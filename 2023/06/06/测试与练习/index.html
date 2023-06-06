@@ -1,0 +1,133 @@
+<!DOCTYPE html><html lang="zh-Hans"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><meta name="author" content="N0ne"><meta name="renderer" content="webkit"><meta name="copyright" content="N0ne"><meta name="keywords" content="N0ne blog"><meta name="description" content=""><meta name="Cache-Control" content="no-cache"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><title>测试与练习 · N0ne's Blog</title><link rel="stylesheet" href="/css/style.css?v=2018.7.9"><link rel="stylesheet" href="/css/animation.css?v=2018.7.9"><link rel="icon" href="/img/assets/favicon.ico"><link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css?version=1.5.6"><!-- scripts--><script>(function( w ){
+  "use strict";
+  // rel=preload support test
+  if( !w.loadCSS ){
+    w.loadCSS = function(){};
+  }
+  // define on the loadCSS obj
+  var rp = loadCSS.relpreload = {};
+  // rel=preload feature support test
+  // runs once and returns a function for compat purposes
+  rp.support = (function(){
+    var ret;
+    try {
+      ret = w.document.createElement( "link" ).relList.supports( "preload" );
+    } catch (e) {
+      ret = false;
+    }
+    return function(){
+      return ret;
+    };
+  })();
+
+  // if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+  // then change that media back to its intended value on load
+  rp.bindMediaToggle = function( link ){
+    // remember existing media attr for ultimate state, or default to 'all'
+    var finalMedia = link.media || "all";
+
+    function enableStylesheet(){
+      link.media = finalMedia;
+    }
+
+    // bind load handlers to enable media
+    if( link.addEventListener ){
+      link.addEventListener( "load", enableStylesheet );
+    } else if( link.attachEvent ){
+      link.attachEvent( "onload", enableStylesheet );
+    }
+
+    // Set rel and non-applicable media type to start an async request
+    // note: timeout allows this to happen async to let rendering continue in IE
+    setTimeout(function(){
+      link.rel = "stylesheet";
+      link.media = "only x";
+    });
+    // also enable media after 3 seconds,
+    // which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+    setTimeout( enableStylesheet, 3000 );
+  };
+
+  // loop through link elements in DOM
+  rp.poly = function(){
+    // double check this to prevent external calls from running
+    if( rp.support() ){
+      return;
+    }
+    var links = w.document.getElementsByTagName( "link" );
+    for( var i = 0; i < links.length; i++ ){
+      var link = links[ i ];
+      // qualify links to those with rel=preload and as=style attrs
+      if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+        // prevent rerunning on link
+        link.setAttribute( "data-loadcss", true );
+        // bind listeners to toggle media back
+        rp.bindMediaToggle( link );
+      }
+    }
+  };
+
+  // if unsupported, run the polyfill
+  if( !rp.support() ){
+    // run once at least
+    rp.poly();
+
+    // rerun poly on an interval until onload
+    var run = w.setInterval( rp.poly, 500 );
+    if( w.addEventListener ){
+      w.addEventListener( "load", function(){
+        rp.poly();
+        w.clearInterval( run );
+      } );
+    } else if( w.attachEvent ){
+      w.attachEvent( "onload", function(){
+        rp.poly();
+        w.clearInterval( run );
+      } );
+    }
+  }
+
+
+  // commonjs
+  if( typeof exports !== "undefined" ){
+    exports.loadCSS = loadCSS;
+  }
+  else {
+    w.loadCSS = loadCSS;
+  }
+}( typeof global !== "undefined" ? global : this ) );</script><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" defer></script><script src="/js/main.js?v=2018.7.9" defer></script><!-- fancybox--><link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script><!-- busuanzi--><script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script><meta name="generator" content="Hexo 6.3.0"></head><body><section class="profile-close" id="cxo-profile"><div class="profile-avatar"><i class="fa fa-caret-left"></i><img src="/img/assets/dog.png"></div><!--.profile-saying
+  i.fa.fa-comment
+  .saying--><div class="cxo-profile-inner"><div class="profile-name">N0ne</div><div class="profile-signature">a music game player</div><div class="friends"><div>FRIENDS</div><span><a href="//sukunahust.com/" target="_black">friendA</a></span><span><a href="//github.com/" target="_black">friendB</a></span><span><a href="//github.com/" target="_black">friendC</a></span></div><div class="read-progress"></div></div></section><header id="cxo-intro" style="height: 70vh;background-image: url(/img/intro/index-bg.png);"><nav id="cxo-intro-nav"><section><div class="intro-nav-title"><a href="/">N0ne's Blog</a></div><div class="intro-nav-label-box"><a href="/">Home</a><a href="/about/">About</a><a href="/archives/">Archives</a><a href="/tags/">Tags</a></div><i class="fa fa-bars intro-nav-menu"><div class="intro-nav-drop"><a href="/">Home</a><a href="/about/">About</a><a href="/archives/">Archives</a><a href="/tags/">Tags</a></div></i><div class="clear"></div></section></nav><h1 class="post-title">测试与练习</h1><div class="post-intros"><div class="post-intro-meta"><span class="post-intro-time"><i class="post-intro-calendar fa fa-calendar"></i><span>2023-06-06</span></span></div></div></header><article class="cxo-up" id="cxo-content-outer"><section id="cxo-content-inner"><article class="article-entry" id="post"><h1 id="测试与练习"><a href="#测试与练习" class="headerlink" title="测试与练习"></a>测试与练习</h1><h2 id="傲慢"><a href="#傲慢" class="headerlink" title="傲慢"></a>傲慢</h2><p>七圣召唤只能说是神中神。一直玩了十几个小时停不下来，引入了原神独创的元素反应感觉玩法比炉石更有深度一些。<br>画风这些都比炉石的欧美画风舒服的多，我估计要是米哈游愿意把七圣召唤独立出来再加一点天梯排行，估计魔兽就要急死了，毕竟在国外原神的热度也可以说是第一游戏，借着原神宣传估计很快能抢占掉炉石的地位。<br>不过米哈游的人也是心大，这么优秀的游戏居然扔在角落用来作为一个内置小游戏，换成任何一家别的游戏公司估计都会打造成当家游戏了。还得是你啊米哈游，友商们还是庆幸一下米哈游的心大吧。</p>
+<h2 id="嫉妒"><a href="#嫉妒" class="headerlink" title="嫉妒"></a>嫉妒</h2><p>我们在二十七宇宙的genshin，愿玩家都尊你的名为圣。愿你的公司降临。愿你的尔西大弟行在地上，如同行在天上。我们家乡经济的繁荣，今日赐给我们。免我们的债，如同我们免了tx的债。不叫我们遇见贴膜压力，救我们脱离垃圾手游。因为热度、纯真、美好，全是你的，直到永远。  </p>
+<p>原神，我观看，见天开了，有一匹白马，骑在马背上的，称为双厨狂喜。  </p>
+<p>祂的眼如火焰，祂头上戴著许多冠冕。  </p>
+<p>看哪，祂乘着风之翼降临。众目要看见祂，连刺祂的人也要看见他祂。整个mihoyo吧都要因祂哀哭。  </p>
+<p>此后，我听见好像群原批在天上大声说，异世相逢，尽享美味。救恩，荣耀，权能，都属乎我们的原神。我们应该给祂跪下，嗑几个响头，伟大的原神，上海乃至国家的传统文化，都靠您向世界输出。那些工人 农民 教师 警察 军人以及那些为社会做出杰出贡献的科学家，工程师，艺术家，他们都不及您分毫，伟大的原神，你眼中有星辰，心中有原石，世间的美好不及您的万一，您不仅会说前面的蛆，而且会喊“芭芭拉冲鸭”，您不仅有相遇之缘，而且有纠缠之缘。啊，伟大的原神，您是万，也是一，您不仅会KY，而且还会偷梗，啊，您将行走人间，就如同走在您的米站。  </p>
+<p>亵渎原神的人有难了，因为米忽悠的国将对他紧闭！  </p>
+<p>计量原神的人有难了，因为他也必在永火之中被计量！  </p>
+<p>为原神排序的人有难了，因为怜悯在不敬者的头上是黯淡的，原神也必将其排在义人之后！  </p>
+<p>我见兽从雪山中来，有二角一尾，在角上戴着十个冠冕，头上有亵渎的名号。不义的人都跟从那兽，又拜它作皇，因为有权柄赐他，可以说讥讽隐晦话的口，兽就开口亵渎原神的名并牠的帐幕。牠必折磨至高者的圣民，逼迫他们背反原神的诫命。牠必在众人前行异事，好夸大他的微小，以迷惑地上的蒙昧者追随他，将他捧到高云之上，称作人之国的王。他又召集众人，不论贫富老幼，刻下兽的印记，并赐给权柄，与他一并说隐藏的话，亵渎原神所称的义，贬损他的名。凡有智慧的，可以计算兽印的轮廓。因为那是众人的数目，它的形状是mh。他领受了权柄可肆意妄行二十四个月，但在期满后我又见一位天使站在海上手持锁链将兽擒拿，让他从天上坠落，而那些被兽迷惑领受了印的，行奇事的，将原神排在兽后的也同被擒拿，他们被投入硫磺的火湖中，mwb们饱食了他们的肉。</p>
+<h2 id="暴怒"><a href="#暴怒" class="headerlink" title="暴怒"></a>暴怒</h2><p>我去，当初我军训，我偷偷把手机藏裤裆，然后休息的时候我就悄悄玩原神。有次被教官发现了，拉我出来让我做了一万个俯卧撑。我两分钟做完后，他拿过我手机，说什么垃圾游戏。当时我直接给了他一巴掌，把他打进医院了，我现在都还记得其他班教官的眼神，反正那天起，教官都不敢管我们学校的学生了 作者：枫原那啥子萬葉 </p>
+<h2 id="懒惰"><a href="#懒惰" class="headerlink" title="懒惰"></a>懒惰</h2><p>差不多忘了😅忘了大点事都要忘，忘了一没忘你，二没忘后面忘了的忘了，忘了怎么忘了让你一直忘记无脑忘了，忘了每天忘了的忘了弘扬忘了文化，你这种忘了只会忘了在网上忘了敲忘了诋毁忘了，忘了游戏的忘了就是被你这种人忘了的😅后面我忘了</p>
+<h2 id="贪婪"><a href="#贪婪" class="headerlink" title="贪婪"></a>贪婪</h2><p>锄大地时我爆了蓝面具。众所周知蓝面具＝3绿面具＝45尘辉＝3抽的副产物。即使是副产物也足显米哈游的慷慨，于是我原地跪下跪了五分钟。以此类推绿面具就是一抽的副产物。也有相当的价值，由于锄地爆率还不错，我把桌子腿全锯了方便我一直跪在地上玩游戏也能够到电脑。</p>
+<p>走到半路发现了以前漏了的箱，开箱得了2原石，原石是付费代币，付费代币等于人民币，这是米哈游在慷慨的给我发钱，我一时难忍激动，当场给米哈游了磕个头。</p>
+<p>开了esc菜单发现昨天邮件没领，点开就是100原石，100原石！我要开50个箱子！就是需要我磕50个头！我觉得单纯磕头已经不能表达我的感激了，于是我沐浴更衣给米哈游上了香郑重的磕了三个头。</p>
+<h2 id="暴食"><a href="#暴食" class="headerlink" title="暴食"></a>暴食</h2><p>我给原神微氪20多w，三百多天活跃天数，蒙德探索100%璃月100%稻妻86%。全角色收集，只有几个零命的三四命的，很多都满命了。</p>
+<p>出皮肤必买除芭芭拉海岛皮肤嫖来的。原神的书、音乐我都买了，我每天早晨都会听原宝的音乐。</p>
+<p>原神官方出的可莉、凝光、莫娜、刻晴、甘雨、芭芭拉手办一个不落全买了。原神抽奖必转发，米游币活动必参加，勋章吊牌立牌必买、肯德基联动我把城里的全买了遍，剩下吃不完的给了辛勤的劳动者。</p>
+<h2 id="色欲"><a href="#色欲" class="headerlink" title="色欲"></a>色欲</h2><p>玩原神不看甘雨本子，就像四大名著不看红楼梦，说明这个人文学造诣和自我修养不足，他理解不了这种内在的阳春白雪的高雅艺术，他只能看到外表的辞藻堆砌，参不透其中深奥的精神内核，他整个人的层次就卡在这里了，只能度过一个相对失败的人生。</p>
+<p><img src="https://patchwiki.biligame.com/images/ys/0/05/8c9hbw8vgn7omiecnpu911rw8d4afe0.png" alt="我老婆" title="我老婆"></p>
+<blockquote>
+<p>玩游戏不玩原神，就像四大名著不看红楼梦，说明这个人文学造诣和自我修养不足，他理解不了这种内在的阳春白雪的高雅艺术，他只能看到外表的辞藻堆砌，参不透其中深奥的精神内核，他整个人的层次就卡在这里了，只能度过一个相对失败的人生。</p>
+</blockquote>
+<ul>
+<li>早八好尼玛困啊</li>
+<li>晚自习能不能不上啊</li>
+<li>图书馆为什么周六不开门啊</li>
+<li>澡堂为什么周六不开啊</li>
+<li>图书馆藏书为什么这么垃圾啊</li>
+<li>校园网为什么这么卡啊</li>
+</ul>
+<hr>
+<p>以及，最后发一本<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1GJ411x7h7/?spm_id_from=333.337.search-card.all.click&vd_source=cc544d4df84af7f7b040%5Bbbaf1a17696d">原神本子</a>。[^原神本子]</p>
+</article><!-- lincense--><div class="license-wrapper"><p> <span>Author:  </span><a href="http://n0nesblog.top">N0ne</a></p><p> <span>Link:  </span><a href="http://n0nesblog.top/2023/06/06/%E6%B5%8B%E8%AF%95%E4%B8%8E%E7%BB%83%E4%B9%A0/">http://n0nesblog.top/2023/06/06/%E6%B5%8B%E8%AF%95%E4%B8%8E%E7%BB%83%E4%B9%A0/</a></p><p> <span>Copyright:  </span><span>All articles in this blog are licensed under <a rel="license noopener" target="_blank" href="https://creativecommons.org/licenses/by-nc-nd/3.0">CC BY-NC-SA 3.0</a> unless stating additionally.</span></p></div><div class="post-paginator"><a class="nextSlogan" href="/2023/06/06/Welcome-File/" title="Welcome File"><span>NextPost ></span><br><span class="nextTitle">Welcome File</span></a><div class="clear"></div></div><div id="comment"></div></section></article><footer id="cxo-footer-outer"><div id="cxo-footer-inner"><p class="footer-container"><span>Site by </span><a target="_blank" rel="noopener" href="http://hexo.io"><span>Hexo</span></a><span> | theme </span><a target="_blank" rel="noopener" href="https://github.com/Longlongyu/hexo-theme-Cxo"><span>Cxo</span></a></p><i class="fa fa-user"> </i><span id="busuanzi_value_site_uv"></span><span> | </span><i class="fa fa-eye"> </i><span id="busuanzi_value_site_pv"></span></div></footer><!-- catelog--><div class="toc-wrapper" style="top: 70vh;"><div class="toc-catalog"><i class="fa fa-list"> </i><span>CATALOG</span></div><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95%E4%B8%8E%E7%BB%83%E4%B9%A0"><span class="toc-number">1.</span> <span class="toc-text">测试与练习</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%82%B2%E6%85%A2"><span class="toc-number">1.1.</span> <span class="toc-text">傲慢</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AB%89%E5%A6%92"><span class="toc-number">1.2.</span> <span class="toc-text">嫉妒</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9A%B4%E6%80%92"><span class="toc-number">1.3.</span> <span class="toc-text">暴怒</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%87%92%E6%83%B0"><span class="toc-number">1.4.</span> <span class="toc-text">懒惰</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B4%AA%E5%A9%AA"><span class="toc-number">1.5.</span> <span class="toc-text">贪婪</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9A%B4%E9%A3%9F"><span class="toc-number">1.6.</span> <span class="toc-text">暴食</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%89%B2%E6%AC%B2"><span class="toc-number">1.7.</span> <span class="toc-text">色欲</span></a></li></ol></li></ol></div><!-- top--><i class="fa fa-arrow-up close" id="go-up" aria-hidden="true"></i></body></html>
