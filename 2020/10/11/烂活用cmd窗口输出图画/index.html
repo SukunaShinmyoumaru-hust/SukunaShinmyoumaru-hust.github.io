@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="这个活儿非常简单,大家都可以尝试一下 第一步:用转换格式的方法把视频换成bmp位图的模式 第二步:用前人的成果(ASC工具)将图片用一种特殊的方式转换成.txt的文本文件 第三步:快速清屏输出: Code: 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525">
+<meta property="og:type" content="article">
+<meta property="og:title" content="(烂活)用cmd窗口输出图画">
+<meta property="og:url" content="https://sukunashinmyoumaru-hust.github.io/project/2020/10/11/%E7%83%82%E6%B4%BB%E7%94%A8cmd%E7%AA%97%E5%8F%A3%E8%BE%93%E5%87%BA%E5%9B%BE%E7%94%BB/index.html">
+<meta property="og:site_name" content="Suwa shrine">
+<meta property="og:description" content="这个活儿非常简单,大家都可以尝试一下 第一步:用转换格式的方法把视频换成bmp位图的模式 第二步:用前人的成果(ASC工具)将图片用一种特殊的方式转换成.txt的文本文件 第三步:快速清屏输出: Code: 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-10-11T15:56:31.000Z">
+<meta property="article:modified_time" content="2024-02-27T05:01:50.084Z">
+<meta property="article:author" content="Sukuna">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/project/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/project/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/project/images/favicon-192x192.png">
+        
+      
+    
+    <!-- title -->
+    <title>(烂活)用cmd窗口输出图画</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/project/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/project/">首页</a></li><!--
+     --><!--
+       --><li><a href="/project/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/project/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/SukunaShinmyoumaru-hust/Hust-opensource-Xuejie">HUST-学解</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="上一篇" href="/project/2021/02/06/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E8%AE%AD%E4%BD%9C%E4%B8%9A/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="下一篇" href="/project/2020/05/25/ufpe-starters-final-try-outs-2019-recife-brazil-dec-1-2018-problem-j%EF%BC%88%E7%BA%BF%E6%AE%B5%E6%A0%91%E4%BA%8C%E5%88%86%EF%BC%89/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sukunashinmyoumaru-hust.github.io/project/2020/10/11/%E7%83%82%E6%B4%BB%E7%94%A8cmd%E7%AA%97%E5%8F%A3%E8%BE%93%E5%87%BA%E5%9B%BE%E7%94%BB/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sukunashinmyoumaru-hust.github.io/project/2020/10/11/%E7%83%82%E6%B4%BB%E7%94%A8cmd%E7%AA%97%E5%8F%A3%E8%BE%93%E5%87%BA%E5%9B%BE%E7%94%BB/&text=(烂活)用cmd窗口输出图画"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sukunashinmyoumaru-hust.github.io/project/2020/10/11/%E7%83%82%E6%B4%BB%E7%94%A8cmd%E7%AA%97%E5%8F%A3%E8%BE%93%E5%87%BA%E5%9B%BE%E7%94%BB/&title=(烂活)用cmd窗口输出图画"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sukunashinmyoumaru-hust.github.io/project/2020/10/11/%E7%83%82%E6%B4%BB%E7%94%A8cmd%E7%AA%97%E5%8F%A3%E8%BE%93%E5%87%BA%E5%9B%BE%E7%94%BB/&is_video=false&description=(烂活)用cmd窗口输出图画"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=(烂活)用cmd窗口输出图画&body=Check out this article: https://sukunashinmyoumaru-hust.github.io/project/2020/10/11/%E7%83%82%E6%B4%BB%E7%94%A8cmd%E7%AA%97%E5%8F%A3%E8%BE%93%E5%87%BA%E5%9B%BE%E7%94%BB/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sukunashinmyoumaru-hust.github.io/project/2020/10/11/%E7%83%82%E6%B4%BB%E7%94%A8cmd%E7%AA%97%E5%8F%A3%E8%BE%93%E5%87%BA%E5%9B%BE%E7%94%BB/&title=(烂活)用cmd窗口输出图画"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sukunashinmyoumaru-hust.github.io/project/2020/10/11/%E7%83%82%E6%B4%BB%E7%94%A8cmd%E7%AA%97%E5%8F%A3%E8%BE%93%E5%87%BA%E5%9B%BE%E7%94%BB/&title=(烂活)用cmd窗口输出图画"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sukunashinmyoumaru-hust.github.io/project/2020/10/11/%E7%83%82%E6%B4%BB%E7%94%A8cmd%E7%AA%97%E5%8F%A3%E8%BE%93%E5%87%BA%E5%9B%BE%E7%94%BB/&title=(烂活)用cmd窗口输出图画"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sukunashinmyoumaru-hust.github.io/project/2020/10/11/%E7%83%82%E6%B4%BB%E7%94%A8cmd%E7%AA%97%E5%8F%A3%E8%BE%93%E5%87%BA%E5%9B%BE%E7%94%BB/&title=(烂活)用cmd窗口输出图画"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sukunashinmyoumaru-hust.github.io/project/2020/10/11/%E7%83%82%E6%B4%BB%E7%94%A8cmd%E7%AA%97%E5%8F%A3%E8%BE%93%E5%87%BA%E5%9B%BE%E7%94%BB/&name=(烂活)用cmd窗口输出图画&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sukunashinmyoumaru-hust.github.io/project/2020/10/11/%E7%83%82%E6%B4%BB%E7%94%A8cmd%E7%AA%97%E5%8F%A3%E8%BE%93%E5%87%BA%E5%9B%BE%E7%94%BB/&t=(烂活)用cmd窗口输出图画"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        (烂活)用cmd窗口输出图画
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Sukuna</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2020-10-11T15:56:31.000Z" class="dt-published" itemprop="datePublished">2020-10-11</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/project/categories/%E6%9D%82%E8%AE%B0/">杂记</a>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <p>这个活儿非常简单,大家都可以尝试一下</p>
+<p>第一步:用转换格式的方法把视频换成bmp位图的模式</p>
+<p>第二步:用前人的成果(ASC工具)将图片用一种特殊的方式转换成.txt的文本文件</p>
+<p>第三步:快速清屏输出:</p>
+<p>Code:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;string.h&gt;</span><br><span class="line">#include&lt;time.h&gt;</span><br><span class="line">#include&lt;stdio.h&gt;</span><br><span class="line">#include&lt;stdlib.h&gt;</span><br><span class="line">#include&lt;windows.h&gt;</span><br><span class="line">#include &lt;mmsystem.h&gt;</span><br><span class="line">#pragma comment(lib, &quot;WINMM.LIB&quot;)</span><br><span class="line">#include &lt;iostream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">void recursur();</span><br><span class="line">//函数声明</span><br><span class="line">int i = 0, caf = 33;</span><br><span class="line">char p = 0;</span><br><span class="line">FILE *fp;</span><br><span class="line">clock_t stime = 0, ftime = 0;</span><br><span class="line">char buf[1921] = &#123;&#125;, seat[] = &quot;output\\test(0).txt&quot;, ai[10];</span><br><span class="line">//buf是输出的字符串,seat是打开的文件名</span><br><span class="line">printf(&quot;-----test art player-----\nPress Enter to play.\nSource:av706from bilibili\n&quot;);</span><br><span class="line">getchar();</span><br><span class="line">system(&quot;cls&quot;);</span><br><span class="line">PlaySound(&quot;test.wav&quot;, NULL, SND_FILENAME  SND_ASYNC);</span><br><span class="line">//输入声音</span><br><span class="line">stime = clock();</span><br><span class="line">while (i &lt;= 6568)// </span><br><span class="line">&#123;</span><br><span class="line">//6568是输出的总帧数,视情况而定</span><br><span class="line">if (i % 30 == 0)</span><br><span class="line">&#123;</span><br><span class="line">caf = 43;</span><br><span class="line">&#125;</span><br><span class="line">else</span><br><span class="line">&#123;</span><br><span class="line">caf = 33;</span><br><span class="line">&#125;</span><br><span class="line">//设定刷新时间</span><br><span class="line">strcpy(seat, &quot;output\\test(&quot;);</span><br><span class="line">sprintf(ai, &quot;%d&quot;, i);</span><br><span class="line">strcat(seat, ai);</span><br><span class="line">strcat(seat, &quot;).txt&quot;);</span><br><span class="line">//把seat设定成要打开的文件的形式</span><br><span class="line">ftime = clock();</span><br><span class="line">if ((ftime - stime) &gt;= caf)</span><br><span class="line">&#123;</span><br><span class="line">//简单而言，就是该程序从启动到函数调用占用CPU的时间。这个函数返回从“开启这个程序进程”到“程序中调用clock()函数”时之间的CPU时钟计时单元（clock tick）</span><br><span class="line">//如果系统运行的时间还没到下一次运行时要清屏的时间,那if不进入,也就不会清屏,继续while循环</span><br><span class="line">i++;</span><br><span class="line">//播放下一帧</span><br><span class="line">fp = fopen(seat, &quot;r&quot;);</span><br><span class="line">fread(buf, sizeof(buf), 1, fp);</span><br><span class="line">buf[1920] = &#x27;\0&#x27;;</span><br><span class="line">fclose(fp);</span><br><span class="line">fprintf(stdout, &quot;%s&quot;, buf);</span><br><span class="line">fprintf(stdout, &quot;Frame:%d&quot;, i);</span><br><span class="line">stime += caf;</span><br><span class="line">//加一下当前循环的时候运行的时间</span><br><span class="line">recursur();</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">system(&quot;cls&quot;);</span><br><span class="line">printf(&quot;----- art player-----\nThanks for watching!\nMade by Sukuna.\n\n&quot;);</span><br><span class="line">printf(&quot;Press Enter to Exit.\n&quot;);</span><br><span class="line">getchar();</span><br><span class="line">return 0;</span><br><span class="line">&#125;</span><br><span class="line">void recursur()</span><br><span class="line">&#123;</span><br><span class="line">HANDLE hout;</span><br><span class="line">COORD coord;</span><br><span class="line">coord.X = 0;</span><br><span class="line">coord.Y = 0;</span><br><span class="line">hout = GetStdHandle(STD_OUTPUT_HANDLE);</span><br><span class="line">SetConsoleCursorPosition(hout, coord);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>说一下recursur函数把</p>
+<p>HANDLE 是一种句柄变量,类似于void*这种类型,COORD是cmd窗口光标类型,把光标设置成(0,0)<br>接着hout赋值为SED_OUTPUT_HANDLE<br>最后一个函数就把光标的位置重新设置一下,光标设置为0</p>
+<p><strong>HANDLE</strong> GetStdHandle( <strong>DWORD</strong> nStdHandle );GetStdHandle（）返回标准的输入、输出或错误的设备的句柄，也就是获得输入、输出&#x2F;错误的屏幕缓冲区的句柄。<br>STD_OUTPUT_HANDLE表示标准输出的句柄</p>
+<p>SetConsoleCursorPosition是一个window api;作用是设置控制台(cmd)光标位置</p>
+<p>这个函数是一个模版,记得就行</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/project/">首页</a></li>
+        
+          <li><a href="/project/about/">关于</a></li>
+        
+          <li><a href="/project/archives/">归档</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/SukunaShinmyoumaru-hust/Hust-opensource-Xuejie">HUST-学解</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sukunashinmyoumaru-hust.github.io/project/2020/10/11/%E7%83%82%E6%B4%BB%E7%94%A8cmd%E7%AA%97%E5%8F%A3%E8%BE%93%E5%87%BA%E5%9B%BE%E7%94%BB/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sukunashinmyoumaru-hust.github.io/project/2020/10/11/%E7%83%82%E6%B4%BB%E7%94%A8cmd%E7%AA%97%E5%8F%A3%E8%BE%93%E5%87%BA%E5%9B%BE%E7%94%BB/&text=(烂活)用cmd窗口输出图画"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sukunashinmyoumaru-hust.github.io/project/2020/10/11/%E7%83%82%E6%B4%BB%E7%94%A8cmd%E7%AA%97%E5%8F%A3%E8%BE%93%E5%87%BA%E5%9B%BE%E7%94%BB/&title=(烂活)用cmd窗口输出图画"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sukunashinmyoumaru-hust.github.io/project/2020/10/11/%E7%83%82%E6%B4%BB%E7%94%A8cmd%E7%AA%97%E5%8F%A3%E8%BE%93%E5%87%BA%E5%9B%BE%E7%94%BB/&is_video=false&description=(烂活)用cmd窗口输出图画"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=(烂活)用cmd窗口输出图画&body=Check out this article: https://sukunashinmyoumaru-hust.github.io/project/2020/10/11/%E7%83%82%E6%B4%BB%E7%94%A8cmd%E7%AA%97%E5%8F%A3%E8%BE%93%E5%87%BA%E5%9B%BE%E7%94%BB/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sukunashinmyoumaru-hust.github.io/project/2020/10/11/%E7%83%82%E6%B4%BB%E7%94%A8cmd%E7%AA%97%E5%8F%A3%E8%BE%93%E5%87%BA%E5%9B%BE%E7%94%BB/&title=(烂活)用cmd窗口输出图画"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sukunashinmyoumaru-hust.github.io/project/2020/10/11/%E7%83%82%E6%B4%BB%E7%94%A8cmd%E7%AA%97%E5%8F%A3%E8%BE%93%E5%87%BA%E5%9B%BE%E7%94%BB/&title=(烂活)用cmd窗口输出图画"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sukunashinmyoumaru-hust.github.io/project/2020/10/11/%E7%83%82%E6%B4%BB%E7%94%A8cmd%E7%AA%97%E5%8F%A3%E8%BE%93%E5%87%BA%E5%9B%BE%E7%94%BB/&title=(烂活)用cmd窗口输出图画"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sukunashinmyoumaru-hust.github.io/project/2020/10/11/%E7%83%82%E6%B4%BB%E7%94%A8cmd%E7%AA%97%E5%8F%A3%E8%BE%93%E5%87%BA%E5%9B%BE%E7%94%BB/&title=(烂活)用cmd窗口输出图画"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sukunashinmyoumaru-hust.github.io/project/2020/10/11/%E7%83%82%E6%B4%BB%E7%94%A8cmd%E7%AA%97%E5%8F%A3%E8%BE%93%E5%87%BA%E5%9B%BE%E7%94%BB/&name=(烂活)用cmd窗口输出图画&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sukunashinmyoumaru-hust.github.io/project/2020/10/11/%E7%83%82%E6%B4%BB%E7%94%A8cmd%E7%AA%97%E5%8F%A3%E8%BE%93%E5%87%BA%E5%9B%BE%E7%94%BB/&t=(烂活)用cmd窗口输出图画"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2024
+    Sukuna
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/project/">首页</a></li><!--
+     --><!--
+       --><li><a href="/project/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/project/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/SukunaShinmyoumaru-hust/Hust-opensource-Xuejie">HUST-学解</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功！");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/project/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="实验二:基本的组合逻辑电路 这里只展示2.3的一部分代码 12345678910111213141516module decoder_3to8(in, out);    input [2:0] in;    output reg [7:0] out;        always@(in)          case(in)              3&#x27;b000 : out[7:0] &#x3D;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="华中科技大学Verilog实验解析">
+<meta property="og:url" content="https://sukunashinmyoumaru-hust.github.io/project/2021/04/25/%E5%8D%8E%E4%B8%AD%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%A6verilog%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90/index.html">
+<meta property="og:site_name" content="Suwa shrine">
+<meta property="og:description" content="实验二:基本的组合逻辑电路 这里只展示2.3的一部分代码 12345678910111213141516module decoder_3to8(in, out);    input [2:0] in;    output reg [7:0] out;        always@(in)          case(in)              3&#x27;b000 : out[7:0] &#x3D;">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-04-25T12:59:20.000Z">
+<meta property="article:modified_time" content="2024-02-27T05:01:50.093Z">
+<meta property="article:author" content="Sukuna">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/project/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/project/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/project/images/favicon-192x192.png">
+        
+      
+    
+    <!-- title -->
+    <title>华中科技大学Verilog实验解析</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/project/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/project/">首页</a></li><!--
+     --><!--
+       --><li><a href="/project/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/project/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/SukunaShinmyoumaru-hust/Hust-opensource-Xuejie">HUST-学解</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="上一篇" href="/project/2021/05/15/gmmem/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="下一篇" href="/project/2021/02/06/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%9B%B8%E5%85%B3%E4%B8%93%E9%A2%98/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sukunashinmyoumaru-hust.github.io/project/2021/04/25/%E5%8D%8E%E4%B8%AD%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%A6verilog%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sukunashinmyoumaru-hust.github.io/project/2021/04/25/%E5%8D%8E%E4%B8%AD%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%A6verilog%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90/&text=华中科技大学Verilog实验解析"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sukunashinmyoumaru-hust.github.io/project/2021/04/25/%E5%8D%8E%E4%B8%AD%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%A6verilog%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90/&title=华中科技大学Verilog实验解析"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sukunashinmyoumaru-hust.github.io/project/2021/04/25/%E5%8D%8E%E4%B8%AD%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%A6verilog%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90/&is_video=false&description=华中科技大学Verilog实验解析"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=华中科技大学Verilog实验解析&body=Check out this article: https://sukunashinmyoumaru-hust.github.io/project/2021/04/25/%E5%8D%8E%E4%B8%AD%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%A6verilog%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sukunashinmyoumaru-hust.github.io/project/2021/04/25/%E5%8D%8E%E4%B8%AD%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%A6verilog%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90/&title=华中科技大学Verilog实验解析"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sukunashinmyoumaru-hust.github.io/project/2021/04/25/%E5%8D%8E%E4%B8%AD%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%A6verilog%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90/&title=华中科技大学Verilog实验解析"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sukunashinmyoumaru-hust.github.io/project/2021/04/25/%E5%8D%8E%E4%B8%AD%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%A6verilog%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90/&title=华中科技大学Verilog实验解析"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sukunashinmyoumaru-hust.github.io/project/2021/04/25/%E5%8D%8E%E4%B8%AD%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%A6verilog%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90/&title=华中科技大学Verilog实验解析"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sukunashinmyoumaru-hust.github.io/project/2021/04/25/%E5%8D%8E%E4%B8%AD%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%A6verilog%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90/&name=华中科技大学Verilog实验解析&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sukunashinmyoumaru-hust.github.io/project/2021/04/25/%E5%8D%8E%E4%B8%AD%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%A6verilog%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90/&t=华中科技大学Verilog实验解析"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        华中科技大学Verilog实验解析
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Sukuna</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-04-25T12:59:20.000Z" class="dt-published" itemprop="datePublished">2021-04-25</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/project/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/">实验记录</a>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <p>实验二:基本的组合逻辑电路</p>
+<p>这里只展示2.3的一部分代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">module decoder_3to8(in, out);</span><br><span class="line">    input [2:0] in;</span><br><span class="line">    output reg [7:0] out;</span><br><span class="line">    </span><br><span class="line">    always@(in)  </span><br><span class="line">        case(in)  </span><br><span class="line">            3&#x27;b000 : out[7:0] = 8&#x27;b11111110;</span><br><span class="line">            3&#x27;b001 : out[7:0] = 8&#x27;b11111101;</span><br><span class="line">            3&#x27;b010 : out[7:0] = 8&#x27;b11111011;</span><br><span class="line">            3&#x27;b011 : out[7:0] = 8&#x27;b11110111;</span><br><span class="line">            3&#x27;b100 : out[7:0] = 8&#x27;b11101111;</span><br><span class="line">            3&#x27;b101 : out[7:0] = 8&#x27;b11011111;</span><br><span class="line">            3&#x27;b110 : out[7:0] = 8&#x27;b10111111;</span><br><span class="line">            default : out[7:0] = 8&#x27;b01111111;</span><br><span class="line">        endcase</span><br><span class="line">endmodule</span><br></pre></td></tr></table></figure>
+
+<p>这里我需要提一点,就是always语句或者initial语句里面是数据流的形式,数据流的形式和其他形式的区别有以下几点</p>
+<ul>
+<li>左边的元素一定是reg类型的</li>
+<li>不允许使用assign赋值</li>
+<li>@(…..)表示…..里面的值发生变化的时候就进入语句块</li>
+</ul>
+<p>这里可以使用case(…)来模仿C里面的switch语句来进行赋值(真值表)<br>用逻辑函数也可以(做运算或者申明逻辑门[逻辑门之间使用wire连接])</p>
+<p>对于4-16的亦是如此</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">module decoder_4to16(in, out);</span><br><span class="line">    input [3:0] in;</span><br><span class="line">    output reg [7:0] out;</span><br><span class="line"></span><br><span class="line">    always@(in)</span><br><span class="line">        begin</span><br><span class="line">            case(in)</span><br><span class="line">                4&#x27;b0000 : out[7:0] = 8&#x27;b11000000;</span><br><span class="line">                4&#x27;b0001 : out[7:0] = 8&#x27;b11111001;</span><br><span class="line">                4&#x27;b0010 : out[7:0] = 8&#x27;b10100100;</span><br><span class="line">                4&#x27;b0011 : out[7:0] = 8&#x27;b10110000;</span><br><span class="line">                4&#x27;b0100 : out[7:0] = 8&#x27;b10011001;</span><br><span class="line">                4&#x27;b0101 : out[7:0] = 8&#x27;b10010010;</span><br><span class="line">                4&#x27;b0110 : out[7:0] = 8&#x27;b10000010;</span><br><span class="line">                4&#x27;b0111 : out[7:0] = 8&#x27;b11111000;</span><br><span class="line">                4&#x27;b1000 : out[7:0] = 8&#x27;b10000000;</span><br><span class="line">                4&#x27;b1001 : out[7:0] = 8&#x27;b10011000;</span><br><span class="line">                4&#x27;b1010 : out[7:0] = 8&#x27;b10001000;</span><br><span class="line">                4&#x27;b1011 : out[7:0] = 8&#x27;b10000011;</span><br><span class="line">                4&#x27;b1100 : out[7:0] = 8&#x27;b11000110;</span><br><span class="line">                4&#x27;b1101 : out[7:0] = 8&#x27;b10100001;</span><br><span class="line">                4&#x27;b1110 : out[7:0] = 8&#x27;b10000110;</span><br><span class="line">                default : out[7:0] = 8&#x27;b10001110;</span><br><span class="line">            endcase</span><br><span class="line">        end</span><br><span class="line">endmodule</span><br></pre></td></tr></table></figure>
+
+<p>最后使用结构声明来组装零件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">module Last(SW, SEG, AN, LED);</span><br><span class="line">    input [15:0] SW;       // 16位拨动开关</span><br><span class="line">    output [7:0] SEG;      // 7段数码管驱动，低电平有效</span><br><span class="line">    output [7:0] AN;       // 7段数码管片选信号，低电平有效</span><br><span class="line">    output [15:0] LED;     // 16位LED显示</span><br><span class="line"></span><br><span class="line">    decoder_3to8(.in(SW[15:13]), .out(AN[7:0]));</span><br><span class="line">    decoder_4to16(.in(SW[3:0]), .out(SEG[7:0]));</span><br><span class="line">    </span><br><span class="line">    assign LED[15:0] = SW[15:0];</span><br><span class="line">endmodule</span><br></pre></td></tr></table></figure>
+
+<p>说明一下.xxx(yyy)说明yyy这个值传进结构声明中xxx这个变量,.in(SW[15:13])表示SW[15:13]这个东西放到decoder_3to8里面的in</p>
+<p>实验三:简单的同步时许逻辑电路</p>
+<p>首先就是滤波器</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">module divider(clk, clk_N);</span><br><span class="line">    input clk;                      // 系统时钟</span><br><span class="line">    output reg clk_N;                   // 分频后的时钟</span><br><span class="line">    parameter N = 100_000_000;     // 1Hz的时钟,N=fclk/fclk_N</span><br><span class="line">    reg [31:0] counter;             /* 计数器变量，通过计数实现分频。当计数器从0计数到(N/2-1)时，输出时钟翻转，计数器清零 */</span><br><span class="line"></span><br><span class="line">    initial</span><br><span class="line">    begin                           // 赋初始值</span><br><span class="line">        counter = 0;</span><br><span class="line">        clk_N = 0;</span><br><span class="line">    end</span><br><span class="line">    always @(posedge clk)           // 时钟上升</span><br><span class="line">    begin</span><br><span class="line">        counter &lt;= counter + 1;</span><br><span class="line">        if (counter &gt; N / 2)</span><br><span class="line">            begin</span><br><span class="line">                clk_N &lt;= ~clk_N;</span><br><span class="line">                counter &lt;= 0;</span><br><span class="line">            end</span><br><span class="line">    end</span><br><span class="line">endmodule</span><br></pre></td></tr></table></figure>
+
+<p>posedge代表上升的意思,这个就是clk(板子里面的E3)每一次上升就会触发,其实板子里面的E3会一直变化(速度非常快)这个就是板子里的E3变化了1亿次之后就会传输一个信号出去的意思</p>
+<p>就是clk进.clk_N出clk变化100000000次,clk_N变化一次,这个就是分频的定义,所以说在always里面加上了一个if语句就是这个意思</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">module counter(clk, out);</span><br><span class="line">    input clk;                    // 计数时钟</span><br><span class="line">    output reg [2:0] out;         // 计数值</span><br><span class="line"></span><br><span class="line">    always @(posedge clk)         // 在时钟上升沿计数器加1</span><br><span class="line">    begin</span><br><span class="line">        out &lt;= out + 1;</span><br><span class="line">    end</span><br><span class="line">endmodule</span><br></pre></td></tr></table></figure>
+
+<p>计数器,就是每一次clk上升out就会加1,至于触发器怎么用,咱也不用管,就说明功能就完事了</p>
+<p>第三个实验就是测试一下计数器和过滤器组合的原理</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">module divide_and_count(clk, out);</span><br><span class="line">    input clk;</span><br><span class="line">    output [2:0] out;</span><br><span class="line">    wire clk_tmp;</span><br><span class="line"></span><br><span class="line">    divider d1(.clk(clk), .clk_N(clk_tmp));</span><br><span class="line">    counter c1(.clk(clk_tmp), .out(out[2:0]));</span><br><span class="line">endmodule</span><br></pre></td></tr></table></figure>
+
+<p>这个是不是有点像Java里面的装饰器,对传进来的信号进行逐级装饰,传递来的信号经过计数器的转化进行输出</p>
+<p>实验四:只读存储器:打个表就行了</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">module rom8x4(addr, data);</span><br><span class="line">    input [2:0] addr;               // 地址</span><br><span class="line">    output [3:0] data;              // 地址addr处存储的数据 </span><br><span class="line">    reg [3: 0] mem [7: 0];          //  8个4位的存储器</span><br><span class="line"></span><br><span class="line">    initial                         // 初始化存储器</span><br><span class="line">        begin</span><br><span class="line">            mem[0]=4&#x27;b0000;</span><br><span class="line">            mem[1]=4&#x27;b0010;</span><br><span class="line">            mem[2]=4&#x27;b0100;</span><br><span class="line">            mem[3]=4&#x27;b0110;</span><br><span class="line">            mem[4]=4&#x27;b1000;</span><br><span class="line">            mem[5]=4&#x27;b1010;</span><br><span class="line">            mem[6]=4&#x27;b1100;</span><br><span class="line">            mem[7]=4&#x27;b1110;</span><br><span class="line">        end</span><br><span class="line"></span><br><span class="line">    assign data[3:0] = mem[addr];   // 读取addr单元的值输出</span><br><span class="line"></span><br><span class="line">endmodule</span><br></pre></td></tr></table></figure>
+
+<p>下面就是把信号分解成七位表示器了.上面提到过</p>
+<p>最后把这些东西组在一块,又用到组织模块</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">module dynamic_scan(clk, SEG, AN);</span><br><span class="line">    input clk;              // 系统时钟</span><br><span class="line">    output [7:0] SEG;  // 分别对应CA、CB、CC、CD、CE、CF、CG和DP</span><br><span class="line">    output [7:0] AN;        // 8位数码管片选信</span><br><span class="line">    wire clk_tmp;</span><br><span class="line">    wire [2:0] num;</span><br><span class="line">    wire [3:0] code;</span><br><span class="line"></span><br><span class="line">    divider d1(.clk(clk), .clk_N(clk_tmp));</span><br><span class="line">    counter c1(.clk(clk_tmp), .out(num[2:0]));</span><br><span class="line">    decoder_3to8(.in(num[2:0]), .out(AN[7:0]));</span><br><span class="line">    rom8x4(.addr(num[2:0]), .data(code[3:0]));</span><br><span class="line">    decoder_4to16(.in(code[3:0]), .out(SEG[7:0]));</span><br><span class="line"></span><br><span class="line">endmodule</span><br></pre></td></tr></table></figure>
+
+<p>可以使用wire连接,也可以直接你的输出就是我的输入</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/project/">首页</a></li>
+        
+          <li><a href="/project/about/">关于</a></li>
+        
+          <li><a href="/project/archives/">归档</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/SukunaShinmyoumaru-hust/Hust-opensource-Xuejie">HUST-学解</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sukunashinmyoumaru-hust.github.io/project/2021/04/25/%E5%8D%8E%E4%B8%AD%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%A6verilog%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sukunashinmyoumaru-hust.github.io/project/2021/04/25/%E5%8D%8E%E4%B8%AD%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%A6verilog%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90/&text=华中科技大学Verilog实验解析"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sukunashinmyoumaru-hust.github.io/project/2021/04/25/%E5%8D%8E%E4%B8%AD%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%A6verilog%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90/&title=华中科技大学Verilog实验解析"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sukunashinmyoumaru-hust.github.io/project/2021/04/25/%E5%8D%8E%E4%B8%AD%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%A6verilog%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90/&is_video=false&description=华中科技大学Verilog实验解析"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=华中科技大学Verilog实验解析&body=Check out this article: https://sukunashinmyoumaru-hust.github.io/project/2021/04/25/%E5%8D%8E%E4%B8%AD%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%A6verilog%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sukunashinmyoumaru-hust.github.io/project/2021/04/25/%E5%8D%8E%E4%B8%AD%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%A6verilog%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90/&title=华中科技大学Verilog实验解析"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sukunashinmyoumaru-hust.github.io/project/2021/04/25/%E5%8D%8E%E4%B8%AD%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%A6verilog%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90/&title=华中科技大学Verilog实验解析"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sukunashinmyoumaru-hust.github.io/project/2021/04/25/%E5%8D%8E%E4%B8%AD%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%A6verilog%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90/&title=华中科技大学Verilog实验解析"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sukunashinmyoumaru-hust.github.io/project/2021/04/25/%E5%8D%8E%E4%B8%AD%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%A6verilog%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90/&title=华中科技大学Verilog实验解析"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sukunashinmyoumaru-hust.github.io/project/2021/04/25/%E5%8D%8E%E4%B8%AD%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%A6verilog%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90/&name=华中科技大学Verilog实验解析&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sukunashinmyoumaru-hust.github.io/project/2021/04/25/%E5%8D%8E%E4%B8%AD%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%A6verilog%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90/&t=华中科技大学Verilog实验解析"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2024
+    Sukuna
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/project/">首页</a></li><!--
+     --><!--
+       --><li><a href="/project/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/project/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/SukunaShinmyoumaru-hust/Hust-opensource-Xuejie">HUST-学解</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功！");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/project/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

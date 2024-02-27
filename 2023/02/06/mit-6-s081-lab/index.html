@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="1:Xv6 and Unix utilities运行环境:Ubuntu 20.04 qemu 在做6.s081的实验之前我们首先要先下载Xv6操作系统以及qemu虚拟机: sudo apt-get install git build-essential gdb-multiarch qemu-system-misc gcc-riscv64-linux-gnu binutils-riscv64-lin">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MIT_6.s081_Lab">
+<meta property="og:url" content="https://sukunashinmyoumaru-hust.github.io/project/2023/02/06/mit-6-s081-lab/index.html">
+<meta property="og:site_name" content="Suwa shrine">
+<meta property="og:description" content="1:Xv6 and Unix utilities运行环境:Ubuntu 20.04 qemu 在做6.s081的实验之前我们首先要先下载Xv6操作系统以及qemu虚拟机: sudo apt-get install git build-essential gdb-multiarch qemu-system-misc gcc-riscv64-linux-gnu binutils-riscv64-lin">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://sukunahust.com/wp-content/uploads/2022/03/image-1024x133.png">
+<meta property="og:image" content="https://sukunahust.com/wp-content/uploads/2022/03/image-1-1024x343.png">
+<meta property="og:image" content="https://sukunahust.com/wp-content/uploads/2022/03/image-2-1024x279.png">
+<meta property="og:image" content="https://sukunahust.com/wp-content/uploads/2022/03/image-3-1024x166.png">
+<meta property="og:image" content="https://img-blog.csdn.net/20161223173958916">
+<meta property="og:image" content="https://sukunahust.com/wp-content/uploads/2022/03/image-4.png">
+<meta property="og:image" content="https://pic3.zhimg.com/80/v2-cfd5f86fa2495b79eabf8bdaa24925f2_1440w.jpg">
+<meta property="og:image" content="https://sukunahust.com/wp-content/uploads/2022/03/image-5.png">
+<meta property="og:image" content="https://sukunahust.com/wp-content/uploads/2022/03/image-6.png">
+<meta property="og:image" content="https://sukunahust.com/wp-content/uploads/2022/03/image-7.png">
+<meta property="og:image" content="https://sukunahust.com/wp-content/uploads/2022/03/image-23.png">
+<meta property="og:image" content="https://sukunahust.com/wp-content/uploads/2022/03/image-24.png">
+<meta property="og:image" content="https://sukunahust.com/wp-content/uploads/2022/03/image-25.png">
+<meta property="og:image" content="https://sukunahust.com/wp-content/uploads/2022/03/image-26.png">
+<meta property="og:image" content="https://pic2.zhimg.com/80/v2-9930748a73415bd511e4fe27f81de13d_1440w.jpg">
+<meta property="og:image" content="https://sukunahust.com/wp-content/uploads/2022/03/image-27.png">
+<meta property="og:image" content="https://sukunahust.com/wp-content/uploads/2022/03/image-33.png">
+<meta property="og:image" content="https://sukunahust.com/wp-content/uploads/2022/03/image-29-1024x488.png">
+<meta property="og:image" content="https://sukunahust.com/wp-content/uploads/2022/03/image-30.png">
+<meta property="og:image" content="https://sukunahust.com/wp-content/uploads/2022/03/image-31-1024x884.png">
+<meta property="og:image" content="https://sukunahust.com/wp-content/uploads/2022/03/image-32.png">
+<meta property="article:published_time" content="2023-02-06T03:02:54.000Z">
+<meta property="article:modified_time" content="2024-02-27T05:01:50.139Z">
+<meta property="article:author" content="Sukuna">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://sukunahust.com/wp-content/uploads/2022/03/image-1024x133.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/project/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/project/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/project/images/favicon-192x192.png">
+        
+      
+    
+    <!-- title -->
+    <title>MIT_6.s081_Lab</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/project/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/project/">首页</a></li><!--
+     --><!--
+       --><li><a href="/project/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/project/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/SukunaShinmyoumaru-hust/Hust-opensource-Xuejie">HUST-学解</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="上一篇" href="/project/2023/02/13/how-to-dress-up/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="下一篇" href="/project/2023/02/06/mit-6-s081-xv6-information-%E9%9B%86%E5%90%88/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sukunashinmyoumaru-hust.github.io/project/2023/02/06/mit-6-s081-lab/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sukunashinmyoumaru-hust.github.io/project/2023/02/06/mit-6-s081-lab/&text=MIT_6.s081_Lab"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sukunashinmyoumaru-hust.github.io/project/2023/02/06/mit-6-s081-lab/&title=MIT_6.s081_Lab"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sukunashinmyoumaru-hust.github.io/project/2023/02/06/mit-6-s081-lab/&is_video=false&description=MIT_6.s081_Lab"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=MIT_6.s081_Lab&body=Check out this article: https://sukunashinmyoumaru-hust.github.io/project/2023/02/06/mit-6-s081-lab/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sukunashinmyoumaru-hust.github.io/project/2023/02/06/mit-6-s081-lab/&title=MIT_6.s081_Lab"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sukunashinmyoumaru-hust.github.io/project/2023/02/06/mit-6-s081-lab/&title=MIT_6.s081_Lab"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sukunashinmyoumaru-hust.github.io/project/2023/02/06/mit-6-s081-lab/&title=MIT_6.s081_Lab"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sukunashinmyoumaru-hust.github.io/project/2023/02/06/mit-6-s081-lab/&title=MIT_6.s081_Lab"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sukunashinmyoumaru-hust.github.io/project/2023/02/06/mit-6-s081-lab/&name=MIT_6.s081_Lab&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sukunashinmyoumaru-hust.github.io/project/2023/02/06/mit-6-s081-lab/&t=MIT_6.s081_Lab"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Xv6-and-Unix-utilities"><span class="toc-number">1.</span> <span class="toc-text">1:Xv6 and Unix utilities</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lab1-1-Boot-xv6"><span class="toc-number">2.</span> <span class="toc-text">Lab1_1:Boot xv6</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lab1-2-sleep"><span class="toc-number">3.</span> <span class="toc-text">Lab1_2 sleep</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lab1-3-pingpong"><span class="toc-number">4.</span> <span class="toc-text">Lab1_3 pingpong</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lab1-4-prime"><span class="toc-number">5.</span> <span class="toc-text">Lab1_4 prime</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lab1-5-find"><span class="toc-number">6.</span> <span class="toc-text">Lab1_5 find</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lab1-6-xargs"><span class="toc-number">7.</span> <span class="toc-text">Lab1_6 xargs</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Xv6-and-Syscall"><span class="toc-number">8.</span> <span class="toc-text">2:Xv6 and Syscall</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lab2-1-Trace"><span class="toc-number">9.</span> <span class="toc-text">Lab2_1 Trace.</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E5%9C%A8user-h%E4%B8%AD%E6%B7%BB%E5%8A%A0%E5%AF%B9%E4%BA%8Etrace%E5%87%BD%E6%95%B0%E7%9A%84%E6%94%AF%E6%8C%81"><span class="toc-number">9.0.1.</span> <span class="toc-text">1) 在user.h中添加对于trace函数的支持.</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E6%B7%BB%E5%8A%A0%E4%B8%80%E4%B8%AAentry%E5%9C%A8user-pl%E9%87%8C%E9%9D%A2"><span class="toc-number">9.0.2.</span> <span class="toc-text">2) 添加一个entry在user.pl里面</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Generate-usys-S-the-stubs-for-syscalls"><span class="toc-number"></span> <span class="toc-text">Generate usys.S, the stubs for syscalls.</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#3-%E5%9C%A8syscall-h%E6%B7%BB%E5%8A%A0%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%8F%B7"><span class="toc-number">0.0.1.</span> <span class="toc-text">3) 在syscall.h添加系统调用号</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-%E5%9C%A8proc%E7%BB%93%E6%9E%84%E4%BD%93%E9%87%8C%E9%9D%A2%E6%B7%BB%E5%8A%A0%E4%B8%80%E4%B8%AAmask%E6%88%90%E5%91%98-%E7%94%A8%E6%9D%A5%E8%AE%B0%E5%BD%95%E8%A6%81trace%E5%93%AA%E7%A7%8D%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8"><span class="toc-number">0.0.2.</span> <span class="toc-text">4) 在proc结构体里面添加一个mask成员,用来记录要trace哪种系统调用.</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-%E5%9C%A8kernel-sysproc-c%E9%87%8C%E9%9D%A2%E5%AE%9E%E7%8E%B0%E5%85%B7%E4%BD%93%E7%9A%84%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8-%E5%9C%A8%E8%BF%99%E9%87%8C%E4%BD%A0%E4%BC%9A%E5%8F%91%E7%8E%B0%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%BC%9A%E4%BF%9D%E5%AD%98%E5%9C%A8%E8%BF%99%E9%87%8C"><span class="toc-number">0.0.3.</span> <span class="toc-text">5) 在kernel&#x2F;sysproc.c里面实现具体的系统调用,在这里你会发现系统调用的实现会保存在这里.</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#6-%E6%9B%B4%E6%94%B9fork%E5%87%BD%E6%95%B0-%E6%B7%BB%E5%8A%A0mask%E7%9A%84%E5%A4%8D%E5%88%B6-np-mask-p-mask"><span class="toc-number">0.0.4.</span> <span class="toc-text">6) 更改fork函数,添加mask的复制.np-&gt;mask &#x3D; p-&gt;mask;</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#7-%E6%B7%BB%E5%8A%A0syscall-c%E4%B8%AD%E5%85%B3%E4%BA%8Etrace%E5%87%BD%E6%95%B0%E7%9A%84%E6%94%AF%E6%8C%81"><span class="toc-number">0.0.5.</span> <span class="toc-text">7) 添加syscall.c中关于trace函数的支持.</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#8-%E6%9B%B4%E6%94%B9syscall-c%E7%9A%84syscall%E5%87%BD%E6%95%B0"><span class="toc-number">0.0.6.</span> <span class="toc-text">8) 更改syscall.c的syscall函数</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lab2-2-sys-info"><span class="toc-number">1.</span> <span class="toc-text">Lab2_2 sys info</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E5%9C%A8makefile-user-pl%E5%92%8Cuser-h%E6%B7%BB%E5%8A%A0%E5%AF%B9%E4%BA%8Esysinfo%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E7%9A%84%E6%94%AF%E6%8C%81-%E4%B8%8D%E6%87%82%E7%9A%84%E8%AF%B7%E7%BF%BB%E9%98%85%E4%B8%8A%E9%9D%A2"><span class="toc-number">1.0.1.</span> <span class="toc-text">1) 在makefile,user.pl和user.h添加对于sysinfo系统调用的支持.(不懂的请翻阅上面)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E7%BB%9F%E8%AE%A1%E5%BD%93%E5%89%8D%E6%AD%A3%E5%9C%A8%E4%BD%BF%E7%94%A8%E8%BF%9B%E7%A8%8B%E6%95%B0-%E5%AE%9A%E4%B9%89%E6%96%B0%E5%87%BD%E6%95%B0proc-size-%E5%9C%A8proc-h%E4%B8%AD"><span class="toc-number">1.0.2.</span> <span class="toc-text">2) 统计当前正在使用进程数.定义新函数proc_size(),在proc.h中</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-%E7%BB%9F%E8%AE%A1%E5%BD%93%E5%89%8D%E7%9A%84%E5%86%85%E5%AD%98%E6%95%B0-%E5%AE%9A%E4%B9%89%E6%96%B0%E5%87%BD%E6%95%B0freememory-%E5%9C%A8kalloc-h%E4%B8%AD"><span class="toc-number">1.0.3.</span> <span class="toc-text">3) 统计当前的内存数,定义新函数freememory(),在kalloc.h中.</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-%E5%AE%8C%E6%88%90sysinfo%E7%9A%84%E6%93%8D%E4%BD%9C-%E6%B3%A8%E6%84%8F2-%E5%92%8C3-%E5%AE%9A%E4%B9%89%E7%9A%84%E5%87%BD%E6%95%B0%E8%A6%81%E5%A3%B0%E6%98%8E%E5%9C%A8def-h%E4%B8%AD"><span class="toc-number">1.0.4.</span> <span class="toc-text">4) 完成sysinfo的操作.注意2)和3)定义的函数要声明在def.h中</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-%E5%83%8F%E4%B8%8A%E4%B8%AA%E5%AE%9E%E9%AA%8C%E4%B8%80%E6%A0%B7%E5%AE%8C%E6%88%90syscall-h-syscall-c%E7%9A%84%E6%94%AF%E6%8C%81%E5%8D%B3%E5%8F%AF"><span class="toc-number">1.0.5.</span> <span class="toc-text">5) 像上个实验一样完成syscall.h,syscall.c的支持即可.</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Xv6-and-PageTable"><span class="toc-number">2.</span> <span class="toc-text">3:Xv6 and PageTable</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lab3-1-Speed-Up-the-system-calls"><span class="toc-number">3.</span> <span class="toc-text">Lab3_1 Speed Up the system calls</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E7%A1%AE%E8%AE%A4usyscall%E7%9A%84%E7%BB%93%E6%9E%84%E4%BD%93%E6%98%AF%E4%BB%80%E4%B9%88-%E5%85%B6%E5%AE%9E%E5%AD%98%E5%82%A8%E7%9A%84%E5%B0%B1%E6%98%AFpid"><span class="toc-number">3.0.1.</span> <span class="toc-text">1) 确认usyscall的结构体是什么,其实存储的就是pid.</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E4%B8%BA%E6%AF%8F%E4%B8%AA%E8%BF%9B%E7%A8%8B%E7%BB%93%E6%9E%84%E6%B7%BB%E5%8A%A0usyscall%E7%9A%84%E5%85%83%E7%B4%A0-%E8%BF%99%E4%B8%AA%E7%BB%93%E6%9E%84%E5%AD%98%E5%82%A8%E5%9C%A8%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84%E9%A1%B5%E9%87%8C%E9%9D%A2"><span class="toc-number">3.0.2.</span> <span class="toc-text">2) 为每个进程结构添加usyscall的元素,这个结构存储在一个新的页里面.</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-%E6%89%93%E5%BC%80proc-c-%E4%BE%9D%E8%91%AB%E8%8A%A6%E7%94%BB%E7%93%A2%E7%BB%99usyscall%E7%BB%93%E6%9E%84%E4%BD%93%E7%94%B3%E8%AF%B7%E4%B8%80%E4%B8%AA%E9%A1%B5%E9%9D%A2"><span class="toc-number">3.0.3.</span> <span class="toc-text">3) 打开proc.c,依葫芦画瓢给usyscall结构体申请一个页面.</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-%E4%BE%9D%E6%8D%AE%E6%8F%90%E7%A4%BA-%E6%88%91%E4%BB%AC%E5%9C%A8proc-pagetable%E4%B8%AD%E4%BE%9D%E8%91%AB%E8%8A%A6%E7%94%BB%E7%93%A2%E6%9D%A5%E8%BF%9B%E8%A1%8C%E5%9C%B0%E5%9D%80%E7%9A%84%E6%98%A0%E5%B0%84-%E6%B3%A8%E6%84%8F-%E5%A6%82%E6%9E%9C%E6%98%A0%E5%B0%84%E5%A4%B1%E8%B4%A5%E6%98%AF%E8%A6%81%E6%8A%8A%E4%B9%8B%E5%89%8D%E4%BF%A9%E9%83%BD%E7%BB%99%E5%8F%96%E6%B6%88%E6%8E%89"><span class="toc-number">3.0.4.</span> <span class="toc-text">4) 依据提示,我们在proc_pagetable中依葫芦画瓢来进行地址的映射,注意,如果映射失败是要把之前俩都给取消掉</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-%E5%9C%A8%E8%BF%9B%E7%A8%8B%E5%88%9D%E5%A7%8B%E5%8C%96%E7%9A%84%E6%97%B6%E5%80%99%E6%B7%BB%E5%8A%A0%E5%88%9D%E5%A7%8B%E5%8C%96%E7%9A%84%E4%BB%A3%E7%A0%81-%E5%88%9D%E5%A7%8B%E5%8C%96usyscall%E7%9A%84%E7%BB%93%E6%9E%84"><span class="toc-number">3.0.5.</span> <span class="toc-text">5) 在进程初始化的时候添加初始化的代码.初始化usyscall的结构.</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#6-%E8%BF%9B%E7%A8%8B%E7%BB%93%E6%9D%9F%E7%9A%84%E6%97%B6%E5%80%99-free%E6%8E%89%E8%BF%9B%E7%A8%8B%E7%9A%84%E6%97%B6%E5%80%99%E6%8A%8A%E8%BF%99%E4%B8%80%E9%A1%B5%E4%B9%9Ffree%E6%8E%89"><span class="toc-number">3.0.6.</span> <span class="toc-text">6) 进程结束的时候,free掉进程的时候把这一页也free掉</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#7-%E8%BF%9B%E7%A8%8B%E7%BB%93%E6%9D%9F%E7%9A%84%E6%97%B6%E5%80%99-%E4%BE%9D%E8%91%AB%E8%8A%A6%E7%94%BB%E7%93%A2%E6%8A%8A%E6%98%A0%E5%B0%84%E5%85%B3%E7%B3%BB%E7%BB%99%E5%8F%96%E6%B6%88%E6%8E%89"><span class="toc-number">3.0.7.</span> <span class="toc-text">7) 进程结束的时候,依葫芦画瓢把映射关系给取消掉.</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lab3-2-Print-a-page-table"><span class="toc-number">4.</span> <span class="toc-text">Lab3_2 Print a page table</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E6%A0%B9%E6%8D%AE%E6%8F%90%E7%A4%BA-%E5%9C%A8exec%E7%9A%84return-argc%E4%B9%8B%E5%89%8D%E6%B7%BB%E5%8A%A0%E4%B8%80%E6%AE%B5"><span class="toc-number">4.0.1.</span> <span class="toc-text">1) 根据提示,在exec的return argc之前添加一段:</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E5%9C%A8def-h%E4%B8%AD%E6%B7%BB%E5%8A%A0%E5%AF%B9%E4%BA%8Evmprint%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-number">4.0.2.</span> <span class="toc-text">2) 在def.h中添加对于vmprint的定义</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-%E4%BF%AE%E6%94%B9vm-c-%E4%BB%BF%E7%85%A7freewalk%E6%94%B9%E9%80%A0%E5%87%BD%E6%95%B0"><span class="toc-number">4.0.3.</span> <span class="toc-text">3) 修改vm.c,仿照freewalk改造函数.</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lab3-3-Detecting-which-pages-have-been-accessed"><span class="toc-number">5.</span> <span class="toc-text">Lab3_3 Detecting which pages have been accessed</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E5%8F%82%E9%98%85RISC-V%E6%89%8B%E5%86%8C-%E7%A1%AE%E5%AE%9APTE-A%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-number">5.0.1.</span> <span class="toc-text">1) 参阅RISC-V手册,确定PTE_A是什么.</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E5%AE%8C%E6%88%90sys-pgaccess-%E5%9C%A8%E8%BF%99%E9%87%8C%E4%B8%BB%E8%A6%81%E6%98%AF%E5%A4%84%E7%90%86%E5%8F%82%E6%95%B0-%E5%88%A9%E7%94%A8argaddr%E5%92%8Cargint%E5%A4%84%E7%90%86%E5%8F%82%E6%95%B0"><span class="toc-number">5.0.2.</span> <span class="toc-text">2) 完成sys_pgaccess,在这里主要是处理参数.利用argaddr和argint处理参数.</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-%E8%AF%BB%E5%8F%96%E5%BD%93%E5%89%8D%E8%99%9A%E6%8B%9F%E5%9C%B0%E5%9D%80-%E6%89%BE%E5%88%B0%E5%AF%B9%E5%BA%94%E7%9A%84%E9%A1%B5%E8%A1%A8%E9%A1%B9%E7%9B%AE%E7%9A%84%E5%87%BD%E6%95%B0%E6%89%BE%E5%88%B0-walk"><span class="toc-number">5.0.3.</span> <span class="toc-text">3) 读取当前虚拟地址,找到对应的页表项目的函数找到:walk</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-%E8%AF%BB%E5%8F%96%E6%8E%A5%E7%9D%80%E6%A0%B9%E6%8D%AEpte%E8%A1%A8%E9%A1%B9-%E6%89%BE%E5%88%B0PTE-A%E4%BD%8D"><span class="toc-number">5.0.4.</span> <span class="toc-text">4) 读取接着根据pte表项,找到PTE_A位.</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-Xv6-and-Trap"><span class="toc-number">6.</span> <span class="toc-text">4:Xv6 and Trap</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lab4-1-RISC-V-Assembly"><span class="toc-number">7.</span> <span class="toc-text">Lab4_1 RISC-V Assembly</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lab4-2-BackTrace"><span class="toc-number">8.</span> <span class="toc-text">Lab4_2 BackTrace</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E5%9C%A8def-h%E6%B7%BB%E5%8A%A0backtrace-%E5%87%BD%E6%95%B0%E7%9A%84%E5%A3%B0%E6%98%8E"><span class="toc-number">8.0.1.</span> <span class="toc-text">1) 在def.h添加backtrace()函数的声明.</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-GCC-%E7%BC%96%E8%AF%91%E5%99%A8%E5%B0%86%E5%BD%93%E5%89%8D%E6%89%A7%E8%A1%8C%E7%9A%84%E5%87%BD%E6%95%B0%E7%9A%84%E5%B8%A7%E6%8C%87%E9%92%88%E5%AD%98%E5%82%A8%E5%9C%A8%E5%AF%84%E5%AD%98%E5%99%A8s0%E4%B8%AD-s0%E5%B0%B1%E5%AF%B9%E5%BA%94%E4%B8%8A%E9%9D%A2%E7%9A%84fp%E6%8C%87%E9%92%88"><span class="toc-number">8.0.2.</span> <span class="toc-text">2) GCC 编译器将当前执行的函数的帧指针存储在寄存器s0中,s0就对应上面的fp指针.</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-%E5%AE%8C%E6%88%90backtrace"><span class="toc-number">8.0.3.</span> <span class="toc-text">3) 完成backtrace()</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lab4-3-Alarm"><span class="toc-number">9.</span> <span class="toc-text">Lab4_3 Alarm</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#test0%EF%BC%9A%E8%B0%83%E7%94%A8%E5%A4%84%E7%90%86%E7%A8%8B%E5%BA%8F"><span class="toc-number">10.</span> <span class="toc-text">test0：调用处理程序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#test1-test2-%E6%81%A2%E5%A4%8D%E4%B8%AD%E6%96%AD%E7%9A%84%E4%BB%A3%E7%A0%81"><span class="toc-number">11.</span> <span class="toc-text">test1&#x2F;test2(): 恢复中断的代码</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E5%9C%A8user-h%E4%B8%AD%E6%B7%BB%E5%8A%A0%E5%A3%B0%E6%98%8E"><span class="toc-number">11.0.1.</span> <span class="toc-text">1) 在user.h中添加声明:</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E5%9C%A8user-pl%E6%B7%BB%E5%8A%A0%E5%87%BD%E6%95%B0%E5%85%A5%E5%8F%A3%E4%BB%A5%E7%94%9F%E6%88%90%E6%B1%87%E7%BC%96%E4%BB%A3%E7%A0%81"><span class="toc-number">11.0.2.</span> <span class="toc-text">2) 在user.pl添加函数入口以生成汇编代码.</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-%E5%9C%A8syscall-h%E6%B7%BB%E5%8A%A0%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%8F%B7-1"><span class="toc-number">11.0.3.</span> <span class="toc-text">3) 在syscall.h添加系统调用号.</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-%E5%9C%A8syscall-c%E4%B8%AD%E6%B7%BB%E5%8A%A0%E5%85%B3%E4%BA%8E%E8%BF%99%E4%B8%A4%E4%B8%AA%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E7%9A%84%E5%A3%B0%E6%98%8E"><span class="toc-number">11.0.4.</span> <span class="toc-text">4) 在syscall.c中添加关于这两个系统调用的声明.</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-%E5%9C%A8proc%E7%9A%84%E8%BF%9B%E7%A8%8B%E7%BB%93%E6%9E%84%E4%BD%93%E4%B8%AD%E6%B7%BB%E5%8A%A0%E6%88%90%E5%91%98-%E4%BF%9D%E5%AD%98%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E4%B8%AD%E6%96%AD-%E4%B8%AD%E6%96%AD%E6%89%A7%E8%A1%8C%E4%BB%80%E4%B9%88-%E8%BF%87%E5%A4%9A%E4%B9%85%E5%B0%B1%E8%BF%9B%E8%A1%8C%E4%B8%80%E6%AC%A1%E4%B8%AD%E6%96%AD-%E8%BF%98%E4%BF%9D%E5%AD%98%E4%B8%AD%E6%96%AD%E7%9A%84%E6%97%B6%E5%80%99%E6%A0%88%E9%A1%B6%E6%8C%87%E9%92%88%E5%92%8C%E4%BF%9D%E5%AD%98%E7%9A%84%E6%A0%88%E5%B8%A7"><span class="toc-number">11.0.5.</span> <span class="toc-text">5) 在proc的进程结构体中添加成员,保存什么时候中断,中断执行什么,过多久就进行一次中断,还保存中断的时候栈顶指针和保存的栈帧.</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#6-%E5%9C%A8allocproc%E5%87%BD%E6%95%B0%E4%B8%AD%E5%88%9D%E5%A7%8B%E5%8C%96%E8%BF%99%E4%BA%9B%E6%88%90%E5%91%98"><span class="toc-number">11.0.6.</span> <span class="toc-text">6) 在allocproc函数中初始化这些成员.</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#7-%E5%AE%8C%E6%88%90sigalarm%E7%9A%84%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8-%E5%81%9A%E6%B3%95%E5%B0%B1%E6%98%AF%E4%BB%8E%E5%AF%84%E5%AD%98%E5%99%A8%E8%8E%B7%E5%BE%97%E5%8F%82%E6%95%B0%E7%84%B6%E5%90%8E%E8%B5%8B%E5%80%BC%E7%BB%99proc%E7%9A%84%E5%85%83%E7%B4%A0%E4%B8%AD"><span class="toc-number">11.0.7.</span> <span class="toc-text">7) 完成sigalarm的系统调用,做法就是从寄存器获得参数然后赋值给proc的元素中.</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#8-%E5%AE%8C%E6%88%90%E6%97%B6%E9%92%9F"><span class="toc-number">11.0.8.</span> <span class="toc-text">8) 完成时钟</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#9-%E5%AE%8C%E6%88%90%E8%BF%94%E5%9B%9E%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="toc-number">11.0.9.</span> <span class="toc-text">9) 完成返回的操作.</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-Xv6-and-MultiThread"><span class="toc-number">12.</span> <span class="toc-text">6:Xv6 and MultiThread</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lab6-1-Uthread-switching-between-threads"><span class="toc-number">13.</span> <span class="toc-text">Lab6_1 Uthread: switching between threads</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E4%BF%AE%E6%94%B9thread-switch%E7%9A%84%E4%BB%A3%E7%A0%81-%E6%B7%BB%E5%8A%A0%E4%B8%8A%E5%85%B3%E4%BA%8Ethread-switch-%E7%9A%84%E4%BB%A3%E7%A0%81-%E5%8F%AA%E9%9C%80%E8%A6%81%E4%BF%9D%E5%AD%98-%E6%81%A2%E5%A4%8Dcallee-save-register"><span class="toc-number">13.0.1.</span> <span class="toc-text">1) 修改thread_switch的代码,添加上关于thread_switch 的代码,只需要保存&#x2F;恢复callee-save register:</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E5%9C%A8Thread%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%AD%E6%B7%BB%E5%8A%A0%E5%AF%84%E5%AD%98%E5%99%A8%E4%BF%A1%E6%81%AF"><span class="toc-number">13.0.2.</span> <span class="toc-text">2) 在Thread的数据结构中添加寄存器信息.</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-%E4%BF%AE%E6%94%B9%E5%88%9B%E5%BB%BA%E8%BF%9B%E7%A8%8B%E7%9A%84%E4%BB%A3%E7%A0%81-%E5%AF%B9ra%E5%92%8Csp%E5%AF%84%E5%AD%98%E5%99%A8%E8%BF%9B%E8%A1%8C%E5%88%9D%E5%A7%8B%E5%8C%96-%E5%85%B6%E4%B8%ADra%E6%9C%AC%E8%B4%A8%E4%B8%8A%E5%B0%B1%E6%98%AF%E6%96%AD%E7%82%B9%E5%AF%84%E5%AD%98%E5%99%A8-%E6%9C%89%E4%B8%80%E4%B8%AA%E5%8F%82%E6%95%B0%E5%B0%B1%E6%98%AF%E4%B8%80%E4%B8%AA%E5%9C%B0%E5%9D%80-%E8%BF%99%E4%B8%AA%E5%9C%B0%E5%9D%80%E6%8C%87%E5%90%91%E4%B8%80%E4%B8%AA%E5%87%BD%E6%95%B0-%E5%BD%93%E8%BF%99%E4%B8%AA%E7%BA%BF%E7%A8%8B%E7%AC%AC%E4%B8%80%E6%AC%A1%E5%90%AF%E5%8A%A8%E7%9A%84%E6%97%B6%E5%80%99%E5%B0%B1%E4%BB%8E%E8%BF%99%E4%B8%AA%E5%9C%B0%E5%9D%80%E5%AF%B9%E5%BA%94%E7%9A%84%E6%8C%87%E4%BB%A4%E5%BC%80%E5%A7%8B%E6%89%A7%E8%A1%8C-%E6%8A%8A%E8%BF%99%E4%B8%AA%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92%E7%BB%99ra"><span class="toc-number">13.0.3.</span> <span class="toc-text">3) 修改创建进程的代码.对ra和sp寄存器进行初始化.其中ra本质上就是断点寄存器.有一个参数就是一个地址,这个地址指向一个函数,当这个线程第一次启动的时候就从这个地址对应的指令开始执行.把这个参数传递给ra</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-%E8%B0%83%E7%94%A8switch%E5%87%BD%E6%95%B0-%E5%88%87%E6%8D%A2-%E5%85%B6%E4%B8%ADt%E6%98%AF%E5%BD%93%E5%89%8D%E8%BF%9B%E7%A8%8B-next-thread%E6%98%AF%E4%B8%8B%E4%B8%80%E4%B8%AA%E8%BF%9B%E7%A8%8B"><span class="toc-number">13.0.4.</span> <span class="toc-text">4) 调用switch函数,切换.其中t是当前进程,next_thread是下一个进程.</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lab6-2-Using-Thread"><span class="toc-number">14.</span> <span class="toc-text">Lab6_2 Using Thread.</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lab6-3-Barrier"><span class="toc-number">15.</span> <span class="toc-text">Lab6_3 Barrier</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-Xv6-and-Networking"><span class="toc-number">16.</span> <span class="toc-text">7:Xv6 and Networking</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-number">17.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%A0%E7%9A%84%E5%B7%A5%E4%BD%9C"><span class="toc-number">18.</span> <span class="toc-text">你的工作.</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%90%E7%A4%BA"><span class="toc-number">19.</span> <span class="toc-text">提示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-Xv6-and-Lock"><span class="toc-number">20.</span> <span class="toc-text">8:Xv6 and Lock</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lab8-1-Memory-Access"><span class="toc-number">21.</span> <span class="toc-text">Lab8_1 Memory Access.</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E6%8C%89%E7%85%A7%E6%8F%90%E7%A4%BA-%E6%9B%B4%E6%94%B9%E5%86%85%E5%AD%98%E5%9D%97%E7%9A%84%E7%BB%93%E6%9E%84-%E4%B8%8D%E6%98%AF%E6%89%80%E6%9C%89%E5%86%85%E5%AD%98%E5%9D%97%E9%83%BD%E5%85%B1%E4%BA%AB%E4%B8%80%E4%B8%AA%E9%94%81-%E6%98%AF%E6%AF%8F%E4%B8%AACPU%E9%83%BD%E6%9C%89%E4%B8%80%E4%B8%AA%E7%8B%AC%E7%AB%8B%E7%9A%84%E9%94%81"><span class="toc-number">21.0.1.</span> <span class="toc-text">1) 按照提示,更改内存块的结构.不是所有内存块都共享一个锁,是每个CPU都有一个独立的锁.</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E6%94%B9%E4%B8%BA%E5%88%9D%E5%A7%8B%E5%8C%96%E6%89%80%E6%9C%89%E9%94%81"><span class="toc-number">21.0.2.</span> <span class="toc-text">2) 改为初始化所有锁.</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-%E8%8E%B7%E5%8F%96CPU%E7%9A%84id-%E5%9C%A8%E8%BF%99%E4%B8%AA%E5%9C%B0%E6%96%B9%E8%8E%B7%E5%8F%96id%E7%9A%84%E6%97%B6%E5%80%99%E8%A6%81%E5%85%B3%E4%B8%AD%E6%96%AD-%E9%98%B2%E6%AD%A2%E5%9B%A0%E4%B8%BA%E4%B8%AD%E6%96%AD%E5%88%86%E9%85%8D%E7%BB%99%E5%85%B6%E4%BB%96CPU%E6%9D%A5%E8%BF%9B%E8%A1%8C%E5%A4%84%E7%90%86%E4%BA%86"><span class="toc-number">21.0.3.</span> <span class="toc-text">3) 获取CPU的id,在这个地方获取id的时候要关中断,防止因为中断分配给其他CPU来进行处理了.</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-%E5%AF%B9%E4%BA%8Ekalloc%E5%92%8Ckfree%E7%9A%84%E9%94%81%E8%8E%B7%E5%8F%96%E5%92%8C%E8%BF%9B%E5%85%A5%E6%94%B9%E6%88%90%E5%AF%B9%E4%BA%8ECPU%E4%B8%BAid%E7%9A%84%E9%82%A3%E4%B8%AA%E9%94%81"><span class="toc-number">21.0.4.</span> <span class="toc-text">4) 对于kalloc和kfree的锁获取和进入改成对于CPU为id的那个锁</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-%E5%9C%A8if-r-%E7%9A%84%E5%90%8E%E9%9D%A2%E6%B7%BB%E5%8A%A0else-%E4%BB%A3%E8%A1%A8%E5%A6%82%E6%9E%9C%E5%AF%BB%E6%89%BE%E5%A4%B1%E8%B4%A5-%E5%B0%B1%E5%88%B0%E5%85%B6%E4%BB%96%E7%9A%84%E6%A0%B8%E4%B8%AD%E8%8E%B7%E5%8F%96"><span class="toc-number">21.0.5.</span> <span class="toc-text">5) 在if(r)的后面添加else,代表如果寻找失败,就到其他的核中获取.</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-Xv6-File-System"><span class="toc-number">22.</span> <span class="toc-text">9:Xv6 &amp; File System</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lab-9-1-Large-files"><span class="toc-number">23.</span> <span class="toc-text">Lab 9_1 Large files</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E4%BF%AE%E6%94%B9%E7%9B%B4%E6%8E%A5%E6%98%A0%E5%B0%84%E7%9A%84%E6%95%B0%E9%87%8F"><span class="toc-number">23.0.1.</span> <span class="toc-text">1) 修改直接映射的数量.</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E5%AF%B9%E5%BA%94%E7%9A%84file-h%E7%9A%84inode%E7%BB%93%E6%9E%84%E4%BD%93%E4%B9%9F%E8%A6%81%E8%BF%9B%E8%A1%8C%E6%9B%B4%E6%94%B9"><span class="toc-number">23.0.2.</span> <span class="toc-text">2) 对应的file.h的inode结构体也要进行更改</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-%E9%98%85%E8%AF%BBbmap%E7%9A%84%E4%BB%A3%E7%A0%81-0-NDIRECT-1-%E7%9B%B4%E6%8E%A5-NDIRECT-NDIRECT-NINDIRECT-1-%E4%B8%80%E7%BA%A7%E9%97%B4%E6%8E%A5"><span class="toc-number">23.0.3.</span> <span class="toc-text">3) 阅读bmap的代码: 0-NDIRECT-1 :直接 ,NDIRECT,NDIRECT+NINDIRECT-1:一级间接</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-%E4%BE%9D%E8%91%AB%E8%8A%A6%E7%94%BB%E7%93%A2%E4%BD%9C%E5%87%BA%E4%BA%8C%E7%BA%A7%E7%B4%A2%E5%BC%95"><span class="toc-number">23.0.4.</span> <span class="toc-text">4) 依葫芦画瓢作出二级索引.</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-%E5%AE%8C%E6%88%90%E7%B4%A2%E5%BC%95%E7%9A%84%E9%87%8A%E6%94%BE"><span class="toc-number">23.0.5.</span> <span class="toc-text">5) 完成索引的释放.</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lab9-2-Symbolic-links"><span class="toc-number">24.</span> <span class="toc-text">Lab9_2 Symbolic links</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E6%B7%BB%E5%8A%A0%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8-%E7%95%A5"><span class="toc-number">24.0.1.</span> <span class="toc-text">1) 添加系统调用.(略)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E6%8C%89%E7%85%A7%E5%AE%9E%E9%AA%8C%E6%8F%90%E7%A4%BA%E7%9A%84%E4%BF%A1%E6%81%AF-%E6%B7%BB%E5%8A%A0%E4%B8%A4%E4%B8%AA%E6%96%B0%E7%9A%84%E5%AE%8F-%E7%95%A5"><span class="toc-number">24.0.2.</span> <span class="toc-text">2) 按照实验提示的信息,添加两个新的宏.(略)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-%E5%AE%8C%E6%88%90symlink%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8"><span class="toc-number">24.0.3.</span> <span class="toc-text">3) 完成symlink系统调用.</span></a></li></ol></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        MIT_6.s081_Lab
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Sukuna</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2023-02-06T03:02:54.000Z" class="dt-published" itemprop="datePublished">2023-02-06</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/project/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/">实验记录</a>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h3 id="1-Xv6-and-Unix-utilities"><a href="#1-Xv6-and-Unix-utilities" class="headerlink" title="1:Xv6 and Unix utilities"></a>1:Xv6 and Unix utilities</h3><p>运行环境:Ubuntu 20.04 qemu</p>
+<p>在做6.s081的实验之前我们首先要先下载Xv6操作系统以及qemu虚拟机:</p>
+<p>sudo apt-get install git build-essential gdb-multiarch qemu-system-misc gcc-riscv64-linux-gnu binutils-riscv64-linux-gnu </p>
+<p>调试的gbd工具使用方法:在Ubuntu的终端输入这个命令即可</p>
+<p><img src="https://sukunahust.com/wp-content/uploads/2022/03/image-1024x133.png"></p>
+<p>记住端口号,是tcp::26000</p>
+<p>另起一个窗口,输入下面命令:</p>
+<p><img src="https://sukunahust.com/wp-content/uploads/2022/03/image-1-1024x343.png"></p>
+<p>输入 file .&#x2F;kernel&#x2F;kernel载入符号表,然后target remote loaclhost:26000即可:</p>
+<h3 id="Lab1-1-Boot-xv6"><a href="#Lab1-1-Boot-xv6" class="headerlink" title="Lab1_1:Boot xv6"></a>Lab1_1:Boot xv6</h3><p>运行并安全退出xv6系统:</p>
+<p>运行的方法很简单:cd进xv6的文件夹里面,然后输入`make qemu`即可,输入完之后就是进入了xv6的系统里面了</p>
+<p><img src="https://sukunahust.com/wp-content/uploads/2022/03/image-2-1024x279.png"></p>
+<p>退出的方法就是,先Ctrl+A,再输入x即可.</p>
+<h3 id="Lab1-2-sleep"><a href="#Lab1-2-sleep" class="headerlink" title="Lab1_2 sleep"></a>Lab1_2 sleep</h3><p>本实验要为 xv6 实现 UNIX 程序 sleep； 您的睡眠应暂停用户指定的滴答数。 滴答是 xv6 内核定义的时间概念，即来自定时器芯片的两次中断之间的时间。</p>
+<p>一些提示：</p>
+<ul>
+<li>在开始编码之前，请阅读<a target="_blank" rel="noopener" href="https://pdos.csail.mit.edu/6.S081/2020/xv6/book-riscv-rev1.pdf">xv6 书籍</a>第 1 章。（中文版<a target="_blank" rel="noopener" href="https://drive.google.com/file/d/1QmK2EgNgYEniHJnn2jidtNsK1uclZ9KM/view?usp=sharing">xv6 书籍</a>)</li>
+<li>查看<code>user/</code>中的其他一些程序 （例如，<code>user/echo.c</code>、<code>user/grep.c</code>和<code>user/rm.c</code>）以了解如何获取传递给程序的命令行参数。</li>
+<li>如果用户忘记传递参数， sleep 应该打印错误消息。</li>
+<li>命令行参数作为字符串传递；您可以使用<code>atoi</code>将其转换为整数（请参阅 user&#x2F;ulib.c）。</li>
+<li>使用系统调用<code>sleep</code>。</li>
+<li>确保<code>main</code>调用<code>exit()</code>以退出您的程序。</li>
+<li>将你的<code>睡眠</code>程序添加到Makefile 中的<code>UPROGS</code>；完成后，<code>make qemu</code>将编译您的程序，您将能够从 xv6 shell 运行它。</li>
+<li>查看 Kernighan 和 Ritchie 的书*The C programming language (second edition)*（K&amp;R）以了解 C。</li>
+</ul>
+<p>#include “kernel&#x2F;types.h”<br>#include “kernel&#x2F;stat.h”<br>#include “user&#x2F;user.h”</p>
+<p>int main(int argc,char *argv[]){<br>  for(int i&#x3D;0;!argv[i];i++){<br>    if(argv[1][i]&gt;’9’argv[1][i]&lt;’0’){<br>      write(1, “error\n”, 6);<br>      exit(-1);<br>    }<br>  }<br>  int times&#x3D;atoi(argv[1]);<br>  sleep(times);<br>  exit(0);<br>}</p>
+<p>首先我们知道在C语言中argc代表传入的参数数,argv是传入的参数.</p>
+<p>第一个for循环就是判断这个是不是一个正常的数字(什么时候结束循环呢?),第二步用atoi函数转化成数字,最后执行系统调用sleep.</p>
+<p><img src="https://sukunahust.com/wp-content/uploads/2022/03/image-3-1024x166.png"></p>
+<h3 id="Lab1-3-pingpong"><a href="#Lab1-3-pingpong" class="headerlink" title="Lab1_3 pingpong"></a>Lab1_3 pingpong</h3><p>编写一个程序，使用 UNIX 系统调用在两个进程之间通过一对管道“乒乓”一个字节，每个管道一个。 父母应该向孩子发送一个字节； 子进程应该打印“: received ping”，其中 是它的进程 ID，将管道上的字节写入父进程，然后退出； 父母应该从孩子那里读取字节，打印“: received pong”，然后退出。</p>
+<p>一些提示：</p>
+<ul>
+<li>使用管道创建管道。</li>
+<li>使用 fork 创建一个孩子。</li>
+<li>使用 read 从管道读取，并使用 write 写入管道。</li>
+<li>使用 getpid 查找调用进程的进程 ID。</li>
+<li>将程序添加到 Makefile 中的 UPROGS。</li>
+<li>xv6 上的用户程序有一组有限的库函数可供它们使用。 可以在 user&#x2F;user.h 中看到列表； 源（系统调用除外）位于 user&#x2F;ulib.c、user&#x2F;printf.c 和 user&#x2F;umalloc.c。</li>
+</ul>
+<p>我们可以认为pipe是一个Linux进程间通讯的一种方式,一个管道以一个两位的int类型数组构成,其中第一个元素是读端的接口编号,第二个元素是写端的接口编号.然后可以使用read和write来进行读取,注意管道的端口有读端口和写端口之分,读的时候只能从读端口读数据,写的时候只能从写的端口写数据.</p>
+<p>有点像我们之前操作系统课上面学到的缓冲区的结构,缓冲区有两端,一端读一端写.</p>
+<p>系统调用:<br>可以使用pipe(一个二位的数组)来初始化一个管道.经过pipe了之后,第一个元素就是一个读取的端口,第二个元素就是对应写入的端口,<br>可以使用read(读端口,读出来的元素写在哪里,长度)来从一个读的端口读出元素<br>可以使用write(写端口,写出来的元素写在哪里,长度)来把元素写进一个端口.</p>
+<p>fork函数就是一次调用,两次返回,调用之后父进程和子进程都从获得函数的返回值开始继续往下运行,就像一条河流,遇到了一个分叉口,河流分成了两叉,这两叉都从分叉口开始继续往下流.在这里分叉口就像fork()调用,调用生成了两个分叉,两个分叉都从fork()调用结束后继续往下走.</p>
+<p><img src="https://img-blog.csdn.net/20161223173958916"></p>
+<p>#include “kernel&#x2F;types.h”<br>#include “kernel&#x2F;stat.h”<br>#include “user&#x2F;user.h”</p>
+<p>int main(){<br>  int p_filedes[2],s_filedes[2];<br>  pipe(p_filedes);<br>  pipe(s_filedes);<br>  char buf[4];<br>  if(fork()&#x3D;&#x3D;0){<br>    read(p_filedes[0],buf,4);<br>    printf(“%d: received %s\n”,getpid(),buf);<br>    write(s_filedes[1],”pong”,4);<br>  }else{<br>    write(p_filedes[1],”ping”,4);<br>    read(s_filedes[0],buf,4);<br>    printf(“%d: received %s\n”,getpid(),buf);<br>  }<br>  exit(0);<br>}</p>
+<p>函数的思路就是先初始化两根管道,接着父进程先read再写,子进程先写再read.</p>
+<p><img src="https://sukunahust.com/wp-content/uploads/2022/03/image-4.png"></p>
+<h3 id="Lab1-4-prime"><a href="#Lab1-4-prime" class="headerlink" title="Lab1_4 prime"></a>Lab1_4 prime</h3><p>编写一个程序,完成一个并发版本的prime初筛,第一个进程负责把2-35范围内的素数输入进管道,对于每一个素数,我们都需要fork一个进程来接受管道的数字然后输出出来.</p>
+<ul>
+<li>关闭进程不需要的文件描述符，否则你的程序将在第一个进程达到 35 之前耗尽 xv6 的资源。</li>
+<li>一旦第一个进程达到 35，它应该等到整个管道终止，包括所有子、孙等。因此，主素数进程应该只在所有输出都被打印出来，并且在所有其他素数进程都退出之后才退出。</li>
+<li>当管道的写端关闭时，read 返回零。</li>
+<li>将 32 位（4 字节）整数直接写入管道是最简单的，而不是使用格式化的 ASCII I&#x2F;O。</li>
+<li>您应该仅在需要时在管道中创建流程。</li>
+<li>将程序添加到 Makefile 中的 UPROGS。</li>
+</ul>
+<p>基本的思路在下面,每一个进程对应一个素数,主进程负责传输2-34的数据给子进程们,每个进程对应一个素数,如果这个数%这个素数不为0的话就可以传给下一级的进程,如果没有下一级的进程那么fork一个新的进程,这个数一定是素数,这个进程就会接着处理来自左边邻居的数据,处理的方式.这样子每一个进程就像一个筛子,筛选不可能是素数的数.</p>
+<p>总的来说主进程的数据首先从左到右到第一个子进程,判断能不能被2除,不可以就继续从左到右交给下一个子进程,判断能不能被3除…,如果下一个子进程是不存在的,那么新建一个进程,这个进程就代表对应数.</p>
+<p><img src="https://pic3.zhimg.com/80/v2-cfd5f86fa2495b79eabf8bdaa24925f2_1440w.jpg"></p>
+<p><img src="https://sukunahust.com/wp-content/uploads/2022/03/image-5.png"></p>
+<h3 id="Lab1-5-find"><a href="#Lab1-5-find" class="headerlink" title="Lab1_5 find"></a>Lab1_5 find</h3><p>编写一个简单版本的 UNIX 查找程序：查找目录树中具有特定名称的所有文件。给定对应的文件名以及文件名在目录,找到文件名的位置.</p>
+<ul>
+<li>查看 user&#x2F;ls.c 以了解如何读取目录。</li>
+<li>使用递归允许 find 访问到子目录。</li>
+<li>不要递归到“.” 和 ”..”。</li>
+<li>对文件系统的更改在 qemu 运行中持续存在； 要获得一个干净的文件系统，请运行 make clean 然后 make qemu。</li>
+</ul>
+<p>struct dirent {<br>  ushort inum;<br>  char name[DIRSIZ];<br>};</p>
+<p>上面是文件系统中关于目录文件内容的说明,inum说明这个文件占用了几个inode.该操作系统类似于Linux系统,磁盘分成磁盘块,磁盘块的一些相关控制信息就储存在存放在内存中的inode.文件系统获得文件,先找到文件的file结构,根据file结构找到inode,再根据inode找到磁盘块.</p>
+<p>说白了目录文件存储的就是一堆dirent类型的结构体.</p>
+<p>下面就是stat信息,stat信息存放了文件的一些控制信息,比如说链接信息,大小和类型之类的.在我们利用open打开文件后,open函数会返回一个数字,我们再利用fstat这个调用找到stat控制块.</p>
+<p>struct stat {<br>  int dev;     &#x2F;&#x2F; File system’s disk device<br>  uint ino;    &#x2F;&#x2F; Inode number<br>  short type;  &#x2F;&#x2F; Type of file<br>  short nlink; &#x2F;&#x2F; Number of links to file<br>  uint64 size; &#x2F;&#x2F; Size of file in bytes<br>};</p>
+<p>我们先来看看xv6是如何完成对ls指令的支持的?</p>
+<p>首先第一个函数:根据文件的的路径名提取出文件的名字,就是从后往前遍历,找到第一个‘&#x2F;’,这之间的那一部分就是文件的名字.</p>
+<p>接着就是ls函数,ls函数中只需要提供当前的path,找到path里面的所有文件即可.首先先打开当前path对应的文件(Linux内部目录文件和普通的文件都是文件),再利用fstat系统调用找到stat的值.由于目录文件里面就是连续地存储了一堆dirent类型的结构体,那我们可以把目录文件的内容当成一个struct dirent[MAX](结构体数组,一个结构体一个结构体地去读)</p>
+<p>最后就是main函数,就是看看输入的指令罢了</p>
+<p>#include “kernel&#x2F;types.h”<br>#include “kernel&#x2F;stat.h”<br>#include “user&#x2F;user.h”<br>#include “kernel&#x2F;fs.h”</p>
+<p>char* fmtname(char *path)<br>{<br>  static char buf[DIRSIZ+1];<br>  char *p;</p>
+<p>  &#x2F;&#x2F; Find first character after last slash.<br>  for(p&#x3D;path+strlen(path); p &gt;&#x3D; path &amp;&amp; *p !&#x3D; ‘&#x2F;‘; p–)<br>    ;<br>  p++;</p>
+<p>  &#x2F;&#x2F; Return blank-padded name.<br>  if(strlen(p) &gt;&#x3D; DIRSIZ)<br>    return p;<br>  memmove(buf, p, strlen(p));<br>  memset(buf+strlen(p), ‘ ‘, DIRSIZ-strlen(p));<br>  return buf;<br>}</p>
+<p>void ls(char *path)<br>{<br>  char buf[512], *p;<br>  int fd;<br>  struct dirent de;<br>  struct stat st;</p>
+<p>  if((fd &#x3D; open(path, 0)) &lt; 0){<br>    fprintf(2, “ls: cannot open %s\n”, path);<br>    return;<br>  }</p>
+<p>  if(fstat(fd, &amp;st) &lt; 0){<br>    fprintf(2, “ls: cannot stat %s\n”, path);<br>    close(fd);<br>    return;<br>  }</p>
+<p>  switch(st.type){<br>  case T_FILE:<br>    printf(“%s %d %d %l\n”, fmtname(path), st.type, st.ino, st.size);<br>    break;</p>
+<p>  case T_DIR:<br>    if(strlen(path) + 1 + DIRSIZ + 1 &gt; sizeof buf){<br>      printf(“ls: path too long\n”);<br>      break;<br>    }<br>    strcpy(buf, path);<br>    p &#x3D; buf+strlen(buf);<br>    *p++ &#x3D; ‘&#x2F;‘;<br>    while(read(fd, &amp;de, sizeof(de)) &#x3D;&#x3D; sizeof(de)){<br>      if(de.inum &#x3D;&#x3D; 0)<br>        continue;<br>      memmove(p, de.name, DIRSIZ);<br>      p[DIRSIZ] &#x3D; 0;<br>      if(stat(buf, &amp;st) &lt; 0){<br>        printf(“ls: cannot stat %s\n”, buf);<br>        continue;<br>      }<br>      printf(“%s %d %d %d\n”, fmtname(buf), st.type, st.ino, st.size);<br>    }<br>    break;<br>  }<br>  close(fd);<br>}</p>
+<p>int main(int argc, char *argv[])<br>{<br>  int i;</p>
+<p>  if(argc &lt; 2){<br>    ls(“.”);<br>    exit(0);<br>  }<br>  for(i&#x3D;1; i&lt;argc; i++)<br>    ls(argv[i]);<br>  exit(0);</p>
+<p>}</p>
+<p>这个时候我们就可以对ls指令稍微修改修改,ls只用找当前目录第一层的所有文件,那么我们也是找当前目录的所有文件,对于目录文件,我们继续往下搜索这个目录,对于普通文件,我们只用看名字是否匹配即可.</p>
+<p><img src="https://sukunahust.com/wp-content/uploads/2022/03/image-6.png"></p>
+<h3 id="Lab1-6-xargs"><a href="#Lab1-6-xargs" class="headerlink" title="Lab1_6 xargs"></a>Lab1_6 xargs</h3><p>这个指令就是我们要把若干条指令合并在一块进行执行.其中前面指令的standard out会作为下一条的指令一个输入来进行执行.</p>
+<p>举个例子:前面指令的hello too作为standard out作为下一条指令的输入.</p>
+<p>$ echo hello too  xargs echo bye<br>$ bye hello too</p>
+<ul>
+<li>使用 fork 和 exec 对每一行输入调用命令。 在父级中使用 wait 等待子级完成命令。</li>
+<li>要读取单行输入，请一次读取一个字符，直到出现换行符 (‘\n’)。</li>
+<li>kernel&#x2F;param.h 声明了 MAXARG，如果您需要声明 argv 数组，这可能很有用。</li>
+<li>对文件系统的更改在 qemu 运行中持续存在； 要获得一个干净的文件系统，请运行 make clean 然后 make qemu。</li>
+<li>将程序添加到 Makefile 中的 UPROGS。</li>
+</ul>
+<p>首先第一步把指令xargs给删除掉:然后把标准输出(来源:0)获取下来,放入最后一个参数中进行执行.</p>
+<p>#include “kernel&#x2F;types.h”<br>#include “kernel&#x2F;param.h”<br>#include “user&#x2F;user.h”</p>
+<p>int main(int argc, char *argv[]){<br>    char* argvs[MAXARG];<br>    for(int i&#x3D;1;i&lt;argc;i++){<br>        argvs[i-1]&#x3D;argv[i];<br>    }<br>    char buf[512];<br>    int index;<br>    int read_len;<br>    while(1){<br>        index &#x3D; -1;<br>        do{<br>            index++;<br>            read_len&#x3D;read(0,&amp;buf[index],sizeof(char));<br>        }while(read_len&gt;0&amp;&amp;buf[index]!&#x3D;’\n’);<br>        if(read_len&#x3D;&#x3D;0&amp;&amp;index&#x3D;&#x3D;0){<br>            break;<br>        }<br>        buf[index]&#x3D;’\0’;<br>        argvs[argc-1]&#x3D;buf;<br>         if (fork() &#x3D;&#x3D; 0) {<br>            exec(argvs[0], argvs);<br>            exit(0);<br>        } else {<br>            wait(0);<br>        }</p>
+<pre><code>&#125;
+exit(0);
+</code></pre>
+<p>}</p>
+<p><img src="https://sukunahust.com/wp-content/uploads/2022/03/image-7.png"></p>
+<h3 id="2-Xv6-and-Syscall"><a href="#2-Xv6-and-Syscall" class="headerlink" title="2:Xv6 and Syscall"></a>2:Xv6 and Syscall</h3><h3 id="Lab2-1-Trace"><a href="#Lab2-1-Trace" class="headerlink" title="Lab2_1 Trace."></a>Lab2_1 Trace.</h3><p>实验2_1主要是完成一个新的系统调用,这个系统调用主要的功能就是追踪,主要就是创建一个新的跟踪系统调用来控制跟踪,它应该采用一个参数,一个整数“掩码”,其位指定要跟踪的系统调用.比如说跟踪fork系统调用就会调用trace(1&lt;&lt;SYS_USER_FORK).我们需要修改 xv6 内核以在每个系统调用即将返回时打印出一行.该行应包含进程id、系统调用的名称和返回值,我们还必须对这个进程以及所有子进程进行跟踪.</p>
+<p>&#x2F;&#x2F;trace.c<br>int main(int argc, char *argv[])<br>{<br>  int i;<br>  char *nargv[MAXARG];</p>
+<p>  if(argc &lt; 3  (argv[1][0] &lt; ‘0’  argv[1][0] &gt; ‘9’)){<br>    fprintf(2, “Usage: %s mask command\n”, argv[0]);<br>    exit(1);<br>  }</p>
+<p>  if (trace(atoi(argv[1])) &lt; 0) {<br>    fprintf(2, “%s: trace failed\n”, argv[0]);<br>    exit(1);<br>  }</p>
+<p>  for(i &#x3D; 2; i &lt; argc &amp;&amp; i &lt; MAXARG; i++){<br>    nargv[i-2] &#x3D; argv[i];<br>  }<br>  exec(nargv[0], nargv);<br>  exit(0);<br>}</p>
+<p>我们发现在调用trace的时候,首先判断输入参数的合法性,然后再进行trace操作,接着再执行剩下的操作.这个时候trace就是一个系统调用,我们需要完成系统调用.</p>
+<p>现在我们开始实验:</p>
+<h5 id="1-在user-h中添加对于trace函数的支持"><a href="#1-在user-h中添加对于trace函数的支持" class="headerlink" title="1) 在user.h中添加对于trace函数的支持."></a>1) 在user.h中添加对于trace函数的支持.</h5><p><img src="https://sukunahust.com/wp-content/uploads/2022/03/image-23.png"></p>
+<p>这里面存储了所有user函数会调用的系统调用.</p>
+<h5 id="2-添加一个entry在user-pl里面"><a href="#2-添加一个entry在user-pl里面" class="headerlink" title="2) 添加一个entry在user.pl里面"></a>2) 添加一个entry在user.pl里面</h5><p>#!&#x2F;usr&#x2F;bin&#x2F;perl -w</p>
+<h1 id="Generate-usys-S-the-stubs-for-syscalls"><a href="#Generate-usys-S-the-stubs-for-syscalls" class="headerlink" title="Generate usys.S, the stubs for syscalls."></a>Generate usys.S, the stubs for syscalls.</h1><p>print “# generated by usys.pl - do not edit\n”;</p>
+<p>print “#include \“kernel&#x2F;syscall.h\“\n”;</p>
+<p>sub entry {<br>    my $name &#x3D; shift;<br>    print “.global $name\n”;<br>    print “${name}:\n”;<br>    print “ li a7, SYS_${name}\n”;<br>    print “ ecall\n”;<br>    print “ ret\n”;<br>}</p>
+<p>entry(“fork”);<br>entry(“exit”);<br>entry(“wait”);<br>entry(“pipe”);<br>entry(“read”);<br>entry(“write”);<br>entry(“close”);<br>entry(“kill”);<br>entry(“exec”);<br>entry(“open”);<br>entry(“mknod”);<br>entry(“unlink”);<br>entry(“fstat”);<br>entry(“link”);<br>entry(“mkdir”);<br>entry(“chdir”);<br>entry(“dup”);<br>entry(“getpid”);<br>entry(“sbrk”);<br>entry(“sleep”);<br>entry(“uptime”);<br>entry(“trace”);</p>
+<p>这个user.pl负责输出汇编代码,这个汇编代码就是user文件夹里面的代码调用系统调用之后由U态进入到S态的过渡代码,主要是构建参数的代码和ecall组成.</p>
+<p>执行顺序:调用系统调用-&gt;user.pl生成的代码(U态进入到S态)-&gt;S态的系统调用.</p>
+<h5 id="3-在syscall-h添加系统调用号"><a href="#3-在syscall-h添加系统调用号" class="headerlink" title="3) 在syscall.h添加系统调用号"></a>3) 在syscall.h添加系统调用号</h5><p>&#x2F;&#x2F; System call numbers<br>#define SYS_fork    1<br>#define SYS_exit    2<br>#define SYS_wait    3<br>#define SYS_pipe    4<br>#define SYS_read    5<br>#define SYS_kill    6<br>#define SYS_exec    7<br>#define SYS_fstat   8<br>#define SYS_chdir   9<br>#define SYS_dup    10<br>#define SYS_getpid 11<br>#define SYS_sbrk   12<br>#define SYS_sleep  13<br>#define SYS_uptime 14<br>#define SYS_open   15<br>#define SYS_write  16<br>#define SYS_mknod  17<br>#define SYS_unlink 18<br>#define SYS_link   19<br>#define SYS_mkdir  20<br>#define SYS_close  21<br>#define SYS_trace  22</p>
+<p>这个文件里面存储了系统调用的调用调用号,在后面这些宏就负责替换为编号.</p>
+<h5 id="4-在proc结构体里面添加一个mask成员-用来记录要trace哪种系统调用"><a href="#4-在proc结构体里面添加一个mask成员-用来记录要trace哪种系统调用" class="headerlink" title="4) 在proc结构体里面添加一个mask成员,用来记录要trace哪种系统调用."></a>4) 在proc结构体里面添加一个mask成员,用来记录要trace哪种系统调用.</h5><h5 id="5-在kernel-sysproc-c里面实现具体的系统调用-在这里你会发现系统调用的实现会保存在这里"><a href="#5-在kernel-sysproc-c里面实现具体的系统调用-在这里你会发现系统调用的实现会保存在这里" class="headerlink" title="5) 在kernel&#x2F;sysproc.c里面实现具体的系统调用,在这里你会发现系统调用的实现会保存在这里."></a>5) 在kernel&#x2F;sysproc.c里面实现具体的系统调用,在这里你会发现系统调用的实现会保存在这里.</h5><p>uint64<br>sys_trace(void)<br>{<br>  int n;<br>  if (argint(0, &amp;n) &lt; 0) &#x2F;&#x2F; get the number of argv[1].<br>    return -1;<br>  myproc()-&gt;mask &#x3D; n;    &#x2F;&#x2F; save in the mask.<br>  return 0;<br>}</p>
+<p>这个时候可以通过argint系统调用来获得栈帧中保存的寄存器值.然后把寄存器的值保存到mask元素中.</p>
+<h5 id="6-更改fork函数-添加mask的复制-np-mask-p-mask"><a href="#6-更改fork函数-添加mask的复制-np-mask-p-mask" class="headerlink" title="6) 更改fork函数,添加mask的复制.np-&gt;mask = p-&gt;mask;"></a>6) 更改fork函数,添加mask的复制.<code>np-&gt;mask = p-&gt;mask;</code></h5><p>这一步的目的就是为了让子进程执行系统调用也可以完成.</p>
+<h5 id="7-添加syscall-c中关于trace函数的支持"><a href="#7-添加syscall-c中关于trace函数的支持" class="headerlink" title="7) 添加syscall.c中关于trace函数的支持."></a>7) 添加syscall.c中关于trace函数的支持.</h5><p>&#x2F;&#x2F;在syscall的函数数组中添加即可.<br>……<br>[SYS_close]   sys_close,<br>[SYS_trace]   sys_trace,<br>};<br>&#x2F;&#x2F;添加函数声明.<br>extern uint64 sys_trace(void);</p>
+<h5 id="8-更改syscall-c的syscall函数"><a href="#8-更改syscall-c的syscall函数" class="headerlink" title="8) 更改syscall.c的syscall函数"></a>8) 更改syscall.c的syscall函数</h5><p>void<br>syscall(void)<br>{<br>  int num;<br>  struct proc *p &#x3D; myproc();</p>
+<p>  num &#x3D; p-&gt;trapframe-&gt;a7;<br>  if(num &gt; 0 &amp;&amp; num &lt; NELEM(syscalls) &amp;&amp; syscalls[num]) {<br>    p-&gt;trapframe-&gt;a0 &#x3D; syscalls[num]();<br>    if (p-&gt;mask &amp; (1 &lt;&lt; num))<br>    {<br>      printf(“%d: syscall %s -&gt; %d\n”,p-&gt;pid, syscalls_name[num], p-&gt;trapframe-&gt;a0);<br>    }<br>  } else {<br>    printf(“%d %s: unknown sys call %d\n”,<br>            p-&gt;pid, p-&gt;name, num);<br>    p-&gt;trapframe-&gt;a0 &#x3D; -1;<br>  }<br>}</p>
+<p>添加关于追踪的函数,追踪的方法很简单,因为要追踪的mask是处于第几位的,只需要求一个与看看是不是0即可.</p>
+<p><img src="https://sukunahust.com/wp-content/uploads/2022/03/image-24.png"></p>
+<p>全部过关</p>
+<h3 id="Lab2-2-sys-info"><a href="#Lab2-2-sys-info" class="headerlink" title="Lab2_2 sys info"></a>Lab2_2 sys info</h3><p>我们需要完成一个系统调用,给定一个struct sysinfo的指针,然后可以输出当前系统的可用进程数和可用内存数.</p>
+<h5 id="1-在makefile-user-pl和user-h添加对于sysinfo系统调用的支持-不懂的请翻阅上面"><a href="#1-在makefile-user-pl和user-h添加对于sysinfo系统调用的支持-不懂的请翻阅上面" class="headerlink" title="1) 在makefile,user.pl和user.h添加对于sysinfo系统调用的支持.(不懂的请翻阅上面)"></a>1) 在makefile,user.pl和user.h添加对于sysinfo系统调用的支持.(不懂的请翻阅上面)</h5><h5 id="2-统计当前正在使用进程数-定义新函数proc-size-在proc-h中"><a href="#2-统计当前正在使用进程数-定义新函数proc-size-在proc-h中" class="headerlink" title="2) 统计当前正在使用进程数.定义新函数proc_size(),在proc.h中"></a>2) 统计当前正在使用进程数.定义新函数proc_size(),在proc.h中</h5><p>&#x2F;&#x2F;return: the proc that are occupied.<br>int<br>proc_size()<br>{<br>  int i;<br>  int n &#x3D; 0;<br>  for (i &#x3D; 0; i &lt; NPROC; i++)<br>  {<br>    if (proc[i].state !&#x3D; UNUSED) n++;<br>  }<br>  return n;<br>}</p>
+<p>方法就是对于所有进程(NPROC)进行一遍遍历,如果不是UNUSED,就代表已经使用了</p>
+<h5 id="3-统计当前的内存数-定义新函数freememory-在kalloc-h中"><a href="#3-统计当前的内存数-定义新函数freememory-在kalloc-h中" class="headerlink" title="3) 统计当前的内存数,定义新函数freememory(),在kalloc.h中."></a>3) 统计当前的内存数,定义新函数freememory(),在kalloc.h中.</h5><p>uint64<br>freememory()<br>{<br>  struct run* p &#x3D; kmem.freelist;<br>  uint64 num &#x3D; 0;<br>  while (p)<br>  {<br>    num ++;<br>    p &#x3D; p-&gt;next;<br>  }<br>  return num * PGSIZE;<br>}</p>
+<p>获得freelist(物理内存中没有分配的块),然后对链表进行一遍遍历,找到有几个块没有分配,乘以一个块的数量即可.</p>
+<h5 id="4-完成sysinfo的操作-注意2-和3-定义的函数要声明在def-h中"><a href="#4-完成sysinfo的操作-注意2-和3-定义的函数要声明在def-h中" class="headerlink" title="4) 完成sysinfo的操作.注意2)和3)定义的函数要声明在def.h中"></a>4) 完成sysinfo的操作.注意2)和3)定义的函数要声明在<code>def.h</code>中</h5><p>uint64<br>sys_sysinfo(void)<br>{<br>  struct sysinfo info;<br>  uint64 addr;<br>  &#x2F;&#x2F; get the the address of the sysinfo structure.<br>  if (argaddr(0, &amp;addr) &lt; 0)<br>    return -1;<br>  struct proc* p &#x3D; myproc();<br>  &#x2F;&#x2F;get freemem<br>  info.freemem &#x3D; freememory();<br>  &#x2F;&#x2F;get the proc<br>  info.nproc &#x3D; proc_size();<br>  &#x2F;&#x2F; copyto the structure.<br>  if (copyout(p-&gt;pagetable, addr, (char*)&amp;info, sizeof(info)) &lt; 0)<br>    return -1;<br>  return 0;<br>}</p>
+<p>这个操作主要是,用户会传递指针来,这个指针就指向了sysinfo的结构体,所以说我们需要在内核态获得信息构造一个新的结构体传回去就可以了.</p>
+<h5 id="5-像上个实验一样完成syscall-h-syscall-c的支持即可"><a href="#5-像上个实验一样完成syscall-h-syscall-c的支持即可" class="headerlink" title="5) 像上个实验一样完成syscall.h,syscall.c的支持即可."></a>5) 像上个实验一样完成syscall.h,syscall.c的支持即可.</h5><p><img src="https://sukunahust.com/wp-content/uploads/2022/03/image-25.png"></p>
+<h3 id="3-Xv6-and-PageTable"><a href="#3-Xv6-and-PageTable" class="headerlink" title="3:Xv6 and PageTable"></a>3:Xv6 and PageTable</h3><h3 id="Lab3-1-Speed-Up-the-system-calls"><a href="#Lab3-1-Speed-Up-the-system-calls" class="headerlink" title="Lab3_1 Speed Up the system calls"></a>Lab3_1 Speed Up the system calls</h3><p>一些操作系统（例如 Linux）通过在用户空间和内核之间共享只读区域中的数据来加速某些系统调用。 这消除了在执行这些系统调用时对内核交叉的需要。</p>
+<p>创建每个进程时，在 USYSCALL（memlayout.h 中定义的 VA）映射一个只读页面。 在这个页面的开始，存储一个struct ussyscall（也在memlayout.h中定义），并初始化它来存储当前进程的PID。</p>
+<ul>
+<li>可以在 kernel&#x2F;proc.c 中的 proc_pagetable() 中执行映射。</li>
+<li>只读的权限位要确保正确</li>
+<li>mappages() 是一个有用的实用程序。</li>
+<li>不要忘记在 allocproc() 中分配和初始化页面。</li>
+<li>确保在 freeproc() 中释放页面。</li>
+</ul>
+<h5 id="1-确认usyscall的结构体是什么-其实存储的就是pid"><a href="#1-确认usyscall的结构体是什么-其实存储的就是pid" class="headerlink" title="1) 确认usyscall的结构体是什么,其实存储的就是pid."></a>1) 确认usyscall的结构体是什么,其实存储的就是pid.</h5><p>struct usyscall {<br>  int pid;  &#x2F;&#x2F; Process ID<br>};</p>
+<h5 id="2-为每个进程结构添加usyscall的元素-这个结构存储在一个新的页里面"><a href="#2-为每个进程结构添加usyscall的元素-这个结构存储在一个新的页里面" class="headerlink" title="2) 为每个进程结构添加usyscall的元素,这个结构存储在一个新的页里面."></a>2) 为每个进程结构添加usyscall的元素,这个结构存储在一个新的页里面.</h5><h5 id="3-打开proc-c-依葫芦画瓢给usyscall结构体申请一个页面"><a href="#3-打开proc-c-依葫芦画瓢给usyscall结构体申请一个页面" class="headerlink" title="3) 打开proc.c,依葫芦画瓢给usyscall结构体申请一个页面."></a>3) 打开proc.c,依葫芦画瓢给usyscall结构体申请一个页面.</h5><p>&#x2F;&#x2F; alloc a page that store usyscall proc<br>  if((p-&gt;usyss &#x3D; (struct usyscall *)kalloc()) &#x3D;&#x3D; 0){<br>    freeproc(p);<br>    release(&amp;p-&gt;lock);<br>    return 0;<br>  }</p>
+<h5 id="4-依据提示-我们在proc-pagetable中依葫芦画瓢来进行地址的映射-注意-如果映射失败是要把之前俩都给取消掉"><a href="#4-依据提示-我们在proc-pagetable中依葫芦画瓢来进行地址的映射-注意-如果映射失败是要把之前俩都给取消掉" class="headerlink" title="4) 依据提示,我们在proc_pagetable中依葫芦画瓢来进行地址的映射,注意,如果映射失败是要把之前俩都给取消掉"></a>4) 依据提示,我们在proc_pagetable中依葫芦画瓢来进行地址的映射,注意,如果映射失败是要把之前俩都给取消掉</h5><pre><code>if (mappages(pagetable, USYSCALL, PGSIZE, (uint64)(p-&gt;usyscall),
+             PTE\_R  PTE\_U) &lt; 0) &#123;
+    uvmunmap(pagetable, TRAMPOLINE, 1, 0);
+    uvmunmap(pagetable, TRAPFRAME, 1, 0);
+    uvmfree(pagetable, 0);
+    return 0;
+&#125;
+</code></pre>
+<p>其中mappages(表,虚拟地址,页大小,物理地址,权限)</p>
+<p>#define PTE_V (1L &lt;&lt; 0) &#x2F;&#x2F; valid<br>#define PTE_R (1L &lt;&lt; 1)<br>#define PTE_W (1L &lt;&lt; 2)<br>#define PTE_X (1L &lt;&lt; 3)<br>#define PTE_U (1L &lt;&lt; 4) &#x2F;&#x2F; 1 -&gt; user can access</p>
+<p>权限的编码有几种方式,分别用五位0-1表示,从左到右都是可运行,可读,可写,只可以内核用,用户可以用.</p>
+<h5 id="5-在进程初始化的时候添加初始化的代码-初始化usyscall的结构"><a href="#5-在进程初始化的时候添加初始化的代码-初始化usyscall的结构" class="headerlink" title="5) 在进程初始化的时候添加初始化的代码.初始化usyscall的结构."></a>5) 在进程初始化的时候添加初始化的代码.初始化usyscall的结构.</h5><p>p-&gt;usyscall-&gt;pid &#x3D; p-&gt;pid;</p>
+<h5 id="6-进程结束的时候-free掉进程的时候把这一页也free掉"><a href="#6-进程结束的时候-free掉进程的时候把这一页也free掉" class="headerlink" title="6) 进程结束的时候,free掉进程的时候把这一页也free掉"></a>6) 进程结束的时候,free掉进程的时候把这一页也free掉</h5><p>if (p-&gt;usyss) kfree((void *)p-&gt;usyss);<br>p-&gt;usyss &#x3D; 0;</p>
+<h5 id="7-进程结束的时候-依葫芦画瓢把映射关系给取消掉"><a href="#7-进程结束的时候-依葫芦画瓢把映射关系给取消掉" class="headerlink" title="7) 进程结束的时候,依葫芦画瓢把映射关系给取消掉."></a>7) 进程结束的时候,依葫芦画瓢把映射关系给取消掉.</h5><p>uvmunmap(pagetable, USYSCALL, 1, 0);</p>
+<h3 id="Lab3-2-Print-a-page-table"><a href="#Lab3-2-Print-a-page-table" class="headerlink" title="Lab3_2 Print a page table"></a>Lab3_2 Print a page table</h3><p>在这部分实验中，您将向 xv6 添加一个新功能，该功能通过检查 RISC-V 页表中的访问位来检测并向用户空间报告此信息。定义一个名为 vmprint() 的函数。 它应该接受一个 pagetable_t 参数，并以下面描述的格式打印该页表。</p>
+<p>page table 0x0000000087f6e000&#x2F;&#x2F;二级页表<br> ..0: pte 0x0000000021fda801 pa 0x0000000087f6a000&#x2F;&#x2F;二级页表的表项,进入一级页表<br> .. ..0: pte 0x0000000021fda401 pa 0x0000000087f69000&#x2F;&#x2F;一级页表的表项,进入页表<br> .. .. ..0: pte 0x0000000021fdac1f pa 0x0000000087f6b000<br> .. .. ..1: pte 0x0000000021fda00f pa 0x0000000087f68000<br> .. .. ..2: pte 0x0000000021fd9c1f pa 0x0000000087f67000<br> ..255: pte 0x0000000021fdb401 pa 0x0000000087f6d000<br> .. ..511: pte 0x0000000021fdb001 pa 0x0000000087f6c000<br> .. .. ..509: pte 0x0000000021fdd813 pa 0x0000000087f76000<br> .. .. ..510: pte 0x0000000021fddc07 pa 0x0000000087f77000<br> .. .. ..511: pte 0x0000000020001c0b pa 0x0000000080007000</p>
+<p>在exec.c中的_return argc;<em>之前插入_if(p-&gt;pid&#x3D;&#x3D;1) vmprint(p-&gt;pagetable)</em> 语句来输出第一个进程的页表.</p>
+<p>首先要确定的第一点就是,这个页表其实实际上是一种多级页表的结构,就是二级页表存储的表项(PPN)其实是一级页表的第一个PTE的地址,一级页表的表项才是pa.具体的多级页表的解释可以参考我其他的博客或者翻阅操作系统或者组员书.</p>
+<p>首先我们知道,PTE是一个长度为64的整数而已.其中存储了各种各样的信息,这些信息可以通过调用宏来实现:</p>
+<p>#define PA2PTE(pa) ((((uint64)pa) &gt;&gt; 12) &lt;&lt; 10<br>#define PTE2PA(pte) (((pte) &gt;&gt; 10) &lt;&lt; 12)<br>#define PTE_FLAGS(pte) ((pte) &amp; 0x3FF)</p>
+<p>其实本质上来说,就是xv6系统的PTE除去后10位和前12位就是pa.</p>
+<p>所以说这个东西就可以转化为基本的递归.对于二级页表,对于每一个表项就进入到一级页表再遍历.所以说本质上这就是一个树,二级页表作为根,有若干个儿子,也就是一级页表,一级页表也有若干个儿子…那遍历树怎么遍历,一般来说就是用递归的手段</p>
+<p>● 可以将vmprint( )放在kernel&#x2F;vm.c中。<br>● 使用kernel&#x2F;riscv.h文件末尾的宏。<br>● 函数freewalk可能是鼓舞人心的（可以仿照该函数来写vmprint）。<br>● 在kernel&#x2F;defs.h中定义vmprint的原型，以便可以从exec.c调用它。<br>● 在printf调用中使用%p输出完整的64位十六进制PTE和地址，如示例所示。</p>
+<h5 id="1-根据提示-在exec的return-argc之前添加一段"><a href="#1-根据提示-在exec的return-argc之前添加一段" class="headerlink" title="1) 根据提示,在exec的return argc之前添加一段:"></a>1) 根据提示,在exec的return argc之前添加一段:</h5><p>if(p-pid&#x3D;&#x3D;1){<br>vmprint(p-&gt;pagetable);<br>}</p>
+<h5 id="2-在def-h中添加对于vmprint的定义"><a href="#2-在def-h中添加对于vmprint的定义" class="headerlink" title="2) 在def.h中添加对于vmprint的定义"></a>2) 在def.h中添加对于vmprint的定义</h5><h5 id="3-修改vm-c-仿照freewalk改造函数"><a href="#3-修改vm-c-仿照freewalk改造函数" class="headerlink" title="3) 修改vm.c,仿照freewalk改造函数."></a>3) 修改vm.c,仿照freewalk改造函数.</h5><p>void vmprintlevel(pagetable_t pt, int level) {<br>    char *delim &#x3D; 0;<br>    if (level &#x3D;&#x3D; 2) delim &#x3D; “..”;<br>    if (level &#x3D;&#x3D; 1) delim &#x3D; “.. ..”;<br>    if (level &#x3D;&#x3D; 0) delim &#x3D; “.. .. ..”;<br>    for (int i &#x3D; 0; i &lt; 512; i++) {<br>        pte_t pte &#x3D; pt[i];<br>        if ((pte &amp; PTE_V)) {<br>            &#x2F;&#x2F;  this PTE points to a lower level page table.<br>            printf(“%s%d: pte %p pa %p\n”, delim, i, pte, PTE2PA(pte));<br>            uint64 child &#x3D; PTE2PA(pte);<br>            if ((pte &amp; (PTE_RPTE_WPTE_X)) &#x3D;&#x3D; 0) {<br>                vmprintlevel((pagetable_t)child, level - 1);<br>            }<br>        }<br>    }<br>}</p>
+<p>void vmprint(pagetable_t pt) {<br>    printf(“page table %p\n”, pt);<br>    vmprintlevel(pt, 2);<br>}</p>
+<p>思想就是递归,递归获得下一级的地址,本质上是一个DFS.有下一级的页表就进入下一级进行遍历.</p>
+<h3 id="Lab3-3-Detecting-which-pages-have-been-accessed"><a href="#Lab3-3-Detecting-which-pages-have-been-accessed" class="headerlink" title="Lab3_3 Detecting which pages have been accessed"></a>Lab3_3 Detecting which pages have been accessed</h3><p>在本部分的实验中，你将向xv6添加一个新特性，通过检查RISC-V页表中的访问位来获取信息并向用户空间报告这些信息。</p>
+<p>实现pgaccess()函数，它是一个系统调用,会返回哪些页面已经被访问.其中第一个参数就是从哪个虚拟地址开始检查,第二个参数就是检查几个页面,结果传递给第三个参数,第三个参数是位掩码,其中第几位为1表示第几个页面已经被访问了.</p>
+<p>● 首先在kernel&#x2F;sysproc.c中实现sys_pgaccess( )。<br>● 你需要使用argaddr()和argint()解析参数。<br>● 对于输出位掩码，在内核中存储一个临时缓冲区并在填充正确的位后将其复制给用户（通过copyout()）更容易。<br>● 可以设置可扫描页数的上限。<br>● kernel&#x2F;vm.c中的walk()对于查找正确的PTE非常有用。<br>● 你需要在kernel&#x2F;riscv.h中定义PTE_A，即访问位。请参阅RISC-V手册以确定其值。<br>● 如果PTE_A已设置，在检查后务必清除它。否则，将无法确定自上次调用pgaccess()以来是否访问了页面（即，该位将被永久设置）。<br>● 利用vmprint()可方便地调试页表。</p>
+<h5 id="1-参阅RISC-V手册-确定PTE-A是什么"><a href="#1-参阅RISC-V手册-确定PTE-A是什么" class="headerlink" title="1) 参阅RISC-V手册,确定PTE_A是什么."></a>1) 参阅RISC-V手册,确定PTE_A是什么.</h5><p>#define PTE_A (1L &lt;&lt; 6)</p>
+<h5 id="2-完成sys-pgaccess-在这里主要是处理参数-利用argaddr和argint处理参数"><a href="#2-完成sys-pgaccess-在这里主要是处理参数-利用argaddr和argint处理参数" class="headerlink" title="2) 完成sys_pgaccess,在这里主要是处理参数.利用argaddr和argint处理参数."></a>2) 完成sys_pgaccess,在这里主要是处理参数.利用argaddr和argint处理参数.</h5><p>uint64 sys_pgaccess(void) {<br>    &#x2F;&#x2F; lab pgtbl: your code here.<br>    &#x2F;&#x2F; get argument<br>    uint64 buf;<br>    int number;<br>    uint64 ans;<br>    if (argaddr(0, &amp;buf) &lt; 0) return -1;<br>    if (argint(1, &amp;number) &lt; 0) return -1;<br>    if (argaddr(2, &amp;ans) &lt; 0) return -1;<br>    return pgaccess((void*)buf, number, (void*)ans);<br>}</p>
+<h5 id="3-读取当前虚拟地址-找到对应的页表项目的函数找到-walk"><a href="#3-读取当前虚拟地址-找到对应的页表项目的函数找到-walk" class="headerlink" title="3) 读取当前虚拟地址,找到对应的页表项目的函数找到:walk"></a>3) 读取当前虚拟地址,找到对应的页表项目的函数找到:walk</h5><p>使用方法:<code>te = (pte_t*)walk(pagetable, ((uint64)pg) + (uint64)PGSIZE * i, 0);</code></p>
+<h5 id="4-读取接着根据pte表项-找到PTE-A位"><a href="#4-读取接着根据pte表项-找到PTE-A位" class="headerlink" title="4) 读取接着根据pte表项,找到PTE_A位."></a>4) 读取接着根据pte表项,找到PTE_A位.</h5><p>uint64 pgaccess(void *pg, int number, void *store) {<br>    struct proc *p &#x3D; myproc();<br>    if (p &#x3D;&#x3D; 0) {<br>        return 1;<br>    }<br>    pagetable_t pagetable &#x3D; p-&gt;pagetable;<br>    int ans &#x3D; 0;<br>    for (int i &#x3D; 0; i &lt; number; i++) {<br>        pte_t* pte;<br>        pte &#x3D; (pte_t*)walk(pagetable, ((uint64)pg) + (uint64)PGSIZE * i, 0);<br>        if (pte !&#x3D; 0 &amp;&amp; ((*pte) &amp; PTE_A)) {<br>            ans &#x3D; 1 &lt;&lt; i;<br>            *pte ^&#x3D; PTE_A;  &#x2F;&#x2F; clear PTE_A<br>        }<br>    }<br>    &#x2F;&#x2F; copyout<br>    return copyout(pagetable, (uint64)store, (char *)&amp;ans, sizeof(int));<br>}</p>
+<p><img src="https://sukunahust.com/wp-content/uploads/2022/03/image-26.png"></p>
+<h3 id="4-Xv6-and-Trap"><a href="#4-Xv6-and-Trap" class="headerlink" title="4:Xv6 and Trap"></a>4:Xv6 and Trap</h3><h3 id="Lab4-1-RISC-V-Assembly"><a href="#Lab4-1-RISC-V-Assembly" class="headerlink" title="Lab4_1 RISC-V Assembly"></a>Lab4_1 RISC-V Assembly</h3><p>我们需要运行对call.c这份代码的编译,然后回答一些问题</p>
+<p>make fs.img编译之后我们可以找到下面的</p>
+<p>int g(int x) {<br>   0:1141                addisp,sp,-16<br>   2:e422                sds0,8(sp)<br>   4:0800                addis0,sp,16<br>  return x+3;<br>}<br>   6:250d                addiwa0,a0,3<br>   8:6422                lds0,8(sp)<br>   a:0141                addisp,sp,16<br>   c:8082                ret</p>
+<p>000000000000000e <f>:</p>
+<p>int f(int x) {<br>   e:1141                addisp,sp,-16<br>  10:e422                sds0,8(sp)<br>  12:0800                addis0,sp,16<br>  return g(x);<br>}<br>  14:250d                addiwa0,a0,3<br>  16:6422                lds0,8(sp)<br>  18:0141                addisp,sp,16<br>  1a:8082                ret</p>
+<p>000000000000001c <main>:</p>
+<p>void main(void) {<br>  1c:1141                addisp,sp,-16<br>  1e:e406                sdra,8(sp)<br>  20:e022                sds0,0(sp)<br>  22:0800                addis0,sp,16<br>  printf(“%d %d\n”, f(8)+1, 13);<br>  24:4635                lia2,13<br>  26:45b1                lia1,12<br>  28:00000517          auipca0,0x0<br>  2c:7b050513          addia0,a0,1968 # 7d8 &lt;malloc+0xea&gt;<br>  30:00000097          auipcra,0x0<br>  34:600080e7          jalr1536(ra) # 630 <printf><br>  exit(0);<br>  38:4501                lia0,0<br>  3a:00000097          auipcra,0x0<br>  3e:27e080e7          jalr638(ra) # 2b8 <exit></p>
+<p>1.Q:Which registers contain arguments to functions? For example, which register holds 13 in main’s call to printf?<br>哪些寄存器存储了函数的参数?比如说调用printf的时候13存在哪个寄存器里面?</p>
+<p>A:a0~a7共8个参数,其中调用printf的时候13就存在a2这个寄存器里面</p>
+<p>2.Q:Where is the call to function f in the assembly code for main? Where is the call to g? (Hint: the compiler may inline functions.)<br>汇编代码中哪一部分出现了对函数f的调用,函数g呢?</p>
+<p>A:其实并没有,编译器把g函数内联到f函数里面,再把f函数内联到main里面</p>
+<p>3.Q:At what address is the function printf located?<br>printf的入口地址在哪里?</p>
+<p>A:根据<code>jalr 1536(ra)</code>可以知道printf的地址在0x630这个里面</p>
+<p>4.Q:What value is in the register ra just after the jalr to printf in main?<br>printf执行完返回到main的时候ra寄存器的值是多少?</p>
+<p>显然ra中应是jalr下一条指令的地址，即0x38。</p>
+<p>5.Q:Run the following code.</p>
+<p>unsigned int i &#x3D; 0x00646c72;<br>printf(“H%x Wo%s”, 57616, &amp;i);</p>
+<p>What is the output? <a target="_blank" rel="noopener" href="http://web.cs.mun.ca/~michael/c/ascii-table.html">Here’s an ASCII table</a> that maps bytes to characters.</p>
+<p>The output depends on that fact that the RISC-V is little-endian. If the RISC-V were instead big-endian what would you set <code>i</code> to in order to yield the same output? Would you need to change<code>57616</code> to a different value?<br>输出是什么?RISC-V是小端存储的.如果是大端存储的呢?</p>
+<p><a target="_blank" rel="noopener" href="http://www.webopedia.com/TERM/b/big_endian.html">Here’s a description of little- and big-endian</a> and <a target="_blank" rel="noopener" href="http://www.networksorcery.com/enp/ien/ien137.txt">a more whimsical description</a>.</p>
+<p><strong>输出”HE110 World”. 57616&#x3D;0xe110。RISC-V 是 little-endian，&amp;i处存储的字节依次为0x72:r, 0x6c:l, 0x64:d，0x00:Null char (空字符)。</strong></p>
+<p><strong>如果 RISC-V 是 big-endian，则i &#x3D; 0x726c6400;. 57616不需改变，因为不管怎样它的十六进制形式都不会变。</strong></p>
+<p>6.Q:In the following code, what is going to be printed after <code>&#39;y=&#39;</code>? (note: the answer is not a specific value.) Why does this happen?<br>执行下一条语句,会输出y&#x3D;多少呢?</p>
+<p>printf(“x&#x3D;%d y&#x3D;%d”, 3);</p>
+<p>因为函数a0~a7都存着参数,所以说对应的输出第二个参数的内容,也就是a1寄存器的内容.</p>
+<h3 id="Lab4-2-BackTrace"><a href="#Lab4-2-BackTrace" class="headerlink" title="Lab4_2 BackTrace"></a>Lab4_2 BackTrace</h3><p>添加一个新的功能,打印函数调用栈.在这个机器中,我们知道有一个结构叫做栈帧,可以保存当前函数调用某个函数之前的一些寄存器,返回地址和一些局部变量的信息,比如说C语言的main函数,main函数调用一个函数f1(),在进入f1()函数的执行之前,编译器会帮我们把main函数的一些寄存器、局部变量的信息保存在栈帧中放入堆栈.其中栈帧中有一个特别的元素就是上一个栈帧的地址.</p>
+<p><img src="https://pic2.zhimg.com/80/v2-9930748a73415bd511e4fe27f81de13d_1440w.jpg"></p>
+<p>本实验的要求就是在kernel&#x2F;printf.c 中实现backtrace()函数。在sys_sleep中插入对该函数的调用。然后运行bttest，它调用sys_sleep。输出应如下：</p>
+<h5 id="1-在def-h添加backtrace-函数的声明"><a href="#1-在def-h添加backtrace-函数的声明" class="headerlink" title="1) 在def.h添加backtrace()函数的声明."></a>1) 在def.h添加backtrace()函数的声明.</h5><h5 id="2-GCC-编译器将当前执行的函数的帧指针存储在寄存器s0中-s0就对应上面的fp指针"><a href="#2-GCC-编译器将当前执行的函数的帧指针存储在寄存器s0中-s0就对应上面的fp指针" class="headerlink" title="2) GCC 编译器将当前执行的函数的帧指针存储在寄存器s0中,s0就对应上面的fp指针."></a>2) GCC 编译器将当前执行的函数的帧指针存储在寄存器s0中,s0就对应上面的fp指针.</h5><p>static inline uint64<br>r_fp()<br>{<br>  uint64 x;<br>  asm volatile(“mv %0, s0” : “&#x3D;r” (x) );<br>  return x;<br>}</p>
+<h5 id="3-完成backtrace"><a href="#3-完成backtrace" class="headerlink" title="3) 完成backtrace()"></a>3) 完成backtrace()</h5><p>我们知道fp指针往下走两个字节就存储的上一个函数的栈帧的最高地址,所以说我们可以循环一下,每一次循环就取上一个函数的栈帧最高地址,输出返回地址即可.</p>
+<p>void<br>backtrace(void){<br>  uint64 fp &#x3D; r_fp(), top &#x3D; PGROUNDUP(fp);<br>  printf(“backtrace:\n”);<br>  for(;fp&lt;top;fp&#x3D;*(uint64*)(fp-16)){<br>    printf(“%p\n”, *((uint64*)(fp-8)));<br>  }<br>}</p>
+<p><img src="https://sukunahust.com/wp-content/uploads/2022/03/image-27.png"></p>
+<h3 id="Lab4-3-Alarm"><a href="#Lab4-3-Alarm" class="headerlink" title="Lab4_3 Alarm"></a>Lab4_3 Alarm</h3><p>在本练习中，您将向xv6添加一项功能，该功能会在使用CPU时间的情况下定期向进程发出警报。这对于想要限制消耗多少CPU时间的计算密集型进程，或者对于想要进行计算但还希望采取一些定期操作的进程很有用。</p>
+<p>您应该添加一个新的sigalarm(interval,handler)系统调用。 如果应用程序调用sigalarm(n,fn)，则在程序每消耗n个“ tick” CPU时间之后，内核应导致调用应用程序函数fn。 当fn返回时，应用程序应从中断处恢复。 滴答是xv6中相当随意的时间单位，由硬件计时器产生中断的频率决定。 如果应用程序调用sigalarm(0,0)，则内核应停止生成定期警报调用。</p>
+<h3 id="test0：调用处理程序"><a href="#test0：调用处理程序" class="headerlink" title="test0：调用处理程序"></a>test0：调用处理程序</h3><p>1.修改Makefile，为sigalarm和sigreturn系统调用添加桩代码。<br>2.现在，sys_sigreturn应该只返回零。<br>3.sys_sigalarm()应该将nl和handler存储在proc结构的新字段中（在kernel&#x2F;proc.h 中）。<br>4.您需要跟踪该进程自上次调用alarm handler以来已经过去了多少ticks。为此，您还需要struct proc中的一个新字段。您可以在proc.c的allocproc() 中初始化这个字段。<br>5.每当tick时，硬件时钟都会强制中断，该中断在kernel&#x2F;trap.c的usertrap()中处理。<br>6.时钟中断是：if(which_dev &#x3D;&#x3D; 2) …<br>7.您需要修改usertrap()以在进程的警报间隔到期时，用户进程执行handler。</p>
+<h3 id="test1-test2-恢复中断的代码"><a href="#test1-test2-恢复中断的代码" class="headerlink" title="test1&#x2F;test2(): 恢复中断的代码"></a>test1&#x2F;test2(): 恢复中断的代码</h3><p>8.handler完成后，控制权返回到用户程序最初被中断的指令。必须确保寄存器内容恢复，以及重置警报计数器。以便定期调用handler。<br>9.user alarm handler需要在完成后调用sigreturn系统调用。这意味着您可以将代码添加到usertrap和sys_sigreturn中，它们会协同工作以使用户进程在处理完警报后正确恢复。<br>10.确保正确地保存和恢复寄存器。<br>11.当计时器到期时，让 usertrap 在 struct proc 中保存足够的状态，以便sigreturn可以正确返回 到被中断的用户代码。<br>12.防止对处理程序的重入调用——如果处理程序尚未返回，内核不应再次调用它。</p>
+<p>首先就是把添加系统调用的路子走一遍.</p>
+<h5 id="1-在user-h中添加声明"><a href="#1-在user-h中添加声明" class="headerlink" title="1) 在user.h中添加声明:"></a>1) 在user.h中添加声明:</h5><p>int sigalarm(int ticks, void (*handler)());<br>int sigreturn(void);</p>
+<h5 id="2-在user-pl添加函数入口以生成汇编代码"><a href="#2-在user-pl添加函数入口以生成汇编代码" class="headerlink" title="2) 在user.pl添加函数入口以生成汇编代码."></a>2) 在user.pl添加函数入口以生成汇编代码.</h5><p>entry(“sigalarm”);<br>entry(“sigreturn”);</p>
+<h5 id="3-在syscall-h添加系统调用号-1"><a href="#3-在syscall-h添加系统调用号-1" class="headerlink" title="3) 在syscall.h添加系统调用号."></a>3) 在syscall.h添加系统调用号.</h5><p>#define SYS_sigalarm  22<br>#define SYS_sigreturn 23</p>
+<h5 id="4-在syscall-c中添加关于这两个系统调用的声明"><a href="#4-在syscall-c中添加关于这两个系统调用的声明" class="headerlink" title="4) 在syscall.c中添加关于这两个系统调用的声明."></a>4) 在syscall.c中添加关于这两个系统调用的声明.</h5><p>……<br>extern uint64 sys_sigalarm(void);<br>extern uint64 sys_sigreturn(void);<br>……<br>[SYS_sigalarm]  sys_sigalarm,<br>[SYS_sigreturn] sys_sigreturn,</p>
+<h5 id="5-在proc的进程结构体中添加成员-保存什么时候中断-中断执行什么-过多久就进行一次中断-还保存中断的时候栈顶指针和保存的栈帧"><a href="#5-在proc的进程结构体中添加成员-保存什么时候中断-中断执行什么-过多久就进行一次中断-还保存中断的时候栈顶指针和保存的栈帧" class="headerlink" title="5) 在proc的进程结构体中添加成员,保存什么时候中断,中断执行什么,过多久就进行一次中断,还保存中断的时候栈顶指针和保存的栈帧."></a>5) 在proc的进程结构体中添加成员,保存什么时候中断,中断执行什么,过多久就进行一次中断,还保存中断的时候栈顶指针和保存的栈帧.</h5><p>int interval;&#x2F;&#x2F; interupt count<br>void (*handler)(); &#x2F;&#x2F;handle programme<br>int count; &#x2F;&#x2F;tick interupt count<br>uint64 interrupt_ra; &#x2F;&#x2F;trapframe pointer.<br>struct trapframe *saved_trapframe;&#x2F;&#x2F;saved_trapframe<br>int isworking;</p>
+<h5 id="6-在allocproc函数中初始化这些成员"><a href="#6-在allocproc函数中初始化这些成员" class="headerlink" title="6) 在allocproc函数中初始化这些成员."></a>6) 在allocproc函数中初始化这些成员.</h5><p>  p-&gt;interval &#x3D; 0;<br>  p-&gt;handler &#x3D; 0;<br>  p-&gt;count &#x3D; 0;<br>  p-&gt;is working &#x3D; 0;</p>
+<h5 id="7-完成sigalarm的系统调用-做法就是从寄存器获得参数然后赋值给proc的元素中"><a href="#7-完成sigalarm的系统调用-做法就是从寄存器获得参数然后赋值给proc的元素中" class="headerlink" title="7) 完成sigalarm的系统调用,做法就是从寄存器获得参数然后赋值给proc的元素中."></a>7) 完成sigalarm的系统调用,做法就是从寄存器获得参数然后赋值给proc的元素中.</h5><p>uint64<br>sys_sigalarm(void){<br>  struct proc* p &#x3D; myproc();<br>  int in;<br>  uint ft;<br>  int interval;<br>    uint64 pt;<br>    if(argint(0, &amp;in) &lt; 0)<br>      return -1;<br>    if(argaddr(1, &amp;ft) &lt; 0)<br>      return -1;</p>
+<pre><code>p-&gt;interval=in;
+p-&gt;handler=(void\*)ft;
+return 0;
+</code></pre>
+<p>}</p>
+<h5 id="8-完成时钟"><a href="#8-完成时钟" class="headerlink" title="8) 完成时钟"></a>8) 完成时钟</h5><p>if(which_dev &#x3D;&#x3D; 2){<br>    &#x2F;&#x2F;the proc no call the sysalaram.<br>    if(p-&gt;interval&#x3D;&#x3D;0p-&gt;working)<br>    {<br>      yield();<br>      usertrapret();<br>    }<br>    else{<br>      p-&gt;count++;<br>      if(p-&gt;count&#x3D;&#x3D;p-&gt;interval)<br>      {<br>        &#x2F;&#x2F;save the trapframe.<br>        p-&gt;saved_trapframe&#x3D;(struct trapframe*)kalloc();<br>        memmove(p-&gt;saved_trapframe,p-&gt;trapframe,PGSIZE);</p>
+<pre><code>    //save the trapped address
+    p-&gt;interrupt\_ra=p-&gt;trapframe-&gt;epc;
+    //the programme will start at handler.
+    p-&gt;trapframe-&gt;epc=(uint64)p-&gt;handler;
+    usertrapret();
+    yield();
+  &#125;
+&#125;
+</code></pre>
+<p>  }</p>
+<p>处理的方式是分类,如果之前没有调用过sigalarm的话,interval为0,就和原来一样,如果不是的话就代表调用过.接着count++,如果count和interval一样的话就代表要跳转了,保存当前的trapframe以及当前被中断的指令的地址,修改epc进行跳转.还有就是要记录working,如果这个函数已经被打断了就不要再重新打断一次.</p>
+<h5 id="9-完成返回的操作"><a href="#9-完成返回的操作" class="headerlink" title="9) 完成返回的操作."></a>9) 完成返回的操作.</h5><p>uint64 sys_sigreturn(void)<br>{<br>  struct proc* p &#x3D; myproc();<br>  p-&gt;count&#x3D;0;<br>  p-&gt;trapframe-&gt;epc&#x3D;p-&gt;interrupt_ra;<br>  memmove(p-&gt;trapframe,p-&gt;saved_trapframe,PGSIZE);<br>  p-&gt;isworking &#x3D; 0;<br>  return 0;<br>}</p>
+<p>把之前保存的断点地址和栈帧读出来,清空时钟即可.</p>
+<p><img src="https://sukunahust.com/wp-content/uploads/2022/03/image-33.png"></p>
+<h3 id="6-Xv6-and-MultiThread"><a href="#6-Xv6-and-MultiThread" class="headerlink" title="6:Xv6 and MultiThread"></a>6:Xv6 and MultiThread</h3><h3 id="Lab6-1-Uthread-switching-between-threads"><a href="#Lab6-1-Uthread-switching-between-threads" class="headerlink" title="Lab6_1 Uthread: switching between threads"></a>Lab6_1 Uthread: switching between threads</h3><p>在本实验中，您将为用户级线程系统设计上下文切换机制，然后实现它。你的 xv6 有两个文件 user&#x2F;uthread.c 和 user&#x2F;uthread_switch.S，以及 Makefile 中的一个规则来构建一个 uthread 程序。uthread.c 包含大部分用户级线程包，以及三个测试线程的代码。但线程包中缺少一些用于<strong>创建线程</strong>和<strong>线程间切换</strong>的代码。</p>
+<p>您需要创建一个函数,这个函数可以创建一个进程,在切换进程的时候保存和恢复寄存器.</p>
+<p>您需要在 user&#x2F;uthread.c 中的<strong>thread_create()<strong>和</strong>thread_schedule()<strong>以及user&#x2F;uthread_switch.S中的</strong>thread_switch</strong>中添加代码。</p>
+<p>一个目标是<strong>确保当thread_schedule()第一次运行给定线程时，该线程在自己的堆栈上执行传递给thread_create()的函数</strong>(这个函数作为一个参数传递给thread_create()函数调用)。换句话说,就是创建线程的时候,有一个参数就是一个地址,这个地址指向一个函数,当这个线程第一次启动的时候就从这个地址对应的指令开始执行.</p>
+<p>另一个目标是<strong>确保thread_switch保存被切换的线程的寄存器，恢复被切换到的线程的寄存器，并返回到后一个线程的指令中上次停止的点</strong>。您必须决定<strong>在哪里保存&#x2F;恢复寄存器</strong>；<strong>修改struct thread以保存寄存器是一个不错的计划</strong>。</p>
+<p>您需要<strong>在thread_schedule中添加对thread_switch的调用</strong>；您可以将所需的任何参数传递给thread_switch，但目的是从线程t切换到next_thread。</p>
+<p>thread_switch 只需要保存&#x2F;恢复callee-save registers。</p>
+<p>要测试您的代码，使用riscv64-linux-gnu-gdb单步执行thread_switch可能会有所帮助。 您可以通过以下方式开始：</p>
+<p>(gdb) file user&#x2F;_uthread<br>Reading symbols from user&#x2F;_uthread…<br>(gdb) b uthread.c:60</p>
+<p>这将在uthread.c的第60行设置一个断点。 甚至在运行uthread之前，可能会（或可能不会）触发断点。 一旦您的xv6 shell运行，键入“ uthread”，gdb将在第60行中断。现在，您可以键入以下命令来检查uthread的状态：</p>
+<p>(gdb) p&#x2F;x *next_thread</p>
+<p>使用“ x”，您可以检查存储位置的内容：</p>
+<p> (gdb) x&#x2F;x next_thread-&gt;stack</p>
+<p>您可以跳到thread_switch的开头，这样：</p>
+<p>(gdb) b thread_switch<br>(gdb) c</p>
+<p>您可以使用以下步骤进行单步组装说明：</p>
+<p>(gdb) si</p>
+<p>ni是下一条汇编语句,n是下一条C语言语句.</p>
+<h5 id="1-修改thread-switch的代码-添加上关于thread-switch-的代码-只需要保存-恢复callee-save-register"><a href="#1-修改thread-switch的代码-添加上关于thread-switch-的代码-只需要保存-恢复callee-save-register" class="headerlink" title="1) 修改thread_switch的代码,添加上关于thread_switch 的代码,只需要保存&#x2F;恢复callee-save register:"></a>1) 修改thread_switch的代码,添加上关于thread_switch 的代码,只需要保存&#x2F;恢复callee-save register:</h5><pre><code>    sd ra, 0(a0)
+    sd sp, 8(a0)
+    sd s0, 16(a0)
+    sd s1, 24(a0)
+    sd s2, 32(a0)
+    sd s3, 40(a0)
+    sd s4, 48(a0)
+    sd s5, 56(a0)
+    sd s6, 64(a0)
+    sd s7, 72(a0)
+    sd s8, 80(a0)
+    sd s9, 88(a0)
+    sd s10, 96(a0)
+    sd s11, 104(a0)
+
+    ld ra, 0(a1)
+    ld sp, 8(a1)
+    ld s0, 16(a1)
+    ld s1, 24(a1)
+    ld s2, 32(a1)
+    ld s3, 40(a1)
+    ld s4, 48(a1)
+    ld s5, 56(a1)
+    ld s6, 64(a1)
+    ld s7, 72(a1)
+    ld s8, 80(a1)
+    ld s9, 88(a1)
+    ld s10, 96(a1)
+    ld s11, 104(a1)
+</code></pre>
+<p>其中a0代表了被打断的线程的栈帧,a1代表了要切换到的线程的栈帧.其中栈帧就是相对于thread的结构体的偏移.</p>
+<h5 id="2-在Thread的数据结构中添加寄存器信息"><a href="#2-在Thread的数据结构中添加寄存器信息" class="headerlink" title="2) 在Thread的数据结构中添加寄存器信息."></a>2) 在Thread的数据结构中添加寄存器信息.</h5><p>  uint64 ra;<br>  uint64 sp;<br>  &#x2F;&#x2F; callee-saved<br>  uint64 s0;<br>  uint64 s1;<br>  uint64 s2;<br>  uint64 s3;<br>  uint64 s4;<br>  uint64 s5;<br>  uint64 s6;<br>  uint64 s7;<br>  uint64 s8;<br>  uint64 s9;<br>  uint64 s10;<br>  uint64 s11;<br>&#x2F;&#x2F;修改后<br>thread{<br>  栈帧<br>  栈<br>  状态<br>}</p>
+<h5 id="3-修改创建进程的代码-对ra和sp寄存器进行初始化-其中ra本质上就是断点寄存器-有一个参数就是一个地址-这个地址指向一个函数-当这个线程第一次启动的时候就从这个地址对应的指令开始执行-把这个参数传递给ra"><a href="#3-修改创建进程的代码-对ra和sp寄存器进行初始化-其中ra本质上就是断点寄存器-有一个参数就是一个地址-这个地址指向一个函数-当这个线程第一次启动的时候就从这个地址对应的指令开始执行-把这个参数传递给ra" class="headerlink" title="3) 修改创建进程的代码.对ra和sp寄存器进行初始化.其中ra本质上就是断点寄存器.有一个参数就是一个地址,这个地址指向一个函数,当这个线程第一次启动的时候就从这个地址对应的指令开始执行.把这个参数传递给ra"></a>3) 修改创建进程的代码.对ra和sp寄存器进行初始化.其中ra本质上就是断点寄存器.有一个参数就是一个地址,这个地址指向一个函数,当这个线程第一次启动的时候就从这个地址对应的指令开始执行.把这个参数传递给ra</h5><p>  t-&gt;ra&#x3D;(uint64)func;<br>  t-&gt;sp&#x3D;(uint64)&amp;t-&gt;stack[STACK_SIZE-1];</p>
+<p>其中栈是从高到低的,所以说初始的栈顶指针是指向最高的地址的.</p>
+<h5 id="4-调用switch函数-切换-其中t是当前进程-next-thread是下一个进程"><a href="#4-调用switch函数-切换-其中t是当前进程-next-thread是下一个进程" class="headerlink" title="4) 调用switch函数,切换.其中t是当前进程,next_thread是下一个进程."></a>4) 调用switch函数,切换.其中t是当前进程,next_thread是下一个进程.</h5><p>thread_switch((uint64)t,(uint64)next_thread);</p>
+<h3 id="Lab6-2-Using-Thread"><a href="#Lab6-2-Using-Thread" class="headerlink" title="Lab6_2 Using Thread."></a>Lab6_2 Using Thread.</h3><p>文件notxv6 &#x2F; ph.c包含一个简单的哈希表，该哈希表从单个线程使用时是正确的，但从多个线程使用时则是错误的。 在您的主要xv6目录（可能是〜&#x2F; xv6-labs-2020）中，键入以下命令：</p>
+<p>$ make ph<br>$ .&#x2F;ph 1</p>
+<p>请注意，要生成ph，Makefile使用操作系统的gcc，而不是6.S081工具。 ph的参数指定在哈希表上执行放置和获取操作的线程数。 </p>
+<p>ph运行两个基准。 首先，它通过调用put（）向哈希表添加很多键，并输出每秒达到的puts速率。 它使用get（）从哈希表中获取密钥。 它打印由于puts而应在哈希表中但丢失的数字键（在这种情况下为零），并打印每秒获得的获取次数。</p>
+<p>您可以通过给它一个大于1的参数来告诉ph同时使用多个线程的哈希表。 尝试ph 2：</p>
+<p>$ .&#x2F;ph 2<br>100000 puts, 1.885 seconds, 53044 puts&#x2F;second<br>1: 16579 keys missing<br>0: 16579 keys missing<br>200000 gets, 4.322 seconds, 46274 gets&#x2F;second</p>
+<p>此ph 2输出的第一行表明，当两个线程同时向哈希表添加条目时，它们每秒的总插入率为53,044。 这大约是运行ph 1时单线程的速度的两倍。这是大约2倍的出色“并行加速”，这是人们可能希望的（即两倍的内核，每单位时间产生两倍的工作量）。</p>
+<p>但是，两行说缺少16579键，表明哈希表中不应该存在大量键。 就是说，puts应该将这些键添加到哈希表中，但是出了点问题。 看一下notxv6 &#x2F; ph.c，尤其是put（）和insert（）。</p>
+<p>为什么缺少2个线程而不是1个线程的键？ 用2个线程标识一系列事件，这些事件可能导致键丢失。 提交您的序列，并在answer-thread.txt中提供简短解释。为避免发生此序列的事件，请在putx和get.not.v6 &#x2F; ph.c中插入lock和unlock语句，以便两个线程始终缺少0的键数。 相关的pthread调用为：</p>
+<p>pthread_mutex_t lock;            &#x2F;&#x2F; declare a lock<br>pthread_mutex_init(&amp;lock, NULL); &#x2F;&#x2F; initialize the lock<br>pthread_mutex_lock(&amp;lock);       &#x2F;&#x2F; acquire lock<br>pthread_mutex_unlock(&amp;lock);     &#x2F;&#x2F; release lock</p>
+<p>其实本质上,线程之间也会有互斥的关系,两个线程不能同时访问同一个缓冲区,如果同时当文同一个缓冲区的同一个位置就导致了写重复的问题,就需要对访问缓冲区的代码块上锁,只允许一个线程访问缓冲区.也就是只允许一个进程访问数组的某一个位置.</p>
+<p>pthread_mutex_t locks[NBUCKET];</p>
+<p>static<br>void put(int key, int value)<br>{<br>  int i &#x3D; key % NBUCKET;</p>
+<p>  &#x2F;&#x2F; is the key already present?<br>  struct entry *e &#x3D; 0;<br>  for (e &#x3D; table[i]; e !&#x3D; 0; e &#x3D; e-&gt;next) {<br>    if (e-&gt;key &#x3D;&#x3D; key)<br>      break;<br>  }<br>  pthread_mutex_lock(&amp;locks[i]);<br>  if(e){<br>    &#x2F;&#x2F; update the existing key.<br>    e-&gt;value &#x3D; value;<br>  } else {<br>    &#x2F;&#x2F; the new is new.<br>    insert(key, value, &amp;table[i], table[i]);<br>  }<br>  pthread_mutex_unlock(&amp;locks[i]);<br>}</p>
+<p>跟我们学过的操作系统一样,线程在进入访问缓冲区的代码之前上锁,线程离开访问缓冲区的代码后解锁.</p>
+<h3 id="Lab6-3-Barrier"><a href="#Lab6-3-Barrier" class="headerlink" title="Lab6_3 Barrier"></a>Lab6_3 Barrier</h3><p>在此分配中，您将实现一个障碍：应用程序中的一个点，所有参与线程必须在该点等待，直到所有其他参与线程也都到达该点。 您将使用pthread条件变量，这是一种类似于xv6的睡眠和唤醒的序列协调技术。</p>
+<p>文件notxv6 &#x2F; barrier.c。</p>
+<p>$ make barrier<br>$ .&#x2F;barrier 2<br>barrier: notxv6&#x2F;barrier.c:42: thread: Assertion `i &#x3D;&#x3D; t’ failed.</p>
+<p>2指定在屏障上同步的线程数（barrier.c中的nthread）。 每个线程执行一个循环。 在每个循环迭代中，线程都会调用barrier（），然后睡眠随机数微秒。 断言触发，因为一个线程在另一线程到达屏障之前就离开了屏障。 理想的行为是每个线程都在barrier（）中阻塞，直到它们的所有nthread都调用了barrier（）。</p>
+<p>pthread_cond_wait(&amp;cond, &amp;mutex);  &#x2F;&#x2F; go to sleep on cond, releasing lock mutex, acquiring upon wake up<br>pthread_cond_broadcast(&amp;cond);     &#x2F;&#x2F; wake up every thread sleeping on cond</p>
+<p>  pthread_mutex_lock(&amp;bstate.barrier_mutex);<br>  bstate.nthread+&#x3D;1;pthread_mutex_unlock(&amp;bstate.barrier_mutex);<br>  if(bstate.nthread&lt;nthread)<br>  {<br>    pthread_cond_wait(&amp;bstate.barrier_cond,&amp;bstate.barrier_mutex);&#x2F;&#x2F;go to sleep on cond,releasing lock mutes acquirint upon wake up<br>  }<br>  else{<br>    bstate.round+&#x3D;1;&#x2F;&#x2F;next round<br>    bstate.nthread&#x3D;0;&#x2F;&#x2F;the thread that have entered the barrier() function -&gt; 0<br>    pthread_cond_broadcast(&amp;bstate.barrier_cond);<br>  }<br>  pthread_mutex_unlock(&amp;bstate.barrier_mutex);</p>
+<p>因为要修改临界量nthread,所以说进入之前所以要加上锁.如果没到就停止,释放锁,如果到了的话就nthread&#x3D;0,round+1,调用broadcast函数即可.</p>
+<p><img src="https://sukunahust.com/wp-content/uploads/2022/03/image-29-1024x488.png"></p>
+<h3 id="7-Xv6-and-Networking"><a href="#7-Xv6-and-Networking" class="headerlink" title="7:Xv6 and Networking"></a>7:Xv6 and Networking</h3><h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>您将使用称为 E1000 的网络设备来处理网络通信。 对于 xv6（以及您编写的驱动程序），E1000 看起来像是连接到真实以太网局域网 (LAN) 的真实硬件。 实际上，您的驱动程序将与之通信的 E1000 是由 qemu 提供的仿真，连接到同样由 qemu 仿真的 LAN。 在这个模拟 LAN 上，xv6（“guest”）的 IP 地址为 10.0.2.15。 Qemu 还安排运行 qemu 的计算机出现在 IP 地址为 10.0.2.2 的 LAN 上。 当 xv6 使用 E1000 向 10.0.2.2 发送数据包时，qemu 会将数据包传送到您正在运行 qemu（“主机”）的（真实）计算机上的适当应用程序。(就是qemu模拟器传递数据到真实的计算机中)</p>
+<p>你将会用到QEMU的 “用户态网络栈”。QEMU的文档中由很多关于用户态栈的描述。我们已经更新了 Makefile，打开了QEMU的用户态网络栈以及E1000网卡。</p>
+<p>Makefile 设置了 QEMU记录所有的进出数据包到文件 packets.pcap。这可能对于检查接收发送的数据包是有用的。展现记录的数据包：</p>
+<p>tcpdump -XXnr packets.pcap</p>
+<h3 id="你的工作"><a href="#你的工作" class="headerlink" title="你的工作."></a>你的工作.</h3><p>我们已经添加了一些文件到xv6上了。文件kernel&#x2F;e1000.c包含了E1000的初始化代码以及空的传输和接收数据包的函数，这些是需要你去完成的。kernel&#x2F;e1000_dev.h包含了寄存器和标志位的定义，这些在Intel E1000的文档有描述。kernel&#x2F;net.c和kernel&#x2F;net.h包含了一个简单的包含IP、UDP、ARP协议的网络栈。这些文件页包含了一个灵活的数据结构来持有数据包，叫做mbuf。最后，kernel&#x2F;pci.c包含了在xv6启动时，在PCI总线上查找一个E1000网卡的代码.</p>
+<p>我们在 e1000.c 中为您提供的 e1000_init() 函数将 E1000 配置为读取要从 RAM 传输的数据包，并将接收到的数据包写入 RAM。这种技术称为 DMA，用于直接内存访问，指的是 E1000 硬件直接从 RAM 写入和读取数据包这一事实。</p>
+<p>因为数据包的爆发可能比驱动程序处理它们的速度更快，所以 e1000_init() 为 E1000 提供了多个缓冲区，E1000 可以将数据包写入其中。 E1000 要求这些缓冲区由 RAM 中的“描述符”数组描述；每个描述符都包含 RAM 中的一个地址，E1000 可以在其中写入接收到的数据包。 struct rx_desc 描述描述符格式。描述符数组称为接收环或接收队列。从某种意义上说，它是一个圆环，当卡或驱动程序到达阵列的末端时，它会回到起点。 e1000_init() 使用 mbufalloc() 将 E1000 的 mbuf 数据包缓冲区分配给 DMA 。还有一个传输环，驱动程序将它希望 E1000 发送的数据包放入其中。 e1000_init() 将两个环配置为具有大小 RX_RING_SIZE 和 TX_RING_SIZE。</p>
+<p>struct tx_desc<br>{<br>  uint64 addr;<br>  uint16 length;<br>  uint8 cso;<br>  uint8 cmd;<br>  uint8 status;<br>  uint8 css;<br>  uint16 special;<br>};<br>#define TX_RING_SIZE 16<br>static struct tx_desc tx_ring[TX_RING_SIZE] __attribute__((aligned(16)));<br>static struct mbuf *tx_mbufs[TX_RING_SIZE];</p>
+<p>&#x2F;&#x2F; [E1000 3.2.3]<br>struct rx_desc<br>{<br>  uint64 addr;       &#x2F;* Address of the descriptor’s data buffer *&#x2F;<br>  uint16 length;     &#x2F;* Length of data DMAed into data buffer *&#x2F;<br>  uint16 csum;       &#x2F;* Packet checksum *&#x2F;<br>  uint8 status;      &#x2F;* Descriptor status *&#x2F;<br>  uint8 errors;      &#x2F;* Descriptor Errors *&#x2F;<br>  uint16 special;<br>};</p>
+<p>#define RX_RING_SIZE 16<br>static struct rx_desc rx_ring[RX_RING_SIZE] __attribute__((aligned(16)));<br>static struct mbuf *rx_mbufs[RX_RING_SIZE];</p>
+<p>struct mbuf {<br>  struct mbuf  *next; &#x2F;&#x2F; the next mbuf in the chain<br>  char         *head; &#x2F;&#x2F; the current start position of the buffer<br>  unsigned int len;   &#x2F;&#x2F; the length of the buffer<br>  char         buf[MBUF_SIZE]; &#x2F;&#x2F; the backing store<br>};</p>
+<p>其中,tx_ring和tx_mbufs是一一对应的.</p>
+<p>当 net.c 中的网络堆栈需要发送数据包时，它会调用 e1000_transmit() 并使用 mbuf 保存要发送的数据包。您的传输代码必须在 TX（传输）环的描述符中放置一个指向数据包数据的指针。 struct tx_desc 描述描述符格式。您需要确保每个 mbuf 最终都被释放，但只有在 E1000 完成数据包传输之后（E1000 设置描述符中的 E1000_TXD_STAT_DD 位来指示这一点）。</p>
+<p>当 E1000 从以太网接收到每个数据包时，它首先将数据包 DMA 到下一个 RX（接收）环描述符指向的 mbuf，然后产生中断。您的 e1000_recv() 代码必须扫描 RX 环并通过调用 net_rx() 将每个新数据包的 mbuf 传送到网络堆栈（在 net.c 中）。然后，您需要分配一个新的 mbuf 并将其放入描述符中，以便当 E1000 再次到达 RX 环中的那个点时，它会找到一个新的缓冲区来 DMA 一个新的数据包。</p>
+<p>除了在 RAM 中读取和写入描述符环之外，您的驱动程序还需要通过其内存映射控制寄存器与 E1000 交互，以检测接收到的数据包何时可用，并通知 E1000 驱动程序已填写一些 TX 描述符与要发送的数据包。全局变量 regs 持有指向 E1000 的第一个控制寄存器的指针；您的驱动程序可以通过将 regs 索引为数组来获取其他寄存器。您需要特别使用索引 E1000_RDT 和 E1000_TDT。</p>
+<p>要测试您的驱动程序，请在一个窗口中运行 make server，在另一个窗口中运行 make qemu，然后在 xv6 中运行 nettests。 nettests 中的第一个测试尝试向主机操作系统发送一个 UDP 数据包，地址是使服务器运行的程序。如果您还没有完成实验，E1000 驱动程序实际上不会发送数据包，也不会发生任何事情。</p>
+<p>完成实验后，E1000 驱动程序会发送数据包，qemu 会将数据包传送到您的主机，make server 会看到它，它会发送响应数据包，然后 E1000 驱动程序和 nettests 会看到响应数据包.然而，在主机发送回复之前，它会向 xv6 发送一个“ARP”请求包以查找其 48 位以太网地址，并期望 xv6 以 ARP 回复进行响应。一旦你完成了 E1000 驱动程序的工作，kernel&#x2F;net.c 就会处理这个问题。如果一切顺利，nettests 将打印 testing ping: OK，并且 make server 将打印一条来自 xv6! 的消息。</p>
+<h3 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h3><p>首先将打印语句添加到 e1000_transmit() 和 e1000_recv()，然后运行 ​​make server 和（在 xv6 中）nettests。您应该从您的打印语句中看到 nettests 生成了对 e1000_transmit 的调用。</p>
+<p>实现 e1000_transmit 的一些提示：</p>
+<p>首先通过读取 E1000_TDT 控制寄存器向 E1000 询问它期待下一个数据包的 TX 环索引。<br>然后检查环是否溢出。如果 E1000_TDT 索引的描述符中没有设置 E1000_TXD_STAT_DD，则说明 E1000 还没有完成对应的上一个传输请求，因此返回错误。<br>否则，使用 mbuffree() 释放从该描述符传输的最后一个 mbuf（如果有的话）。<br>然后填写描述符。 m-&gt;head 指向包在内存中的内容，m-&gt;len 是包的长度。设置必要的 cmd 标志（查看 E1000 手册中的第 3.3 节）并隐藏指向 mbuf 的指针以供以后释放。<br>最后，通过将 E1000_TDT 模 TX_RING_SIZE 加一来更新环位置。<br>如果 e1000_transmit() 成功地将 mbuf 添加到环中，则返回 0。失败时（例如，没有可用于传输 mbuf 的描述符），返回 -1 以便调用者知道释放 mbuf。</p>
+<p>实现 e1000_recv 的一些提示：</p>
+<p>首先通过获取 E1000_RDT 控制寄存器并加一个模 RX_RING_SIZE，向 E1000 询问下一个等待接收的数据包（如果有）所在的环索引。<br>然后通过检查描述符状态部分中的 E1000_RXD_STAT_DD 位来检查新数据包是否可用。如果没有，请停止。<br>否则，将 mbuf 的 m-&gt;len 更新为描述符中报告的长度。使用 net_rx() 将 mbuf 传送到网络堆栈。<br>然后使用 mbufalloc() 分配一个新的 mbuf 来替换刚刚给 net_rx() 的那个。将其数据指针（m-&gt;head）编程到描述符中。将描述符的状态位清零。<br>最后，将 E1000_RDT 寄存器更新为最后处理的环描述符的索引。<br>e1000_init() 用 mbufs 初始化 RX 环，你会想看看它是如何做到的，也许还需要借用代码。<br>在某些时候，已经到达的数据包总数将超过环大小（16）；确保您的代码可以处理。<br>您将需要锁来应对 xv6 可能从多个进程使用 E1000 的可能性，或者当中断到达时可能在内核线程中使用 E1000。</p>
+<p>int<br>e1000_transmit(struct mbuf *m)<br>{<br>  &#x2F;&#x2F;<br>  &#x2F;&#x2F; Your code here.<br>  &#x2F;&#x2F;<br>  &#x2F;&#x2F; the mbuf contains an ethernet frame; program it into<br>  &#x2F;&#x2F; the TX descriptor ring so that the e1000 sends it. Stash<br>  &#x2F;&#x2F; a pointer so that it can be freed after sending.<br>  &#x2F;&#x2F;<br>  acquire(&amp;e1000_lock);<br>  &#x2F;&#x2F;首先通过读取 E1000_TDT 控制寄存器向 E1000 询问它期待下一个数据包的 TX 环索引。<br>  uint reg_tdt &#x3D; regs[E1000_TDT];<br>  &#x2F;&#x2F;然后检查环是否溢出。如果 E1000_TDT 索引的描述符中没有设置 E1000_TXD_STAT_DD，则说明 E1000 还没有完成对应的上一个传输请求，因此返回错误。<br>  if((tx_ring[reg_tdt].status &amp; E1000_TXD_STAT_DD) &#x3D;&#x3D; 0){<br>      return -1;<br>  }<br>  &#x2F;&#x2F;否则，使用 mbuffree() 释放从该描述符传输的最后一个 mbuf（如果有的话）。<br>  if(tx_mbufs[reg_tdt] !&#x3D; 0)<br>    mbuffree(tx_mbufs[reg_tdt]);</p>
+<p>  &#x2F;&#x2F;然后填写描述符。 m-&gt;head 指向包在内存中的内容，m-&gt;len 是包的长度。设置必要的 cmd 标志<br>  tx_mbufs[reg_tdt] &#x3D; m;<br>  tx_ring[reg_tdt].length &#x3D; m-&gt;len;<br>  tx_ring[reg_tdt].addr &#x3D; (uint64)(m-&gt;head);<br>  tx_ring[reg_tdt].cmd &#x3D; 9;</p>
+<p>  &#x2F;&#x2F;最后，通过将 E1000_TDT 模 TX_RING_SIZE 加一来更新环位置。<br>  regs[E1000_TDT] &#x3D; (regs[E1000_TDT] + 1) % TX_RING_SIZE;<br>  release(&amp;e1000_lock);<br>  return 0;<br>}</p>
+<p>static void<br>e1000_recv(void)<br>{<br>  &#x2F;&#x2F;<br>  &#x2F;&#x2F; Your code here.<br>  &#x2F;&#x2F;<br>  &#x2F;&#x2F; Check for packets that have arrived from the e1000<br>  &#x2F;&#x2F; Create and deliver an mbuf for each packet (using net_rx()).<br>  &#x2F;&#x2F;首先通过获取 E1000_RDT 控制寄存器并加一个模 RX_RING_SIZE，向 E1000 询问下一个等待接收的数据包（如果有）所在的环索引。<br>  uint reg_rdt &#x3D; regs[E1000_RDT];<br>  int i &#x3D; (reg_rdt + 1)%RX_RING_SIZE;</p>
+<p>  &#x2F;&#x2F;然后通过检查描述符状态部分中的 E1000_RXD_STAT_DD 位来检查新数据包是否可用。如果没有，请停止。<br>  &#x2F;&#x2F;否则，将 mbuf 的 m-&gt;len 更新为描述符中报告的长度。使用 net_rx() 将 mbuf 传送到网络堆栈。<br>   while(rx_ring[i].status &amp; E1000_RXD_STAT_DD){<br>      rx_mbufs[i]-&gt;len &#x3D; rx_ring[i].length;<br>      net_rx(rx_mbufs[i]);<br>      &#x2F;&#x2F;然后使用 mbufalloc() 分配一个新的 mbuf 来替换刚刚给 net_rx() 的那个。将其数据指针（m-&gt;head）编程到描述符中。将描述符的状态位清零。<br>      if((rx_mbufs[i] &#x3D; mbufalloc(0)) &#x3D;&#x3D; 0)<br>          panic(“e1000”);<br>      rx_ring[i].addr &#x3D; (uint64)rx_mbufs[i]-&gt;head;<br>      rx_ring[i].status &#x3D; 0;<br>      i &#x3D; (i + 1) % RX_RING_SIZE;<br>  }<br>  &#x2F;&#x2F;最后，将 E1000_RDT 寄存器更新为最后处理的环描述符的索引。<br>  regs[E1000_RDT] &#x3D; (i - 1) % RX_RING_SIZE;<br>}</p>
+<p><img src="https://sukunahust.com/wp-content/uploads/2022/03/image-30.png"></p>
+<h3 id="8-Xv6-and-Lock"><a href="#8-Xv6-and-Lock" class="headerlink" title="8:Xv6 and Lock"></a>8:Xv6 and Lock</h3><h3 id="Lab8-1-Memory-Access"><a href="#Lab8-1-Memory-Access" class="headerlink" title="Lab8_1 Memory Access."></a>Lab8_1 Memory Access.</h3><p>在这个部分的测试中,三个进程频繁地调度kalloc和kfree.</p>
+<p>对于每个锁，acquire 维护对该锁的调用计数，以及获取中的循环尝试但未能设置锁的次数。 kalloctest 调用一个系统调用，使内核打印 kmem 和 bcache 锁（这是本实验的重点）和 5 个最争用次数最多锁的计数。如果存在锁争用，获取循环迭代的次数将会很大。系统调用返回 kmem 和 bcache 锁的循环迭代次数的总和。</p>
+<p>对于本实验，您必须使用具有多核的专用机器。如果您使用一台正在做其他事情的机器，那么 kalloctest 打印的计数将是无稽之谈。</p>
+<p>kalloctest 中锁争用的根本原因是 kalloc() 有一个空闲列表，由一个锁保护。要消除锁争用，您必须重新设计内存分配器以不使用一个锁和列表。基本思想是为每个 CPU 维护一个空闲列表，每个列表都有自己的锁。不同 CPU 上的分配和释放可以并行运行，因为每个 CPU 将在不同的列表上运行。主要挑战将是处理一个 CPU 的空闲列表为空，但另一个 CPU 的列表有空闲内存的情况；在这种情况下，一个 CPU 必须“窃取”另一个 CPU 的空闲列表的一部分。窃取可能会引入锁争用，但希望这种情况很少见。(这个叫“负载均衡”)</p>
+<p>你的工作是实现每个 CPU 的空闲列表(就是对于每个CPU的核维护一个空闲列表,这个列表就是kmem)，并在 CPU 的空闲列表为空时进行读取。 您必须为所有以“kmem”开头的锁命名。 也就是说，您应该为每个锁调用 initlock，并传递一个以“kmem”开头的名称。 运行 kalloctest 以查看您的实现是否减少了锁争用。 要检查它是否仍然可以分配所有内存，请运行 usertests sbrkmuch。 您的输出将类似于下图所示，kmem 锁的争用总量大大减少，尽管具体数字会有所不同。 确保 usertests 中的所有测试都通过。 make Grade 应该说 kalloctests 通过了。</p>
+<h5 id="1-按照提示-更改内存块的结构-不是所有内存块都共享一个锁-是每个CPU都有一个独立的锁"><a href="#1-按照提示-更改内存块的结构-不是所有内存块都共享一个锁-是每个CPU都有一个独立的锁" class="headerlink" title="1) 按照提示,更改内存块的结构.不是所有内存块都共享一个锁,是每个CPU都有一个独立的锁."></a>1) 按照提示,更改内存块的结构.不是所有内存块都共享一个锁,是每个CPU都有一个独立的锁.</h5><p>struct {<br>  struct spinlock lock;<br>  struct run *freelist;<br>} kmem[NCPU];</p>
+<h5 id="2-改为初始化所有锁"><a href="#2-改为初始化所有锁" class="headerlink" title="2) 改为初始化所有锁."></a>2) 改为初始化所有锁.</h5><p>void<br>kinit()<br>{<br>  for (int i &#x3D; 0; i &lt; NCPU; i++)<br>    initlock(&amp;kmem[i].lock, “kmem”);<br>  freerange(end, (void*)PHYSTOP);<br>}</p>
+<h5 id="3-获取CPU的id-在这个地方获取id的时候要关中断-防止因为中断分配给其他CPU来进行处理了"><a href="#3-获取CPU的id-在这个地方获取id的时候要关中断-防止因为中断分配给其他CPU来进行处理了" class="headerlink" title="3) 获取CPU的id,在这个地方获取id的时候要关中断,防止因为中断分配给其他CPU来进行处理了."></a>3) 获取CPU的id,在这个地方获取id的时候要关中断,防止因为中断分配给其他CPU来进行处理了.</h5><p>push_off();<br>int id &#x3D; cpuid();<br>pop_off();</p>
+<h5 id="4-对于kalloc和kfree的锁获取和进入改成对于CPU为id的那个锁"><a href="#4-对于kalloc和kfree的锁获取和进入改成对于CPU为id的那个锁" class="headerlink" title="4) 对于kalloc和kfree的锁获取和进入改成对于CPU为id的那个锁"></a>4) 对于kalloc和kfree的锁获取和进入改成对于CPU为id的那个锁</h5><p><code>acquire(&amp;kmem.lock)-&gt;acquire(&amp;kmem[id].lock)</code></p>
+<h5 id="5-在if-r-的后面添加else-代表如果寻找失败-就到其他的核中获取"><a href="#5-在if-r-的后面添加else-代表如果寻找失败-就到其他的核中获取" class="headerlink" title="5) 在if(r)的后面添加else,代表如果寻找失败,就到其他的核中获取."></a>5) 在if(r)的后面添加else,代表如果寻找失败,就到其他的核中获取.</h5><p>  else{<br>    for (int i &#x3D; 0; i &lt; NCPU; i++) {<br>      if (i &#x3D;&#x3D; id) continue;<br>      acquire(&amp;kmem[i].lock);<br>      r &#x3D; kmem[i].freelist;<br>      if(r)<br>        kmem[i].freelist &#x3D; r-&gt;next;<br>      release(&amp;kmem[i].lock);<br>      if(r) break;<br>    }<br>  }</p>
+<p><img src="https://sukunahust.com/wp-content/uploads/2022/03/image-31-1024x884.png"></p>
+<h3 id="9-Xv6-File-System"><a href="#9-Xv6-File-System" class="headerlink" title="9:Xv6 &amp; File System"></a>9:Xv6 &amp; File System</h3><h3 id="Lab-9-1-Large-files"><a href="#Lab-9-1-Large-files" class="headerlink" title="Lab 9_1 Large files"></a>Lab 9_1 Large files</h3><p>在这个实验中,你会拓展文件系统中文件的最大大小,其中一开始文件是12个直接连接块,1个一级索引块,一共16*16+12&#x3D;268个块,这个时候我们要修改一下改成11个直接相连,1个一级索引块,1个二级索引块,一共256*256+256+11&#x3D;65536+256+11个块.</p>
+<p>其中xv6把文件系统映射到fs.img中,这个一共有二十万个块,其中70个保存块信息的meta块,剩下的都是数据.完成这个实验你需要关注磁盘 inode 的格式,这个由 fs.h 中的 struct dinode 定义。 您对 NDIRECT、NINDIRECT、MAXFILE 和结构 dinode 的 addrs[] 元素特别感兴趣。 查看 xv6 文本中的图 8.3 以了解标准 xv6 inode 的图表。<br>在磁盘上查找文件数据的代码在 fs.c 的 bmap() 中。 看看它，确保你明白它在做什么。 bmap() 在读取和写入文件时都会被调用。 写入时，bmap() 会根据需要分配新块来保存文件内容，并在需要时分配间接块来保存块地址。<br>bmap() 处理两种块号。 bn 参数是一个“逻辑块号”——文件中的块号，相对于文件的开头。 ip-&gt;addrs[] 中的块号和 bread() 的参数是磁盘块号。 您可以将 bmap() 视为将文件的逻辑块号映射到磁盘块号。</p>
+<p>修改 bmap() ，使其除了直接块和单间接块外，还实现双重间接块。 你只需要 11 个直接块，而不是 12 个，就可以为新的双重间接块腾出空间； 您不能更改磁盘 inode 的大小。 ip-&gt;addrs[] 的前 11 个元素应该是直接块； 第 12 个应该是一个单独的间接块（就像现在的块一样）； 第 13 个应该是你新的双重间接块。</p>
+<h5 id="1-修改直接映射的数量"><a href="#1-修改直接映射的数量" class="headerlink" title="1) 修改直接映射的数量."></a>1) 修改直接映射的数量.</h5><p>#define NDIRECT 11#define NDIRECT 11<br>uint addrs[NDIRECT+2];<br>#define MAXFILE (NDIRECT + NINDIRECT + NDOUBLE)&#x2F;&#x2F;文件最大值也要改变</p>
+<p>其中直接映射的数量由原来的12个改为11个.</p>
+<h5 id="2-对应的file-h的inode结构体也要进行更改"><a href="#2-对应的file-h的inode结构体也要进行更改" class="headerlink" title="2) 对应的file.h的inode结构体也要进行更改"></a>2) 对应的file.h的inode结构体也要进行更改</h5><p>struct inode {<br>  uint dev;           &#x2F;&#x2F; Device number<br>  uint inum;          &#x2F;&#x2F; Inode number<br>  int ref;            &#x2F;&#x2F; Reference count<br>  struct sleeplock lock; &#x2F;&#x2F; protects everything below here<br>  int valid;          &#x2F;&#x2F; inode has been read from disk?</p>
+<p>  short type;         &#x2F;&#x2F; copy of disk inode<br>  short major;<br>  short minor;<br>  short nlink;<br>  uint size;<br>  uint addrs[NDIRECT+2];<br>};</p>
+<h5 id="3-阅读bmap的代码-0-NDIRECT-1-直接-NDIRECT-NDIRECT-NINDIRECT-1-一级间接"><a href="#3-阅读bmap的代码-0-NDIRECT-1-直接-NDIRECT-NDIRECT-NINDIRECT-1-一级间接" class="headerlink" title="3) 阅读bmap的代码: 0-NDIRECT-1 :直接 ,NDIRECT,NDIRECT+NINDIRECT-1:一级间接"></a>3) 阅读bmap的代码: 0-NDIRECT-1 :直接 ,NDIRECT,NDIRECT+NINDIRECT-1:一级间接</h5><p>&#x2F;&#x2F;bn:the number the blocks.<br>  if(bn &lt; NDIRECT){<br>    if((addr &#x3D; ip-&gt;addrs[bn]) &#x3D;&#x3D; 0)<br>      ip-&gt;addrs[bn] &#x3D; addr &#x3D; balloc(ip-&gt;dev);<br>    return addr;<br>  }<br>  bn -&#x3D; NDIRECT;</p>
+<p>  if(bn &lt; NINDIRECT){<br>    &#x2F;&#x2F; Load indirect block, allocating if necessary.<br>    if((addr &#x3D; ip-&gt;addrs[NDIRECT]) &#x3D;&#x3D; 0)<br>      ip-&gt;addrs[NDIRECT] &#x3D; addr &#x3D; balloc(ip-&gt;dev);<br>    bp &#x3D; bread(ip-&gt;dev, addr);<br>    a &#x3D; (uint*)bp-&gt;data;<br>    if((addr &#x3D; a[bn]) &#x3D;&#x3D; 0){<br>      a[bn] &#x3D; addr &#x3D; balloc(ip-&gt;dev);<br>      log_write(bp);<br>    }<br>    brelse(bp);<br>    return addr;<br>  }</p>
+<p>有个大前提,就是如果索引为0就代表这个磁盘为空,需要申请一个返回一个磁盘块号</p>
+<p>首先第一部分,就是直接映射的部分,如果寻找的逻辑地址是在NDIRECT以内的,就可以直接访问磁盘块.</p>
+<p>第二部分就是一级间接映射,首先先把一级映射的映射表找到,读出来,如果没有映射表就新建一个.映射表我们之前在操作系统学过就是一个int类型数组,这个时候我们就可以把映射表解释称int类型数组,然后根据索引值,也就是bn-NDIRECT来寻找,寻找就是寻找数组里面的东西.</p>
+<h5 id="4-依葫芦画瓢作出二级索引"><a href="#4-依葫芦画瓢作出二级索引" class="headerlink" title="4) 依葫芦画瓢作出二级索引."></a>4) 依葫芦画瓢作出二级索引.</h5><p>  bn -&#x3D; NINDIRECT;</p>
+<p>  if(bn &lt; NDOUBLE){<br>    if((addr &#x3D; ip-&gt;addrs[NDIRECT+1]) &#x3D;&#x3D; 0)<br>      ip-&gt;addrs[NDIRECT+1] &#x3D; addr &#x3D; balloc(ip-&gt;dev);<br>    bp &#x3D; bread(ip-&gt;dev, addr);<br>    a &#x3D; (uint*)bp-&gt;data;<br>    int bn1 &#x3D; bn &#x2F; NINDIRECT,bn2 &#x3D; bn % NINDIRECT;<br>    &#x2F;&#x2F;first suoyin<br>    if((addr &#x3D; a[bn1]) &#x3D;&#x3D; 0){<br>     a[bn1] &#x3D; addr &#x3D; balloc(ip-&gt;dev);<br>     log_write(bp);<br>    }<br>    &#x2F;&#x2F;second suoyin<br>    brelse(bp);<br>    bp&#x3D;bread(ip-&gt;dev,addr);<br>    a&#x3D;(uint*)bp-&gt;data;<br>    if((addr&#x3D;a[bn2])&#x3D;&#x3D;0)<br>    {<br>        a[bn2]&#x3D;addr&#x3D;balloc(ip-&gt;dev);<br>        log_write(bp);<br>    }<br>    brelse(bp);<br>    return addr;<br>  }</p>
+<p>二级索引需要两个索引值,一个是除得来的结果,一个是%得来的结果,首先先读一次,获得一级索引表,做法和上面是一样的,接着再读,根据一级索引表得来的结果就是对应二级索引表的位置,所以说根据一级索引表的结果打开二级索引表,找到最后属于我们的索引值.</p>
+<h5 id="5-完成索引的释放"><a href="#5-完成索引的释放" class="headerlink" title="5) 完成索引的释放."></a>5) 完成索引的释放.</h5><p>  if(ip-&gt;addrs[NDIRECT+1]) {<br>    bp &#x3D; bread(ip-&gt;dev, ip-&gt;addrs[NDIRECT+1]);<br>    a &#x3D; (uint*)bp-&gt;data;<br>    for(j &#x3D; 0; j &lt; NINDIRECT; j++) {<br>      if(a[j]) {<br>        bp2 &#x3D; bread(ip-&gt;dev, a[j]);<br>        a2 &#x3D; (uint*)bp2-&gt;data;<br>        for(i &#x3D; 0; i &lt; NINDIRECT; i++) {<br>          if(a2[i]) bfree(ip-&gt;dev, a2[i]);<br>        }<br>        brelse(bp2);<br>        bfree(ip-&gt;dev, a[j]);<br>        a[j] &#x3D; 0;<br>      }<br>    }<br>    brelse(bp);<br>    bfree(ip-&gt;dev, ip-&gt;addrs[NDIRECT+1]);<br>    ip-&gt;addrs[NDIRECT] &#x3D; 0;<br>  }</p>
+<p>就是先读取数组的第13项,构造一个二重循环,先进入到第一个一级索引的第一个二级索引陆续地释放所有的块.再进入到第一个一级索引的第二个二级索引…第一个一级索引的第256个二级索引….第256个二级索引的第256个一级索引…</p>
+<h3 id="Lab9-2-Symbolic-links"><a href="#Lab9-2-Symbolic-links" class="headerlink" title="Lab9_2 Symbolic links"></a>Lab9_2 Symbolic links</h3><p>您将实现 symlink(char *target, char *path) 系统调用，它会在 path 处创建一个新的符号链接，该链接引用由 target 命名的文件。</p>
+<p>首先，为symlink创建一个新的系统调用号，在user&#x2F;usys.pl，user&#x2F;user.h中添加一个入口，在kernel&#x2F;sysfile.c中实现一个空的sys_symlink。<br>将新文件类型 (T_SYMLINK) 添加到 kernel&#x2F;stat.h 以表示符号链接。<br>向 kernel&#x2F;fcntl.h 添加一个新标志 (O_NOFOLLOW)，可与 open 系统调用一起使用。请注意，传递给 open 的标志是使用按位 OR 运算符组合的，因此您的新标志不应与任何现有标志重叠。这将让您在将 user&#x2F;symlinktest.c 添加到 Makefile 后编译它。<br>实现 symlink(target, path) 系统调用以在指向目标的路径上创建一个新的符号链接。请注意，系统调用成功时不需要存在目标。您将需要选择某个位置来存储符号链接的目标路径，例如，在 inode 的数据块中。 symlink 应该返回一个表示成功 (0) 或失败 (-1) 的整数，类似于链接和取消链接。<br>修改 open 系统调用以处理路径引用符号链接的情况。如果文件不存在，则打开必须失败。当进程在要打开的标志中指定 O_NOFOLLOW 时， open 应该打开符号链接（而不是跟随符号链接）。<br>如果链接文件也是符号链接，则必须递归地跟随它，直到到达非链接文件。如果链接形成循环，则必须返回错误代码。如果链接的深度达到某个阈值（例如，10），您可以通过返回错误代码来近似此值。<br>其他系统调用（例如，链接和取消链接）不得遵循符号链接；这些系统调用对符号链接本身进行操作。<br>对于本实验，您不必处理指向目录的符号链接。</p>
+<h5 id="1-添加系统调用-略"><a href="#1-添加系统调用-略" class="headerlink" title="1) 添加系统调用.(略)"></a>1) 添加系统调用.(略)</h5><h5 id="2-按照实验提示的信息-添加两个新的宏-略"><a href="#2-按照实验提示的信息-添加两个新的宏-略" class="headerlink" title="2) 按照实验提示的信息,添加两个新的宏.(略)"></a>2) 按照实验提示的信息,添加两个新的宏.(略)</h5><h5 id="3-完成symlink系统调用"><a href="#3-完成symlink系统调用" class="headerlink" title="3) 完成symlink系统调用."></a>3) 完成symlink系统调用.</h5><p>首先第一点,我们发现,在sysfile.c的系统调用是需要提交事务的,我们也模仿这一点进行更改,处理的思路就是获取参数,创建一个新的inode,把符号连接的文件路径写进inode里面,然后提交即可.</p>
+<p>uint64<br>sys_symlink(void)<br>{<br>  char path[MAXPATH], target[MAXPATH];<br>  struct inode *ip;<br>  &#x2F;&#x2F; get parameter<br>  if(argstr(0, target, MAXPATH) &lt; 0)<br>    return -1;<br>  if(argstr(1, path, MAXPATH) &lt; 0)<br>    return -1;<br>  begin_op();<br>  &#x2F;&#x2F; create a inode<br>  if((ip &#x3D; create(path, T_SYMLINK, 0, 0)) &#x3D;&#x3D; 0) {<br>    end_op();<br>    return -1;<br>  }<br>  &#x2F;&#x2F; write the path of the file to the inode.<br>  if(writei(ip, 0, (uint64)target, 0, MAXPATH) &lt; MAXPATH) {<br>    iunlockput(ip);<br>    end_op();<br>    return -1;<br>  }<br>  iunlockput(ip);<br>  end_op();<br>  return 0;<br>}</p>
+<p><img src="https://sukunahust.com/wp-content/uploads/2022/03/image-32.png"></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/project/">首页</a></li>
+        
+          <li><a href="/project/about/">关于</a></li>
+        
+          <li><a href="/project/archives/">归档</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/SukunaShinmyoumaru-hust/Hust-opensource-Xuejie">HUST-学解</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Xv6-and-Unix-utilities"><span class="toc-number">1.</span> <span class="toc-text">1:Xv6 and Unix utilities</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lab1-1-Boot-xv6"><span class="toc-number">2.</span> <span class="toc-text">Lab1_1:Boot xv6</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lab1-2-sleep"><span class="toc-number">3.</span> <span class="toc-text">Lab1_2 sleep</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lab1-3-pingpong"><span class="toc-number">4.</span> <span class="toc-text">Lab1_3 pingpong</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lab1-4-prime"><span class="toc-number">5.</span> <span class="toc-text">Lab1_4 prime</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lab1-5-find"><span class="toc-number">6.</span> <span class="toc-text">Lab1_5 find</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lab1-6-xargs"><span class="toc-number">7.</span> <span class="toc-text">Lab1_6 xargs</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Xv6-and-Syscall"><span class="toc-number">8.</span> <span class="toc-text">2:Xv6 and Syscall</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lab2-1-Trace"><span class="toc-number">9.</span> <span class="toc-text">Lab2_1 Trace.</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E5%9C%A8user-h%E4%B8%AD%E6%B7%BB%E5%8A%A0%E5%AF%B9%E4%BA%8Etrace%E5%87%BD%E6%95%B0%E7%9A%84%E6%94%AF%E6%8C%81"><span class="toc-number">9.0.1.</span> <span class="toc-text">1) 在user.h中添加对于trace函数的支持.</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E6%B7%BB%E5%8A%A0%E4%B8%80%E4%B8%AAentry%E5%9C%A8user-pl%E9%87%8C%E9%9D%A2"><span class="toc-number">9.0.2.</span> <span class="toc-text">2) 添加一个entry在user.pl里面</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Generate-usys-S-the-stubs-for-syscalls"><span class="toc-number"></span> <span class="toc-text">Generate usys.S, the stubs for syscalls.</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#3-%E5%9C%A8syscall-h%E6%B7%BB%E5%8A%A0%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%8F%B7"><span class="toc-number">0.0.1.</span> <span class="toc-text">3) 在syscall.h添加系统调用号</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-%E5%9C%A8proc%E7%BB%93%E6%9E%84%E4%BD%93%E9%87%8C%E9%9D%A2%E6%B7%BB%E5%8A%A0%E4%B8%80%E4%B8%AAmask%E6%88%90%E5%91%98-%E7%94%A8%E6%9D%A5%E8%AE%B0%E5%BD%95%E8%A6%81trace%E5%93%AA%E7%A7%8D%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8"><span class="toc-number">0.0.2.</span> <span class="toc-text">4) 在proc结构体里面添加一个mask成员,用来记录要trace哪种系统调用.</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-%E5%9C%A8kernel-sysproc-c%E9%87%8C%E9%9D%A2%E5%AE%9E%E7%8E%B0%E5%85%B7%E4%BD%93%E7%9A%84%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8-%E5%9C%A8%E8%BF%99%E9%87%8C%E4%BD%A0%E4%BC%9A%E5%8F%91%E7%8E%B0%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%BC%9A%E4%BF%9D%E5%AD%98%E5%9C%A8%E8%BF%99%E9%87%8C"><span class="toc-number">0.0.3.</span> <span class="toc-text">5) 在kernel&#x2F;sysproc.c里面实现具体的系统调用,在这里你会发现系统调用的实现会保存在这里.</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#6-%E6%9B%B4%E6%94%B9fork%E5%87%BD%E6%95%B0-%E6%B7%BB%E5%8A%A0mask%E7%9A%84%E5%A4%8D%E5%88%B6-np-mask-p-mask"><span class="toc-number">0.0.4.</span> <span class="toc-text">6) 更改fork函数,添加mask的复制.np-&gt;mask &#x3D; p-&gt;mask;</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#7-%E6%B7%BB%E5%8A%A0syscall-c%E4%B8%AD%E5%85%B3%E4%BA%8Etrace%E5%87%BD%E6%95%B0%E7%9A%84%E6%94%AF%E6%8C%81"><span class="toc-number">0.0.5.</span> <span class="toc-text">7) 添加syscall.c中关于trace函数的支持.</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#8-%E6%9B%B4%E6%94%B9syscall-c%E7%9A%84syscall%E5%87%BD%E6%95%B0"><span class="toc-number">0.0.6.</span> <span class="toc-text">8) 更改syscall.c的syscall函数</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lab2-2-sys-info"><span class="toc-number">1.</span> <span class="toc-text">Lab2_2 sys info</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E5%9C%A8makefile-user-pl%E5%92%8Cuser-h%E6%B7%BB%E5%8A%A0%E5%AF%B9%E4%BA%8Esysinfo%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E7%9A%84%E6%94%AF%E6%8C%81-%E4%B8%8D%E6%87%82%E7%9A%84%E8%AF%B7%E7%BF%BB%E9%98%85%E4%B8%8A%E9%9D%A2"><span class="toc-number">1.0.1.</span> <span class="toc-text">1) 在makefile,user.pl和user.h添加对于sysinfo系统调用的支持.(不懂的请翻阅上面)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E7%BB%9F%E8%AE%A1%E5%BD%93%E5%89%8D%E6%AD%A3%E5%9C%A8%E4%BD%BF%E7%94%A8%E8%BF%9B%E7%A8%8B%E6%95%B0-%E5%AE%9A%E4%B9%89%E6%96%B0%E5%87%BD%E6%95%B0proc-size-%E5%9C%A8proc-h%E4%B8%AD"><span class="toc-number">1.0.2.</span> <span class="toc-text">2) 统计当前正在使用进程数.定义新函数proc_size(),在proc.h中</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-%E7%BB%9F%E8%AE%A1%E5%BD%93%E5%89%8D%E7%9A%84%E5%86%85%E5%AD%98%E6%95%B0-%E5%AE%9A%E4%B9%89%E6%96%B0%E5%87%BD%E6%95%B0freememory-%E5%9C%A8kalloc-h%E4%B8%AD"><span class="toc-number">1.0.3.</span> <span class="toc-text">3) 统计当前的内存数,定义新函数freememory(),在kalloc.h中.</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-%E5%AE%8C%E6%88%90sysinfo%E7%9A%84%E6%93%8D%E4%BD%9C-%E6%B3%A8%E6%84%8F2-%E5%92%8C3-%E5%AE%9A%E4%B9%89%E7%9A%84%E5%87%BD%E6%95%B0%E8%A6%81%E5%A3%B0%E6%98%8E%E5%9C%A8def-h%E4%B8%AD"><span class="toc-number">1.0.4.</span> <span class="toc-text">4) 完成sysinfo的操作.注意2)和3)定义的函数要声明在def.h中</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-%E5%83%8F%E4%B8%8A%E4%B8%AA%E5%AE%9E%E9%AA%8C%E4%B8%80%E6%A0%B7%E5%AE%8C%E6%88%90syscall-h-syscall-c%E7%9A%84%E6%94%AF%E6%8C%81%E5%8D%B3%E5%8F%AF"><span class="toc-number">1.0.5.</span> <span class="toc-text">5) 像上个实验一样完成syscall.h,syscall.c的支持即可.</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Xv6-and-PageTable"><span class="toc-number">2.</span> <span class="toc-text">3:Xv6 and PageTable</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lab3-1-Speed-Up-the-system-calls"><span class="toc-number">3.</span> <span class="toc-text">Lab3_1 Speed Up the system calls</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E7%A1%AE%E8%AE%A4usyscall%E7%9A%84%E7%BB%93%E6%9E%84%E4%BD%93%E6%98%AF%E4%BB%80%E4%B9%88-%E5%85%B6%E5%AE%9E%E5%AD%98%E5%82%A8%E7%9A%84%E5%B0%B1%E6%98%AFpid"><span class="toc-number">3.0.1.</span> <span class="toc-text">1) 确认usyscall的结构体是什么,其实存储的就是pid.</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E4%B8%BA%E6%AF%8F%E4%B8%AA%E8%BF%9B%E7%A8%8B%E7%BB%93%E6%9E%84%E6%B7%BB%E5%8A%A0usyscall%E7%9A%84%E5%85%83%E7%B4%A0-%E8%BF%99%E4%B8%AA%E7%BB%93%E6%9E%84%E5%AD%98%E5%82%A8%E5%9C%A8%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84%E9%A1%B5%E9%87%8C%E9%9D%A2"><span class="toc-number">3.0.2.</span> <span class="toc-text">2) 为每个进程结构添加usyscall的元素,这个结构存储在一个新的页里面.</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-%E6%89%93%E5%BC%80proc-c-%E4%BE%9D%E8%91%AB%E8%8A%A6%E7%94%BB%E7%93%A2%E7%BB%99usyscall%E7%BB%93%E6%9E%84%E4%BD%93%E7%94%B3%E8%AF%B7%E4%B8%80%E4%B8%AA%E9%A1%B5%E9%9D%A2"><span class="toc-number">3.0.3.</span> <span class="toc-text">3) 打开proc.c,依葫芦画瓢给usyscall结构体申请一个页面.</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-%E4%BE%9D%E6%8D%AE%E6%8F%90%E7%A4%BA-%E6%88%91%E4%BB%AC%E5%9C%A8proc-pagetable%E4%B8%AD%E4%BE%9D%E8%91%AB%E8%8A%A6%E7%94%BB%E7%93%A2%E6%9D%A5%E8%BF%9B%E8%A1%8C%E5%9C%B0%E5%9D%80%E7%9A%84%E6%98%A0%E5%B0%84-%E6%B3%A8%E6%84%8F-%E5%A6%82%E6%9E%9C%E6%98%A0%E5%B0%84%E5%A4%B1%E8%B4%A5%E6%98%AF%E8%A6%81%E6%8A%8A%E4%B9%8B%E5%89%8D%E4%BF%A9%E9%83%BD%E7%BB%99%E5%8F%96%E6%B6%88%E6%8E%89"><span class="toc-number">3.0.4.</span> <span class="toc-text">4) 依据提示,我们在proc_pagetable中依葫芦画瓢来进行地址的映射,注意,如果映射失败是要把之前俩都给取消掉</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-%E5%9C%A8%E8%BF%9B%E7%A8%8B%E5%88%9D%E5%A7%8B%E5%8C%96%E7%9A%84%E6%97%B6%E5%80%99%E6%B7%BB%E5%8A%A0%E5%88%9D%E5%A7%8B%E5%8C%96%E7%9A%84%E4%BB%A3%E7%A0%81-%E5%88%9D%E5%A7%8B%E5%8C%96usyscall%E7%9A%84%E7%BB%93%E6%9E%84"><span class="toc-number">3.0.5.</span> <span class="toc-text">5) 在进程初始化的时候添加初始化的代码.初始化usyscall的结构.</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#6-%E8%BF%9B%E7%A8%8B%E7%BB%93%E6%9D%9F%E7%9A%84%E6%97%B6%E5%80%99-free%E6%8E%89%E8%BF%9B%E7%A8%8B%E7%9A%84%E6%97%B6%E5%80%99%E6%8A%8A%E8%BF%99%E4%B8%80%E9%A1%B5%E4%B9%9Ffree%E6%8E%89"><span class="toc-number">3.0.6.</span> <span class="toc-text">6) 进程结束的时候,free掉进程的时候把这一页也free掉</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#7-%E8%BF%9B%E7%A8%8B%E7%BB%93%E6%9D%9F%E7%9A%84%E6%97%B6%E5%80%99-%E4%BE%9D%E8%91%AB%E8%8A%A6%E7%94%BB%E7%93%A2%E6%8A%8A%E6%98%A0%E5%B0%84%E5%85%B3%E7%B3%BB%E7%BB%99%E5%8F%96%E6%B6%88%E6%8E%89"><span class="toc-number">3.0.7.</span> <span class="toc-text">7) 进程结束的时候,依葫芦画瓢把映射关系给取消掉.</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lab3-2-Print-a-page-table"><span class="toc-number">4.</span> <span class="toc-text">Lab3_2 Print a page table</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E6%A0%B9%E6%8D%AE%E6%8F%90%E7%A4%BA-%E5%9C%A8exec%E7%9A%84return-argc%E4%B9%8B%E5%89%8D%E6%B7%BB%E5%8A%A0%E4%B8%80%E6%AE%B5"><span class="toc-number">4.0.1.</span> <span class="toc-text">1) 根据提示,在exec的return argc之前添加一段:</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E5%9C%A8def-h%E4%B8%AD%E6%B7%BB%E5%8A%A0%E5%AF%B9%E4%BA%8Evmprint%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-number">4.0.2.</span> <span class="toc-text">2) 在def.h中添加对于vmprint的定义</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-%E4%BF%AE%E6%94%B9vm-c-%E4%BB%BF%E7%85%A7freewalk%E6%94%B9%E9%80%A0%E5%87%BD%E6%95%B0"><span class="toc-number">4.0.3.</span> <span class="toc-text">3) 修改vm.c,仿照freewalk改造函数.</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lab3-3-Detecting-which-pages-have-been-accessed"><span class="toc-number">5.</span> <span class="toc-text">Lab3_3 Detecting which pages have been accessed</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E5%8F%82%E9%98%85RISC-V%E6%89%8B%E5%86%8C-%E7%A1%AE%E5%AE%9APTE-A%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-number">5.0.1.</span> <span class="toc-text">1) 参阅RISC-V手册,确定PTE_A是什么.</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E5%AE%8C%E6%88%90sys-pgaccess-%E5%9C%A8%E8%BF%99%E9%87%8C%E4%B8%BB%E8%A6%81%E6%98%AF%E5%A4%84%E7%90%86%E5%8F%82%E6%95%B0-%E5%88%A9%E7%94%A8argaddr%E5%92%8Cargint%E5%A4%84%E7%90%86%E5%8F%82%E6%95%B0"><span class="toc-number">5.0.2.</span> <span class="toc-text">2) 完成sys_pgaccess,在这里主要是处理参数.利用argaddr和argint处理参数.</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-%E8%AF%BB%E5%8F%96%E5%BD%93%E5%89%8D%E8%99%9A%E6%8B%9F%E5%9C%B0%E5%9D%80-%E6%89%BE%E5%88%B0%E5%AF%B9%E5%BA%94%E7%9A%84%E9%A1%B5%E8%A1%A8%E9%A1%B9%E7%9B%AE%E7%9A%84%E5%87%BD%E6%95%B0%E6%89%BE%E5%88%B0-walk"><span class="toc-number">5.0.3.</span> <span class="toc-text">3) 读取当前虚拟地址,找到对应的页表项目的函数找到:walk</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-%E8%AF%BB%E5%8F%96%E6%8E%A5%E7%9D%80%E6%A0%B9%E6%8D%AEpte%E8%A1%A8%E9%A1%B9-%E6%89%BE%E5%88%B0PTE-A%E4%BD%8D"><span class="toc-number">5.0.4.</span> <span class="toc-text">4) 读取接着根据pte表项,找到PTE_A位.</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-Xv6-and-Trap"><span class="toc-number">6.</span> <span class="toc-text">4:Xv6 and Trap</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lab4-1-RISC-V-Assembly"><span class="toc-number">7.</span> <span class="toc-text">Lab4_1 RISC-V Assembly</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lab4-2-BackTrace"><span class="toc-number">8.</span> <span class="toc-text">Lab4_2 BackTrace</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E5%9C%A8def-h%E6%B7%BB%E5%8A%A0backtrace-%E5%87%BD%E6%95%B0%E7%9A%84%E5%A3%B0%E6%98%8E"><span class="toc-number">8.0.1.</span> <span class="toc-text">1) 在def.h添加backtrace()函数的声明.</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-GCC-%E7%BC%96%E8%AF%91%E5%99%A8%E5%B0%86%E5%BD%93%E5%89%8D%E6%89%A7%E8%A1%8C%E7%9A%84%E5%87%BD%E6%95%B0%E7%9A%84%E5%B8%A7%E6%8C%87%E9%92%88%E5%AD%98%E5%82%A8%E5%9C%A8%E5%AF%84%E5%AD%98%E5%99%A8s0%E4%B8%AD-s0%E5%B0%B1%E5%AF%B9%E5%BA%94%E4%B8%8A%E9%9D%A2%E7%9A%84fp%E6%8C%87%E9%92%88"><span class="toc-number">8.0.2.</span> <span class="toc-text">2) GCC 编译器将当前执行的函数的帧指针存储在寄存器s0中,s0就对应上面的fp指针.</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-%E5%AE%8C%E6%88%90backtrace"><span class="toc-number">8.0.3.</span> <span class="toc-text">3) 完成backtrace()</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lab4-3-Alarm"><span class="toc-number">9.</span> <span class="toc-text">Lab4_3 Alarm</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#test0%EF%BC%9A%E8%B0%83%E7%94%A8%E5%A4%84%E7%90%86%E7%A8%8B%E5%BA%8F"><span class="toc-number">10.</span> <span class="toc-text">test0：调用处理程序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#test1-test2-%E6%81%A2%E5%A4%8D%E4%B8%AD%E6%96%AD%E7%9A%84%E4%BB%A3%E7%A0%81"><span class="toc-number">11.</span> <span class="toc-text">test1&#x2F;test2(): 恢复中断的代码</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E5%9C%A8user-h%E4%B8%AD%E6%B7%BB%E5%8A%A0%E5%A3%B0%E6%98%8E"><span class="toc-number">11.0.1.</span> <span class="toc-text">1) 在user.h中添加声明:</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E5%9C%A8user-pl%E6%B7%BB%E5%8A%A0%E5%87%BD%E6%95%B0%E5%85%A5%E5%8F%A3%E4%BB%A5%E7%94%9F%E6%88%90%E6%B1%87%E7%BC%96%E4%BB%A3%E7%A0%81"><span class="toc-number">11.0.2.</span> <span class="toc-text">2) 在user.pl添加函数入口以生成汇编代码.</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-%E5%9C%A8syscall-h%E6%B7%BB%E5%8A%A0%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%8F%B7-1"><span class="toc-number">11.0.3.</span> <span class="toc-text">3) 在syscall.h添加系统调用号.</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-%E5%9C%A8syscall-c%E4%B8%AD%E6%B7%BB%E5%8A%A0%E5%85%B3%E4%BA%8E%E8%BF%99%E4%B8%A4%E4%B8%AA%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E7%9A%84%E5%A3%B0%E6%98%8E"><span class="toc-number">11.0.4.</span> <span class="toc-text">4) 在syscall.c中添加关于这两个系统调用的声明.</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-%E5%9C%A8proc%E7%9A%84%E8%BF%9B%E7%A8%8B%E7%BB%93%E6%9E%84%E4%BD%93%E4%B8%AD%E6%B7%BB%E5%8A%A0%E6%88%90%E5%91%98-%E4%BF%9D%E5%AD%98%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E4%B8%AD%E6%96%AD-%E4%B8%AD%E6%96%AD%E6%89%A7%E8%A1%8C%E4%BB%80%E4%B9%88-%E8%BF%87%E5%A4%9A%E4%B9%85%E5%B0%B1%E8%BF%9B%E8%A1%8C%E4%B8%80%E6%AC%A1%E4%B8%AD%E6%96%AD-%E8%BF%98%E4%BF%9D%E5%AD%98%E4%B8%AD%E6%96%AD%E7%9A%84%E6%97%B6%E5%80%99%E6%A0%88%E9%A1%B6%E6%8C%87%E9%92%88%E5%92%8C%E4%BF%9D%E5%AD%98%E7%9A%84%E6%A0%88%E5%B8%A7"><span class="toc-number">11.0.5.</span> <span class="toc-text">5) 在proc的进程结构体中添加成员,保存什么时候中断,中断执行什么,过多久就进行一次中断,还保存中断的时候栈顶指针和保存的栈帧.</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#6-%E5%9C%A8allocproc%E5%87%BD%E6%95%B0%E4%B8%AD%E5%88%9D%E5%A7%8B%E5%8C%96%E8%BF%99%E4%BA%9B%E6%88%90%E5%91%98"><span class="toc-number">11.0.6.</span> <span class="toc-text">6) 在allocproc函数中初始化这些成员.</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#7-%E5%AE%8C%E6%88%90sigalarm%E7%9A%84%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8-%E5%81%9A%E6%B3%95%E5%B0%B1%E6%98%AF%E4%BB%8E%E5%AF%84%E5%AD%98%E5%99%A8%E8%8E%B7%E5%BE%97%E5%8F%82%E6%95%B0%E7%84%B6%E5%90%8E%E8%B5%8B%E5%80%BC%E7%BB%99proc%E7%9A%84%E5%85%83%E7%B4%A0%E4%B8%AD"><span class="toc-number">11.0.7.</span> <span class="toc-text">7) 完成sigalarm的系统调用,做法就是从寄存器获得参数然后赋值给proc的元素中.</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#8-%E5%AE%8C%E6%88%90%E6%97%B6%E9%92%9F"><span class="toc-number">11.0.8.</span> <span class="toc-text">8) 完成时钟</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#9-%E5%AE%8C%E6%88%90%E8%BF%94%E5%9B%9E%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="toc-number">11.0.9.</span> <span class="toc-text">9) 完成返回的操作.</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-Xv6-and-MultiThread"><span class="toc-number">12.</span> <span class="toc-text">6:Xv6 and MultiThread</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lab6-1-Uthread-switching-between-threads"><span class="toc-number">13.</span> <span class="toc-text">Lab6_1 Uthread: switching between threads</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E4%BF%AE%E6%94%B9thread-switch%E7%9A%84%E4%BB%A3%E7%A0%81-%E6%B7%BB%E5%8A%A0%E4%B8%8A%E5%85%B3%E4%BA%8Ethread-switch-%E7%9A%84%E4%BB%A3%E7%A0%81-%E5%8F%AA%E9%9C%80%E8%A6%81%E4%BF%9D%E5%AD%98-%E6%81%A2%E5%A4%8Dcallee-save-register"><span class="toc-number">13.0.1.</span> <span class="toc-text">1) 修改thread_switch的代码,添加上关于thread_switch 的代码,只需要保存&#x2F;恢复callee-save register:</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E5%9C%A8Thread%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%AD%E6%B7%BB%E5%8A%A0%E5%AF%84%E5%AD%98%E5%99%A8%E4%BF%A1%E6%81%AF"><span class="toc-number">13.0.2.</span> <span class="toc-text">2) 在Thread的数据结构中添加寄存器信息.</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-%E4%BF%AE%E6%94%B9%E5%88%9B%E5%BB%BA%E8%BF%9B%E7%A8%8B%E7%9A%84%E4%BB%A3%E7%A0%81-%E5%AF%B9ra%E5%92%8Csp%E5%AF%84%E5%AD%98%E5%99%A8%E8%BF%9B%E8%A1%8C%E5%88%9D%E5%A7%8B%E5%8C%96-%E5%85%B6%E4%B8%ADra%E6%9C%AC%E8%B4%A8%E4%B8%8A%E5%B0%B1%E6%98%AF%E6%96%AD%E7%82%B9%E5%AF%84%E5%AD%98%E5%99%A8-%E6%9C%89%E4%B8%80%E4%B8%AA%E5%8F%82%E6%95%B0%E5%B0%B1%E6%98%AF%E4%B8%80%E4%B8%AA%E5%9C%B0%E5%9D%80-%E8%BF%99%E4%B8%AA%E5%9C%B0%E5%9D%80%E6%8C%87%E5%90%91%E4%B8%80%E4%B8%AA%E5%87%BD%E6%95%B0-%E5%BD%93%E8%BF%99%E4%B8%AA%E7%BA%BF%E7%A8%8B%E7%AC%AC%E4%B8%80%E6%AC%A1%E5%90%AF%E5%8A%A8%E7%9A%84%E6%97%B6%E5%80%99%E5%B0%B1%E4%BB%8E%E8%BF%99%E4%B8%AA%E5%9C%B0%E5%9D%80%E5%AF%B9%E5%BA%94%E7%9A%84%E6%8C%87%E4%BB%A4%E5%BC%80%E5%A7%8B%E6%89%A7%E8%A1%8C-%E6%8A%8A%E8%BF%99%E4%B8%AA%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92%E7%BB%99ra"><span class="toc-number">13.0.3.</span> <span class="toc-text">3) 修改创建进程的代码.对ra和sp寄存器进行初始化.其中ra本质上就是断点寄存器.有一个参数就是一个地址,这个地址指向一个函数,当这个线程第一次启动的时候就从这个地址对应的指令开始执行.把这个参数传递给ra</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-%E8%B0%83%E7%94%A8switch%E5%87%BD%E6%95%B0-%E5%88%87%E6%8D%A2-%E5%85%B6%E4%B8%ADt%E6%98%AF%E5%BD%93%E5%89%8D%E8%BF%9B%E7%A8%8B-next-thread%E6%98%AF%E4%B8%8B%E4%B8%80%E4%B8%AA%E8%BF%9B%E7%A8%8B"><span class="toc-number">13.0.4.</span> <span class="toc-text">4) 调用switch函数,切换.其中t是当前进程,next_thread是下一个进程.</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lab6-2-Using-Thread"><span class="toc-number">14.</span> <span class="toc-text">Lab6_2 Using Thread.</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lab6-3-Barrier"><span class="toc-number">15.</span> <span class="toc-text">Lab6_3 Barrier</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-Xv6-and-Networking"><span class="toc-number">16.</span> <span class="toc-text">7:Xv6 and Networking</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-number">17.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%A0%E7%9A%84%E5%B7%A5%E4%BD%9C"><span class="toc-number">18.</span> <span class="toc-text">你的工作.</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%90%E7%A4%BA"><span class="toc-number">19.</span> <span class="toc-text">提示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-Xv6-and-Lock"><span class="toc-number">20.</span> <span class="toc-text">8:Xv6 and Lock</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lab8-1-Memory-Access"><span class="toc-number">21.</span> <span class="toc-text">Lab8_1 Memory Access.</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E6%8C%89%E7%85%A7%E6%8F%90%E7%A4%BA-%E6%9B%B4%E6%94%B9%E5%86%85%E5%AD%98%E5%9D%97%E7%9A%84%E7%BB%93%E6%9E%84-%E4%B8%8D%E6%98%AF%E6%89%80%E6%9C%89%E5%86%85%E5%AD%98%E5%9D%97%E9%83%BD%E5%85%B1%E4%BA%AB%E4%B8%80%E4%B8%AA%E9%94%81-%E6%98%AF%E6%AF%8F%E4%B8%AACPU%E9%83%BD%E6%9C%89%E4%B8%80%E4%B8%AA%E7%8B%AC%E7%AB%8B%E7%9A%84%E9%94%81"><span class="toc-number">21.0.1.</span> <span class="toc-text">1) 按照提示,更改内存块的结构.不是所有内存块都共享一个锁,是每个CPU都有一个独立的锁.</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E6%94%B9%E4%B8%BA%E5%88%9D%E5%A7%8B%E5%8C%96%E6%89%80%E6%9C%89%E9%94%81"><span class="toc-number">21.0.2.</span> <span class="toc-text">2) 改为初始化所有锁.</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-%E8%8E%B7%E5%8F%96CPU%E7%9A%84id-%E5%9C%A8%E8%BF%99%E4%B8%AA%E5%9C%B0%E6%96%B9%E8%8E%B7%E5%8F%96id%E7%9A%84%E6%97%B6%E5%80%99%E8%A6%81%E5%85%B3%E4%B8%AD%E6%96%AD-%E9%98%B2%E6%AD%A2%E5%9B%A0%E4%B8%BA%E4%B8%AD%E6%96%AD%E5%88%86%E9%85%8D%E7%BB%99%E5%85%B6%E4%BB%96CPU%E6%9D%A5%E8%BF%9B%E8%A1%8C%E5%A4%84%E7%90%86%E4%BA%86"><span class="toc-number">21.0.3.</span> <span class="toc-text">3) 获取CPU的id,在这个地方获取id的时候要关中断,防止因为中断分配给其他CPU来进行处理了.</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-%E5%AF%B9%E4%BA%8Ekalloc%E5%92%8Ckfree%E7%9A%84%E9%94%81%E8%8E%B7%E5%8F%96%E5%92%8C%E8%BF%9B%E5%85%A5%E6%94%B9%E6%88%90%E5%AF%B9%E4%BA%8ECPU%E4%B8%BAid%E7%9A%84%E9%82%A3%E4%B8%AA%E9%94%81"><span class="toc-number">21.0.4.</span> <span class="toc-text">4) 对于kalloc和kfree的锁获取和进入改成对于CPU为id的那个锁</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-%E5%9C%A8if-r-%E7%9A%84%E5%90%8E%E9%9D%A2%E6%B7%BB%E5%8A%A0else-%E4%BB%A3%E8%A1%A8%E5%A6%82%E6%9E%9C%E5%AF%BB%E6%89%BE%E5%A4%B1%E8%B4%A5-%E5%B0%B1%E5%88%B0%E5%85%B6%E4%BB%96%E7%9A%84%E6%A0%B8%E4%B8%AD%E8%8E%B7%E5%8F%96"><span class="toc-number">21.0.5.</span> <span class="toc-text">5) 在if(r)的后面添加else,代表如果寻找失败,就到其他的核中获取.</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-Xv6-File-System"><span class="toc-number">22.</span> <span class="toc-text">9:Xv6 &amp; File System</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lab-9-1-Large-files"><span class="toc-number">23.</span> <span class="toc-text">Lab 9_1 Large files</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E4%BF%AE%E6%94%B9%E7%9B%B4%E6%8E%A5%E6%98%A0%E5%B0%84%E7%9A%84%E6%95%B0%E9%87%8F"><span class="toc-number">23.0.1.</span> <span class="toc-text">1) 修改直接映射的数量.</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E5%AF%B9%E5%BA%94%E7%9A%84file-h%E7%9A%84inode%E7%BB%93%E6%9E%84%E4%BD%93%E4%B9%9F%E8%A6%81%E8%BF%9B%E8%A1%8C%E6%9B%B4%E6%94%B9"><span class="toc-number">23.0.2.</span> <span class="toc-text">2) 对应的file.h的inode结构体也要进行更改</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-%E9%98%85%E8%AF%BBbmap%E7%9A%84%E4%BB%A3%E7%A0%81-0-NDIRECT-1-%E7%9B%B4%E6%8E%A5-NDIRECT-NDIRECT-NINDIRECT-1-%E4%B8%80%E7%BA%A7%E9%97%B4%E6%8E%A5"><span class="toc-number">23.0.3.</span> <span class="toc-text">3) 阅读bmap的代码: 0-NDIRECT-1 :直接 ,NDIRECT,NDIRECT+NINDIRECT-1:一级间接</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-%E4%BE%9D%E8%91%AB%E8%8A%A6%E7%94%BB%E7%93%A2%E4%BD%9C%E5%87%BA%E4%BA%8C%E7%BA%A7%E7%B4%A2%E5%BC%95"><span class="toc-number">23.0.4.</span> <span class="toc-text">4) 依葫芦画瓢作出二级索引.</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-%E5%AE%8C%E6%88%90%E7%B4%A2%E5%BC%95%E7%9A%84%E9%87%8A%E6%94%BE"><span class="toc-number">23.0.5.</span> <span class="toc-text">5) 完成索引的释放.</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lab9-2-Symbolic-links"><span class="toc-number">24.</span> <span class="toc-text">Lab9_2 Symbolic links</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E6%B7%BB%E5%8A%A0%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8-%E7%95%A5"><span class="toc-number">24.0.1.</span> <span class="toc-text">1) 添加系统调用.(略)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E6%8C%89%E7%85%A7%E5%AE%9E%E9%AA%8C%E6%8F%90%E7%A4%BA%E7%9A%84%E4%BF%A1%E6%81%AF-%E6%B7%BB%E5%8A%A0%E4%B8%A4%E4%B8%AA%E6%96%B0%E7%9A%84%E5%AE%8F-%E7%95%A5"><span class="toc-number">24.0.2.</span> <span class="toc-text">2) 按照实验提示的信息,添加两个新的宏.(略)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-%E5%AE%8C%E6%88%90symlink%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8"><span class="toc-number">24.0.3.</span> <span class="toc-text">3) 完成symlink系统调用.</span></a></li></ol></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sukunashinmyoumaru-hust.github.io/project/2023/02/06/mit-6-s081-lab/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sukunashinmyoumaru-hust.github.io/project/2023/02/06/mit-6-s081-lab/&text=MIT_6.s081_Lab"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sukunashinmyoumaru-hust.github.io/project/2023/02/06/mit-6-s081-lab/&title=MIT_6.s081_Lab"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sukunashinmyoumaru-hust.github.io/project/2023/02/06/mit-6-s081-lab/&is_video=false&description=MIT_6.s081_Lab"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=MIT_6.s081_Lab&body=Check out this article: https://sukunashinmyoumaru-hust.github.io/project/2023/02/06/mit-6-s081-lab/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sukunashinmyoumaru-hust.github.io/project/2023/02/06/mit-6-s081-lab/&title=MIT_6.s081_Lab"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sukunashinmyoumaru-hust.github.io/project/2023/02/06/mit-6-s081-lab/&title=MIT_6.s081_Lab"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sukunashinmyoumaru-hust.github.io/project/2023/02/06/mit-6-s081-lab/&title=MIT_6.s081_Lab"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sukunashinmyoumaru-hust.github.io/project/2023/02/06/mit-6-s081-lab/&title=MIT_6.s081_Lab"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sukunashinmyoumaru-hust.github.io/project/2023/02/06/mit-6-s081-lab/&name=MIT_6.s081_Lab&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sukunashinmyoumaru-hust.github.io/project/2023/02/06/mit-6-s081-lab/&t=MIT_6.s081_Lab"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2024
+    Sukuna
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/project/">首页</a></li><!--
+     --><!--
+       --><li><a href="/project/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/project/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/SukunaShinmyoumaru-hust/Hust-opensource-Xuejie">HUST-学解</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功！");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/project/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

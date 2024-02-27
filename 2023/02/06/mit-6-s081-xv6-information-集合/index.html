@@ -1,0 +1,1392 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="1:Operating System Overview1 xv6系统的启动过程:1.1xv6引导器当x86系列的PC机启动的时候,首先会执行BIOS程序,BIOS程序一般会存放在固定的ROM中,一般在磁盘固定扇区中.BIOS 的作用是在启动时进行硬件的准备工作,接着BIOS程序会把控制权递交给操作系统.具体来说,BIOS会把控制权递交给从引导扇区中的固定的代码中(BIOS会把引导扇区存储的代码加载">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MIT_6.S081_xv6.Information 集合">
+<meta property="og:url" content="https://sukunashinmyoumaru-hust.github.io/project/2023/02/06/mit-6-s081-xv6-information-%E9%9B%86%E5%90%88/index.html">
+<meta property="og:site_name" content="Suwa shrine">
+<meta property="og:description" content="1:Operating System Overview1 xv6系统的启动过程:1.1xv6引导器当x86系列的PC机启动的时候,首先会执行BIOS程序,BIOS程序一般会存放在固定的ROM中,一般在磁盘固定扇区中.BIOS 的作用是在启动时进行硬件的准备工作,接着BIOS程序会把控制权递交给操作系统.具体来说,BIOS会把控制权递交给从引导扇区中的固定的代码中(BIOS会把引导扇区存储的代码加载">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://sukunahust.com/wp-content/uploads/2022/03/image-8.png">
+<meta property="og:image" content="https://sukunahust.com/wp-content/uploads/2022/03/image-10-826x1024.png">
+<meta property="og:image" content="https://sukunahust.com/wp-content/uploads/2022/03/image-9.png">
+<meta property="og:image" content="https://sukunahust.com/wp-content/uploads/2022/03/image-39-1024x875.png">
+<meta property="og:image" content="https://sukunahust.com/wp-content/uploads/2022/03/image-40-1024x988.png">
+<meta property="og:image" content="https://sukunahust.com/wp-content/uploads/2022/03/image-41.png">
+<meta property="og:image" content="https://sukunahust.com/wp-content/uploads/2022/03/image-42-1024x719.png">
+<meta property="article:published_time" content="2023-02-06T02:57:19.000Z">
+<meta property="article:modified_time" content="2024-02-27T05:01:50.137Z">
+<meta property="article:author" content="Sukuna">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://sukunahust.com/wp-content/uploads/2022/03/image-8.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/project/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/project/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/project/images/favicon-192x192.png">
+        
+      
+    
+    <!-- title -->
+    <title>MIT_6.S081_xv6.Information 集合</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/project/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/project/">首页</a></li><!--
+     --><!--
+       --><li><a href="/project/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/project/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/SukunaShinmyoumaru-hust/Hust-opensource-Xuejie">HUST-学解</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="上一篇" href="/project/2023/02/06/mit-6-s081-lab/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="下一篇" href="/project/2023/02/06/stanford-cs144-lab/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sukunashinmyoumaru-hust.github.io/project/2023/02/06/mit-6-s081-xv6-information-%E9%9B%86%E5%90%88/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sukunashinmyoumaru-hust.github.io/project/2023/02/06/mit-6-s081-xv6-information-%E9%9B%86%E5%90%88/&text=MIT_6.S081_xv6.Information 集合"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sukunashinmyoumaru-hust.github.io/project/2023/02/06/mit-6-s081-xv6-information-%E9%9B%86%E5%90%88/&title=MIT_6.S081_xv6.Information 集合"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sukunashinmyoumaru-hust.github.io/project/2023/02/06/mit-6-s081-xv6-information-%E9%9B%86%E5%90%88/&is_video=false&description=MIT_6.S081_xv6.Information 集合"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=MIT_6.S081_xv6.Information 集合&body=Check out this article: https://sukunashinmyoumaru-hust.github.io/project/2023/02/06/mit-6-s081-xv6-information-%E9%9B%86%E5%90%88/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sukunashinmyoumaru-hust.github.io/project/2023/02/06/mit-6-s081-xv6-information-%E9%9B%86%E5%90%88/&title=MIT_6.S081_xv6.Information 集合"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sukunashinmyoumaru-hust.github.io/project/2023/02/06/mit-6-s081-xv6-information-%E9%9B%86%E5%90%88/&title=MIT_6.S081_xv6.Information 集合"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sukunashinmyoumaru-hust.github.io/project/2023/02/06/mit-6-s081-xv6-information-%E9%9B%86%E5%90%88/&title=MIT_6.S081_xv6.Information 集合"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sukunashinmyoumaru-hust.github.io/project/2023/02/06/mit-6-s081-xv6-information-%E9%9B%86%E5%90%88/&title=MIT_6.S081_xv6.Information 集合"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sukunashinmyoumaru-hust.github.io/project/2023/02/06/mit-6-s081-xv6-information-%E9%9B%86%E5%90%88/&name=MIT_6.S081_xv6.Information 集合&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sukunashinmyoumaru-hust.github.io/project/2023/02/06/mit-6-s081-xv6-information-%E9%9B%86%E5%90%88/&t=MIT_6.S081_xv6.Information 集合"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Operating-System-Overview"><span class="toc-number">1.</span> <span class="toc-text">1:Operating System Overview</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-xv6%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B"><span class="toc-number"></span> <span class="toc-text">1 xv6系统的启动过程:</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1xv6%E5%BC%95%E5%AF%BC%E5%99%A8"><span class="toc-number">1.</span> <span class="toc-text">1.1xv6引导器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E5%86%85%E6%A0%B8%E6%80%81%E8%BF%9B%E5%85%A5%E7%94%A8%E6%88%B7%E6%80%81"><span class="toc-number">2.</span> <span class="toc-text">1.2 内核态进入用户态</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#set-up-a-stack-for-C"><span class="toc-number"></span> <span class="toc-text">set up a stack for C.</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#jump-to-start-in-start-c"><span class="toc-number"></span> <span class="toc-text">jump to start() in start.c</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#This-code-runs-in-user-space"><span class="toc-number"></span> <span class="toc-text">This code runs in user space.</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#exec-init-argv"><span class="toc-number"></span> <span class="toc-text">exec(init, argv)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%8E%A5%E5%8F%A3%E4%B8%8E%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8"><span class="toc-number">1.</span> <span class="toc-text">2 操作系统接口与系统调用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E6%9B%B4%E5%A4%9A%E7%9A%84%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><span class="toc-number">2.</span> <span class="toc-text">3 更多的基础知识</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-%E5%86%85%E6%A0%B8%E7%9A%84%E7%BB%84%E6%88%90"><span class="toc-number">2.1.</span> <span class="toc-text">3.1 内核的组成</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-%E7%A8%8B%E5%BA%8F%E7%9A%84%E9%80%BB%E8%BE%91%E5%9C%B0%E5%9D%80"><span class="toc-number">2.2.</span> <span class="toc-text">3.2 程序的逻辑地址</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-%E8%BF%9B%E7%A8%8B"><span class="toc-number">2.3.</span> <span class="toc-text">3.3 进程</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Trap-Syscall"><span class="toc-number">3.</span> <span class="toc-text">2:Trap&amp;Syscall</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%AD%E6%96%AD%E5%92%8C%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8"><span class="toc-number">4.</span> <span class="toc-text">中断和系统调用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RISC-V%E7%A1%AC%E4%BB%B6"><span class="toc-number">5.</span> <span class="toc-text">RISC-V硬件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E6%80%81%E7%9A%84%E4%B8%AD%E6%96%AD"><span class="toc-number">6.</span> <span class="toc-text">用户态的中断</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#save-the-user-a0-in-p-trapframe-a0"><span class="toc-number"></span> <span class="toc-text">save the user a0 in p-&gt;trapframe-&gt;a0</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#restore-user-a0-and-save-TRAPFRAME-in-sscratch"><span class="toc-number"></span> <span class="toc-text">restore user a0, and save TRAPFRAME in sscratch</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B0%83%E7%94%A8%E7%B3%BB%E7%BB%9F%E5%87%BD%E6%95%B0"><span class="toc-number">1.</span> <span class="toc-text">调用系统函数.</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#exec-init-argv-1"><span class="toc-number"></span> <span class="toc-text">exec(init, argv)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#for-exit"><span class="toc-number"></span> <span class="toc-text">for(;;) exit();</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#char-init-%E2%80%9C-init-0%E2%80%9D"><span class="toc-number"></span> <span class="toc-text">char init[] &#x3D; “&#x2F;init\0”;</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#char-argv-init-0"><span class="toc-number"></span> <span class="toc-text">char *argv[] &#x3D; { init, 0 };</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E7%9A%84%E5%8F%82%E6%95%B0"><span class="toc-number">1.</span> <span class="toc-text">系统调用的参数.</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E6%A0%B8%E6%80%81%E5%BC%95%E5%8F%91%E7%9A%84%E4%B8%AD%E6%96%AD"><span class="toc-number">2.</span> <span class="toc-text">内核态引发的中断</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%BA%E9%A1%B5%E4%B8%AD%E6%96%AD"><span class="toc-number">3.</span> <span class="toc-text">缺页中断</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Memory-Pagetable"><span class="toc-number">4.</span> <span class="toc-text">3: Memory&amp;Pagetable</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86"><span class="toc-number"></span> <span class="toc-text">内存管理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E9%A1%B5%E7%9A%84%E7%A1%AC%E4%BB%B6"><span class="toc-number">1.</span> <span class="toc-text">分页的硬件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E6%A0%B8%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4"><span class="toc-number">2.</span> <span class="toc-text">内核地址空间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4"><span class="toc-number">3.</span> <span class="toc-text">如何创建一个地址空间?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sbrk%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8"><span class="toc-number">4.</span> <span class="toc-text">sbrk系统调用?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E8%BF%9B%E7%A8%8B%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4"><span class="toc-number">5.</span> <span class="toc-text">用户进程地址空间.</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E7%94%B3%E8%AF%B7%E7%89%A9%E7%90%86%E5%9D%97"><span class="toc-number">6.</span> <span class="toc-text">如何申请物理块?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-Interrupt-Device-Manage"><span class="toc-number">7.</span> <span class="toc-text">4:Interrupt&amp;Device Manage</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86"><span class="toc-number">8.</span> <span class="toc-text">设备管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A7%E5%88%B6%E5%8F%B0%E8%BE%93%E5%85%A5"><span class="toc-number">9.</span> <span class="toc-text">控制台输入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A7%E5%88%B6%E5%8F%B0%E8%BE%93%E5%87%BA"><span class="toc-number">10.</span> <span class="toc-text">控制台输出</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E7%9A%84%E5%B9%B6%E8%A1%8C%E6%80%A7"><span class="toc-number">11.</span> <span class="toc-text">设备驱动的并行性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%B6%E9%92%9F%E4%B8%AD%E6%96%AD"><span class="toc-number">12.</span> <span class="toc-text">时钟中断</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-MultiPlexing"><span class="toc-number">13.</span> <span class="toc-text">5:MultiPlexing</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8"><span class="toc-number">14.</span> <span class="toc-text">多路复用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8A%E4%B8%8B%E6%96%87%E5%88%87%E6%8D%A2"><span class="toc-number">15.</span> <span class="toc-text">上下文切换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B0%83%E5%BA%A6%E6%96%B9%E6%B3%95"><span class="toc-number">16.</span> <span class="toc-text">调度方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BD%93%E5%89%8D%E7%9A%84CPU%E5%92%8C%E8%BF%9B%E7%A8%8B%E4%BF%A1%E6%81%AF"><span class="toc-number">17.</span> <span class="toc-text">当前的CPU和进程信息.</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9D%A1%E7%9C%A0%E4%B8%8E%E5%94%A4%E9%86%92"><span class="toc-number">18.</span> <span class="toc-text">睡眠与唤醒</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%A1%E9%81%93"><span class="toc-number">19.</span> <span class="toc-text">管道</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AD%89%E5%BE%85-%E9%80%80%E5%87%BA%E5%92%8C%E6%9D%80%E6%AD%BB%E7%9A%84%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8"><span class="toc-number">20.</span> <span class="toc-text">等待,退出和杀死的系统调用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-File-System"><span class="toc-number">21.</span> <span class="toc-text">6:File System</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%A6%82%E8%A7%88"><span class="toc-number">22.</span> <span class="toc-text">1.概览</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-buffer-cache%E5%B1%82"><span class="toc-number">23.</span> <span class="toc-text">2.buffer cache层.</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-Cache%E5%B1%82%E9%87%8D%E8%A6%81%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9A%E4%B9%89"><span class="toc-number">23.1.</span> <span class="toc-text">2.1 Cache层重要数据结构定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-Cache%E5%B1%82%E7%9A%84%E5%87%BD%E6%95%B0%E5%AE%9A%E4%B9%89"><span class="toc-number">23.2.</span> <span class="toc-text">2.2 Cache层的函数定义</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Log%E5%B1%82"><span class="toc-number"></span> <span class="toc-text">3. Log层</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-Log%E5%B1%82%E7%BB%93%E6%9E%84%E4%BD%93%E5%AE%9A%E4%B9%89"><span class="toc-number">1.</span> <span class="toc-text">3.1 Log层结构体定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-Log%E5%B1%82%E5%87%BD%E6%95%B0%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-number">2.</span> <span class="toc-text">3.2 Log层函数的定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-inode%E5%B1%82"><span class="toc-number">3.</span> <span class="toc-text">4. inode层</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1-%E4%B8%A4%E4%B8%AA%E5%88%86%E9%85%8D%E5%92%8C%E5%9B%9E%E6%94%B6%E7%A3%81%E7%9B%98%E5%9D%97%E7%9A%84%E5%87%BD%E6%95%B0"><span class="toc-number">3.1.</span> <span class="toc-text">4.1 两个分配和回收磁盘块的函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2-inode%E5%B1%82%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9A%E4%B9%89"><span class="toc-number">3.2.</span> <span class="toc-text">4.2 inode层的数据结构定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-3-inode%E5%B1%82%E5%87%BD%E6%95%B0%E5%AE%9A%E4%B9%89"><span class="toc-number">3.3.</span> <span class="toc-text">4.3 inode层函数定义</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-Directory%E5%B1%82"><span class="toc-number">4.</span> <span class="toc-text">4. Directory层</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1-directory%E5%B1%82%E7%BB%93%E6%9E%84%E4%BD%93%E5%AE%9A%E4%B9%89"><span class="toc-number">4.1.</span> <span class="toc-text">4.1 directory层结构体定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2-directory%E5%B1%82%E5%87%BD%E6%95%B0%E5%AE%9A%E4%B9%89"><span class="toc-number">4.2.</span> <span class="toc-text">4.2 directory层函数定义</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-file-descriptor%E5%B1%82"><span class="toc-number">5.</span> <span class="toc-text">5. file descriptor层</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#5-1-file-descriptor%E5%B1%82%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9A%E4%B9%89"><span class="toc-number">5.1.</span> <span class="toc-text">5.1 file descriptor层的数据结构定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-2-file-descriptor%E5%B1%82%E5%87%BD%E6%95%B0%E5%AE%9A%E4%B9%89"><span class="toc-number">5.2.</span> <span class="toc-text">5.2 file descriptor层函数定义</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E8%AF%BB%E5%86%99%E6%93%8D%E4%BD%9C%E5%92%8C%E8%AE%BE%E5%A4%87%E6%96%87%E4%BB%B6"><span class="toc-number">6.</span> <span class="toc-text">6. 读写操作和设备文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-Lock"><span class="toc-number">7.</span> <span class="toc-text">7:Lock</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#race"><span class="toc-number">8.</span> <span class="toc-text">race</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#spinlocks"><span class="toc-number">9.</span> <span class="toc-text">spinlocks</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E6%97%8B%E9%94%81%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">10.</span> <span class="toc-text">自旋锁的使用.</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%98%B2%E6%AD%A2%E6%AD%BB%E9%94%81"><span class="toc-number">11.</span> <span class="toc-text">防止死锁</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%87%E4%BB%A4%E5%92%8C%E5%86%85%E5%AD%98%E9%A1%BA%E5%BA%8F"><span class="toc-number">12.</span> <span class="toc-text">指令和内存顺序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9D%A1%E7%9C%A0%E9%94%81"><span class="toc-number">13.</span> <span class="toc-text">睡眠锁</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        MIT_6.S081_xv6.Information 集合
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Sukuna</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2023-02-06T02:57:19.000Z" class="dt-published" itemprop="datePublished">2023-02-06</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/project/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/">实验记录</a>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h3 id="1-Operating-System-Overview"><a href="#1-Operating-System-Overview" class="headerlink" title="1:Operating System Overview"></a>1:Operating System Overview</h3><h2 id="1-xv6系统的启动过程"><a href="#1-xv6系统的启动过程" class="headerlink" title="1 xv6系统的启动过程:"></a>1 xv6系统的启动过程:</h2><h3 id="1-1xv6引导器"><a href="#1-1xv6引导器" class="headerlink" title="1.1xv6引导器"></a>1.1xv6引导器</h3><p>当x86系列的PC机启动的时候,首先会执行BIOS程序,BIOS程序一般会存放在固定的ROM中,一般在磁盘固定扇区中.BIOS 的作用是在启动时进行硬件的准备工作,接着BIOS程序会把控制权递交给操作系统.具体来说,BIOS会把控制权递交给从引导扇区中的固定的代码中(BIOS会把引导扇区存储的代码加载到内存0x7c00处),接着引导程序会把操作系统内核载入到内存中,控制权递交给内核,程序是M态的.</p>
+<p>在xv6系统,引导程序由汇编引导程序和代码引导程序.</p>
+<h3 id="1-2-内核态进入用户态"><a href="#1-2-内核态进入用户态" class="headerlink" title="1.2 内核态进入用户态"></a>1.2 内核态进入用户态</h3><p>阅读kernel.asm(内核整体的代码)</p>
+<p>Disassembly of section .text:</p>
+<p>0000000080000000 &lt;_entry&gt;:<br>    80000000:00009117          auipcsp,0x9<br>    80000004:86013103          ldsp,-1952(sp) # 80008860 &lt;_GLOBAL_OFFSET_TABLE_+0x8&gt;<br>    80000008:6505                luia0,0x1<br>    8000000a:f14025f3          csrra1,mhartid<br>    8000000e:0585                addia1,a1,1<br>    80000010:02b50533          mula0,a0,a1<br>    80000014:912a                addsp,sp,a0<br>    80000016:652050ef          jalra,80005668 <start></p>
+<p>我们看到了_entry这个标签,也就是说内核是从_entry开始运行的,那我们首先查看一下entry.S的代码:</p>
+<p># qemu -kernel loads the kernel at 0x80000000<br>        # and causes each CPU to jump there.<br>        # kernel.ld causes the following code to<br>        # be placed at 0x80000000.<br>.section .text<br>.global _entry<br>_entry:</p>
+<h1 id="set-up-a-stack-for-C"><a href="#set-up-a-stack-for-C" class="headerlink" title="set up a stack for C."></a>set up a stack for C.</h1><pre><code>    # stack0 is declared in start.c,
+    # with a 4096-byte stack per CPU.
+    # sp = stack0 + (hartid \* 4096)
+    la sp, stack0
+    li a0, 1024\*4
+</code></pre>
+<p>csrr a1, mhartid<br>        addi a1, a1, 1<br>        mul a0, a0, a1<br>        add sp, sp, a0</p>
+<h1 id="jump-to-start-in-start-c"><a href="#jump-to-start-in-start-c" class="headerlink" title="jump to start() in start.c"></a>jump to start() in start.c</h1><pre><code>    call start
+</code></pre>
+<p>引导程序会把内存载入到0x80000000这个地址是因为在0~0x80000000这个地址范围内还有I&#x2F;O设备等(还有程序的逻辑地址)</p>
+<p>entry.S开始设置了一个栈,栈的带下是1024*4&#x3D;4KB,其中mhartid是运行当前程序的CPU核的ID,那么第i个核的栈地址空间就分配到stack+(hartid)*4096~stack+(hartid+1)*4096这个范围内.</p>
+<p>因为这个操作系统是运行在多核的RISC-V操作系统上,由多个核同时访问一个内存空间,所以说每个核的CPU只在允许的内存空间中执行代码.其中每个核的寄存器又是不一样的,所以说可以修改每个核的sp寄存器来区分不同的核的代码运行空间.</p>
+<p>在entry.S执行完操作之后,根据汇编代码,程序会跳转到start的这个函数中</p>
+<p>&#x2F;&#x2F; entry.S jumps here in machine mode on stack0.<br>void start()<br>{<br>  &#x2F;&#x2F; set M Previous Privilege mode to Supervisor, for mret.<br>  unsigned long x &#x3D; r_mstatus();<br>  x &amp;&#x3D; ~MSTATUS_MPP_MASK;<br>  x &#x3D; MSTATUS_MPP_S;<br>  w_mstatus(x);</p>
+<p>  &#x2F;&#x2F; set M Exception Program Counter to main, for mret.<br>  &#x2F;&#x2F; requires gcc -mcmodel&#x3D;medany<br>  w_mepc((uint64)main);</p>
+<p>  &#x2F;&#x2F; disable paging for now.<br>  w_satp(0);</p>
+<p>  &#x2F;&#x2F; delegate all interrupts and exceptions to supervisor mode.<br>  w_medeleg(0xffff);<br>  w_mideleg(0xffff);<br>  w_sie(r_sie()  SIE_SEIE  SIE_STIE  SIE_SSIE);</p>
+<p>  &#x2F;&#x2F; configure Physical Memory Protection to give supervisor mode<br>  &#x2F;&#x2F; access to all of physical memory.<br>  w_pmpaddr0(0x3fffffffffffffull);<br>  w_pmpcfg0(0xf);</p>
+<p>  &#x2F;&#x2F; ask for clock interrupts.<br>  timerinit();</p>
+<p>  &#x2F;&#x2F; keep each CPU’s hartid in its tp register, for cpuid().<br>  int id &#x3D; r_mhartid();<br>  w_tp(id);</p>
+<p>  &#x2F;&#x2F; switch to supervisor mode and jump to main().<br>  asm volatile(“mret”);<br>}</p>
+<p>在start函数中我们还是会执行在M态执行的操作:</p>
+<p>首先会执行mepc寄存器的操作,改变了mepc寄存器就相当于改变了断点值.这个寄存器相当于S态中断进入到M态的时候,触发中断的PC,当M态回到S态的时候,就继续从断点处执行.当然这个操作还制定了M态比S态更加接近于内核.</p>
+<p>接着下一步就是取消分页,在这一部分,虚拟地址是和实际的物理地址是一一对应的.</p>
+<p>再下一步,将所有的中断委托给S态进行处理.</p>
+<p>再下一步,指定程序允许的物理地址,在S态我们允许访问所有的物理地址</p>
+<p>在下一步,对时钟芯片编程以产生计时器中断.</p>
+<p>再下一步,取CPU的核id</p>
+<p>最后一步,返回到main()函数,执行mret指令.</p>
+<p>操作系统接着就会进入main函数,main函数主要初始化设备和一些子系统,然后调用userinit()函数来生成第一个进程,第一个进程只会运行很基础的程序,这个程序再initcode.S中已经声明.(这个时候已经进入U态了)</p>
+<p># Initial process that execs &#x2F;init.</p>
+<h1 id="This-code-runs-in-user-space"><a href="#This-code-runs-in-user-space" class="headerlink" title="This code runs in user space."></a>This code runs in user space.</h1><p>#include “syscall.h”</p>
+<h1 id="exec-init-argv"><a href="#exec-init-argv" class="headerlink" title="exec(init, argv)"></a>exec(init, argv)</h1><p>.globl start<br>start:<br>        la a0, init<br>        la a1, argv<br>        li a7, SYS_exec<br>        ecall</p>
+<p>系统调用的参数是a0<del>a7,其中a0</del>a6代表argv等,a7代表具体执行什么系统调用.</p>
+<p>这个时候系统会执行init程序,init程序这个时候就会加载sh程序,并且会初始化一个新的文件描述器(你可以认为是标准的I&#x2F;O输入输出,控制台输出,因为Unix类型的系统会把设备当成文件来看),然后执行Shell程序,系统开始执行</p>
+<h3 id="2-操作系统接口与系统调用"><a href="#2-操作系统接口与系统调用" class="headerlink" title="2 操作系统接口与系统调用"></a>2 操作系统接口与系统调用</h3><p>这个操作系统没有图形化界面,目前只能执行基本的键盘命令.</p>
+<p><img src="https://sukunahust.com/wp-content/uploads/2022/03/image-8.png"></p>
+<p>操作系统通过接口向用户程序提供服务。设计一个好的接口实际上是很难的。一方面我们希望接口设计得简单和精准，使其易于正确地实现；另一方面，我们可能忍不住想为应用提供一些更加复杂的功能。解决这种矛盾的办法是让接口的设计依赖于少量的_机制_ （<em>mechanism</em>)，而通过这些机制的组合提供强大、通用的功能。</p>
+<p>xv6提供 Unix 操作系统中的基本接口（由 Ken Thompson 和 Dennis Ritchie 引入），同时模仿 Unix 的内部设计。Unix 里机制结合良好的窄接口提供了令人吃惊的通用性。这样的接口设计非常成功，使得包括 BSD，Linux，Mac OS X，Solaris （甚至 Microsoft Windows 在某种程度上）都有类似 Unix 的接口。理解 xv6 是理解这些操作系统的一个良好起点。</p>
+<p>xv6 使用了传统的<strong>内核</strong>概念 – 一个向其他运行中程序提供服务的特殊程序。每一个运行中程序（称之为<strong>进程</strong>）都拥有包含指令、数据、栈的内存空间。指令实现了程序的运算，数据是用于运算过程的变量，栈管理了程序的过程调用。</p>
+<p>听上去很绕是吧,我们可以简单地理解,就是操作系统类似于高速公路的服务区,程序就是司机,司机在高速公路上开车相当于程序的正常执行,进入高速公路服务区司机就不会继续开车了,程序暂停执行.所以说程序获得操作系统提供的服务是通过中断的方式获得的.这个中断可以简称访管中断.</p>
+<p>程序想获得操作系统的服务,先通过访管中断进入中断处理程序,这个时候就进入到了S态,在中断处理程序中根据某种特殊寄存器的值跳转到特殊的地址执行特殊的程序,这种特殊的程序叫做系统调用.因为用户态的程序权限有限,所以说要向操作系统提获取给更高的权限.只能通过中断的方式获取.</p>
+<p>总得来说,进程通过<strong>系统调用</strong>使用内核服务。系统调用会进入内核，让内核执行服务然后返回。所以进程总是在用户空间和内核空间之间交替运行。</p>
+<h3 id="3-更多的基础知识"><a href="#3-更多的基础知识" class="headerlink" title="3 更多的基础知识"></a>3 更多的基础知识</h3><h4 id="3-1-内核的组成"><a href="#3-1-内核的组成" class="headerlink" title="3.1 内核的组成"></a>3.1 内核的组成</h4><p>RISC-V的CPU主要分成三个态,操作系统会在三个态中穿插进行.</p>
+<p>其中M态是机器态,在M态的操作系统有最高的权限,最高的优先级,可以执行所有指令,但是操作系统一般只在刚开始启动的时候是M态,在执行了一段初始化代码后就会降低到S态.</p>
+<p>操作系统的内核一般是在S态进行运行,在S态,我们可以执行所有的指令,包括一部分特权指令,特权指令不知道的回去翻一下操作系统书.</p>
+<p>在操作系统的空间划分中,我们一般划分内核态和用户态空间,在S态的时候,所有的程序和堆栈都是在内核态空间的,在U态的时候,所有的程序和堆栈都是在用户态空间的.</p>
+<p>综上所述,内核主要由内核态空间和一些系统调用组成.这种内核一般称为monolithic kernel.</p>
+<p>下面给出了基本的内核态运行的代码,运行这些代码就需要通过系统调用进入内核态,执行syscall.c之后然后再跳转到具体的代码.</p>
+<p><img src="https://sukunahust.com/wp-content/uploads/2022/03/image-10-826x1024.png"></p>
+<p>对于另外一种microkernel的操作系统,它们会把一部分应该在S态运行的代码下放到U态防止出现问题,这个叫做微内核.</p>
+<h4 id="3-2-程序的逻辑地址"><a href="#3-2-程序的逻辑地址" class="headerlink" title="3.2 程序的逻辑地址"></a>3.2 程序的逻辑地址</h4><p><img src="https://sukunahust.com/wp-content/uploads/2022/03/image-9.png"></p>
+<p>程序空间主要由基本的代码和数据,栈,堆,栈帧组成.其中栈帧保存了当前程序执行的时候一些基本的寄存器、断点信息、页表信息和CPU信息.</p>
+<p>struct trapframe {<br>  &#x2F;*   0 *&#x2F; uint64 kernel_satp;   &#x2F;&#x2F; kernel page table<br>  &#x2F;*   8 *&#x2F; uint64 kernel_sp;     &#x2F;&#x2F; top of process’s kernel stack<br>  &#x2F;*  16 *&#x2F; uint64 kernel_trap;   &#x2F;&#x2F; usertrap()<br>  &#x2F;*  24 *&#x2F; uint64 epc;           &#x2F;&#x2F; saved user program counter<br>  &#x2F;*  32 *&#x2F; uint64 kernel_hartid; &#x2F;&#x2F; saved kernel tp<br>  &#x2F;*  40 *&#x2F; uint64 ra;<br>  &#x2F;*  48 *&#x2F; uint64 sp;<br>  &#x2F;*  56 *&#x2F; uint64 gp;<br>  &#x2F;*  64 *&#x2F; uint64 tp;<br>  &#x2F;*  72 *&#x2F; uint64 t0;<br>  &#x2F;*  80 *&#x2F; uint64 t1;<br>  &#x2F;*  88 *&#x2F; uint64 t2;<br>  &#x2F;*  96 *&#x2F; uint64 s0;<br>  &#x2F;* 104 *&#x2F; uint64 s1;<br>  &#x2F;* 112 *&#x2F; uint64 a0;<br>  &#x2F;* 120 *&#x2F; uint64 a1;<br>  &#x2F;* 128 *&#x2F; uint64 a2;<br>  &#x2F;* 136 *&#x2F; uint64 a3;<br>  &#x2F;* 144 *&#x2F; uint64 a4;<br>  &#x2F;* 152 *&#x2F; uint64 a5;<br>  &#x2F;* 160 *&#x2F; uint64 a6;<br>  &#x2F;* 168 *&#x2F; uint64 a7;<br>  &#x2F;* 176 *&#x2F; uint64 s2;<br>  &#x2F;* 184 *&#x2F; uint64 s3;<br>  &#x2F;* 192 *&#x2F; uint64 s4;<br>  &#x2F;* 200 *&#x2F; uint64 s5;<br>  &#x2F;* 208 *&#x2F; uint64 s6;<br>  &#x2F;* 216 *&#x2F; uint64 s7;<br>  &#x2F;* 224 *&#x2F; uint64 s8;<br>  &#x2F;* 232 *&#x2F; uint64 s9;<br>  &#x2F;* 240 *&#x2F; uint64 s10;<br>  &#x2F;* 248 *&#x2F; uint64 s11;<br>  &#x2F;* 256 *&#x2F; uint64 t3;<br>  &#x2F;* 264 *&#x2F; uint64 t4;<br>  &#x2F;* 272 *&#x2F; uint64 t5;<br>  &#x2F;* 280 *&#x2F; uint64 t6;<br>};</p>
+<h4 id="3-3-进程"><a href="#3-3-进程" class="headerlink" title="3.3 进程"></a>3.3 进程</h4><p>进程就是运行的代码,进程可以通过调用ecall指令来进入到S态.其中进入到S态的何处就是有S态进行定义的.S态也可以调用sret指令回到断点处继续执行指令.</p>
+<p>下面给顶了进程的代码</p>
+<p>struct proc {<br>  struct spinlock lock;</p>
+<p>  &#x2F;&#x2F; p-&gt;lock must be held when using these:<br>  enum procstate state;        &#x2F;&#x2F; Process state<br>  void *chan;                  &#x2F;&#x2F; If non-zero, sleeping on chan<br>  int killed;                  &#x2F;&#x2F; If non-zero, have been killed<br>  int xstate;                  &#x2F;&#x2F; Exit status to be returned to parent’s wait<br>  int pid;                     &#x2F;&#x2F; Process ID</p>
+<p>  &#x2F;&#x2F; wait_lock must be held when using this:<br>  struct proc *parent;         &#x2F;&#x2F; Parent process</p>
+<p>  &#x2F;&#x2F; these are private to the process, so p-&gt;lock need not be held.<br>  uint64 kstack;               &#x2F;&#x2F; Virtual address of kernel stack<br>  uint64 sz;                   &#x2F;&#x2F; Size of process memory (bytes)<br>  pagetable_t pagetable;       &#x2F;&#x2F; User page table<br>  struct trapframe *trapframe; &#x2F;&#x2F; data page for trampoline.S<br>  struct context context;      &#x2F;&#x2F; swtch() here to run process<br>  struct file *ofile[NOFILE];  &#x2F;&#x2F; Open files<br>  struct inode *cwd;           &#x2F;&#x2F; Current directory<br>  char name[16];               &#x2F;&#x2F; Process name (debugging)<br>};</p>
+<p>其中trapframe就是栈帧,pagetable就是页表.(可以复习一下OS关于内存的论述),state用于描述进程的状态.然后chan我猜测是进程等待队列的下一个元素.file就是打开的文件,cwd就是当前的目录,kstack是内核栈的位置,parent就是父进程.</p>
+<p>进程之间是用数组来进行组合的.</p>
+<p>在这一节你需要知道的是:</p>
+<p>每一个进程都有一个页表来标记va和pa,不同的进程靠不同的页表来物理地相互阻隔,由于页表不同,不同的进程访问相同的虚拟地址,却是访问不同的物理地址,达到了物理的阻塞.</p>
+<p>每一个进程再一定的时间会被其他的进程打断,这个时候CPU停止对于这个进程的执行,转而执行其他的进程.</p>
+<p>每个进程都有两个栈,在U态处理的时候访问用户栈,在S态处理的时候访问内核栈.当进程被打断的时候信息会存储在用户态栈中.</p>
+<p>总之,一个进程有控制流,什么时候控制CPU,还有数据流,对于内存和栈的访问.</p>
+<h3 id="2-Trap-Syscall"><a href="#2-Trap-Syscall" class="headerlink" title="2:Trap&amp;Syscall"></a>2:Trap&amp;Syscall</h3><h3 id="中断和系统调用"><a href="#中断和系统调用" class="headerlink" title="中断和系统调用"></a>中断和系统调用</h3><p>在RISC-V中有三种事件会使得CPU放弃对当前执行的程序的运行转而去处理这些事件.</p>
+<ul>
+<li>系统调用,当当前程序执行ecall指令的时候</li>
+<li>异常:指令的执行出现问题,比如说除0等.内部</li>
+<li>中断:当设备传来需要中断的信号.外部</li>
+</ul>
+<p>我们首先先注意到一点就是CPU进入到中断然后从中断中恢复,程序本身是不可查的,也就是说程序并不知道它被中断了,犹如做了一个梦一样,这是非常重要的,就是怎么进入中断,怎么样从中断回来.</p>
+<p>有了这么一个基本的要求,我们可以得到大概的处理思路,基本上来说就是中断首先要进入内核的状态进行处理.并且可以分成4步:RISC-V的CPU首先在硬件层面上作出一些反应,接着就是执行一段汇编代码来进入到内核状态.进入到内核状态后就是一段中断例程,这个程序是所有中断共享的,然后再根据中断的类型不同再进入到不同的中断处理的程序.</p>
+<p>对于中断我们又可以分成三类,对于这三类有不同的做法,分别是内核态中断,用户态中断和时钟中断.对于处理中断的程序,我们一般称为handler.</p>
+<h3 id="RISC-V硬件"><a href="#RISC-V硬件" class="headerlink" title="RISC-V硬件"></a>RISC-V硬件</h3><p>首先RISC-V有几个处理中断的硬件结构:</p>
+<ul>
+<li><code>stvec</code>寄存器:存储中断处理程序(例程)的第一条指令,当中断发生的时候RISC-V的CPU会跳转到<code>stvec</code>寄存器对应的地址.这个寄存器也叫中断入口寄存器</li>
+<li><code>sepc</code>寄存器:当中断发生的时候RISC-V CPU会保存当前PC寄存器的值在sepc中.</li>
+<li><code>scause</code>寄存器:表示中断的原因和来源,为什么会发生此中断.</li>
+<li><code>sscratch</code>寄存器:内核会放一个值在这里,这一个值对于中断程序的开始很有用.</li>
+<li><code>sstatus</code>寄存器:设置中断屏蔽的寄存器.</li>
+</ul>
+<p>上述寄存器在U状态下不可读写.并且上述的寄存器还有一个M开头的版本,用于处理M模式下的中断.对于每一个CPU都有一套寄存器来管理程序运行.</p>
+<p>那么硬件具体会做什么呢;</p>
+<ol>
+<li>如果当前中断是设备中断,并且sstatus寄存器内设置了屏蔽,就不做任何事.</li>
+<li>设置sstatus寄存器的值,屏蔽中断.</li>
+<li>把当前PC寄存器的值copy给sepc寄存器.</li>
+<li>保存当前的模式,在sstatus寄存器.</li>
+<li>设置scause,保存中断的原因.</li>
+<li>设置当前状态为S态.</li>
+<li>把stvec寄存器的值给PC.</li>
+<li>转而执行PC寄存器对应的指令.</li>
+</ol>
+<h3 id="用户态的中断"><a href="#用户态的中断" class="headerlink" title="用户态的中断"></a>用户态的中断</h3><p>这里讲述了当执行用户态的代码的时候会发生什么.</p>
+<p>当用户段代码出现了中断现象的时候,首先就会执行<code>uservec</code>-&gt;<code>usertrap</code>-&gt;中断处理 -&gt;<code>usertrapret</code>-&gt;<code>userret</code>.</p>
+<p>对于RISC-V的处理中,主要是内核态空间和用户态空间都维持了页表,但是RISC-V的硬件并没有在中断发生的时候在硬件的层面上更换页表,所以说xv6操作系统需要在处理中断的时候把页表替换成内核的页表,并且这个内核的页表可以与stvec寄存器的值对应,不会发生缺页中断.</p>
+<p>xv6的解决之道就是添加一个trampoline页,trampoline就是以个特殊的页,这个页包含了uservec和userret两部分,并且这个页存在于所有进程的页表,自然也存在于内核态空间下的页表.并且这个页是分配在虚拟地址空间的最后一个部分,所以说很难与用户进程发生冲突.</p>
+<p>这个trampoline页存在于任何一个进程和内核的页表,并且映射的虚拟地址都是一样的,定义在<code>TRAMPOLINE</code>这个C语言宏中.并且stvec这个寄存器存储的地址,就指向trampoline这个页的uservec这个部分,所以说当用户态发生中断的时候,RISC-V硬件处理完之后就可以立刻转化成内核态然后接着运行.因为U态和S态的页表是部分一样的,起码对于trampoline的记录是一样的</p>
+<p>![image-20220309213655516](&#x2F;Users&#x2F;xupengzhu&#x2F;Library&#x2F;Application Support&#x2F;typora-user-images&#x2F;image-20220309213655516.png)</p>
+<p>![image-20220309210759489](&#x2F;Users&#x2F;xupengzhu&#x2F;Library&#x2F;Application Support&#x2F;typora-user-images&#x2F;image-20220309210759489.png)</p>
+<p>由于stvec寄存器存储了userret的地址,所以中断一开始的时候会进入uservec这个部分执行.</p>
+<p>uservec:<br>#<br>        # trap.c sets stvec to point here, so<br>        # traps from user space start here,<br>        # in supervisor mode, but with a<br>        # user page table.<br>        #<br>        # sscratch points to where the process’s p-&gt;trapframe is<br>        # mapped into user space, at TRAPFRAME.<br>        #</p>
+<pre><code>  # swap a0 and sscratch
+    # so that a0 is TRAPFRAME
+    csrrw a0, sscratch, a0
+
+    # save the user registers in TRAPFRAME
+    sd ra, 40(a0)
+    sd sp, 48(a0)
+    sd gp, 56(a0)
+    sd tp, 64(a0)
+    sd t0, 72(a0)
+    sd t1, 80(a0)
+    sd t2, 88(a0)
+    sd s0, 96(a0)
+    sd s1, 104(a0)
+    sd a1, 120(a0)
+    sd a2, 128(a0)
+    sd a3, 136(a0)
+    sd a4, 144(a0)
+    sd a5, 152(a0)
+    sd a6, 160(a0)
+    sd a7, 168(a0)
+    sd s2, 176(a0)
+    sd s3, 184(a0)
+    sd s4, 192(a0)
+    sd s5, 200(a0)
+    sd s6, 208(a0)
+    sd s7, 216(a0)
+    sd s8, 224(a0)
+    sd s9, 232(a0)
+    sd s10, 240(a0)
+    sd s11, 248(a0)
+    sd t3, 256(a0)
+    sd t4, 264(a0)
+    sd t5, 272(a0)
+    sd t6, 280(a0)
+</code></pre>
+<h1 id="save-the-user-a0-in-p-trapframe-a0"><a href="#save-the-user-a0-in-p-trapframe-a0" class="headerlink" title="save the user a0 in p-&gt;trapframe-&gt;a0"></a>save the user a0 in p-&gt;trapframe-&gt;a0</h1><pre><code>    csrr t0, sscratch
+    sd t0, 112(a0)
+
+    # restore kernel stack pointer from p-&gt;trapframe-&gt;kernel\_sp
+    ld sp, 8(a0)
+
+    # make tp hold the current hartid, from p-&gt;trapframe-&gt;kernel\_hartid
+    ld tp, 32(a0)
+
+    # load the address of usertrap(), p-&gt;trapframe-&gt;kernel\_trap
+    ld t0, 16(a0)
+
+    # restore kernel page table from p-&gt;trapframe-&gt;kernel\_satp
+    ld t1, 0(a0)
+    csrw satp, t1
+    sfence.vma zero, zero
+
+    # a0 is no longer valid, since the kernel page
+    # table does not specially map p-&gt;tf.
+
+    # jump to usertrap(), which does not return
+    jr t0
+</code></pre>
+<p>对于中断操作,我们知道我们得把所有的寄存器存放到内存中,但是对于RISC-V的汇编语言,我们还得有一个寄存器来存储应该访问的内存的地址.但是通用寄存器都已经失去了作用了,所以说RISC-V提供一个寄存器叫做sscratch寄存器,这个时候就可以把a0先暂时存储到<code>sscratch</code>寄存器中,然后再把a0从<code>sscratch</code>寄存器中取出.<em>在这里这个寄存器主要是存放了栈帧的首地址,新的栈帧就会存放在<code>sscratch</code>表示的地址中,在原文中提到,在返回到U态时,内核通过设置<code>sscratch</code>寄存器来制定下一次中断时栈帧的地址</em>.</p>
+<p>对于栈帧的处理同样需要页表,在xv6系统中,对于每一个进程我们都会申请一个trapframe页,这个页的虚拟地址永远指定在TRAPFRAME这个地方上.栈帧元素的一系列初始化都是在进程创建的时候都已经保存好了.其实所有进程都会有一个栈帧,并且栈帧的虚拟地址是一样的,但是虚拟地址是一样的由于每个进程的页表又不是一样的,所以说对应的物理地址是不一样的.</p>
+<p>那对于内核态的代码,我们不能通过TRAPFRAME这个虚拟地址来访问进程的栈帧结构,那么我们应该怎么办呢?</p>
+<p>我们看到p-&gt;trapframe的构造过程.首先就是<code>p-&gt;trapframe</code>保存的是kalloc直接分配的物理地址,p-&gt;trapframe &#x3D; (struct <strong>trapframe</strong> *)<strong>kalloc</strong>(),直接保存的物理地址.</p>
+<p>对于每一个进程,首先要申请一个页面,然后把这个页面的物理地址保存到p-&gt;trapframe这个结构中,接着每个进程都要调用proc_pagetable函数,执行<strong>mappages</strong>(pagetable, <strong>TRAPFRAME</strong>, <strong>PGSIZE</strong>, (<strong>uint64</strong>)(p-&gt;trapframe), <strong>PTE_R</strong>  <strong>PTE_W</strong>),把这个物理地址映射到TRAPFRAME这个va中.</p>
+<p>所以说对于每个进程,在用户态访问trapframe都是访问TRAPFRAME这个va,由于每个进程的页表映射不同导致最后的实际物理地址不同.</p>
+<p>综上所述:内核使用p-&gt;trapframe保存的物理地址访问栈帧结构,所有的用户态程序使用TRAPFRAME这个同样的虚拟地址访问栈帧结构,但是由于页表不同导致访问的实际物理地址不一样.</p>
+<p>最后就是进程进入到内核态,访问p-&gt;trapframe就是物理地址,就不会访问TRAPFRAME这个虚拟地址</p>
+<p>由于栈帧已经保存好了内核栈的地址,内核页表的地址,以及CPU的核号,所以说接下来的操作就是读取栈帧,读取内核栈地址,内核页表的地址以及下一个trap函数的入口地址.</p>
+<p>void<br>usertrap(void)<br>{<br>  int which_dev &#x3D; 0;</p>
+<p>  if((r_sstatus() &amp; SSTATUS_SPP) !&#x3D; 0)<br>    panic(“usertrap: not from user mode”);</p>
+<p>  &#x2F;&#x2F; send interrupts and exceptions to kerneltrap(),<br>  &#x2F;&#x2F; since we’re now in the kernel.<br>  w_stvec((uint64)kernelvec);</p>
+<p>  struct proc *p &#x3D; myproc();</p>
+<p>  &#x2F;&#x2F; save user program counter.<br>  p-&gt;trapframe-&gt;epc &#x3D; r_sepc();</p>
+<p>  if(r_scause() &#x3D;&#x3D; 8){<br>    &#x2F;&#x2F; system call</p>
+<pre><code>if(p-&gt;killed)
+  exit(-1);
+
+// sepc points to the ecall instruction,
+// but we want to return to the next instruction.
+p-&gt;trapframe-&gt;epc += 4;
+
+// an interrupt will change sstatus &amp;c registers,
+// so don&#39;t enable until done with those registers.
+intr\_on();
+
+syscall();
+</code></pre>
+<p>  } else if((which_dev &#x3D; devintr()) !&#x3D; 0){<br>    &#x2F;&#x2F; ok<br>  } else {<br>    printf(“usertrap(): unexpected scause %p pid&#x3D;%d\n”, r_scause(), p-&gt;pid);<br>    printf(“            sepc&#x3D;%p stval&#x3D;%p\n”, r_sepc(), r_stval());<br>    p-&gt;killed &#x3D; 1;<br>  }</p>
+<p>  if(p-&gt;killed)<br>    exit(-1);</p>
+<p>  &#x2F;&#x2F; give up the CPU if this is a timer interrupt.<br>  if(which_dev &#x3D;&#x3D; 2)<br>    yield();</p>
+<p>  usertrapret();<br>}</p>
+<p>接着调用<code>trap.c()</code>中的<code>usertrap</code>函数,这个时候就已经进入内核态了,首先第一步就是对<code>stvec</code>寄存器进行修改,因为对于用户态和内核态发生中断,进入的中断程序还是不一样的,然后接着在<code>trapframe</code>里面保存<code>sepc</code>寄存器(就是中断的断点),因为有可能调用yield(),所以说保存断点非常有必要.如果trap是<code>syscall</code>的话,接着就调用syscall函数即可,如果是设备故障的话,就先保存设备的编号,如果不是设备中断的话就是指令的异常这个时候就退出就可以了.如果是时钟中断<code>(which_dev==2)</code>就处理一下.</p>
+<p>这个就是中断处理,对于不同类型的中断有不同的处理,处理完之后就要返回U态了</p>
+<p>void<br>usertrapret(void)<br>{<br>  struct proc *p &#x3D; myproc();</p>
+<p>  &#x2F;&#x2F; we’re about to switch the destination of traps from<br>  &#x2F;&#x2F; kerneltrap() to usertrap(), so turn off interrupts until<br>  &#x2F;&#x2F; we’re back in user space, where usertrap() is correct.<br>  intr_off();</p>
+<p>  &#x2F;&#x2F; send syscalls, interrupts, and exceptions to trampoline.S<br>  w_stvec(TRAMPOLINE + (uservec - trampoline));</p>
+<p>  &#x2F;&#x2F; set up trapframe values that uservec will need when<br>  &#x2F;&#x2F; the process next re-enters the kernel.<br>  p-&gt;trapframe-&gt;kernel_satp &#x3D; r_satp();         &#x2F;&#x2F; kernel page table<br>  p-&gt;trapframe-&gt;kernel_sp &#x3D; p-&gt;kstack + PGSIZE; &#x2F;&#x2F; process’s kernel stack<br>  p-&gt;trapframe-&gt;kernel_trap &#x3D; (uint64)usertrap;<br>  p-&gt;trapframe-&gt;kernel_hartid &#x3D; r_tp();         &#x2F;&#x2F; hartid for cpuid()</p>
+<p>  &#x2F;&#x2F; set up the registers that trampoline.S’s sret will use<br>  &#x2F;&#x2F; to get to user space.</p>
+<p>  &#x2F;&#x2F; set S Previous Privilege mode to User.<br>  unsigned long x &#x3D; r_sstatus();<br>  x &amp;&#x3D; ~SSTATUS_SPP; &#x2F;&#x2F; clear SPP to 0 for user mode<br>  x &#x3D; SSTATUS_SPIE; &#x2F;&#x2F; enable interrupts in user mode<br>  w_sstatus(x);</p>
+<p>  &#x2F;&#x2F; set S Exception Program Counter to the saved user pc.<br>  w_sepc(p-&gt;trapframe-&gt;epc);</p>
+<p>  &#x2F;&#x2F; tell trampoline.S the user page table to switch to.<br>  uint64 satp &#x3D; MAKE_SATP(p-&gt;pagetable);</p>
+<p>  &#x2F;&#x2F; jump to trampoline.S at the top of memory, which<br>  &#x2F;&#x2F; switches to the user page table, restores user registers,<br>  &#x2F;&#x2F; and switches to user mode with sret.<br>  uint64 fn &#x3D; TRAMPOLINE + (userret - trampoline);<br>  ((void (*)(uint64,uint64))fn)(TRAPFRAME, satp);<br>}</p>
+<p>首先第一步就是调用usertrapret函数,这个函数首先第一步就是做stvec寄存器的写入,回忆一下:一开始在进入内核的时候为了防止内核出现中断就把stvec寄存器改成<code>kerbelvec</code>,现在要返回U态了就把中断入口改成uservec即可.然后就是处理栈帧了,把内核页表地址,内核栈和usertrap地址,CPU核号保存进去.接着就是改变status寄存器的数值,改成用户态的寄存器,然后调取断点地址,把断点地址写到sepc寄存器里面(<em>这样子就是进入内核态保存用户态断点,退出内核态的时候把断点进行加载,防止内核态也出现中断</em>),接着切换页表,切换到用户态的页表,然后接着跳转到userret函数中.</p>
+<p>userret:<br>        # userret(TRAPFRAME, pagetable)<br>        # switch from kernel to user.<br>        # usertrapret() calls here.<br>        # a0: TRAPFRAME, in user page table.<br>        # a1: user page table, for satp.</p>
+<pre><code>    # switch to the user page table.
+    csrw satp, a1
+    sfence.vma zero, zero
+
+    # put the saved user a0 in sscratch, so we
+    # can swap it with our a0 (TRAPFRAME) in the last step.
+    ld t0, 112(a0)
+    csrw sscratch, t0
+
+    # restore all but a0 from TRAPFRAME
+    ld ra, 40(a0)
+    ld sp, 48(a0)
+    ld gp, 56(a0)
+    ld tp, 64(a0)
+    ld t0, 72(a0)
+    ld t1, 80(a0)
+    ld t2, 88(a0)
+    ld s0, 96(a0)
+    ld s1, 104(a0)
+    ld a1, 120(a0)
+    ld a2, 128(a0)
+    ld a3, 136(a0)
+    ld a4, 144(a0)
+    ld a5, 152(a0)
+    ld a6, 160(a0)
+    ld a7, 168(a0)
+    ld s2, 176(a0)
+    ld s3, 184(a0)
+    ld s4, 192(a0)
+    ld s5, 200(a0)
+    ld s6, 208(a0)
+    ld s7, 216(a0)
+    ld s8, 224(a0)
+    ld s9, 232(a0)
+    ld s10, 240(a0)
+    ld s11, 248(a0)
+    ld t3, 256(a0)
+    ld t4, 264(a0)
+    ld t5, 272(a0)
+    ld t6, 280(a0)
+</code></pre>
+<h1 id="restore-user-a0-and-save-TRAPFRAME-in-sscratch"><a href="#restore-user-a0-and-save-TRAPFRAME-in-sscratch" class="headerlink" title="restore user a0, and save TRAPFRAME in sscratch"></a>restore user a0, and save TRAPFRAME in sscratch</h1><pre><code>    csrrw a0, sscratch, a0
+    
+    # return to user mode and user pc.
+    # usertrapret() set up sstatus and sepc.
+    sret
+</code></pre>
+<p>这个时候会进行函数调用,进入userret这个函数之前,TRAPFRAME作为第一个参数,第二个参数就是用户态页表的地址,首先第一步就是加载用户态页表(<em>处理逻辑:先获得satp,再加载到a1寄存器,接着取出来</em>),接着就是把栈帧中存储的寄存器值全部加载到真实的寄存器中,最后一步就是把栈帧头部的虚拟地址保存到sscratch寄存器,下一次执行中断操作的时候就可以直接读取sscratch寄存器的内容确定栈帧的地址.</p>
+<p>最后执行sret,把sepc寄存器的内容给pc,转换为U态,中断结束</p>
+<p>总结下来: 导出保存在寄存器的栈帧首虚拟地址-&gt;把寄存器保存到trapframe中-&gt;加载内核态页表-&gt;存储断点-&gt;执行中断处理-&gt;加载断点-&gt;加载用户态页表-&gt;把trapframe的内容加载到真实的寄存器-&gt;把栈帧首地址放入寄存器中.</p>
+<p>其实内核可以修改trapframe中的寄存器值,在中断结束后再把栈帧的值加载到真实的寄存器中.</p>
+<h3 id="调用系统函数"><a href="#调用系统函数" class="headerlink" title="调用系统函数."></a>调用系统函数.</h3><p>我们接着第二章来说,在执行userinit函数之后,就执行initcode.S</p>
+<p>#include “syscall.h”</p>
+<h1 id="exec-init-argv-1"><a href="#exec-init-argv-1" class="headerlink" title="exec(init, argv)"></a>exec(init, argv)</h1><p>.globl start<br>start:<br>        la a0, init<br>        la a1, argv<br>        li a7, SYS_exec<br>        ecall</p>
+<h1 id="for-exit"><a href="#for-exit" class="headerlink" title="for(;;) exit();"></a>for(;;) exit();</h1><p>exit:<br>        li a7, SYS_exit<br>        ecall<br>        jal exit</p>
+<h1 id="char-init-“-init-0”"><a href="#char-init-“-init-0”" class="headerlink" title="char init[] &#x3D; “&#x2F;init\0”;"></a>char init[] &#x3D; “&#x2F;init\0”;</h1><p>init:<br>  .string “&#x2F;init\0”</p>
+<h1 id="char-argv-init-0"><a href="#char-argv-init-0" class="headerlink" title="char *argv[] &#x3D; { init, 0 };"></a>char *argv[] &#x3D; { init, 0 };</h1><p>.p2align 2<br>argv:<br>  .long init<br>  .long 0</p>
+<p>这是一个标准的调用系统调用的样本,a0~a6存储系统调用需要的参数,a7传递了系统调用号,表示执行何种系统调用,传递完参数后就执行ecall.ecall是一个硬件指令,会把状态调整为S态然后执行uservec函数,接着就是我们熟知的trap处理函数.</p>
+<p>在syscall()函数中,我们可以知道这个函数根据a7寄存器表示的系统调用号来找到函数指针然后进行调用,这里构思很巧妙,就是构建系统调用函数指针来进行跳转.</p>
+<p>接着返回的时候就把返回值传递给a0寄存器.</p>
+<p>static uint64 (*syscalls[])(void) &#x3D; {<br>[SYS_fork]    sys_fork,<br>[SYS_exit]    sys_exit,<br>[SYS_wait]    sys_wait,<br>[SYS_pipe]    sys_pipe,<br>[SYS_read]    sys_read,<br>[SYS_kill]    sys_kill,<br>[SYS_exec]    sys_exec,<br>[SYS_fstat]   sys_fstat,<br>[SYS_chdir]   sys_chdir,<br>[SYS_dup]     sys_dup,<br>[SYS_getpid]  sys_getpid,<br>[SYS_sbrk]    sys_sbrk,<br>[SYS_sleep]   sys_sleep,<br>[SYS_uptime]  sys_uptime,<br>[SYS_open]    sys_open,<br>[SYS_write]   sys_write,<br>[SYS_mknod]   sys_mknod,<br>[SYS_unlink]  sys_unlink,<br>[SYS_link]    sys_link,<br>[SYS_mkdir]   sys_mkdir,<br>[SYS_close]   sys_close,<br>};<br>&#x2F;&#x2F;系统调用号,系统调用函数<br>void<br>syscall(void)<br>{<br>  int num;<br>  struct proc *p &#x3D; myproc();</p>
+<p>  num &#x3D; p-&gt;trapframe-&gt;a7;<br>  if(num &gt; 0 &amp;&amp; num &lt; NELEM(syscalls) &amp;&amp; syscalls[num]) {<br>    p-&gt;trapframe-&gt;a0 &#x3D; syscalls[num]();<br>  } else {<br>    printf(“%d %s: unknown sys call %d\n”,<br>            p-&gt;pid, p-&gt;name, num);<br>    p-&gt;trapframe-&gt;a0 &#x3D; -1;<br>  }<br>}</p>
+<h3 id="系统调用的参数"><a href="#系统调用的参数" class="headerlink" title="系统调用的参数."></a>系统调用的参数.</h3><p>系统调用会传递参数进入,对于RISC-V来说,朴素的思想就是把参数传递到寄存器中,然后系统调用函数读取存储在寄存器中的数据,比如说argint和atgaddr,argfd等.</p>
+<p>对于直接传递的参数,我们可以直接读取没有大问题,但是对于传递指针的参数,我们就需要进行额外的处理,第一个问题呢就是我们不知道程序是不是友好的,有可能用户程序通过传递地址来修改内核的内存,这样就导致了不安全的情况的发生.第二个问题就是xv6的内核态和用户态页表是不一样的.</p>
+<p>所以说xv6的做法就是对于获得字符串的函数argstr(),去构建一个新的函数fetchstr去安全地获得数据,这个函数就会调用copyinstr()函数.</p>
+<p>int<br>copyinstr(pagetable_t pagetable, char *dst, uint64 srcva, uint64 max)<br>{<br>  uint64 n, va0, pa0;<br>  int got_null &#x3D; 0;</p>
+<p>  while(got_null &#x3D;&#x3D; 0 &amp;&amp; max &gt; 0){<br>    va0 &#x3D; PGROUNDDOWN(srcva);<br>    pa0 &#x3D; walkaddr(pagetable, va0);<br>    if(pa0 &#x3D;&#x3D; 0)<br>      return -1;<br>    n &#x3D; PGSIZE - (srcva - va0);<br>    if(n &gt; max)<br>      n &#x3D; max;</p>
+<pre><code>char \*p = (char \*) (pa0 + (srcva - va0));
+while(n &gt; 0)&#123;
+  if(\*p == &#39;\\0&#39;)&#123;
+    \*dst = &#39;\\0&#39;;
+    got\_null = 1;
+    break;
+  &#125; else &#123;
+    \*dst = \*p;
+  &#125;
+  --n;
+  --max;
+  p++;
+  dst++;
+&#125;
+
+srcva = va0 + PGSIZE;
+</code></pre>
+<p>  }<br>  if(got_null){<br>    return 0;<br>  } else {<br>    return -1;<br>  }<br>}</p>
+<p>这个函数会从pagetable这个页表对应的虚拟地址srcva处copy max字节的元素到内核页表的dst处.做法就是调用walkaddr来找到pagetable中srcva对应的物理地址,然后从这个物理地址中拷贝字节到dst中,由于现在是S态,所以说页表是内核态对应的页表,所以说提取用户态地址上的数据要查找用户态页表,然后把数据存放到内核态的地址就直接查询内核态页表就可以了.</p>
+<p>总体的思路就是,找到这个用户态虚拟地址对应的物理地址,取出这个物理地址上的元素,给到dst(内核态虚拟地址).</p>
+<h3 id="内核态引发的中断"><a href="#内核态引发的中断" class="headerlink" title="内核态引发的中断"></a>内核态引发的中断</h3><p>在内核态引发中断,由于stvec寄存器已经发生了改变,所以进入的中断程序已经是kernelvec这个程序了</p>
+<p>kernelvec:<br>        &#x2F;&#x2F; make room to save registers.<br>        addi sp, sp, -256</p>
+<pre><code>    // save the registers.
+    sd ra, 0(sp)
+    sd sp, 8(sp)
+    sd gp, 16(sp)
+    sd tp, 24(sp)
+    sd t0, 32(sp)
+    sd t1, 40(sp)
+    sd t2, 48(sp)
+    sd s0, 56(sp)
+    sd s1, 64(sp)
+    sd a0, 72(sp)
+    sd a1, 80(sp)
+    sd a2, 88(sp)
+    sd a3, 96(sp)
+    sd a4, 104(sp)
+    sd a5, 112(sp)
+    sd a6, 120(sp)
+    sd a7, 128(sp)
+    sd s2, 136(sp)
+    sd s3, 144(sp)
+    sd s4, 152(sp)
+    sd s5, 160(sp)
+    sd s6, 168(sp)
+    sd s7, 176(sp)
+    sd s8, 184(sp)
+    sd s9, 192(sp)
+    sd s10, 200(sp)
+    sd s11, 208(sp)
+    sd t3, 216(sp)
+    sd t4, 224(sp)
+    sd t5, 232(sp)
+    sd t6, 240(sp)
+</code></pre>
+<p>&#x2F;&#x2F; call the C trap handler in trap.c<br>        call kerneltrap</p>
+<p>但是由于已经在内核态了,所以说就不需要切换堆栈,也不需要切换页表,也不需要构建trapframe了,直接把寄存器的数值存到堆栈,调用处理内核中断的函数kerneltrap.</p>
+<p>void<br>kerneltrap()<br>{<br>  int which_dev &#x3D; 0;<br>  uint64 sepc &#x3D; r_sepc();<br>  uint64 sstatus &#x3D; r_sstatus();<br>  uint64 scause &#x3D; r_scause();</p>
+<p>  if((sstatus &amp; SSTATUS_SPP) &#x3D;&#x3D; 0)<br>    panic(“kerneltrap: not from supervisor mode”);<br>  if(intr_get() !&#x3D; 0)<br>    panic(“kerneltrap: interrupts enabled”);</p>
+<p>  if((which_dev &#x3D; devintr()) &#x3D;&#x3D; 0){<br>    printf(“scause %p\n”, scause);<br>    printf(“sepc&#x3D;%p stval&#x3D;%p\n”, r_sepc(), r_stval());<br>    panic(“kerneltrap”);<br>  }</p>
+<p>  &#x2F;&#x2F; give up the CPU if this is a timer interrupt.<br>  if(which_dev &#x3D;&#x3D; 2 &amp;&amp; myproc() !&#x3D; 0 &amp;&amp; myproc()-&gt;state &#x3D;&#x3D; RUNNING)<br>    yield();</p>
+<p>  &#x2F;&#x2F; the yield() may have caused some traps to occur,<br>  &#x2F;&#x2F; so restore trap registers for use by kernelvec.S’s sepc instruction.<br>  w_sepc(sepc);<br>  w_sstatus(sstatus);<br>}</p>
+<p>kerneltrap就只用处理两种类型的中断了,分别是设备I&#x2F;O和指令执行错误.在这里和usertrap其实是一样的,先获得设备号,如果设备号没有,那就是指令执行错误,打出错误信息</p>
+<p>当然也是一样yiled()执行完了之后会导致其他进程执行,其他进程的时候会继续引发中断,所以说朴素的思想就是把sepc保存下来,再最后中断返回的时候把保存的sepc写入即可.</p>
+<p>&#x2F;&#x2F; restore registers.<br>        ld ra, 0(sp)<br>        ld sp, 8(sp)<br>        ld gp, 16(sp)<br>        &#x2F;&#x2F; not this, in case we moved CPUs: ld tp, 24(sp)<br>        ld t0, 32(sp)<br>        ld t1, 40(sp)<br>        ld t2, 48(sp)<br>        ld s0, 56(sp)<br>        ld s1, 64(sp)<br>        ld a0, 72(sp)<br>        ld a1, 80(sp)<br>        ld a2, 88(sp)<br>        ld a3, 96(sp)<br>        ld a4, 104(sp)<br>        ld a5, 112(sp)<br>        ld a6, 120(sp)<br>        ld a7, 128(sp)<br>        ld s2, 136(sp)<br>        ld s3, 144(sp)<br>        ld s4, 152(sp)<br>        ld s5, 160(sp)<br>        ld s6, 168(sp)<br>        ld s7, 176(sp)<br>        ld s8, 184(sp)<br>        ld s9, 192(sp)<br>        ld s10, 200(sp)<br>        ld s11, 208(sp)<br>        ld t3, 216(sp)<br>        ld t4, 224(sp)<br>        ld t5, 232(sp)<br>        ld t6, 240(sp)</p>
+<pre><code>    addi sp, sp, 256
+
+    // return to whatever we were doing in the kernel.
+    sret
+</code></pre>
+<p>最后返回的时候也是只需要把寄存器取出来即可.</p>
+<h3 id="缺页中断"><a href="#缺页中断" class="headerlink" title="缺页中断"></a>缺页中断</h3><p>当访问一个va,但是页表中没有对应的pa的时候,就会引发缺页中断,系统会处理这个缺页中断或者退出执行,或者分配一个新的页给这个进程.</p>
+<h3 id="3-Memory-Pagetable"><a href="#3-Memory-Pagetable" class="headerlink" title="3: Memory&amp;Pagetable"></a>3: Memory&amp;Pagetable</h3><h2 id="内存管理"><a href="#内存管理" class="headerlink" title="内存管理"></a>内存管理</h2><h3 id="分页的硬件"><a href="#分页的硬件" class="headerlink" title="分页的硬件"></a>分页的硬件</h3><p>RISC-V的指令(包括用户态下的或者内核态下的)里面的地址操作数其实代表了虚拟地址.但是对应地,RAM或者叫做物理内存,自然也有物理地址,物理地址真实唯一地标记实际内存空间,可能RAM的第10006个区块地址就是0x10006.所以说就有页表这个东西,把指令提供的逻辑地址转化到实际内存的物理地址.</p>
+<p>xv6会运行RISC-V支持的Sv39架构,页表是一个连接虚拟地址和实际的物理地址的一个桥梁,CPU给页表一个虚拟地址,页表会返回一个物理地址.</p>
+<p>其中虚拟地址分成两部分,低12位就是offset,代表一个页有​大,中间的27位是index值,负责寻找到对应的表项位置,比如说如果index&#x3D;5就代表要找到第五个表项.后面的25位不需要.页表的每一项对应44位的PPN和10位的flags.其中flags标记这一项的一些控制信息,PPN则和offset一块组成物理地址.虚拟地址是​的空间,而物理地址是​.</p>
+<p>总的来说是分三步走.</p>
+<ul>
+<li>虚拟地址分成index和Offset两部分.</li>
+<li>找到页表中的第index项.获取其中的PPN和flags</li>
+<li>PPN和虚拟地址的Offset组成物理地址.</li>
+</ul>
+<p>页表给OS给操作系统提供了va和pa互换的途径,其中内存被划分成4KB的块,我们称之为页.</p>
+<p><img src="https://sukunahust.com/wp-content/uploads/2022/03/image-39-1024x875.png"></p>
+<p>实际的操作可能更加复杂,SV39维护的是一个多级页表.虚拟地址转化为物理地址需要分三步走.</p>
+<p>首先我们发现页表是三级结构,第一层页表的首地址保存在satp寄存器中,有512个表项,其中表项存储着下一级页表(第二层)的首地址.第二级页表也是由512个表项组成,其中每一个表项存着下一级页表(第三层)的首地址.第三级页表里面存储的就是对应的物理地址的PPN.</p>
+<p>所以说va分成L2,L1,L0和Offset分成四部分.</p>
+<ul>
+<li>首先在第一级页表中找到第L2个表项,这样就找到第二级页表的首地址.</li>
+<li>然后在第二级页表中找到第L1个表项,这样就找到第三级页表的首地址.</li>
+<li>最后在第三级页表中找到第L0个表项,这样就能获取到PPN,然后拿PPN和offset组合在一起就可以了.</li>
+<li>如果在任何一次寻找的时候Flags显示这个页表项不可用,那么就引发缺页中断.</li>
+</ul>
+<p>三级页表非常好用而别比较高效,因为一开始的时候我们不需要要那么大的空间存放页表,我们可以边运行程序遍扩充页表的大小.</p>
+<p><img src="https://sukunahust.com/wp-content/uploads/2022/03/image-40-1024x988.png"></p>
+<p>但是CPU这样去访问页表需要3次访存指令.这样子访问就很慢,所以说CPU设计了一个类似于cache的东西来保存页表信息,这个表叫做TLB.CPU首先会在TLB中查找页表元素.如果TLB miss了才会调用访存操作来获取页表元素.</p>
+<p>每一个页表都都存储了flag位,其中PTE_V存着这个页表项究竟是不是可用的.PTE_W表示指令是否可以往这个页是否可写,PTE_X表示这个页是否可执行,PTE_U表示在用户态下是否可以访问这一页.</p>
+<p>在硬件层面上我们必须指定第一级页表的首地址,这个页表首地址存放在<code>satp</code>寄存器中,由于这个是CPU,所以说不同CPU的satp寄存器的值都是不一样的.我们还知道每个进程的第一级页表的首地址也是不一样的(每个进程都有不同的页表记录地址).这为每个CPU运行不同的进程提供了一句.</p>
+<p>我们的用户程序在虚拟内存上进行读写,提供的地址也是虚拟地址,虚拟内存其实就是由许多的实际的DRAM(存储器件)组成的虚拟化而已.</p>
+<h3 id="内核地址空间"><a href="#内核地址空间" class="headerlink" title="内核地址空间"></a>内核地址空间</h3><p><img src="https://sukunahust.com/wp-content/uploads/2022/03/image-41.png"></p>
+<p>xv6对每个进程都维护了一份页表(<strong>每个进程都有一个页表</strong>),来表示不同进程的虚拟地址空间.当然xv6也会给内核态地址空间维护一个页表,也就是说xv6的地址空间&#x3D;若干个用户态进程的地址空间+内核地址空间.</p>
+<p>QEMU会模拟一个RAM(物理存储器),这个存储器的地址空间是0x80000000~0x86400000.在xv6系统中称为PHYSTOP.QEMU还把各种I&#x2F;O设备,比如说磁盘等的地址映射到0x80000000的地址之下,xv6操作系统可以通过直接访问这些物理地址来操控这些设备(比如说访问0x10001000来访问VIRTIO disk),而不是通过访问RAM来间接地访问设备.</p>
+<p>内核通过直接访问映射来访问RAM和上文提到的设备,也就是说程序提到的虚拟地址&#x3D;物理地址.(也就是说,xv6访问内存和设备是bare linking的,物理地址就是虚拟地址,同样地,在页表中,对应的虚拟地址&#x3D;物理地址).</p>
+<p>当然内核用户状态下也有不是直接链接的比如说<code>trampoline</code>页(看syscall&amp;trap一章)和内核态栈(若干个内核态栈之间有一个Guard页)不是直接连的.</p>
+<h3 id="如何创建一个地址空间"><a href="#如何创建一个地址空间" class="headerlink" title="如何创建一个地址空间?"></a>如何创建一个地址空间?</h3><p>所有的xv6关于地址的处理全部放在<code>vm.c</code>这个文件中.</p>
+<p>最关键的就是数据结构就是<code>pagetable_t</code>这个数据结构,这个数据结构本质上就是一个<code>uint64*</code>类型的一个指针,这个代表了第一级页表的首地址.可以是用户进程页表的首地址,也可以是内核页表的首地址.</p>
+<p>最重要的函数有<code>walk</code>,这个函数负责给定一个va,然后找到对应的PTE.</p>
+<p>pte_t *<br>walk(pagetable_t pagetable, uint64 va, int alloc)<br>{<br> if(va &gt;&#x3D; MAXVA)<br>   panic(“walk”);<br>​<br> for(int level &#x3D; 2; level &gt; 0; level–) {<br>   pte_t *pte &#x3D; &amp;pagetable[PX(level, va)];<br>   if(*pte &amp; PTE_V) {<br>     pagetable &#x3D; (pagetable_t)PTE2PA(*pte);<br>  } else {<br>     if(!alloc  (pagetable &#x3D; (pde_t*)kalloc()) &#x3D;&#x3D; 0)<br>       return 0;<br>     memset(pagetable, 0, PGSIZE);<br>     *pte &#x3D; PA2PTE(pagetable)  PTE_V;<br>  }<br>}<br> return &amp;pagetable[PX(0, va)];<br>}</p>
+<p>int<br>mappages(pagetable_t pagetable, uint64 va, uint64 size, uint64 pa, int perm)<br>{<br> uint64 a, last;<br> pte_t *pte;<br>​<br> if(size &#x3D;&#x3D; 0)<br>   panic(“mappages: size”);<br> <br> a &#x3D; PGROUNDDOWN(va);<br> last &#x3D; PGROUNDDOWN(va + size - 1);<br> for(;;){<br>   if((pte &#x3D; walk(pagetable, a, 1)) &#x3D;&#x3D; 0)<br>     return -1;<br>   if(*pte &amp; PTE_V)<br>     panic(“mappages: remap”);<br>   *pte &#x3D; PA2PTE(pa)  perm  PTE_V;<br>   if(a &#x3D;&#x3D; last)<br>     break;<br>   a +&#x3D; PGSIZE;<br>   pa +&#x3D; PGSIZE;<br>}<br> return 0;<br>}</p>
+<p>void<br>kvmmap(pagetable_t kpgtbl, uint64 va, uint64 pa, uint64 sz, int perm)<br>{<br> if(mappages(kpgtbl, va, sz, pa, perm) !&#x3D; 0)<br>   panic(“kvmmap”);<br>}<br>​<br>pagetable_t<br>kvmmake(void)<br>{<br> pagetable_t kpgtbl;<br>​<br> kpgtbl &#x3D; (pagetable_t) kalloc();<br> memset(kpgtbl, 0, PGSIZE);<br>​<br> &#x2F;&#x2F; uart registers<br> kvmmap(kpgtbl, UART0, UART0, PGSIZE, PTE_R  PTE_W);<br>​<br> &#x2F;&#x2F; virtio mmio disk interface<br> kvmmap(kpgtbl, VIRTIO0, VIRTIO0, PGSIZE, PTE_R  PTE_W);<br>​<br> &#x2F;&#x2F; PLIC<br> kvmmap(kpgtbl, PLIC, PLIC, 0x400000, PTE_R  PTE_W);<br>​<br> &#x2F;&#x2F; map kernel text executable and read-only.<br> kvmmap(kpgtbl, KERNBASE, KERNBASE, (uint64)etext-KERNBASE, PTE_R  PTE_X);<br>​<br> &#x2F;&#x2F; map kernel data and the physical RAM we’ll make use of.<br> kvmmap(kpgtbl, (uint64)etext, (uint64)etext, PHYSTOP-(uint64)etext, PTE_R  PTE_W);<br>​<br> &#x2F;&#x2F; map the trampoline for trap entry&#x2F;exit to<br> &#x2F;&#x2F; the highest virtual address in the kernel.<br> kvmmap(kpgtbl, TRAMPOLINE, (uint64)trampoline, PGSIZE, PTE_R  PTE_X);<br>​<br> &#x2F;&#x2F; map kernel stacks<br> proc_mapstacks(kpgtbl);<br> <br> return kpgtbl;<br>}</p>
+<p>void<br>kvminithart()<br>{<br> w_satp(MAKE_SATP(kernel_pagetable));<br> sfence_vma();<br>}</p>
+<p>void<br>kinit()<br>{<br> initlock(&amp;kmem.lock, “kmem”);<br> freerange(end, (void*)PHYSTOP);<br>}<br>​<br>void *<br>kalloc(void)<br>{<br> struct run *r;<br>​<br> acquire(&amp;kmem.lock);<br> r &#x3D; kmem.freelist;<br> if(r)<br>   kmem.freelist &#x3D; r-&gt;next;<br> release(&amp;kmem.lock);<br>​<br> if(r)<br>   memset((char*)r, 5, PGSIZE); &#x2F;&#x2F; fill with junk<br> return (void*)r;<br>}</p>
+<p>void<br>kfree(void *pa)<br>{<br> struct run *r;<br>​<br> if(((uint64)pa % PGSIZE) !&#x3D; 0  (char*)pa &lt; end  (uint64)pa &gt;&#x3D; PHYSTOP)<br>   panic(“kfree”);<br>​<br> &#x2F;&#x2F; Fill with junk to catch dangling refs.<br> memset(pa, 1, PGSIZE);<br>​<br> r &#x3D; (struct run*)pa;<br>​<br> acquire(&amp;kmem.lock);<br> r-&gt;next &#x3D; kmem.freelist;<br> kmem.freelist &#x3D; r;<br> release(&amp;kmem.lock);<br>}</p>
+<p>int<br>growproc(int n)<br>{<br> uint sz;<br> struct proc *p &#x3D; myproc();<br>​<br> sz &#x3D; p-&gt;sz;<br> if(n &gt; 0){<br>   if((sz &#x3D; uvmalloc(p-&gt;pagetable, sz, sz + n)) &#x3D;&#x3D; 0) {<br>     return -1;<br>  }<br>} else if(n &lt; 0){<br>   sz &#x3D; uvmdealloc(p-&gt;pagetable, sz, sz + n);<br>}<br> p-&gt;sz &#x3D; sz;<br> return 0;<br>}</p>
+<p>sbrk是一个系统调用,这个调用帮助我们实现进程内存空间的增长和消亡.</p>
+<h3 id="sbrk系统调用"><a href="#sbrk系统调用" class="headerlink" title="sbrk系统调用?"></a>sbrk系统调用?</h3><p>同样,为了防止栈溢出,我们有一个guard page来保护.</p>
+<p>stack页是一个页,然后里面的参数是由exec程序创建的,有各种参数以及参数的地址.还有main执行完PC的返回值.</p>
+<p>其中trapframe这个页是映射到可用物理空间的,在kernel态是直接映射的,所以说不用担心kernel态访问不了用户态的kernel.</p>
+<p>第一:一个用户进程只使用一张页表,不同的用户进程的物理地址是相互隔离的不会被打扰的.第二,用户看见的虚拟地址是连续的但其实物理地址不是连续的,这样加大了分配的灵活性.第三,trampoline页是所有用户通用的,也就是说每个用户的页表一定有一个MAXVA-PGSIZE-&gt;trampoline的映射.</p>
+<p>用户地址空间是从0~MAXVA的.然后当用户程序需要更多的内存的时候,xv6就会使用kalloc来获取新的页,然后接着建立pa和va的关系(和内核是一样的).对于虚拟地址,如果用户进程暂时不需要使用,就可以把页表的PTE_V置0表示不需要使用.</p>
+<p><img src="https://sukunahust.com/wp-content/uploads/2022/03/image-42-1024x719.png"></p>
+<h3 id="用户进程地址空间"><a href="#用户进程地址空间" class="headerlink" title="用户进程地址空间."></a>用户进程地址空间.</h3><p>同样,在释放的时候,也是获得这个释放的物理块地址,把它放到freelist的队首中.</p>
+<p>在<code>kalloc.c</code>中我们知道,每次申请都会调用一次kalloc函数.kalloc函数每一次从freelist中取出一块来进行返回.这个freelist已经在kinit函数中初始化好了,就是从end(内核态空间的占用的最后一个地址)到PHYSTOP这个区域内.</p>
+<h3 id="如何申请物理块"><a href="#如何申请物理块" class="headerlink" title="如何申请物理块?"></a>如何申请物理块?</h3><p>我们知道TLB会存储一些页表信息,CPU同样也会切换进程,切换进程的时候我们不想让下一个进程知道我们的页表信息,这个时候就会调用sfence_vma()函数来对TLB的内容进行一次部分刷新.</p>
+<p>这个时候这个函数会把<code>kernel_pagetable</code>写进satp寄存器中,这个时候页表正式进入工作,之后的地址就是需要页表一级的转化,并且当前页表的第一级首地址就是<code>kernel_pagetable</code>.</p>
+<p>在S态的main函数执行了<code>kvminithart</code>函数来初始化了内核态页表.</p>
+<p>上面的所有函数实现的基础就是在bare linking上面的,也就是说执行的情况中虚拟地址&#x3D;物理地址,我们才可以方便地访问和处理.</p>
+<p>进行了若干次的虚拟地址和物理地址的映射,这个时候最后一步就是调用<code>proc_mapstacks</code>.对每一个进程都分配了一个内核栈.然后也调用了<code>kvmmap</code>来进行地址的映射.最后返回一个内核态页表.</p>
+<p>在操作系统初始化的时候,就调用<code>kvminit</code>函数对内存空间进行初始化,<code>kvminit</code>调用了<code>kvmmake</code>函数.<code>kvmmake</code>又调用了若干个<code>kvmmap</code>函数.在调用这一段函数的时候,xv6还没有开启份页功能,所以说在这一部分执行的指令可以直接访问物理内存.<code>kvmmake</code>函数首先申请物理内存的一页作为内核态页表的一页.然后接着调用<code>kvmmap</code>函数在kernel态的页表中添加对于若干个虚拟地址的映射.</p>
+<p>然后又copyout和copyin,这个函数可以从用户态的虚拟地址中获取信息传递给内核态.</p>
+<p>给定va和pa,然后添加va和pa的连接,放入页表中,这个时候va和pa正式有了联系.</p>
+<p>还有一个就是mappages.这个函数负责添加页表项,就是给页表添加一项,让一段虚拟地址和一段物理地址进行匹配.</p>
+<p>这个函数是不是跟我们之前说的读法是一样的,三层的页表就需要我们去读三次,有哪一次发现Valid位(PTE_V不对)就返回为0,然后申请一个新页即可.</p>
+<h3 id="4-Interrupt-Device-Manage"><a href="#4-Interrupt-Device-Manage" class="headerlink" title="4:Interrupt&amp;Device Manage"></a>4:Interrupt&amp;Device Manage</h3><h3 id="设备管理"><a href="#设备管理" class="headerlink" title="设备管理"></a>设备管理</h3><p>一个设备驱动程序就是操作系统对特定的设备进行管理的程序,这些程序让设备执行操作,并且处理设备引起的中断,并且与因为设备I&#x2F;O而被阻塞的进程.设备驱动程序往往非常难设计,因为设备和设备驱动程序是一起工作的,而且编写设备驱动程序需要对硬件接口有着深入的了解,这一点往往非常难.</p>
+<p>设备会通过引发中断来通知操作系统进行处理,在中断的那一部分我们说过,操作系统通过识别中断来源来判断这是个设备中断,然后调用设备中断处理程序.其中函数会调用<code>devintr</code>这个函数来获取究竟是什么设备发生了中断.</p>
+<p>许多设备中断的程序一般分成两个部分,第一个部分在进程的内核态执行,一般来说用户程序会执行read和write调用以希望从设备中获取一些信息.这一部分的内容可能负责把用户的请求传送给设备,让设备执行用户的请求.第二个部分就是设备中断处理,这一部分一般是设备处理完用户的请求,处理完之后设备会向操作系统发送一个中断请求,这一部分的代码就是用来处理设备的中断请求的,把结果传递给用户程序并唤醒相关的进程.</p>
+<h3 id="控制台输入"><a href="#控制台输入" class="headerlink" title="控制台输入"></a>控制台输入</h3><p>关于控制台,关于控制台的一些代码存放到了<code>console.c</code>这个文件中,控制台驱动程序可以接受用户输入的字符,通过UART这个特殊的硬件.控制台驱动程序一次性获得一行输入,用户进程,比如说shell程序会通过read这个系统调用来获得控制台输入.综合起来就是</p>
+<p>QEMU模拟的UART硬件-&gt;操作系统的内核-&gt;用户程序的read系统调用.</p>
+<p>在实际的电脑中,16550芯片会管理RS232这个串行链路来连接到其他终端,在QEMU中,这个模拟的芯片连接你的键盘和屏幕.</p>
+<p>对于操作系统(软件)来说:我们可以像访问内存一样来访问UART硬件,在之前内存管理的时候我们已经提到了,我们可以通过访问UART0这个地址来像访问内存一样来访问设备.在UART设备中存储了许多寄存器数据,操作系统可以通过UART0地址+偏移来访问寄存器数据.</p>
+<p>#define RHR 0                 &#x2F;&#x2F; receive holding register (for input bytes)<br>#define THR 0                 &#x2F;&#x2F; transmit holding register (for output bytes)<br>#define IER 1                 &#x2F;&#x2F; interrupt enable register<br>#define IER_RX_ENABLE (1&lt;&lt;0)<br>#define IER_TX_ENABLE (1&lt;&lt;1)<br>#define FCR 2                 &#x2F;&#x2F; FIFO control register<br>#define FCR_FIFO_ENABLE (1&lt;&lt;0)<br>#define FCR_FIFO_CLEAR (3&lt;&lt;1) &#x2F;&#x2F; clear the content of the two FIFOs<br>#define ISR 2                 &#x2F;&#x2F; interrupt status register<br>#define LCR 3                 &#x2F;&#x2F; line control register<br>#define LCR_EIGHT_BITS (3&lt;&lt;0)<br>#define LCR_BAUD_LATCH (1&lt;&lt;7) &#x2F;&#x2F; special mode to set baud rate<br>#define LSR 5                 &#x2F;&#x2F; line status register<br>#define LSR_RX_READY (1&lt;&lt;0)   &#x2F;&#x2F; input is waiting to be read from RHR<br>#define LSR_TX_IDLE (1&lt;&lt;5)    &#x2F;&#x2F; THR can accept another character to send</p>
+<p>首先xv6的S态的main函数会调用<code>consoleinit</code>函数.这个函数会初始化UART硬件.</p>
+<p>void<br>consoleinit(void)<br>{<br>  initlock(&amp;cons.lock, “cons”);</p>
+<p>  uartinit();</p>
+<p>  &#x2F;&#x2F; connect read and write system calls<br>  &#x2F;&#x2F; to consoleread and consolewrite.<br>  devsw[CONSOLE].read &#x3D; consoleread;<br>  devsw[CONSOLE].write &#x3D; consolewrite;<br>}</p>
+<p>uartinit()的代码保证了UART在收到每一次键盘输入的时候都会引发中断,然后每一次传输完一整个字符还会送出一个trasmit complete中断.</p>
+<p>WriteReg(IER, IER_TX_ENABLE  IER_RX_ENABLE);</p>
+<p>接着UART硬件也会引发一个中断,trap函数会判断这是什么类型中断,发现是设备引起的中断,就转而调用处理设备中断的函数<code>devintr</code>,接着这个函数通过调用<code>PLIC</code>判断是什么设备引起的中断,发现是UART设备,转而调用<code>uartintr</code>.</p>
+<p>int<br>devintr()<br>{<br>  uint64 scause &#x3D; r_scause();</p>
+<p>  if((scause &amp; 0x8000000000000000L) &amp;&amp;<br>     (scause &amp; 0xff) &#x3D;&#x3D; 9){<br>    &#x2F;&#x2F; this is a supervisor external interrupt, via PLIC.</p>
+<pre><code>// irq indicates which device interrupted.
+int irq = plic\_claim();
+
+if(irq == UART0\_IRQ)&#123;
+  uartintr();
+&#125; else if(irq == VIRTIO0\_IRQ)&#123;
+  virtio\_disk\_intr();
+&#125; else if(irq)&#123;
+  printf(&quot;unexpected interrupt irq=%d\\n&quot;, irq);
+&#125;
+
+// the PLIC allows each device to raise at most one
+// interrupt at a time; tell the PLIC the device is
+// now allowed to interrupt again.
+if(irq)
+  plic\_complete(irq);
+
+return 1;
+</code></pre>
+<p>  } else if(scause &#x3D;&#x3D; 0x8000000000000001L){<br>    &#x2F;&#x2F; software interrupt from a machine-mode timer interrupt,<br>    &#x2F;&#x2F; forwarded by timervec in kernelvec.S.</p>
+<pre><code>if(cpuid() == 0)&#123;
+  clockintr();
+&#125;
+
+// acknowledge the software interrupt by clearing
+// the SSIP bit in sip.
+w\_sip(r\_sip() &amp; ~2);
+
+return 2;
+</code></pre>
+<p>  } else {<br>    return 0;<br>  }<br>}<br>&#x2F;&#x2F;中断处理分成两个部分,前面部分把存储在UART寄存器的键盘输入发送.<br>void<br>uartintr(void)<br>{<br>  &#x2F;&#x2F;keyborad-&gt;RHR<br>  &#x2F;&#x2F; read and process incoming characters.(处理控制台输入)<br>  while(1){<br>    int c &#x3D; uartgetc();<br>    if(c &#x3D;&#x3D; -1)<br>      break;<br>    consoleintr(c);<br>  }</p>
+<p>  &#x2F;&#x2F; send buffered characters.(处理控制台输出)<br>  acquire(&amp;uart_tx_lock);<br>  uartstart();<br>  release(&amp;uart_tx_lock);<br>}</p>
+<p>接着从uartintr函数中从UART寄存器中获取一个字符,再把字符递交给consoleintr函数.</p>
+<p>int<br>uartgetc(void)<br>{<br>  if(ReadReg(LSR) &amp; 0x01){<br>    &#x2F;&#x2F; input data is ready.<br>    return ReadReg(RHR);<br>  } else {<br>    return -1;<br>  }<br>}</p>
+<p>就是从LSR寄存器判断,然后从RHR寄存器获得数据.</p>
+<p><code>consoleintr</code>负责把所有UART输入的元素存储起来,存储到<code>cons.buf</code>这个数组中,然后当输入的是换行,就可以唤醒一个正在运行<code>consoleread</code>的进程.这个进程会执行<code>consoleread</code>函数,<code>consoleread</code>函数会读取缓冲区内的数据,然后返回给用户态.</p>
+<p>每一次唤醒,<code>consoleread</code>就是读取一行的元素,然后把数据传递给用户态.</p>
+<p>总结:用户键盘输入-&gt;中断一次-&gt;UART把中断的输入读取出来送到consoleintr-&gt;consointr调用consoleread函数</p>
+<h3 id="控制台输出"><a href="#控制台输出" class="headerlink" title="控制台输出"></a>控制台输出</h3><p>read()系统调用能获得用户的键盘输入,write()系统调用可以在控制器中进行输出.</p>
+<p>UART设备每一次从THR寄存器中输出一字节的数据,它就会产生一个中断,和之前一样,<code>uartintr</code>会调用<code>uartstart</code>函数.</p>
+<p>void<br>uartstart()<br>{<br>  while(1){<br>    if(uart_tx_w &#x3D;&#x3D; uart_tx_r){<br>      &#x2F;&#x2F; transmit buffer is empty.<br>      return;<br>    }</p>
+<pre><code>if((ReadReg(LSR) &amp; LSR\_TX\_IDLE) == 0)&#123;
+  // the UART transmit holding register is full,
+  // so we cannot give it another byte.
+  // it will interrupt when it&#39;s ready for a new byte.
+  return;
+&#125;
+
+int c = uart\_tx\_buf\[uart\_tx\_r % UART\_TX\_BUF\_SIZE\];
+uart\_tx\_r += 1;
+
+// maybe uartputc() is waiting for space in the buffer.
+wakeup(&amp;uart\_tx\_r);
+
+WriteReg(THR, c);
+</code></pre>
+<p>  }<br>}</p>
+<p>每一次输出一字节的数据都需要看看在缓冲区内有没有其他的数据需要去输出.这个函数就是检查缓冲区内还有没有数据要写,如果要写,就放到THR寄存器中等待去写.</p>
+<p>然后机器就会从THR寄存器中读取要输出的内容,输出成功就触发中断,看看还有没有要要写的内容,有的话就接着放入THR寄存器中.</p>
+<p>特别地,第一个字节会在<code>uartputc</code>这个系统调用中进行输出.其他的字节是通过字节</p>
+<h3 id="设备驱动的并行性"><a href="#设备驱动的并行性" class="headerlink" title="设备驱动的并行性"></a>设备驱动的并行性</h3><p>你会发现,每一次进入<code>consoleread</code>和<code>consoleintr</code>都会获取一个锁,这个锁会保证不可能同时有两个进程执行这个函数,当两个进程同时执行<code>consoleread</code>的时候,有可能会把一整句话分成两部分交付给两个进程,这个是不对的.加上锁可以保证同时只有一个进程进入这个函数</p>
+<p>cd abab<br>process1 :c a<br>process2 :dabb</p>
+<p>还有一个可能就是一个进程在等待<code>consoleread</code>的结束,另外一个进程正在运行,这个时候执行中断操作可能会把console输入传递给另外一个进程,这个时候我们也需要上一个锁.</p>
+<p>Another way in which concurrency requires care in drivers is that one process may be waiting for input from a device, but the interrupt signaling arrival of the input may arrive when a different process (or no process at all) is running. Thus interrupt handlers are not allowed to think about the process or code that they have interrupted. For example, an interrupt handler cannot safely call copyout with the current process’s page table. Interrupt handlers typically do relatively little work (e.g., just copy the input data to a buffer), and wake up top-half code to do the rest.</p>
+<h3 id="时钟中断"><a href="#时钟中断" class="headerlink" title="时钟中断"></a>时钟中断</h3><p>RISC-V的CPU在一定的时间段就会触发一次时钟中断,RISC-V希望时钟中断能在M态处理而不是在S态处理.xv6选择在一个特殊的方法来处理时钟中断.</p>
+<p>在start.c中,我们设置了把所有中断都放在S态进行处理.但是我们在<code>timeinit</code>函数中创建了一个专属于时钟中断的处理模式.主要有几点:</p>
+<ul>
+<li>配置了CLINT硬件,这个硬件会在一定间隔时间触发一次中断.</li>
+<li>配置trapframe,这样可以把通用寄存器的数据放到CLINT寄存器中</li>
+<li>由于M态的中断只有时钟中断,中断向量配置为timevec.</li>
+</ul>
+<p>在M态下的时钟中断处理函数在是<code>timervec</code>:这个保存了一部分寄存器,然后告诉CLINT硬件什么时候产生下一次时钟中断,然后引发一个S态的软件中断.</p>
+<p>在执行用户态或者是内核态的代码的时候都会引发时钟中断,时钟中断尽量不要打扰正在执行关键任务的进程.所以说RISC-V允许引起一个软件中断,这个中断是S态引起的.</p>
+<p>当中断被关闭的时候,说明正在执行很关键的任务,代码可以选择拒绝时钟中断的执行,如果没有关中断,这个软件中断就会打断正在执行的代码,执行时钟中断的操作,放弃对CPU的占用.</p>
+<p>总结:进入M态处理中断-&gt;引发一个S态的中断-&gt;如果执行关键任务,先不管中断,如果不执行关键任务,就放弃对于CPU的占用-&gt;调度给其他进程.</p>
+<h3 id="5-MultiPlexing"><a href="#5-MultiPlexing" class="headerlink" title="5:MultiPlexing"></a>5:MultiPlexing</h3><h3 id="多路复用"><a href="#多路复用" class="headerlink" title="多路复用"></a>多路复用</h3><p>在xv6中,我们拥有的进程数往往要比CPU核要多.那么我们通过多路复用来进行调度.我们这个时候多路复用来进行调度.所有的进程共用几个多路复用器,使用的方法一般是时分复用.</p>
+<p>首先xv6当等待设备完成I&#x2F;O或者等待子进程退出的时候,就会使用<code>sleep</code>和<code>wakeup</code>系统调用来切换进程的状态.同时xv6操作系统并不会允许一个进程占用CPU太多时间,当一个进程连续占用CPU一段时间这个进程也会强制改变状态.这个对于进程来说,它被唤醒和打断是无法侦查的.所以说对于一个进程来说相当于占用了属于自己的CPU.</p>
+<p>完成多路复用有一定的挑战,第一点就是如何进行进程的切换,切换CPU的运行状态以及其他部件的状态.第二点,对于用户进程,怎么处理可以让用户进程无法觉察到自己失去了CPU的控制权.这里xv6使用时钟中断来进行切换,(每段时间暂停一遍,进入内核态执行进程切换函数,这样子对于用户进程是透明的).第三点,所有CPU核都会执行一组进程,我们需要设计一个锁结构来防止race的出现.第四点,一个进程的所有内存和其他的资源在进程退出的时候都必须得释放,但是在释放的时候我们很难释放内核态栈.第五点,每一个核都需要知道自己运行进程的序号,否则我们进入内核态的时候不知道使用哪个栈.最后一点,就是sleep和wakeup的系统调用让进程放弃CPU.但是我们需要的注意是在唤醒进程的时候的race现象.</p>
+<h3 id="上下文切换"><a href="#上下文切换" class="headerlink" title="上下文切换"></a>上下文切换</h3><p>![image-20220325163645539](&#x2F;Users&#x2F;xupengzhu&#x2F;Library&#x2F;Application Support&#x2F;typora-user-images&#x2F;image-20220325163645539.png)</p>
+<p>在切换进程的时候首先用户态先进入内核态,然后会把上下文信息放入到内核栈,切换到新的进程,然后新的进程的上下文信息会从内核栈中取出,再切换到用户态.每个进程会拥有一个内核态栈,因为多个进程共用一个内核栈是非常危险的.</p>
+<p>保存的信息就是CPU的寄存器的值,同时,恢复也是恢复保存在内核态栈的寄存器值.swtch函数会执行寄存器的保存和提取.</p>
+<p>.globl swtch<br>swtch:<br>        sd ra, 0(a0)<br>        sd sp, 8(a0)<br>        sd s0, 16(a0)<br>        sd s1, 24(a0)<br>        sd s2, 32(a0)<br>        sd s3, 40(a0)<br>        sd s4, 48(a0)<br>        sd s5, 56(a0)<br>        sd s6, 64(a0)<br>        sd s7, 72(a0)<br>        sd s8, 80(a0)<br>        sd s9, 88(a0)<br>        sd s10, 96(a0)<br>        sd s11, 104(a0)</p>
+<pre><code>    ld ra, 0(a1)
+    ld sp, 8(a1)
+    ld s0, 16(a1)
+    ld s1, 24(a1)
+    ld s2, 32(a1)
+    ld s3, 40(a1)
+    ld s4, 48(a1)
+    ld s5, 56(a1)
+    ld s6, 64(a1)
+    ld s7, 72(a1)
+    ld s8, 80(a1)
+    ld s9, 88(a1)
+    ld s10, 96(a1)
+    ld s11, 104(a1)
+    
+    ret
+    
+</code></pre>
+<p>swtch(&amp;c-&gt;context, &amp;p-&gt;context);</p>
+<p>在这里swtch首先把当前的寄存器信息存放到a0对应的内核栈中,再从a1对应的内核栈中取出数据放到寄存器中.对于这个函数,它并不知道这是什么进程在执行stwch调用.</p>
+<p>现在我们知道context(上下文)的内容了,对于每一个进程和CPU的数据结构都有一部分保存上下文.</p>
+<p>&#x2F;&#x2F; Saved registers for kernel context switches.<br>struct context {<br>  uint64 ra;<br>  uint64 sp;</p>
+<p>  &#x2F;&#x2F; callee-saved<br>  uint64 s0;<br>  uint64 s1;<br>  uint64 s2;<br>  uint64 s3;<br>  uint64 s4;<br>  uint64 s5;<br>  uint64 s6;<br>  uint64 s7;<br>  uint64 s8;<br>  uint64 s9;<br>  uint64 s10;<br>  uint64 s11;<br>};</p>
+<p>在C语言中,a0分别是老进程的context字段的地址,a1是新的进程的context字段的地址.我们发现这里只保存了callee-saved寄存器.但是你会发现,ra寄存器的值被改变了,所以说我知道当函数返回的时候,返回地址改变了,所以说这下pc就变成之前调用swtch的进程调用swtch的PC.这听上去很绕,简单的说就是反悔的PC不是这个进程调用之前的那个PC,而是上个进程调用之前的PC.</p>
+<p>Swtch takes two arguments: struct context *old and struct context *new. It saves the current registers in old, loads registers from new, and returns.</p>
+<p>我们回到之前的代码,在trap中最后调用了yield函数.</p>
+<p>void<br>yield(void)<br>{<br>  struct proc *p &#x3D; myproc();<br>  acquire(&amp;p-&gt;lock);<br>  p-&gt;state &#x3D; RUNNABLE;<br>  sched();<br>  release(&amp;p-&gt;lock);<br>}</p>
+<p>首先yield函数讲当前进程的状态改成“可执行”,接着又调用sched()函数.</p>
+<p>void<br>sched(void)<br>{<br>  int intena;<br>  struct proc *p &#x3D; myproc();</p>
+<p>  if(!holding(&amp;p-&gt;lock))<br>    panic(“sched p-&gt;lock”);<br>  if(mycpu()-&gt;noff !&#x3D; 1)<br>    panic(“sched locks”);<br>  if(p-&gt;state &#x3D;&#x3D; RUNNING)<br>    panic(“sched running”);<br>  if(intr_get())<br>    panic(“sched interruptible”);</p>
+<p>  intena &#x3D; mycpu()-&gt;intena;<br>  swtch(&amp;p-&gt;context, &amp;mycpu()-&gt;context);<br>  mycpu()-&gt;intena &#x3D; intena;<br>}</p>
+<p>先判断各种情况,这个不是特别重要,重要的是我执行了swtch函数,这个函数会把当前进程的上下文保存,然后把scheduler()的上下文拿出来开始执行中间的调度过程.这个调度过程是每个CPU都特有的调度过程,其上下文存放在cpu的context里面,这个context区间每个CPU核都有一个.这下返回的地址不是sched()函数而是scheduler()函数了.也就是说这个地方很巧妙地改变ra寄存器让程序的返回地址改变,返回的是调度函数.这种思路只改变了部分上下文就可以改变运行的程序,非常妙.(最重要的是每个CPU一个防止race现象)</p>
+<h3 id="调度方法"><a href="#调度方法" class="headerlink" title="调度方法"></a>调度方法</h3><p>现在完成了第一步,从原进程到调度程序,对于第一步,都是先获得进程的锁,然后更改进程的状态然后调用sched,这个对于sleep还是yiled还是exit都是一样.sched函数会进行一定的检查,然后最后sched会调用swtch转移到scheduler函数.</p>
+<p>void<br>scheduler(void)<br>{<br>  struct proc *p;<br>  struct cpu *c &#x3D; mycpu();</p>
+<p>  c-&gt;proc &#x3D; 0;<br>  for(;;){<br>    &#x2F;&#x2F; Avoid deadlock by ensuring that devices can interrupt.<br>    intr_on();</p>
+<pre><code>for(p = proc; p &lt; &amp;proc\[NPROC\]; p++) &#123;
+  acquire(&amp;p-&gt;lock);
+  if(p-&gt;state == RUNNABLE) &#123;
+    // Switch to chosen process.  It is the process&#39;s job
+    // to release its lock and then reacquire it
+    // before jumping back to us.
+    p-&gt;state = RUNNING;
+    c-&gt;proc = p;
+    swtch(&amp;c-&gt;context, &amp;p-&gt;context);
+
+    // Process is done running for now.
+    // It should have changed its p-&gt;state before coming back.
+    c-&gt;proc = 0;
+  &#125;
+  release(&amp;p-&gt;lock);
+&#125;
+</code></pre>
+<p>  }<br>}</p>
+<p>接着根据scheduler的返回地址开始执行,首先这个函数是一个永远循环下去的循环,接着把上一次调用swtch进程的锁给释放了.你会发现这个十分巧妙,因为进程之间的解锁和上锁是通过swtch实现的,swtch的调用者已经有了锁,接着这个锁传递给scheduler.</p>
+<p>由于scheduler是<code>swtch(&amp;c-&gt;context, &amp;p-&gt;context);</code>开始执行的,所以说第一步就是标记CPU正在运行的进程,把这个进程改成0(NULL),然后再来释放这个锁.(因为当前上锁的进程一定是上一次进入的进程.)这个时候在sched()上的锁,在scheduler()释放.在scheduler()获得的锁,在sched()释放因为这是一个回环.这个时候你可以认为scheduler和sched是一个回环.当然也不绝对,因为当新的进程第一次运行的时候,返回是从forkret函数返回的,这个是在frok函数一开始就已经设定好的.第一次运行执行forkret函数,然后通过usertrapret返回到用户态.</p>
+<p>void<br>forkret(void)<br>{<br>  static int first &#x3D; 1;</p>
+<p>  &#x2F;&#x2F; Still holding p-&gt;lock from scheduler.<br>  release(&amp;myproc()-&gt;lock);</p>
+<p>  if (first) {<br>    &#x2F;&#x2F; File system initialization must be run in the context of a<br>    &#x2F;&#x2F; regular process (e.g., because it calls sleep), and thus cannot<br>    &#x2F;&#x2F; be run from main().<br>    first &#x3D; 0;<br>    fsinit(ROOTDEV);<br>  }</p>
+<p>  usertrapret();<br>}</p>
+<p>scheduler运行一个永远运行的循环,首先找到一个可以运行的进程,一直运行直到调用yield()函数,这个可以运行的定义就是p-&gt;state&#x3D;&#x3D;RUNNABLE.每一次找到可以运行的进程,都会把这个进程的进程信息放到当前cpu的结构体里面,标记为RUNNING.</p>
+<p>首先我们知道,当一个进程的状态是RUNNING,我们可以安全地保存这个进程的上下文,因为现在这个CPU的寄存器是属于某个进成的寄存器,还有一个就是挑选属于RUNNABLE的进程它也是为了防止出现问题.</p>
+<p>由于要保存进程的状态,所以说这就是为什么xv6需要给处理进程的代码上锁了,就是因为进程状态这个变量就是临界变量,这块代码是临界区</p>
+<h3 id="当前的CPU和进程信息"><a href="#当前的CPU和进程信息" class="headerlink" title="当前的CPU和进程信息."></a>当前的CPU和进程信息.</h3><p>我们需要记录当前的进程指针来获取信息,一般来说,如果你的机器是一个核的,我们可以设置一个全局变量,但是我们的机器是多核的,每个核执行不同的进程,这个方案就有一定的问题.</p>
+<p>所以说xv6维护一个结构体叫做CPU,这个CPU存储着当前CPU核正在运行什么核.</p>
+<p>&#x2F;&#x2F; Per-CPU state.<br>struct cpu {<br>  struct proc *proc;          &#x2F;&#x2F; The process running on this cpu, or null.<br>  struct context context;     &#x2F;&#x2F; swtch() here to enter scheduler().<br>  int noff;                   &#x2F;&#x2F; Depth of push_off() nesting.<br>  int intena;                 &#x2F;&#x2F; Were interrupts enabled before push_off()?<br>};</p>
+<p>这个结构体存放着scheduler的上下文,以及当前运行的进程.</p>
+<p>struct cpu*<br>mycpu(void) {<br>  int id &#x3D; cpuid();<br>  struct cpu *c &#x3D; &amp;cpus[id];<br>  return c;<br>}</p>
+<p>int<br>cpuid()<br>{<br>  int id &#x3D; r_tp();<br>  return id;<br>}</p>
+<p>这个时候可以获得cpuid以及对应的结构体.因为CPU的核号是存放在tp寄存器的.在mstart中,就是在启动的时候已经把CPU的核号已经送入到tp寄存器中了,在M-mode的时候,usertrapret把tp寄存器保存在trapoline寄存器中.并且编译器永远不会把tp寄存器改变,所以说我们可以很方便地获得cpu核的id值.</p>
+<p>当然,为了保证CPU返回不会被时钟中断打扰,调用这个函数要求使用cpu结构体的时候关闭中断,当使用完毕之后再来开启中断.</p>
+<p>当然我们还可以使用<code>myproc()</code>函数来获得当前cpu运行的进程结构体:</p>
+<p>&#x2F;&#x2F; Return the current struct proc *, or zero if none.<br>struct proc*<br>myproc(void) {<br>  push_off();<br>  struct cpu *c &#x3D; mycpu();<br>  struct proc *p &#x3D; c-&gt;proc;<br>  pop_off();<br>  return p;<br>}</p>
+<h3 id="睡眠与唤醒"><a href="#睡眠与唤醒" class="headerlink" title="睡眠与唤醒"></a>睡眠与唤醒</h3><p>sleep和wakeup调用给底层提供了一个同步接口,我们可以根据这个同步接口构建一个叫做信号量的顶层接口,信号量的定义和P-V操作我们都在操作系统课上学过了,我们就不需要解释究竟什么是P-V操作.贴个代码吧:</p>
+<p>100 struct semaphore {<br>101 struct spinlock lock;<br>102 int count;<br>103 };<br>104</p>
+<p>400 void<br>401 V(struct semaphore *s)<br>402 {<br>403 acquire(&amp;s-&gt;lock);<br>404 s-&gt;count +&#x3D; 1;<br>405 wakeup(s);<br>406 release(&amp;s-&gt;lock);<br>407 }<br>408<br>409 void<br>410 P(struct semaphore *s)<br>411 {<br>412 acquire(&amp;s-&gt;lock);<br>413 while(s-&gt;count &#x3D;&#x3D; 0)<br>414 sleep(s, &amp;s-&gt;lock);<br>415 s-&gt;count -&#x3D; 1;<br>416 release(&amp;s-&gt;lock);<br>417 }</p>
+<p>P-V操作需要获得锁,因为对于信号量,同时可以有多个进程对信号量进行操作.</p>
+<p>总而言之,P-V操作要求我们sleep(s,s-&gt;lock),要求这个进程为了s信号灯而等待,放弃当前CPU的占用,wakeup(s)要求通知所有为s信号灯而等待的进程,有位占了.</p>
+<p>&#x2F;&#x2F; Atomically release lock and sleep on chan.<br>&#x2F;&#x2F; Reacquires lock when awakened.<br>void<br>sleep(void *chan, struct spinlock *lk)<br>{<br>  struct proc *p &#x3D; myproc();</p>
+<p>  &#x2F;&#x2F; Must acquire p-&gt;lock in order to<br>  &#x2F;&#x2F; change p-&gt;state and then call sched.<br>  &#x2F;&#x2F; Once we hold p-&gt;lock, we can be<br>  &#x2F;&#x2F; guaranteed that we won’t miss any wakeup<br>  &#x2F;&#x2F; (wakeup locks p-&gt;lock),<br>  &#x2F;&#x2F; so it’s okay to release lk.</p>
+<p>  acquire(&amp;p-&gt;lock);  &#x2F;&#x2F;DOC: sleeplock1<br>  release(lk);</p>
+<p>  &#x2F;&#x2F; Go to sleep.<br>  p-&gt;chan &#x3D; chan;<br>  p-&gt;state &#x3D; SLEEPING;</p>
+<p>  sched();</p>
+<p>  &#x2F;&#x2F; Tidy up.<br>  p-&gt;chan &#x3D; 0;</p>
+<p>  &#x2F;&#x2F; Reacquire original lock.<br>  release(&amp;p-&gt;lock);<br>  acquire(lk);<br>}</p>
+<p>首先先标记一下,这个目前是睡眠状态.还标记一下睡眠的理由,就是proc的chan元素.然后进行进程调度,因为这个程序在返回的时候还是需要对信号灯进行更改,所以说在返回的时候还是需要信号灯的锁.但是当进程进入睡眠状态就可以不需要信号灯的锁了.记录进程是为了谁而睡眠的十分重要.</p>
+<p>对应的,在wakeup()函数:</p>
+<p>&#x2F;&#x2F; Wake up all processes sleeping on chan.<br>&#x2F;&#x2F; Must be called without any p-&gt;lock.<br>void<br>wakeup(void *chan)<br>{<br>  struct proc *p;</p>
+<p>  for(p &#x3D; proc; p &lt; &amp;proc[NPROC]; p++) {<br>    if(p !&#x3D; myproc()){<br>      acquire(&amp;p-&gt;lock);<br>      if(p-&gt;state &#x3D;&#x3D; SLEEPING &amp;&amp; p-&gt;chan &#x3D;&#x3D; chan) {<br>        p-&gt;state &#x3D; RUNNABLE;<br>      }<br>      release(&amp;p-&gt;lock);<br>    }<br>  }<br>}</p>
+<p>这个时候就寻找一个正在睡眠的并且因为chan这个原因睡眠的进程,表示你要的资源已经到达,这个时候就可以提醒这些进程现在可以执行了.(为什么要一次性全部通知,这样会错吗?其实不会,因为是执行while循环的,如果发现s-&gt;count还是小于0,那我还是接着睡吧zzz)</p>
+<p>由于我们对很多临界变量,比如说信号灯,进程控制块进行了修改,所以说锁结构是必要的.</p>
+<h3 id="管道"><a href="#管道" class="headerlink" title="管道"></a>管道</h3><p>xv6的管道使用sleep和wakeup的操作来进行复杂的同步通讯.我们在之前已经了解过Linux的管道系统.</p>
+<p>struct pipe {<br>  struct spinlock lock;<br>  char data[PIPESIZE];<br>  uint nread;     &#x2F;&#x2F; number of bytes read<br>  uint nwrite;    &#x2F;&#x2F; number of bytes written<br>  int readopen;   &#x2F;&#x2F; read fd is still open<br>  int writeopen;  &#x2F;&#x2F; write fd is still open<br>};</p>
+<p>在xv6,我们使用pipe这个数据结构,首先我们看到一个锁结构,还有一个数据buffer.还有nread和nwrite来表示目前管道的两端已经读出了几个元素,已经写入几个元素.这个数据buffer还是一个循环队列,也就是第PIPELINE-1项之后就是第0项.循环队列的判空和判满非常容易.由于在这里我们使用了类似于TCP id的模式处理,所以说我们读区元素使用%运算来进行读取.</p>
+<p>int<br>pipewrite(struct pipe *pi, uint64 addr, int n)<br>{<br>  int i &#x3D; 0;<br>  struct proc *pr &#x3D; myproc();</p>
+<p>  acquire(&amp;pi-&gt;lock);<br>  while(i &lt; n){<br>    if(pi-&gt;readopen &#x3D;&#x3D; 0  pr-&gt;killed){<br>      release(&amp;pi-&gt;lock);<br>      return -1;<br>    }<br>    if(pi-&gt;nwrite &#x3D;&#x3D; pi-&gt;nread + PIPESIZE){ &#x2F;&#x2F;DOC: pipewrite-full<br>      wakeup(&amp;pi-&gt;nread);<br>      sleep(&amp;pi-&gt;nwrite, &amp;pi-&gt;lock);<br>    } else {<br>      char ch;<br>      if(copyin(pr-&gt;pagetable, &amp;ch, addr + i, 1) &#x3D;&#x3D; -1)<br>        break;<br>      pi-&gt;data[pi-&gt;nwrite++ % PIPESIZE] &#x3D; ch;<br>      i++;<br>    }<br>  }<br>  wakeup(&amp;pi-&gt;nread);<br>  release(&amp;pi-&gt;lock);</p>
+<p>  return i;<br>}</p>
+<p>首先就是pipewrite,在对管道这个临界资源修改之前我们先上锁,所以说读的时候不能写,写的时候不能读,也不能同时读也不能同时写,这个就是锁的魅力.</p>
+<p>首先就是各种异常情况,这个不说了,接着就是满的情况,那么只能让暂时让写的进程休眠,顺便让那群没字节可读的进程醒过来.如果没有满,那就一个一个字节地往buffer里面写,写的操作就是普通的循环队列,只不过这里巧妙地使用了wakeup和sleep调节满和空之间的平衡.</p>
+<p>int<br>piperead(struct pipe *pi, uint64 addr, int n)<br>{<br>  int i;<br>  struct proc *pr &#x3D; myproc();<br>  char ch;</p>
+<p>  acquire(&amp;pi-&gt;lock);<br>  while(pi-&gt;nread &#x3D;&#x3D; pi-&gt;nwrite &amp;&amp; pi-&gt;writeopen){  &#x2F;&#x2F;DOC: pipe-empty<br>    if(pr-&gt;killed){<br>      release(&amp;pi-&gt;lock);<br>      return -1;<br>    }<br>    sleep(&amp;pi-&gt;nread, &amp;pi-&gt;lock); &#x2F;&#x2F;DOC: piperead-sleep<br>  }<br>  for(i &#x3D; 0; i &lt; n; i++){  &#x2F;&#x2F;DOC: piperead-copy<br>    if(pi-&gt;nread &#x3D;&#x3D; pi-&gt;nwrite)<br>      break;<br>    ch &#x3D; pi-&gt;data[pi-&gt;nread++ % PIPESIZE];<br>    if(copyout(pr-&gt;pagetable, addr + i, &amp;ch, 1) &#x3D;&#x3D; -1)<br>      break;<br>  }<br>  wakeup(&amp;pi-&gt;nwrite);  &#x2F;&#x2F;DOC: piperead-wakeup<br>  release(&amp;pi-&gt;lock);<br>  return i;<br>}</p>
+<p>对于读也是一样,如果管道是空的,那么没字节可读,那就让自己休眠.顺便通知写的进程抓紧来写,如果不是空的,那就慢慢来读.一个字一个字地读.</p>
+<p>由于读写区间都上了锁,所以说这样可以保证只有一个进程能对一个管道进行处理,防止乱套.</p>
+<h3 id="等待-退出和杀死的系统调用"><a href="#等待-退出和杀死的系统调用" class="headerlink" title="等待,退出和杀死的系统调用"></a>等待,退出和杀死的系统调用</h3><p>首先就是wait的系统调用:wait调用就是等待子进程退出,退出了之后父进程就可以继续执行.</p>
+<p>int<br>wait(uint64 addr)<br>{<br>  struct proc *np;<br>  int havekids, pid;<br>  struct proc *p &#x3D; myproc();</p>
+<p>  acquire(&amp;wait_lock);</p>
+<p>  for(;;){<br>    &#x2F;&#x2F; Scan through table looking for exited children.<br>    havekids &#x3D; 0;<br>    for(np &#x3D; proc; np &lt; &amp;proc[NPROC]; np++){<br>      if(np-&gt;parent &#x3D;&#x3D; p){<br>        &#x2F;&#x2F; make sure the child isn’t still in exit() or swtch().<br>        acquire(&amp;np-&gt;lock);</p>
+<pre><code>    havekids = 1;
+    if(np-&gt;state == ZOMBIE)&#123;
+      // Found one.
+      pid = np-&gt;pid;
+      if(addr != 0 &amp;&amp; copyout(p-&gt;pagetable, addr, (char \*)&amp;np-&gt;xstate,
+                              sizeof(np-&gt;xstate)) &lt; 0) &#123;
+        release(&amp;np-&gt;lock);
+        release(&amp;wait\_lock);
+        return -1;
+      &#125;
+      freeproc(np);
+      release(&amp;np-&gt;lock);
+      release(&amp;wait\_lock);
+      return pid;
+    &#125;
+    release(&amp;np-&gt;lock);
+  &#125;
+&#125;
+
+// No point waiting if we don&#39;t have any children.
+if(!havekids  p-&gt;killed)&#123;
+  release(&amp;wait\_lock);
+  return -1;
+&#125;
+
+// Wait for a child to exit.
+sleep(p, &amp;wait\_lock);  //DOC: wait-sleep
+</code></pre>
+<p>  }<br>}</p>
+<p>这个程序的代码非常好懂,由于这个wait比较菜,只需要任何一个子进程退出就可以了,所以说实现起来不难.首先判断这个进程有没有一个儿子,并且这个儿子就是僵尸状态的,如果有的话就太好了,我就不用wait了,我就把这个儿子给释放了.并且把信息传递给用户那边.如果没有找到,那还是乖乖等着吧.我们获得这些锁,第一是为了保护进程,第二个是为了防止多线程访问..导致这个pid和havekids出现问题.</p>
+<p>接着就是exit了,由于wait调用要等待有没有儿子退出,所以说sleep和wakeup是要配套的,wakeup就是在exit里面实现的.</p>
+<p>void<br>exit(int status)<br>{<br>  struct proc *p &#x3D; myproc();</p>
+<p>  if(p &#x3D;&#x3D; initproc)<br>    panic(“init exiting”);</p>
+<p>  &#x2F;&#x2F; Close all open files.<br>  for(int fd &#x3D; 0; fd &lt; NOFILE; fd++){<br>    if(p-&gt;ofile[fd]){<br>      struct file *f &#x3D; p-&gt;ofile[fd];<br>      fileclose(f);<br>      p-&gt;ofile[fd] &#x3D; 0;<br>    }<br>  }</p>
+<p>  begin_op();<br>  iput(p-&gt;cwd);<br>  end_op();<br>  p-&gt;cwd &#x3D; 0;</p>
+<p>  acquire(&amp;wait_lock);</p>
+<p>  &#x2F;&#x2F; Give any children to init.<br>  reparent(p);</p>
+<p>  &#x2F;&#x2F; Parent might be sleeping in wait().<br>  wakeup(p-&gt;parent);</p>
+<p>  acquire(&amp;p-&gt;lock);</p>
+<p>  p-&gt;xstate &#x3D; status;<br>  p-&gt;state &#x3D; ZOMBIE;</p>
+<p>  release(&amp;wait_lock);</p>
+<p>  &#x2F;&#x2F; Jump into the scheduler, never to return.<br>  sched();<br>  panic(“zombie exit”);<br>}</p>
+<p>首先看看是不是init的守护进程要退出,不是就还好.第一步就是解决打开的文件问题,一一关闭文件即可.接着就是reparent,就是如果它的父进程要被exit掉,但是子进程还在存活,就需要使用reparent来处理父进程.如果这个进程有父进程,顺便叫醒正在沉睡的,等待它的儿子调用exit()的爸爸.接着由于这个已经退出了,所以说转进程调度吧.</p>
+<p>exit是自己退场,那么kill是勒令让别人退场.</p>
+<p>int<br>kill(int pid)<br>{<br>  struct proc *p;</p>
+<p>  for(p &#x3D; proc; p &lt; &amp;proc[NPROC]; p++){<br>    acquire(&amp;p-&gt;lock);<br>    if(p-&gt;pid &#x3D;&#x3D; pid){<br>      p-&gt;killed &#x3D; 1;<br>      if(p-&gt;state &#x3D;&#x3D; SLEEPING){<br>        &#x2F;&#x2F; Wake process from sleep().<br>        p-&gt;state &#x3D; RUNNABLE;<br>      }<br>      release(&amp;p-&gt;lock);<br>      return 0;<br>    }<br>    release(&amp;p-&gt;lock);<br>  }<br>  return -1;<br>}</p>
+<p>&#x2F;&#x2F;usertrapret()<br>if(p-&gt;killed)<br>    exit(-1);</p>
+<p>这个就像注射了慢性毒药,我在kill函数什么都不做,我只是设定一个killed为1,然后这个进程在执行usertrapret的时候由于killed值为1,这个时候就它会自己调用exit()然后退场.</p>
+<h3 id="6-File-System"><a href="#6-File-System" class="headerlink" title="6:File System"></a>6:File System</h3><h3 id="1-概览"><a href="#1-概览" class="headerlink" title="1.概览"></a>1.概览</h3><p>xv6的文件系统由7层组成,首先就是最下面的硬件层,<strong>cache层</strong>在上面通过缓存硬件块来实现操作系统同步地访问硬盘块(这样可以降低操作系统访问硬盘块的时间),并且可以进行简单的同步管理,这样子可以保证只有一个进程同时访问一个硬盘块.<strong>记录层</strong>让更高层次的程序在在一次处理中能够处理多个硬件块,保证这些硬件块是同步处理的(要么都不处理,要么都处理).<strong>inode层</strong>负责描述文件,其中一个文件对应着一个inode,这个inode存储着许多文件的信息.其中inode层负责存储文件的控制信息,其中有一个索引负责带领文件找到索引本身.<strong>文件目录层</strong>负责实现具体的文件目录.<strong>路经名层</strong>负责完善文件树.这样可以根据文件的路径取访问文件了.文件描述器层负责完善许多UNIX抽象文件接口,负责给用户程序提供文件系统相关的系统调用.</p>
+<p>![image-20220326161104594](&#x2F;Users&#x2F;xupengzhu&#x2F;Library&#x2F;Application Support&#x2F;typora-user-images&#x2F;image-20220326161104594.png)</p>
+<p>硬盘把数据按照硬盘扇区为单位连续地存放在磁盘中,每一个磁盘扇区大小是512字节.其中第0块是第一个512字节.第1块是第513-1024字节,以此类推.xv6操作系统维护一个buf结构体.存储在这个结构体的数据可能和磁盘实际存储的数据不一样.<strong>有一种可能就是数据写进buf结构体,但还是没有写进磁盘块</strong>.(类似于cache,cache也有脏数据嘛)</p>
+<p>还需要注意的是,在操作系统中,磁盘块的大小一般是磁盘扇区大小的两倍.所以说在xv6中我们认为一块就是两个扇区,就是1024字节.<strong>到后面我们逻辑上认为一块就是两个扇区,1024字节.</strong></p>
+<p>#define BSIZE 1024  &#x2F;&#x2F; block size<br>struct buf {<br>  int valid;   &#x2F;&#x2F; has data been read from disk?<br>  int disk;    &#x2F;&#x2F; does disk “own” buf?<br>  uint dev;<br>  uint blockno;<br>  struct sleeplock lock;<br>  uint refcnt;<br>  struct buf *prev; &#x2F;&#x2F; LRU cache list<br>  struct buf *next;<br>  uchar data[BSIZE];<br>};</p>
+<p>一个文件系统必须有一个计划,就是哪些磁盘块存放控制文件总体信息的inode,哪些磁盘块存放具体的文件.在这里,xv6把磁盘分成了几个部分,第0块是boot块,这里面存放着引导操作系统的代码.第1块又被称为“超级块”,超级块中存放了关于整个文件系统的原数据(包括文件系统所有块的数量,inode的数量,还有文件块的数量).从2后面就是记录,接着就是inode,接着就是bit map(这个bitmap可以帮助我们确定哪些块已经被使用了),最后就是存放的文件块.</p>
+<h3 id="2-buffer-cache层"><a href="#2-buffer-cache层" class="headerlink" title="2.buffer cache层."></a>2.buffer cache层.</h3><p>buffer cache层有两个作用,第一个是同步,在内存中只有一个磁盘块的拷贝,还有就是只有一个进程能够访问这个磁盘块的拷贝.第二个作用就是可以把比较常用的磁盘块放入缓存区里面,这样可以加快进程读写磁盘的速度.</p>
+<p>buffer cache层主要提供了两个API,分别是bread()和bwrite().</p>
+<p>bread()负责获取一个块的存储在内存中的副本,我们之后的读写操作就是在内存中的副本进行的.bwirte()就负责把内存中副本写入到磁盘中.总的来说是read()操作把磁盘中信息读取到内存,write就是把内存中的信息写入到磁盘.在最后我们要调用brelease来释放这个内存块的锁.总之bread()返回了一个带锁的buffer,brelease就负责把这个锁释放掉.</p>
+<p>因为这个本质上也是一个cache.当操作系统要求访问一个不再buffer的磁盘块,它就需要淘汰,淘汰就选用最久未使用算法即可.</p>
+<h4 id="2-1-Cache层重要数据结构定义"><a href="#2-1-Cache层重要数据结构定义" class="headerlink" title="2.1 Cache层重要数据结构定义"></a>2.1 Cache层重要数据结构定义</h4><p><code>buf</code>数据结构定义。<code>valid</code>字段表示该buf中是否存储了有效内容；字段<code>disk</code>的意思是缓冲区的内容已经被提交到了磁盘，这可能会改变缓冲区(如，把磁盘中的数据写到<code>data</code>,这个类似于cache的脏位,代表这个是不是在cache中写过)；<code>dev</code>、<code>blockno</code>标识该buf存储的磁盘块设备和扇区号；<code>data</code>则是<code>buf</code>实际缓存的内容；而<code>prev</code>和<code>next</code>就代表一个双向链表.其中<code>refcnt</code>代表这个块是不是可用的,或者代表这个buf链接了多少个磁盘块.</p>
+<p>struct buf {<br>  int valid;   &#x2F;&#x2F; has data been read from disk?<br>  int disk;    &#x2F;&#x2F; does disk “own” buf?<br>  uint dev;<br>  uint blockno;<br>  struct sleeplock lock;<br>  uint refcnt;<br>  struct buf *prev; &#x2F;&#x2F; LRU cache list<br>  struct buf *next;<br>  uchar data[BSIZE];<br>};</p>
+<p><code>bcache</code>数据结构定义。bcache用于管理所有的buffer，将所有的<code>buf</code>用双链表进行连接，<code>head</code>是链表头，不存储实际的buf。所有的代码访问bcache是访问head,并不会访问buf数组.我们了解过用硬件实现的cache,但是这是第一次遇见用软件实现的cache.</p>
+<p>struct {<br>  struct spinlock lock;<br>  struct buf buf[NBUF];</p>
+<p>  &#x2F;&#x2F; Linked list of all buffers, through prev&#x2F;next.<br>  &#x2F;&#x2F; Sorted by how recently the buffer was used.<br>  &#x2F;&#x2F; head.next is most recent, head.prev is least.<br>  struct buf head;<br>} bcache;</p>
+<h4 id="2-2-Cache层的函数定义"><a href="#2-2-Cache层的函数定义" class="headerlink" title="2.2 Cache层的函数定义"></a>2.2 Cache层的函数定义</h4><blockquote>
+<p><code>binit()</code>函数：初始化<code>bcache</code>，把所有的buf使用双链表进行连接。</p>
+</blockquote>
+<p>void<br>binit(void)<br>{<br>  struct buf *b;</p>
+<p>  initlock(&amp;bcache.lock, “bcache”);</p>
+<p>  &#x2F;&#x2F; Create linked list of buffers<br>  bcache.head.prev &#x3D; &amp;bcache.head;<br>  bcache.head.next &#x3D; &amp;bcache.head;<br>  for(b &#x3D; bcache.buf; b &lt; bcache.buf+NBUF; b++){<br>    b-&gt;next &#x3D; bcache.head.next;<br>    b-&gt;prev &#x3D; &amp;bcache.head;<br>    initsleeplock(&amp;b-&gt;lock, “buffer”);<br>    bcache.head.next-&gt;prev &#x3D; b;<br>    bcache.head.next &#x3D; b;<br>  }<br>}</p>
+<blockquote>
+<p><code>bget()</code>函数：</p>
+<p>bget函数首先获取<code>bcache.lock</code>，至多扫描两遍双链表，第一遍从前到后，如果磁盘块已经缓存至buf中，则在第一遍循环之后就会返回该buf；否则执行第二次反向扫描，寻找目前未使用的buf，将buf的必要字段进行标记之后返回该buf。</p>
+<p>注意：在将buf返回之前，需要获取该buf的锁<code>(buf.lock)</code>；赋值语句<code>b-&gt;valid = 0</code>，它确保了<code>bread</code>将从磁盘读取块数据，而不是错误地使用缓冲区里之前的数据。获取锁的目标是,现在只有一个进程能够访问这段cache,这是为了方便各进程进行同步.当然我们获得了我们需要的元素之后我们就可以释放<code>bcache.lock</code>了.</p>
+<p>如果所有的块都是忙的,只能返回busy的信息了.我们不需要考虑同步的问题,我们设计的锁能保证同时只有一个进程访问bcache和buf结构体.同样,非零的refcnt保证了只有一个dev number.</p>
+<p>睡眠锁保证了就算有许多个进程要访问这个块,仅仅是睡眠而已,因为有多个进程要访问这个文件是很正常的.这样子也可以保证在只有一个进程同时读写这个cache.</p>
+</blockquote>
+<p>&#x2F;&#x2F; Look through buffer cache for block on device dev.<br>&#x2F;&#x2F; If not found, allocate a buffer.<br>&#x2F;&#x2F; In either case, return locked buffer.<br>static struct buf*<br>bget(uint dev, uint blockno)<br>{<br>  struct buf *b;</p>
+<p>  acquire(&amp;bcache.lock);</p>
+<p>  &#x2F;&#x2F; Is the block already cached?<br>  for(b &#x3D; bcache.head.next; b !&#x3D; &amp;bcache.head; b &#x3D; b-&gt;next){<br>    if(b-&gt;dev &#x3D;&#x3D; dev &amp;&amp; b-&gt;blockno &#x3D;&#x3D; blockno){<br>      b-&gt;refcnt++;<br>      release(&amp;bcache.lock);<br>      acquiresleep(&amp;b-&gt;lock);<br>      return b;<br>    }<br>  }</p>
+<p>  &#x2F;&#x2F; Not cached.<br>  &#x2F;&#x2F; Recycle the least recently used (LRU) unused buffer.<br>  for(b &#x3D; bcache.head.prev; b !&#x3D; &amp;bcache.head; b &#x3D; b-&gt;prev){<br>    if(b-&gt;refcnt &#x3D;&#x3D; 0) {<br>      b-&gt;dev &#x3D; dev;<br>      b-&gt;blockno &#x3D; blockno;<br>      b-&gt;valid &#x3D; 0;<br>      b-&gt;refcnt &#x3D; 1;<br>      release(&amp;bcache.lock);<br>      acquiresleep(&amp;b-&gt;lock);<br>      return b;<br>    }<br>  }<br>  panic(“bget: no buffers”);<br>}</p>
+<p><code>bread()</code>函数：</p>
+<ul>
+<li>内部调用了<code>bget</code>函数，该函数保证了返回的已经获取了<code>buf.lock</code>的<code>buf</code></li>
+<li>如果buf还没有获取有效的数据内容，则需要通过<code>virtio_disk_rw()</code>这个函数接口载入数据并将buf的有效位置为1.<code>virtio_disk_rw()</code>函数可以读取磁盘里面的信息,然后把信息传递给</li>
+<li>返回这个buf</li>
+</ul>
+<p>&#x2F;&#x2F; Return a locked buf with the contents of the indicated block.<br>struct buf*<br>bread(uint dev, uint blockno)<br>{<br>  struct buf *b;</p>
+<p>  b &#x3D; bget(dev, blockno);<br>  if(!b-&gt;valid) {<br>    virtio_disk_rw(b, 0);<br>    b-&gt;valid &#x3D; 1;<br>  }<br>  return b;<br>}</p>
+<blockquote>
+<p><code>bwrite()</code>函数把buf中的数据写回磁盘，要求持有<code>buf.lock</code>锁</p>
+</blockquote>
+<p>&#x2F;&#x2F; Write b’s contents to disk.  Must be locked.<br>void<br>bwrite(struct buf *b)<br>{<br>  if(!holdingsleep(&amp;b-&gt;lock))<br>    panic(“bwrite”);<br>  virtio_disk_rw(b, 1);<br>}</p>
+<p><code>brelse()</code>函数：如果调用者完成了对缓冲区的操作，它必须调用<code>brelse</code>来释放它。</p>
+<ul>
+<li>首先需要判断是否持有参数<code>buf</code>的锁；</li>
+<li>如果持有锁则释放该<code>buf</code> 的锁；这样子其他进程就可以访问这个cache了.所以说综上就是一个进程获取了锁并成功进入之后,执行完brelse就可以让下一个进程接着执行.</li>
+<li>获取<code>bcache.lock</code>之后，将buf的引用计数<code>refcnt</code>减1，根据<code>buf</code>的引用计数是否为0来决定是否将<code>buf</code>调整到双链表的表头。</li>
+<li>对缓冲区的移动使得列表按照最近使用(释放)进行排序：列表里的第一个缓冲区是最近被使用的，最后一个则是最近最少被使用的。<code>bget</code>里的两个循环利用了这点：在最坏的情况下，扫描一个已经存在的缓冲区必须处理整个列表，当引用处于良好的位置的时候，先检查最近使用的缓冲区将减少扫描时间。通过反向扫描(跟随<code>prev</code>指针)，对要重新使用的缓冲区的扫描查找到了最少使用的缓冲区。</li>
+</ul>
+<p>&#x2F;&#x2F; Release a locked buffer.<br>&#x2F;&#x2F; Move to the head of the most-recently-used list.<br>void<br>brelse(struct buf *b)<br>{<br>  if(!holdingsleep(&amp;b-&gt;lock))<br>    panic(“brelse”);</p>
+<p>  releasesleep(&amp;b-&gt;lock);</p>
+<p>  acquire(&amp;bcache.lock);<br>  b-&gt;refcnt–;<br>  if (b-&gt;refcnt &#x3D;&#x3D; 0) {<br>    &#x2F;&#x2F; no one is waiting for it.<br>    b-&gt;next-&gt;prev &#x3D; b-&gt;prev;<br>    b-&gt;prev-&gt;next &#x3D; b-&gt;next;<br>    b-&gt;next &#x3D; bcache.head.next;<br>    b-&gt;prev &#x3D; &amp;bcache.head;<br>    bcache.head.next-&gt;prev &#x3D; b;<br>    bcache.head.next &#x3D; b;<br>  }</p>
+<p>  release(&amp;bcache.lock);<br>}</p>
+<blockquote>
+<p><code>bpin</code>和<code>bunpin</code>用于调整引用计数<code>refcnt</code>.pin就是+1,unpin就是-1.</p>
+</blockquote>
+<p>void<br>bpin(struct buf *b) {<br>  acquire(&amp;bcache.lock);<br>  b-&gt;refcnt++;<br>  release(&amp;bcache.lock);<br>}</p>
+<p>void<br>bunpin(struct buf *b) {<br>  acquire(&amp;bcache.lock);<br>  b-&gt;refcnt–;<br>  release(&amp;bcache.lock);<br>}</p>
+<h2 id="3-Log层"><a href="#3-Log层" class="headerlink" title="3. Log层"></a>3. Log层</h2><p><strong>前言</strong></p>
+<p>在文件系统的设计里最有趣的问题之一是故障恢复。许多文件系统的操作包含了多次写磁盘的操作，在一串写操作之后的崩溃使得磁盘上的文件系统处于不一致的状态。</p>
+<p>xv6系统调用不直接写入硬盘上文件系统的数据结构。相反，它把一个描述放在磁盘上，这个描述是它在一个<code>log</code>里所期望的所有磁盘写操作。一旦系统调用日志记录了所有的写操作，它往磁盘上写入一个特殊的<code>commit</code>记录用来表示那个日志包含了一个完整的操作。那时系统调用才会把所有的写操作写入到磁盘文件系统里的数据结构中。当那些写操作都完成后，系统调用删除磁盘上的日志。</p>
+<p>如果系统崩溃并重启，在运行任何进程之前，文件系统代码按如下描述从崩溃中恢复：如果日志被标记为包含一个完整的操作，则恢复代码把写操作复制到磁盘文件系统。如果日志不是标记为包含完整的操作，恢复代码忽略这个日志。恢复代码最后删除日志完成所有的操作。</p>
+<p><strong>超级块结构体定义以及磁盘布局</strong></p>
+<p>&#x2F;&#x2F; Disk layout:<br>&#x2F;&#x2F; [ boot block  super block  log  inode blocks<br>&#x2F;&#x2F;                                          free bit map  data blocks]<br>&#x2F;&#x2F;<br>&#x2F;&#x2F; mkfs computes the super block and builds an initial file system. The<br>&#x2F;&#x2F; super block describes the disk layout:<br>struct superblock {<br>  uint magic;        &#x2F;&#x2F; Must be FSMAGIC<br>  uint size;         &#x2F;&#x2F; Size of file system image (blocks)<br>  uint nblocks;      &#x2F;&#x2F; Number of data blocks<br>  uint ninodes;      &#x2F;&#x2F; Number of inodes.<br>  uint nlog;         &#x2F;&#x2F; Number of log blocks<br>  uint logstart;     &#x2F;&#x2F; Block number of first log block<br>  uint inodestart;   &#x2F;&#x2F; Block number of first inode block<br>  uint bmapstart;    &#x2F;&#x2F; Block number of first free map block<br>};</p>
+<h3 id="3-1-Log层结构体定义"><a href="#3-1-Log层结构体定义" class="headerlink" title="3.1 Log层结构体定义"></a>3.1 Log层结构体定义</h3><blockquote>
+<p>这个数据结构和磁盘上的<code>log</code>区域一一对应的。磁盘上的<code>log</code>区域由<code>log.start</code>开始的连续<code>log.size</code>个<code>block</code>组成。第一个<code>block</code>即为<code>logheader</code>，待写磁盘块的个数记录在<code>logheader.n</code>中，待写磁盘块号记录在<code>block</code>数组中。<code>log.dev</code>表示该<code>log</code>位于哪一个磁盘（xv6实际上只有一个）。<code>log.outstanding</code>记录了目前有多少个进程正在并行地对磁盘进行写。</p>
+</blockquote>
+<p>&#x2F;&#x2F; Contents of the header block, used for both the on-disk header block<br>&#x2F;&#x2F; and to keep track in memory of logged block# before commit.<br>struct logheader {<br>  int n;<br>  int block[LOGSIZE];<br>};</p>
+<p>struct log {<br>  struct spinlock lock;<br>  int start;<br>  int size;<br>  int outstanding; &#x2F;&#x2F; how many FS sys calls are executing.<br>  int committing;  &#x2F;&#x2F; in commit(), please wait.<br>  int dev;<br>  struct logheader lh;<br>};</p>
+<h3 id="3-2-Log层函数的定义"><a href="#3-2-Log层函数的定义" class="headerlink" title="3.2 Log层函数的定义"></a>3.2 Log层函数的定义</h3><blockquote>
+<p><code>initlog</code>函数：使用超级块中的字段初始化log。</p>
+</blockquote>
+<p>void<br>initlog(int dev, struct superblock *sb)<br>{<br>  if (sizeof(struct logheader) &gt;&#x3D; BSIZE)<br>    panic(“initlog: too big logheader”);</p>
+<p>  initlock(&amp;log.lock, “log”);<br>  log.start &#x3D; sb-&gt;logstart;<br>  log.size &#x3D; sb-&gt;nlog;<br>  log.dev &#x3D; dev;<br>  recover_from_log();<br>}</p>
+<p><code>recover_from_log</code>函数，根据函数名称应该是根据之前写入磁盘的日志信息恢复磁盘数据的操作</p>
+<ul>
+<li>从磁盘读取log header</li>
+<li>将提交的日志写入磁盘</li>
+<li>清空日志记录</li>
+</ul>
+<p>static void<br>recover_from_log(void)<br>{<br>  read_head();<br>  install_trans(1); &#x2F;&#x2F; if committed, copy from log to disk<br>  log.lh.n &#x3D; 0;<br>  write_head(); &#x2F;&#x2F; clear the log<br>}</p>
+<blockquote>
+<p>从磁盘的读取<code>log header</code>到内存中，位于log所在磁盘块的第一个磁盘块</p>
+</blockquote>
+<p>&#x2F;&#x2F; Read the log header from disk into the in-memory log header<br>static void<br>read_head(void)<br>{<br>  struct buf *buf &#x3D; bread(log.dev, log.start);<br>  struct logheader *lh &#x3D; (struct logheader *) (buf-&gt;data);<br>  int i;<br>  log.lh.n &#x3D; lh-&gt;n;<br>  for (i &#x3D; 0; i &lt; log.lh.n; i++) {<br>    log.lh.block[i] &#x3D; lh-&gt;block[i];<br>  }<br>  brelse(buf);<br>}</p>
+<blockquote>
+<p>recovering的作用是啥？</p>
+</blockquote>
+<p>&#x2F;&#x2F; Copy committed blocks from log to their home location<br>static void<br>install_trans(int recovering)<br>{<br>  int tail;</p>
+<p>  for (tail &#x3D; 0; tail &lt; log.lh.n; tail++) {<br>    struct buf *lbuf &#x3D; bread(log.dev, log.start+tail+1); &#x2F;&#x2F; read log block<br>    struct buf *dbuf &#x3D; bread(log.dev, log.lh.block[tail]); &#x2F;&#x2F; read dst<br>    memmove(dbuf-&gt;data, lbuf-&gt;data, BSIZE);  &#x2F;&#x2F; copy block to dst<br>    bwrite(dbuf);  &#x2F;&#x2F; write dst to disk<br>    if(recovering &#x3D;&#x3D; 0)<br>      bunpin(dbuf);<br>    brelse(lbuf);<br>    brelse(dbuf);<br>  }<br>}</p>
+<p><code>begin_op()</code>函数：发起写请求，任何对bcache中的block进行写操作之前都需要调用这个函数。</p>
+<ul>
+<li>如果日志处于commit状态，则需要等待；</li>
+<li>否则判断本次写操作是否会使得transaction需要写的磁盘块超出LOGSIZE；</li>
+<li>如果没有超过则将<code>log.outstanding</code>字段加1；</li>
+<li>如果超过则需要等待。</li>
+</ul>
+<p>&#x2F;&#x2F; called at the start of each FS system call.<br>void<br>begin_op(void)<br>{<br>  acquire(&amp;log.lock);<br>  while(1){<br>    if(log.committing){<br>      sleep(&amp;log, &amp;log.lock);<br>    } else if(log.lh.n + (log.outstanding+1)*MAXOPBLOCKS &gt; LOGSIZE){<br>      &#x2F;&#x2F; this op might exhaust log space; wait for commit.<br>      sleep(&amp;log, &amp;log.lock);<br>    } else {<br>      log.outstanding +&#x3D; 1;<br>      release(&amp;log.lock);<br>      break;<br>    }<br>  }<br>}</p>
+<ul>
+<li>在结束写请求的时候调用<code>end_op()</code>函数，将<code>log.outstanding</code>字段减1；</li>
+<li>如果<code>log.committing</code>字段为1，表面日志处于提交状态，抛出异常；</li>
+<li>如果所有的进程都结束了写请求，则将<code>log.committing</code>字段以及<code>do_commit</code>置为1；</li>
+<li>如果<code>do_commit</code>为1则调用commit函数，将本轮进程写的结果写回磁盘</li>
+</ul>
+<p>&#x2F;&#x2F; called at the end of each FS system call.<br>&#x2F;&#x2F; commits if this was the last outstanding operation.<br>void<br>end_op(void)<br>{<br>  int do_commit &#x3D; 0;</p>
+<p>  acquire(&amp;log.lock);<br>  log.outstanding -&#x3D; 1;<br>  if(log.committing)<br>    panic(“log.committing”);<br>  if(log.outstanding &#x3D;&#x3D; 0){<br>    do_commit &#x3D; 1;<br>    log.committing &#x3D; 1;<br>  } else {<br>    &#x2F;&#x2F; begin_op() may be waiting for log space,<br>    &#x2F;&#x2F; and decrementing log.outstanding has decreased<br>    &#x2F;&#x2F; the amount of reserved space.<br>    wakeup(&amp;log);<br>  }<br>  release(&amp;log.lock);</p>
+<p>  if(do_commit){<br>    &#x2F;&#x2F; call commit w&#x2F;o holding locks, since not allowed<br>    &#x2F;&#x2F; to sleep with locks.<br>    commit();<br>    acquire(&amp;log.lock);<br>    log.committing &#x3D; 0;<br>    wakeup(&amp;log);<br>    release(&amp;log.lock);<br>  }<br>}</p>
+<p><code>log_write</code>函数用于把块修改写入内存中的log</p>
+<p>通常情况下，我们调用<code>bread</code>函数读取一个块，然后对块的内容进行了修改，然后调用<code>brelse</code>释放这个块。**问题在于log怎么知道哪些块需要写回呢？得用<code>logheader</code>来记录，所以必须有个函数来写<code>logheader</code>记录块的修改，这个函数就是<code>log_write</code>**。</p>
+<ul>
+<li>如果是第一次修改这个块，那么执行<code>log.lh.n++</code>操作；</li>
+<li>当一个块在单个事务中被多次写入时，<code>log_write</code>会发现它，并在日志里为那个块分配相同的位置。这个优化被称为<strong>合并</strong>(absorption)；</li>
+</ul>
+<p>void<br>log_write(struct buf *b)<br>{<br>  int i;</p>
+<p>  acquire(&amp;log.lock);<br>  if (log.lh.n &gt;&#x3D; LOGSIZE  log.lh.n &gt;&#x3D; log.size - 1)<br>    panic(“too big a transaction”);<br>  if (log.outstanding &lt; 1)<br>    panic(“log_write outside of trans”);</p>
+<p>  for (i &#x3D; 0; i &lt; log.lh.n; i++) {<br>    if (log.lh.block[i] &#x3D;&#x3D; b-&gt;blockno)   &#x2F;&#x2F; log absorption<br>      break;<br>  }<br>  log.lh.block[i] &#x3D; b-&gt;blockno;<br>  if (i &#x3D;&#x3D; log.lh.n) {  &#x2F;&#x2F; Add new block to log?<br>    bpin(b);<br>    log.lh.n++;<br>  }<br>  release(&amp;log.lock);<br>}</p>
+<p><code>commit</code>函数可以分为几个阶段：</p>
+<ul>
+<li>把内存中需要修改的block写回磁盘的log区域<code>(write_log)</code></li>
+<li>把内存中<code>logheader</code>写回磁盘的log区域头<code>(write_head)</code></li>
+<li>把log区域的磁盘块写回到磁盘的相应位置<code>(install_trans)</code></li>
+<li>把磁盘<code>log</code>区域头标记需要写回的<code>block</code>数目的位置清零<code>log.lh.n = 0 &amp; write_head</code></li>
+</ul>
+<p>static void<br>commit()<br>{<br>  if (log.lh.n &gt; 0) {<br>    write_log();     &#x2F;&#x2F; Write modified blocks from cache to log<br>    write_head();    &#x2F;&#x2F; Write header to disk – the real commit<br>    install_trans(0); &#x2F;&#x2F; Now install writes to home locations<br>    log.lh.n &#x3D; 0;<br>    write_head();    &#x2F;&#x2F; Erase the transaction from the log<br>  }<br>}</p>
+<p>&#x2F;&#x2F; Copy modified blocks from cache to log.<br>static void<br>write_log(void)<br>{<br>  int tail;</p>
+<p>  for (tail &#x3D; 0; tail &lt; log.lh.n; tail++) {<br>    struct buf *to &#x3D; bread(log.dev, log.start+tail+1); &#x2F;&#x2F; log block<br>    struct buf *from &#x3D; bread(log.dev, log.lh.block[tail]); &#x2F;&#x2F; cache block<br>    memmove(to-&gt;data, from-&gt;data, BSIZE);<br>    bwrite(to);  &#x2F;&#x2F; write the log<br>    brelse(from);<br>    brelse(to);<br>  }<br>}</p>
+<h3 id="4-inode层"><a href="#4-inode层" class="headerlink" title="4. inode层"></a>4. inode层</h3><blockquote>
+<p>磁盘上的inode被填充在一个被称为inode块的连续磁盘区域上。每个inode都是一样大小，所以给定一个编号n，很容易就找到磁盘上的第n个inode</p>
+</blockquote>
+<h4 id="4-1-两个分配和回收磁盘块的函数"><a href="#4-1-两个分配和回收磁盘块的函数" class="headerlink" title="4.1 两个分配和回收磁盘块的函数"></a>4.1 两个分配和回收磁盘块的函数</h4><blockquote>
+<p>遍历bitmap，分配或者回收block</p>
+</blockquote>
+<p>&#x2F;&#x2F; Allocate a zeroed disk block.<br>static uint<br>balloc(uint dev)<br>{<br>  int b, bi, m;<br>  struct buf *bp;</p>
+<p>  bp &#x3D; 0;<br>  for(b &#x3D; 0; b &lt; sb.size; b +&#x3D; BPB){<br>    bp &#x3D; bread(dev, BBLOCK(b, sb));<br>    for(bi &#x3D; 0; bi &lt; BPB &amp;&amp; b + bi &lt; sb.size; bi++){<br>      m &#x3D; 1 &lt;&lt; (bi % 8);<br>      if((bp-&gt;data[bi&#x2F;8] &amp; m) &#x3D;&#x3D; 0){  &#x2F;&#x2F; Is block free?<br>        bp-&gt;data[bi&#x2F;8] &#x3D; m;  &#x2F;&#x2F; Mark block in use.<br>        log_write(bp);<br>        brelse(bp);<br>        bzero(dev, b + bi);<br>        return b + bi;<br>      }<br>    }<br>    brelse(bp);<br>  }<br>  panic(“balloc: out of blocks”);<br>}</p>
+<p>&#x2F;&#x2F; Free a disk block.<br>static void<br>bfree(int dev, uint b)<br>{<br>  struct buf *bp;<br>  int bi, m;</p>
+<p>  bp &#x3D; bread(dev, BBLOCK(b, sb));<br>  bi &#x3D; b % BPB;<br>  m &#x3D; 1 &lt;&lt; (bi % 8);<br>  if((bp-&gt;data[bi&#x2F;8] &amp; m) &#x3D;&#x3D; 0)<br>    panic(“freeing free block”);<br>  bp-&gt;data[bi&#x2F;8] &amp;&#x3D; ~m;<br>  log_write(bp);<br>  brelse(bp);<br>}</p>
+<h4 id="4-2-inode层的数据结构定义"><a href="#4-2-inode层的数据结构定义" class="headerlink" title="4.2 inode层的数据结构定义"></a>4.2 inode层的数据结构定义</h4><blockquote>
+<p><strong>磁盘上 i 结点结构定义</strong></p>
+<p>磁盘上的inode通过<code>struct dinode</code>来定义。<code>type</code>字段区分了文件、目录、和特殊文件(设备)。如类型值为0则表示磁盘inode是空闲的。字段<code>nlink</code>记录了引用当前inode的目录条目的数量，用以识别这个磁盘inode和它的数据块何时应该被释放。<code>size</code>字段记录了文件内容的字节数。<code>addrs</code>数组记录了保存了文件内容的磁盘块的块号，<code>addrs</code>里的前<code>NDIRECT</code>个块被称为<strong>直接块</strong>(direct blocks)；第<code>NDIRECT+1</code>个块记录了<code>NINDIRECT</code>个块的数据，它被称为<strong>间接块</strong>(indirect block)。</p>
+<p>对数据结构中 <code>major</code>、<code>minor</code> 字段的解释：</p>
+<p>在Unix系系统中，一切皆是文件。所有硬盘，键盘，网卡等设备都有文件来代表，对应着<code>/dev/</code>下面的文件。对于应用程序来说，可以像对待普通文件一样打开、关闭、读写这些设备文件。但是，这种文件名比如：<code>/dev/sda</code> 、<code>/dev/raw/raw1</code>都是用户空间名称，OS <code>Kernel</code>根本不知道这个名称代指什么。在内核空间是通过<code>major</code>、<code>minor``device number</code>来区分设备的。</p>
+<p>**<code>major device number</code>**：可以看做是设备驱动程序，被同一设备驱动程序管理的设备有相同的<code>major device number</code>。这个数字实际是Kernel 中<code>device driver table</code>的索引。这个表保存着不同的设备驱动程序。</p>
+<p>**<code>minor device number</code>**：代表被访问的具体设备。也就是说，Kernel根据<code>major device number</code>找到设备驱动程序，然后再从<code>minor device number</code>获得设备位置等属性。</p>
+</blockquote>
+<p>&#x2F;&#x2F; 下面的宏定义用于type字段，type &#x3D; 0表示该dinode尚未分配<br>#define T_DIR     1<br>#define T_FILE    2<br>#define T_DEVICE  3<br>&#x2F;&#x2F; On-disk inode structure<br>struct dinode {<br>  short type;           &#x2F;&#x2F; File type<br>  short major;          &#x2F;&#x2F; Major device number (T_DEVICE only)<br>  short minor;          &#x2F;&#x2F; Minor device number (T_DEVICE only)<br>  short nlink;          &#x2F;&#x2F; Number of links to inode in file system<br>  uint size;            &#x2F;&#x2F; Size of file (bytes)<br>  uint addrs[NDIRECT+1];   &#x2F;&#x2F; Data block addresses<br>};</p>
+<blockquote>
+<p>内存中需保存的i结点信息数据结构定义，除了从磁盘读取的inode信息，还定义了一些其他的字段。内核把活动inode的集合保存在内存中，即<code>struct inode</code>。<code>ref</code>字段记录了C指针引用内存里inode的次数，当那个计数降为0的时候内核就会从内存中丢弃这个inode。<code>iget</code>和<code>iput</code>函数请求和释放到一个inode的指针，这会修改这个引用计数。</p>
+</blockquote>
+<p>&#x2F;&#x2F; in-memory copy of an inode<br>struct inode {<br>  uint dev;           &#x2F;&#x2F; Device number<br>  uint inum;          &#x2F;&#x2F; Inode number<br>  int ref;            &#x2F;&#x2F; Reference count<br>  struct sleeplock lock; &#x2F;&#x2F; protects everything below here<br>  int valid;          &#x2F;&#x2F; inode has been read from disk?</p>
+<p>  short type;         &#x2F;&#x2F; copy of disk inode<br>  short major;<br>  short minor;<br>  short nlink;<br>  uint size;<br>  uint addrs[NDIRECT+1];<br>};</p>
+<h4 id="4-3-inode层函数定义"><a href="#4-3-inode层函数定义" class="headerlink" title="4.3 inode层函数定义"></a>4.3 inode层函数定义</h4><blockquote>
+<p><code>iget()</code>函数</p>
+<p>遍历<code>itable</code>寻找 i 结点是否已经被加载至内存中，如是则将该 i 结点的<code>ref</code>引用计数加1；在遍历的过程中使用empty对空的 i 结点进行保存；如果 i 结点还未被加载至内存则使用空 i 结点对需要获取的 i 结点进行保存。最后返回对应的 i 结点。</p>
+</blockquote>
+<p>struct {<br>  struct spinlock lock;<br>  struct inode inode[NINODE];<br>} itable;<br>&#x2F;&#x2F; Find the inode with number inum on device dev<br>&#x2F;&#x2F; and return the in-memory copy. Does not lock<br>&#x2F;&#x2F; the inode and does not read it from disk.<br>static struct inode*<br>iget(uint dev, uint inum)<br>{<br>  struct inode *ip, *empty;</p>
+<p>  acquire(&amp;itable.lock);</p>
+<p>  &#x2F;&#x2F; Is the inode already in the table?<br>  empty &#x3D; 0;<br>  for(ip &#x3D; &amp;itable.inode[0]; ip &lt; &amp;itable.inode[NINODE]; ip++){<br>    if(ip-&gt;ref &gt; 0 &amp;&amp; ip-&gt;dev &#x3D;&#x3D; dev &amp;&amp; ip-&gt;inum &#x3D;&#x3D; inum){<br>      ip-&gt;ref++;<br>      release(&amp;itable.lock);<br>      return ip;<br>    }<br>    if(empty &#x3D;&#x3D; 0 &amp;&amp; ip-&gt;ref &#x3D;&#x3D; 0)    &#x2F;&#x2F; Remember empty slot.<br>      empty &#x3D; ip;<br>  }</p>
+<p>  &#x2F;&#x2F; Recycle an inode entry.<br>  if(empty &#x3D;&#x3D; 0)<br>    panic(“iget: no inodes”);</p>
+<p>  ip &#x3D; empty;<br>  ip-&gt;dev &#x3D; dev;<br>  ip-&gt;inum &#x3D; inum;<br>  ip-&gt;ref &#x3D; 1;<br>  ip-&gt;valid &#x3D; 0;<br>  release(&amp;itable.lock);</p>
+<p>  return ip;<br>}</p>
+<blockquote>
+<p><code>ilock</code>函数用于获取ip所☞的 i 结点的锁，同时如果该 i 结点的内容处于无效状态时，需要从磁盘中读取对应设备和结点号的 i 结点，把相关字段拷贝至内存 i 结点中，将该 i 结点的有效位置为1，保证 i 结点的内容是有效的。</p>
+</blockquote>
+<p>&#x2F;&#x2F; Inodes per block.<br>#define IPB           (BSIZE &#x2F; sizeof(struct dinode))</p>
+<p>&#x2F;&#x2F; Block containing inode i<br>#define IBLOCK(i, sb)     ((i) &#x2F; IPB + sb.inodestart)</p>
+<p>&#x2F;&#x2F; Lock the given inode.<br>&#x2F;&#x2F; Reads the inode from disk if necessary.<br>void<br>ilock(struct inode *ip)<br>{<br>  struct buf *bp;<br>  struct dinode *dip;</p>
+<p>  if(ip &#x3D;&#x3D; 0  ip-&gt;ref &lt; 1)<br>    panic(“ilock”);</p>
+<p>  acquiresleep(&amp;ip-&gt;lock);</p>
+<p>  if(ip-&gt;valid &#x3D;&#x3D; 0){<br>    bp &#x3D; bread(ip-&gt;dev, IBLOCK(ip-&gt;inum, sb));<br>    dip &#x3D; (struct dinode*)bp-&gt;data + ip-&gt;inum%IPB;<br>    ip-&gt;type &#x3D; dip-&gt;type;<br>    ip-&gt;major &#x3D; dip-&gt;major;<br>    ip-&gt;minor &#x3D; dip-&gt;minor;<br>    ip-&gt;nlink &#x3D; dip-&gt;nlink;<br>    ip-&gt;size &#x3D; dip-&gt;size;<br>    memmove(ip-&gt;addrs, dip-&gt;addrs, sizeof(ip-&gt;addrs));<br>    brelse(bp);<br>    ip-&gt;valid &#x3D; 1;<br>    if(ip-&gt;type &#x3D;&#x3D; 0)<br>      panic(“ilock: no type”);<br>  }<br>}</p>
+<blockquote>
+<p><code>iunlock()</code> 函数：释放<code>ip</code>所☞的 i 结点的锁</p>
+</blockquote>
+<p>&#x2F;&#x2F; Unlock the given inode.<br>void<br>iunlock(struct inode *ip)<br>{<br>  if(ip &#x3D;&#x3D; 0  !holdingsleep(&amp;ip-&gt;lock)  ip-&gt;ref &lt; 1)<br>    panic(“iunlock”);</p>
+<p>  releasesleep(&amp;ip-&gt;lock);<br>}</p>
+<blockquote>
+<p><code>idup()</code>函数类似于<code>bpin</code> ，<code>iput()</code>函数类似于<code>brelse</code>函数。</p>
+<p>当<code>iput</code>函数判断自己是最后一个持有该inode指针、该inode的内容是有效的、该inode的引用链接数为0时，会将该inode进行删除。</p>
+</blockquote>
+<p>&#x2F;&#x2F; Increment reference count for ip.<br>&#x2F;&#x2F; Returns ip to enable ip &#x3D; idup(ip1) idiom.<br>struct inode*<br>idup(struct inode *ip)<br>{<br>  acquire(&amp;itable.lock);<br>  ip-&gt;ref++;<br>  release(&amp;itable.lock);<br>  return ip;<br>}<br>&#x2F;&#x2F; Drop a reference to an in-memory inode.<br>&#x2F;&#x2F; If that was the last reference, the inode table entry can<br>&#x2F;&#x2F; be recycled.<br>&#x2F;&#x2F; If that was the last reference and the inode has no links<br>&#x2F;&#x2F; to it, free the inode (and its content) on disk.<br>&#x2F;&#x2F; All calls to iput() must be inside a transaction in<br>&#x2F;&#x2F; case it has to free the inode.<br>void<br>iput(struct inode *ip)<br>{<br>  acquire(&amp;itable.lock);</p>
+<p>  if(ip-&gt;ref &#x3D;&#x3D; 1 &amp;&amp; ip-&gt;valid &amp;&amp; ip-&gt;nlink &#x3D;&#x3D; 0){<br>    &#x2F;&#x2F; inode has no links and no other references: truncate and free.</p>
+<pre><code>// ip-&gt;ref == 1 means no other process can have ip locked,
+// so this acquiresleep() won&#39;t block (or deadlock).
+acquiresleep(&amp;ip-&gt;lock);
+
+release(&amp;itable.lock);
+
+itrunc(ip);
+ip-&gt;type = 0;
+iupdate(ip);
+ip-&gt;valid = 0;
+
+releasesleep(&amp;ip-&gt;lock);
+
+acquire(&amp;itable.lock);
+</code></pre>
+<p>  }</p>
+<p>  ip-&gt;ref–;<br>  release(&amp;itable.lock);<br>}</p>
+<blockquote>
+<p><code>itrunc()</code>函数先释放直接块，再释放间接块里所列出的那些块，最后再释放间接块自身。</p>
+</blockquote>
+<p>&#x2F;&#x2F; Truncate(截断) inode (discard contents).<br>&#x2F;&#x2F; Caller must hold ip-&gt;lock.<br>void<br>itrunc(struct inode *ip)<br>{<br>  int i, j;<br>  struct buf *bp;<br>  uint *a;<br>  &#x2F;&#x2F; 遍历前面NDIRECT个直接块，并进行释放块操作<br>  for(i &#x3D; 0; i &lt; NDIRECT; i++){<br>    if(ip-&gt;addrs[i]){<br>      bfree(ip-&gt;dev, ip-&gt;addrs[i]);<br>      ip-&gt;addrs[i] &#x3D; 0;<br>    }<br>  }</p>
+<p>  if(ip-&gt;addrs[NDIRECT]){<br>    bp &#x3D; bread(ip-&gt;dev, ip-&gt;addrs[NDIRECT]);<br>    a &#x3D; (uint*)bp-&gt;data;<br>    &#x2F;&#x2F; 遍历后面NINDIRECT个间接块，进行释放操作<br>    for(j &#x3D; 0; j &lt; NINDIRECT; j++){<br>      if(a[j])<br>        bfree(ip-&gt;dev, a[j]);<br>    }<br>    brelse(bp);<br>    bfree(ip-&gt;dev, ip-&gt;addrs[NDIRECT]);<br>    ip-&gt;addrs[NDIRECT] &#x3D; 0;<br>  }</p>
+<p>  ip-&gt;size &#x3D; 0;<br>  iupdate(ip);<br>}</p>
+<blockquote>
+<p><code>bmap()</code>函数用于返回第<code>bn</code>个数据块的硬盘块号，参数<code>ip</code>用于表示inode的指针。如果<code>ip</code>里没有那个块，<code>bmap</code>会给它分配一个。</p>
+<p>(注：由于一个块的大小<code>BSIZE</code>是1024字节且<code>NDIRECT</code>是12，所以一个文件可以直接载入的内容为12k字节。由于<code>NINDIRECT</code>是256，所以读取间接块后可以载入的内容是256k字节。)</p>
+</blockquote>
+<p>static uint<br>bmap(struct inode *ip, uint bn)<br>{<br>  uint addr, *a;<br>  struct buf *bp;<br>  &#x2F;&#x2F; 判断是否为直接块<br>  if(bn &lt; NDIRECT){<br>    if((addr &#x3D; ip-&gt;addrs[bn]) &#x3D;&#x3D; 0)<br>      ip-&gt;addrs[bn] &#x3D; addr &#x3D; balloc(ip-&gt;dev);<br>    return addr;<br>  }<br>  bn -&#x3D; NDIRECT;<br>  &#x2F;&#x2F; 判断是否是间接块<br>  if(bn &lt; NINDIRECT){<br>    &#x2F;&#x2F; Load indirect block, allocating if necessary.<br>    if((addr &#x3D; ip-&gt;addrs[NDIRECT]) &#x3D;&#x3D; 0)<br>      ip-&gt;addrs[NDIRECT] &#x3D; addr &#x3D; balloc(ip-&gt;dev);<br>    bp &#x3D; bread(ip-&gt;dev, addr);<br>    a &#x3D; (uint*)bp-&gt;data;<br>    if((addr &#x3D; a[bn]) &#x3D;&#x3D; 0){<br>      a[bn] &#x3D; addr &#x3D; balloc(ip-&gt;dev);<br>      log_write(bp);<br>    }<br>    brelse(bp);<br>    return addr;<br>  }</p>
+<p>  panic(“bmap: out of range”);<br>}</p>
+<blockquote>
+<p><code>writei()</code>函数和<code>readi()</code>函数</p>
+<p>比较简单，首先检查文件偏移和写入&#x2F;读取字节大小是否合法，合法后对数据进行循环拷贝.写入时，读取块，将源数据拷贝至缓冲区；读出时，读取块，将块数据拷贝至对应的区域。</p>
+</blockquote>
+<p>&#x2F;&#x2F; Write data to inode.<br>&#x2F;&#x2F; Caller must hold ip-&gt;lock.<br>&#x2F;&#x2F; If user_src&#x3D;&#x3D;1, then src is a user virtual address;<br>&#x2F;&#x2F; otherwise, src is a kernel address.<br>&#x2F;&#x2F; Returns the number of bytes successfully written.<br>&#x2F;&#x2F; If the return value is less than the requested n,<br>&#x2F;&#x2F; there was an error of some kind.<br>int<br>writei(struct inode *ip, int user_src, uint64 src, uint off, uint n)<br>{<br>  uint tot, m;<br>  struct buf *bp;</p>
+<p>  if(off &gt; ip-&gt;size  off + n &lt; off)<br>    return -1;<br>  if(off + n &gt; MAXFILE*BSIZE)<br>    return -1;</p>
+<p>  for(tot&#x3D;0; tot&lt;n; tot+&#x3D;m, off+&#x3D;m, src+&#x3D;m){<br>    bp &#x3D; bread(ip-&gt;dev, bmap(ip, off&#x2F;BSIZE));<br>    m &#x3D; min(n - tot, BSIZE - off%BSIZE);<br>    if(either_copyin(bp-&gt;data + (off % BSIZE), user_src, src, m) &#x3D;&#x3D; -1) {<br>      brelse(bp);<br>      break;<br>    }<br>    log_write(bp);<br>    brelse(bp);<br>  }</p>
+<p>  if(off &gt; ip-&gt;size)<br>    ip-&gt;size &#x3D; off;</p>
+<p>  &#x2F;&#x2F; write the i-node back to disk even if the size didn’t change<br>  &#x2F;&#x2F; because the loop above might have called bmap() and added a new<br>  &#x2F;&#x2F; block to ip-&gt;addrs[].<br>  iupdate(ip);</p>
+<p>  return tot;<br>}</p>
+<p>int<br>readi(struct inode *ip, int user_dst, uint64 dst, uint off, uint n)<br>{<br>  uint tot, m;<br>  struct buf *bp;</p>
+<p>  if(off &gt; ip-&gt;size  off + n &lt; off)<br>    return 0;<br>  if(off + n &gt; ip-&gt;size)<br>    n &#x3D; ip-&gt;size - off;</p>
+<p>  for(tot&#x3D;0; tot&lt;n; tot+&#x3D;m, off+&#x3D;m, dst+&#x3D;m){<br>    bp &#x3D; bread(ip-&gt;dev, bmap(ip, off&#x2F;BSIZE));<br>    m &#x3D; min(n - tot, BSIZE - off%BSIZE);<br>    if(either_copyout(user_dst, dst, bp-&gt;data + (off % BSIZE), m) &#x3D;&#x3D; -1) {<br>      brelse(bp);<br>      tot &#x3D; -1;<br>      break;<br>    }<br>    brelse(bp);<br>  }<br>  return tot;<br>}</p>
+<h3 id="4-Directory层"><a href="#4-Directory层" class="headerlink" title="4. Directory层"></a>4. Directory层</h3><h4 id="4-1-directory层结构体定义"><a href="#4-1-directory层结构体定义" class="headerlink" title="4.1 directory层结构体定义"></a>4.1 directory层结构体定义</h4><blockquote>
+<p><code>inum</code>：该目录项对应的inode号</p>
+<p><code>name</code>：该目录项的名称</p>
+</blockquote>
+<p>struct dirent {<br>  ushort inum;<br>  char name[DIRSIZ];<br>};</p>
+<h4 id="4-2-directory层函数定义"><a href="#4-2-directory层函数定义" class="headerlink" title="4.2 directory层函数定义"></a>4.2 directory层函数定义</h4><blockquote>
+<p>函数<code>dirloopup()</code>在目录 i 结点所包含的下一层的所有文件中找到名称为name的文件目录项，首先判断inode的type是否为T_DIR (目录) ，如果不是则抛出异常；接着循环读取inode所☞的目录文件，读取每一个目录项，如果找到名字为name的目录项，则查找 该目录项指向的inode并返回该inode。</p>
+</blockquote>
+<p>&#x2F;&#x2F; Look for a directory entry in a directory.<br>&#x2F;&#x2F; If found, set *poff to byte offset of entry.<br>struct inode*<br>dirlookup(struct inode *dp, char *name, uint *poff)<br>{<br>  uint off, inum;<br>  struct dirent de;</p>
+<p>  if(dp-&gt;type !&#x3D; T_DIR)<br>    panic(“dirlookup not DIR”);</p>
+<p>  for(off &#x3D; 0; off &lt; dp-&gt;size; off +&#x3D; sizeof(de)){<br>    if(readi(dp, 0, (uint64)&amp;de, off, sizeof(de)) !&#x3D; sizeof(de))<br>      panic(“dirlookup read”);<br>    if(de.inum &#x3D;&#x3D; 0)<br>      continue;<br>    if(namecmp(name, de.name) &#x3D;&#x3D; 0){<br>      &#x2F;&#x2F; entry matches path element<br>      if(poff)<br>        *poff &#x3D; off;<br>      inum &#x3D; de.inum;<br>      return iget(dp-&gt;dev, inum);<br>    }<br>  }</p>
+<p>  return 0;<br>}</p>
+<p><code>namex()</code>函数</p>
+<ul>
+<li><code>namex</code>首先决定路径计算从哪里开始。如果路径是从斜杠开始的，计算从根目录开始；否则，就从当前目录开始；</li>
+<li>用<code>skipelem</code>来依次得到路径里的每个元素；</li>
+<li>每次循环都必须在当前inode(<code>ip</code>)查找<code>name</code>；</li>
+<li>循环首先锁定<code>ip</code>并检查它是否是一个目录，如果不是，查找失败；</li>
+<li>如果这个调用是<code>nameiparent</code>并且这是最后一个路径元素，按照<code>nameiparent</code>的定义，循环终止；</li>
+<li>最后，使用<code>dirlookup</code>查找路径元素，并通过设置<code>ip = next</code>为下一次循环做好准备。当循环遍历完所有的路径元素退出后，<code>namex</code>返回<code>ip</code>；</li>
+</ul>
+<p>&#x2F;&#x2F; Look up and return the inode for a path name.<br>&#x2F;&#x2F; If parent !&#x3D; 0, return the inode for the parent and copy the final<br>&#x2F;&#x2F; path element into name, which must have room for DIRSIZ bytes.<br>&#x2F;&#x2F; Must be called inside a transaction since it calls iput().<br>static struct inode*<br>namex(char *path, int nameiparent, char *name)<br>{<br>  struct inode *ip, *next;</p>
+<p>  if(*path &#x3D;&#x3D; ‘&#x2F;‘)<br>    ip &#x3D; iget(ROOTDEV, ROOTINO);<br>  else<br>    ip &#x3D; idup(myproc()-&gt;cwd);</p>
+<p>  while((path &#x3D; skipelem(path, name)) !&#x3D; 0){<br>    ilock(ip);<br>    if(ip-&gt;type !&#x3D; T_DIR){<br>      iunlockput(ip);<br>      return 0;<br>    }<br>    if(nameiparent &amp;&amp; *path &#x3D;&#x3D; ‘\0’){<br>      &#x2F;&#x2F; Stop one level early.<br>      iunlock(ip);<br>      return ip;<br>    }<br>    if((next &#x3D; dirlookup(ip, name, 0)) &#x3D;&#x3D; 0){<br>      iunlockput(ip);<br>      return 0;<br>    }<br>    iunlockput(ip);<br>    ip &#x3D; next;<br>  }<br>  if(nameiparent){<br>    iput(ip);<br>    return 0;<br>  }<br>  return ip;<br>}<br>&#x2F;&#x2F; Paths</p>
+<p>&#x2F;&#x2F; Copy the next path element from path into name.<br>&#x2F;&#x2F; Return a pointer to the element following the copied one.<br>&#x2F;&#x2F; The returned path has no leading slashes,<br>&#x2F;&#x2F; so the caller can check *path&#x3D;&#x3D;’\0’ to see if the name is the last one.<br>&#x2F;&#x2F; If no name to remove, return 0.<br>&#x2F;&#x2F;<br>&#x2F;&#x2F; Examples:<br>&#x2F;&#x2F;   skipelem(“a&#x2F;bb&#x2F;c”, name) &#x3D; “bb&#x2F;c”, setting name &#x3D; “a”<br>&#x2F;&#x2F;   skipelem(“&#x2F;&#x2F;&#x2F;a&#x2F;&#x2F;bb”, name) &#x3D; “bb”, setting name &#x3D; “a”<br>&#x2F;&#x2F;   skipelem(“a”, name) &#x3D; “”, setting name &#x3D; “a”<br>&#x2F;&#x2F;   skipelem(“”, name) &#x3D; skipelem(“&#x2F;&#x2F;&#x2F;&#x2F;“, name) &#x3D; 0<br>&#x2F;&#x2F;<br>static char*<br>skipelem(char *path, char *name)<br>{<br>  char *s;<br>  int len;<br>  &#x2F;&#x2F; 过滤路径字符串开头所有的’&#x2F;‘<br>  while(*path &#x3D;&#x3D; ‘&#x2F;‘)<br>    path++;<br>  if(*path &#x3D;&#x3D; 0)<br>    return 0;<br>  s &#x3D; path;<br>  while(*path !&#x3D; ‘&#x2F;‘ &amp;&amp; *path !&#x3D; 0)<br>    path++;<br>  len &#x3D; path - s;<br>  if(len &gt;&#x3D; DIRSIZ)<br>    memmove(name, s, DIRSIZ);<br>  else {<br>    memmove(name, s, len);<br>    name[len] &#x3D; 0;<br>  }<br>  while(*path &#x3D;&#x3D; ‘&#x2F;‘)<br>    path++;<br>  return path;<br>}</p>
+<blockquote>
+<p><code>dirlink()</code>函数</p>
+<p>在目录 i 结点dp中添加一个新的名字为name的目录项</p>
+</blockquote>
+<p>&#x2F;&#x2F; Write a new directory entry (name, inum) into the directory dp.<br>int<br>dirlink(struct inode *dp, char *name, uint inum)<br>{<br>  int off;<br>  struct dirent de;<br>  struct inode *ip;</p>
+<p>  &#x2F;&#x2F; Check that name is not present.<br>  if((ip &#x3D; dirlookup(dp, name, 0)) !&#x3D; 0){<br>    iput(ip);<br>    return -1;<br>  }</p>
+<p>  &#x2F;&#x2F; Look for an empty dirent.<br>  for(off &#x3D; 0; off &lt; dp-&gt;size; off +&#x3D; sizeof(de)){<br>    if(readi(dp, 0, (uint64)&amp;de, off, sizeof(de)) !&#x3D; sizeof(de))<br>      panic(“dirlink read”);<br>    if(de.inum &#x3D;&#x3D; 0)<br>      break;<br>  }</p>
+<p>  strncpy(de.name, name, DIRSIZ);<br>  de.inum &#x3D; inum;<br>  if(writei(dp, 0, (uint64)&amp;de, off, sizeof(de)) !&#x3D; sizeof(de))<br>    panic(“dirlink”);</p>
+<p>  return 0;<br>}</p>
+<h3 id="5-file-descriptor层"><a href="#5-file-descriptor层" class="headerlink" title="5. file descriptor层"></a>5. file descriptor层</h3><h4 id="5-1-file-descriptor层的数据结构定义"><a href="#5-1-file-descriptor层的数据结构定义" class="headerlink" title="5.1 file descriptor层的数据结构定义"></a>5.1 file descriptor层的数据结构定义</h4><blockquote>
+<p><code>readable</code>、<code>writable</code>刻画文件的读写权限，<code>off</code>表示文件读写偏移；</p>
+<p><code>ftable</code>管理所有打开的文件</p>
+</blockquote>
+<p>struct file {<br>  enum { FD_NONE, FD_PIPE, FD_INODE, FD_DEVICE } type;<br>  int ref; &#x2F;&#x2F; reference count<br>  char readable;<br>  char writable;<br>  struct pipe *pipe; &#x2F;&#x2F; FD_PIPE<br>  struct inode *ip;  &#x2F;&#x2F; FD_INODE and FD_DEVICE<br>  uint off;          &#x2F;&#x2F; FD_INODE<br>  short major;       &#x2F;&#x2F; FD_DEVICE<br>};</p>
+<p>struct {<br>  struct spinlock lock;<br>  struct file file[NFILE];<br>} ftable;</p>
+<h4 id="5-2-file-descriptor层函数定义"><a href="#5-2-file-descriptor层函数定义" class="headerlink" title="5.2 file descriptor层函数定义"></a>5.2 file descriptor层函数定义</h4><blockquote>
+<p><code>filealloc</code>扫描文件表查找未引用的文件(<code>f-&gt;ref == 0</code>)并返回一个新的引用。</p>
+</blockquote>
+<p>&#x2F;&#x2F; Allocate a file structure.<br>struct file*<br>filealloc(void)<br>{<br>  struct file *f;</p>
+<p>  acquire(&amp;ftable.lock);<br>  for(f &#x3D; ftable.file; f &lt; ftable.file + NFILE; f++){<br>    if(f-&gt;ref &#x3D;&#x3D; 0){<br>      f-&gt;ref &#x3D; 1;<br>      release(&amp;ftable.lock);<br>      return f;<br>    }<br>  }<br>  release(&amp;ftable.lock);<br>  return 0;<br>}</p>
+<blockquote>
+<p><code>filedup</code>递增引用计数。</p>
+</blockquote>
+<p>&#x2F;&#x2F; Increment ref count for file f.<br>struct file*<br>filedup(struct file *f)<br>{<br>  acquire(&amp;ftable.lock);<br>  if(f-&gt;ref &lt; 1)<br>    panic(“filedup”);<br>  f-&gt;ref++;<br>  release(&amp;ftable.lock);<br>  return f;<br>}</p>
+<blockquote>
+<p><code>fileclose</code>递减引用计数。当引用计数降为0，释放底层对应的管道或inode。</p>
+</blockquote>
+<p>&#x2F;&#x2F; Close file f.  (Decrement ref count, close when reaches 0.)<br>void<br>fileclose(struct file *f)<br>{<br>  struct file ff;</p>
+<p>  acquire(&amp;ftable.lock);<br>  if(f-&gt;ref &lt; 1)<br>    panic(“fileclose”);<br>  if(–f-&gt;ref &gt; 0){<br>    release(&amp;ftable.lock);<br>    return;<br>  }<br>  ff &#x3D; *f;<br>  f-&gt;ref &#x3D; 0;<br>  f-&gt;type &#x3D; FD_NONE;<br>  release(&amp;ftable.lock);</p>
+<p>  if(ff.type &#x3D;&#x3D; FD_PIPE){<br>    pipeclose(ff.pipe, ff.writable);<br>  } else if(ff.type &#x3D;&#x3D; FD_INODE  ff.type &#x3D;&#x3D; FD_DEVICE){<br>    begin_op();<br>    iput(ff.ip);<br>    end_op();<br>  }<br>}</p>
+<blockquote>
+<p><code>filestat</code>实现了对文件的<code>stat</code>操作（<code>stat操作是文件/文件系统的详细信息显示</code>）。它只允许操作inode，然后调用<code>stati</code>；最后将数据从内核拷贝至用户。</p>
+</blockquote>
+<p>&#x2F;&#x2F; Get metadata about file f.<br>&#x2F;&#x2F; addr is a user virtual address, pointing to a struct stat.<br>int<br>filestat(struct file *f, uint64 addr)<br>{<br>  struct proc *p &#x3D; myproc();<br>  struct stat st;</p>
+<p>  if(f-&gt;type &#x3D;&#x3D; FD_INODE  f-&gt;type &#x3D;&#x3D; FD_DEVICE){<br>    ilock(f-&gt;ip);<br>    stati(f-&gt;ip, &amp;st);<br>    iunlock(f-&gt;ip);<br>    if(copyout(p-&gt;pagetable, addr, (char *)&amp;st, sizeof(st)) &lt; 0)<br>      return -1;<br>    return 0;<br>  }<br>  return -1;<br>}</p>
+<blockquote>
+<p><code>fileread</code>实现了对文件的<code>read</code>操作。首先检查是否允许<code>readable</code>模式，然后把调用传递给管道或inode的实现。如果文件是一个inode，它使用I&#x2F;O位移作为读操作的位移，然后增加这个位移。管道没有位移的概念。</p>
+</blockquote>
+<p>&#x2F;&#x2F; Read from file f.<br>&#x2F;&#x2F; addr is a user virtual address.<br>int<br>fileread(struct file *f, uint64 addr, int n)<br>{<br>  int r &#x3D; 0;</p>
+<p>  if(f-&gt;readable &#x3D;&#x3D; 0)<br>    return -1;</p>
+<p>  if(f-&gt;type &#x3D;&#x3D; FD_PIPE){<br>    r &#x3D; piperead(f-&gt;pipe, addr, n);<br>  } else if(f-&gt;type &#x3D;&#x3D; FD_DEVICE){<br>    if(f-&gt;major &lt; 0  f-&gt;major &gt;&#x3D; NDEV  !devsw[f-&gt;major].read)<br>      return -1;<br>    r &#x3D; devsw[f-&gt;major].read(1, addr, n);<br>  } else if(f-&gt;type &#x3D;&#x3D; FD_INODE){<br>    ilock(f-&gt;ip);<br>    if((r &#x3D; readi(f-&gt;ip, 1, addr, f-&gt;off, n)) &gt; 0)<br>      f-&gt;off +&#x3D; r;<br>    iunlock(f-&gt;ip);<br>  } else {<br>    panic(“fileread”);<br>  }</p>
+<p>  return r;<br>}</p>
+<blockquote>
+<p><code>filewrite</code>实现了对文件的<code>write</code>操作。首先检查是否允许<code>writeable</code>模式，然后把调用传递给管道或inode的实现。如果文件是一个inode，它使用I&#x2F;O位移作为写操作的位移，然后增加这个位移。管道没有位移的概念。要记得inode函数需要调用者管理锁定。inode的锁定有一个方便的附加效果，即读写位移是自动更新的，因此同时对一个文件的多个写操作不会覆盖彼此的数据，但这些写操作可能会交错在一起。</p>
+</blockquote>
+<p>&#x2F;&#x2F; Write to file f.<br>&#x2F;&#x2F; addr is a user virtual address.<br>int<br>filewrite(struct file *f, uint64 addr, int n)<br>{<br>  int r, ret &#x3D; 0;</p>
+<p>  if(f-&gt;writable &#x3D;&#x3D; 0)<br>    return -1;</p>
+<p>  if(f-&gt;type &#x3D;&#x3D; FD_PIPE){<br>    ret &#x3D; pipewrite(f-&gt;pipe, addr, n);<br>  } else if(f-&gt;type &#x3D;&#x3D; FD_DEVICE){<br>    if(f-&gt;major &lt; 0  f-&gt;major &gt;&#x3D; NDEV  !devsw[f-&gt;major].write)<br>      return -1;<br>    ret &#x3D; devsw[f-&gt;major].write(1, addr, n);<br>  } else if(f-&gt;type &#x3D;&#x3D; FD_INODE){<br>    &#x2F;&#x2F; write a few blocks at a time to avoid exceeding<br>    &#x2F;&#x2F; the maximum log transaction size, including<br>    &#x2F;&#x2F; i-node, indirect block, allocation blocks,<br>    &#x2F;&#x2F; and 2 blocks of slop for non-aligned writes.<br>    &#x2F;&#x2F; this really belongs lower down, since writei()<br>    &#x2F;&#x2F; might be writing a device like the console.<br>    int max &#x3D; ((MAXOPBLOCKS-1-1-2) &#x2F; 2) * BSIZE;<br>    int i &#x3D; 0;<br>    while(i &lt; n){<br>      int n1 &#x3D; n - i;<br>      if(n1 &gt; max)<br>        n1 &#x3D; max;</p>
+<pre><code>  begin\_op();
+  ilock(f-&gt;ip);
+  if ((r = writei(f-&gt;ip, 1, addr + i, f-&gt;off, n1)) &gt; 0)
+    f-&gt;off += r;
+  iunlock(f-&gt;ip);
+  end\_op();
+
+  if(r != n1)&#123;
+    // error from writei
+    break;
+  &#125;
+  i += r;
+&#125;
+ret = (i == n ? n : -1);
+</code></pre>
+<p>  } else {<br>    panic(“filewrite”);<br>  }</p>
+<p>  return ret;<br>}</p>
+<blockquote>
+<p><code>sys_link</code>从获取它的两个字符串参数<code>old</code>和<code>new</code>开始。如果<code>old</code>存在且不是目录，递增它的<code>ip-&gt;nlink</code>计数。然后调用<code>nameiparent</code>来找到<code>new</code>的父目录和最终的路径元素，并创建一个新的目录条目来指向<code>old</code>的inode。新的上级目录必须存在且和inode在同一设备上：inode号在单独的磁盘上有唯一的意义。如果发生了这样的错误，<code>sys_link</code>必须回退且递减<code>ip-&gt;nlink</code>。</p>
+</blockquote>
+<p>&#x2F;&#x2F; Create the path new as a link to the same inode as old.<br>uint64<br>sys_link(void)<br>{<br>  char name[DIRSIZ], new[MAXPATH], old[MAXPATH];<br>  struct inode *dp, *ip;</p>
+<p>  if(argstr(0, old, MAXPATH) &lt; 0  argstr(1, new, MAXPATH) &lt; 0)<br>    return -1;</p>
+<p>  begin_op();<br>  if((ip &#x3D; namei(old)) &#x3D;&#x3D; 0){<br>    end_op();<br>    return -1;<br>  }</p>
+<p>  ilock(ip);<br>  if(ip-&gt;type &#x3D;&#x3D; T_DIR){<br>    iunlockput(ip);<br>    end_op();<br>    return -1;<br>  }</p>
+<p>  ip-&gt;nlink++;<br>  iupdate(ip);<br>  iunlock(ip);</p>
+<p>  if((dp &#x3D; nameiparent(new, name)) &#x3D;&#x3D; 0)<br>    goto bad;<br>  ilock(dp);<br>  if(dp-&gt;dev !&#x3D; ip-&gt;dev  dirlink(dp, name, ip-&gt;inum) &lt; 0){<br>    iunlockput(dp);<br>    goto bad;<br>  }<br>  iunlockput(dp);<br>  iput(ip);</p>
+<p>  end_op();</p>
+<p>  return 0;</p>
+<p>bad:<br>  ilock(ip);<br>  ip-&gt;nlink–;<br>  iupdate(ip);<br>  iunlockput(ip);<br>  end_op();<br>  return -1;<br>}</p>
+<p>……还有很多与文件相关的系统调用，不一一列举了</p>
+<h3 id="6-读写操作和设备文件"><a href="#6-读写操作和设备文件" class="headerlink" title="6. 读写操作和设备文件"></a>6. 读写操作和设备文件</h3><blockquote>
+<p><code>file.c</code>和<code>file.h</code>文件中记录了xv6的驱动</p>
+</blockquote>
+<p>&#x2F;&#x2F; map major device number to device functions.<br>struct devsw {<br>  int (*read)(int, uint64, int);<br>  int (*write)(int, uint64, int);<br>};</p>
+<p>struct devsw devsw[NDEV];&#x2F;&#x2F; 其中NDEV &#x3D; 10，xv6最多支持10种不同的驱动<br>#define CONSOLE 1&#x2F;&#x2F; xv6只实现了Console的读写</p>
+<blockquote>
+<p>在<code>console.c</code>种，console的读写绑定到devsw上了</p>
+</blockquote>
+<p>void<br>consoleinit(void)<br>{<br>  initlock(&amp;cons.lock, “cons”);</p>
+<p>  uartinit();</p>
+<p>  &#x2F;&#x2F; connect read and write system calls<br>  &#x2F;&#x2F; to consoleread and consolewrite.<br>  devsw[CONSOLE].read &#x3D; consoleread;<br>  devsw[CONSOLE].write &#x3D; consolewrite;<br>}</p>
+<p><code>init.c</code>中的一段代码</p>
+<ul>
+<li>创建设备文件console；</li>
+<li>将<code>CONSOLE(major号)</code>绑定到console文件上；</li>
+<li>打开console。</li>
+</ul>
+<p>  if(open(“console”, O_RDWR) &lt; 0){<br>    mknod(“console”, CONSOLE, 0);<br>    open(“console”, O_RDWR);<br>  }<br>  dup(0);  &#x2F;&#x2F; stdout<br>  dup(0);  &#x2F;&#x2F; stderr</p>
+<p><strong>一个设备文件总是绑定了一个驱动函数，打开设备文件后的读写，就相当于调用相应的驱动程序</strong>。</p>
+<h3 id="7-Lock"><a href="#7-Lock" class="headerlink" title="7:Lock"></a>7:Lock</h3><p>许多操作系统内核,包括xv6都保持着多线程多进程执行,首先是因为这个xv6有许多个微处理器,这些处理器(CPU)是独立地执行一段代码,共享物理内存,这个时候就会有问题,就是在一个CPU读取数据的时候,另外一个CPU会写数据,或者说多个CPU同时写数据.这些都会出现问题.所以说多进程多线程的同步问题是非常重要的,我们需要一系列同步的手段来保证同步.所以这个词“并发性”代表多个指令同时执行的情况,由于中断操作,线程切换以及多核并行执行,我们不得不考虑并发性的问题.</p>
+<p>这一章我们会举出一些由于并发性导致的程序执行错误的例子,并着重介绍一个使用广泛的并发操作:锁.</p>
+<h3 id="race"><a href="#race" class="headerlink" title="race"></a>race</h3><p>首先我们举一个简单的例子来解释什么叫做race现象.假设有两个进程同时调用wait.wait需要free掉子进程的内存,所以说在每个CPU,这个内核会调用kfree来执行操作,kalloc()会从空闲页链表中取出链表首部,kfree()就是从空闲页链表中放一个页进入首部.这个时候两个进程都会进入到wait调用中,这个时候程序的结果是不确定的!</p>
+<p>因为你不知道程序执行的顺序,因为CPU的调度我们具体也无法得知.假设这两个进程分别是A和B,这个时候有一种可能就是,A先取了链表的头,B随后取链表的头,A改完之后放进去,B改完之后放进去.这个时候B的修改<strong>覆盖</strong>了A的修改,导致了执行的错误.</p>
+<p>这个叫做race现象,具体的来说就是,对于内存区域的同一块区域有多个进程同时访问,往往,出现race现象就代表着离出现bug也不远了.对于争用现象,最重要的问题就是我们对与并行程序的控制不是很够,我们不知道并行程序的执行顺序,所以说我们要加上一点控制手段来控制执行程序.</p>
+<h3 id="spinlocks"><a href="#spinlocks" class="headerlink" title="spinlocks"></a>spinlocks</h3><p>xv6自旋锁(<code>spinlock</code>)用于内核临界区访问的同步和互斥。自旋锁最大的特征是当进程拿不到锁时会进入无限循环，直到拿到锁退出循环。Xv6使用100ms一次的时钟中断和Round-Robin调度算法来避免陷入自旋锁的进程一直无限循环下去。Xv6允许同时运行多个CPU核，多核CPU上的等待队列实现相当复杂，因此使用自旋锁是相对比较简单且能正确执行的实现方案。</p>
+<p>&#x2F;&#x2F; Mutual exclusion lock.<br>struct spinlock {<br>  uint locked;       &#x2F;&#x2F; Is the lock held?</p>
+<p>  &#x2F;&#x2F; For debugging:<br>  char *name;        &#x2F;&#x2F; Name of lock.<br>  struct cpu *cpu;   &#x2F;&#x2F; The cpu holding the lock.<br>};</p>
+<p>最重要的就是一个int类型的变量,这个变量帮助我们记录一下锁有没有被使用.</p>
+<p>首先调用锁之前我们要对锁进行初始化,初始化的操作就是:</p>
+<p>void<br>initlock(struct spinlock *lk, char *name)<br>{<br>  lk-&gt;name &#x3D; name;<br>  lk-&gt;locked &#x3D; 0;<br>  lk-&gt;cpu &#x3D; 0;<br>}</p>
+<p>给定一个锁结构,还有一个名字,把名字存进去,其他的元素赋值0即可.</p>
+<p>RISC-V会给定一个指令,这个指令叫做<code>amoswap</code>,这是一个原子指令,使用方法是这个<code>amoswap r, a</code>.本质上就是lw指令,把地址a的内存元素放进r对应的寄存器,但是有一点比较特殊的是:这个操作可以保证在执行操作的时候r和a都不会被其他CPU访问到.保证了同步控制.(不给其他CPU访问相当于规定了对于这个内存的访问顺序).</p>
+<p>xv6使用acquire来获取锁的控制:</p>
+<p>void<br>acquire(struct spinlock *lk)<br>{<br>  push_off(); &#x2F;&#x2F; disable interrupts to avoid deadlock.<br>  if(holding(lk))<br>    panic(“acquire”);</p>
+<p>  &#x2F;&#x2F; On RISC-V, sync_lock_test_and_set turns into an atomic swap:<br>  &#x2F;&#x2F;   a5 &#x3D; 1<br>  &#x2F;&#x2F;   s1 &#x3D; &amp;lk-&gt;locked<br>  &#x2F;&#x2F;   amoswap.w.aq a5, a5, (s1)<br>  while(__sync_lock_test_and_set(&amp;lk-&gt;locked, 1) !&#x3D; 0)<br>    ;</p>
+<p>  &#x2F;&#x2F; Tell the C compiler and the processor to not move loads or stores<br>  &#x2F;&#x2F; past this point, to ensure that the critical section’s memory<br>  &#x2F;&#x2F; references happen strictly after the lock is acquired.<br>  &#x2F;&#x2F; On RISC-V, this emits a fence instruction.<br>  __sync_synchronize();</p>
+<p>  &#x2F;&#x2F; Record info about lock acquisition for holding() and debugging.<br>  lk-&gt;cpu &#x3D; mycpu();<br>}</p>
+<p>这个函数会一直调用一个C的库函数,这个库函数会按照注释的方法调用来获取数据,如果这个锁一直都没有释放,就让它一直这么循环下去,直到锁被释放了为止.一释放这个进程就获得锁,在获得的第一瞬间把lock值赋值1.然后获取之后为了调试需要顺便记录一下CPU的值.</p>
+<p>下面是锁的释放:</p>
+<p>void<br>release(struct spinlock *lk)<br>{<br>  if(!holding(lk))<br>    panic(“release”);</p>
+<p>  lk-&gt;cpu &#x3D; 0;</p>
+<p>  &#x2F;&#x2F; Tell the C compiler and the CPU to not move loads or stores<br>  &#x2F;&#x2F; past this point, to ensure that all the stores in the critical<br>  &#x2F;&#x2F; section are visible to other CPUs before the lock is released,<br>  &#x2F;&#x2F; and that loads in the critical section occur strictly before<br>  &#x2F;&#x2F; the lock is released.<br>  &#x2F;&#x2F; On RISC-V, this emits a fence instruction.<br>  __sync_synchronize();</p>
+<p>  &#x2F;&#x2F; Release the lock, equivalent to lk-&gt;locked &#x3D; 0.<br>  &#x2F;&#x2F; This code doesn’t use a C assignment, since the C standard<br>  &#x2F;&#x2F; implies that an assignment might be implemented with<br>  &#x2F;&#x2F; multiple store instructions.<br>  &#x2F;&#x2F; On RISC-V, sync_lock_release turns into an atomic swap:<br>  &#x2F;&#x2F;   s1 &#x3D; &amp;lk-&gt;locked<br>  &#x2F;&#x2F;   amoswap.w zero, zero, (s1)<br>  __sync_lock_release(&amp;lk-&gt;locked);</p>
+<p>  pop_off();<br>}</p>
+<p>首先把cpu的值设置为0,然后通过同步的赋值指令把值赋值,这个就代表这个进程结束了对临界区的访问,现在可以让其他进程访问了.</p>
+<h3 id="自旋锁的使用"><a href="#自旋锁的使用" class="headerlink" title="自旋锁的使用."></a>自旋锁的使用.</h3><p>xv6使用锁来防止race现象的发生.对于使用锁,下面有几个基本的准则:</p>
+<p>第一个就是如果有一个变量,一个CPU写的时候另外一个CPU可以去读,这个时候我们需要保护这个变量.第二,记住锁要保护不变量(不变量指的是在某些时候不能被其他程序改变的变量).总的来说就是,如果有可能有多个进程会对一个数据结构进行更改的话,那么我们必须得采取一定的措施来让进程有序地访问数据结构.</p>
+<p>当然过分地使用锁也是不应该的,如果这个程序只可能有一个进程访问,那么就没必要使用锁.</p>
+<p>使用锁的一个特征就是,我们把访问和修改数据结构的代码称为临界区,当进入临界区的时候获得锁,当离开临界区的时候释放锁.</p>
+<p>获得锁</p>
+<p>临界区</p>
+<p>释放锁</p>
+<h3 id="防止死锁"><a href="#防止死锁" class="headerlink" title="防止死锁"></a>防止死锁</h3><p>我们首先得知道,对于不同锁,我们要保证锁的获取顺序是一定的,如果有一段代码要求先获得A锁,再获得B锁.另外一段代码要求获得B锁,在获得A锁,这个时候就会造成卡死.因为一段代码等待B锁,另外一段代码等待A锁.就互相等待,卡死了.</p>
+<p>在xv6里面也有很多这样的锁链,比如说在console.c中,首先获取了<code>cons.lock</code>,接着调用wakeup函数,这个又获得<code>p.lock</code>.在文件系统中也是首先获取<code>vdisk.lock</code>再获取<code>p-&gt;lock</code>.xv6里面的锁都有着巧妙的安排,这样可以避免死锁的发生.</p>
+<p>死锁有可能是程序的逻辑结构出现了问题,有时锁的特征事先不知道，可能是因为必须持有一个锁才能发现下一个要获取的锁的特征。最后,死锁发生与否取决于你怎么规划和使用锁,使用的锁越多就越容易死锁.</p>
+<p>一个比较朴素的方法就是使用“重入锁”.重入锁的设计就是如果一一个锁是被一个进程拥有的,我们还是允许这个进程再获得这个锁.而不是执行panic指令.然而，事实证明，重入锁使并发性更难推理：重入锁打破了锁导致关键部分相对于其他关键部分是原子的直觉。</p>
+<p>struct spinlock lock;<br>int data &#x3D; 0; &#x2F;&#x2F; protected by lock<br>f() {<br>acquire(&amp;lock);<br>if(data &#x3D;&#x3D; 0){<br>call_once();<br>h();<br>data &#x3D; 1;<br>}<br>release(&amp;lock);<br>}<br>g() {<br>aquire(&amp;lock);<br>if(data &#x3D;&#x3D; 0){<br>call_once();<br>data &#x3D; 1;<br>}<br>release(&amp;lock);<br>}</p>
+<p>在这里面,假设h函数就是执行g函数的调用,如果饮用了重入锁的话,这个call_once就会执行两遍.但是不引入重入锁的话就会导致死锁.出于这个问题,我们还是放弃了可重入锁,所以说对于程序的编写者来说,我们尽量确定好锁的申请顺序,防止A进程拥有a锁等待b锁,B进程拥有b锁等待a锁的存在.</p>
+<p>获取锁之后进入临界区的时候,由于防止被中断打断进入中断处理程序从而导致死锁,所以说获得锁的死后就会打断中断.举个例子,比如说处理时钟中断的时候,clockintr会获得tickslock.</p>
+<p>void<br>clockintr()<br>{<br>  acquire(&amp;tickslock);<br>  ticks++;<br>  wakeup(&amp;ticks);<br>  release(&amp;tickslock);<br>}</p>
+<p>与此同时,在执行中断操作的<code>sys_sleep</code>函数也会访问tickslock:</p>
+<p>uint64<br>sys_sleep(void)<br>{<br>  int n;<br>  uint ticks0;</p>
+<p>  if(argint(0, &amp;n) &lt; 0)<br>    return -1;<br>  acquire(&amp;tickslock);<br>  ticks0 &#x3D; ticks;<br>  while(ticks - ticks0 &lt; n){<br>    if(myproc()-&gt;killed){<br>      release(&amp;tickslock);<br>      return -1;<br>    }<br>    sleep(&amp;ticks, &amp;tickslock);<br>  }<br>  release(&amp;tickslock);<br>  return 0;<br>}</p>
+<p>所以说为了避免中断打断之后的死锁现象,一个CPU运行的代码获得了锁之后,这个CPU的中断就会被禁止.所以说这个时候就要禁用中断,但是禁用中断的时候要改变中断使能寄存器:我们就用一个栈来存储之,这个存储中断使能寄存器的函数就是<code>push_pff</code>和<code>pop_off</code>.当然一个CPU对应上的进程能开启多个锁,所以说我们用一个intena来代表这个进程拥有多少锁.所以说我们在acquire中申请一遍,在release中再申请一遍.</p>
+<p>为了避免死锁，xv6中规定若一个进程持有<code>spinlock</code>，则必须要禁用中断。如果此时中断开启，那么可能会出现以下死锁情况：</p>
+<ol>
+<li>进程A在内核态运行并拿下了p锁时，触发中断进入中断处理程序。</li>
+<li>中断处理程序也在内核态中请求p锁，由于锁在A进程手里，且只有A进程执行时才能释放p锁，因此中断处理程序必须返回，p锁才能被释放。</li>
+<li>那么此时中断处理程序会永远拿不到锁，陷入无限循环，进入死锁。</li>
+</ol>
+<p>因此调用<code>push_off</code>和<code>pop_off</code>来禁用和开启中断。</p>
+<p>获取锁的过程可能嵌套：一个进程获取了锁A，然后再获取锁B，释放锁B时，由于A还未释放，因此不能开启中断。注：<code>struct cpu</code>中的<code>noff</code>记录目前的深度，<code>intena</code>记录在获取第一把锁之前的中断使能状态，当深度为0且<code>intena</code>为1（所有锁都被释放且最初的使能状态为1）时，才开启中断。</p>
+<p>&#x2F;&#x2F; push_off&#x2F;pop_off are like intr_off()&#x2F;intr_on() except that they are matched:<br>&#x2F;&#x2F; it takes two pop_off()s to undo two push_off()s.  Also, if interrupts<br>&#x2F;&#x2F; are initially off, then push_off, pop_off leaves them off.</p>
+<p>void<br>push_off(void)<br>{<br>  &#x2F;&#x2F; 获取之前的中断使能状态<br>  int old &#x3D; intr_get();<br>  &#x2F;&#x2F; 关闭中断使能<br>  intr_off();<br>  if(mycpu()-&gt;noff &#x3D;&#x3D; 0)<br>    mycpu()-&gt;intena &#x3D; old;<br>  mycpu()-&gt;noff +&#x3D; 1;<br>}</p>
+<p>void<br>pop_off(void)<br>{<br>  struct cpu *c &#x3D; mycpu();<br>  if(intr_get())<br>    panic(“pop_off - interruptible”);<br>  if(c-&gt;noff &lt; 1)<br>    panic(“pop_off”);<br>  c-&gt;noff -&#x3D; 1;<br>  if(c-&gt;noff &#x3D;&#x3D; 0 &amp;&amp; c-&gt;intena)<br>    intr_on();<br>}</p>
+<h3 id="指令和内存顺序"><a href="#指令和内存顺序" class="headerlink" title="指令和内存顺序"></a>指令和内存顺序</h3><p>我们一般会认为指令的执行顺序和我们代码的编辑顺序是一样的,但是其实这个并不绝对.CPU为了执行的速度,往往会做一些修改.假如说A和B一组指令,CPU可能会先让B执行,可能因为<strong>B的输入比A的输入</strong>先准备好,也有可能是因为执行B的时间比A长,我们不如先执行B,,这样B和A可以同步执行,增加CPU的效率,当然对于编译器,编译器也可能会把后面的指令移动到前面.当然CPU和编译器这么做的前提就是我不会改变输出的结果.但是,这样的特性对于锁来说是不好的,<strong>这对多处理器的情况下,有可能会出现与时间有关的问题</strong>.总而言之,CPU和编译器可能会提高效率改变指令执行的顺序.</p>
+<p>比如说下面的这个例子:假如说第4行的语句移动到第6行之后就会引起严重的后果.</p>
+<p>1  l &#x3D; malloc(sizeof *l);<br>2  l-&gt;data &#x3D; data;<br>3  acquire(&amp;listlock);<br>4  l-&gt;next &#x3D; list;<br>5  list &#x3D; l;<br>6  release(&amp;listlock);</p>
+<p>这个时候对于其他的进程来说看到了被更新的list,但是看到了没有被初始化的list-&gt;next.这样是不好的.</p>
+<p>去告诉CPU和编译器不要执行这样的重新编排,我们在acquire和release中执行了 <code>__sync_synchronize()</code>函数,这个函数类似于一个<code>memery barrier</code>.之前的指令不可以跨过这个memeory_barrier执行.</p>
+<h3 id="睡眠锁"><a href="#睡眠锁" class="headerlink" title="睡眠锁"></a>睡眠锁</h3><p>自旋锁是这个进程一直等待别的进程把锁释放,这个进程在一直执行一个循环等待释放,这个锁适用于获得锁到释放锁用不了多久的时间的那种,等待的一方执行执行不了不久循环.但是万一这个锁要使用很久呢,一直等待别人,等一会儿还行,等很久我不如先睡一会儿,等别人用完了再叫醒我就好了.</p>
+<p>所以说xv6提供一个睡眠锁.</p>
+<p>void<br>acquiresleep(struct sleeplock *lk)<br>{<br>  acquire(&amp;lk-&gt;lk);<br>  while (lk-&gt;locked) {<br>    sleep(lk, &amp;lk-&gt;lk);<br>  }<br>  lk-&gt;locked &#x3D; 1;<br>  lk-&gt;pid &#x3D; myproc()-&gt;pid;<br>  release(&amp;lk-&gt;lk);<br>}</p>
+<p>获得锁的时候,自旋锁就是一直查询,查询到可以使用锁了就接着往下走,但是这个睡眠锁就不一样了,当锁被占用的时候,它就直接引入睡眠模式,当有进程release这个锁的时候这个进程就会被唤醒,然后再查询一遍锁是否是可用的即可.如果是可用的,就往下执行和spinlock一样的操作.</p>
+<p>总结:自旋锁就是一直查,睡眠锁就是被叫醒一次查一次.</p>
+<p>对于release操作也是一样:首先清空标记,然后把所有为了lk而等待的进程全部唤醒.</p>
+<p>void<br>releasesleep(struct sleeplock *lk)<br>{<br>  acquire(&amp;lk-&gt;lk);<br>  lk-&gt;locked &#x3D; 0;<br>  lk-&gt;pid &#x3D; 0;<br>  wakeup(lk);<br>  release(&amp;lk-&gt;lk);<br>}</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/project/">首页</a></li>
+        
+          <li><a href="/project/about/">关于</a></li>
+        
+          <li><a href="/project/archives/">归档</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/SukunaShinmyoumaru-hust/Hust-opensource-Xuejie">HUST-学解</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Operating-System-Overview"><span class="toc-number">1.</span> <span class="toc-text">1:Operating System Overview</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-xv6%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B"><span class="toc-number"></span> <span class="toc-text">1 xv6系统的启动过程:</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1xv6%E5%BC%95%E5%AF%BC%E5%99%A8"><span class="toc-number">1.</span> <span class="toc-text">1.1xv6引导器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E5%86%85%E6%A0%B8%E6%80%81%E8%BF%9B%E5%85%A5%E7%94%A8%E6%88%B7%E6%80%81"><span class="toc-number">2.</span> <span class="toc-text">1.2 内核态进入用户态</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#set-up-a-stack-for-C"><span class="toc-number"></span> <span class="toc-text">set up a stack for C.</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#jump-to-start-in-start-c"><span class="toc-number"></span> <span class="toc-text">jump to start() in start.c</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#This-code-runs-in-user-space"><span class="toc-number"></span> <span class="toc-text">This code runs in user space.</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#exec-init-argv"><span class="toc-number"></span> <span class="toc-text">exec(init, argv)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%8E%A5%E5%8F%A3%E4%B8%8E%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8"><span class="toc-number">1.</span> <span class="toc-text">2 操作系统接口与系统调用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E6%9B%B4%E5%A4%9A%E7%9A%84%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><span class="toc-number">2.</span> <span class="toc-text">3 更多的基础知识</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-%E5%86%85%E6%A0%B8%E7%9A%84%E7%BB%84%E6%88%90"><span class="toc-number">2.1.</span> <span class="toc-text">3.1 内核的组成</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-%E7%A8%8B%E5%BA%8F%E7%9A%84%E9%80%BB%E8%BE%91%E5%9C%B0%E5%9D%80"><span class="toc-number">2.2.</span> <span class="toc-text">3.2 程序的逻辑地址</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-%E8%BF%9B%E7%A8%8B"><span class="toc-number">2.3.</span> <span class="toc-text">3.3 进程</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Trap-Syscall"><span class="toc-number">3.</span> <span class="toc-text">2:Trap&amp;Syscall</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%AD%E6%96%AD%E5%92%8C%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8"><span class="toc-number">4.</span> <span class="toc-text">中断和系统调用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RISC-V%E7%A1%AC%E4%BB%B6"><span class="toc-number">5.</span> <span class="toc-text">RISC-V硬件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E6%80%81%E7%9A%84%E4%B8%AD%E6%96%AD"><span class="toc-number">6.</span> <span class="toc-text">用户态的中断</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#save-the-user-a0-in-p-trapframe-a0"><span class="toc-number"></span> <span class="toc-text">save the user a0 in p-&gt;trapframe-&gt;a0</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#restore-user-a0-and-save-TRAPFRAME-in-sscratch"><span class="toc-number"></span> <span class="toc-text">restore user a0, and save TRAPFRAME in sscratch</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B0%83%E7%94%A8%E7%B3%BB%E7%BB%9F%E5%87%BD%E6%95%B0"><span class="toc-number">1.</span> <span class="toc-text">调用系统函数.</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#exec-init-argv-1"><span class="toc-number"></span> <span class="toc-text">exec(init, argv)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#for-exit"><span class="toc-number"></span> <span class="toc-text">for(;;) exit();</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#char-init-%E2%80%9C-init-0%E2%80%9D"><span class="toc-number"></span> <span class="toc-text">char init[] &#x3D; “&#x2F;init\0”;</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#char-argv-init-0"><span class="toc-number"></span> <span class="toc-text">char *argv[] &#x3D; { init, 0 };</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E7%9A%84%E5%8F%82%E6%95%B0"><span class="toc-number">1.</span> <span class="toc-text">系统调用的参数.</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E6%A0%B8%E6%80%81%E5%BC%95%E5%8F%91%E7%9A%84%E4%B8%AD%E6%96%AD"><span class="toc-number">2.</span> <span class="toc-text">内核态引发的中断</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%BA%E9%A1%B5%E4%B8%AD%E6%96%AD"><span class="toc-number">3.</span> <span class="toc-text">缺页中断</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Memory-Pagetable"><span class="toc-number">4.</span> <span class="toc-text">3: Memory&amp;Pagetable</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86"><span class="toc-number"></span> <span class="toc-text">内存管理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E9%A1%B5%E7%9A%84%E7%A1%AC%E4%BB%B6"><span class="toc-number">1.</span> <span class="toc-text">分页的硬件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E6%A0%B8%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4"><span class="toc-number">2.</span> <span class="toc-text">内核地址空间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4"><span class="toc-number">3.</span> <span class="toc-text">如何创建一个地址空间?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sbrk%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8"><span class="toc-number">4.</span> <span class="toc-text">sbrk系统调用?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E8%BF%9B%E7%A8%8B%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4"><span class="toc-number">5.</span> <span class="toc-text">用户进程地址空间.</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E7%94%B3%E8%AF%B7%E7%89%A9%E7%90%86%E5%9D%97"><span class="toc-number">6.</span> <span class="toc-text">如何申请物理块?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-Interrupt-Device-Manage"><span class="toc-number">7.</span> <span class="toc-text">4:Interrupt&amp;Device Manage</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86"><span class="toc-number">8.</span> <span class="toc-text">设备管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A7%E5%88%B6%E5%8F%B0%E8%BE%93%E5%85%A5"><span class="toc-number">9.</span> <span class="toc-text">控制台输入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A7%E5%88%B6%E5%8F%B0%E8%BE%93%E5%87%BA"><span class="toc-number">10.</span> <span class="toc-text">控制台输出</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E7%9A%84%E5%B9%B6%E8%A1%8C%E6%80%A7"><span class="toc-number">11.</span> <span class="toc-text">设备驱动的并行性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%B6%E9%92%9F%E4%B8%AD%E6%96%AD"><span class="toc-number">12.</span> <span class="toc-text">时钟中断</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-MultiPlexing"><span class="toc-number">13.</span> <span class="toc-text">5:MultiPlexing</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8"><span class="toc-number">14.</span> <span class="toc-text">多路复用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8A%E4%B8%8B%E6%96%87%E5%88%87%E6%8D%A2"><span class="toc-number">15.</span> <span class="toc-text">上下文切换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B0%83%E5%BA%A6%E6%96%B9%E6%B3%95"><span class="toc-number">16.</span> <span class="toc-text">调度方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BD%93%E5%89%8D%E7%9A%84CPU%E5%92%8C%E8%BF%9B%E7%A8%8B%E4%BF%A1%E6%81%AF"><span class="toc-number">17.</span> <span class="toc-text">当前的CPU和进程信息.</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9D%A1%E7%9C%A0%E4%B8%8E%E5%94%A4%E9%86%92"><span class="toc-number">18.</span> <span class="toc-text">睡眠与唤醒</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%A1%E9%81%93"><span class="toc-number">19.</span> <span class="toc-text">管道</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AD%89%E5%BE%85-%E9%80%80%E5%87%BA%E5%92%8C%E6%9D%80%E6%AD%BB%E7%9A%84%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8"><span class="toc-number">20.</span> <span class="toc-text">等待,退出和杀死的系统调用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-File-System"><span class="toc-number">21.</span> <span class="toc-text">6:File System</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%A6%82%E8%A7%88"><span class="toc-number">22.</span> <span class="toc-text">1.概览</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-buffer-cache%E5%B1%82"><span class="toc-number">23.</span> <span class="toc-text">2.buffer cache层.</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-Cache%E5%B1%82%E9%87%8D%E8%A6%81%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9A%E4%B9%89"><span class="toc-number">23.1.</span> <span class="toc-text">2.1 Cache层重要数据结构定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-Cache%E5%B1%82%E7%9A%84%E5%87%BD%E6%95%B0%E5%AE%9A%E4%B9%89"><span class="toc-number">23.2.</span> <span class="toc-text">2.2 Cache层的函数定义</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Log%E5%B1%82"><span class="toc-number"></span> <span class="toc-text">3. Log层</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-Log%E5%B1%82%E7%BB%93%E6%9E%84%E4%BD%93%E5%AE%9A%E4%B9%89"><span class="toc-number">1.</span> <span class="toc-text">3.1 Log层结构体定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-Log%E5%B1%82%E5%87%BD%E6%95%B0%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-number">2.</span> <span class="toc-text">3.2 Log层函数的定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-inode%E5%B1%82"><span class="toc-number">3.</span> <span class="toc-text">4. inode层</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1-%E4%B8%A4%E4%B8%AA%E5%88%86%E9%85%8D%E5%92%8C%E5%9B%9E%E6%94%B6%E7%A3%81%E7%9B%98%E5%9D%97%E7%9A%84%E5%87%BD%E6%95%B0"><span class="toc-number">3.1.</span> <span class="toc-text">4.1 两个分配和回收磁盘块的函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2-inode%E5%B1%82%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9A%E4%B9%89"><span class="toc-number">3.2.</span> <span class="toc-text">4.2 inode层的数据结构定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-3-inode%E5%B1%82%E5%87%BD%E6%95%B0%E5%AE%9A%E4%B9%89"><span class="toc-number">3.3.</span> <span class="toc-text">4.3 inode层函数定义</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-Directory%E5%B1%82"><span class="toc-number">4.</span> <span class="toc-text">4. Directory层</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1-directory%E5%B1%82%E7%BB%93%E6%9E%84%E4%BD%93%E5%AE%9A%E4%B9%89"><span class="toc-number">4.1.</span> <span class="toc-text">4.1 directory层结构体定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2-directory%E5%B1%82%E5%87%BD%E6%95%B0%E5%AE%9A%E4%B9%89"><span class="toc-number">4.2.</span> <span class="toc-text">4.2 directory层函数定义</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-file-descriptor%E5%B1%82"><span class="toc-number">5.</span> <span class="toc-text">5. file descriptor层</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#5-1-file-descriptor%E5%B1%82%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9A%E4%B9%89"><span class="toc-number">5.1.</span> <span class="toc-text">5.1 file descriptor层的数据结构定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-2-file-descriptor%E5%B1%82%E5%87%BD%E6%95%B0%E5%AE%9A%E4%B9%89"><span class="toc-number">5.2.</span> <span class="toc-text">5.2 file descriptor层函数定义</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E8%AF%BB%E5%86%99%E6%93%8D%E4%BD%9C%E5%92%8C%E8%AE%BE%E5%A4%87%E6%96%87%E4%BB%B6"><span class="toc-number">6.</span> <span class="toc-text">6. 读写操作和设备文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-Lock"><span class="toc-number">7.</span> <span class="toc-text">7:Lock</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#race"><span class="toc-number">8.</span> <span class="toc-text">race</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#spinlocks"><span class="toc-number">9.</span> <span class="toc-text">spinlocks</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E6%97%8B%E9%94%81%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">10.</span> <span class="toc-text">自旋锁的使用.</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%98%B2%E6%AD%A2%E6%AD%BB%E9%94%81"><span class="toc-number">11.</span> <span class="toc-text">防止死锁</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%87%E4%BB%A4%E5%92%8C%E5%86%85%E5%AD%98%E9%A1%BA%E5%BA%8F"><span class="toc-number">12.</span> <span class="toc-text">指令和内存顺序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9D%A1%E7%9C%A0%E9%94%81"><span class="toc-number">13.</span> <span class="toc-text">睡眠锁</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sukunashinmyoumaru-hust.github.io/project/2023/02/06/mit-6-s081-xv6-information-%E9%9B%86%E5%90%88/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sukunashinmyoumaru-hust.github.io/project/2023/02/06/mit-6-s081-xv6-information-%E9%9B%86%E5%90%88/&text=MIT_6.S081_xv6.Information 集合"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sukunashinmyoumaru-hust.github.io/project/2023/02/06/mit-6-s081-xv6-information-%E9%9B%86%E5%90%88/&title=MIT_6.S081_xv6.Information 集合"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sukunashinmyoumaru-hust.github.io/project/2023/02/06/mit-6-s081-xv6-information-%E9%9B%86%E5%90%88/&is_video=false&description=MIT_6.S081_xv6.Information 集合"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=MIT_6.S081_xv6.Information 集合&body=Check out this article: https://sukunashinmyoumaru-hust.github.io/project/2023/02/06/mit-6-s081-xv6-information-%E9%9B%86%E5%90%88/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sukunashinmyoumaru-hust.github.io/project/2023/02/06/mit-6-s081-xv6-information-%E9%9B%86%E5%90%88/&title=MIT_6.S081_xv6.Information 集合"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sukunashinmyoumaru-hust.github.io/project/2023/02/06/mit-6-s081-xv6-information-%E9%9B%86%E5%90%88/&title=MIT_6.S081_xv6.Information 集合"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sukunashinmyoumaru-hust.github.io/project/2023/02/06/mit-6-s081-xv6-information-%E9%9B%86%E5%90%88/&title=MIT_6.S081_xv6.Information 集合"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sukunashinmyoumaru-hust.github.io/project/2023/02/06/mit-6-s081-xv6-information-%E9%9B%86%E5%90%88/&title=MIT_6.S081_xv6.Information 集合"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sukunashinmyoumaru-hust.github.io/project/2023/02/06/mit-6-s081-xv6-information-%E9%9B%86%E5%90%88/&name=MIT_6.S081_xv6.Information 集合&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sukunashinmyoumaru-hust.github.io/project/2023/02/06/mit-6-s081-xv6-information-%E9%9B%86%E5%90%88/&t=MIT_6.S081_xv6.Information 集合"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2024
+    Sukuna
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/project/">首页</a></li><!--
+     --><!--
+       --><li><a href="/project/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/project/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/SukunaShinmyoumaru-hust/Hust-opensource-Xuejie">HUST-学解</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功！");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/project/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

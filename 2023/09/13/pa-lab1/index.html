@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="南大pa是一个设计非常巧妙而且指引非常足的一个实验，由于其指引已经很足了，我在这里不会写实验具体是怎么做的，具体写一下我的思考。 开天辟地的篇章程序的执行可以看成是一个有限状态机，每一个时刻可能对应一个状态。状态可以用程序计数器的值来进行表述，在不同的状态下，执行的指令和存储器的值也是不一样的，每一个状态可以指令一个访存或者计算指令。不同的程序是不同的状态机。 RTFSCpa的实验分成三个部分，一">
+<meta property="og:type" content="article">
+<meta property="og:title" content="南大pa-Lab1">
+<meta property="og:url" content="https://sukunashinmyoumaru-hust.github.io/project/2023/09/13/pa-lab1/index.html">
+<meta property="og:site_name" content="Suwa shrine">
+<meta property="og:description" content="南大pa是一个设计非常巧妙而且指引非常足的一个实验，由于其指引已经很足了，我在这里不会写实验具体是怎么做的，具体写一下我的思考。 开天辟地的篇章程序的执行可以看成是一个有限状态机，每一个时刻可能对应一个状态。状态可以用程序计数器的值来进行表述，在不同的状态下，执行的指令和存储器的值也是不一样的，每一个状态可以指令一个访存或者计算指令。不同的程序是不同的状态机。 RTFSCpa的实验分成三个部分，一">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-09-13T03:07:52.000Z">
+<meta property="article:modified_time" content="2024-02-27T05:01:50.145Z">
+<meta property="article:author" content="Sukuna">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/project/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/project/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/project/images/favicon-192x192.png">
+        
+      
+    
+    <!-- title -->
+    <title>南大pa-Lab1</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/project/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/project/">首页</a></li><!--
+     --><!--
+       --><li><a href="/project/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/project/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/SukunaShinmyoumaru-hust/Hust-opensource-Xuejie">HUST-学解</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="下一篇" href="/project/2023/02/13/how-to-dress-up/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sukunashinmyoumaru-hust.github.io/project/2023/09/13/pa-lab1/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sukunashinmyoumaru-hust.github.io/project/2023/09/13/pa-lab1/&text=南大pa-Lab1"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sukunashinmyoumaru-hust.github.io/project/2023/09/13/pa-lab1/&title=南大pa-Lab1"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sukunashinmyoumaru-hust.github.io/project/2023/09/13/pa-lab1/&is_video=false&description=南大pa-Lab1"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=南大pa-Lab1&body=Check out this article: https://sukunashinmyoumaru-hust.github.io/project/2023/09/13/pa-lab1/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sukunashinmyoumaru-hust.github.io/project/2023/09/13/pa-lab1/&title=南大pa-Lab1"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sukunashinmyoumaru-hust.github.io/project/2023/09/13/pa-lab1/&title=南大pa-Lab1"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sukunashinmyoumaru-hust.github.io/project/2023/09/13/pa-lab1/&title=南大pa-Lab1"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sukunashinmyoumaru-hust.github.io/project/2023/09/13/pa-lab1/&title=南大pa-Lab1"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sukunashinmyoumaru-hust.github.io/project/2023/09/13/pa-lab1/&name=南大pa-Lab1&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sukunashinmyoumaru-hust.github.io/project/2023/09/13/pa-lab1/&t=南大pa-Lab1"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%80%E5%A4%A9%E8%BE%9F%E5%9C%B0%E7%9A%84%E7%AF%87%E7%AB%A0"><span class="toc-number">1.</span> <span class="toc-text">开天辟地的篇章</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#RTFSC"><span class="toc-number">1.1.</span> <span class="toc-text">RTFSC</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Makefile"><span class="toc-number">1.2.</span> <span class="toc-text">Makefile</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%A2%E6%88%B7%E7%A8%8B%E5%BA%8F%E8%BD%BD%E5%85%A5"><span class="toc-number">1.3.</span> <span class="toc-text">客户程序载入</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%A2%E6%88%B7%E7%A8%8B%E5%BA%8F%E8%BF%90%E8%A1%8C"><span class="toc-number">1.4.</span> <span class="toc-text">客户程序运行</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%98%E9%9B%85%E5%9C%B0%E9%80%80%E5%87%BA"><span class="toc-number">1.5.</span> <span class="toc-text">优雅地退出</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD"><span class="toc-number">1.6.</span> <span class="toc-text">基础设施</span></a></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        南大pa-Lab1
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Sukuna</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2023-09-13T03:07:52.000Z" class="dt-published" itemprop="datePublished">2023-09-13</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/project/categories/%E6%9D%82%E8%AE%B0/">杂记</a>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <p>南大pa是一个设计非常巧妙而且指引非常足的一个实验，由于其指引已经很足了，我在这里不会写实验具体是怎么做的，具体写一下我的思考。</p>
+<h3 id="开天辟地的篇章"><a href="#开天辟地的篇章" class="headerlink" title="开天辟地的篇章"></a>开天辟地的篇章</h3><p>程序的执行可以看成是一个有限状态机，每一个时刻可能对应一个状态。状态可以用程序计数器的值来进行表述，在不同的状态下，执行的指令和存储器的值也是不一样的，每一个状态可以指令一个访存或者计算指令。不同的程序是不同的状态机。</p>
+<h4 id="RTFSC"><a href="#RTFSC" class="headerlink" title="RTFSC"></a>RTFSC</h4><p>pa的实验分成三个部分，一个是基础的nemu，nemu本质上是一个硬件模拟，它并不承担软件的部分，它为其他的部份提供硬件层面上的支持。对于其他的部份来说，他们会天真的认为自己是在一个真实的计算机进行执行，但是这一切都是nemu假扮的。nemu并不完善，它只能假扮CPU的执行和部分IO。</p>
+<p>还有一个是am，am是抽象计算机，它可以称为静态链接库，这个本质上属于软件，它为其他运行程序提供基础的IO服务，在编译的时候它会和其他的用户程序一起编译在一起。所以说软件部份&#x3D;am+用户程序，在实验的不同部分中，用户程序是不同的。</p>
+<p>这个实验的运行逻辑其实可以知道了。nemu充当硬件的成份，am+用户程序充当软件，在编译后写入进nemu的假想的存储内，由nemu模拟运行。</p>
+<h4 id="Makefile"><a href="#Makefile" class="headerlink" title="Makefile"></a>Makefile</h4><p>一般来说一个成熟的系统会使用make来自动化构建。pa使用了下面这条make语句进行构建</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$(OBJ_DIR)/%.o: %.c</span><br><span class="line">  @echo + CC $&lt;</span><br><span class="line">  @mkdir -p $(dir $@)</span><br><span class="line">  @$(CC) $(CFLAGS) -c -o $@ $&lt;</span><br><span class="line">  $(call call_fixdep, $(@:.o=.d), $@)</span><br></pre></td></tr></table></figure>
+
+<p>其中%.表示对于任何一个.o文件，这个是什么意思呢，我们看下面的这个make文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">CC=gcc</span><br><span class="line"> </span><br><span class="line">%.o: %.cpp</span><br><span class="line">$(CC) -c -o $@ $&lt;</span><br><span class="line">main: main.o fun.o</span><br><span class="line">$(CC) -o main main.o fun.o</span><br></pre></td></tr></table></figure>
+
+<p>其中系统的输出是这样子的：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gcc -c -o main.o main.cpp</span><br><span class="line">gcc -c -o fun.o fun.cpp</span><br><span class="line">gcc -o main main.o fun.o</span><br></pre></td></tr></table></figure>
+
+<p>%.保证在依赖链中所有依赖相似的依赖都会被构建，我们可以将%.的替换称为一次“展开”，在一次展开中，$&lt;表示第一个依赖文件，$^表示所有依赖文件，$@指代所有目标文件。当然这个指代仅指代一次展开。这是一个省力的好办法。</p>
+<h4 id="客户程序载入"><a href="#客户程序载入" class="headerlink" title="客户程序载入"></a>客户程序载入</h4><p>众所周知，nemu是一个硬件模拟器，硬件需要运行软件，软件是以操作码储存在内存中的，nemu提供了一个默认的客户程序，这个客户程序很小，只有4B，在启动的时候首先把这个客户程序放在指定的位置中，然后让pc寄存器指向这个客户程序的第一个字节码。当然，这个客户程序执行完之后是nemu_trap命令。执行中断操作，这个后面会讲为什么。</p>
+<p>当然我们可以定义一个自选的默认程序来执行相关操作。这个程序的读取在parse_arg已经做好了。如果有自选的程序，会覆盖掉之前的默认的客户程序。</p>
+<h4 id="客户程序运行"><a href="#客户程序运行" class="headerlink" title="客户程序运行"></a>客户程序运行</h4><p>当代码初始化了之后就会进入sdb_mainloop中，sdb_mainloop是nemu自带的一个控制台小程序，它可以接收控制台的命令然后控制客户程序的执行。</p>
+<p>执行的核心逻辑是cpu_exec()，括号内可以传一个整数，表示执行多少条指令，如果传的数是-1就一直循环执行下去。</p>
+<p>什么东西可以打断cpu的执行呢，那就是中断，当遇到中断的时候，执行结束，nemu会根据中断的类型判断：</p>
+<ul>
+<li><code>HIT GOOD TRAP</code> - 客户程序正确地结束执行</li>
+<li><code>HIT BAD TRAP</code> - 客户程序错误地结束执行</li>
+<li><code>ABORT</code> - 客户程序意外终止, 并未结束执行</li>
+</ul>
+<p>对于nemu来说，我们可以简单地认为，遇到BAD TRAP&#x2F;GOOD TRAP就算是一次程序运行的结束。复杂点说就是对于nemu这一个硬件平台，可以运行很多次软件，一次TRAP就是一次软件的运行。实际上对于C语言或者别的，程序运行的结束有另外的表示，nemu本身也是一个大型的C语言项目，nemu运行的结束也需要有表示。</p>
+<h4 id="优雅地退出"><a href="#优雅地退出" class="headerlink" title="优雅地退出"></a>优雅地退出</h4><p>作为一个C语言代码，我们可以认为main是C语言的核心框架，当main执行完了之后，整个C语言代码就执行完了，一般OS需要在这个时候回收一个信号，这个信号提示刚刚的C语言代码运行情况。这就是return 0的作用，return 0就是告诉上层（或者叫调用该C语言代码的模块），我运行地挺好。</p>
+<p>我们注意到nemu退出的时候输出了一堆奇怪的东西，其实是return的结果不是0而是-1，如果return的结果是-1，一般就是运行出现了问题。RTFSC之后可以很快更改。</p>
+<h4 id="基础设施"><a href="#基础设施" class="headerlink" title="基础设施"></a>基础设施</h4><p>这个是实验本身的部分，本身其实是C语言编程的一个训练，比较简单。</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/project/">首页</a></li>
+        
+          <li><a href="/project/about/">关于</a></li>
+        
+          <li><a href="/project/archives/">归档</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/SukunaShinmyoumaru-hust/Hust-opensource-Xuejie">HUST-学解</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%80%E5%A4%A9%E8%BE%9F%E5%9C%B0%E7%9A%84%E7%AF%87%E7%AB%A0"><span class="toc-number">1.</span> <span class="toc-text">开天辟地的篇章</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#RTFSC"><span class="toc-number">1.1.</span> <span class="toc-text">RTFSC</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Makefile"><span class="toc-number">1.2.</span> <span class="toc-text">Makefile</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%A2%E6%88%B7%E7%A8%8B%E5%BA%8F%E8%BD%BD%E5%85%A5"><span class="toc-number">1.3.</span> <span class="toc-text">客户程序载入</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%A2%E6%88%B7%E7%A8%8B%E5%BA%8F%E8%BF%90%E8%A1%8C"><span class="toc-number">1.4.</span> <span class="toc-text">客户程序运行</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%98%E9%9B%85%E5%9C%B0%E9%80%80%E5%87%BA"><span class="toc-number">1.5.</span> <span class="toc-text">优雅地退出</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD"><span class="toc-number">1.6.</span> <span class="toc-text">基础设施</span></a></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sukunashinmyoumaru-hust.github.io/project/2023/09/13/pa-lab1/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sukunashinmyoumaru-hust.github.io/project/2023/09/13/pa-lab1/&text=南大pa-Lab1"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sukunashinmyoumaru-hust.github.io/project/2023/09/13/pa-lab1/&title=南大pa-Lab1"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sukunashinmyoumaru-hust.github.io/project/2023/09/13/pa-lab1/&is_video=false&description=南大pa-Lab1"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=南大pa-Lab1&body=Check out this article: https://sukunashinmyoumaru-hust.github.io/project/2023/09/13/pa-lab1/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sukunashinmyoumaru-hust.github.io/project/2023/09/13/pa-lab1/&title=南大pa-Lab1"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sukunashinmyoumaru-hust.github.io/project/2023/09/13/pa-lab1/&title=南大pa-Lab1"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sukunashinmyoumaru-hust.github.io/project/2023/09/13/pa-lab1/&title=南大pa-Lab1"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sukunashinmyoumaru-hust.github.io/project/2023/09/13/pa-lab1/&title=南大pa-Lab1"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sukunashinmyoumaru-hust.github.io/project/2023/09/13/pa-lab1/&name=南大pa-Lab1&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sukunashinmyoumaru-hust.github.io/project/2023/09/13/pa-lab1/&t=南大pa-Lab1"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2024
+    Sukuna
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/project/">首页</a></li><!--
+     --><!--
+       --><li><a href="/project/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/project/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/SukunaShinmyoumaru-hust/Hust-opensource-Xuejie">HUST-学解</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功！");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/project/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

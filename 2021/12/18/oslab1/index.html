@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="许可证: 版权归华中科技大学操作系统团队所有,下面是许可证书,本文档是对https:&#x2F;&#x2F;gitee.com&#x2F;hustos&#x2F;pke-doc的部分修改和解释. &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&amp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="华中科技大学OS实验解析(Lab1)">
+<meta property="og:url" content="https://sukunashinmyoumaru-hust.github.io/project/2021/12/18/oslab1/index.html">
+<meta property="og:site_name" content="Suwa shrine">
+<meta property="og:description" content="许可证: 版权归华中科技大学操作系统团队所有,下面是许可证书,本文档是对https:&#x2F;&#x2F;gitee.com&#x2F;hustos&#x2F;pke-doc的部分修改和解释. &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&amp;">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/hustos/pke-doc/raw/master/pictures/htif.png">
+<meta property="article:published_time" content="2021-12-17T17:07:30.000Z">
+<meta property="article:modified_time" content="2024-02-27T05:01:50.106Z">
+<meta property="article:author" content="Sukuna">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/hustos/pke-doc/raw/master/pictures/htif.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/project/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/project/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/project/images/favicon-192x192.png">
+        
+      
+    
+    <!-- title -->
+    <title>华中科技大学OS实验解析(Lab1)</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/project/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/project/">首页</a></li><!--
+     --><!--
+       --><li><a href="/project/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/project/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/SukunaShinmyoumaru-hust/Hust-opensource-Xuejie">HUST-学解</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="上一篇" href="/project/2021/12/18/oslab2/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="下一篇" href="/project/2021/05/15/gmmem/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sukunashinmyoumaru-hust.github.io/project/2021/12/18/oslab1/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sukunashinmyoumaru-hust.github.io/project/2021/12/18/oslab1/&text=华中科技大学OS实验解析(Lab1)"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sukunashinmyoumaru-hust.github.io/project/2021/12/18/oslab1/&title=华中科技大学OS实验解析(Lab1)"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sukunashinmyoumaru-hust.github.io/project/2021/12/18/oslab1/&is_video=false&description=华中科技大学OS实验解析(Lab1)"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=华中科技大学OS实验解析(Lab1)&body=Check out this article: https://sukunashinmyoumaru-hust.github.io/project/2021/12/18/oslab1/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sukunashinmyoumaru-hust.github.io/project/2021/12/18/oslab1/&title=华中科技大学OS实验解析(Lab1)"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sukunashinmyoumaru-hust.github.io/project/2021/12/18/oslab1/&title=华中科技大学OS实验解析(Lab1)"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sukunashinmyoumaru-hust.github.io/project/2021/12/18/oslab1/&title=华中科技大学OS实验解析(Lab1)"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sukunashinmyoumaru-hust.github.io/project/2021/12/18/oslab1/&title=华中科技大学OS实验解析(Lab1)"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sukunashinmyoumaru-hust.github.io/project/2021/12/18/oslab1/&name=华中科技大学OS实验解析(Lab1)&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sukunashinmyoumaru-hust.github.io/project/2021/12/18/oslab1/&t=华中科技大学OS实验解析(Lab1)"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Copyright-License"><span class="toc-number">1.</span> <span class="toc-text">&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;Copyright License</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-%E5%AE%9E%E9%AA%8C1%E7%9A%84%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><span class="toc-number">1.1.</span> <span class="toc-text">3.1 实验1的基础知识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-1-RISC-V%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%BC%96%E8%AF%91%E5%92%8C%E9%93%BE%E6%8E%A5"><span class="toc-number">1.1.1.</span> <span class="toc-text">3.1.1 RISC-V程序的编译和链接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-2-%E6%8C%87%E5%AE%9A%E7%AC%A6%E5%8F%B7%E7%9A%84%E9%80%BB%E8%BE%91%E5%9C%B0%E5%9D%80"><span class="toc-number">1.1.2.</span> <span class="toc-text">3.1.2 指定符号的逻辑地址</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-3-%E4%BB%A3%E7%90%86%E5%86%85%E6%A0%B8%E7%9A%84%E6%9E%84%E9%80%A0%E8%BF%87%E7%A8%8B"><span class="toc-number">1.1.3.</span> <span class="toc-text">3.1.3 代理内核的构造过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-4-%E4%BB%A3%E7%90%86%E5%86%85%E6%A0%B8%E7%9A%84%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B"><span class="toc-number">1.1.4.</span> <span class="toc-text">3.1.4 代理内核的启动过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-5-ELF%E6%96%87%E4%BB%B6%EF%BC%88app%EF%BC%89%E7%9A%84%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B"><span class="toc-number">1.1.5.</span> <span class="toc-text">3.1.5 ELF文件（app）的加载过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-6-spike%E7%9A%84HTIF%E6%8E%A5%E5%8F%A3"><span class="toc-number">1.1.6.</span> <span class="toc-text">3.1.6 spike的HTIF接口</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-lab1-1-%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8"><span class="toc-number">1.2.</span> <span class="toc-text">3.2 lab1_1 系统调用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%99%E5%AE%9A%E5%BA%94%E7%94%A8"><span class="toc-number">1.2.0.1.</span> <span class="toc-text">给定应用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9"><span class="toc-number">1.2.0.2.</span> <span class="toc-text">实验内容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E6%8C%87%E5%AF%BC"><span class="toc-number">1.2.0.3.</span> <span class="toc-text">实验指导</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-lab1-2-%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86"><span class="toc-number">1.3.</span> <span class="toc-text">3.3 lab1_2 异常处理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%99%E5%AE%9A%E5%BA%94%E7%94%A8-1"><span class="toc-number">1.3.0.1.</span> <span class="toc-text">给定应用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9-1"><span class="toc-number">1.3.0.2.</span> <span class="toc-text">实验内容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E6%8C%87%E5%AF%BC-1"><span class="toc-number">1.3.0.3.</span> <span class="toc-text">实验指导</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-4-lab1-3-%EF%BC%88%E5%A4%96%E9%83%A8%EF%BC%89%E4%B8%AD%E6%96%AD"><span class="toc-number">1.4.</span> <span class="toc-text">3.4 lab1_3 （外部）中断</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%99%E5%AE%9A%E5%BA%94%E7%94%A8-2"><span class="toc-number">1.4.0.1.</span> <span class="toc-text">给定应用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9-2"><span class="toc-number">1.4.0.2.</span> <span class="toc-text">实验内容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E6%8C%87%E5%AF%BC-2"><span class="toc-number">1.4.0.3.</span> <span class="toc-text">实验指导</span></a></li></ol></li></ol></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        华中科技大学OS实验解析(Lab1)
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Sukuna</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-12-17T17:07:30.000Z" class="dt-published" itemprop="datePublished">2021-12-18</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/project/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/">实验记录</a>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <p>许可证:</p>
+<p>版权归<a target="_blank" rel="noopener" href="https://gitee.com/hustos">华中科技大学操作系统团队</a>所有,下面是许可证书,本文档是对<a target="_blank" rel="noopener" href="https://gitee.com/hustos/pke-doc%E7%9A%84%E9%83%A8%E5%88%86%E4%BF%AE%E6%94%B9%E5%92%8C%E8%A7%A3%E9%87%8A">https://gitee.com/hustos/pke-doc的部分修改和解释</a>.</p>
+<h1 id="Copyright-License"><a href="#Copyright-License" class="headerlink" title="=&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;Copyright License"></a>=&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;<br>Copyright License</h1><p>The PKE software is:</p>
+<p>Copyright (c) 2021, Zhiyuan Shao (<a href="mailto:&#122;&#121;&#115;&#104;&#x61;&#x6f;&#64;&#104;&#117;&#x73;&#116;&#x2e;&#101;&#100;&#117;&#46;&#99;&#x6e;">&#122;&#121;&#115;&#104;&#x61;&#x6f;&#64;&#104;&#117;&#x73;&#116;&#x2e;&#101;&#100;&#117;&#46;&#99;&#x6e;</a>),<br>                    Yi Gui (<a href="mailto:&#103;&#121;&#49;&#x36;&#x33;&#101;&#109;&#97;&#x69;&#x6c;&#x40;&#x31;&#54;&#x33;&#x2e;&#x63;&#111;&#109;">&#103;&#121;&#49;&#x36;&#x33;&#101;&#109;&#97;&#x69;&#x6c;&#x40;&#x31;&#54;&#x33;&#x2e;&#x63;&#111;&#109;</a>),<br>                    Yan Jiao (<a href="mailto:&#x37;&#55;&#51;&#x37;&#48;&#57;&#53;&#x37;&#57;&#64;&#x71;&#x71;&#x2e;&#x63;&#x6f;&#109;">&#x37;&#55;&#51;&#x37;&#48;&#57;&#53;&#x37;&#57;&#64;&#x71;&#x71;&#x2e;&#x63;&#x6f;&#109;</a>),<br>                    Ziming Yuan (<a href="mailto:&#49;&#50;&#x32;&#x33;&#57;&#x36;&#50;&#48;&#53;&#x33;&#64;&#x71;&#113;&#46;&#x63;&#111;&#109;">&#49;&#50;&#x32;&#x33;&#57;&#x36;&#50;&#48;&#53;&#x33;&#64;&#x71;&#113;&#46;&#x63;&#111;&#109;</a>),<br>                    Yixin Song (<a href="mailto:&#121;&#x69;&#120;&#x69;&#110;&#x73;&#111;&#x6e;&#103;&#64;&#104;&#117;&#115;&#x74;&#46;&#x65;&#x64;&#117;&#x2e;&#99;&#x6e;">&#121;&#x69;&#120;&#x69;&#110;&#x73;&#111;&#x6e;&#103;&#64;&#104;&#117;&#115;&#x74;&#46;&#x65;&#x64;&#117;&#x2e;&#99;&#x6e;</a>),<br>                    Boyang Li (liboyang_<a href="mailto:&#x68;&#117;&#x73;&#x74;&#x40;&#49;&#54;&#x33;&#46;&#x63;&#111;&#x6d;">&#x68;&#117;&#x73;&#x74;&#x40;&#49;&#54;&#x33;&#46;&#x63;&#111;&#x6d;</a>),<br>                   Huazhong University of Science and Technology</p>
+<p>Permission is hereby granted, free of charge, to any person obtaining<br>a copy of this software and associated documentation files (the<br>“Software”), to deal in the Software without restriction, including<br>without limitation the rights to use, copy, modify, merge, publish,<br>distribute, sublicense, and&#x2F;or sell copies of the Software, and to<br>permit persons to whom the Software is furnished to do so, subject to<br>the following conditions:</p>
+<p>* The above copyright notice and this permission notice shall be<br>  included in all copies or substantial portions of the Software.</p>
+<p>* Neither the name of the Huazhong University of Science and Technology<br>  nor the names of its contributors may be used to endorse or promote<br>  products derived from this software without specific prior written<br>  permission.</p>
+<p>THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND,<br>EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF<br>MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND<br>NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE<br>LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION<br>OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION<br>WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
+<h2 id="3-1-实验1的基础知识"><a href="#3-1-实验1的基础知识" class="headerlink" title="3.1 实验1的基础知识"></a>3.1 实验1的基础知识</h2><p>本章我们将首先<a target="_blank" rel="noopener" href="https://gitee.com/hustos/pke-doc#subsec_preparecode">获得代码</a>，接下来介绍<a target="_blank" rel="noopener" href="https://gitee.com/hustos/pke-doc#subsec_elfload">程序的编译链接和ELF文件</a>的基础知识，接着讲述riscv-pke操作系统内核的<a target="_blank" rel="noopener" href="https://gitee.com/hustos/pke-doc#subsec_booting">启动原理</a>，最后开始实验1的3个实验。</p>
+<h3 id="3-1-1-RISC-V程序的编译和链接"><a href="#3-1-1-RISC-V程序的编译和链接" class="headerlink" title="3.1.1 RISC-V程序的编译和链接"></a><a target="_blank" rel="noopener" href="https://gitee.com/hustos/pke-doc#311-risc-v%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%BC%96%E8%AF%91%E5%92%8C%E9%93%BE%E6%8E%A5"></a>3.1.1 RISC-V程序的编译和链接</h3><p>下面，我们将简要介绍RISC-V程序的编译和链接相关知识。这里，我们仍然假设你已经按照<a target="_blank" rel="noopener" href="https://gitee.com/hustos/pke-doc/blob/master/chapter2_installation.md">第二章</a>的要求完成了基于Ubuntu或者openEular的开发环境构建，如果是在头歌平台，可以通过他们提供的交互??进入终端使用（里面的交叉编译器已经安装且已加入系统路径）。在PKE实验的开发环境中，我们通过模拟器（spike）所构建的目标机是risc-v机器，而主机一般采用的是采用x86指令集的Intel处理器（openEular可能采用的是基于ARM指令集的华为鲲鹏处理器），在这种配置下我们的程序，包括PKE操作系统内核以及应用都通过交叉编译器所提供的工具进行编译和链接。虽然risc-v交叉编译器和主机环境下的GCC是同一套体系，但它的使用和输出还是有些细微的不同，所以有必要对它进行一定的了解。</p>
+<p>实际上，采用RV64G指令集的RISC-V体系结构（参见<a target="_blank" rel="noopener" href="https://gitee.com/hustos/pke-doc/blob/master/chapter1_riscv.md">第一章</a>的内容）跟传统的x86或者ARM体系结构非常类似（从采用精简指令集这个角度，跟ARM更加类似一些），从软件层面上来看也没有什么不同。所以，为RISC-V体系结构编写、编译和链接程序，以及ELF文件的结构这些基础知识，读者可以从<a href="https://gitee.com/link?target=https://book.douban.com/subject/30295940/">《计算机系统基础》课程</a>的第四章（采用x86指令集）里找到，以下的讲解我们将更侧重用我们的PKE实验里可能碰到的问题。</p>
+<p>我们知道，采用C语言编写一个应用的过程大概可以归纳为：首先，<strong>编辑（edit）</strong>.c的源文件；接下来，编译（compile）<strong>为对象文件.o；最后，将对象文件</strong>链接（link）为可执行程序文件。当然，在从源代码编译为对象文件的过程中，可能会出现语法错误；再链接过程中，也可能出现符号找不到或函数未定义的错误，这些错误都需要我们回到源代码或者修改链接命令行来进行修正，并最终得到符合预期的应用程序。(.c-&gt;(编译).o-&gt;(与静态库静态链接)可执行)</p>
+<ul>
+<li>编辑</li>
+</ul>
+<p>例如，我们有以下简单Hello world!程序（在当前目录编辑helloworld.c文件）：</p>
+<p>  1 #include &lt;stdio.h&gt;<br>  2<br>  3 <strong>int</strong> <strong>main</strong>()<br>  4 {<br>  5   printf( “Hello world!\n” );<br>  6   <strong>return</strong> 0;<br>  7 }</p>
+<ul>
+<li>编译</li>
+</ul>
+<p>使用交叉编译器对以上程序进行编译：</p>
+<p><code>$ riscv64-unknown-elf-gcc -c ./helloworld.c</code></p>
+<p>以上命令中<code>-c</code>开关告诉riscv64-unknown-elf-gcc命令只对源代码做编译，即compile动作。如果不加该开关，gcc默认地将对源文件进行编译+链接动作，直接生成可执行程序。</p>
+<p>该命令执行后，我们将在当前目录得到helloworld.o文件，使用file命令对该文件进行观察：</p>
+<p>$ file .&#x2F;helloworld.o<br>.&#x2F;helloworld.o: ELF 64-bit LSB relocatable, UCB RISC-V, version 1 (SYSV), not stripped</p>
+<p>可以看到，helloworld.o文件的属性为：</p>
+<ol>
+<li>ELF 64-bit: 64位的ELF文件；</li>
+<li>LSB: 低位有效，即低地址存放最低有效字节。LSB的意思是：全称为Least Significant Bit，在二进制数中意为最低有效位，一般来说，MSB位于二进制数的最左侧，LSB位于二进制数的最右侧；(编者注:和小端存储差不多意思?低地址存放低位)</li>
+<li>relocatable：可浮动代码，意味着该ELF文件中的符号并无指定的逻辑地址；</li>
+<li>UCB RISC-V：代码的目标指令集为RISC-V指令集；</li>
+<li>version 1 (SYSV)：说明该ELF文件是SYSV版本的，即ELF头中的e_ident [EI_OSABI]字段设置为0；</li>
+<li>not stripped：说明该ELF文件保留了程序中的符号表（symbol table）。符号（symbol）广泛存在于我们编写的源程序中，编译器会把所有函数名、变量名处理为符号。例如，helloworld.c中的main就是一个符号。</li>
+</ol>
+<p>编者注:ELF其实就是在计算机科学中，是一种用于二进制文件、可执行文件、目标代码、共享库和核心转储格式文件。是UNIX系统实验室（USL）作为应用程序二进制接口（Application Binary Interface，ABI）而开发和发布的，也是Linux的主要可执行文件格式。</p>
+<p>#define EI_NIDENT 16<br>typedef struct{<br>    unsigned char e_ident[EI_NIDENT];<br>    Elf32_Half e_type;<br>    Elf32_Half e_machine;<br>    Elf32_Word e_version;<br>    Elf32_Addr e_entry;<br>    Elf32_Off e_phoff;<br>    Elf32_Off e_shoff;<br>    Elf32_Word e_flags;<br>    Elf32_Half e_ehsize;<br>    Elf32_Half e_phentsize;<br>    Elf32_Half e_phnum;<br>    Elf32_Half e_shentsize;<br>    Elf32_Half e_shnum;<br>    Elf32_Half e_shstrndx;<br>} Elf32_Ehdr;</p>
+<p><strong>数据类型说明：</strong></p>
+<p>名称</p>
+<p>大小</p>
+<p>对齐</p>
+<p>用途</p>
+<p>Elf32_Addr</p>
+<p>4</p>
+<p>4</p>
+<p>无符号程序地址</p>
+<p>Elf32_Half</p>
+<p>2</p>
+<p>2</p>
+<p>无符号中等大小整数</p>
+<p>Elf32_Off</p>
+<p>4</p>
+<p>4</p>
+<p>无符号文件偏移</p>
+<p>Elf32_Sword</p>
+<p>4</p>
+<p>4</p>
+<p>有符号大整数</p>
+<p>Elf32_Word</p>
+<p>4</p>
+<p>4</p>
+<p>无符号大整数</p>
+<p>unsigned char</p>
+<p>1</p>
+<p>1</p>
+<p>无符号小整数</p>
+<p><strong>代码项含义：</strong>最开头是16个字节的e_ident, 其中包含用以表示ELF文件的字符，以及其他一些与机器无关的信息。开头的4个字节值固定不变，为0x7f和ELF三个字符。<br><strong>e_type</strong> 它标识的是该文件的类型。<br><strong>e_machine</strong> 表明运行该程序需要的体系结构。<br><strong>e_version</strong> 表示文件的版本。<br><strong>e_entry</strong> 程序的入口地址。<br><strong>e_phoff</strong> 表示Program header table 在文件中的偏移量（以字节计数）。<br><strong>e_shoff</strong> 表示Section header table 在文件中的偏移量（以字节计数）。<br><strong>e_flags</strong> 对IA32而言，此项为0。<br><strong>e_ehsize</strong> 表示ELF header大小（以字节计数）。<br><strong>e_phentsize</strong> 表示Program header table中每一个条目的大小。<br><strong>e_phnum</strong> 表示Program header table中有多少个条目。<br><strong>e_shentsize</strong> 表示Section header table中的每一个条目的大小。<br><strong>e_shnum</strong> 表示Section header table中有多少个条目。<br><strong>e_shstrndx</strong> 包含节名称的字符串是第几个节（从零开始计数）。</p>
+<ul>
+<li>链接</li>
+</ul>
+<p>最后，我们对生成的目标文件进行链接：</p>
+<p><code>$ riscv64-unknown-elf-gcc -o ./helloworld ./helloworld.o</code></p>
+<p>该命令将在当前目录生成helloworld文件，我们仍然用file命令查看该文件的信息：</p>
+<p>$ file .&#x2F;helloworld<br>.&#x2F;helloworld: ELF 64-bit LSB executable, UCB RISC-V, version 1 (SYSV), statically linked, not stripped</p>
+<p>对比于helloworld.o文件，我们发现helloworld文件是可执行（executable）文件而不是可浮动代码，也就是说通过链接，已经给源代码中的符号指定好了逻辑地址。另外，statically linked说明helloworld程序是通过<strong>静态链接</strong>生成的。实际上，newlib版本的RISC-V交叉编译（也就是我们用的riscv64-unknown-elf-gcc）默认会将输入程序与它<strong>自带的静态库进行链接</strong>，从而生成直接可以在RISC-V机器上执行的可执行代码。具体到helloworld.c程序，<strong>它所调用的printf函数将从交叉编译器的静态库中获得，并在最终生成的.&#x2F;helloworld注入printf函数的实现</strong>。这样，.&#x2F;helloworld的执行将无需依赖其他动态库，避免二进制程序因缺少二进制库而无法执行的问题。PKE实验将全部采用静态链接的方法，生成所有二进制文件。</p>
+<p>接下来，我们了解一下helloworld的结构。首先通过riscv64-unknown-elf-readelf -h命令，了解该ELF文件的文件头信息：</p>
+<p>$ riscv64-unknown-elf-readelf -h .&#x2F;helloworld<br>ELF Header:<br>  Magic:   7f 45 4c 46 02 01 01 00 00 00 00 00 00 00 00 00<br>  Class:                             ELF64<br>  Data:                              2’s complement, little endian<br>  Version:                           1 (current)<br>  OS&#x2F;ABI:                            UNIX - System V<br>  ABI Version:                       0<br>  Type:                              EXEC (Executable file)<br>  Machine:                           RISC-V<br>  Version:                           0x1<br>  Entry point address:               0x100c0<br>  Start of program headers:          64 (bytes into file)<br>  Start of section headers:          19440 (bytes into file)<br>  Flags:                             0x5, RVC, double-float ABI<br>  Size of this header:               64 (bytes)<br>  Size of program headers:           56 (bytes)<br>  -&gt;Number of program headers:         2<br>  Size of section headers:           64 (bytes)<br>  Number of section headers:         15<br>  Section header string table index: 14</p>
+<p>从以上输出我们可以看到，helloworld包含了2个程序段（segment），以及15个节（section），它的入口地址为0x100c0。</p>
+<p>接下来，我们可以通过riscv64-unknown-elf-readelf -S命令了解helloworld可执行程序包含哪些程序节：</p>
+<p>$ riscv64-unknown-elf-readelf -S .&#x2F;helloworld<br>There are 15 section headers, starting at offset 0x4bf0:</p>
+<p>Section Headers:<br>  [Nr] Name              Type             Address           Offset<br>       Size              EntSize          Flags  Link  Info  Align<br>  [ 0]                   NULL             0000000000000000  00000000<br>       0000000000000000  0000000000000000           0     0     0<br>  [ 1] .text             PROGBITS         00000000000100b0  000000b0<br>       00000000000024ca  0000000000000000  AX       0     0     2<br>  [ 2] .rodata           PROGBITS         0000000000012580  00002580<br>       0000000000000012  0000000000000000   A       0     0     8<br>  [ 3] .eh_frame         PROGBITS         0000000000013594  00002594<br>       0000000000000004  0000000000000000  WA       0     0     4<br>  [ 4] .init_array       INIT_ARRAY       0000000000013598  00002598<br>       0000000000000010  0000000000000008  WA       0     0     8<br>  [ 5] .fini_array       FINI_ARRAY       00000000000135a8  000025a8<br>       0000000000000008  0000000000000008  WA       0     0     8<br>  [ 6] .data             PROGBITS         00000000000135b0  000025b0<br>       0000000000000f58  0000000000000000  WA       0     0     8<br>  [ 7] .sdata            PROGBITS         0000000000014508  00003508<br>       0000000000000040  0000000000000000  WA       0     0     8<br>  [ 8] .sbss             NOBITS           0000000000014548  00003548<br>       0000000000000020  0000000000000000  WA       0     0     8<br>  [ 9] .bss              NOBITS           0000000000014568  00003548<br>       0000000000000068  0000000000000000  WA       0     0     8<br>  [10] .comment          PROGBITS         0000000000000000  00003548<br>       0000000000000011  0000000000000001  MS       0     0     1<br>  [11] .riscv.attributes RISCV_ATTRIBUTE  0000000000000000  00003559<br>       0000000000000035  0000000000000000           0     0     1<br>  [12] .symtab           SYMTAB           0000000000000000  00003590<br>       0000000000000f48  0000000000000018          13    78     8<br>  [13] .strtab           STRTAB           0000000000000000  000044d8<br>       0000000000000695  0000000000000000           0     0     1<br>  [14] .shstrtab         STRTAB           0000000000000000  00004b6d<br>       000000000000007e  0000000000000000           0     0     1<br>Key to Flags:<br>  W (write), A (alloc), X (execute), M (merge), S (strings), I (info),<br>  L (link order), O (extra OS processing required), G (group), T (TLS),<br>  C (compressed), x (unknown), o (OS specific), E (exclude),<br>  p (processor specific)</p>
+<p>以上输出中比较重要的有：.text表示可执行节（section），.rodata节是只读数据节，.data，.sdata，.sbss以及.bss节都可以视为helloworld程序的数据段（.data是数据节，.sdata为精简数据节，.bss为未初始化数据节，.sbss则为精简未初始化数据节）。其他的节，如.symtab为符号节，即程序中出现的符号（如main函数）列表；.strtab节为程序中出现的字符串列表等。</p>
+<p>编者注: .sbss是小的BSS节，用于存放“近”数据，即使用短指针（near）寻址的数据。有利于小的对象组合到单个可以直接寻址的区域。一般来说,未初始化的数据在.bss节,里面的内容默认为0.</p>
+<p>由于helloworld是可执行程序，且根据riscv64-unknown-elf-readelf -h命令的输出，我们已知该程序有2个程序段（segment），接下来我们再通过riscv64-unknown-elf-readelf -l查看该可执行程序的程序段组成：</p>
+<p>$ riscv64-unknown-elf-readelf -l .&#x2F;helloworld</p>
+<p>Elf file type is EXEC (Executable file)<br>Entry point 0x100c0<br>There are 2 program headers, starting at offset 64</p>
+<p>Program Headers:<br>  Type           Offset             VirtAddr           PhysAddr<br>                 FileSiz            MemSiz              Flags  Align<br>  LOAD           0x0000000000000000 0x0000000000010000 0x0000000000010000<br>                 0x0000000000002592 0x0000000000002592  R E    0x1000<br>  LOAD           0x0000000000002594 0x0000000000013594 0x0000000000013594<br>                 0x0000000000000fb4 0x000000000000103c  RW     0x1000</p>
+<p> Section to Segment mapping:<br>  Segment Sections…<br>   00     .text .rodata<br>   01     .eh_frame .init_array .fini_array .data .sdata .sbss .bss</p>
+<p>以上输出表明，helloworld的两个段，其中一个（00）是由.text节和.rodata节所组成的（可执行代码段），另一个（01）是由.eh_frame，.init_array，.fini_arry，.data，.sdata，.sbss以及.bss节所组成的（数据段）。<strong>这里，读者可以思考：helloworld文件中为什么没有出现堆栈（.stack）段呢？</strong></p>
+<p>为了对helloworld文件进行进一步理解，我们使用objdump命令将它进行反汇编处理（使用<code>-D</code>开关反汇编所有的段），并列出3个有效段（省略辅助段，也省略gcc加入的一些辅助函数和辅助数据结构）：</p>
+<p>$ riscv64-unknown-elf-objdump -D .&#x2F;helloworld  less</p>
+<p>.&#x2F;helloworld:     file format elf64-littleriscv</p>
+<p>Disassembly of section .text:</p>
+<p>000000000001014e <main>:<br>   1014e:       1141                    addi    sp,sp,-16<br>   10150:       e406                    sd      ra,8(sp)<br>   10152:       e022                    sd      s0,0(sp)<br>   10154:       0800                    addi    s0,sp,16<br>   10156:       67c9                    lui     a5,0x12<br>   10158:       58078513                addi    a0,a5,1408 # 12580 &lt;__errno+0xc&gt;<br>   1015c:       1c0000ef                jal     ra,1031c <puts><br>   10160:       4781                    li      a5,0<br>   10162:       853e                    mv      a0,a5<br>   10164:       60a2                    ld      ra,8(sp)<br>   10166:       6402                    ld      s0,0(sp)<br>   10168:       0141                    addi    sp,sp,16<br>   1016a:       8082                    ret<br>        …</p>
+<p>实际上，由于helloworld是静态链接文件，里面的内容非常繁杂，而以上输出中的main函数是我们在<code>riscv64-unknown-elf-objdump -D ./helloworld</code>的输出中抽取出来的，可以观察从helloworld.c中C源程序到RISC-V汇编的转换。首先，我们可以看到main函数对应的逻辑地址为000000000001014e，这里读者可以思考下为什么它不是<code>riscv64-unknown-elf-readelf -h ./helloworld</code>命令输出中的程序入口地址0x100c0？</p>
+<p>编者注:.text的起始地址是100b0,有可能test之前是相关程序进入的代码</p>
+<p>另外，我们看到main函数中进行的<strong>printf调用实际上转换成了对puts函数的调用</strong>，而我们并未实现该函数。这是因为采用<code>riscv64-unknown-elf-gcc</code>对源程序进行的编译和链接，实际上是静态链接，也就是会将<strong>应用程序中的常用函数调用转换为编译器自带的程序库的调用</strong>，并在最终生成的ELF文件中带入自带程序库中的实现。对于printf，编译器在对其字符串参数进行转化后就自然转换为puts库函数调用了，这也是为什么我们在反汇编的代码中找不到printf的原因。</p>
+<p>编者注:这里编译器的静态链接库里面只有put函数,编译器在编译的时候将printf变异成put也是为了与编译器的静态链接库进行配合(静态链接就是在编译的时候将一些符号进行替换.)</p>
+<p>通过以上讲解，可以看到RISC-V程序的编译链接其实跟我们在x86平台上编写、编译和链接一个C语言程序的过程一摸一样，唯一的不同是将以上的命令加上了<code>riscv64-unknown-elf-</code>前缀而已，基本的过程是完全一样的。除此之外，我们生成的可执行代码（如以上的helloworld）采用是RISC-V指令集（更准确的说，是RV64G指令集），是不能在我们的x86开发电脑上直接执行的！也就是说，我们不能通过<code>./helloworld</code>命令直接执行之前编写的C语言程序。</p>
+<p>为了执行helloworld文件，首先我们需要：<strong>1）一个支持RISC-V指令集的机器；2）一个能够在该RISC-V机器上运行的操作系统。</strong>在PKE实验中，我们采用spike模拟RISC-V机器以满足第一个要求；通过实验设计操作系统内核，以满足第二个要求。实际上，PKE的实验设计正是从应用出发，考虑为给定应用设计“刚刚好”的内核，使得给定应用能够在spike模拟的RISC-V机器上正确地执行。</p>
+<h3 id="3-1-2-指定符号的逻辑地址"><a href="#3-1-2-指定符号的逻辑地址" class="headerlink" title="3.1.2 指定符号的逻辑地址"></a><a target="_blank" rel="noopener" href="https://gitee.com/hustos/pke-doc#312-%E6%8C%87%E5%AE%9A%E7%AC%A6%E5%8F%B7%E7%9A%84%E9%80%BB%E8%BE%91%E5%9C%B0%E5%9D%80"></a>3.1.2 指定符号的逻辑地址</h3><p>编译器在链接过程中，一个重要的任务就是为源程序中的符号（symbol）赋予逻辑地址。例如，在以上<code>sections</code>的例子中，我们通过<code>objdump</code>命令，得知helloworld.c源文件的main函数所对应的逻辑地址为0x000000000001014e，而且对于<strong>任意ELF中的段（segment）或节（section）而言，它的逻辑地址必然是从某个地址开始的一段连续地址空间。</strong></p>
+<p>那么，是否有办法指定某符号对应的逻辑地址呢？答案是可以，但只能指定符号所在的段的起始逻辑地址，方法是通过<strong>lds链接脚本</strong>。我们还是用以上的helloworld.c作为例子，另外创建和编辑一个lds链接脚本，即helloworld_lds.lds文件：</p>
+<p>  1 OUTPUT_ARCH( “riscv” )<br>  2<br>  3 ENTRY(main)<br>  4<br>  5 SECTIONS<br>  6 {<br>  7   . &#x3D; 0x81000000;<br>  8   . &#x3D; ALIGN(0x1000);<br>  9   .text : { <strong>*</strong>(.text) }<br> 10   . &#x3D; ALIGN(16);<br> 11   .data : { <strong>*</strong>(.data) }<br> 12   . &#x3D; ALIGN(16);<br> 13   .bss : { <strong>*</strong>(.bss) }<br> 14 }</p>
+<p>在该脚本中，我们规定了程序的目标指令集为RISC-V（第1行）；入口地址为main（第3行）。接下来，我们对程序的几个段地址进行了“规划”，其中代码段的首地址为0x81000000（如果目标平台是64位，编译器会对该逻辑地址的高地址位填0），**.data段和.bss段跟在.text段之后**；ALIGN(0x1000)表示按4KB对齐，ALIGN(16)表示按照16字节对齐。</p>
+<p>为了避免库函数的“干扰”，我们将3.1.2中的helloworld.c代码进行了修改（helloworld_with_lds.c），去掉了printf的调用转用一个加法语句作为main函数的主体：</p>
+<p>  1 #include &lt;stdio.h&gt;<br>  2<br>  3 <strong>int</strong> main()<br>  4 {<br>  5   <strong>int</strong> global_var&#x3D;0;<br>  6   global_var &#x3D; 1;<br>  7   <strong>return</strong> 0;<br>  8 }</p>
+<p>采用以下命令对helloworld_with_lds.c进行编译：</p>
+<p><code>$ riscv64-unknown-elf-gcc -nostartfiles helloworld_with_lds.c -T helloworld_lds.lds -o helloworld_with_lds</code></p>
+<p>并对重新生成的helloworld_with_lds文件进行观察：</p>
+<p>$ riscv64-unknown-elf-readelf -h .&#x2F;helloworld_with_lds<br>ELF Header:<br>  Magic:   7f 45 4c 46 02 01 01 00 00 00 00 00 00 00 00 00<br>  Class:                             ELF64<br>  Data:                              2’s complement, little endian<br>  Version:                           1 (current)<br>  OS&#x2F;ABI:                            UNIX - System V<br>  ABI Version:                       0<br>  Type:                              EXEC (Executable file)<br>  Machine:                           RISC-V<br>  Version:                           0x1<br>  Entry point address:               0x81000000<br>  Start of program headers:          64 (bytes into file)<br>  Start of section headers:          4424 (bytes into file)<br>  Flags:                             0x5, RVC, double-float ABI<br>  Size of this header:               64 (bytes)<br>  Size of program headers:           56 (bytes)<br>  Number of program headers:         1<br>  Size of section headers:           64 (bytes)<br>  Number of section headers:         7<br>  Section header string table index: 6</p>
+<p>以上的输出表明，它的入口地址变成了0x81000000（也就是由helloworld_lds.lds所指定的地址），另外采用<code>riscv64-unknown-elf-objdump -D ./helloworld_with_lds</code>命令观察helloworld_with_lds文件中符号地址main所对应的逻辑地址，有以下输出：</p>
+<p>$ riscv64-unknown-elf-objdump -D .&#x2F;helloworld_with_lds  less</p>
+<p>.&#x2F;helloworld_with_lds:     file format elf64-littleriscv</p>
+<p>Disassembly of section .text:</p>
+<p>0000000081000000 <main>:<br>    81000000:   1101                    addi    sp,sp,-32<br>    81000002:   ec22                    sd      s0,24(sp)<br>    81000004:   1000                    addi    s0,sp,32<br>    81000006:   fe042623                sw      zero,-20(s0)<br>    8100000a:   4785                    li      a5,1<br>    8100000c:   fef42623                sw      a5,-20(s0)<br>    81000010:   4781                    li      a5,0<br>    81000012:   853e                    mv      a0,a5<br>    81000014:   6462                    ld      s0,24(sp)<br>    81000016:   6105                    addi    sp,sp,32<br>    81000018:   8082                    ret<br>        …</p>
+<p>可以看到，main函数成为了helloworld_with_lds文件的真正入口（而不是3.1.2中的helloworld文件中main函数并不是该可执行程序的真正入口的情形）。</p>
+<p>通过lds文件的办法控制程序中符号地址到逻辑地址的转换，对于PKE的第一组实验（lab1）而言，是一个很重要的知识点。<strong>因为在第一组实验中，我们将采用直接映射（Bare-mode mapping）的办法完成应用程序中虚地址到实际物理地址的转换</strong>（我们在第二组实验中才会打开RISC-V的SV39页式地址映射），所以需要提前对PKE的内核以及应用的逻辑地址进行“规划”。</p>
+<h3 id="3-1-3-代理内核的构造过程"><a href="#3-1-3-代理内核的构造过程" class="headerlink" title="3.1.3 代理内核的构造过程"></a><a target="_blank" rel="noopener" href="https://gitee.com/hustos/pke-doc#313-%E4%BB%A3%E7%90%86%E5%86%85%E6%A0%B8%E7%9A%84%E6%9E%84%E9%80%A0%E8%BF%87%E7%A8%8B"></a>3.1.3 代理内核的构造过程</h3><p>这里我们讨论lab1_1中代理内核，以及其上运行的应用的构造（build）过程。PKE实验采用了Linux中广泛采用的make软件包完成内核、支撑库，以及应用的构造。关于Makefile的编写，我们建议读者阅读<a href="https://gitee.com/link?target=https://blog.csdn.net/foryourface/article/details/34058577">这里</a>了解make文件的基础知识，这里仅讨论lab1_1的Makefile以及对应的构造过程。PKE的后续实验实际上采用的Makefile跟lab1_1的非常类似，所以我们在后续章节中不再对它们的构建过程进行讨论。</p>
+<p>编者注:在 Linux环境下使用 GNU 的 make工具能够比较容易的构建一个属于你自己的工程，整个工程的编译只需要一个命令就可以完成编译、连接以至于最后的执行。一个工程中的源文件不计数，其按<strong>类型、功能、模块</strong>分别放在若干个目录中，makefile定义了一系列的规则来指定，哪些文件需要先编译，哪些文件需要后编译，哪些文件需要重新编译，甚至于进行更复杂的功能操作，因为makefile就像一个Shell脚本一样，其中也可以执行操作系统的命令。makefile带来的好处就是——“<strong>自动化编译</strong>”，一旦写好，只需要一个make命令，整个工程完全自动编译，极大的提高了软件开发的效率。</p>
+<p>我们首先观察lab1_1中位于根目录的Makefile文件（摘取其中我们认为重要的内容）：</p>
+<p>  8 CROSS_PREFIX    :<strong>= riscv64-unknown-elf-</strong><br>  9 CC              :<strong>= $(CROSS_PREFIX)gcc</strong><br> 10 AR              :<strong>= $(CROSS_PREFIX)ar</strong><br> 11 RANLIB          :<strong>= $(CROSS_PREFIX)ranlib</strong><br> 12<br> 13 SRC_DIR         :<strong>= .</strong><br> 14 OBJ_DIR         :<strong>= obj</strong><br> 15 SPROJS_INCLUDE  :<strong>= -I.</strong><br> 16<br> …<br> 26 #———————  utils ———————–<br> 27 UTIL_CPPS   :<strong>= util&#x2F;*.c</strong><br> 28<br> 29 UTIL_CPPS  :<strong>= $(wildcard $(UTIL_CPPS))</strong><br> 30 UTIL_OBJS  :<strong>=  $(addprefix $(OBJ_DIR)&#x2F;</strong>, <strong>$(patsubst %.c</strong>,<strong>%.o</strong>,<strong>$(UTIL_CPPS)))</strong><br> 31<br> 32<br> 33 UTIL_LIB   :<strong>= $(OBJ_DIR)&#x2F;util.a</strong><br> 34<br> 35 #———————  kernel ———————–<br> 36 KERNEL_LDS      :<strong>= kernel&#x2F;kernel.lds</strong><br> 37 KERNEL_CPPS     :<strong>=</strong> \<br> <strong>38     kernel&#x2F;*.c</strong> \<br> <strong>39     kernel&#x2F;machine&#x2F;*.c</strong> \<br> <strong>40     kernel&#x2F;util&#x2F;*.c</strong><br> 41<br> 42 KERNEL_ASMS     :<strong>=</strong> \<br> <strong>43     kernel&#x2F;*.S</strong> \<br> <strong>44     kernel&#x2F;machine&#x2F;*.S</strong> \<br> <strong>45     kernel&#x2F;util&#x2F;*.S</strong><br> 46<br> 47 KERNEL_CPPS     :<strong>= $(wildcard $(KERNEL_CPPS))</strong><br> 48 KERNEL_ASMS     :<strong>= $(wildcard $(KERNEL_ASMS))</strong><br> 49 KERNEL_OBJS     :<strong>=  $(addprefix $(OBJ_DIR)&#x2F;</strong>, <strong>$(patsubst %.c</strong>,<strong>%.o</strong>,<strong>$(KERNEL_CPPS)))</strong><br> 50 KERNEL_OBJS     +&#x3D;  <strong>$(<strong>addprefix $(OBJ_DIR)&#x2F;, <strong>$(<strong>patsubst %.S,%.o,$(KERNEL_ASMS)</strong>))</strong><br> 51<br> 52 KERNEL_TARGET &#x3D; $(OBJ_DIR)&#x2F;riscv-pke<br> 53<br> 54<br> 55 #———————  spike interface library ———————–<br> 56 SPIKE_INF_CPPS  :<strong>= spike_interface&#x2F;*.c</strong><br> 57<br> 58 SPIKE_INF_CPPS  :<strong>= $(wildcard $(SPIKE_INF_CPPS))</strong><br> 59 SPIKE_INF_OBJS  :<strong>=  $(addprefix $(OBJ_DIR)&#x2F;</strong>, <strong>$(patsubst %.c</strong>,</strong>%.o</strong>,<strong>$(SPIKE_INF_CPPS)))</strong><br> 60<br> 61<br> 62 SPIKE_INF_LIB   :<strong>= $(OBJ_DIR)&#x2F;spike_interface.a</strong><br> 63<br> 64<br> 65 #———————  user   ———————–<br> 66 USER_LDS  :<strong>= user&#x2F;user.lds</strong><br> 67 USER_CPPS       :<strong>= user&#x2F;*.c</strong><br> 68<br> 70 USER_OBJS       :<strong>= $(addprefix $(OBJ_DIR)&#x2F;</strong>, <strong>$(patsubst %.c</strong>,<strong>%.o</strong>,<strong>$(USER_CPPS)))</strong><br> 71<br> 72 USER_TARGET     :<strong>= $(OBJ_DIR)&#x2F;app_helloworld</strong><br> 73<br> 74 #————————targets————————<br> 75 $(OBJ_DIR):<br> 76     @-mkdir -p $(OBJ_DIR)<br> 77     @-mkdir -p $(dir $(UTIL_OBJS))<br> 78     @-mkdir -p $(dir $(SPIKE_INF_OBJS))<br> 79     @-mkdir -p $(dir $(KERNEL_OBJS))<br> 80     @-mkdir -p $(dir $(USER_OBJS))<br> 81<br> 82 $(OBJ_DIR)&#x2F;%.o : <strong>%.c</strong><br> 83     @echo “compiling” $&lt;<br> 84     @$(COMPILE) -c $&lt; -o $@<br> 85<br> 86 $(OBJ_DIR)&#x2F;%.o : <strong>%.S</strong><br> 87     @echo “compiling” $&lt;<br> 88     @$(COMPILE) -c $&lt; -o $@<br> 89<br> 90 $(UTIL_LIB): <strong>$(OBJ_DIR) $(UTIL_OBJS)</strong><br> 91     @echo “linking “ $@ …<br> 92     @$(AR) -rcs $@ $(UTIL_OBJS)<br> 93     @echo “Util lib has been build into” \“$@\“<br> 94<br> 95 $(SPIKE_INF_LIB): $(OBJ_DIR) $(UTIL_OBJS) $(SPIKE_INF_OBJS)<br> 96     @echo “linking “ $@ …<br> 97     @$(AR) -rcs $@ $(SPIKE_INF_OBJS) $(UTIL_OBJS)<br> 98     @echo “Spike lib has been build into” \“$@\“<br> 99<br>100 $(KERNEL_TARGET): $(OBJ_DIR) $(UTIL_LIB) $(SPIKE_INF_LIB) $(KERNEL_OBJS) $(KERNEL_LDS)<br>101     @echo “linking” $@ …<br>102     @$(COMPILE) $(KERNEL_OBJS) $(UTIL_LIB) $(SPIKE_INF_LIB) -o $@ -T $(KERNEL_LDS)<br>103     @echo “PKE core has been built into” \“$@\“<br>104<br>105 $(USER_TARGET): $(OBJ_DIR) $(UTIL_LIB) $(USER_OBJS) $(USER_LDS)<br>106     @echo “linking” $@  …<br>107     @$(COMPILE) $(USER_OBJS) $(UTIL_LIB) -o $@ -T $(USER_LDS)<br>108     @echo “User app has been built into” \“$@\“<br>109<br>…<br>113 .DEFAULT_GOAL :<strong>= $(all)</strong><br>114<br>115 all: <strong>$(KERNEL_TARGET) $(USER_TARGET)</strong><br>116 .PHONY:<strong>all</strong><br>…</p>
+<p>编者注:makefile的$(xxx)可以简单地认为是专属于makefile的一种变量,这个变量可以对应一种操作.对于整个makefile文件来说,all这个变量就代表我执行make操作的时候需要做什么操作.其中echo命令是Unix在cmd显示内容的命令.每个$(xxx)首先定义在做这个操作之前我们还要做什么操作.其中前面那几行就是代表环境变量的配置.</p>
+<p>通过阅读该文件，我们看到构建过程的最终目标是第115行的all，而它有两个依赖目标：<code>$(KERNEL_TARGET)</code>和<code>$(USER_TARGET)</code>。我们从右往左看，<code>$(USER_TARGET)</code>的定义在72行，对应的是<code>$(OBJ_DIR)/app_helloworld</code> （即.&#x2F;obj&#x2F;app_helloworld）。构建<code>$(USER_TARGET)</code>的规则在第105–108行，其中第105行说明<code>$(USER_TARGET)</code>的构建依赖<code>$(OBJ_DIR)</code>，<code>$(UTIL_LIB)</code>，<code>$(USER_OBJS)</code>以及<code>$(USER_LDS)</code>这4个目标。</p>
+<ul>
+<li><code>$(OBJ_DIR)</code>：它对应的动作是建立5个目录（第75–80行）：.&#x2F;obj，.&#x2F;obj&#x2F;util，.&#x2F;obj&#x2F;spike_interface，.&#x2F;obj&#x2F;user以及.&#x2F;obj&#x2F;kernel；</li>
+<li><code>$(UTIL_LIB)</code>：它的定义在第33行，它对应的是<code>$(OBJ_DIR)/util.a</code>，而它的编译规则在第90行–第93行，依赖<code>$(UTIL_OBJS)</code>的处理。而后者的定义在第30行，对应<code>$(addprefix $(OBJ_DIR)/, $(patsubst %.c,%.o,$(UTIL_CPPS)))</code>，需要将<code>$(UTIL_CPPS)</code>也就是util&#x2F;*.c（见第27行）全部编译成.o文件，并链接为静态库（第92行的动作）；</li>
+<li><code>$(USER_OBJS)</code>：它对应（第70行）的是<code>$(addprefix $(OBJ_DIR)/, $(patsubst %.c,%.o,$(USER_CPPS)))</code>，需要将<code>$(USER_CPPS)</code>也就是user&#x2F;*.c都编译为.o文件（具体的编译动作由82–84行完成）；</li>
+<li><code>$(USER_LDS)</code>：它对应（见第66行）user&#x2F;user.lds，由于后者已经存在于源代码树中，所以不会导致任何动作。</li>
+</ul>
+<p>以上构造<code>$(USER_TARGET)</code>所依赖的目标全部完成后，构造过程将执行第105–108行的动作，即将user&#x2F;目录下通过编译出来的.o文件与util中编译和链接出来的静态库文件一起链接，生成采用RISC-V指令集的可执行文件。同时，链接过程采用user&#x2F;user.lds脚本以指定生成的可执行文件中的符号所对应的逻辑地址。</p>
+<p>完成<code>$(USER_TARGET)</code>的构造后，我们回到第115行，继续$(KERNEL_TARGET)目标的构造。它的定义在100-103行，可以看到它又有5个依赖目标：<code>$(OBJ_DIR)</code>，<code>$(UTIL_LIB)</code>，<code>$(SPIKE_INF_LIB)</code>，<code>$(KERNEL_OBJS)</code>和<code>$(KERNEL_LDS)</code>。其中<code>$(OBJ_DIR)</code>、<code>$(UTIL_LIB)</code>在构造<code>$(USER_TARGET)</code>目标时就已经顺带地实现了，剩下的<code>$(KERNEL_LDS)</code>也是已经存在的文件。这样，就剩下两个“新”目标：</p>
+<ul>
+<li><code>$(SPIKE_INF_LIB)</code>：它的定义在第62行，对应<code>$(OBJ_DIR)/spike_interface.a</code>文件，对应的构造动作在第95–98行，又依赖<code>$(OBJ_DIR)</code>、<code>$(UTIL_OBJS)</code>和<code>$(SPIKE_INF_OBJS)</code>这3个目标。其中<code>$(OBJ_DIR)</code>和<code>$(UTIL_OBJS)</code>两个目标我们在之前构造<code>$(USER_TARGET)</code>时已经解决，剩下的<code>$(SPIKE_INF_OBJS)</code>目标对应的是<code>$(addprefix $(OBJ_DIR)/, $(patsubst %.c,%.o,$(SPIKE_INF_CPPS)))</code>将导致<code>$(SPIKE_INF_CPPS)</code>，也就是spike_interface&#x2F;*.c被对应地编译成.o文件。最后，第96–98行的动作，会将编译spike_interface目录下文件生成的.o文件链接为静态库（<code>$(OBJ_DIR)/spike_interface.a</code>）文件；</li>
+<li><code>$(KERNEL_OBJS)</code>：它对应的定义在第49–50行，内容很简单，就是kernel下的所有汇编.S文件和所有的.c文件。处理该依赖构造目标，会将kernel子目录下的所有汇编和C源文件编译成对应的.o文件。</li>
+</ul>
+<p>以上依赖目标全部构造完毕后，回到第101–103行的<code>$(KERNEL_TARGET)</code>目标所对应的动作，将编译kernel目录下的源文件所得到的.o文件与<code>$(OBJ_DIR)/spike_interface.a</code>进行链接，并最终生成我们的代理内核<code>$(OBJ_DIR)/riscv-pke</code>。至此，PKE实验所需要的代码构造完毕。总结一下，这个构造过程是：</p>
+<ul>
+<li>1）构造util目录下的静态库文件<code>$(OBJ_DIR)/util.a</code>；</li>
+<li>2）构造应用程序，得到<code>$(OBJ_DIR)/app_helloworld</code>；</li>
+<li>3）构造<code>$(OBJ_DIR)/spike_interface.a</code>，即spike所提供的工具库文件；</li>
+<li>4）最后构造代理内核<code>$(OBJ_DIR)/riscv-pke</code>。</li>
+</ul>
+<p>编者注:这一段很长,其实就是一个套娃的过程,就是指定变量,这个变量可以理解成一个函数,或者是一种操作,在执行这种操作之前我们都会之前这个操作“依赖”的操作(有点像函数里面调用函数).这样我们就可以构造一个代理内核来运行我们的程序了</p>
+<h3 id="3-1-4-代理内核的启动过程"><a href="#3-1-4-代理内核的启动过程" class="headerlink" title="3.1.4 代理内核的启动过程"></a><a target="_blank" rel="noopener" href="https://gitee.com/hustos/pke-doc#314-%E4%BB%A3%E7%90%86%E5%86%85%E6%A0%B8%E7%9A%84%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B"></a>3.1.4 代理内核的启动过程</h3><p>在3.1.1中，我们获取riscv-pke的代码并完成构造步骤后，我们将通过以下命令开始lab1_1所给定的应用的执行：</p>
+<p>$ spike .&#x2F;obj&#x2F;riscv-pke .&#x2F;obj&#x2F;app_helloworld<br>In m_start, hartid:0<br>HTIF is available!<br>(Emulated) memory size: 2048 MB<br>Enter supervisor mode…<br>Application: .&#x2F;obj&#x2F;app_helloworld<br>Application program entry point (virtual address): 0x0000000081000000<br>Switching to user mode…<br>call do_syscall to accomplish the syscall and lab1_1 here.</p>
+<p>System is shutting down with exit code -1.</p>
+<p>可以看到，该命令有3个部分组成：spike、.&#x2F;obj&#x2F;riscv-pke以及.&#x2F;obj&#x2F;app_helloworld。其中spike是我们在<a target="_blank" rel="noopener" href="https://gitee.com/hustos/pke-doc/blob/master/chapter2_installation.md">第二章</a>安装的RISC-V模拟器，执行它的效果是模拟出一个支持RV64G指令集的RISC-V机器；.&#x2F;obj&#x2F;riscv-pke是我们的PKE代理内核；而.&#x2F;obj&#x2F;app_helloworld是我们在lab1_1中给定的应用。</p>
+<p>那么代理内核是如何在spike模拟的RISC-V机器上启动的呢？实际上，这个启动过程比我们实际的物理机的启动过程简单得多，_<strong>代理内核实际上是spike模拟器将其当作是一个标准ELF文件载入的</strong>_。那么既然是“可执行”的ELF文件，我们就可以用交叉编译器里提供的工具观察它的结构：(编者注:也就是说代理内核也是一个可执行文件.我们的程序就在代理内核上面跑[PKE是一个操作系统内核…])</p>
+<p>$ riscv64-unknown-elf-readelf -h .&#x2F;obj&#x2F;riscv-pke<br>ELF Header:<br>  Magic:   7f 45 4c 46 02 01 01 00 00 00 00 00 00 00 00 00<br>  Class:                             ELF64<br>  Data:                              2’s complement, little endian<br>  Version:                           1 (current)<br>  OS&#x2F;ABI:                            UNIX - System V<br>  ABI Version:                       0<br>  Type:                              EXEC (Executable file)<br>  Machine:                           RISC-V<br>  Version:                           0x1<br>  Entry point address:               0x80000548<br>  Start of program headers:          64 (bytes into file)<br>  Start of section headers:          130760 (bytes into file)<br>  Flags:                             0x5, RVC, double-float ABI<br>  Size of this header:               64 (bytes)<br>  Size of program headers:           56 (bytes)<br>  Number of program headers:         2<br>  Size of section headers:           64 (bytes)<br>  Number of section headers:         18<br>  Section header string table index: 17</p>
+<p>$ riscv64-unknown-elf-readelf -l .&#x2F;obj&#x2F;riscv-pke</p>
+<p>Elf file type is EXEC (Executable file)<br>Entry point 0x80000548<br>There are 2 program headers, starting at offset 64</p>
+<p>Program Headers:<br>  Type           Offset             VirtAddr           PhysAddr<br>                 FileSiz            MemSiz              Flags  Align<br>  LOAD           0x0000000000001000 0x0000000080000000 0x0000000080000000<br>                 0x0000000000003564 0x0000000000003564  R E    0x1000<br>  LOAD           0x0000000000005000 0x0000000080004000 0x0000000080004000<br>                 0x0000000000001411 0x00000000000098b8  RW     0x1000</p>
+<p> Section to Segment mapping:<br>  Segment Sections…<br>   00     .text .rodata<br>   01     .htif .data .bss</p>
+<p>通过以上命令和输出，我们可以得知.&#x2F;obj&#x2F;riscv-pke这个ELF文件的入口地址是0x80000548，且它有两个程序段（segment），分别是00号代码段和01号数据段。其中00号代码段的段首地址是0x80000000，长度是0x3564；01号数据段的段首地址是0x80004000，长度是0x98b8。</p>
+<p>那么为什么.&#x2F;obj&#x2F;riscv-pke的段首地址是0x80000000呢？这是问题通过阅读kernel&#x2F;kernel.lds就一目了然了，因为后者规定了<code>. = 0x80000000</code>即所有虚地址从0x80000000开始。更进一步，为什么要通过将逻辑地址的开始固定在0x80000000这个位置呢？这是因为spike在模拟一个RISC-V机器时，会将其模拟的内存（可通过spike的-m开关指定大小）放置在<strong>0x80000000这个物理地址开始的地方</strong>。例如，默认情况下spike会为它创建的RISC-V机器模拟2GB（2^31，0x80000000）内存，此时，有效物理内存的范围就为[0x80000000, 0xffffffff]。这样，我们就发现了一个“巧合”，即代理内核的虚地址起始地址&#x3D;物理内存的起始地址！有了这个巧合，spike就只需要将代理内核的两个段加载到RISC-V机器内存开始的地方，最后将控制权交给代理内核（将代理内核的入口地址写到epc中）即可。同时，<strong>由于代理内核在编译的时候默认的起始地址也是0x80000000，所以它的执行无需做任何虚拟地址到物理地址的转换，且不会发生错误。</strong>(编者注:对于操作系统代理内核PKE,它的虚拟地址&#x3D;&#x3D;物理地址,不需要虚拟地址和物理地址的转换.)</p>
+<p>另外，.&#x2F;obj&#x2F;riscv-pke的入口地址0x80000548对应代码中的哪个函数呢？这给我们也可以通过阅读kernel&#x2F;kernel.lds得知：</p>
+<p>  1 &#x2F;<strong>*</strong> See LICENSE <strong>for</strong> license details. <strong>*</strong>&#x2F;<br>  2<br>  3 OUTPUT_ARCH( “riscv” )<br>  4<br>  5 ENTRY( _mentry )<br>  6<br>  7 SECTIONS<br>  8 {<br>  9<br> 10   &#x2F;<strong>*<strong>-——————————————————————-</strong>*</strong>&#x2F;<br> 11   &#x2F;<strong>*</strong> Code and read-only segment                                         <strong>*</strong>&#x2F;<br> 12   &#x2F;<strong>*<strong>-——————————————————————-</strong>*</strong>&#x2F;<br> 13<br> 14   &#x2F;<strong>*</strong> Begining of code and text segment, starts from DRAM_BASE to be effective before enabling paging <strong>*</strong>&#x2F;<br> 15   . &#x3D; 0x80000000;<br> 16   _ftext &#x3D; .;<br> 17<br> 18   &#x2F;<strong>*</strong> text: Program code section <strong>*</strong>&#x2F;<br> 19   .text :<br> 20   {<br> 21     <strong>*</strong>(.text)<br> 22     <strong>*</strong>(.text.<strong>*</strong>)<br> 23     <strong>*</strong>(.gnu.linkonce.t.<strong>*</strong>)<br> 24     . &#x3D; ALIGN(0x1000);<br> 25<br> 26     _trap_sec_start &#x3D; .;<br> 27     <strong>*</strong>(trapsec)<br> 28     . &#x3D; ALIGN(0x1000);<br> 29   &#x2F;<strong>*</strong>   ASSERT(. - _trap_sec_start &#x3D;&#x3D; 0x1000, “error: trap section larger than one page”);   <strong>*</strong>&#x2F;<br> 30   }</p>
+<p>以上列出了部分kernel&#x2F;kernel.lds的内容，从第5行可知内核的入口地址是_mentry 函数，通过:</p>
+<p>$ riscv64-unknown-elf-objdump -D .&#x2F;obj&#x2F;riscv-pke  grep _mentry<br>0000000080000548 &lt;_mentry&gt;:</p>
+<p>我们进一步确定了代理内核的入口，即_mentry函数。</p>
+<p>实际上_mentry函数是在kernel&#x2F;machine&#x2F;mentry.S文件中定义的：</p>
+<p> 13   .globl _mentry<br> 14 _mentry:<br> 15     # [mscratch] &#x3D; 0; mscratch points the stack bottom of machine mode computer<br> 16     csrw mscratch, x0<br> 17<br> 18     # following codes allocate a 4096-byte stack for each HART, although we use only<br> 19     # ONE HART in this lab.<br> 20     la sp, stack0       # stack0 is statically defined in kernel&#x2F;machine&#x2F;minit.c<br> 21     li a3, 4096         # 4096-byte stack<br> 22     csrr a4, mhartid    # [mhartid] &#x3D; core ID<br> 23     addi a4, a4, 1<br> 24     mul a3, a3, a4<br> 25     add sp, sp, a3      # re-arrange the stack points so that they don’t overlap<br> 26<br> 27     # jump to mstart(), i.e., machine state start function in kernel&#x2F;machine&#x2F;minit.c<br> 28     call m_start</p>
+<p>它的执行将机器复位（16行）为在不同处理器上（我们在lab1_1中只考虑单个内核）运行的内核分配大小为4KB的栈（20–25行），并在最后（28行）调用m_start函数。m_start函数是在kernel&#x2F;machine&#x2F;minit.c文件中定义的：</p>
+<p>编者注:csr(Control Statu Regs)控制寄存器,csrw就是对控制寄存器进行读的.mscratch寄存器用于机器模式下的程序临时保存某些数据。mscratch寄存器可以提供一种快速的保存、恢复机制。比如，在进入机器模式的异常处理程序后，将应用程序的某个通用寄存器的值临时存入mscratch寄存器中，然后在退出异常处理程序之前，将mscratch寄存器中的值读出恢复至通用寄存器。在这里可以理解成栈底的地址是多少</p>
+<p> 68 <strong>void</strong> <strong>m_start</strong>(<strong>uintptr_t</strong> hartid, <strong>uintptr_t</strong> dtb) {<br> 69   &#x2F;&#x2F; init the spike file interface (stdin,stdout,stderr)<br> 70   spike_file_init();<br> 71   sprint(“In m_start, hartid:%d\n”, hartid);<br> 72<br> 73   &#x2F;&#x2F; init HTIF (Host-Target InterFace) and memory by using the Device Table Blob (DTB)<br> 74   init_dtb(dtb);<br> 75<br> 76   &#x2F;&#x2F; set previous privilege mode to S (Supervisor), and will enter S mode after ‘mret’<br> 77   write_csr(mstatus, ((read_csr(mstatus) &amp; ~MSTATUS_MPP_MASK)  MSTATUS_MPP_S));<br> 78<br> 79   &#x2F;&#x2F; set M Exception Program Counter to sstart, for mret (requires gcc -mcmodel&#x3D;medany)<br> 80   write_csr(mepc, (uint64)s_start);<br> 81<br> 82   &#x2F;&#x2F; delegate all interrupts and exceptions to supervisor mode.<br> 83   delegate_traps();<br> 84<br> 85   &#x2F;&#x2F; switch to supervisor mode and jump to s_start(), i.e., set pc to mepc<br> 86   asm <strong>volatile</strong>(“mret”);<br> 87 }</p>
+<p>它的作用是首先初始化spike的客户机-主机接口（Host-Target InterFace，简称HTIF），以及承载于其上的文件接口（70-74行）；人为的将上一个状态（机器启动时的状态为M态，即Machine态）设置为S（Supervisor）态，并将“退回”到S态的函数指针s_start写到mepc寄存器中（77–80行）；接下来，<strong>将中断异常处理“代理”给S态</strong>（83行）；最后，执行返回动作（86行）。由于之前人为地将上一个状态设置为S态，所以86行的返回动作将<strong>“返回”S态</strong>，并进入s_start函数执行。</p>
+<p>编者注:S代表Supervise(监管态),M代表Machine(机器态),U代表User(机器态),write_csr就是对csr寄存器进行更改的函数.</p>
+<p>编者注:m_start代表M模式下的启动过程,s_start代表S模式下的启动过程</p>
+<p>s_start函数在kernel&#x2F;kernel.c文件中定义：</p>
+<p> 30 <strong>int</strong> <strong>s_start</strong>(<strong>void</strong>) {<br> 31   sprint(“Enter supervisor mode…\n”);<br> 32   &#x2F;&#x2F; Note: we use direct (i.e., Bare mode) for memory mapping in lab1.<br> 33   &#x2F;&#x2F; which means: Virtual Address &#x3D; Physical Address<br> 34   write_csr(satp, 0);<br> 35<br> 36   &#x2F;&#x2F; the application code (elf) is first loaded into memory, and then put into execution<br> 37   load_user_program(&amp;user_app);<br> 38<br> 39   sprint(“Switch to user mode…\n”);<br> 40   switch_to(&amp;user_app);<br> 41<br> 42   <strong>return</strong> 0;<br> 43 }</p>
+<p>该函数的动作也非常简单：首先将地址映射模式置为（34行）直映射模式（Bare mode），接下来调用（37行）load_user_program()函数，将应用（也就是最开始的命令行中的.&#x2F;obj&#x2F;app_helloworld）载入内存，封装成一个最简单的“进程（process）”，最终调用switch_to()函数，将这个简单得不能再简单的进程投入运行。</p>
+<p>以上过程中，load_user_program()函数的作用是将我们的给定应用（user&#x2F;app_helloworld.c）所对应的可执行ELF文件（即.&#x2F;obj&#x2F;app_helloworld文件），这个过程我们将在3.1.5中详细讨论。另一个函数是switch_to()，为了理解这个函数的行为，需要先对lab1中“进程”的定义有一定的了解（kernel&#x2F;process.h）：</p>
+<p>编者注:这里有点小语病,应该是可执行的ELF文件载入到操作系统内核里面.</p>
+<p> 19 <strong>typedef</strong> <strong>struct</strong> process {<br> 20   &#x2F;&#x2F; pointing to the stack used in trap handling.<br> 21   uint64 kstack;<br> 22   &#x2F;&#x2F; trapframe storing the context of a (User mode) process.<br> 23   trapframe* trapframe;<br> 24 }process;</p>
+<p>可以看到，lab1中定义的“进程”非常简单，它只包含了一个栈指针（kstack）以及一个指向trapframe结构的指针。trapframe结构也在kernel&#x2F;process.h文件中被定义：</p>
+<p>  6 <strong>typedef</strong> <strong>struct</strong> trapframe {<br>  7   &#x2F;&#x2F; space to store context (all common registers)<br>  8   &#x2F;* offset:0   *&#x2F; riscv_regs regs;<br>  9<br> 10   &#x2F;&#x2F; process’s “user kernel” stack<br> 11   &#x2F;* offset:248 *&#x2F; uint64 kernel_sp;<br> 12   &#x2F;&#x2F; pointer to smode_trap_handler<br> 13   &#x2F;* offset:256 *&#x2F; uint64 kernel_trap;<br> 14   &#x2F;&#x2F; saved user process counter<br> 15   &#x2F;* offset:264 *&#x2F; uint64 epc;<br> 16 }trapframe;</p>
+<p>该结构除了记录进程上下文的RISC-V机器的通用寄存器组（regs成员）外，还包括很少的其他成员（如指向内核态栈顶的kernel_sp，指向内核态trap处理函数入口的kernel_trap指针，进程执行的当前位置epc）。</p>
+<p>回到switch_to()函数，它在kernel&#x2F;process.c文件中定义：</p>
+<p> 28 <strong>void</strong> <strong>switch_to</strong>(process* proc) {<br> 29   assert(proc);<br> 30   current &#x3D; proc;<br> 31<br> 32   write_csr(stvec, (uint64)smode_trap_vector);<br> 33   &#x2F;&#x2F; set up trapframe values that smode_trap_vector will need when<br> 34   &#x2F;&#x2F; the process next re-enters the kernel.<br> 35   proc-&gt;trapframe-&gt;kernel_sp &#x3D; proc-&gt;kstack;  &#x2F;&#x2F; process’s kernel stack<br> 36   proc-&gt;trapframe-&gt;kernel_trap &#x3D; (uint64)smode_trap_handler;<br> 37<br> 38   &#x2F;&#x2F; set up the registers that strap_vector.S’s sret will use<br> 39   &#x2F;&#x2F; to get to user space.<br> 40<br> 41   &#x2F;&#x2F; set S Previous Privilege mode to User.<br> 42   <strong>unsigned</strong> <strong>long</strong> x &#x3D; read_csr(sstatus);<br> 43   x &amp;&#x3D; ~SSTATUS_SPP;  &#x2F;&#x2F; clear SPP to 0 for user mode<br> 44   x &#x3D; SSTATUS_SPIE;  &#x2F;&#x2F; enable interrupts in user mode<br> 45<br> 46   write_csr(sstatus, x);<br> 47<br> 48   &#x2F;&#x2F; set S Exception Program Counter to the saved user pc.<br> 49   write_csr(sepc, proc-&gt;trapframe-&gt;epc);<br> 50<br> 51   &#x2F;&#x2F; switch to user mode with sret.<br> 52   return_to_user(proc-&gt;trapframe);<br> 53 }</p>
+<p>可以看到，该函数的作用是初始化进程的process结构体，并最终调用return_to_user(proc-&gt;trapframe)函数将载入的应用（所封装的进程）投入运行。return_to_user()函数在kernel&#x2F;strap_vector.S文件中定义：</p>
+<p>编者注:current代表当前正在执行的进程,这里switch_to函数做了两件事,一个是切换进程,一个是转换成了用户态.</p>
+<p> 45 .globl return_to_user<br> 46 return_to_user:<br> 47     # save a0 in sscratch, so sscratch points to a trapframe now.<br> 48     csrw sscratch, a0<br> 49<br> 50     # let [t6]&#x3D;[a0]<br> 51     addi t6, a0, 0<br> 52<br> 53     # restore all registers from trapframe, so as to resort the execution of a process<br> 54     restore_all_registers<br> 55<br> 56     # return to user mode and user pc.<br> 57     sret</p>
+<p>其作用是恢复进程的上下文（54行）到RISC-V机器的所有寄存器，并调用sret指令，从S模式“返回”应用模式（即U模式）。这样，所载入的应用程序（即obj&#x2F;app_helloworld所对应的“进程”）就投入运行了。</p>
+<h3 id="3-1-5-ELF文件（app）的加载过程"><a href="#3-1-5-ELF文件（app）的加载过程" class="headerlink" title="3.1.5 ELF文件（app）的加载过程"></a><a target="_blank" rel="noopener" href="https://gitee.com/hustos/pke-doc#315-elf%E6%96%87%E4%BB%B6app%E7%9A%84%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B"></a>3.1.5 ELF文件（app）的加载过程</h3><p>这里我们对load_user_program()函数进行讨论，它在kernel&#x2F;kernel.c中定义：</p>
+<p> 18 <strong>void</strong> <strong>load_user_program</strong>(process *proc) {<br> 19   proc-&gt;trapframe &#x3D; (trapframe *)USER_TRAP_FRAME;<br> 20   memset(proc-&gt;trapframe, 0, <strong>sizeof</strong>(trapframe));<br> 21   proc-&gt;kstack &#x3D; USER_KSTACK;<br> 22   proc-&gt;trapframe-&gt;regs.sp &#x3D; USER_STACK;<br> 23<br> 24   load_bincode_from_host_elf(proc);<br> 25 }</p>
+<p>我们看到，它的作用是首先对进程壳做了一定的初始化，最后调用load_bincode_from_host_elf()函数将应用程序对应的二进制代码实际地载入。load_bincode_from_host_elf()函数在kernel&#x2F;elf.c文件中实际定义：</p>
+<p>编者注:这个函数的主要作用就是更改对应进程的prod数据结构中的trapframe.</p>
+<p>103 <strong>void</strong> <strong>load_bincode_from_host_elf</strong>(<strong>struct</strong> process *p) {<br>104   arg_buf arg_bug_msg;<br>105<br>106   &#x2F;&#x2F; retrieve command line arguements<br>107   <strong>size_t</strong> argc &#x3D; parse_args(&amp;arg_bug_msg);<br>108   <strong>if</strong> (!argc) panic(“You need to specify the application program!\n”);<br>109<br>110   sprint(“Application: %s\n”, arg_bug_msg.argv[0]);<br>111<br>112   &#x2F;&#x2F;elf loading<br>113   elf_ctx elfloader;<br>114   elf_info info;<br>115<br>116   info.f &#x3D; spike_file_open(arg_bug_msg.argv[0], O_RDONLY, 0);<br>117   info.p &#x3D; p;<br>118   <strong>if</strong> (IS_ERR_VALUE(info.f)) panic(“Fail on openning the input application program.\n”);<br>119<br>120   &#x2F;&#x2F; init elfloader<br>121   <strong>if</strong> (elf_init(&amp;elfloader, &amp;info) !&#x3D; EL_OK)<br>122     panic(“fail to init elfloader.\n”);<br>123<br>124   &#x2F;&#x2F; load elf<br>125   <strong>if</strong> (elf_load(&amp;elfloader) !&#x3D; EL_OK) panic(“Fail on loading elf.\n”);<br>126<br>127   &#x2F;&#x2F; entry (virtual) address<br>128   p-&gt;trapframe-&gt;epc &#x3D; elfloader.ehdr.entry;<br>129<br>130   &#x2F;&#x2F; close host file<br>131   spike_file_close( info.f );<br>132<br>133   sprint(“Application program entry point (virtual address): 0x%lx\n”, p-&gt;trapframe-&gt;epc);<br>134 }</p>
+<p>该函数的大致过程是：</p>
+<ul>
+<li>（107–108行）首先，解析命令行参数，获得需要加载的ELF文件文件名；</li>
+<li>（113–122行）接下来初始化ELF加载数据结构，并打开即将被加载的ELF文件；</li>
+<li>（125行）加载ELF文件；</li>
+<li>（128行）通过ELF文件提供的入口地址设置进程的trapframe-&gt;epc，保证“返回”用户态的时候，所加载的ELF文件被执行；</li>
+<li>（131–133行）关闭ELF文件并返回。</li>
+</ul>
+<p>该函数用到了同文件中的诸多工具函数，这些函数的细节请读者自行阅读相关代码，这里我们只贴我们认为重要的代码：</p>
+<ul>
+<li>spike_file_open&#x2F;spike_file_close：这两个函数在spike_interface&#x2F;spike_file.c文件中定义，它的作用是通过spike的HTIF接口打开&#x2F;关闭位于主机上的ELF文件。spike的HTIF接口相关知识，我们将在3.1.7中做简要的讨论；</li>
+<li>elf_init：该函数的作用是初始化elf_ctx类型的elfloader结构体。该初始化过程将读取给定ELF的文件头，确保它是一个正确的ELF文件；</li>
+<li>elf_load：读入ELF文件中所包含的程序段（segment）到给定的内存地址中。elf_load的具体实现如下：</li>
+</ul>
+<p> 51 elf_status <strong>elf_load</strong>(elf_ctx *ctx) {<br> 52   elf_prog_header ph_addr;<br> 53   <strong>int</strong> i, off;<br> 54   &#x2F;&#x2F; traverse the elf program segment headers<br> 55   <strong>for</strong> (i &#x3D; 0, off &#x3D; ctx-&gt;ehdr.phoff; i &lt; ctx-&gt;ehdr.phnum; i++, off +&#x3D; <strong>sizeof</strong>(ph_addr)) {<br> 56     &#x2F;&#x2F; read segment headers<br> 57     <strong>if</strong> (elf_fpread(ctx, (<strong>void</strong> *)&amp;ph_addr, <strong>sizeof</strong>(ph_addr), off) !&#x3D; <strong>sizeof</strong>(ph_addr)) <strong>return</strong> EL_EIO;<br> 58<br> 59     <strong>if</strong> (ph_addr.type !&#x3D; ELF_PROG_LOAD) <strong>continue</strong>;<br> 60     <strong>if</strong> (ph_addr.memsz &lt; ph_addr.filesz) <strong>return</strong> EL_ERR;<br> 61     <strong>if</strong> (ph_addr.vaddr + ph_addr.memsz &lt; ph_addr.vaddr) <strong>return</strong> EL_ERR;<br> 62<br> 63     &#x2F;&#x2F; allocate memory before loading<br> 64     <strong>void</strong> *dest &#x3D; elf_alloc_mb(ctx, ph_addr.vaddr, ph_addr.vaddr, ph_addr.memsz);<br> 65<br> 66     &#x2F;&#x2F; actual loading<br> 67     <strong>if</strong> (elf_fpread(ctx, dest, ph_addr.memsz, ph_addr.off) !&#x3D; ph_addr.memsz)<br> 68       <strong>return</strong> EL_EIO;<br> 69   }<br> 70<br> 71   <strong>return</strong> EL_OK;<br> 72 }</p>
+<p>这个函数里，我们需要说一下elf_alloc_mb()函数，该函数返回代码段将要加载进入的地址dest。由于我们在lab1全面采用了直地址映射模式（Bare mode，也就是说：逻辑地址&#x3D;物理地址），对于lab1全系列的实验来说，elf_alloc_mb()返回的装载地址实际上就是物理地址。</p>
+<p> 19 <strong>static</strong> <strong>void</strong> *<strong>elf_alloc_mb</strong>(elf_ctx *ctx, uint64 elf_pa, uint64 elf_va, uint64 size) {<br> 20   &#x2F;&#x2F; directly returns the virtual address as we are in the Bare mode in lab1<br> 21   <strong>return</strong> (<strong>void</strong> *)elf_va;<br> 22 }</p>
+<p>但是，到了实验二（lab2系列），我们将开启RISC-V的分页模式（sv39），届时elf_alloc_mb函数将发生变化。</p>
+<h3 id="3-1-6-spike的HTIF接口"><a href="#3-1-6-spike的HTIF接口" class="headerlink" title="3.1.6 spike的HTIF接口"></a><a target="_blank" rel="noopener" href="https://gitee.com/hustos/pke-doc#316-spike%E7%9A%84htif%E6%8E%A5%E5%8F%A3"></a>3.1.6 spike的HTIF接口</h3><p>spike提供的HTIF（Host-Target InterFace）接口的原理可以用下图说明：</p>
+<p><img src="https://gitee.com/hustos/pke-doc/raw/master/pictures/htif.png" alt="fig2_install_1"></p>
+<p>图2.1 HTIF的原理</p>
+<p>我们知道spike是运行在主机（host）上的，在创建目标（target）机器的时候，spike模拟器将自身的一段内存（图中的HTIF内存段）提供给目标机。PKE操作系统内核在构造时引入了这段内存（参考kernel&#x2F;kernel.lds文件），在启动时通过目标机器传给PKE操作系统内核的设备参数（DTS，Device Tree String）中发现这段内存；接下来通过spike_interface目录中的代码对这段内存进行初始化和封装动作，将其包装成一组可以由操作系统调用的函数调用，典型的如sprint、spike_file_open、spike_file_close这些；最后PKE操作系统内核就能够直接使用这些封装后的函数调用完成对模拟硬件的操纵，如打印字符串到屏幕、访问主机上的文件或设备这些动作。</p>
+<p>spike基于HTIF内存的传递，定义了一组HTIF调用（类似于操作系统的系统调用的概念），每个HTIF调用实现一个既定的功能。在使用时，PKE内核可以通过设定往HTIF内存中写入特定的HTIF调用号，spike在从HTIF内存中获得调用号后就会执行调用号对应的动作，并传递返回值到HTIF内存中。最后，PKE操作系统内核通过读取HTIF中的信息获得返回值的内容。</p>
+<p>对于PKE实验而言，利用HTIF接口可以屏蔽一些操作系统底层功能（如设备操纵）的实现，这些功能往往是跟具体的硬件实现有关（不同平台还不一样），往往用汇编语言书写，阅读起来非常枯燥也很难读懂。更重要的，这些实现细节跟操作系统可能并无关系！采用HTIF这种形式，用高级语言（C语言）来书写这段代码（spike_interface目录下的文件）会简单易懂，满足操作系统原理课程的教学要求。</p>
+<p>另外需要注意的是，<strong>HTIF机制并不是纯粹为满足教学要求而写的“玩具”</strong>。我们在ZedBoard这种开发板的PL（Programmable Logic）部分部署我们开发的RISC-V处理器时，为了检验所开发的处理器对操作系统的支持能力，往往会在RISC-V处理器上启动代理内核（可以直接用我们在实验中开发的PKE代理内核），而后者就是通过HTIF的机制完成与主机（即在PS上运行的ARM Linux）的交互的。</p>
+<p>编者注:HTIF更像是网络中的应用层,屏蔽很多的底层实现,将复杂的底层实现打包成一个应用接口,来供用户使用.(可以使用C)</p>
+<h2 id="3-2-lab1-1-系统调用"><a href="#3-2-lab1-1-系统调用" class="headerlink" title="3.2 lab1_1 系统调用"></a><a target="_blank" rel="noopener" href="https://gitee.com/hustos/pke-doc#32-lab1_1-%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8"></a>3.2 lab1_1 系统调用</h2><h4 id="给定应用"><a href="#给定应用" class="headerlink" title="给定应用"></a><a target="_blank" rel="noopener" href="https://gitee.com/hustos/pke-doc#%E7%BB%99%E5%AE%9A%E5%BA%94%E7%94%A8"></a><strong>给定应用</strong></h4><ul>
+<li>user&#x2F;app_helloworld.c</li>
+</ul>
+<p>  1 &#x2F;*<br>  2  * Below is the given application for lab1_1.<br>  3  *<br>  4  * You can build this app (as well as our PKE OS kernel) by command:<br>  5  * $ make<br>  6  *<br>  7  * Or run this app (with the support from PKE OS kernel) by command:<br>  8  * $ make run<br>  9  *&#x2F;<br> 10<br> 11 #include “user_lib.h”<br> 12<br> 13 <strong>int</strong> <strong>main</strong>(<strong>void</strong>) {<br> 14   printu(“Hello world!\n”);<br> 15<br> 16   exit(0);<br> 17 }</p>
+<p>应用实现的功能非常简单，即在屏幕上打印”Hello world!\n”。</p>
+<ul>
+<li>make后的直接运行结果：</li>
+</ul>
+<p>$ spike .&#x2F;obj&#x2F;riscv-pke .&#x2F;obj&#x2F;app_helloworld<br>In m_start, hartid:0<br>HTIF is available!<br>(Emulated) memory size: 2048 MB<br>Enter supervisor mode…<br>Application: .&#x2F;obj&#x2F;app_helloworld<br>elf_load: ctx-&gt;ehdr.phoff &#x3D; 64, ctx-&gt;ehdr.phnum &#x3D;1, sizeof(ph_addr)&#x3D;56.<br>elf_load: ph_addr.memsz &#x3D; 744, ph_addr.off &#x3D;4096.<br>Application program entry point (virtual address): 0x0000000081000000<br>Switching to user mode…<br>call do_syscall to accomplish the syscall and lab1_1 here.</p>
+<p>System is shutting down with exit code -1.</p>
+<p>从结果上来看，并未达到我们的预期结果，即在屏幕上输出”Hello world!\n”。</p>
+<h4 id="实验内容"><a href="#实验内容" class="headerlink" title="实验内容"></a><a target="_blank" rel="noopener" href="https://gitee.com/hustos/pke-doc#%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9"></a><strong>实验内容</strong></h4><p>如输出提示所表示的那样，需要找到并完成对do_syscall的调用，并获得以下预期结果：</p>
+<p>$ spike .&#x2F;obj&#x2F;riscv-pke .&#x2F;obj&#x2F;app_helloworld<br>In m_start, hartid:0<br>HTIF is available!<br>(Emulated) memory size: 2048 MB<br>Enter supervisor mode…<br>Application: .&#x2F;obj&#x2F;app_helloworld<br>Application program entry point (virtual address): 0x0000000081000000<br>Switching to user mode…<br>Hello world!<br>User exit with code:0.<br>System is shutting down with exit code 0.</p>
+<h4 id="实验指导"><a href="#实验指导" class="headerlink" title="实验指导"></a><a target="_blank" rel="noopener" href="https://gitee.com/hustos/pke-doc#%E5%AE%9E%E9%AA%8C%E6%8C%87%E5%AF%BC"></a><strong>实验指导</strong></h4><p>lab1_1实验需要读者了解和掌握操作系统中系统调用机制的实现原理。从应用出发，我们发现user&#x2F;app_helloworld.c文件中有两个函数调用：printu和exit。对代码进行跟踪，我们发现这两个函数都在user&#x2F;user_lib.c中进行了实现，同时，这两个函数最后都转换成了对do_user_call的调用。查看do_user_call函数的实现：</p>
+<p>编者注:ret本质上是a0???</p>
+<p> 13 <strong>int</strong> <strong>do_user_call</strong>(uint64 sysnum, uint64 a1, uint64 a2, uint64 a3, uint64 a4, uint64 a5, uint64 a6,<br> 14                  uint64 a7) {<br> 15   <strong>int</strong> ret;<br> 16<br> 17   &#x2F;&#x2F; before invoking the syscall, arguments of do_user_call are already loaded into the argument<br> 18   &#x2F;&#x2F; registers (a0-a7) of our (emulated) risc-v machine.<br> 19   asm <strong>volatile</strong>(<br> 20       “ecall\n”<br> 21       “sw a0, %0”  &#x2F;&#x2F; returns a 32-bit value<br> 22       : “&#x3D;m”(ret)<br> 23       :<br> 24       : “memory”);<br> 25<br> 26   <strong>return</strong> ret;<br> 27 }</p>
+<p>我们发现，do_user_call函数是通过ecall指令完成系统调用的，且在执行ecall指令前，所有的参数（即do_user_call函数的8个参数）实际上都已经载入到RISC-V机器的a0到a7这8个寄存器中（这一步是我们的编译器生成的代码帮我们完成的）。ecall指令的执行将根据a0寄存器中的值获得系统调用号，并使RISC-V转到S模式（因为我们的操作系统内核启动时将所有的中断、异常、系统调用都代理给了S模式）的trap处理入口执行（在kernel&#x2F;strap_vector.S文件中定义）：</p>
+<p> 16 .globl smode_trap_vector<br> 17 .align 4<br> 18 smode_trap_vector:<br> 19     # swap a0 and sscratch, so that points a0 to the trapframe of current process<br> 20     csrrw a0, sscratch, a0<br> 21<br> 22     # save the context (user registers) of current process in its trapframe.<br> 23     addi t6, a0 , 0<br> 24     store_all_registers<br> 25<br> 26     # come back to save a0 register before entering trap handling in trapframe<br> 27     csrr t0, sscratch<br> 28     sd t0, 72(a0)<br> 29<br> 30     # use the “user kernel” stack (whose pointer stored in p-&gt;trapframe-&gt;kernel_sp)<br> 31     ld sp, 248(a0)<br> 32<br> 33     # load the address of smode_trap_handler() from p-&gt;trapframe-&gt;kernel_trap<br> 34     ld t0, 256(a0)<br> 35<br> 36     # jump to smode_trap_handler() that is defined in kernel&#x2F;trap.c<br> 37     jr t0</p>
+<p>从以上代码我们可以看到，trap的入口处理函数首先将“进程”（即我们的obj&#x2F;app_helloworld的运行现场）进行保存（第24行）；接下来将a0寄存器中的系统调用号保存到内核堆栈（第27–28行），再将p-&gt;trapframe-&gt;kernel_sp指向的为应用进程分配的内核栈设置到sp寄存器（第31行），<strong>该过程实际上完成了栈的切换</strong>。完整的切换过程为：</p>
+<ul>
+<li>1）应用程序在U模式即应用态执行，这个时候是使用的操作系统为其分配的栈（称为用户栈），这一部分参见<code>kernel/kernel.c</code>文件中<code>load_user_program</code>的实现；</li>
+<li>2）应用程序调用ecall，后陷入内核，开始执行<code>smode_trap_vector</code>函数，此时使用的是操作系统内核的栈。参见<code>kernel/machine/mentry.S</code>文件中的PKE入口<code>_mentry</code>；</li>
+<li>3）中断处理例程<code>smode_trap_vector</code>函数执行到第31行时，将栈切换到用户进程“自带”的“用户内核栈“，也就是<code>kernel/process.c</code>文件中<code>switch_to</code>函数的第35行所引用的<code>proc-&gt;kstack</code>，而不使用PKE内核自己的栈，<strong>这里请读者思考为何要这样安排</strong>？</li>
+</ul>
+<p>编者注:这里一共3个栈,一个是用户栈,一个是操作系统内核栈,一个是用户进程内核栈.最后的操作就是用过jr跳转来执行内核态的中断处理.(这里中断时非向量中断,先中断进入,再进入例程来进行处理)</p>
+<p>后续的执行将使用应用进程所附带的内核栈来保存执行的上下文，如函数调用、临时变量这些；最后，将应用进程中的p-&gt;trapframe-&gt;kernel_trap写入t0寄存器（第34行），并最后（第37行）调用p-&gt;trapframe-&gt;kernel_trap所指向的smode_trap_handler()函数。</p>
+<p>smode_trap_handler()函数的定义在kernel&#x2F;strap.c文件中，采用C语言编写：</p>
+<p> 33 <strong>void</strong> <strong>smode_trap_handler</strong>(<strong>void</strong>) {<br> 34   &#x2F;&#x2F; make sure we are in User mode before entering the trap handling.<br> 35   &#x2F;&#x2F; we will consider other previous case in lab1_3 (interrupt).<br> 36   <strong>if</strong> ((read_csr(sstatus) &amp; SSTATUS_SPP) !&#x3D; 0) panic(“usertrap: not from user mode”);<br> 37<br> 38   assert(current);<br> 39   &#x2F;&#x2F; save user process counter.<br> 40   current-&gt;trapframe-&gt;epc &#x3D; read_csr(sepc);<br> 41<br> 42   &#x2F;&#x2F; if the cause of trap is syscall from user application<br> 43   <strong>if</strong> (read_csr(scause) &#x3D;&#x3D; CAUSE_USER_ECALL) {<br> 44     handle_syscall(current-&gt;trapframe);<br> 45   } <strong>else</strong> {<br> 46     sprint(“smode_trap_handler(): unexpected scause %p\n”, read_csr(scause));<br> 47     sprint(“            sepc&#x3D;%p stval&#x3D;%p\n”, read_csr(sepc), read_csr(stval));<br> 48     panic( “unexpected exception happened.\n” );<br> 49   }<br> 50<br> 51   &#x2F;&#x2F; continue the execution of current process.<br> 52   switch_to(current);<br> 53 }</p>
+<p>该函数首先在第36行，对进入当前特权级模式（S模式）之前的模式进行判断，确保进入前是用户模式（U模式）；接下来在第40行，保存发生系统调用的指令地址；进一步判断（第43–49行的if…else…语句）导致进入当前模式的原因，如果是系统调用的话（read_csr(scause) &#x3D;&#x3D; CAUSE_USER_ECALL）就执行handle_syscall()函数，但如果是其他原因（对于其他原因的处理，我们将在后续实验中进一步完善）的话，就打印出错信息并推出；最后，在第52行调用switch_to()函数返回当前进程。</p>
+<p>编者注:scause就是中断源.</p>
+<p>handle_syscall()函数的定义也在kernel&#x2F;strap.c文件中：</p>
+<p> 15 <strong>static</strong> <strong>void</strong> <strong>handle_syscall</strong>(trapframe *tf) {<br> 16   &#x2F;&#x2F; tf-&gt;epc points to the address that our computer will jump to after the trap handling.<br> 17   &#x2F;&#x2F; for a syscall, we should return to the NEXT instruction after its handling.<br> 18   &#x2F;&#x2F; in RV64G, each instruction occupies exactly 32 bits (i.e., 4 Bytes)<br> 19   tf-&gt;epc +&#x3D; 4;<br> 20<br> 21   &#x2F;&#x2F; TODO (lab1_1): remove the panic call below, and call do_syscall (defined in<br> 22   &#x2F;&#x2F; kernel&#x2F;syscall.c) to conduct real operations of the kernel side for a syscall.<br> 23   &#x2F;&#x2F; IMPORTANT: return value should be returned to user app, or else, you will encounter<br> 24   &#x2F;&#x2F; problems in later experiments!<br> 25   panic( “call do_syscall to accomplish the syscall and lab1_1 here.\n” );<br> 26<br> 27 }</p>
+<p>看到第25行，我们就应该明白为什么在make后的直接运行结果中出现<code>call do_syscall to accomplish the syscall and lab1_1 here.</code>这行的输出了，那是panic的输出结果。所以为了完成lab1_1，就应该把panic语句删掉，换成对do_syscall()函数的调用！其实完成这个实验非常简单，但需要读者完成以上所述的代码跟踪，了解PKE操作系统内核处理系统调用的流程。</p>
+<p>那么do_syscall()函数是在哪里定义的呢？实际上这个函数在kernel&#x2F;syscall.c文件中，已经帮大家写好了：</p>
+<p> 38 <strong>long</strong> <strong>do_syscall</strong>(<strong>long</strong> a0, <strong>long</strong> a1, <strong>long</strong> a2, <strong>long</strong> a3, <strong>long</strong> a4, <strong>long</strong> a5, <strong>long</strong> a6, <strong>long</strong> a7) {<br> 39   <strong>switch</strong> (a0) {<br> 40     <strong>case</strong> SYS_user_print:<br> 41       <strong>return</strong> sys_user_print((<strong>const</strong> <strong>char</strong>*)a1, a2);<br> 42     <strong>case</strong> SYS_user_exit:<br> 43       <strong>return</strong> sys_user_exit(a1);<br> 44     <strong>default</strong>:<br> 45       panic(“Unknown syscall %ld \n”, a0);<br> 46   }<br> 47 }</p>
+<p>但是，做实验的时候，需要读者思考在handle_syscall()函数中调用do_syscall()函数，后者的参数怎么办？毕竟有8个long类型（因为我们的机器是RV64G，long类型占据8个字节）的参数，另外，do_syscall()函数的返回值怎么处理？毕竟do_syscall()函数有一个long类型的返回值，而这个返回值是要通知应用程序它发出的系统调用是否成功的。</p>
+<p>除了实验内容之外，在handle_syscall()函数的第19行，有一个<code>tf-&gt;epc += 4;</code>语句，<strong>这里请读者思考为什么要将tf-&gt;epc的值进行加4处理</strong>？这个问题请结合你对RISC-V指令集架构的理解，以及系统调用的原理回答。另外，<strong>我们的PKE操作系统内核是如何得到应用程序中“hello world!”字符串的地址的呢</strong>？</p>
+<p>编者注:处理系统调用本质上是房管中断,中断结束之后执行触发中断的下一条语句.总的来说,处理中断的逻辑就是用户程序调用print,print调用do_user_call这个函数,do_user_call这个函数会进入中断,进入中断,中断进入的程序(汇编)会保存入口地址,将堆栈改为每个进程的内核堆栈.然后跳转到中断处理例程,例程根据中断类型处理,跳转到syscall的处理里面.</p>
+<p>答案:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tf-&gt;regs.a0=do_syscall(tf-&gt;regs.a0,tf-&gt;regs.a1,tf-&gt;regs.a2,tf-&gt;regs.a3,tf-&gt;regs.a4,tf-&gt;regs.a5,tf-&gt;regs.a6,tf-&gt;regs.a7);</span><br></pre></td></tr></table></figure>
+
+<p>完成以上实验后，就能够获得以下结果输出了：</p>
+<p>$ spike .&#x2F;obj&#x2F;riscv-pke .&#x2F;obj&#x2F;app_helloworld<br>In m_start, hartid:0<br>HTIF is available!<br>(Emulated) memory size: 2048 MB<br>Enter supervisor mode…<br>Application: .&#x2F;obj&#x2F;app_helloworld<br>Application program entry point (virtual address): 0x0000000081000000<br>Switching to user mode…<br>Hello world!<br>User exit with code:0.<br>System is shutting down with exit code 0.</p>
+<p><strong>实验完毕后，记得提交修改（命令行中-m后的字符串可自行确定），以便在后续实验中继承lab1_1中所做的工作</strong>：</p>
+<p>$ git commit -a -m “my work on lab1_1 is done.”</p>
+<h2 id="3-3-lab1-2-异常处理"><a href="#3-3-lab1-2-异常处理" class="headerlink" title="3.3 lab1_2 异常处理"></a><a target="_blank" rel="noopener" href="https://gitee.com/hustos/pke-doc#33-lab1_2-%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86"></a>3.3 lab1_2 异常处理</h2><h4 id="给定应用-1"><a href="#给定应用-1" class="headerlink" title="给定应用"></a><a target="_blank" rel="noopener" href="https://gitee.com/hustos/pke-doc#%E7%BB%99%E5%AE%9A%E5%BA%94%E7%94%A8-1"></a><strong>给定应用</strong></h4><ul>
+<li>user&#x2F;app_illegal_instruction.c</li>
+</ul>
+<p>  1 &#x2F;*<br>  2  * Below is the given application for lab1_2.<br>  3  * This app attempts to issue M-mode instruction in U-mode, and consequently raises an exception.<br>  4  *&#x2F;<br>  5<br>  6 #include “user_lib.h”<br>  7 #include “util&#x2F;types.h”<br>  8<br>  9 <strong>int</strong> <strong>main</strong>(<strong>void</strong>) {<br> 10   printu(“Going to hack the system by running privilege instructions.\n”);<br> 11   &#x2F;&#x2F; we are now in U(user)-mode, but the “csrw” instruction requires M-mode privilege.<br> 12   &#x2F;&#x2F; Attempting to execute such instruction will raise illegal instruction exception.<br> 13   asm <strong>volatile</strong>(“csrw sscratch, 0”);<br> 14   exit(0);<br> 15 }</p>
+<p>（在用户U模式下执行的）应用企图执行RISC-V的特权指令csrw sscratch, 0。该指令会修改S模式的栈指针，如果允许该指令的执行，执行的结果可能会导致系统崩溃。</p>
+<ul>
+<li>（先提交lab1_1的答案，然后）切换到lab1_2、继承lab1_1中所做修改，并make后的直接运行结果：</li>
+</ul>
+<p>&#x2F;&#x2F;切换到lab1_2<br>$ git checkout lab1_2_exception</p>
+<p>&#x2F;&#x2F;继承lab1_1的答案<br>$ git merge lab1_1_syscall -m “continue to work on lab1_2”</p>
+<p>&#x2F;&#x2F;重新构造<br>$ make clean; make</p>
+<p>&#x2F;&#x2F;运行构造结果<br>$ spike .&#x2F;obj&#x2F;riscv-pke .&#x2F;obj&#x2F;app_illegal_instruction<br>In m_start, hartid:0<br>HTIF is available!<br>(Emulated) memory size: 2048 MB<br>Enter supervisor mode…<br>Application: .&#x2F;obj&#x2F;app_illegal_instruction<br>elf_load: ctx-&gt;ehdr.phoff &#x3D; 64, ctx-&gt;ehdr.phnum &#x3D;1, sizeof(ph_addr)&#x3D;56.<br>elf_load: ph_addr.memsz &#x3D; 800, ph_addr.off &#x3D;4096.<br>Application program entry point (virtual address): 0x0000000081000000<br>Switching to user mode…<br>Going to hack the system by running privilege instructions.<br>call handle_illegal_instruction to accomplish illegal instruction interception of lab1_2.</p>
+<p>System is shutting down with exit code -1.</p>
+<p>以上输出中，由于篇幅的关系，我们隐藏了前三个命令的输出结果。</p>
+<h4 id="实验内容-1"><a href="#实验内容-1" class="headerlink" title="实验内容"></a><a target="_blank" rel="noopener" href="https://gitee.com/hustos/pke-doc#%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9-1"></a><strong>实验内容</strong></h4><p>如输出所提示的那样，通过调用handle_illegal_instruction函数完成异常指令处理，阻止app_illegal_instruction的执行。</p>
+<p>$ spike .&#x2F;obj&#x2F;riscv-pke .&#x2F;obj&#x2F;app_illegal_instruction<br>In m_start, hartid:0<br>HTIF is available!<br>(Emulated) memory size: 2048 MB<br>Enter supervisor mode…<br>Application: .&#x2F;obj&#x2F;app_illegal_instruction<br>Application program entry point (virtual address): 0x0000000081000000<br>Switching to user mode…<br>Going to hack the system by running privilege instructions.<br>Illegal instruction!<br>System is shutting down with exit code -1.</p>
+<h4 id="实验指导-1"><a href="#实验指导-1" class="headerlink" title="实验指导"></a><a target="_blank" rel="noopener" href="https://gitee.com/hustos/pke-doc#%E5%AE%9E%E9%AA%8C%E6%8C%87%E5%AF%BC-1"></a><strong>实验指导</strong></h4><p>lab1_2实验需要读者了解和掌握操作系统中异常（exception）的产生原理以及处理的原则。从应用出发，我们发现user&#x2F;app_illegal_instruction.c文件中，我们的应用程序“企图”执行不能在用户模式（U模式）运行的特权级指令：<code>csrw sscratch, 0</code></p>
+<p>显然，这种企图破坏了RISC-V机器以及操作系统的设计原则，对于机器而言该事件并不是它期望（它期望在用户模式下执行的都是用户模式的指令）发生的“异常事件”，需要介入和破坏该应用程序的执行。查找RISC-V体系结构的相关文档，我们知道，这类异常属于非法指令异常，即CAUSE_ILLEGAL_INSTRUCTION，它对应的异常码是02（见kernel&#x2F;riscv.h中的定义）。那么，当RISC-V机器截获了这类异常后，该将它交付给谁来处理呢？</p>
+<p>通过<a target="_blank" rel="noopener" href="https://gitee.com/hustos/pke-doc#subsec_booting">3.1.5</a>节的阅读，我们知道PKE操作系统内核在启动时会将部分异常和中断“代理”给S模式处理，但是它是否将CAUSE_ILLEGAL_INSTRUCTION这类异常也进行了代理呢？这就要研究m_start()函数在执行delegate_traps()函数时设置的代理规则了，我们先查看delegate_traps()函数的代码，在kernel&#x2F;machine&#x2F;minit.c文件中找到它对应的代码：</p>
+<p> 51 <strong>static</strong> <strong>void</strong> <strong>delegate_traps</strong>() {<br> 52   <strong>if</strong> (!supports_extension(‘S’)) {<br> 53     &#x2F;&#x2F; confirm that our processor supports supervisor mode. abort if not.<br> 54     sprint(“s mode is not supported.\n”);<br> 55     <strong>return</strong>;<br> 56   }<br> 57<br> 58   <strong>uintptr_t</strong> interrupts &#x3D; MIP_SSIP  MIP_STIP  MIP_SEIP;<br> 59   <strong>uintptr_t</strong> exceptions &#x3D; (1U &lt;&lt; CAUSE_MISALIGNED_FETCH)  (1U &lt;&lt; CAUSE_FETCH_PAGE_FAULT)<br> 60                          (1U &lt;&lt; CAUSE_BREAKPOINT)  (1U &lt;&lt; CAUSE_LOAD_PAGE_FAULT)<br> 61                          (1U &lt;&lt; CAUSE_STORE_PAGE_FAULT)  (1U &lt;&lt; CAUSE_USER_ECALL);<br> 62<br> 63   write_csr(mideleg, interrupts);<br> 64   write_csr(medeleg, exceptions);<br> 65   assert(read_csr(mideleg) &#x3D;&#x3D; interrupts);<br> 66   assert(read_csr(medeleg) &#x3D;&#x3D; exceptions);<br> 67 }</p>
+<p>在第58–61行的代码中，delegate_traps()函数确实将部分异常代理给了S模式处理，但是里面并没有我们关心的CAUSE_ILLEGAL_INSTRUCTION异常，这说明该异常的处理还是交给M模式来处理（实际上，对于spike模拟的RISC-V平台而言，CAUSE_ILLEGAL_INSTRUCTION异常_必须_在M态处理）！所以，我们需要了解M模式的trap处理入口，以便继续跟踪其后的处理过程。M模式的trap处理入口在kernel&#x2F;machine&#x2F;mtrap_vector.S文件中（PKE操作系统内核在启动时（kernel&#x2F;machine&#x2F;minit.c文件的第125行<code>write_csr(mtvec, (uint64)mtrapvec);</code>）已经将M模式的中断处理入口指向了该函数）：</p>
+<p>  8 mtrapvec:<br>  9     # swap a0 and mscratch<br> 10     # so that a0 points to interrupt frame<br> 11     csrrw a0, mscratch, a0<br> 12<br> 13     # save the registers in interrupt frame<br> 14     addi t6, a0, 0<br> 15     store_all_registers<br> 16     # save the user a0 in itrframe-&gt;a0<br> 17     csrr t0, mscratch<br> 18     sd t0, 72(a0)<br> 19<br> 20     # use stack0 for sp<br> 21     la sp, stack0<br> 22     li a3, 4096<br> 23     csrr a4, mhartid<br> 24     addi a4, a4, 1<br> 25     mul a3, a3, a4<br> 26     add sp, sp, a3<br> 27<br> 28     &#x2F;&#x2F; save the address of interrupt frame in the csr “mscratch”<br> 29     csrw mscratch, a0<br> 30<br> 31     call handle_mtrap<br> 32<br> 33     &#x2F;&#x2F; restore all registers<br> 34     csrr t6, mscratch<br> 35     restore_all_registers<br> 36<br> 37     mret</p>
+<p>可以看到，mtrapvec汇编函数首先会将a0和mscratch交换，而mscratch之前保护的是g_itrframe的地址（g_itrframe的定义在kernel&#x2F;machine&#x2F;minit.c的第27行<code>struct riscv_regs g_itrframe;</code>，也就是说g_itrframe是一个包含所有RISC-V通用寄存器的栈帧）。接下来，将t6赋值为a0的值（第14行），并将所有通用寄存器保存到t6寄存器所指定首地址的内存区域（该动作由第15行的store_all_registers完成）。这里因为t0&#x3D;a0&#x3D;mstratch，所以通用寄存器最终是保存到了mstratch所指向的内存区域，也就是g_itrframe中。第17-18行是保护进入中断处理前a0寄存器的值到g_itrframe。</p>
+<p>接下来，mtrapvec汇编函数在第21–26行切换栈到stack0（即PKE内核启动时用过的栈），并在31行调用handle_mtrap()函数。handle_mtrap()函数在kernel&#x2F;machine&#x2F;mtrap.c文件中定义：</p>
+<p>编者注:很简单,就是S模式下处理不了的中断要交付到M模式下处理,在M模式下的中断例程就是handle_mtrap(也是非向量中断).而且栈是内核栈.</p>
+<p> 20 <strong>void</strong> <strong>handle_mtrap</strong>() {<br> 21   uint64 mcause &#x3D; read_csr(mcause);<br> 22   <strong>switch</strong> (mcause) {<br> 23     <strong>case</strong> CAUSE_FETCH_ACCESS:<br> 24       handle_instruction_access_fault();<br> 25       <strong>break</strong>;<br> 26     <strong>case</strong> CAUSE_LOAD_ACCESS:<br> 27       handle_load_access_fault();<br> 28     <strong>case</strong> CAUSE_STORE_ACCESS:<br> 29       handle_store_access_fault();<br> 30       <strong>break</strong>;<br> 31     <strong>case</strong> CAUSE_ILLEGAL_INSTRUCTION:<br> 32       &#x2F;&#x2F; TODO (lab1_2): call handle_illegal_instruction to implement illegal instruction<br> 33       &#x2F;&#x2F; interception, and finish lab1_2.<br> 34       panic( “call handle_illegal_instruction to accomplish illegal instruction interception for lab1_2.\n” );<br> 35<br> 36       <strong>break</strong>;<br> 37     <strong>case</strong> CAUSE_MISALIGNED_LOAD:<br> 38       handle_misaligned_load();<br> 39       <strong>break</strong>;<br> 40     <strong>case</strong> CAUSE_MISALIGNED_STORE:<br> 41       handle_misaligned_store();<br> 42       <strong>break</strong>;<br> 43<br> 44     <strong>default</strong>:<br> 45       sprint(“machine trap(): unexpected mscause %p\n”, mcause);<br> 46       sprint(“            mepc&#x3D;%p mtval&#x3D;%p\n”, read_csr(mepc), read_csr(mtval));<br> 47       panic( “unexpected exception happened in M-mode.\n” );<br> 48       <strong>break</strong>;<br> 49   }<br> 50 }</p>
+<p>可以看到，handle_mtrap()函数对在M态处理的多项异常都进行了处理，处理的方式几乎全部是调用panic函数，让（模拟）机器停机。对于CAUSE_ILLEGAL_INSTRUCTION尚未处理，所以这里你可以将第34行的panic函数替换成对handle_illegal_instruction()函数的调用，已完成lab1_2。</p>
+<p>需要注意的是，因为对于PKE而言，它只需要一次执行一个应用程序即可，所以我们可以调用panic让（模拟）RISC-V机器停机，但是如果是实际的硬件机器场景，就要想办法将发生被handle_mtrap()函数所处理异常的应用进程销毁掉。</p>
+<p>答案:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">handle_illegal_instruction();</span><br></pre></td></tr></table></figure>
+
+<p><strong>实验完毕后，记得提交修改（命令行中-m后的字符串可自行确定），以便在后续实验中继承lab1_2中所做的工作</strong>：</p>
+<p>$ git commit -a -m “my work on lab1_2 is done.”</p>
+<h2 id="3-4-lab1-3-（外部）中断"><a href="#3-4-lab1-3-（外部）中断" class="headerlink" title="3.4 lab1_3 （外部）中断"></a><a target="_blank" rel="noopener" href="https://gitee.com/hustos/pke-doc#34-lab1_3-%E5%A4%96%E9%83%A8%E4%B8%AD%E6%96%AD"></a>3.4 lab1_3 （外部）中断</h2><h4 id="给定应用-2"><a href="#给定应用-2" class="headerlink" title="给定应用"></a><a target="_blank" rel="noopener" href="https://gitee.com/hustos/pke-doc#%E7%BB%99%E5%AE%9A%E5%BA%94%E7%94%A8-2"></a><strong>给定应用</strong></h4><ul>
+<li>user&#x2F;app_long_loop.c</li>
+</ul>
+<p>  1 &#x2F;*<br>  2  * Below is the given application for lab1_3.<br>  3  * This app performs a long loop, during which, timers are<br>  4  * generated and pop messages to our screen.<br>  5  *&#x2F;<br>  6<br>  7 #include “user_lib.h”<br>  8 #include “util&#x2F;types.h”<br>  9<br> 10 <strong>int</strong> <strong>main</strong>(<strong>void</strong>) {<br> 11   printu(“Hello world!\n”);<br> 12   <strong>int</strong> i;<br> 13   <strong>for</strong> (i &#x3D; 0; i &lt; 100000000; ++i) {<br> 14     <strong>if</strong> (i % 5000000 &#x3D;&#x3D; 0) printu(“wait %d\n”, i);<br> 15   }<br> 16<br> 17   exit(0);<br> 18<br> 19   <strong>return</strong> 0;<br> 20 }</p>
+<p>应用的程序逻辑包含一个长度为100000000次的循环，循环每次将整型变量i加一，当i的值是5000000的整数倍时，输出”wait i的值\n”。这个循环程序在我们的（模拟）RISC-V平台上运行，显然将消耗一定时间（实际上，你也可以把这个程序改成死循环，但并不会死机！<strong>请读者做完lab1_3的实验后思考为什么死循环并不会导致死机</strong>。）。</p>
+<ul>
+<li>（先提交lab1_2的答案，然后）切换到lab1_3、继承lab1_2中所做修改，并make后的直接运行结果：</li>
+</ul>
+<p>&#x2F;&#x2F;切换到lab1_3<br>$ git checkout lab1_3_irq</p>
+<p>&#x2F;&#x2F;继承lab1_2以及之前的答案<br>$ git merge lab1_2_exception -m “continue to work on lab1_3”</p>
+<p>&#x2F;&#x2F;重新构造<br>$ make clean; make</p>
+<p>&#x2F;&#x2F;运行构造结果<br>$ spike .&#x2F;obj&#x2F;riscv-pke .&#x2F;obj&#x2F;app_long_loop<br>In m_start, hartid:0<br>HTIF is available!<br>(Emulated) memory size: 2048 MB<br>Enter supervisor mode…<br>Application: .&#x2F;obj&#x2F;app_long_loop<br>Application program entry point (virtual address): 0x000000008100007e<br>Switching to user mode…<br>Hello world!<br>wait 0<br>wait 5000000<br>wait 10000000<br>Ticks 0<br>lab1_3: increase g_ticks by one, and clear SIP field <strong>in</strong> sip register.</p>
+<p>System is shutting down with exit code -1.</p>
+<p>以上输出中，由于篇幅的关系，我们隐藏了前三个命令的输出结果。</p>
+<p>从以上程序的运行结果来看，给定的程序并不是“不受干扰”地从开始运行到最终结束的，而是在运行过程中受到了系统的外部时钟中断（timer irq）的“干扰”！而我们在这个实验中给出的PKE操作系统内核，在时钟中断部分并未完全做好，导致（模拟）RISC-V机器碰到第一个时钟中断后就会出现崩溃。</p>
+<h4 id="实验内容-2"><a href="#实验内容-2" class="headerlink" title="实验内容"></a><a target="_blank" rel="noopener" href="https://gitee.com/hustos/pke-doc#%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9-2"></a>实验内容</h4><p>完成PKE操作系统内核未完成的时钟中断处理过程，使得它能够完整地处理时钟中断。</p>
+<p>实验完成后的运行结果：</p>
+<p>$ spike .&#x2F;obj&#x2F;riscv-pke .&#x2F;obj&#x2F;app_long_loop<br>In m_start, hartid:0<br>HTIF is available!<br>(Emulated) memory size: 2048 MB<br>Enter supervisor mode…<br>Application: obj&#x2F;app_long_loop<br>Application program entry point (virtual address): 0x000000008100007e<br>Switching to user mode…<br>Hello world!<br>wait 0<br>wait 5000000<br>wait 10000000<br>Ticks 0<br>wait 15000000<br>wait 20000000<br>Ticks 1<br>wait 25000000<br>wait 30000000<br>wait 35000000<br>Ticks 2<br>wait 40000000<br>wait 45000000<br>Ticks 3<br>wait 50000000<br>wait 55000000<br>wait 60000000<br>Ticks 4<br>wait 65000000<br>wait 70000000<br>Ticks 5<br>wait 75000000<br>wait 80000000<br>wait 85000000<br>Ticks 6<br>wait 90000000<br>wait 95000000<br>Ticks 7<br>User exit with code:0.<br>System is shutting down with exit code 0.</p>
+<h4 id="实验指导-2"><a href="#实验指导-2" class="headerlink" title="实验指导"></a><a target="_blank" rel="noopener" href="https://gitee.com/hustos/pke-doc#%E5%AE%9E%E9%AA%8C%E6%8C%87%E5%AF%BC-2"></a>实验指导</h4><p>在<a target="_blank" rel="noopener" href="https://gitee.com/hustos/pke-doc#exception">上一个实验</a>中，我们已经接触了机器模式（M-mode）下的中断处理。在本实验中，我们接触的时钟中断也是在机器模式下触发的。为了处理时钟中断，我们的PKE代码在lab1_2的基础上，新增了以下内容：</p>
+<ul>
+<li>在m_start函数（也就是机器模式的初始化函数）中新增了timerinit()函数，后者的函数定义在kernel&#x2F;machine&#x2F;minit.c文件：</li>
+</ul>
+<p> 72 <strong>void</strong> <strong>timerinit</strong>(<strong>uintptr_t</strong> hartid) {<br> 73   &#x2F;&#x2F; fire timer irq after TIMER_INTERVAL from now.<br> 74   *(uint64*)CLINT_MTIMECMP(hartid) &#x3D; *(uint64*)CLINT_MTIME + TIMER_INTERVAL;<br> 75<br> 76   &#x2F;&#x2F; enable machine-mode timer irq in MIE (Machine Interrupt Enable) csr.<br> 77   write_csr(mie, read_csr(mie)  MIE_MTIE);<br> 78 }</p>
+<p>该函数首先在74行设置了下一次timer触发的时间，即当前时间的TIMER_INTERVAL（即1000000周期后，见kernel&#x2F;config.h中的定义）之后。另外，在77行设置了MIE（Machine Interrupt Enable，见本书的第一章的<a target="_blank" rel="noopener" href="https://gitee.com/hustos/pke-doc/blob/master/chapter1_riscv.md#machinestates">1.3节</a>和<a target="_blank" rel="noopener" href="https://gitee.com/hustos/pke-doc/blob/master/chapter1_riscv.md#traps">1.4节</a>）寄存器中的MIE_MTIE位，即允许我们的（模拟）RISC-V机器在M模式处理timer中断。</p>
+<p>时钟中断触发后，kernel&#x2F;machine&#x2F;mtrap_vector.S文件中的mtrapvec函数将被调用：</p>
+<p>  8 mtrapvec:<br>  9     # swap a0 and mscratch<br> 10     # so that a0 points to interrupt frame<br> 11     csrrw a0, mscratch, a0<br> 12<br> 13     # save the registers in interrupt frame<br> 14     addi t6, a0, 0<br> 15     store_all_registers<br> 16     # save the user a0 in itrframe-&gt;a0<br> 17     csrr t0, mscratch<br> 18     sd t0, 72(a0)<br> 19<br> 20     # use stack0 for sp<br> 21     la sp, stack0<br> 22     li a3, 4096<br> 23     csrr a4, mhartid<br> 24     addi a4, a4, 1<br> 25     mul a3, a3, a4<br> 26     add sp, sp, a3<br> 27<br> 28     &#x2F;&#x2F; save the address of interrupt frame in the csr “mscratch”<br> 29     csrw mscratch, a0<br> 30<br> 31     call handle_mtrap<br> 32<br> 33     &#x2F;&#x2F; restore all registers<br> 34     csrr t6, mscratch<br> 35     restore_all_registers<br> 36<br> 37     mret</p>
+<p>和lab1_2一样，最终将进入handle_mtrap函数继续处理。handle_mtrap函数将通过对mcause寄存器的值进行判断，确认是时钟中断（CAUSE_MTIMER）后，将调用handle_timer()函数进行进一步处理：</p>
+<p> 17 <strong>static</strong> <strong>void</strong> <strong>handle_timer</strong>() {<br> 18   <strong>int</strong> cpuid &#x3D; 0;<br> 19   &#x2F;&#x2F; setup the timer fired at next time (TIMER_INTERVAL from now)<br> 20   *(uint64*)CLINT_MTIMECMP(cpuid) &#x3D; *(uint64*)CLINT_MTIMECMP(cpuid) + TIMER_INTERVAL;<br> 21<br> 22   &#x2F;&#x2F; setup a soft interrupt in sip (S-mode Interrupt Pending) to be handled in S-mode<br> 23   write_csr(sip, SIP_SSIP);<br> 24 }<br> 25<br> 26 &#x2F;&#x2F;<br> 27 &#x2F;&#x2F; handle_mtrap calls cooresponding functions to handle an exception of a given type.<br> 28 &#x2F;&#x2F;<br> 29 <strong>void</strong> <strong>handle_mtrap</strong>() {<br> 30   uint64 mcause &#x3D; read_csr(mcause);<br> 31   <strong>switch</strong> (mcause) {<br> 32     <strong>case</strong> CAUSE_MTIMER:<br> 33       handle_timer();<br> 34       <strong>break</strong>;<br> 35     <strong>case</strong> CAUSE_FETCH_ACCESS:<br> 36       handle_instruction_access_fault();<br> 37       <strong>break</strong>;<br> 38     <strong>case</strong> CAUSE_LOAD_ACCESS:<br> 39       handle_load_access_fault();<br> 40     <strong>case</strong> CAUSE_STORE_ACCESS:<br> 41       handle_store_access_fault();<br> 42       <strong>break</strong>;<br> 43     <strong>case</strong> CAUSE_ILLEGAL_INSTRUCTION:<br> 44       &#x2F;&#x2F; TODO (lab1_2): call handle_illegal_instruction to implement illegal instruction<br> 45       &#x2F;&#x2F; interception, and finish lab1_2.<br> 46       panic( “call handle_illegal_instruction to accomplish illegal instruction interception for lab1_2.\n” );<br> 47<br> 48       <strong>break</strong>;<br> 49     <strong>case</strong> CAUSE_MISALIGNED_LOAD:<br> 50       handle_misaligned_load();<br> 51       <strong>break</strong>;<br> 52     <strong>case</strong> CAUSE_MISALIGNED_STORE:<br> 53       handle_misaligned_store();<br> 54       <strong>break</strong>;<br> 55<br> 56     <strong>default</strong>:<br> 57       sprint(“machine trap(): unexpected mscause %p\n”, mcause);<br> 58       sprint(“            mepc&#x3D;%p mtval&#x3D;%p\n”, read_csr(mepc), read_csr(mtval));<br> 59       panic( “unexpected exception happened in M-mode.\n” );<br> 60       <strong>break</strong>;<br> 61   }<br> 62 }</p>
+<p><strong>而handle_timer()函数会（在第20行）先设置下一次timer（再次）触发的时间为当前时间+TIMER_INTERVAL</strong>，并在23行对SIP（Supervisor Interrupt Pending，即S模式的中断等待寄存器）寄存器进行设置，将其中的SIP_SSIP位进行设置，完成后返回。至此，时钟中断在M态的处理就结束了，剩下的动作交给S态继续处理。而handle_timer()在第23行的动作，<strong>会导致PKE操作系统内核在S模式收到一个来自M态的时钟中断请求（CAUSE_MTIMER_S_TRAP）</strong>。</p>
+<p>那么为什么操作系统内核不在M态就完成对时钟中断的处理，而一定要将它“接力”给S态呢？这是因为，对于一个操作系统来说，timer事件对它的意义在于，它是标记时间片的重要（甚至是唯一）手段，而将CPU事件分成若干时间片的作用很大程度上是为了做进程的调度（我们将在lab2_3中接触），同时，操作系统的功能大多数是在S态完成的。如果在M态处理时钟中断，虽然说特权级上允许这样的操作，但是处于M态的程序可能并不是非常清楚S态的操作系统的状态。如果贸然采取动作，可能会破坏操作系统本身的设计。</p>
+<p>接下来，我们继续讨论时钟中断在S态的处理。我们直接来到S态的C处理函数，即位于kernel&#x2F;strap.c中的 smode_trap_handler函数：</p>
+<p> 45 <strong>void</strong> <strong>smode_trap_handler</strong>(<strong>void</strong>) {<br> 46   &#x2F;&#x2F; make sure we are in User mode before entering the trap handling.<br> 47   &#x2F;&#x2F; we will consider other previous case in lab1_3 (interrupt).<br> 48   <strong>if</strong> ((read_csr(sstatus) &amp; SSTATUS_SPP) !&#x3D; 0) panic(“usertrap: not from user mode”);<br> 49<br> 50   assert(current);<br> 51   &#x2F;&#x2F; save user process counter.<br> 52   current-&gt;trapframe-&gt;epc &#x3D; read_csr(sepc);<br> 53<br> 54   &#x2F;&#x2F; if the cause of trap is syscall from user application<br> 55   uint64 cause &#x3D; read_csr(scause);<br> 56<br> 57   <strong>if</strong> (cause &#x3D;&#x3D; CAUSE_USER_ECALL) {<br> 58     handle_syscall(current-&gt;trapframe);<br> 59   } <strong>else</strong> <strong>if</strong> (cause &#x3D;&#x3D; CAUSE_MTIMER_S_TRAP) {  &#x2F;&#x2F;soft trap generated by timer interrupt in M mode<br> 60     handle_mtimer_trap();<br> 61   } <strong>else</strong> {<br> 62     sprint(“smode_trap_handler(): unexpected scause %p\n”, read_csr(scause));<br> 63     sprint(“            sepc&#x3D;%p stval&#x3D;%p\n”, read_csr(sepc), read_csr(stval));<br> 64     panic( “unexpected exception happened.\n” );<br> 65   }<br> 66<br> 67   &#x2F;&#x2F; continue the execution of current process.<br> 68   switch_to(current);<br> 69 }</p>
+<p>我们看到，该函数首先读取scause寄存器的内容，如果内容等于CAUSE_MTIMER_S_TRAP的话，说明是M态传递上来的时钟中断动作，就调用handle_mtimer_trap()函数进行处理，而handle_mtimer_trap()函数的定义为:</p>
+<p> 31 <strong>static</strong> uint64 g_ticks &#x3D; 0;<br> 32 <strong>void</strong> <strong>handle_mtimer_trap</strong>() {<br> 33   sprint(“Ticks %d\n”, g_ticks);<br> 34   &#x2F;&#x2F; TODO (lab1_3): increase g_ticks to record this “tick”, and then clear the “SIP”<br> 35   &#x2F;&#x2F; field in sip register.<br> 36   &#x2F;&#x2F; hint: use write_csr to disable the SIP_SSIP bit in sip.<br> 37   panic( “lab1_3: increase g_ticks by one, and clear SIP field in sip register.\n” );<br> 38<br> 39 }</p>
+<p>至此，我们就知道为什么会在之前看到<code>lab1_3: increase g_ticks by one, and clear SIP field in sip register.</code>这样的输出了，显然这是因为handle_mtimer_trap()并未完成。</p>
+<p>那么handle_mtimer_trap()需要完成哪些“后续动作”呢？首先，<strong>我们看到在该函数上面定义了一个全局变量g_ticks，用它来对时钟中断的次数进行计数，而第33行会输出该计数。</strong>为了确保我们的系统持续正常运行，该计数应每次都会完成加一操作。所以，handle_mtimer_trap()首先需要对g_ticks进行加一；其次，由于处理完中断后，SIP（Supervisor Interrupt Pending，即S模式的中断等待寄存器）寄存器中的SIP_SSIP位仍然为1（由M态的中断处理函数设置），如果该位持续为1的话会导致我们的模拟RISC-V机器始终处于中断状态。所以，handle_mtimer_trap()还需要对<strong>SIP的SIP_SSIP位清零</strong>，以保证下次再发生时钟中断时，M态的函数将该位置一会导致S模式的下一次中断。</p>
+<p>编者注:操作系统会根据中断寄存器的值来判断是否发生中断,再处理完中断之后要把中断发生位清零.在这题目里面,首先是中断会交付到M模式下,然后M模式再处理完之后交付到S模式下.S模式计算玩时钟之后,自动把中断位清零,来表示没有中断(因为之前M模式下SIP寄存器被改变了,现在要变回去)</p>
+<p>g_ticks++;<br>write_csr(sip, 0);</p>
+<p><strong>实验完毕后，记得提交修改（命令行中-m后的字符串可自行确定），以便在后续实验中继承lab1_3中所做的工作</strong>：</p>
+<p>$ git commit -a -m “my work on lab1_3 is done.”</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/project/">首页</a></li>
+        
+          <li><a href="/project/about/">关于</a></li>
+        
+          <li><a href="/project/archives/">归档</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/SukunaShinmyoumaru-hust/Hust-opensource-Xuejie">HUST-学解</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Copyright-License"><span class="toc-number">1.</span> <span class="toc-text">&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;Copyright License</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-%E5%AE%9E%E9%AA%8C1%E7%9A%84%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><span class="toc-number">1.1.</span> <span class="toc-text">3.1 实验1的基础知识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-1-RISC-V%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%BC%96%E8%AF%91%E5%92%8C%E9%93%BE%E6%8E%A5"><span class="toc-number">1.1.1.</span> <span class="toc-text">3.1.1 RISC-V程序的编译和链接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-2-%E6%8C%87%E5%AE%9A%E7%AC%A6%E5%8F%B7%E7%9A%84%E9%80%BB%E8%BE%91%E5%9C%B0%E5%9D%80"><span class="toc-number">1.1.2.</span> <span class="toc-text">3.1.2 指定符号的逻辑地址</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-3-%E4%BB%A3%E7%90%86%E5%86%85%E6%A0%B8%E7%9A%84%E6%9E%84%E9%80%A0%E8%BF%87%E7%A8%8B"><span class="toc-number">1.1.3.</span> <span class="toc-text">3.1.3 代理内核的构造过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-4-%E4%BB%A3%E7%90%86%E5%86%85%E6%A0%B8%E7%9A%84%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B"><span class="toc-number">1.1.4.</span> <span class="toc-text">3.1.4 代理内核的启动过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-5-ELF%E6%96%87%E4%BB%B6%EF%BC%88app%EF%BC%89%E7%9A%84%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B"><span class="toc-number">1.1.5.</span> <span class="toc-text">3.1.5 ELF文件（app）的加载过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-6-spike%E7%9A%84HTIF%E6%8E%A5%E5%8F%A3"><span class="toc-number">1.1.6.</span> <span class="toc-text">3.1.6 spike的HTIF接口</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-lab1-1-%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8"><span class="toc-number">1.2.</span> <span class="toc-text">3.2 lab1_1 系统调用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%99%E5%AE%9A%E5%BA%94%E7%94%A8"><span class="toc-number">1.2.0.1.</span> <span class="toc-text">给定应用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9"><span class="toc-number">1.2.0.2.</span> <span class="toc-text">实验内容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E6%8C%87%E5%AF%BC"><span class="toc-number">1.2.0.3.</span> <span class="toc-text">实验指导</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-lab1-2-%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86"><span class="toc-number">1.3.</span> <span class="toc-text">3.3 lab1_2 异常处理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%99%E5%AE%9A%E5%BA%94%E7%94%A8-1"><span class="toc-number">1.3.0.1.</span> <span class="toc-text">给定应用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9-1"><span class="toc-number">1.3.0.2.</span> <span class="toc-text">实验内容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E6%8C%87%E5%AF%BC-1"><span class="toc-number">1.3.0.3.</span> <span class="toc-text">实验指导</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-4-lab1-3-%EF%BC%88%E5%A4%96%E9%83%A8%EF%BC%89%E4%B8%AD%E6%96%AD"><span class="toc-number">1.4.</span> <span class="toc-text">3.4 lab1_3 （外部）中断</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%99%E5%AE%9A%E5%BA%94%E7%94%A8-2"><span class="toc-number">1.4.0.1.</span> <span class="toc-text">给定应用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9-2"><span class="toc-number">1.4.0.2.</span> <span class="toc-text">实验内容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E6%8C%87%E5%AF%BC-2"><span class="toc-number">1.4.0.3.</span> <span class="toc-text">实验指导</span></a></li></ol></li></ol></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sukunashinmyoumaru-hust.github.io/project/2021/12/18/oslab1/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sukunashinmyoumaru-hust.github.io/project/2021/12/18/oslab1/&text=华中科技大学OS实验解析(Lab1)"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sukunashinmyoumaru-hust.github.io/project/2021/12/18/oslab1/&title=华中科技大学OS实验解析(Lab1)"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sukunashinmyoumaru-hust.github.io/project/2021/12/18/oslab1/&is_video=false&description=华中科技大学OS实验解析(Lab1)"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=华中科技大学OS实验解析(Lab1)&body=Check out this article: https://sukunashinmyoumaru-hust.github.io/project/2021/12/18/oslab1/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sukunashinmyoumaru-hust.github.io/project/2021/12/18/oslab1/&title=华中科技大学OS实验解析(Lab1)"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sukunashinmyoumaru-hust.github.io/project/2021/12/18/oslab1/&title=华中科技大学OS实验解析(Lab1)"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sukunashinmyoumaru-hust.github.io/project/2021/12/18/oslab1/&title=华中科技大学OS实验解析(Lab1)"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sukunashinmyoumaru-hust.github.io/project/2021/12/18/oslab1/&title=华中科技大学OS实验解析(Lab1)"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sukunashinmyoumaru-hust.github.io/project/2021/12/18/oslab1/&name=华中科技大学OS实验解析(Lab1)&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sukunashinmyoumaru-hust.github.io/project/2021/12/18/oslab1/&t=华中科技大学OS实验解析(Lab1)"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2024
+    Sukuna
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/project/">首页</a></li><!--
+     --><!--
+       --><li><a href="/project/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/project/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/SukunaShinmyoumaru-hust/Hust-opensource-Xuejie">HUST-学解</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功！");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/project/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

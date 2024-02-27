@@ -1,0 +1,1190 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="[latexpage] 洛谷刷题记录(橙到黄)P2367 语文成绩(差分前缀和)题目描述 语文老师总是写错成绩，所以当她修改成绩的时候，总是累得不行。她总是要一遍遍地给某些同学增加分数，又要注意最低分是多少。你能帮帮她吗？ 输入格式 第一行有两个整数 ，，代表学生数与增加分数的次数。 第二行有  个数，，代表各个学生的初始成绩。 接下来 行，每行有三个数代表给第 x个到第 y个学生每人增加 z分。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="做算法题综合">
+<meta property="og:url" content="https://sukunashinmyoumaru-hust.github.io/project/2022/04/17/luogu-al/index.html">
+<meta property="og:site_name" content="Suwa shrine">
+<meta property="og:description" content="[latexpage] 洛谷刷题记录(橙到黄)P2367 语文成绩(差分前缀和)题目描述 语文老师总是写错成绩，所以当她修改成绩的时候，总是累得不行。她总是要一遍遍地给某些同学增加分数，又要注意最低分是多少。你能帮帮她吗？ 输入格式 第一行有两个整数 ，，代表学生数与增加分数的次数。 第二行有  个数，，代表各个学生的初始成绩。 接下来 行，每行有三个数代表给第 x个到第 y个学生每人增加 z分。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://sukunahust.com/wp-content/uploads/2022/04/image-2-1024x937.png">
+<meta property="og:image" content="https://sukunahust.com/wp-content/uploads/2021/11/image-1024x916.png">
+<meta property="og:image" content="https://sukunahust.com/wp-content/uploads/2021/11/image-1-1006x1024.png">
+<meta property="og:image" content="https://sukunahust.com/wp-content/uploads/2021/11/image-2-1024x941.png">
+<meta property="og:image" content="https://sukunahust.com/wp-content/uploads/2021/11/image-4-1024x795.png">
+<meta property="og:image" content="https://sukunahust.com/wp-content/uploads/2021/11/image-5-1024x841.png">
+<meta property="og:image" content="https://sukunahust.com/wp-content/uploads/2021/11/image-6-1024x415.png">
+<meta property="og:image" content="https://sukunahust.com/wp-content/uploads/2021/11/image-7-1024x103.png">
+<meta property="og:image" content="https://sukunahust.com/wp-content/uploads/2021/11/image-8-1024x705.png">
+<meta property="og:image" content="https://sukunahust.com/wp-content/uploads/2021/11/image-9-1024x707.png">
+<meta property="og:image" content="https://sukunahust.com/wp-content/uploads/2021/11/image-10-1024x702.png">
+<meta property="og:image" content="https://sukunahust.com/wp-content/uploads/2021/11/image-11-1024x676.png">
+<meta property="og:image" content="https://sukunahust.com/wp-content/uploads/2021/11/image-12-1024x719.png">
+<meta property="og:image" content="https://sukunahust.com/wp-content/ql-cache/quicklatex.com-5a9f5e1efc7097781b5577ce990c2ffa_l3.svg">
+<meta property="og:image" content="https://sukunahust.com/wp-content/ql-cache/quicklatex.com-7ecea4b92f8a8a78bfe8eb90cfab93f6_l3.svg">
+<meta property="og:image" content="https://sukunahust.com/wp-content/ql-cache/quicklatex.com-42b757c2f671bc07789d4986ca6e2099_l3.svg">
+<meta property="og:image" content="https://sukunahust.com/wp-content/ql-cache/quicklatex.com-c34b52deeb305f9413f534b570f9fed7_l3.svg">
+<meta property="og:image" content="https://sukunahust.com/wp-content/ql-cache/quicklatex.com-131d0c2aa952b43d45bba07dfc407e81_l3.svg">
+<meta property="og:image" content="https://sukunahust.com/wp-content/ql-cache/quicklatex.com-dbe284a90142f25d096bec9394436c2a_l3.svg">
+<meta property="og:image" content="https://sukunahust.com/wp-content/uploads/2021/05/image-1024x205.png">
+<meta property="og:image" content="https://sukunahust.com/wp-content/ql-cache/quicklatex.com-076590b86ba207ce143e94b2e823ad03_l3.svg">
+<meta property="og:image" content="https://sukunahust.com/wp-content/ql-cache/quicklatex.com-8c01feeb7f41da7bdd5ef7afa96f778d_l3.svg">
+<meta property="og:image" content="https://sukunahust.com/wp-content/ql-cache/quicklatex.com-062b76d533174cda72c813758355544f_l3.svg">
+<meta property="og:image" content="https://sukunahust.com/wp-content/ql-cache/quicklatex.com-259b6415756adf3480ea5e8a80d1d578_l3.svg">
+<meta property="og:image" content="https://sukunahust.com/wp-content/ql-cache/quicklatex.com-0ac3fe2e28e9326d90e0c98613c1491d_l3.svg">
+<meta property="og:image" content="https://sukunahust.com/wp-content/ql-cache/quicklatex.com-da4556c0a02b580047678d308649edf9_l3.svg">
+<meta property="og:image" content="https://sukunahust.com/wp-content/ql-cache/quicklatex.com-0ac3fe2e28e9326d90e0c98613c1491d_l3.svg">
+<meta property="og:image" content="https://sukunahust.com/wp-content/ql-cache/quicklatex.com-da4556c0a02b580047678d308649edf9_l3.svg">
+<meta property="og:image" content="https://sukunahust.com/wp-content/ql-cache/quicklatex.com-73e0257639a78306bcf13ad0c68fcbdb_l3.svg">
+<meta property="og:image" content="https://sukunahust.com/wp-content/ql-cache/quicklatex.com-85ca23a1e42ccdfafecd1cf9622b44c3_l3.svg">
+<meta property="og:image" content="https://sukunahust.com/wp-content/uploads/2021/05/image-1024x205.png">
+<meta property="article:published_time" content="2022-04-17T13:10:37.000Z">
+<meta property="article:modified_time" content="2024-02-27T05:03:29.577Z">
+<meta property="article:author" content="Sukuna">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://sukunahust.com/wp-content/uploads/2022/04/image-2-1024x937.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/project/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/project/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/project/images/favicon-192x192.png">
+        
+      
+    
+    <!-- title -->
+    <title>做算法题综合</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/project/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/project/">首页</a></li><!--
+     --><!--
+       --><li><a href="/project/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/project/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/SukunaShinmyoumaru-hust/Hust-opensource-Xuejie">HUST-学解</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="上一篇" href="/project/2022/06/06/nju-ics/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="下一篇" href="/project/2022/03/30/splay/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sukunashinmyoumaru-hust.github.io/project/2022/04/17/luogu-al/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sukunashinmyoumaru-hust.github.io/project/2022/04/17/luogu-al/&text=做算法题综合"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sukunashinmyoumaru-hust.github.io/project/2022/04/17/luogu-al/&title=做算法题综合"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sukunashinmyoumaru-hust.github.io/project/2022/04/17/luogu-al/&is_video=false&description=做算法题综合"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=做算法题综合&body=Check out this article: https://sukunashinmyoumaru-hust.github.io/project/2022/04/17/luogu-al/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sukunashinmyoumaru-hust.github.io/project/2022/04/17/luogu-al/&title=做算法题综合"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sukunashinmyoumaru-hust.github.io/project/2022/04/17/luogu-al/&title=做算法题综合"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sukunashinmyoumaru-hust.github.io/project/2022/04/17/luogu-al/&title=做算法题综合"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sukunashinmyoumaru-hust.github.io/project/2022/04/17/luogu-al/&title=做算法题综合"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sukunashinmyoumaru-hust.github.io/project/2022/04/17/luogu-al/&name=做算法题综合&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sukunashinmyoumaru-hust.github.io/project/2022/04/17/luogu-al/&t=做算法题综合"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B4%9B%E8%B0%B7%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95-%E6%A9%99%E5%88%B0%E9%BB%84"><span class="toc-number">1.</span> <span class="toc-text">洛谷刷题记录(橙到黄)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#P2367-%E8%AF%AD%E6%96%87%E6%88%90%E7%BB%A9-%E5%B7%AE%E5%88%86%E5%89%8D%E7%BC%80%E5%92%8C"><span class="toc-number">1.0.0.1.</span> <span class="toc-text">P2367 语文成绩(差分前缀和)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%8C%E5%80%8D%E7%BB%8F%E9%AA%8C-CF44C-Holiday-%E5%B7%AE%E5%88%86%E5%89%8D%E7%BC%80%E5%92%8C"><span class="toc-number">1.0.0.2.</span> <span class="toc-text">双倍经验:CF44C Holiday (差分前缀和)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P1160-%E9%98%9F%E5%88%97%E5%AE%89%E6%8E%92-%E9%98%9F%E5%88%97%E6%A8%A1%E7%89%88%E9%A2%98-%E5%8C%85%E5%90%AB%E9%98%9F%E5%88%97%E7%9A%84%E6%B7%BB%E5%8A%A0%E5%92%8C%E5%88%A0%E9%99%A4%E6%93%8D%E4%BD%9C"><span class="toc-number">1.0.0.3.</span> <span class="toc-text">P1160 队列安排(队列模版题,包含队列的添加和删除操作)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#P1044-%E6%A0%88"><span class="toc-number">1.0.1.</span> <span class="toc-text">P1044 栈</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#P1449-%E5%90%8E%E7%BC%80%E8%A1%A8%E8%BE%BE%E5%BC%8F-%E6%A0%88%E7%9A%84%E7%BB%8F%E5%85%B8%E9%97%AE%E9%A2%98"><span class="toc-number">1.0.1.1.</span> <span class="toc-text">P1449 后缀表达式(栈的经典问题)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%8C%E5%80%8D%E7%BB%8F%E9%AA%8C-P1981-%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%B1%82%E5%80%BC"><span class="toc-number">1.0.1.2.</span> <span class="toc-text">(双倍经验) P1981 表达式求值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P1165-%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90-%E6%A8%A1%E6%8B%9F%E6%A0%88"><span class="toc-number">1.0.1.3.</span> <span class="toc-text">P1165 日志分析(模拟栈)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P5788-%E5%8D%95%E8%B0%83%E6%A0%88%E6%A8%A1%E7%89%88"><span class="toc-number">1.0.1.4.</span> <span class="toc-text">P5788 单调栈模版</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P1886-%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3-%E5%8D%95%E8%B0%83%E9%98%9F%E5%88%97%E6%A8%A1%E7%89%88"><span class="toc-number">1.0.1.5.</span> <span class="toc-text">P1886 滑动窗口&#x2F;单调队列模版.</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#UVA540-%E5%9B%A2%E4%BD%93%E9%98%9F%E5%88%97-%E9%98%9F%E5%88%97%E6%A8%A1%E6%8B%9F"><span class="toc-number">1.0.1.6.</span> <span class="toc-text">UVA540 团体队列(队列模拟)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#P1162-%E5%A1%AB%E6%B6%82%E9%A2%9C%E8%89%B2-%E7%AE%80%E5%8D%95%E6%B7%B1%E6%90%9C"><span class="toc-number">1.0.2.</span> <span class="toc-text">P1162 填涂颜色(简单深搜)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#P1042-%E4%B9%92%E4%B9%93%E7%90%83-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%B0%8F%E6%A8%A1%E6%8B%9F"><span class="toc-number">1.0.2.1.</span> <span class="toc-text">P1042 乒乓球(字符串小模拟)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P1553-%E6%95%B0%E5%AD%97%E5%8F%8D%E8%BD%AC%E5%8D%87%E7%BA%A7%E7%89%88-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%B0%8F%E6%A8%A1%E6%8B%9F"><span class="toc-number">1.0.2.2.</span> <span class="toc-text">P1553 数字反转升级版(字符串小模拟)</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#include"><span class="toc-number">2.</span> <span class="toc-text">include</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#P1332-Logo%E8%AF%AD%E8%A8%80-%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%80%92%E5%BD%92"><span class="toc-number">2.0.0.1.</span> <span class="toc-text">P1332 Logo语言(字符串递归)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P3375-KMP%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D-KMP%E6%A8%A1%E7%89%88"><span class="toc-number">2.0.0.2.</span> <span class="toc-text">P3375 KMP字符串匹配(KMP模版)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P1030-%E7%BB%99%E5%AE%9A%E4%B8%AD%E5%BA%8F%E5%90%8E%E5%BA%8F%E6%B1%82%E5%85%88%E5%BA%8F-%E5%8F%8C%E5%80%8D%E7%BB%8F%E9%AA%8CP1827-%E7%BE%8E%E5%9B%BD%E8%A1%80%E7%BB%9F"><span class="toc-number">2.0.0.3.</span> <span class="toc-text">P1030 给定中序后序求先序(双倍经验P1827 美国血统)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P1087-FBI%E6%A0%91-%E4%BA%8C%E5%8F%89%E6%A0%91%E9%80%92%E5%BD%92%E6%9E%84%E9%80%A0%E5%92%8C%E6%A8%A1%E6%8B%9F"><span class="toc-number">2.0.0.4.</span> <span class="toc-text">P1087 FBI树(二叉树递归构造和模拟)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P3884-%E4%BA%8C%E5%8F%89%E6%A0%91%E9%97%AE%E9%A2%98-LCA%E2%80%93%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88-%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86"><span class="toc-number">2.0.0.5.</span> <span class="toc-text">P3884 二叉树问题(LCA–最近公共祖先,树链剖分)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P4913-%E4%BA%8C%E5%8F%89%E6%A0%91%E6%B7%B1%E5%BA%A6"><span class="toc-number">2.0.0.6.</span> <span class="toc-text">P4913 二叉树深度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P5318-%E6%9F%A5%E6%89%BE%E6%96%87%E7%8C%AE-BFS%E5%92%8CDFS"><span class="toc-number">2.0.0.7.</span> <span class="toc-text">P5318 查找文献(BFS和DFS)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P3371-%E5%8D%95%E5%85%83%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84-%E9%82%BB%E6%8E%A5%E8%A1%A8%E7%89%88%E6%9C%AC"><span class="toc-number">2.0.0.8.</span> <span class="toc-text">P3371 单元最短路径(邻接表版本)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P2910-%E5%8F%8C%E5%80%8D%E7%BB%8F%E9%AA%8C-%E9%82%BB%E6%8E%A5%E7%9F%A9%E9%98%B5%E7%89%88%E6%9C%AC"><span class="toc-number">2.0.0.9.</span> <span class="toc-text">P2910 双倍经验(邻接矩阵版本)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P3367-%E5%B9%B6%E6%9F%A5%E9%9B%86-%E5%BE%80%E4%B8%8A%E6%90%9C%E7%B4%A2%E7%9A%84%E6%A0%91"><span class="toc-number">2.0.0.10.</span> <span class="toc-text">P3367 并查集(往上搜索的树)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P3366-%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91"><span class="toc-number">2.0.0.11.</span> <span class="toc-text">P3366 最小生成树</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P3370-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%93%88%E5%B8%8C"><span class="toc-number">2.0.0.12.</span> <span class="toc-text">P3370 字符串哈希</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P1908-%E9%80%86%E5%BA%8F%E5%AF%B9-%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F"><span class="toc-number">2.0.0.13.</span> <span class="toc-text">P1908 逆序对(归并排序)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P1309-%E5%8F%8C%E5%80%8D%E7%BB%8F%E9%AA%8C-%E9%80%86%E5%BA%8F%E5%AF%B9"><span class="toc-number">2.0.0.14.</span> <span class="toc-text">P1309 (双倍经验) 逆序对</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P1090-%E5%90%88%E5%B9%B6%E6%9E%9C%E5%AD%90"><span class="toc-number">2.0.0.15.</span> <span class="toc-text">P1090 合并果子</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P1138-%E6%9C%80k%E5%B0%8F%E6%95%B4%E6%95%B0"><span class="toc-number">2.0.0.16.</span> <span class="toc-text">P1138 最k小整数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P1918-%E4%BF%9D%E9%BE%84%E7%90%83"><span class="toc-number">2.0.0.17.</span> <span class="toc-text">P1918 保龄球</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B4%9B%E8%B0%B7%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95-%E7%BB%BF%E5%88%B0%E8%93%9D"><span class="toc-number">3.</span> <span class="toc-text">洛谷刷题记录(绿到蓝)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#P6510-%E5%A5%B6%E7%89%9B%E6%8E%92%E9%98%9F"><span class="toc-number">3.0.0.1.</span> <span class="toc-text">P6510 奶牛排队</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P3719-rexp"><span class="toc-number">3.0.0.2.</span> <span class="toc-text">P3719 rexp.</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P1185-%E7%BB%98%E5%88%B6%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="toc-number">3.0.0.3.</span> <span class="toc-text">P1185 绘制二叉树</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P3956-%E6%A3%8B%E7%9B%98"><span class="toc-number">3.0.0.4.</span> <span class="toc-text">P3956 棋盘</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P1983-%E8%BD%A6%E7%AB%99%E5%88%86%E7%BA%A7-%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F"><span class="toc-number">3.0.0.5.</span> <span class="toc-text">P1983 车站分级(拓扑排序)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P1038-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C"><span class="toc-number">3.0.0.6.</span> <span class="toc-text">P1038 神经网络</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P1381-%E5%8D%95%E8%AF%8D%E8%83%8C%E8%AF%B5"><span class="toc-number">3.0.0.7.</span> <span class="toc-text">P1381 单词背诵</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86"><span class="toc-number">4.</span> <span class="toc-text">基础部分</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#P1002-NOIP2002-%E6%99%AE%E5%8F%8A%E7%BB%84-%E8%BF%87%E6%B2%B3%E5%8D%92"><span class="toc-number">5.</span> <span class="toc-text">P1002 [NOIP2002 普及组] 过河卒</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#P1095-NOIP2007-%E6%99%AE%E5%8F%8A%E7%BB%84-%E5%AE%88%E6%9C%9B%E8%80%85%E7%9A%84%E9%80%83%E7%A6%BB"><span class="toc-number">6.</span> <span class="toc-text">P1095 [NOIP2007 普及组] 守望者的逃离</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%83%8C%E5%8C%85"><span class="toc-number">7.</span> <span class="toc-text">背包</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#P1048-NOIP2005-%E6%99%AE%E5%8F%8A%E7%BB%84-%E9%87%87%E8%8D%AF"><span class="toc-number">8.</span> <span class="toc-text">P1048 [NOIP2005 普及组] 采药</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#P1616-%E7%96%AF%E7%8B%82%E7%9A%84%E9%87%87%E8%8D%AF"><span class="toc-number">9.</span> <span class="toc-text">P1616 疯狂的采药</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7"><span class="toc-number">10.</span> <span class="toc-text">线性</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#P1091-NOIP2004-%E6%8F%90%E9%AB%98%E7%BB%84-%E5%90%88%E5%94%B1%E9%98%9F%E5%BD%A2"><span class="toc-number">11.</span> <span class="toc-text">P1091 [NOIP2004 提高组] 合唱队形</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#P1439-%E3%80%90%E6%A8%A1%E6%9D%BF%E3%80%91%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%AD%90%E5%BA%8F%E5%88%97"><span class="toc-number">12.</span> <span class="toc-text">P1439 【模板】最长公共子序列</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8C%BA%E9%97%B4"><span class="toc-number">13.</span> <span class="toc-text">区间</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#P1880-NOI1995-%E7%9F%B3%E5%AD%90%E5%90%88%E5%B9%B6"><span class="toc-number">14.</span> <span class="toc-text">P1880 [NOI1995] 石子合并</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%9B%E6%89%A3%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98"><span class="toc-number">14.0.1.</span> <span class="toc-text">力扣每日一题</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8A%9B%E6%89%A3%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98%E8%AE%B0%E5%BD%95"><span class="toc-number">15.</span> <span class="toc-text">力扣每日一题记录</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CSP%E8%80%83%E8%AF%95%E2%80%93%E7%BB%83%E6%89%8B"><span class="toc-number">16.</span> <span class="toc-text">CSP考试–练手</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        做算法题综合
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Sukuna</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2022-04-17T13:10:37.000Z" class="dt-published" itemprop="datePublished">2022-04-17</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/project/categories/uncategorized/">uncategorized</a>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <p>[latexpage]</p>
+<h1 id="洛谷刷题记录-橙到黄"><a href="#洛谷刷题记录-橙到黄" class="headerlink" title="洛谷刷题记录(橙到黄)"></a>洛谷刷题记录(橙到黄)</h1><h4 id="P2367-语文成绩-差分前缀和"><a href="#P2367-语文成绩-差分前缀和" class="headerlink" title="P2367 语文成绩(差分前缀和)"></a>P2367 语文成绩(差分前缀和)</h4><p><strong>题目描述</strong></p>
+<p>语文老师总是写错成绩，所以当她修改成绩的时候，总是累得不行。她总是要一遍遍地给某些同学增加分数，又要注意最低分是多少。你能帮帮她吗？</p>
+<p><strong>输入格式</strong></p>
+<p>第一行有两个整数 ，，代表学生数与增加分数的次数。</p>
+<p>第二行有  个数，，代表各个学生的初始成绩。</p>
+<p>接下来 行，每行有三个数代表给第 x个到第 y个学生每人增加 z分。</p>
+<p>现在有一个数组,我们要对一个数组的一个小区间统一进行加减操作,就是需要做差分操作.</p>
+<p>首先我们需要做一个差分数组,差分数组是数组的两个元素之间的差值.然后对每一个区间做加减运算的时候,我们只需要在首尾处对差分树组进行操作.进行操作.然后再进行合并即可.合并的操作就是给定数组的第一个元素,根据差分数组的定义进行加即可.</p>
+<p>1、首先构造差分数组.</p>
+<p>2、接着对每一次小区间加减进行操作.</p>
+<p>3、然后合并差分数组.</p>
+<p>&#x2F;&#x2F;这个时候还不会stl,甚至还没有养成用宏来开数组的习惯<br>#include&lt;stdio.h&gt;<br>int n,p,a[5000005],f[5000005],ans&#x3D;9999999,sum;<br>int min(int a,int b){<br>    return a&lt;b?a:b;<br>}<br>int main(){<br>    scanf(“%d%d”,&amp;n,&amp;p);<br>    for(int i&#x3D;1;i&lt;&#x3D;n;i++){<br>        scanf(“%d”,&amp;a[i]);<br>        f[i]&#x3D;a[i]-a[i-1];<br>    }<br>    for(int i&#x3D;1;i&lt;&#x3D;p;i++){<br>        int x,y,z;<br>        scanf(“%d%d%d”,&amp;x,&amp;y,&amp;z);<br>        f[x]+&#x3D;z;<br>        f[y+1]-&#x3D;z;<br>    }<br>    for(int i&#x3D;1;i&lt;&#x3D;n;i++){<br>        sum+&#x3D;f[i];<br>        a[i]&#x3D;sum;<br>        ans&#x3D;min(ans,a[i]);<br>    }<br>    printf(“%d”,ans);<br>}</p>
+<h4 id="双倍经验-CF44C-Holiday-差分前缀和"><a href="#双倍经验-CF44C-Holiday-差分前缀和" class="headerlink" title="双倍经验:CF44C Holiday (差分前缀和)"></a>双倍经验:CF44C Holiday (差分前缀和)</h4><p><strong>对于有若干个区间,求一个点被多少个区间覆盖的问题就可以使用差分前缀和的思想.因为答案数组是全0的,对应的差分数组也是全0,输入每一个区间就相当于在这个区间做加1操作.然后合并即可</strong></p>
+<p>那么差分是怎么做的,下面看题:</p>
+<p>天假期，安排个人来浇花，第i个人负责天，问花是否可以每天都被浇水且不重复。 可以的话输出“OK”，不可以的话输出最早出问题的那天的天号以及那天花被浇了多少次水。</p>
+<p>这道题就是有若干个区间,你需要找到每个点被多少个区间覆盖.那么我们可以进行差分,每一次进行+1操作即可,由于一开始数组取值为0,所以说初始的构造差分数组的步骤可以省略&#x2F;</p>
+<p>#include &lt;stdio.h&gt;<br>#define N 105<br>int a[N];<br>int b[N];<br>int k[N];<br>int n,m;<br>int flag;<br>int i;<br>int ans;<br>int main(){<br>    scanf(“%d %d”,&amp;n,&amp;m);<br>    for(i&#x3D;1;i&lt;&#x3D;m;i++){<br>        scanf(“%d %d”,&amp;a[i],&amp;b[i]);<br>        k[a[i]]++;<br>        k[b[i]+1]–;<br>    }<br>    for(int i&#x3D;1;i&lt;&#x3D;n;i++){<br>        k[i]+&#x3D;k[i-1];<br>        if(k[i]!&#x3D;1){<br>            printf(“%d %d”,i,k[i]);<br>            return 0;<br>        }<br>    }<br>    printf(“OK”);<br>}</p>
+<h4 id="P1160-队列安排-队列模版题-包含队列的添加和删除操作"><a href="#P1160-队列安排-队列模版题-包含队列的添加和删除操作" class="headerlink" title="P1160 队列安排(队列模版题,包含队列的添加和删除操作)"></a>P1160 队列安排(队列模版题,包含队列的添加和删除操作)</h4><p>![image-20220406211731519](&#x2F;Users&#x2F;xupengzhu&#x2F;Library&#x2F;Application Support&#x2F;typora-user-images&#x2F;image-20220406211731519.png)</p>
+<p>这道题就是一个纯粹的队列的模拟问题,我们可以采用数组模拟链表的策略,就是记录两个数组和,来记录左边和右边的人是谁,就是在i右边的人,是i左边的人是谁,添加的时候先判断是左边还是右边,插入的方法和删除的方法不需要多说了,<strong>这就是一个双向队列的模版</strong>.插入的时候注意插入的顺序即可</p>
+<p>#include&lt;stdio.h&gt;<br>int n,m,nex[100010],be[100010],t[100010];<br>int head&#x3D;1;<br>int main()<br>{<br>    scanf(“%d”,&amp;n);<br>    for(int i&#x3D;2,k,p;i&lt;&#x3D;n;i++)<br>    {<br>        scanf(“%d%d”,&amp;k,&amp;p);<br>        if(!p)<br>        {<br>            int before&#x3D;be[k];<br>            nex[before]&#x3D;i;nex[i]&#x3D;k;<br>            be[k]&#x3D;i;be[i]&#x3D;before;<br>            if(k&#x3D;&#x3D;head)    head&#x3D;i;<br>        }else<br>        {<br>            nex[i]&#x3D;nex[k];nex[k]&#x3D;i;<br>            be[nex[i]]&#x3D;i;be[i]&#x3D;k;<br>        }<br>    }<br>    scanf(“%d”,&amp;m);<br>    for(int i&#x3D;1,c;i&lt;&#x3D;m;i++)<br>        scanf(“%d”,&amp;c),t[c]&#x3D;1;<br>    for(int i&#x3D;1;i&lt;&#x3D;n;i++)<br>    {<br>        if(!t[head])    printf(“%d “,head);<br>        head&#x3D;nex[head];<br>    }<br>&#x2F;&#x2F;better delete.<br>&#x2F;&#x2F;int be&#x3D;be[i];<br>&#x2F;&#x2F;int nex&#x3D;nex[i];<br>&#x2F;&#x2F;nex[be]&#x3D;nex;<br>&#x2F;&#x2F;be[nex]&#x3D;be;<br>    return 0;<br>}</p>
+<h3 id="P1044-栈"><a href="#P1044-栈" class="headerlink" title="P1044 栈"></a>P1044 栈</h3><p>给定一个数,入栈序列一共有多少个出栈序列.</p>
+<p>本质上是数学题,但是在计算机中比较难以计算.所以说用卡特兰数的定义是直接RE.</p>
+<p>#include&lt;stdio.h&gt;<br>int n,m,nex[100010],be[100010],t[100010];<br>int head&#x3D;1;<br>int computeCMN(int m, int n) {<br>if (n &#x3D;&#x3D; 0  m &#x3D;&#x3D; n) return 1;<br>int c1 &#x3D; computeCMN(m - 1, n);<br>int c2 &#x3D; computeCMN(m - 1, n - 1);<br>return c1 + c2;<br>}<br>int main()<br>{<br>    scanf(“%d”,&amp;n);<br>    printf(“%d”,computeCMN(2*n,n)-computeCMN(2*n,n-1));<br>}</p>
+<p>那我们怎么办呢?我们这个时候还知道卡特兰序列有这么一个性质:</p>
+<p>这个时候我们就可以进行递推就可以得到啦!</p>
+<p>#include&lt;stdio.h&gt;<br>int n,m,nex[100010],be[100010],t[100010];<br>int head&#x3D;1;<br>int main()<br>{<br>    scanf(“%d”,&amp;n);<br>    nex[0]&#x3D;1;<br>    nex[1]&#x3D;1;<br>    for(int i&#x3D;2;i&lt;&#x3D;n;i++){<br>        for(int j&#x3D;0;j&lt;i;j++){<br>            nex[i]+&#x3D;nex[j]*nex[i-j-1];<br>        }<br>    }<br>    printf(“%d”,nex[n]);<br>}</p>
+<p>当然还有一种更加巧妙的.</p>
+<h4 id="P1449-后缀表达式-栈的经典问题"><a href="#P1449-后缀表达式-栈的经典问题" class="headerlink" title="P1449 后缀表达式(栈的经典问题)"></a>P1449 后缀表达式(栈的经典问题)</h4><p>所谓后缀表达式是指这样的一个表达式：式中不再引用括号，运算符号放在两个运算对象之后，所有计算按运算符号出现的顺序，严格地由左而右新进行（不用考虑运算符的优先级）。</p>
+<p>如：对应的后缀表达式为：．．．．。’@’为表达式的结束符号。‘.’为操作数的结束符号。</p>
+<p>#include&lt;stdio.h&gt;<br>char s[100005];<br>int stack[100005];<br>int main(){<br>    int top&#x3D;0,i&#x3D;0,x;<br>    scanf(“%s”,s);<br>    while(s[i]!&#x3D;‘@’){<br>        switch (s[i])<br>        {<br>        case ‘+’:stack[–top]+&#x3D;stack[top+1];break;&#x2F;&#x2F;出栈之后再进栈<br>        case ‘-‘:stack[–top]-&#x3D;stack[top+1];break;<br>        case ‘*‘:stack[–top]*&#x3D;stack[top+1];break;<br>        case ‘&#x2F;‘:stack[–top]&#x2F;&#x3D;stack[top+1];break;<br>        default:<br>            x&#x3D;0;<br>            while(s[i]!&#x3D;’.’){<br>                x&#x3D;x*10+s[i++]-‘0’;<br>            }<br>            stack[++top]&#x3D;x;<br>            break;<br>        }<br>        i++;<br>    }<br>    printf(“%d”,stack[top]);<br>}</p>
+<p>遍历整个字符串,如果是基本的数字的话就把数字计算(计算方式和C语言学过的一模一样,数字字符串转数字的方法)出来然后入栈.如果是运算符就把栈顶的两个数字取出来做运算符对应的运算然后再放回栈中.</p>
+<h4 id="双倍经验-P1981-表达式求值"><a href="#双倍经验-P1981-表达式求值" class="headerlink" title="(双倍经验) P1981 表达式求值"></a>(双倍经验) P1981 表达式求值</h4><p>给定一个只包含加法和乘法的算术表达式，请你编程计算表达式的值。</p>
+<p>先输入一个符号然后输入一个数字,然后判断符号的类型,如果是乘的话,优先级最高,就可以先做.取一个数然后乘,如果是加的话就直接把这个数字push进去就好了,因为只用处理乘,剩下的堆栈中存放的就是加法的加数.</p>
+<p>#include&lt;stdio.h&gt;<br>#include<stack><br>using namespace std;<br>&#x2F;&#x2F;char s[100005];<br>&#x2F;&#x2F;int stack[100005];<br>stack<int> num;<br>stack<char> op;<br>#define MOD 10000<br>int main(){<br>    char ch;<br>    int number;<br>    int n1,n2;<br>    scanf(“%d”,&amp;number);<br>    num.push(number);<br>    while(1){<br>        ch&#x3D;getchar();<br>        if(ch&#x3D;&#x3D;’\n’) break;<br>        scanf(“%d”,&amp;number);<br>        if(ch&#x3D;&#x3D;’*‘){<br>            n1&#x3D;num.top();<br>            num.pop();<br>            num.push((n1%MOD)*(number%MOD));<br>        }<br>        if(ch&#x3D;&#x3D;’+’){<br>            num.push(number);<br>        }<br>    }<br>    int sum &#x3D; 0;<br>    while (!num.empty()) {<br>        sum +&#x3D; num.top();<br>        sum %&#x3D; 10000;<br>        num.pop();<br>    }<br>    printf(“%d”,sum);<br>}</p>
+<h4 id="P1165-日志分析-模拟栈"><a href="#P1165-日志分析-模拟栈" class="headerlink" title="P1165 日志分析(模拟栈)"></a>P1165 日志分析(模拟栈)</h4><p>![image-20220406214705134](&#x2F;Users&#x2F;xupengzhu&#x2F;Library&#x2F;Application Support&#x2F;typora-user-images&#x2F;image-20220406214705134.png)</p>
+<p>#include&lt;stdio.h&gt;<br>#include&lt;math.h&gt;<br>#include&lt;string.h&gt;<br>int n,p,now,maxn;<br>int s[200005];<br>int top&#x3D;-1;<br>int max(int x,int y){<br>    return x&gt;y?x:y;<br>}<br>int main()<br>{<br>    scanf(“%d”,&amp;n);<br>    while(n–)<br>    {<br>        scanf(“%d”,&amp;p);<br>        if(p&#x3D;&#x3D;0)<br>        {<br>            scanf(“%d”,&amp;s[++top]);<br>            s[top]&#x3D;max(s[top],s[top-1]);<br>        }<br>        else if(p&#x3D;&#x3D;1)<br>        {<br>            if(top&#x3D;&#x3D;-1)continue;<br>            s[top–]&#x3D;0;<br>        }<br>        else if(p&#x3D;&#x3D;2)<br>            printf(“%d\n”,s[top]);<br>    }<br>    return 0;<br>}</p>
+<ol>
+<li>操作0（集装箱进库操作，相当于进栈），如果输入的数小于之前的最大值，就仍然存储原来的最大值因为后进先出，当前的如果小，永远不可能被操作2询问到，所以存了也没用，不然入栈，栈顶+1.栈f,就是从到元素的最大值.</li>
+<li>操作1（集装箱出库操作，相当于出栈），直接栈顶-1.因为我们不需要知道最近入栈的元素是什么.所以说我们只需要知道当前所有元素的最大值就好了,一个元素的出栈就是我们不需要再讨论包含它的最大值,仅此而已.栈顶就是少了刚入栈的最大值即可.</li>
+<li>操作2（集装箱询问操作，由于此时的栈顶是最大值，可以直接输出）</li>
+</ol>
+<h4 id="P5788-单调栈模版"><a href="#P5788-单调栈模版" class="headerlink" title="P5788 单调栈模版"></a>P5788 单调栈模版</h4><p>定义函数为第i个元素之后第一个大于的下标,求</p>
+<p>举一个生活中的例子,就是对于若干个人排队,往后看,你可以看到第一个比你高的人,比你矮的人你全部都看不见,会被遮住,所以说这些点我们也不需要考虑了.</p>
+<p>所以我们可以从后往前扫描并且维护一个栈,在栈中小于等于的要删掉,<strong>那么栈顶的就是第一个比大的下标</strong>.因为堆栈具有单调性质,在栈底的下标最大,在栈顶的下标最小.那我们从下标最小的栈顶往下走,找到第一个满足题目条件的下标.不满足题目条件的下标由于之后肯定用不到所以说可以删除.</p>
+<p>最后一步就是这个数入栈.</p>
+<p>#include <iostream><br>#include <algorithm><br>#include <cstdio><br>#define N &#x3D; 3000005;<br>int a[N], st[N], ans[N];<br>int top;<br>int n;</p>
+<p>int main() {<br>scanf(“%d”,&amp;n);<br>for(int i&#x3D;1;i&lt;&#x3D;n;i++)<br>scanf(“%d”,&amp;a[i]);<br>for(int i&#x3D;n;i&gt;&#x3D;1;i–) {<br>while(top&amp;&amp;a[st[top]]&lt;&#x3D;a[i])top–;<br>ans[i]&#x3D;st[top];<br>st[++top]&#x3D;i;<br>}<br>for(int i&#x3D;1;i&lt;&#x3D;n;i++)printf(“%d “,ans[i]);<br>return 0;<br>}</p>
+<h4 id="P1886-滑动窗口-单调队列模版"><a href="#P1886-滑动窗口-单调队列模版" class="headerlink" title="P1886 滑动窗口&#x2F;单调队列模版."></a>P1886 滑动窗口&#x2F;单调队列模版.</h4><p>有一个长为  的序列，以及一个大小为的窗口。现在这个从左边开始向右滑动，每次滑动一个单位，求出每次滑动后窗口中的最大值和最小值。</p>
+<p>首先是样例:</p>
+<p>8 3<br>1 3 -1 -3 5 3 6 7</p>
+<p>下文中我们用q来表示单调队列，p来表示其所对应的在原列表里的序号。</p>
+<ol>
+<li>由于此时队中没有一个元素，我们直接令1进队。此时，q&#x3D;{1},p&#x3D;{1}。</li>
+<li>现在3面临着抉择。下面基于这样一个思想:假如把3放进去，如果后面2个数都比它大，那么3在其有生之年就有可能成为最小的。此时，q&#x3D;{1,3},p&#x3D;{1,2}</li>
+<li>下面出现了-1。队尾元素3比-1大，那么意味着只要-1进队，那么3在其有生之年必定成为不了最小值，原因很明显:因为当下面3被框起来，那么-1也一定被框起来，所以3永远不能当最小值。所以，3从<strong>队尾</strong>出队。同理，1从队尾出队。最后-1进队，此时q&#x3D;{-1},p&#x3D;{3} 输出-1</li>
+<li>出现-3，同上面分析，-1&gt;-3，-1从队尾出队,-3从队尾进队。q&#x3D;{-3}，p&#x3D;{4}。 输出-3</li>
+<li>出现5，因为5&gt;-3，同第二条分析，5在有生之年还是有希望的，所以5进队。此时，q&#x3D;{-3,5},p&#x3D;{4,5} 输出-3</li>
+<li>出现3。3先与队尾的5比较，3&lt;5，按照第3条的分析，5从队尾出队。3再与-3比较，同第二条分析，3进队。此时，q&#x3D;{-3,3},p&#x3D;{4,6}输出-3</li>
+<li>出现6。6与3比较，因为3&lt;6，所以3不必出队。由于3以前元素都＜3，所以不必再比较，6进队。因为-3此时已经在滑动窗口之外，所以-3从<strong>队首</strong>出队。此时，q&#x3D;{3,6},p&#x3D;{6,7} 输出3</li>
+<li>出现7。队尾元素6小于7，7进队。此时，q&#x3D;{3,6,7},p&#x3D;{6,7,8}。 输出3</li>
+</ol>
+<p>总结一下: 假设入队从后往前比较:</p>
+<p>(1)如果:</p>
+<p>入队</p>
+<p>(2)如果</p>
+<p>出队,继续比较,知道队列没有元素或者有</p>
+<p>#include&lt;stdio.h&gt;<br>#include<stack><br>#include&lt;math.h&gt;<br>#include&lt;string.h&gt;<br>using namespace std;<br>&#x2F;&#x2F;char s[100005];<br>&#x2F;&#x2F;int stack[100005];<br>&#x2F;&#x2F;stack<int> num;<br>&#x2F;&#x2F;stack<char> op;<br>#define MOD 10000<br>#include<map><br>#include<queue><br>int xianxu[1000];<br>int a[10000005],value[100000005],queue1[100000005];<br>int main()<br>{<br>    int n,k;<br>    int h&#x3D;1,t&#x3D;1;<br>    scanf(“%d %d”,&amp;n,&amp;k);<br>    for(int i&#x3D;1;i&lt;&#x3D;n;i++) scanf(“%d”,&amp;a[i]);<br>    for(int i&#x3D;1;i&lt;&#x3D;n;i++){<br>        &#x2F;&#x2F;维护单调队列<br>        while(h&lt;t&amp;&amp;value[t-1]&gt;a[i])t–;<br>        value[t]&#x3D;a[i];<br>        queue1[t++]&#x3D;i;<br>        if(i-queue1[h]&gt;&#x3D;k)h++;<br>        if(i&gt;&#x3D;k) printf(“%d “,value[h]);<br>    }<br>    puts(“”);<br>    h&#x3D;1,t&#x3D;1;<br>    for(int i&#x3D;1;i&lt;&#x3D;n;i++){<br>        while(h&lt;t&amp;&amp;value[t-1]&lt;a[i])t–;<br>        value[t]&#x3D;a[i];<br>        queue1[t++]&#x3D;i;<br>        if(i-queue1[h]&gt;&#x3D;k)h++;<br>        if(i&gt;&#x3D;k) printf(“%d “,value[h]);<br>    }<br>}</p>
+<h4 id="UVA540-团体队列-队列模拟"><a href="#UVA540-团体队列-队列模拟" class="headerlink" title="UVA540 团体队列(队列模拟)"></a>UVA540 团体队列(队列模拟)</h4><p>有 个团队的人正在排长队。每有一个新来的人时，他会从队首开始向后搜寻，如果发现有队友正在排队，他就会插队到他队友的身后；如果没有发现任何一个队友排队，他就只好站在长队的队尾。输入每个团队中所有队员的编号，要求支持如下  种指令：<code>ENQUEUE x</code>：编号为 x 的人进入长队。<code>DEQUEUE</code>：长队的队首出队。<code>STOP</code>：停止模拟。对于每个 <code>DEQUEUE</code> 指令，输出出队的人的编号。</p>
+<p>这道题也是一个队列的模拟题,这一道题的难点就是在如何找到队友并插入.构建一个二维数组太慢了,不如我们用一下stl吧,这个stl叫做map,这个map可以帮我们做哈希映射,我们可以在很快的时间内找到序号和对应的分组.</p>
+<p>就是说我们可以首次调用map[x]&#x3D;y,建立的映射,这个映射的查找是的,</p>
+<p>#include&lt;stdio.h&gt;<br>#include<stack><br>#include&lt;math.h&gt;<br>#include&lt;string.h&gt;<br>using namespace std;<br>#define MOD 10000<br>#include<map><br>#include<queue><br>int t,number&#x3D;0;<br>char* str;<br>int x;<br>int main()<br>{<br>    str&#x3D;(char*)malloc(50);<br>    while(scanf(“%d”,&amp;t)&#x3D;&#x3D;1&amp;&amp;t&gt;0){<br>        map&lt;int ,int&gt; team;<br>        printf(“Scenario #%d\n”,++number);<br>        for(int i&#x3D;0;i&lt;t;i++){<br>            int n;<br>            scanf(“%d”,&amp;n);<br>            int code;<br>            while(n–){<br>                scanf(“%d”,&amp;code);<br>                team[code]&#x3D;i;<br>            }<br>        }<br>        queue<int> q,q_sup[100005];<br>        while(1){<br>            scanf(“%s”,str);<br>            if(*str&#x3D;&#x3D;’S’) break;<br>            else if(*str&#x3D;&#x3D;’D’){<br>                x&#x3D;q.front();<br>                printf(“%d\n”,q_sup[x].front());<br>                q_sup[x].pop();<br>                if(q_sup[x].empty()) q.pop();<br>            }<br>            else if(*str&#x3D;&#x3D;’E’){<br>                scanf(“%d”,&amp;x);<br>                int t&#x3D;team[x];<br>                if(q_sup[t].empty())q.push(t);<br>                q_sup[t].push(x);<br>            }<br>        }<br>        printf(“\n”);<br>    }<br>}</p>
+<p>一开始先建立map的映射关系,然后进行操作的时候我们维护一个主队列,主队列里面存储着小组的顺序,然后维护一个小组队列,存储着小组里面有什么人,由于插入的时候只会插入到每个小组的人后面,所以说出队也是按照小组的顺序出队,只有这个小组的所有人都出队了(判断方法,小组队列为空),才轮到另外一个小组出队.所以说入队的时候看看你是不是小组第一个,如果是的话就在主队列排一个队.出队的时候看看你是不是小组最后一个,如果是的话,就出主队列.总之由于出队一定是一个队一个队的顺序出队的,我们只需要记录队与队之间的顺序和队内部的顺序就好了.</p>
+<h3 id="P1162-填涂颜色-简单深搜"><a href="#P1162-填涂颜色-简单深搜" class="headerlink" title="P1162 填涂颜色(简单深搜)"></a>P1162 填涂颜色(简单深搜)</h3><p>由数字组成的方阵中，有一任意形状闭合圈，闭合圈由数字构成，围圈时只走上下左右个方向。现要求把闭合圈内的所有空间都填写成.例如：的方阵（），涂色前和涂色后的方阵如下：</p>
+<p>0 0 0 0 0 0<br>0 0 1 1 1 1<br>0 1 1 0 0 1<br>1 1 0 0 0 1<br>1 0 0 0 0 1<br>1 1 1 1 1 1 </p>
+<p>0 0 0 0 0 0<br>0 0 1 1 1 1<br>0 1 1 2 2 1<br>1 1 2 2 2 1<br>1 2 2 2 2 1<br>1 1 1 1 1 1</p>
+<p>#include&lt;stdio.h&gt;<br>#include<stack><br>#include&lt;math.h&gt;<br>#include&lt;string.h&gt;<br>using namespace std;<br>&#x2F;&#x2F;char s[100005];<br>&#x2F;&#x2F;int stack[100005];<br>stack<int> num;<br>stack<char> op;<br>#define MOD 10000<br>int N,a[100][100];<br>void dfs(int x,int y){<br>    if(a[x][y]!&#x3D;0)return ;<br>    a[x][y]&#x3D;-1;<br>    if(x+1&lt;&#x3D;N)dfs(x+1,y);<br>    if(x-1&gt;&#x3D;1)dfs(x-1,y);<br>    if(y+1&lt;&#x3D;N)dfs(x,y+1);<br>    if(y-1&gt;&#x3D;1)dfs(x,y-1);<br>}<br>int main()<br>{</p>
+<pre><code>scanf(&quot;%d&quot;,&amp;N);
+for(int i=1;i&lt;=N;i++)
+    for(int j=1;j&lt;=N;j++)
+        scanf(&quot;%d&quot;,&amp;a\[i\]\[j\]);
+for(int i=1;i&lt;=N;i++)
+    if(a\[1\]\[i\]==0)dfs(1,i);
+    else if(a\[N\]\[i\]==0)dfs(N,i);
+for(int i=1;i&lt;=N;i++)
+    if(a\[i\]\[1\]==0)dfs(i,1);
+    else if(a\[i\]\[N\]==0)dfs(i,N);
+for(int i=1;i&lt;=N;i++)
+&#123;
+    if(a\[i\]\[1\]==-1)printf(&quot;0&quot;);
+    else if(a\[i\]\[1\]==0)printf(&quot;2&quot;);
+    else printf(&quot;1&quot;);
+    for(int j=2;j&lt;=N;j++)
+    &#123;
+        if(a\[i\]\[j\]==-1)printf(&quot; 0&quot;);
+        else if(a\[i\]\[j\]==0)printf(&quot; 2&quot;);
+        else printf(&quot; 1&quot;);
+    &#125;
+    printf(&quot;\\n&quot;);
+&#125;
+return 0;
+</code></pre>
+<p>}</p>
+<p>这里就是深度优先搜索,从边界开始进行搜索,遇到了可用的点就先进行标记,完后往上下左右搜索,遇到不可用的点(墙)就停止,这个时候没搜索到的就是被墙围起来的那部分.</p>
+<h4 id="P1042-乒乓球-字符串小模拟"><a href="#P1042-乒乓球-字符串小模拟" class="headerlink" title="P1042 乒乓球(字符串小模拟)"></a>P1042 乒乓球(字符串小模拟)</h4><p>![image-20220410195828465](&#x2F;Users&#x2F;xupengzhu&#x2F;Library&#x2F;Application Support&#x2F;typora-user-images&#x2F;image-20220410195828465.png)</p>
+<p>不贴代码了,这道题就是模拟题,我们就依次读取,维护两组元素,分别是11分下的胜负和21分下的胜负,用一个数组存储胜负的信息.a[N][0]存储的就是第N局的信息.判断每一局结束的标准就是分数是否超过了11(21)分并且两位选手的分差是不是大于2.</p>
+<h4 id="P1553-数字反转升级版-字符串小模拟"><a href="#P1553-数字反转升级版-字符串小模拟" class="headerlink" title="P1553 数字反转升级版(字符串小模拟)"></a>P1553 数字反转升级版(字符串小模拟)</h4><p>给定一个数，请将该数各个位上数字反转得到一个新数。</p>
+<p>这次与NOIp2011普及组第一题不同的是：这个数可以是小数，分数，百分数，整数。整数反转是将所有数位对调；小数反转是把整数部分的数反转，再将小数部分的数反转，不交换整数部分与小数部分；分数反转是把分母的数反转，再把分子的数反转，不交换分子与分母；百分数的分子一定是整数，百分数只改变数字部分。整数新数也应满足整数的常见形式，即除非给定的原数为零，否则反转后得到的新数的最高位数字不应为零；小数新数的末尾不为0（除非小数部分除了0没有别的数，那么只保留1个0）；分数不约分，分子和分母都不是小数（约分滴童鞋抱歉了，不能过哦。输入数据保证分母不为0），本次没有负数。</p>
+<p>给定一个数，请将该数各个位上数字反转得到一个新数。</p>
+<p>这次与NOIp2011普及组第一题不同的是：这个数可以是小数，分数，百分数，整数。</p>
+<ul>
+<li>整数反转是将所有数位对调。</li>
+<li>小数反转是把整数部分的数反转，再将小数部分的数反转，不交换整数部分与小数部分。</li>
+<li>分数反转是把分母的数反转，再把分子的数反转，不交换分子与分母。</li>
+<li>百分数的分子一定是整数，百分数只改变数字部分。</li>
+</ul>
+<p>这次我们来了解一下string的一些操作:</p>
+<p># include<iostream></p>
+<h1 id="include"><a href="#include" class="headerlink" title="include"></a>include<string></h1><p>using namespace std;</p>
+<p>bool isZero(string s)<br>{<br>int j &#x3D; 0;<br>for(int i &#x3D; 0;s[i];++i)<br>if(s[i] &#x3D;&#x3D; ‘0’)<br>j++;</p>
+<p>if(j &#x3D;&#x3D; s.length())<br>return true;<br>else<br>return false;<br>}</p>
+<p>&#x2F;&#x2F;倒置<br>void transpos(string s1,string &amp;s2)<br>{<br>for(int i &#x3D; s1.length()-1,j &#x3D; 0;i &gt;&#x3D; 0;–i)<br>s2 +&#x3D; s1[i];<br>}</p>
+<p>&#x2F;&#x2F;去除前导0<br>void dePreZero(string s1,string &amp;s2)<br>{<br>int i &#x3D; 0;<br>while(s1[i] &#x3D;&#x3D; ‘0’)<br>i++;<br>s2.assign(s1,i,s1.npos);<br> }</p>
+<p>&#x2F;&#x2F;去除后缀0<br>void  deSufZero(string s1,string &amp;s2)<br>{<br>int i &#x3D; s1.length()-1;<br>while(s1[i] &#x3D;&#x3D; ‘0’)<br>{<br>i–;<br>}<br>s2.assign(s1,0,i+1);<br>}</p>
+<p>int main()<br>{<br>string s,ans,tmp;<br>int idx;&#x2F;&#x2F;特殊符号的位置 </p>
+<p>getline(cin,s);<br>if(s.find(‘.’,0) !&#x3D; -1)<br>{<br>idx &#x3D; s.find(‘.’,0);<br>tmp.assign(s,0,idx);<br>if(isZero(tmp))<br>ans.assign(“0”);<br>else<br>{<br>transpos(tmp,ans);<br>dePreZero(ans,ans);<br>}<br>cout &lt;&lt; ans;<br>cout &lt;&lt; ‘.’;<br>tmp.clear();<br>ans.clear();<br>tmp.assign(s,idx+1,s.npos);<br>if(isZero(tmp))<br>ans.assign(“0”);<br>else<br>{<br>transpos(tmp,ans);<br>deSufZero(ans,ans);<br>}<br>cout &lt;&lt; ans;<br>}<br>else if(s.find(‘&#x2F;‘,0) !&#x3D; -1)<br>{<br>idx &#x3D; s.find(‘&#x2F;‘,0);<br>tmp.assign(s,0,idx);<br>if(isZero(tmp))<br>ans.assign(“0”);<br>else<br>{<br>transpos(tmp,ans);<br>dePreZero(ans,ans);<br>}<br>cout &lt;&lt; ans &lt;&lt; “&#x2F;“;<br>tmp.clear();<br>ans.clear();<br>tmp.assign(s,idx+1,s.npos);<br>if(isZero(tmp))<br>ans.assign(“0”);<br>else<br>{<br>transpos(tmp,ans);<br>dePreZero(ans,ans);<br>}<br>cout &lt;&lt; ans;<br>}<br>else if(s.find(‘%’,0) !&#x3D; -1)<br>{<br>idx &#x3D; s.find(‘%’,0);<br>tmp.assign(s,0,idx);<br>if(isZero(tmp))<br>ans.assign(“0”);<br>else<br>{<br>transpos(tmp,ans);<br>dePreZero(ans,ans);<br>}<br>cout &lt;&lt; ans &lt;&lt; ‘%’;<br>}<br>else<br>{<br>if(isZero(s))<br>ans.assign(“0”);<br>else<br>{<br>transpos(s,ans);<br>dePreZero(ans,ans);<br>}<br>cout &lt;&lt; ans;<br>}</p>
+<p> return 0;<br>}</p>
+<p>首先是前面几个辅助的函数,函数的声明里面有一个代表函数对这个变量的修改也会顺便引起对主程序里面变量的修改(和传指针一样).首先是转置函数,从后往前把字符串的值添加到中,由于已经做好了运算符重载,所以我们可以直接用+来进行添加元素的操作.接着就是去除前导0和后置0的,无非就是从前往后遍历和从后往前遍历而已.</p>
+<p>那就分成几种就好办了,第一种就是小数,我们找到小数点,然后把小数点前面的值做一次翻转,去掉前面的0,然后小数点后面的值做一次翻转,去掉后面的0.就可以了 分数也是一样,找到分数符号,下亦同. 百分号,从1~s.length()-1处理即可.去掉前缀0. 整数最简单.</p>
+<h4 id="P1332-Logo语言-字符串递归"><a href="#P1332-Logo语言-字符串递归" class="headerlink" title="P1332 Logo语言(字符串递归)"></a>P1332 Logo语言(字符串递归)</h4><p>Logo 语言命令可以指挥海龟在屏幕中爬行。本问题只使用 Logo 语言的三个语句：前进 <code>FD</code>，倒退 <code>BK</code>和重复 <code>REPEAT</code>，因此，海龟只在一条直线上来回爬行。输入一行 logo 的命令行，输出海龟在屏幕中离开原来位子的距离（假设屏幕很大，可以让海龟移开 1000000010000000 的距离）。</p>
+<p>例如：</p>
+<ul>
+<li>输入 <code>FD 100</code> ，输出：100。</li>
+<li>输入 <code>FD 100 BK 150</code>， 输出：50。</li>
+<li>输入 <code>REPEAT 5[FD 100 BK 50]</code>， 输出：250。</li>
+<li>输入 <code>REPEAT 5[ FD 50 REPEAT 10[FD 100]]</code>， 输出：5250。</li>
+</ul>
+<p>一般来说,遇到带括号的式子,朴素的想法就是递归.对于括号的处理往往是系数*括号内的内容值,括号内的内容也可以理解为一个式子的值,递归的基本条件也达成了.那我们就通过cin来处理字符串,(当然你用一个函数参数表示现在处理到什么位置也可以,或者用一个全局变量也可以).这道题用printf感觉不太行,就用cin了</p>
+<p>#include<iostream><br>#include<cstdio><br>#include<cmath><br>#include<cstring><br>#include<algorithm><br>#include<map><br>using namespace std;<br>#define maxn 100005<br>#define ll long long<br>int handle(){<br>    char ch,x;string a;int n,ans&#x3D;0;<br>    while (cin&gt;&gt;ch){<br>        if (ch&#x3D;&#x3D;’]‘) break;<br>        cin&gt;&gt;a&gt;&gt;n;<br>        if (ch&#x3D;&#x3D;’R’){<br>          &#x2F;&#x2F;读入‘[’<br>            x&#x3D;getchar();<br>            ans+&#x3D;n*handle();<br>          &#x2F;&#x2F;读入空格<br>            x&#x3D;getchar();<br>        }<br>        if (ch&#x3D;&#x3D;’F’){<br>          &#x2F;&#x2F;读入空格<br>            x&#x3D;getchar();<br>            ans+&#x3D;n;<br>        }<br>        if (ch&#x3D;&#x3D;’B’){<br>            x&#x3D;getchar();<br>            ans-&#x3D;n;<br>        }<br>        if (x&#x3D;&#x3D;’]‘) break;<br>    }<br>    return ans;<br>}<br>int main(){<br>    cout&lt;&lt;abs(handle());<br>    return 0;<br>}</p>
+<p>首先先读取一下第一个指令的字符,反正只有几种,一个是FD前进,BK后退和REPEAT重复.那就每一次读取都读取一个字符串(输入剩下来的字符,比如说“EPEAT”,“D”,“K”等).还有一个数字,然后根据功能进入到不同的值中,(如果遇到了]就代表这一层括号已经结束了,可以返回递归的结果).(需要处理括号然后求出括号内的值的就需要用到递归,递归地求出值然后传给主函数)</p>
+<h4 id="P3375-KMP字符串匹配-KMP模版"><a href="#P3375-KMP字符串匹配-KMP模版" class="headerlink" title="P3375 KMP字符串匹配(KMP模版)"></a>P3375 KMP字符串匹配(KMP模版)</h4><p>用字符串匹配就用KMP最好不过了2333</p>
+<p>#include<algorithm><br>#include &lt;stdio.h&gt;<br>#include <cstring><br>#define N 1000000+5<br>using namespace std;<br>char a[N];<br>char b[N];<br>int kmp[N];<br>int main(){<br>    scanf(“%s”,a+1);<br>    scanf(“%s”,b+1);<br>    int a_length&#x3D;strlen(a+1);<br>    int b_length&#x3D;strlen(b+1);<br>    int p;<br>    for(int i&#x3D;2;i&lt;&#x3D;b_length;i++){<br>        p&#x3D;kmp[i-1];<br>        while(p&amp;&amp;b[p+1]!&#x3D;b[i]){<br>            p&#x3D;kmp[p];<br>        }<br>        if(b[p+1]&#x3D;&#x3D;b[i]) kmp[i]&#x3D;p+1;<br>    }<br>    p&#x3D;0;<br>    for(int i&#x3D;1;i&lt;&#x3D;a_length;i++){<br>        if(b[p+1]&#x3D;&#x3D;a[i]) p++;<br>        else{<br>            while(p &amp;&amp; b[p+1]!&#x3D;a[i])p&#x3D;kmp[p];<br>            if(b[p+1]&#x3D;&#x3D;a[i])p++;<br>        }<br>        if(p&#x3D;&#x3D;b_length)printf(“%d\n”,i-b_length+1);<br>    }<br>    for(int i&#x3D;1;i&lt;&#x3D;b_length;i++)printf(“%d “,kmp[i]);<br>}</p>
+<p>首先就是KMP数组.就是字符串的前位组成的子串种前j位和后j位一样,比如说””.其中,就是这个字符串前5位的前3位和后3位都是””</p>
+<p>然后就是匹配,不匹配就直接从重新开始,就酱紫…</p>
+<h4 id="P1030-给定中序后序求先序-双倍经验P1827-美国血统"><a href="#P1030-给定中序后序求先序-双倍经验P1827-美国血统" class="headerlink" title="P1030 给定中序后序求先序(双倍经验P1827 美国血统)"></a>P1030 给定中序后序求先序(双倍经验P1827 美国血统)</h4><p>#include&lt;stdio.h&gt;<br>#include<iostream><br>#include<cstring><br>#define N 10<br>char houxu[N];<br>char zhongxu[N];<br>int find(char ch){<br>    int i&#x3D;0;<br>    while(zhongxu[i]!&#x3D;ch){<br>        i++;<br>    }<br>    return i;<br>}<br>void DFS(int l1,int r1,int l2,int r2){<br>    char ch &#x3D; houxu[r2];<br>    printf(“%c”,ch);<br>    int m &#x3D; find(ch);<br>    if(m&gt;l1) DFS(l1, m-1,l2,r2-r1+m-1);&#x2F;&#x2F;r1-m是右子树的数目<br>    if(m&lt;r1) DFS(m+1, r1, l2-l1+m, r2-1);</p>
+<p>}<br>int main(){<br>    scanf(“%s”,zhongxu);<br>    scanf(“%s”,houxu);<br>    int len&#x3D;strlen(zhongxu);<br>    DFS(0,len-1,0,len-1);<br>}</p>
+<p>首先我们在数据结构课中做这种题就是先找到后序遍历中找到根结点.然后根据根结点把中序遍历序列分成两部分.左中右,然后在搜索左子树和右子树.即可,搜索的函数就是(中序遍历首,中序遍历尾,后序遍历首,后序遍历尾).分成左右两个子树进行搜索即可.</p>
+<p>中序:左中右 后序:左右中 然后按照这个规则进行切割,切割出左子树的部分和右子树的部分即可.</p>
+<h4 id="P1087-FBI树-二叉树递归构造和模拟"><a href="#P1087-FBI树-二叉树递归构造和模拟" class="headerlink" title="P1087 FBI树(二叉树递归构造和模拟)"></a>P1087 FBI树(二叉树递归构造和模拟)</h4><p>![image-20220410211808841](&#x2F;Users&#x2F;xupengzhu&#x2F;Library&#x2F;Application Support&#x2F;typora-user-images&#x2F;image-20220410211808841.png)</p>
+<p>我们递归判断的时候可以这么做,如果这个树长度只有1,那么我们可以通过这个树的本身来判断究竟是B还是I树.如果这个树的长度比较长,那我们判断左子树和右子树的类型来判断这个树是FBI中的哪一种.进行遍历就好了,所以说甚至建树都不用建,用一个dfs打一个搜索就好啦!</p>
+<p>#include<iostream><br>#include&lt;stdio.h&gt;<br>#include&lt;math.h&gt;<br>using namespace std;<br>#define N 2000<br>char str[N];<br>int n;<br>int tree(int l,int r){<br>    int mid&#x3D;(l+r)&#x2F;2;<br>    if(l&#x3D;&#x3D;r){<br>        if(str[l]&#x3D;&#x3D;’1’) {<br>            printf(“I”);<br>            return 1;<br>        }<br>        else {<br>            printf(“B”);<br>            return 0;<br>        }<br>    }<br>    int le,ri;<br>    if(l&lt;r){<br>        le&#x3D;tree(l,mid);<br>        ri&#x3D;tree(mid+1,r);<br>    }<br>    if(le&#x3D;&#x3D;0&amp;&amp;ri&#x3D;&#x3D;0) {<br>        printf(“B”);<br>        return 0;<br>    }<br>    else if(le&#x3D;&#x3D;1&amp;&amp;ri&#x3D;&#x3D;1){<br>        printf(“I”);<br>        return 1;<br>    }<br>    else{<br>        printf(“F”);<br>        return 2;<br>    }</p>
+<p>}<br>int main(){<br>    scanf(“%d”,&amp;n);<br>    scanf(“%s”,str+1);<br>    tree(1,pow(2,n));<br>}</p>
+<h4 id="P3884-二叉树问题-LCA–最近公共祖先-树链剖分"><a href="#P3884-二叉树问题-LCA–最近公共祖先-树链剖分" class="headerlink" title="P3884 二叉树问题(LCA–最近公共祖先,树链剖分)"></a>P3884 二叉树问题(LCA–最近公共祖先,树链剖分)</h4><p><strong>输入格式</strong></p>
+<p>输入文件第一行为一个整数n(1≤n≤100)，表示二叉树结点个数。接下来的n-1行，表示从结点x到结点y（约定根结点为1），最后一行两个整数u、v，表示求从结点u到结点v的距离。</p>
+<p><strong>输出格式</strong></p>
+<p>三个数，每个数占一行，依次表示给定二叉树的深度、宽度及结点u到结点v间距离.</p>
+<p>注：结点间距离的定义：由结点向根方向（上行方向）时的边数×2， 与由根向叶结点方向（下行方向）时的边数之和。</p>
+<p>这个是非常经典的树的问题:</p>
+<p>#include&lt;stdio.h&gt;<br>#include<algorithm><br>#define N 105<br>int father[N],depth[N],width[N],son[N],parent[N];<br>int n;<br>int x,y;<br>int find_father(int x,int y){<br>    if(x&#x3D;&#x3D;y) return x;<br>    if(depth[x]&#x3D;&#x3D;depth[y]) return find_father(parent[x], parent[y]);<br>    else if(depth[x]&lt;depth[y]) return find_father(x, parent[y]);<br>    else return find_father(parent[x], y);<br>}<br>int main(){<br>    depth[1]&#x3D;1;<br>    scanf(“%d”,&amp;n);<br>    for(int i&#x3D;1;i&lt;n;i++){<br>        scanf(“%d %d”,&amp;father[i],&amp;son[i]);<br>        parent[son[i]]&#x3D;father[i];<br>        depth[son[i]]&#x3D;depth[father[i]]+1;<br>    }<br>    scanf(“%d %d”,&amp;x,&amp;y);<br>    &#x2F;&#x2F;depth<br>    int max_depth&#x3D;0;<br>    for(int i&#x3D;1;i&lt;&#x3D;n;i++){<br>        max_depth&#x3D;std::max(max_depth,depth[i]);<br>        width[depth[i]]++;<br>    }<br>    printf(“%d\n”,max_depth);<br>    int max_width&#x3D;0;<br>    for(int i&#x3D;1;i&lt;&#x3D;n;i++){<br>        max_width&#x3D;std::max(max_width,width[i]);<br>    }<br>    printf(“%d\n”,max_width);<br>    int fa&#x3D;find_father(x,y);<br>    printf(“%d\n”,(depth[x]-depth[fa])*2+(depth[y]-depth[fa]));<br>}</p>
+<p>第一个问题就是求深度,由于保证输入的时候按照序号顺序输入的,所以说可以用上面的方法.如果乱序的话还是要遍历一遍树的.求深度的时候用depth[i]表示i结点的深度是depth[i],然后再把每个深度有多少个结点保存起来,这样求宽度也求好了.</p>
+<p>最关键的就是求两个点的距离了.求两个点的距离就是要找到最近的公共祖先,假设祖先为z,首先要从x往上走找到公共祖先,然后再从公共祖先往下走即可,走的步数可以直接用深度差表示.公共祖先找法是,先保持深度一样.然后再往上找,直到父亲是一样的为止.</p>
+<h4 id="P4913-二叉树深度"><a href="#P4913-二叉树深度" class="headerlink" title="P4913 二叉树深度"></a>P4913 二叉树深度</h4><p>求二叉树的深度</p>
+<p>#include&lt;stdio.h&gt;<br>#include<iostream><br>#include<cstring><br>using namespace std;<br>#define N 1000005<br>struct BiTree{<br>    int l;<br>    int r;<br>};<br>struct BiTree tr[N];<br>int n;</p>
+<p>int se(int root){<br>    if(tr[root].l&#x3D;&#x3D;0&amp;&amp;tr[root].r&#x3D;&#x3D;0){<br>        return 1;<br>    }<br>    int l&#x3D;0,r&#x3D;0;<br>    if(tr[root].l)<br>        l &#x3D; se(tr[root].l)+1;<br>    if(tr[root].r)<br>        r &#x3D; se(tr[root].r)+1;<br>    return max(l,r);<br>}</p>
+<p>int main(){<br>    scanf(“%d”,&amp;n);<br>    for(int i&#x3D;1;i&lt;&#x3D;n;i++){<br>        scanf(“%d %d”,&amp;tr[i].l,&amp;tr[i].r);<br>    }<br>    int s &#x3D; se(1);<br>    printf(“%d”,s);<br>}</p>
+<p>用数组来模拟二叉树.Br[l]代表结点号为l的二叉树,成员中l为左子树结点,r为右子树结点.那就是经典前序遍历,检查本结点,遍历左子树和右子树,然后找最大值即可.</p>
+<h4 id="P5318-查找文献-BFS和DFS"><a href="#P5318-查找文献-BFS和DFS" class="headerlink" title="P5318 查找文献(BFS和DFS)"></a>P5318 查找文献(BFS和DFS)</h4><p>给定一个图,寻找DFS和BFS序列.</p>
+<p>在搜索之前我们先排序,因为对于图来说,优先输出数字比较小的元素,将比较小的元素放前面也有助我们排序.然后就是构建一个边的集合,在构建一个链接表,链接表LinkNodes[i]存储着所有起点为i的边的边号.</p>
+<p>接着就是DFS和BFS了,对于BFS,就是维护一个队列,每一次都把没有遍历过且链接的东东入队,做完后取一个出队.DFS就是维护一个栈,栈的表示就是递归,搜索没有遍历过且链接的东东,找到就立刻跳转.对新结点进行搜索.</p>
+<p>#include &lt;stdio.h&gt;<br>#include <vector><br>#include <algorithm><br>#include <queue><br>using namespace std;<br>struct edg{<br>    int u;<br>    int v;<br>};<br>vector<edg> edgs;<br>vector<int> LinkNodes[100005];<br>queue<int> q;<br>int n,m;<br>bool cmp(edg x,edg y){<br>    if(x.v&#x3D;&#x3D;y.v) return x.u&lt;y.u;<br>    else return x.v&lt;y.v;<br>}<br>bool dfs_OK[100005],bfs_OK[100005];<br>void bfs(int x){<br>    q.push(x);<br>    printf(“%d “,x);<br>    bfs_OK[x]&#x3D;true;<br>    while(1){<br>        int k&#x3D;q.front();<br>        for(auto&amp;i:LinkNodes[k]){<br>            if(!bfs_OK[edgs[i].v]){<br>                q.push(edgs[i].v);<br>                printf(“%d “,edgs[i].v);<br>                bfs_OK[edgs[i].v]&#x3D;true;<br>            }<br>        }<br>        q.pop();<br>        if(q.empty()) break;<br>    }<br>}<br>void dfs(int x){<br>    dfs_OK[x]&#x3D;true;<br>    printf(“%d “,x);<br>    for(auto&amp;i:LinkNodes[x]){<br>        if(!dfs_OK[edgs[i].v]) dfs(edgs[i].v);<br>    }<br>    return;<br>}<br>int main(){<br>    scanf(“%d %d”,&amp;n,&amp;m);<br>    int x,y;<br>    int k&#x3D;m;<br>    while(k–){<br>        scanf(“%d %d”,&amp;x,&amp;y);<br>        edgs.push_back((edg){x,y});<br>    }<br>    sort(edgs.begin(),edgs.end(),cmp);<br>    for(int i&#x3D;0;i&lt;m;i++)<br>        LinkNodes[edgs[i].u].push_back(i);<br>    dfs(1);<br>    printf(“\n”);<br>    bfs(1);<br>}</p>
+<h4 id="P3371-单元最短路径-邻接表版本"><a href="#P3371-单元最短路径-邻接表版本" class="headerlink" title="P3371 单元最短路径(邻接表版本)"></a>P3371 单元最短路径(邻接表版本)</h4><p>主要的思路就是先从一个点开始,然后计算从A到每个点的距离,找到最小的,假设为,把它标记.,然后再把与x相接的边(注意,边的另一边没有被标记)做一次松弛操作,选出最小的标记,以此类推…</p>
+<ul>
+<li>选出最小的</li>
+<li>标记</li>
+<li>松弛</li>
+</ul>
+<p>#include &lt;stdio.h&gt;<br>#include <cstring><br>#define N 500005<br>struct edge{<br>    int to;<br>    int weight;<br>    int next;<br>}edges[N];<br>int cnt;<br>int ans[N];<br>bool vised[N];<br>int head[N];<br>void add(int x,int y,int w){<br>    edges[++cnt].to&#x3D;y;<br>    edges[cnt].weight&#x3D;w;<br>    edges[cnt].next&#x3D;head[x];<br>    head[x]&#x3D;cnt;<br>}<br>bool songchi(int x,int y,int z){<br>    return x+y&lt;z;<br>}<br>int main(){<br>    int m,n,s;<br>    int x,y,w;<br>    scanf(“%d %d %d”,&amp;m,&amp;n,&amp;s);<br>    for(int i&#x3D;1;i&lt;&#x3D;m;i++){<br>        ans[i]&#x3D;2147483647;<br>    }<br>    ans[s]&#x3D;0;<br>    for(int i&#x3D;1;i&lt;&#x3D;n;i++){<br>        scanf(“%d %d %d”,&amp;x,&amp;y,&amp;w);<br>        add(x, y, w);<br>    }<br>    int pos&#x3D;s;<br>    while(!vised[pos]){<br>        long long minn &#x3D; 1145141919810;<br>        vised[pos]&#x3D;1;<br>        for(int i&#x3D;head[pos];i!&#x3D;0;i&#x3D;edges[i].next){<br>            if(!vised[edges[i].to]&amp;&amp;ans[edges[i].to]&gt;ans[pos]+edges[i].weight){<br>                ans[edges[i].to]&#x3D;ans[pos]+edges[i].weight;<br>            }<br>        }<br>        for(int i&#x3D;1;i&lt;&#x3D;m;i++){<br>            if(!vised[i]&amp;&amp;ans[i]&lt;minn){<br>                pos&#x3D;i;<br>                minn&#x3D;ans[i];<br>            }<br>        }<br>    }<br>    for(int i&#x3D;1;i&lt;&#x3D;m;i++){<br>        printf(“%d “,ans[i]);<br>    }</p>
+<p>}</p>
+<h4 id="P2910-双倍经验-邻接矩阵版本"><a href="#P2910-双倍经验-邻接矩阵版本" class="headerlink" title="P2910 双倍经验(邻接矩阵版本)"></a>P2910 双倍经验(邻接矩阵版本)</h4><p>#include&lt;stdio.h&gt;<br>#include<cstring><br>#define N 101<br>#define M 10005<br>int a[N][N];<br>int ans[N];<br>bool vised[N];<br>int weizhi[M];<br>int n,m,w;<br>int dj(int x,int y){<br>    int pos&#x3D;x;<br>    ans[pos]&#x3D;0;<br>    while(!vised[pos]){<br>        long long minn &#x3D; 1145141919810;<br>        vised[pos]&#x3D;1;<br>        for(int i&#x3D;1;i&lt;&#x3D;n;i++){<br>            if(vised[i]) continue;<br>            if(ans[pos]+a[pos][i]&lt;ans[i]){<br>                ans[i]&#x3D;ans[pos]+a[pos][i];<br>            }<br>        }<br>        for(int i&#x3D;1;i&lt;&#x3D;n;i++){<br>            if(!vised[i]&amp;&amp;ans[i]&lt;minn){<br>                pos&#x3D;i;<br>                minn&#x3D;ans[i];<br>            }<br>        }<br>    }<br>    return ans[y];<br>}<br>int main(){<br>    scanf(“%d %d”,&amp;n,&amp;m);<br>    for(int i&#x3D;1;i&lt;&#x3D;m;i++){<br>        scanf(“%d”,&amp;weizhi[i]);<br>    }<br>    for(int i&#x3D;1;i&lt;&#x3D;n;i++){<br>        for(int j&#x3D;1;j&lt;&#x3D;n;j++){<br>            scanf(“%d”,&amp;w);<br>            a[i][j]&#x3D;w;<br>        }<br>    }<br>    int res&#x3D;0;<br>    for(int i&#x3D;2;i&lt;&#x3D;m;i++){<br>        memset(vised,false,sizeof(vised));<br>        for (int i&#x3D;1;i&lt;&#x3D;n;i++) {<br>            ans[i]&#x3D;1145141919;<br>        }<br>        res+&#x3D;dj(weizhi[i-1],weizhi[i]);<br>    }<br>    printf(“%d”,res);<br>}</p>
+<p>这个版本是进行了多次查找的,其实也差不多…</p>
+<h4 id="P3367-并查集-往上搜索的树"><a href="#P3367-并查集-往上搜索的树" class="headerlink" title="P3367 并查集(往上搜索的树)"></a>P3367 并查集(往上搜索的树)</h4><p>就是对于N个元素,一开始有N个集合,你需要完成若干次集合的合并和判断操作.</p>
+<p>#include<cstdio><br>#include<iostream><br>#include<algorithm><br>#include<string><br>#include<cstring><br>#include<cmath><br>int temp[10000];<br>int find(int x){<br>    while(x!&#x3D;temp[x]) x&#x3D;temp[x]&#x3D;temp[temp[x]];<br>    return x;<br>}<br>int main(){<br>    int N,M;<br>    scanf(“%d %d”,&amp;N,&amp;M);<br>    int i&#x3D;1;<br>    while(i&lt;&#x3D;N){<br>        temp[i]&#x3D;i;<br>        i++;<br>    }<br>    int op,num1,num2;<br>    while(M–){<br>        scanf(“%d %d %d”,&amp;op,&amp;num1,&amp;num2);<br>        int fa_a&#x3D;find(num1),fa_b&#x3D;find(num2);<br>        if(op&#x3D;&#x3D;1){<br>            temp[fa_a]&#x3D;fa_b;<br>        }<br>        else{<br>            if(fa_a&#x3D;&#x3D;fa_b){<br>                printf(“Y\n”);<br>            }<br>            else if(fa_a!&#x3D;fa_b){<br>                printf(“N\n”);<br>            }<br>        }<br>    }<br>}</p>
+<p>我们用temp[x]来表示树的父亲,如果<code>temp[x]=自己</code>的话就代表自己是根,对于若干个集合就相当于若干个树,判断是不是在同一个集合就看属于自己的树是不是根就好了,集合的合并也就是确立父子关系而已,这个相当于把两个树合并在一块.</p>
+<h4 id="P3366-最小生成树"><a href="#P3366-最小生成树" class="headerlink" title="P3366 最小生成树"></a>P3366 最小生成树</h4><p>Prim算法:每一次选择权值最小的边,然后标记边的终点.并且保证终点是没有被搜索过的.</p>
+<p>#include&lt;bits&#x2F;stdc++.h&gt;<br>using namespace std;<br>#define re register<br>#define il inline<br>il int read()<br>{<br>    re int x&#x3D;0,f&#x3D;1;char c&#x3D;getchar();<br>    while(c&lt;’0’c&gt;’9’){if(c&#x3D;&#x3D;’-‘) f&#x3D;-1;c&#x3D;getchar();}<br>    while(c&gt;&#x3D;’0’&amp;&amp;c&lt;&#x3D;’9’) x&#x3D;(x&lt;&lt;3)+(x&lt;&lt;1)+(c^48),c&#x3D;getchar();<br>    return x*f;<br>}&#x2F;&#x2F;快读，不理解的同学用cin代替即可<br>#define inf 123456789<br>#define maxn 5005<br>#define maxm 200005<br>struct edge<br>{<br>int v,w,next;<br>}e[maxm&lt;&lt;1];<br>&#x2F;&#x2F;注意是无向图，开两倍数组<br>int head[maxn],dis[maxn],cnt,n,m,tot,now&#x3D;1,ans;<br>&#x2F;&#x2F;已经加入最小生成树的的点到没有加入的点的最短距离，比如说1和2号节点已经加入了最小生成树，那么dis[3]就等于min(1-&gt;3,2-&gt;3)<br>bool vis[maxn];<br>&#x2F;&#x2F;链式前向星加边<br>il void add(int u,int v,int w)<br>{<br>e[++cnt].v&#x3D;v;<br>e[cnt].w&#x3D;w;<br>e[cnt].next&#x3D;head[u];<br>head[u]&#x3D;cnt;<br>}<br>&#x2F;&#x2F;读入数据<br>il void init()<br>{<br>    n&#x3D;read(),m&#x3D;read();<br>    for(re int i&#x3D;1,u,v,w;i&lt;&#x3D;m;++i)<br>    {<br>        u&#x3D;read(),v&#x3D;read(),w&#x3D;read();<br>        add(u,v,w),add(v,u,w);<br>    }<br>}<br>il int prim()<br>{<br>&#x2F;&#x2F;先把dis数组附为极大值<br>for(re int i&#x3D;2;i&lt;&#x3D;n;++i)<br>{<br>dis[i]&#x3D;inf;<br>}<br>    &#x2F;&#x2F;这里要注意重边，所以要用到min<br>for(re int i&#x3D;head[1];i;i&#x3D;e[i].next)<br>{<br>dis[e[i].v]&#x3D;min(dis[e[i].v],e[i].w);<br>}<br>    while(++tot&lt;n)&#x2F;&#x2F;最小生成树边数等于点数-1<br>    {<br>        re int minn&#x3D;inf;&#x2F;&#x2F;把minn置为极大值<br>        vis[now]&#x3D;1;&#x2F;&#x2F;标记点已经走过<br>        &#x2F;&#x2F;枚举每一个没有使用的点<br>        &#x2F;&#x2F;找出最小值作为新边<br>        &#x2F;&#x2F;注意这里不是枚举now点的所有连边，而是1~n<br>        for(re int i&#x3D;1;i&lt;&#x3D;n;++i)<br>        {<br>            if(!vis[i]&amp;&amp;minn&gt;dis[i])<br>            {<br>                minn&#x3D;dis[i];<br>now&#x3D;i;<br>            }<br>        }<br>        ans+&#x3D;minn;<br>        &#x2F;&#x2F;枚举now的所有连边，更新dis数组<br>        for(re int i&#x3D;head[now];i;i&#x3D;e[i].next)<br>        {<br>        re int v&#x3D;e[i].v;<br>        if(dis[v]&gt;e[i].w&amp;&amp;!vis[v])<br>        {<br>        dis[v]&#x3D;e[i].w;<br>        }<br>}<br>    }<br>    return ans;<br>}<br>int main()<br>{<br>    init();<br>    printf(“%d”,prim());<br>    return 0;<br>}</p>
+<h4 id="P3370-字符串哈希"><a href="#P3370-字符串哈希" class="headerlink" title="P3370 字符串哈希"></a>P3370 字符串哈希</h4><p>直接使用<code>set&lt;string&gt;</code>就好了,这样就可以保证哈希了</p>
+<p>#include&lt;bits&#x2F;stdc++.h&gt;<br>using namespace std;<br>set<string> a;<br>int main()<br>{<br>    string p;<br>    int n;<br>    scanf(“%d”,&amp;n);<br>    for(int i&#x3D;0;i&lt;n;i++)<br>    {<br>        &#x2F;&#x2F;输入string只能用cin…<br>        cin&gt;&gt;p;<br>        a.insert(p);<br>    }<br>    printf(“%d”,a.size());<br>}</p>
+<p>这样做会不会有点阴啊…</p>
+<p>所以说我们可以使用哈希查找:就是把字符串转化成一个整数,然后对整数排序,看看有没有相等的两个数就好了.(代码略)</p>
+<h4 id="P1908-逆序对-归并排序"><a href="#P1908-逆序对-归并排序" class="headerlink" title="P1908 逆序对(归并排序)"></a>P1908 逆序对(归并排序)</h4><p>求一个数组的逆序对数:</p>
+<p>这里是用归并的方式:判断左边的逆序对数,右边的逆序对数和跨过两边逆序对数.</p>
+<p>为了方便,顺便把左右两边的归并排序也做了(方便统计) 归并排序就是左边归并右边归并,然后归并左右两边(使用双指针,哪边小保存哪边).这个时候可以统计逆序对,只要左边&gt;右边,我们就认为这是一个逆序对.(因为左右已经排好序,我们可以使用线性时间做完).</p>
+<p>#include&lt;stdio.h&gt;<br>#include<iostream><br>#include<algorithm><br>#include<vector><br>#include<stack><br>using namespace std;<br>#define N 1000000<br>int a[N];<br>int t[N];<br>long long ans &#x3D; 0;<br>void merge(int l,int r){<br>    if(l&#x3D;&#x3D;r)return;<br>    int mid&#x3D;l+r&gt;&gt;1,i&#x3D;l,k&#x3D;l,j&#x3D;mid+1;<br>    merge(l,mid),merge(mid+1,r);<br>    while(i&lt;&#x3D;mid&amp;&amp;j&lt;&#x3D;r){<br>        if(a[i]&lt;&#x3D;a[j]){<br>            t[k++]&#x3D;a[i++];<br>        }<br>        else{<br>            t[k++]&#x3D;a[j++];<br>            ans+&#x3D;mid-i+1;<br>        }<br>    }<br>    while(i&lt;&#x3D;mid)t[k++]&#x3D;a[i++];<br>    while(j&lt;&#x3D;r)t[k++]&#x3D;a[j++];<br>    for(int i&#x3D;l;i&lt;&#x3D;r;++i)a[i]&#x3D;t[i];<br>}<br>int main(){<br>    int n;<br>    scanf(“%d”,&amp;n);<br>    for(int i&#x3D;0;i&lt;n;i++){<br>        scanf(“%d”,&amp;a[i]);<br>    }<br>    merge(0,n-1);<br>    printf(“%lld”,ans);<br>}</p>
+<h4 id="P1309-双倍经验-逆序对"><a href="#P1309-双倍经验-逆序对" class="headerlink" title="P1309 (双倍经验) 逆序对"></a>P1309 (双倍经验) 逆序对</h4><p>2×<em>N</em> 名编号为 1∼2N 的选手共进行R 轮比赛。每轮比赛开始前，以及所有比赛结束后，都会按照总分从高到低对选手进行一次排名。选手的总分为第一轮开始前的初始分数加上已参加过的所有比赛的得分和。总分相同的，约定编号较小的选手排名靠前。每轮比赛的对阵安排与该轮比赛开始前的排名有关：第1名和第2名、第 3名和第 4名、……、第2K−1名和第2K名、…… 、第2N−1名和第2N名，各进行一场比赛。每场比赛胜者得1分，负者得 0分。也就是说除了首轮以外，其它轮比赛的安排均不能事先确定，而是要取决于选手在之前比赛中的表现。现给定每个选手的初始分数及其实力值，试计算在R 轮比赛过后，排名第Q 的选手编号是多少。我们假设选手的实力值两两不同，且每场比赛中实力值较高的总能获胜。</p>
+<p>这个时候我们就可以使用归并排序了.首先将选手进行排序,然后进行比拼.比拼的时候记录胜者和败者.在这个时候由于胜者都+1分,败者都不加分,所以说记录的胜者和败者都是有序的.有序的前提就是方便我们的归并.归并的方式和我们之前做的事一样的.</p>
+<p>#include &lt;stdio.h&gt;<br>#include <algorithm><br>#define N 200005<br>int n,m;<br>int win[N];<br>int lose[N];<br>int s[N];<br>int a[N];<br>int p[N];<br>int R,Q;<br>bool cmp(int x,int y){<br>    if(s[x]&#x3D;&#x3D;s[y]) return x&lt;y;<br>    else return s[x]&gt;s[y];<br>}<br>void merge(){<br>    int i&#x3D;1;&#x2F;&#x2F;the position of win<br>    int j&#x3D;1;&#x2F;&#x2F;the position of lose<br>    int k&#x3D;1;<br>    &#x2F;&#x2F;我们把win的那一部分和lose的那一部分给归并了,因为我们知道赢的那一部分和输的那一部分是有序的<br>    while(i&lt;&#x3D;n&#x2F;2&amp;&amp;j&lt;&#x3D;n&#x2F;2){<br>        if(cmp(win[i],lose[j])){<br>            a[k++]&#x3D;win[i++];<br>        }<br>        else{<br>            a[k++]&#x3D;lose[j++];<br>        }<br>    }<br>    while(i&lt;&#x3D;n&#x2F;2) a[k++]&#x3D;win[i++];<br>    while(j&lt;&#x3D;n&#x2F;2) a[k++]&#x3D;lose[j++];<br>}<br>int main(){<br>    scanf(“%d %d %d”,&amp;n,&amp;R,&amp;Q);<br>    n*&#x3D;2;<br>    for(int i&#x3D;1;i&lt;&#x3D;n;i++){<br>        a[i]&#x3D;i;<br>    }<br>    for(int i&#x3D;1;i&lt;&#x3D;n;i++){<br>        scanf(“%d”,&amp;s[i]);<br>    }<br>    for(int i&#x3D;1;i&lt;&#x3D;n;i++){<br>        scanf(“%d”,&amp;p[i]);<br>    }<br>    std::sort(a+1, a+n+1, cmp);<br>    while(R–){<br>        for(int i&#x3D;1;i&lt;&#x3D;n;i+&#x3D;2){<br>            if(p[a[i]]&lt;p[a[i+1]]){<br>                s[a[i+1]]++;<br>                win[(i-1)&#x2F;2+1]&#x3D;a[i+1];<br>                lose[(i-1)&#x2F;2+1]&#x3D;a[i];<br>            }<br>            else{<br>                s[a[i]]++;<br>                win[(i-1)&#x2F;2+1]&#x3D;a[i];<br>                lose[(i-1)&#x2F;2+1]&#x3D;a[i+1];<br>            }<br>        }<br>        merge();<br>    }<br>    printf(“%d”,a[Q]);<br>}</p>
+<h4 id="P1090-合并果子"><a href="#P1090-合并果子" class="headerlink" title="P1090 合并果子"></a>P1090 合并果子</h4><p>在一个果园里，多多已经将所有的果子打了下来，而且按果子的不同种类分成了不同的堆。多多决定把所有的果子合成一堆。</p>
+<p>每一次合并，多多可以把两堆果子合并到一起，消耗的体力等于两堆果子的重量之和。可以看出，所有的果子经过 n-1次合并之后， 就只剩下一堆了。多多在合并果子时总共消耗的体力等于每次合并所耗体力之和。</p>
+<p>本来是想打一个区间dp的,但是发现数据样例有一点大,就直接用优先队列了,在这里记录一下优先队列的用法:</p>
+<p>#include&lt;stdio.h&gt;<br>#include<queue><br>int n,x,ans;<br>std::priority_queue&lt;int,std::vector<int>,std::greater<int>&gt; queue;<br>int main(){<br>    scanf(“%d”,&amp;n);<br>    while(n–){<br>        scanf(“%d”,&amp;x);<br>        queue.push(x);<br>    }<br>    while(queue.size()&#x2F;2){<br>        int a1&#x3D;queue.top();<br>        queue.pop();<br>        int a2&#x3D;queue.top();<br>        queue.pop();<br>        ans +&#x3D; (a1+a2);<br>        queue.push(a1+a2);<br>    }<br>    printf(“%d”,ans);<br>}</p>
+<p>优先队列可以保证入队的时候按照你规定的cmp函数来执行排序.</p>
+<h4 id="P1138-最k小整数"><a href="#P1138-最k小整数" class="headerlink" title="P1138 最k小整数"></a>P1138 最k小整数</h4><p>这里就回忆一下sort函数的用法吧~.然后从前到后遍历一遍而已</p>
+<p>#include &lt;stdio.h&gt;<br>#include<algorithm><br>int a[10005];<br>int main(){<br>    int n,k;<br>    scanf(“%d %d”,&amp;n,&amp;k);<br>    for(int i&#x3D;1;i&lt;&#x3D;n;i++){<br>        scanf(“%d”,&amp;a[i]);<br>    }<br>    std::sort(a+1,a+n+1);<br>    int temp&#x3D;0;<br>    for(int i&#x3D;1;i&lt;&#x3D;n;i++){<br>        if(a[i]&gt;a[i-1]) temp++;<br>        if(temp&#x3D;&#x3D;k) {<br>            printf(“%d”,a[i]);<br>            break;<br>        }<br>    }<br>    if(temp&lt;k) printf(“NO RESULT”);<br>}</p>
+<h4 id="P1918-保龄球"><a href="#P1918-保龄球" class="headerlink" title="P1918 保龄球"></a>P1918 保龄球</h4><p>给定,现在给定,求.</p>
+<p>就可以使用一个map就可以了:</p>
+<p>#include<map><br>#include&lt;stdio.h&gt;<br>using namespace std;<br>map&lt;int,int&gt;maps;<br>int n,t,q,m;<br>int main(){<br>    scanf(“%d”,&amp;n);<br>    for(int i&#x3D;1;i&lt;&#x3D;n;i++){<br>        scanf(“%d”,&amp;t);<br>        maps[t]&#x3D;i;<br>    }<br>    scanf(“%d”,&amp;m);<br>    while(m–){<br>        scanf(“%d”,&amp;q);<br>        printf(“%d\n”,maps[q]);<br>    }<br>}</p>
+<h1 id="洛谷刷题记录-绿到蓝"><a href="#洛谷刷题记录-绿到蓝" class="headerlink" title="洛谷刷题记录(绿到蓝)"></a>洛谷刷题记录(绿到蓝)</h1><h4 id="P6510-奶牛排队"><a href="#P6510-奶牛排队" class="headerlink" title="P6510 奶牛排队"></a>P6510 奶牛排队</h4><p>给定一组数据,从,找到两个一组连续的数,最左边的数是最小的,最右边的数是最大的.</p>
+<p>我们调用单调栈的模版,首先求出A右侧第一个的位置,再求出B左侧第一个的位置.A右侧第一个小于A的数在B的右边,B左侧第一个大于B的数在A左边就可以了.</p>
+<p>然后枚举​,看看最合适的​在哪里,遍历的方法如下:</p>
+<ul>
+<li>首先确定B,B左侧第一个大于B的数位.</li>
+<li>然后确定A,A从K+1开始遍历,然后判断A右侧第一个小于A的位置是不是在B右边</li>
+<li>计算值B的位置-A的位置+1.</li>
+</ul>
+<p>#include <iostream><br>#include <cstdio><br>#include <cstdlib><br>using namespace std;<br>struct statype{<br>int bhei,bpos,ahei,apos;<br>}sta[100010];<br>int top&#x3D;-1;<br>int main(){<br>int n,ans&#x3D;0;<br>cin&gt;&gt;n;<br>for(int i&#x3D;1;i&lt;&#x3D;n;i++){<br>top++;<br>cin&gt;&gt;sta[top].bhei;<br>sta[top].ahei&#x3D;sta[top].bhei;<br>sta[top].bpos&#x3D;i;<br>sta[top].apos&#x3D;i;<br>while(sta[top].bhei&gt;sta[top-1].bhei&amp;&amp;top&gt;&#x3D;1){<br>if(sta[top].ahei&gt;sta[top-1].ahei){<br>sta[top].ahei&#x3D;sta[top-1].ahei;<br>sta[top].apos&#x3D;sta[top-1].apos;<br>}<br>sta[top-1]&#x3D;sta[top];<br>top–;<br>}<br>if(ans&lt;sta[top].bpos-sta[top].apos+1)<br>ans&#x3D;sta[top].bpos-sta[top].apos+1;<br>}<br>if(ans&#x3D;&#x3D;1)<br>ans&#x3D;0;<br>cout&lt;&lt;ans&lt;&lt;endl;<br>return 0;<br>}</p>
+<ul>
+<li>如果是遇到了左括号,就递归求括号内的元素.</li>
+<li>如果是遇到了右括号,就把括号内的数据返回给上层.</li>
+<li>如果是遇到了a,就把当前的结果+1即可.</li>
+<li>如果是遇到了,根据max(a,b,c)&#x3D;max(a,max(b,c))的结合率进行递归求解,递归求解右边的值,与当前计算得来的值进行比较.(因为遇到了就代表当前部分的串已经结束了).、</li>
+</ul>
+<h4 id="P3719-rexp"><a href="#P3719-rexp" class="headerlink" title="P3719 rexp."></a>P3719 rexp.</h4><p>给出一个由(,),,a组成的序列，求化简后有多少个a。</p>
+<p>1、形如aa…aaa…aaa…a的，化简结果为“”两边a的个数最多的一项，例如aaaaaa&#x3D;aaa 2、先算带括号的序列，例如(aa)aaa&#x3D;aaa</p>
+<p>依次输入一个字符,分成下面几种情况:</p>
+<ul>
+<li>如果是遇到了左括号,就递归求括号内的元素.</li>
+<li>如果是遇到了右括号,就把括号内的数据返回给上层.</li>
+<li>如果是遇到了a,就把当前的结果+1即可.</li>
+<li>如果是遇到了,根据max(a,b,c)&#x3D;max(a,max(b,c))的结合率进行递归求解,递归求解右边的值,与当前计算得来的值进行比较.(因为遇到了就代表当前部分的串已经结束了).</li>
+</ul>
+<h4 id="P1185-绘制二叉树"><a href="#P1185-绘制二叉树" class="headerlink" title="P1185 绘制二叉树"></a>P1185 绘制二叉树</h4><p><img src="https://sukunahust.com/wp-content/uploads/2022/04/image-2-1024x937.png"></p>
+<p>这一题是非常复杂的一个模拟,下面分成几个部分来讲:</p>
+<p>首先是初始化的操作:</p>
+<p>void init(){<br>    if(n&#x3D;&#x3D;1){<br>        h&#x3D;1;<br>        w&#x3D;1;<br>    }<br>    else if(n&#x3D;&#x3D;2){<br>        h&#x3D;3;<br>        w&#x3D;5;<br>    }<br>    else{<br>        h&#x3D;3;<br>        for(int i&#x3D;3;i&lt;&#x3D;n;i++)h*&#x3D;2;<br>        w&#x3D;6*(1&lt;&lt;(n-2))-1;&#x2F;&#x2F;计算画布大小<br>    }<br>    for(int i&#x3D;1;i&lt;&#x3D;h;i++){<br>        for(int j&#x3D;1;j&lt;&#x3D;w;j++){<br>            c[i][j]&#x3D;’ ‘;<br>        }<br>    }<br>    int temp&#x3D;1;<br>    isJiedian[1]&#x3D;temp;<br>    for(int i&#x3D;1;i&lt;n;i++){<br>        temp&#x3D;temp+g[n-i]+1;<br>        isJiedian[i+1]&#x3D;temp;<br>    }<br>}</p>
+<p>首先先计算画布的大小,初始化成空格,然后计算对于这个画布,画布的哪几行可以存放点的信息.</p>
+<p>我们用数组来模拟树,用<code>[X][Y]</code>来模拟这是树的第X行和第Y个元素.</p>
+<pre><code>scanf(&quot;%d %d&quot;,&amp;n,&amp;m);
+while(m--)&#123;
+    scanf(&quot;%d %d&quot;,&amp;x,&amp;y);
+    b\[x\]\[y\]=true;
+&#125;
+init();
+dfs(1,w/2+1,1,1,1);
+</code></pre>
+<p>然后标记已经被删除的点,从根结点(1,w&#x2F;2+1)开始搜索.</p>
+<p>搜索分成四类,一种是非叶子结点类型.dfs(画布的行,画布的列,树的行,树的列,下一个点的类型)</p>
+<pre><code>if(k==1)&#123;
+    c\[x\]\[y\]=&#39;o&#39;;
+    X++;
+    Y=Y\*2-1;
+    if(!b\[X\]\[Y\])&#123;
+        dfs(x+1,y-1,X,Y,2);
+    &#125;
+    Y++;
+    if(!b\[X\]\[Y\])&#123;
+        dfs(x+1,y+1,X,Y,3);
+    &#125;
+&#125;
+</code></pre>
+<p>非叶子结点可以同时往左和右搜索(前提是这个结点的左儿子和右儿子没有被删掉),X++和Y&#x3D;Y*2-1是计算左儿子和右儿子在模拟数组中的值.</p>
+<p>左下和右下走的列,这种点只能往左或者是右搜索,搜索的变数就是下一行是不是应该存储的是树的结点.</p>
+<pre><code>else if(k==2)&#123;
+    c\[x\]\[y\]=&#39;/&#39;;
+    if((x+1)==isJiedian\[X\])&#123;
+        dfs(x+1,y-1,X,Y,1);
+    &#125;
+    else&#123;
+        dfs(x+1,y-1,X,Y,2);
+    &#125;
+&#125;
+else&#123;
+    c\[x\]\[y\]=92;
+    if((x+1)==isJiedian\[X\])&#123;
+        dfs(x+1,y+1,X,Y,1);
+    &#125;
+    else&#123;
+        dfs(x+1,y+1,X,Y,3);
+    &#125;
+&#125;
+</code></pre>
+<p>最后一种就是叶子结点,是时候该返回了.</p>
+<p>if(x&#x3D;&#x3D;h){c[x][y]&#x3D;’o’;return;}</p>
+<h4 id="P3956-棋盘"><a href="#P3956-棋盘" class="headerlink" title="P3956 棋盘"></a>P3956 棋盘</h4><p>有一个m×m的棋盘，棋盘上每一个格子可能是红色、黄色或没有任何颜色的。你现在要从棋盘的最左上角走到棋盘的最右下角。</p>
+<p>任何一个时刻，你所站在的位置必须是有颜色的（不能是无色的）， 你只能向上、 下、左、 右四个方向前进。当你从一个格子走向另一个格子时，如果两个格子的颜色相同，那你不需要花费金币；如果不同，则你需要花费 1个金币。另外， 你可以花费 2个金币施展魔法让下一个无色格子暂时变为你指定的颜色。但这个魔法不能连续使用， 而且这个魔法的持续时间很短，也就是说，如果你使用了这个魔法，走到了这个暂时有颜色的格子上，你就不能继续使用魔法； 只有当你离开这个位置，走到一个本来就有颜色的格子上的时候，你才能继续使用这个魔法，而当你离开了这个位置（施展魔法使得变为有颜色的格子）时，这个格子恢复为无色。现在你要从棋盘的最左上角，走到棋盘的最右下角，求花费的最少金币是多少？</p>
+<p>转化为最短路径的问题.首先先构造图,构造图的同时我们需要找到出发点和终点.然后做djkstra算法即可.</p>
+<p>那么怎么构建图?我们可以分成两种形式的问题.</p>
+<ul>
+<li>遍历所有带颜色的点,如果两个点相邻,这两个点之间的距离就是0和1.</li>
+<li>如果这两个点只差了一格,那么距离就是2+0或者1.</li>
+<li>假如说终点是没有颜色的,加上所有点到终点的边.</li>
+</ul>
+<p>#include&lt;stdio.h&gt;<br>#include&lt;math.h&gt;<br>#include<algorithm><br>#include <cstring><br>#define N 1002<br>int map[N][2],z[N][N],distance[N];<br>int start,end,flag;<br>int color[N];<br>int m,n;<br>int cloud[N];<br>void makeGraph(){<br>    for(int i&#x3D;1;i&lt;n;i++){<br>        for(int j&#x3D;i+1;j&lt;&#x3D;n;j++){<br>            if(abs(map[i][0]-map[j][0])+abs(map[i][1]-map[j][1])&#x3D;&#x3D;1){<br>                z[i][j]&#x3D;z[j][i]&#x3D;abs(color[i]-color[j]);<br>            }<br>            if(abs(map[i][0]-map[j][0])+abs(map[i][1]-map[j][1])&#x3D;&#x3D;2){<br>                z[i][j]&#x3D;z[j][i]&#x3D;2+abs(color[i]-color[j]);<br>            }<br>        }<br>    }<br>    if(!flag){<br>        for(int i&#x3D;1;i&lt;&#x3D;n;i++){<br>            if(abs(map[i][0]-map[end][0])+abs(map[i][1]-map[end][1])&#x3D;&#x3D;1){<br>                z[i][end]&#x3D;z[end][i]&#x3D;2;<br>            }<br>        }<br>        n++;<br>    }</p>
+<p>}<br>&#x2F;&#x2F;对每条边进行松弛操作.<br>void makeDj(int k){<br>    distance[k]&#x3D;0;<br>    int maxn,t;<br>    for(int i&#x3D;1;i&lt;&#x3D;n;i++){<br>        maxn&#x3D;99999999;<br>        for(int j&#x3D;1;j&lt;&#x3D;n;j++){<br>            if(cloud[j]&#x3D;&#x3D;0&amp;&amp;distance[j]&lt;maxn){<br>                maxn&#x3D;distance[j];<br>                t&#x3D;j;<br>            }<br>        }<br>        cloud[t]&#x3D;1;<br>        for(int j&#x3D;1;j&lt;&#x3D;n;j++){<br>            distance[j]&#x3D;std::min(distance[t]+z[t][j],distance[j]);<br>        }<br>    }<br>}<br>int main(){<br>    memset(z,1,sizeof(z));<br>    memset(distance,1,sizeof(distance));<br>    scanf(“%d %d”,&amp;m,&amp;n);<br>    for(int i&#x3D;1;i&lt;&#x3D;n;i++){<br>        scanf(“%d %d %d”,&amp;map[i][0],&amp;map[i][1],&amp;color[i]);<br>      &#x2F;&#x2F;在这里map记录了每个点的数据,所以说i和j可以代表点的序号<br>        if(map[i][0]&#x3D;&#x3D;1&amp;&amp;map[i][1]&#x3D;&#x3D;1){<br>            start&#x3D;i;<br>        }<br>        else if(map[i][0]&#x3D;&#x3D;m&amp;&amp;map[i][1]&#x3D;&#x3D;m){<br>            end&#x3D;i;<br>            flag&#x3D;1;<br>        }<br>    }<br>    if(!flag){<br>        end&#x3D;n+1;<br>        map[end][0]&#x3D;map[end][1]&#x3D;m;<br>    }<br>    makeGraph();<br>    makeDj(start);<br>    if(distance[end]&lt;16843009)<br>    printf(“%d\n”,distance[end]);<br>    else if(m!&#x3D;1){<br>        puts(“-1”);<br>    }<br>    else{<br>        puts(“0”);<br>    }<br>}</p>
+<h4 id="P1983-车站分级-拓扑排序"><a href="#P1983-车站分级-拓扑排序" class="headerlink" title="P1983 车站分级(拓扑排序)"></a>P1983 车站分级(拓扑排序)</h4><p>一条单向的铁路线上，依次有编号为 1,2,…,n的 n个火车站。每个火车站都有一个级别，最低为 1 级。现有若干趟车次在这条线路上行驶，每一趟都满足如下要求：如果这趟车次停靠了火车站 x，则始发站、终点站之间所有级别大于等于火车站x的都必须停靠。（注意：起始站和终点站自然也算作事先已知需要停靠的站点）,现在给定了若干个停靠的关系,现在求最多有几级?</p>
+<p>建图,然后拓扑排序即可.</p>
+<p>首先是建图:</p>
+<pre><code>while(m--)&#123;
+    memset(is, 0, sizeof(is));
+    scanf(&quot;%d&quot;,&amp;s);
+    for(int i=1;i&lt;=s;i++)&#123;
+        scanf(&quot;%d&quot;,&amp;stations\[i\]);
+        is\[stations\[i\]\]=true;
+    &#125;
+    for(int i=stations\[1\];i&lt;=stations\[s\];i++)&#123;
+        if(!is\[i\])&#123;
+            for(int j=1;j&lt;=s;j++)&#123;
+                if(!tuopu\[i\]\[stations\[j\]\]) &#123;
+                    tuopu\[i\]\[stations\[j\]\]=1;
+                    rudu\[stations\[j\]\]++;
+                &#125;
+            &#125;
+        &#125;
+    &#125;
+&#125;
+</code></pre>
+<p>对于每一条铁路线路,我们有边:<code>[没停靠的站][停靠的站]=1</code>.</p>
+<pre><code>int top=1;
+while(top)&#123;
+    top=0;
+    for(int i=1;i&lt;=n;i++)&#123;
+        if(!rudu\[i\]&amp;&amp;!shanchu\[i\])&#123;
+            ruduweizero\[top++\]=i;
+            shanchu\[i\]=true;
+        &#125;
+    &#125;
+    for(int i=0;i&lt;top;i++)&#123;
+        for(int j=1;j&lt;=n;j++)&#123;
+            if(tuopu\[ruduweizero\[i\]\]\[j\]) &#123;
+                tuopu\[ruduweizero\[i\]\]\[j\]=0;
+                rudu\[j\]--;
+            &#125;
+        &#125;
+    &#125;
+    ans++;
+&#125;
+</code></pre>
+<p>然后进行拓扑排序,把入度为1的点全部删除掉.</p>
+<h4 id="P1038-神经网络"><a href="#P1038-神经网络" class="headerlink" title="P1038 神经网络"></a>P1038 神经网络</h4><p>神经网络就是一张有向图，图中的节点称为神经元，而且两个神经元之间至多有一条边相连.这一级传递给下一级的激励是由上一级传递给这一级的激励决定的.</p>
+<p>现在给定每个神经元一开始的激励,然后给定神经元之间的激励传递函数.求输出神经元的输出激励.</p>
+<p>#include&lt;stdio.h&gt;<br>#include<algorithm><br>#include<cstring><br>#include<queue><br>#define N 105<br>#define M 10005<br>int n,p;<br>struct egdes{<br>    int y;<br>    int val;<br>    int next;<br>}a[M];<br>struct answers{<br>    int val;<br>    int x;<br>}ans[N];<br>int total;<br>int c[N],u[N],rudu[N],chudu[N],head[M];<br>int cnt;<br>std::queue <int> q;<br>bool vis[N];<br>void add(int x,int y,int val){<br>    cnt++;<br>    a[cnt].y&#x3D;y;<br>    a[cnt].val&#x3D;val;<br>    a[cnt].next&#x3D;head[x];<br>    head[x]&#x3D;cnt;<br>}<br>bool cmp(struct answers a,struct answers b){<br>    return a.x&lt;b.x;<br>}<br>int main(){<br>  &#x2F;&#x2F;输入初态<br>    scanf(“%d %d”,&amp;n,&amp;p);<br>    for(int i&#x3D;1;i&lt;&#x3D;n;i++){<br>        scanf(“%d %d”,&amp;c[i],&amp;u[i]);<br>      &#x2F;&#x2F;把初始的结点放入队列<br>        if(c[i]) {<br>            q.push(i);<br>            vis[i]&#x3D;true;<br>        }<br>        else c[i]-&#x3D;u[i];<br>    }<br>  &#x2F;&#x2F;输入边的构造,链式前向星<br>    for(int i&#x3D;1;i&lt;&#x3D;p;i++){<br>        int x,y,val;<br>        scanf(“%d %d %d”,&amp;x,&amp;y,&amp;val);<br>        add(x, y, val);<br>        rudu[y]++;<br>        chudu[x]++;<br>    }<br>  &#x2F;&#x2F;从初始值开始往后传递,一条边可以进行一次传递,然后把后面的点入队.这样子可以保证按照拓扑排序的顺序来进行遍历.<br>    while(!q.empty()){<br>        int f&#x3D;q.front();<br>        q.pop();<br>        vis[f]&#x3D;0;<br>        &#x2F;&#x2F;non-exicited<br>        if(c[f]&lt;0){<br>            continue;<br>        }<br>        &#x2F;&#x2F;the edge start from front<br>        for(int i&#x3D;head[f];i;i&#x3D;a[i].next){<br>            int y&#x3D;a[i].y;<br>            c[y]+&#x3D;a[i].val*c[f];<br>            if(!vis[y]){<br>                q.push(y);<br>                vis[y]&#x3D;1;<br>            }<br>        }<br>    }<br>    &#x2F;&#x2F;计算所有被激活的而且出度为0的值(最终值.)<br>    for(int i&#x3D;1;i&lt;&#x3D;n;i++){<br>        if(c[i]&gt;0&amp;&amp;chudu[i]&#x3D;&#x3D;0){<br>            total++;<br>            ans[total].x&#x3D;i;<br>            ans[total].val&#x3D;c[i];<br>        }<br>    }<br>    std::sort(ans+1,ans+1+total,cmp);<br>    if(total){<br>        for(int i&#x3D;1;i&lt;&#x3D;total;i++){<br>            printf(“%d %d\n”,ans[i].x,ans[i].val);<br>        }<br>    }<br>    else{<br>        printf(“NULL”);<br>    }<br>}</p>
+<h4 id="P1381-单词背诵"><a href="#P1381-单词背诵" class="headerlink" title="P1381 单词背诵"></a>P1381 单词背诵</h4><p>灵梦有 n个单词想要背，但她想通过一篇文章中的一段来记住这些单词。文章由 m个单词构成，她想在文章中找出连续的一段，其中包含最多的她想要背的单词（重复的只算一个）。并且在背诵的单词量尽量多的情况下，还要使选出的文章段落尽量短，这样她就可以用尽量短的时间学习尽可能多的单词了。</p>
+<p>我们每次记录此时有多少个单词，若比之前多，则直接更新长度与数量。 然后在更新左边 l，若最左边的单词不想背，或后文已出现就更新，把长度去最短即可。</p>
+<p>#include <map><br>#include <string><br>#include &lt;stdio.h&gt;<br>#include <iostream><br>#include <algorithm><br>#define N 100005<br>std::map<a href="std::string,int">std::string,int</a> tongji;<br>std::map<a href="std::string,bool">std::string,bool</a> flags;<br>std::string s1[N];<br>std::string s2;<br>int n,m,l;<br>int ans1,ans2;<br>int main(){<br>    scanf(“%d”,&amp;n);<br>    for(int i&#x3D;1;i&lt;&#x3D;n;i++){<br>        std::cin&gt;&gt;s2;<br>        flags[s2]&#x3D;1;<br>    }<br>    scanf(“%d”,&amp;m);<br>    l++;<br>    for(int i&#x3D;1;i&lt;&#x3D;m;i++){<br>        std::cin&gt;&gt;s1[i];<br>        if(flags[s1[i]]) tongji[s1[i]]++;<br>        if(tongji[s1[i]]&#x3D;&#x3D;1) {<br>            ans1++;<br>            ans2&#x3D;i-l+1;<br>        }<br>        while(l&lt;&#x3D;i){<br>            &#x2F;&#x2F;不用背<br>            if(!flags[s1[l]]) {<br>                l++;<br>                continue;<br>            }<br>            &#x2F;&#x2F;后问已经出现了<br>            if(tongji[s1[l]]&gt;1){<br>                tongji[s1[l]]–;<br>                l++;<br>                continue;<br>            }<br>            break;<br>        }<br>        ans2&#x3D;std::min(ans2,i-l+1);<br>    }<br>    printf(“%d\n%d\n”,ans1,ans2);<br>}</p>
+<h1 id="基础部分"><a href="#基础部分" class="headerlink" title="基础部分"></a>基础部分</h1><h1 id="P1002-NOIP2002-普及组-过河卒"><a href="#P1002-NOIP2002-普及组-过河卒" class="headerlink" title="P1002 [NOIP2002 普及组] 过河卒"></a>P1002 [NOIP2002 普及组] 过河卒</h1><p><img src="https://sukunahust.com/wp-content/uploads/2021/11/image-1024x916.png"></p>
+<p>dp方程:因为小兵只能往下或者右走,我们设一个二维dp数组dp[i][j]表示从起点到坐标为(i,j)的路径数,如果这个点能被马能吃掉的,那就dp[i][j]&#x3D;0,这个可以告诉它下面和右边的点,我这是不能到达的.然后输出dp[N][M]就行了</p>
+<p>#include&lt;stdio.h&gt;<br>#include&lt;iostream&gt;<br>#include&lt;algorithm&gt;<br>#include&lt;vector&gt;<br>#include&lt;stack&gt;<br>#include &lt;math.h&gt;<br>using namespace std;<br>#define N 40<br>int t[N];<br>int a[N][N];<br>long long dp[N][N];<br>bool beimalanzhu[N][N]; &#x2F;&#x2F;判断这个点有没有马拦住<br>const int madex[] &#x3D; {-2, -1, 1, 2, 2, 1, -1, -2};<br>const int madey[] &#x3D; {1, 2, 2, 1, -1, -2, -2, -1};<br>int c,n;<br>&#x2F;&#x2F;long long count(long long a,long long b,long long p){<br>&#x2F;&#x2F;    if(b&#x3D;&#x3D;0) return 1;<br>&#x2F;&#x2F;    if(b&#x3D;&#x3D;1) return a%p;<br>&#x2F;&#x2F;    long long c &#x3D; count(a,b&#x2F;2,p)%p;<br>&#x2F;&#x2F;    return ((b%2&#x3D;&#x3D;0?1:a)*c*c)%p;<br>&#x2F;&#x2F;}</p>
+<p>int main(){<br>    int ma_x,ma_y;<br>    int b_x,b_y;<br>    scanf(“%d %d %d %d”,&amp;b_x,&amp;b_y,&amp;ma_x,&amp;ma_y);<br>    ma_x+&#x3D;2;<br>    ma_y+&#x3D;2;<br>    b_x+&#x3D;2;<br>    b_y+&#x3D;2;</p>
+<pre><code>dp\[2\]\[1\]=1;
+for(int i=0;i&amp;lt;8;i++)&#123;
+    beimalanzhu\[ma\_x+madex\[i\]\]\[ma\_y+madey\[i\]\]=true;
+&#125;
+//忘记讨论马自己了
+beimalanzhu\[ma\_x\]\[ma\_y\] = true;
+for(int i=2;i&amp;lt;=b\_x;i++)&#123;
+    for(int j=2;j&amp;lt;=b\_y;j++)&#123;
+        if(beimalanzhu\[i\]\[j\]) continue;
+        dp\[i\]\[j\]=dp\[i-1\]\[j\]+dp\[i\]\[j-1\];
+    &#125;
+&#125;
+printf(&quot;%lld&quot;,dp\[b\_x\]\[b\_y\]);
+</code></pre>
+<p>}</p>
+<h1 id="P1095-NOIP2007-普及组-守望者的逃离"><a href="#P1095-NOIP2007-普及组-守望者的逃离" class="headerlink" title="P1095 [NOIP2007 普及组] 守望者的逃离"></a>P1095 [NOIP2007 普及组] 守望者的逃离</h1><p><img src="https://sukunahust.com/wp-content/uploads/2021/11/image-1-1006x1024.png"></p>
+<p>这个其实我们都知道,根据中学物理的知识都知道我们瞬移最好,但是有这么一种情况,就是你瞬移没蓝了,但是终点离你不远,这时候还不如直接开跑,等在这里等蓝还不如直接run<br>这个时候就有个最优选择了:维护一个一维的dp数组dp[T]来表示到t时间最远能run多远,那我们假设一个dp[t],dp[1,….t-1]都是已知的了,那就可以维护了dp[t]&#x3D;max[dp[t-1]+17,r[t]],r[t]就代表一直瞬移的距离,如果这个时候一直瞬移还不如现在直接跑来得快,那就选跑</p>
+<p>对于这位可怜的人,一直闪现肯定是最优解,但是这里dp其实判断的是,对于这个时刻,没有蓝了,是停在原地回蓝好还是直接撒腿就跑好,是判断这俩的选择的.</p>
+<p>#include&lt;stdio.h&gt;<br>#define N 300005<br>int dp[N];<br>int main(){<br>    int M,S,T;<br>    scanf(“%d %d %d”,&amp;M,&amp;S,&amp;T);<br>    dp[0]&#x3D;0;<br>    int run;<br>    int flash;<br>    for(int i&#x3D;1;i&lt;&#x3D;T;i++){<br>        if(M&gt;&#x3D;10) {<br>            dp[i]&#x3D;dp[i-1]+60;<br>            M-&#x3D;10;<br>        }<br>        else{<br>            dp[i]&#x3D;dp[i-1];<br>            M+&#x3D;4;<br>        }</p>
+<pre><code>&#125;
+for(int i=1;i&amp;lt;=T;i++)&#123;
+    if(dp\[i\]&amp;lt;dp\[i-1\]+17) dp\[i\]=dp\[i-1\]+17;
+    if(dp\[i\]&amp;gt;S)&#123;
+        printf(&quot;Yes\\n%d&quot;,i);
+        return 0;
+    &#125;
+&#125;
+printf(&quot;No\\n%d&quot;,dp\[T\]);
+</code></pre>
+<p>}</p>
+<h1 id="背包"><a href="#背包" class="headerlink" title="背包"></a>背包</h1><h1 id="P1048-NOIP2005-普及组-采药"><a href="#P1048-NOIP2005-普及组-采药" class="headerlink" title="P1048 [NOIP2005 普及组] 采药"></a>P1048 [NOIP2005 普及组] 采药</h1><p><img src="https://sukunahust.com/wp-content/uploads/2021/11/image-2-1024x941.png"></p>
+<p>动态规划方程</p>
+<p>#include “iostream”<br>#include “stdio.h”<br>using namespace std;<br>int  weigth[105],value[105];<br>&#x2F;&#x2F;dp[i][j]代表处理第i个,背包容量还剩下j个<br>int dp[105][1005];<br>int total,m;</p>
+<p>int main(){<br>    scanf(“%d %d”,&amp;total,&amp;m);<br>    for(int i&#x3D;1;i&lt;&#x3D;m;i++){<br>        scanf(“%d %d”,&amp;weigth[i],&amp;value[i]);<br>    }<br>    for(int i&#x3D;1;i&lt;&#x3D;m;i++){<br>        for(int j&#x3D;total;j&gt;&#x3D;0;j–){<br>            &#x2F;&#x2F;表示这个元素可以选入<br>            if(j&gt;&#x3D;weigth[i]){<br>                dp[i][j]&#x3D;max(dp[i-1][j-weigth[i]]+value[i],dp[i-1][j]);<br>            }<br>            &#x2F;&#x2F;不可以<br>            else{<br>                dp[i][j]&#x3D;dp[i-1][j];<br>            }<br>        }<br>    }<br>    printf(“%d”,dp[m][total]);<br>}</p>
+<h1 id="P1616-疯狂的采药"><a href="#P1616-疯狂的采药" class="headerlink" title="P1616 疯狂的采药"></a>P1616 疯狂的采药</h1><p><img src="https://sukunahust.com/wp-content/uploads/2021/11/image-4-1024x795.png"></p>
+<p>一维dp数组,dp[m]代表用m的背包就可以获得的最大元素,还是两层循环,外循环是对物品种类进行讨论,内循环对dp方程进行处理,看看对于一个重量$j$,我要不要选择第$i$号元素放入背包中.</p>
+<p>#include&lt;stdio.h&gt;;<br>#include&lt;iostream&gt;<br>#include&lt;algorithm&gt;<br>using namespace std;<br>const int M &#x3D; 1e7+5;<br>long long  weigth[M],value[10005];<br>&#x2F;&#x2F;dp[i][j]代表处理第i个,背包容量还剩下j个<br>long long dp[M];<br>long long total,m;</p>
+<p>int main(){<br>    scanf(“%lld %lld”,&amp;total,&amp;m);<br>    for(int i&#x3D;1;i&lt;&#x3D;m;i++){<br>        scanf(“%lld %lld”,&amp;weigth[i],&amp;value[i]);<br>    }<br>    for(int i&#x3D;1;i&lt;&#x3D;m;i++){<br>        for(int j&#x3D;weigth[i];j&lt;&#x3D;total;j++){<br>            dp[j]&#x3D;max(dp[j],dp[j-weigth[i]]+value[i]);<br>        }<br>    }<br>    printf(“%lld”,dp[total]);<br>}</p>
+<h1 id="线性"><a href="#线性" class="headerlink" title="线性"></a>线性</h1><h1 id="P1091-NOIP2004-提高组-合唱队形"><a href="#P1091-NOIP2004-提高组-合唱队形" class="headerlink" title="P1091 [NOIP2004 提高组] 合唱队形"></a>P1091 [NOIP2004 提高组] 合唱队形</h1><p><img src="https://sukunahust.com/wp-content/uploads/2021/11/image-5-1024x841.png"></p>
+<p>这是一个脑筋急转弯类型的题目,第一步就是计算[1,i]的最长上升子序列的长度,记在dp[i][0]中,第二步就是计算[i,n]的最长下降子序列的长度,记在dp[i][1].但是有一点就是这个最长上升子序列长度是要包括自己的.<br>记dp1[i]&#x3D;dp[i][0]+dp[i][1]<br>最后的结果就是需要找到一个点使得dp1[i]最大,这样就代表这个点左右更加光滑.</p>
+<p>#include&lt;stdio.h&gt;<br>#define N 105<br>int a[N];<br>int dp[N][2];<br>int res[N];<br>&#x2F;&#x2F;dp数组,dp[i][0]<br>int main(){<br>    int n;<br>    scanf(“%d”,&amp;n);<br>    for(int i&#x3D;1;i&lt;&#x3D;n;i++){<br>        scanf(“%d”,&amp;a[i]);</p>
+<pre><code>&#125;
+//从左到右扫描
+for(int i=2;i&amp;lt;=n;i++)&#123;
+    for(int j=1;j&amp;lt;i;j++)&#123;
+        if(a\[i\]&amp;gt;a\[j\]&amp;amp;&amp;amp;dp\[i\]\[0\]&amp;lt;=dp\[j\]\[0\]+1)&#123;
+            dp\[i\]\[0\]=dp\[j\]\[0\]+1;
+        &#125;
+    &#125;
+&#125;
+for(int i=n-1;i&amp;gt;=1;i--)&#123;
+    for(int j=i+1;j&amp;lt;=n;j++)&#123;
+        if(a\[i\]&amp;gt;a\[j\]&amp;amp;&amp;amp;dp\[i\]\[1\]&amp;lt;=dp\[j\]\[1\]+1)&#123;
+            dp\[i\]\[1\]=dp\[j\]\[1\]+1;
+        &#125;
+    &#125;
+&#125;
+int result=0;
+for(int i=1;i&amp;lt;=n;i++)&#123;
+    res\[i\]=dp\[i\]\[0\]+dp\[i\]\[1\]+1;
+    if(res\[i\]&amp;gt;result) result=res\[i\];
+&#125;
+printf(&quot;%d&quot;,n-result);
+</code></pre>
+<p>}</p>
+<h1 id="P1439-【模板】最长公共子序列"><a href="#P1439-【模板】最长公共子序列" class="headerlink" title="P1439 【模板】最长公共子序列"></a>P1439 【模板】最长公共子序列</h1><p><img src="https://sukunahust.com/wp-content/uploads/2021/11/image-6-1024x415.png"></p>
+<p>排列中没有重复元素，俩排列置换后 (重命名) 的 LCS 长度不变:不妨用置换$\sigma$将排列$P_1$$\to$[1:n].  </p>
+<p>这个时候我们可以将排列$P_1$变成[1,2,3,….,n]然后排列$P_2$映射成与$P_1$相匹配的形式.排列$P_2$中第$i$个元素存储的就是原来的元素在$P_1$中的位置  </p>
+<p><img src="https://sukunahust.com/wp-content/uploads/2021/11/image-7-1024x103.png"></p>
+<p>如图,Y中第一个元素5,在X中的位置是第6个.</p>
+<p>这个时候变成求Y的最长上升子序列了</p>
+<p><img src="https://sukunahust.com/wp-content/uploads/2021/11/image-8-1024x705.png"></p>
+<p>现在进行算法改进:</p>
+<p><img src="https://sukunahust.com/wp-content/uploads/2021/11/image-9-1024x707.png"></p>
+<p><img src="https://sukunahust.com/wp-content/uploads/2021/11/image-10-1024x702.png"></p>
+<p><img src="https://sukunahust.com/wp-content/uploads/2021/11/image-11-1024x676.png"></p>
+<p>#include&lt;stdio.h&gt;<br>#include&lt;algorithm&gt;<br>#define N 100005<br>using namespace std;<br>int a[N],b[N],c[N],found[N];<br>int main(){<br>    int n;<br>    scanf(“%d”,&amp;n);<br>    for(int i&#x3D;1;i&lt;&#x3D;n;i++){<br>        scanf(“%d”,&amp;a[i]);<br>        c[a[i]]&#x3D;i;<br>    }<br>    for(int i&#x3D;1;i&lt;&#x3D;n;i++){<br>        scanf(“%d”,&amp;b[i]);<br>        found[i]&#x3D;114514;<br>    }<br>    int LCS_length&#x3D;0;<br>    for (int i&#x3D;1; i&lt;&#x3D;n; i++) {<br>        int l&#x3D;0,r&#x3D;LCS_length,mid;<br>        &#x2F;&#x2F;如果大于:直接放在后面<br>        if(c[b[i]]&gt;found[LCS_length]){<br>            found[++LCS_length]&#x3D;c[b[i]];<br>        }<br>        &#x2F;&#x2F;如果小于二分查找<br>        else{<br>            while (l&lt;r) {<br>                mid&#x3D;(l+r)&#x2F;2;<br>                if(found[mid]&gt;c[b[i]]){<br>                    r&#x3D;mid;<br>                }<br>                else{<br>                    l&#x3D;mid+1;<br>                }<br>            }<br>            found[l]&#x3D;min(c[b[i]],found[l]);<br>        }<br>    }<br>    printf(“%d\n”,LCS_length);<br>}</p>
+<h1 id="区间"><a href="#区间" class="headerlink" title="区间"></a>区间</h1><h1 id="P1880-NOI1995-石子合并"><a href="#P1880-NOI1995-石子合并" class="headerlink" title="P1880 [NOI1995] 石子合并"></a>P1880 [NOI1995] 石子合并</h1><p><img src="https://sukunahust.com/wp-content/uploads/2021/11/image-12-1024x719.png"></p>
+<p>让dp[i][j]代表第i堆到第j堆的合并分数,我们要做的事$dp[i][i+n-1]$最大(小),只需要在区间[i][j]中找到一个最佳的分划k,让i-k,k+1,j这两个区域内部得分和合并这两个区域的得分最大(小),即$max(a[i][k]+a[k+1][j]+d(i,j))$分别代表两个区域的分划和合并两部分的得分</p>
+<p>#include&lt;stdio.h&gt;<br>#include<algorithm><br>#define N 205<br>int mins[N][N];<br>int maxs[N][N];<br>int stones[N];<br>int sums[N];&#x2F;&#x2F;前缀和<br>int main(){<br>    int n;<br>    scanf(“%d”,&amp;n);<br>    for(int i&#x3D;1;i&lt;&#x3D;n;i++){<br>        scanf(“%d”,&amp;stones[i]);<br>        sums[i]&#x3D;sums[i-1]+stones[i];<br>        stones[i+n]&#x3D;stones[i];<br>    }<br>    for(int i&#x3D;n+1;i&lt;&#x3D;2*n;i++){<br>        sums[i]&#x3D;sums[i-1]+stones[i];<br>    }<br>    for(int length&#x3D;1;length&lt;n;length++){<br>        for(int i&#x3D;1,j&#x3D;i+length;j&lt;2*n&amp;&amp;i&lt;2*n;i++,j&#x3D;length+i){<br>            mins[i][j]&#x3D;1145141919;<br>            for(int k&#x3D;i;k&lt;j;k++){<br>                maxs[i][j]&#x3D;std::max(maxs[i][j],maxs[i][k]+maxs[k+1][j]+sums[j]-sums[i-1]);<br>                mins[i][j]&#x3D;std::min(mins[i][j],mins[i][k]+mins[k+1][j]+sums[j]-sums[i-1]);<br>            }<br>        }<br>    }<br>    int min_res&#x3D;114514;<br>    int max_res&#x3D;0;<br>    for(int i&#x3D;1;i&lt;&#x3D;n;i++){<br>        max_res&#x3D;std::max(max_res,maxs[i][i+n-1]);<br>        min_res&#x3D;std::min(min_res,mins[i][i+n-1]);<br>    }<br>    printf(“%d\n%d”,min_res,max_res);<br>}</p>
+<h3 id="力扣每日一题"><a href="#力扣每日一题" class="headerlink" title="力扣每日一题"></a>力扣每日一题</h3><h1 id="力扣每日一题记录"><a href="#力扣每日一题记录" class="headerlink" title="力扣每日一题记录"></a>力扣每日一题记录</h1><p>5.6 解码异或后的数组</p>
+<p>class Solution {<br>public:<br>    vector<int> decode(vector<int>&amp; encoded, int first) {<br>        int n&#x3D;encoded.size()+1;<br>        vector<int> arr(n);<br>        arr[0]&#x3D;first;<br>        for (int i&#x3D;1; i&lt;n; i++) {<br>            arr[i]&#x3D;arr[i-1]^encoded[i-1];<br>        }<br>        return arr;<br>    }<br>};</p>
+<p>异或是满足交换律和结合律的,就是x和y异或&#x3D;z,已知x和z,y是能求出来的<img src="https://sukunahust.com/wp-content/ql-cache/quicklatex.com-5a9f5e1efc7097781b5577ce990c2ffa_l3.svg" alt="x\oplus y=z">,<img src="https://sukunahust.com/wp-content/ql-cache/quicklatex.com-7ecea4b92f8a8a78bfe8eb90cfab93f6_l3.svg" alt="x\oplus z=y"><br>那对于这道题,我知道<img src="https://sukunahust.com/wp-content/ql-cache/quicklatex.com-42b757c2f671bc07789d4986ca6e2099_l3.svg" alt="encode[i]=arr[i]\oplus arr[i+1]">,我还知道第一个元素是什么,那我们自然而然的就往下做了</p>
+<p>5.7 数组的异或操作:这个不想说了,太简单了</p>
+<p>5.8 完成工作的最短时间<br>这道题我犯了四个很低级的错误:<br>1.二分查找的时候没有更新mid<br>2.传参数没有传引用,导致所有的结果都没变<br>3.判断能否完成的时候没有考虑刚好完成所带来<br>4.工作时间加了之后,如果判断不行没减回去<br>给你一个整数数组 jobs ，其中 jobs[i] 是完成第 i 项工作要花费的时间。<br>请你将这些工作分配给 k 位工人。所有工作都应该分配给工人，且每项工作只能分配给一位工人。工人的 工作时间 是完成分配给他们的所有工作花费时间的总和。请你设计一套最佳的工作分配方案，使工人的 最大工作时间 得以 最小化 。<br>返回分配方案中尽可能 最小 的 最大工作时间 。<br>示例 1：<br>输入：jobs &#x3D; [3,2,3], k &#x3D; 3<br>输出：3<br>解释：给每位工人分配一项工作，最大工作时间是 3 。</p>
+<p>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/find-minimum-time-to-finish-all-jobs">https://leetcode-cn.com/problems/find-minimum-time-to-finish-all-jobs</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<p>这道题是一道搜索类型的题目,是一道直接搜索答案的题目,总的思路就两点<br>1.主函数做二分搜索<br>2.子函数验证这个结果对不对,来帮助主函数做二分搜索</p>
+<p>这道题要注意一点,要不然时间这一块把握不住<br>1.建议使用贪心算法,就是把大的任务先安排下去<br>2.在任务已经明确不能完成或者说是一定能够完成的情况下自动退出</p>
+<p>判断的方法也稍微提一下:就是给每个工人分配任务,分配任务的形式就是更改一个数组,这个数组存放了每个工人工作的总时间,分配就是依据每个总时间进行分配的,分配的方式就是递归,有一步出现问题就返回报错,到达叶节点(分配完成)就返回OK</p>
+<p>如果有思路,写出代码来还是很简单的,这一种题真的和滑动窗口很像</p>
+<p>class Solution {<br>public:<br>    int minimumTimeRequired(vector<int>&amp; jobs, int k) {<br>        sort(jobs.begin(), jobs.end(), greater<int>());<br>        int first &#x3D; jobs[0], total &#x3D; accumulate(jobs.begin(), jobs.end(), 0);<br>        &#x2F;&#x2F;没有达到最优解<br>        while(first&lt;total){<br>            &#x2F;&#x2F;检查一下mid行不行<br>            int mid &#x3D; (first+total)&#x2F;2;<br>            if(ok(jobs,k,mid)){<br>                total&#x3D;mid;<br>            }<br>            else{<br>                first&#x3D;mid+1;<br>            }<br>        }<br>        return first;<br>    }<br>    bool ok(vector<int>&amp; jobs, int k, int value){<br>        vector<int> workers(k,0);<br>        return check(jobs,workers,0,value);<br>    }<br>    &#x2F;&#x2F;递归寻找<br>    bool check (vector<int>&amp; jobs,vector<int> workers, int now,int value){<br>        if(jobs.size()&lt;&#x3D;now){<br>            return true;<br>        }<br>        else{<br>            int cur&#x3D;jobs[now];<br>            for (auto&amp; workload : workers) {<br>                if (workload+cur&lt;&#x3D;value) {<br>                    workload+&#x3D;cur;<br>                    if (check(jobs,workers,now+1,value)) {<br>                        return true;<br>                    }<br>                    workload-&#x3D;cur;<br>                }<br>                if (workload&#x3D;&#x3D;0workload+cur&#x3D;&#x3D;value) {<br>                    break;<br>                }<br>            }<br>            return false;<br>        }</p>
+<pre><code>&#125;
+</code></pre>
+<p>};</p>
+<p>5.9 制作花束的最少天数<br>给你一个整数数组 bloomDay，以及两个整数 m 和 k 。<br>现需要制作 m 束花。制作花束时，需要使用花园中 相邻的 k 朵花 。<br>花园中有 n 朵花，第 i 朵花会在 bloomDay[i] 时盛开，恰好 可以用于 一束 花中。<br>请你返回从花园中摘 m 束花需要等待的最少的天数。如果不能摘到 m 束花则返回 -1 。</p>
+<p>示例 1：<br>输入：bloomDay &#x3D; [1,10,3,10,2], m &#x3D; 3, k &#x3D; 1<br>输出：3<br>解释：让我们一起观察这三天的花开过程，x 表示花开，而 _ 表示花还未开。<br>现在需要制作 3 束花，每束只需要 1 朵。<br>1 天后：[x, <em>,</em> , <em>,</em> ] &#x2F;&#x2F; 只能制作 1 束花<br>2 天后：[x, <em>,</em> , <em>, x] &#x2F;&#x2F; 只能制作 2 束花 3 天后：[x,</em> , x, _, x] &#x2F;&#x2F; 可以制作 3 束花，答案为 3</p>
+<p>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/minimum-number-of-days-to-make-m-bouquets">https://leetcode-cn.com/problems/minimum-number-of-days-to-make-m-bouquets</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<p>这道题的思路和昨天的其实很像,就说说判断在某一天之内能否生产那么多花束的思路:其实就是一个遍历+模拟就可以完成的,就是假设这一天已经来到,看看有哪些花盛开了.就取哪些花,有连续的几朵就可以组成一个花束,这么简单</p>
+<p>class Solution {<br>public:<br>    int minDays(vector<int>&amp; bloomDay, int m, int k) {<br>        if(bloomDay.size()&lt;m*k){<br>            return -1;<br>        }<br>        int high&#x3D;0,low&#x3D;INT_MAX;<br>        for (int i &#x3D; 0; i &lt; bloomDay.size(); i++) {<br>            low&#x3D;min(low, bloomDay[i]);<br>            high&#x3D;max(high, bloomDay[i]);<br>        }</p>
+<pre><code>    while(high&gt;low)&#123;
+        int mid=(high+low)/2;
+        if(check(bloomDay,m,k,mid))&#123;
+            high=mid;
+        &#125;
+        else&#123;
+            low=mid+1;
+        &#125;
+    &#125;
+    return low;
+&#125;
+bool check(vector&lt;int&gt;&amp; bloomDay, int m, int k,int days)&#123;
+    int hua=0,huashu=0;
+    for(int i=0;i&lt;bloomDay.size()&amp;&amp;huashu&lt;m;i++)&#123;
+        if(bloomDay\[i\]&lt;=days)&#123;
+            hua++;
+            if(hua==k)&#123;
+                huashu++;
+                hua=0;
+            &#125;
+        &#125;
+        else&#123;
+                hua=0;
+        &#125;
+    &#125;
+    return huashu&gt;=m;
+&#125;   
+</code></pre>
+<p>};</p>
+<p>上面两题向我们展示了一个利用二分搜索搜索答案的思路:<br>1.主函数二分搜索<br>2.子函数验证<br>众所周知,求解比验证难许多</p>
+<p>5.10 叶子相似的树</p>
+<p>前序遍历就可以了.前序遍历能保证叶子是从左到右被遍历到的</p>
+<p>class Solution {<br>public:<br>    bool leafSimilar(TreeNode* root1, TreeNode* root2) {<br>        vector<int> a1;<br>        vector<int> a2;<br>        if(root1) forwardTraverse(root1,a1);<br>        if(root2) forwardTraverse(root2,a2);<br>        return a1&#x3D;&#x3D;a2;<br>    }<br>    void forwardTraverse(TreeNode* root,vector<int>&amp;list){<br>        if(!(root-&gt;left)&amp;&amp;!(root-&gt;right)){<br>            list.push_back(root-&gt;val);<br>            return;<br>        }<br>        if(root-&gt;left) forwardTraverse(root-&gt;left,list);<br>        if(root-&gt;right) forwardTraverse(root-&gt;right,list);<br>        return;<br>    }<br>};</p>
+<p>5.11 解码异或后的排列<br>给你一个整数数组 perm ，它是前 n 个正整数的排列，且 n 是个 奇数 。<br>它被加密成另一个长度为 n – 1 的整数数组 encoded ，满足 encoded[i] &#x3D; perm[i] XOR perm[i + 1] 。比方说，如果 perm &#x3D; [1,3,2] ，那么 encoded &#x3D; [2,1] 。<br>给你 encoded 数组，请你返回原始数组 perm 。题目保证答案存在且唯一。<br>示例 1：<br>输入：encoded &#x3D; [3,1]<br>输出：[1,2,3]<br>解释：如果 perm &#x3D; [1,2,3] ，那么 encoded &#x3D; [1 XOR 2,2 XOR 3] &#x3D; [3,1]<br>示例 2：</p>
+<p>之前我们就做过异或之后的数组怎么解码:最重要的就是寻找到那个first元素,这里我们也可以寻找到first元素</p>
+<p>我们知道<img src="https://sukunahust.com/wp-content/ql-cache/quicklatex.com-c34b52deeb305f9413f534b570f9fed7_l3.svg" alt="x\lxor x=0">,那我们寻找到第一个元素,就是<img src="https://sukunahust.com/wp-content/ql-cache/quicklatex.com-131d0c2aa952b43d45bba07dfc407e81_l3.svg" alt="(x_0\oplus x_1\oplus x_2...\oplus x_n)\oplus (x_1 \oplus x_2\oplus x_3....x_n)=x1"></p>
+<p>我们还知道<img src="https://sukunahust.com/wp-content/ql-cache/quicklatex.com-dbe284a90142f25d096bec9394436c2a_l3.svg" alt="encode[2k+1]=a[2k]\oplus a[2k+1]">刚好对所有奇数元素的数列一异或就可以把上述式子异或符号右边的元素求出来</p>
+<p>注意,原来的数据是从1-n的排列</p>
+<p>class Solution {<br>public:<br>    vector<int> decode(vector<int>&amp; encode) {<br>        int n&#x3D;encode.size()+1;<br>        vector<int> decode(n,0);<br>        int total&#x3D;0;<br>        int except_0&#x3D;0;<br>        for(int i&#x3D;0;i&lt;&#x3D;n;i++){<br>            total&#x3D;total^i;<br>        }<br>        for(int i&#x3D;1;i&lt;n;i+&#x3D;2){<br>            except_0&#x3D;except_0^encode[i];<br>        }<br>        decode[0]&#x3D;except_0^total;<br>        for(int i&#x3D;1;i&lt;n;i++){<br>            decode[i]&#x3D;decode[i-1]^encode[i-1];<br>        }<br>        return decode;<br>    }<br>};</p>
+<p>5.12 字数组异或查询<br>有一个正整数数组 arr，现给你一个对应的查询数组 queries，其中 queries[i] &#x3D; [Li, Ri]。<br>对于每个查询 i，请你计算从 Li 到 Ri 的 XOR 值（即 arr[Li] xor arr[Li+1] xor … xor arr[Ri]）作为本次查询的结果。<br>并返回一个包含给定查询 queries 所有结果的数组。<br>示例 1：<br>输入：arr &#x3D; [1,3,4,8], queries &#x3D; [[0,1],[1,2],[0,3],[3,3]]<br>输出：[2,7,14,8]<br>解释：<br>数组中元素的二进制表示形式是：<br>1 &#x3D; 0001<br>3 &#x3D; 0011<br>4 &#x3D; 0100<br>8 &#x3D; 1000<br>查询的 XOR 值为：<br>[0,1] &#x3D; 1 xor 3 &#x3D; 2<br>[1,2] &#x3D; 3 xor 4 &#x3D; 7<br>[0,3] &#x3D; 1 xor 3 xor 4 xor 8 &#x3D; 14<br>[3,3] &#x3D; 8</p>
+<p>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/xor-queries-of-a-subarray">https://leetcode-cn.com/problems/xor-queries-of-a-subarray</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<p>一个式子就可以明白:这里截取官方题解了:</p>
+<p><img src="https://sukunahust.com/wp-content/uploads/2021/05/image-1024x205.png"></p>
+<p>class Solution {<br>public:<br>    vector<int> xorQueries(vector<int>&amp; arr, vector&lt;vector<int>&gt;&amp; queries) {<br>        vector<int> result;<br>        vector<int> xors(arr.size()+1);<br>        for (int i&#x3D;0;i&lt;arr.size();i++) {<br>            xors[i+1]&#x3D;xors[i]^arr[i];<br>        }<br>        for(vector<int>temp:queries){<br>            int total&#x3D;0;<br>            total&#x3D;xors[temp[0]]^xors[temp[1]+1];<br>            result.push_back(total);<br>        }<br>        return result;<br>    }<br>};</p>
+<p>5.13 停在原地的方案数<br>有一个长度为 arrLen 的数组，开始有一个指针在索引 0 处。<br>每一步操作中，你可以将指针向左或向右移动 1 步，或者停在原地（指针不能被移动到数组范围外）。<br>给你两个整数 steps 和 arrLen ，请你计算并返回：在恰好执行 steps 次操作以后，指针仍然指向索引 0 处的方案数。<br>由于答案可能会很大，请返回方案数 模 10^9 + 7 后的结果。<br>示例 1<br>输入：steps &#x3D; 3, arrLen &#x3D; 2<br>输出：4<br>解释：3 步后，总共有 4 种不同的方法可以停在索引 0 处。<br>向右，向左，不动<br>不动，向右，向左<br>向右，不动，向左<br>不动，不动，不动</p>
+<p>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/number-of-ways-to-stay-in-the-same-place-after-some-steps">https://leetcode-cn.com/problems/number-of-ways-to-stay-in-the-same-place-after-some-steps</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<p>class Solution {<br>public:<br>    const int MODULO &#x3D; 1000000007;<br>    int numWays(int steps, int arrLen) {<br>        int maxc&#x3D;min(arrLen-1,steps&#x2F;2);<br>        vector&lt;vector<int>&gt; dp(steps+1, vector<int>(maxc+1));<br>        dp[0][0]&#x3D;1;<br>        for(int i&#x3D;1;i&lt;&#x3D;steps;i++){<br>            for(int j&#x3D;0;j&lt;&#x3D;maxc;j++){<br>                dp[i][j]&#x3D;dp[i-1][j];<br>                if(j-1&gt;&#x3D;0){<br>                    dp[i][j]&#x3D;(dp[i][j]+dp[i-1][j-1])%MODULO;<br>                }<br>                if(j+1&lt;&#x3D;maxc){<br>                    dp[i][j]&#x3D;(dp[i][j]+dp[i-1][j+1])%MODULO;<br>                }</p>
+<pre><code>        &#125;
+    &#125;
+    return dp\[steps\]\[0\];
+&#125;
+</code></pre>
+<p>};</p>
+<p>动态规划:dp[行动的步数][获得的这个结果]&#x3D;走的方案数<br>官方题解还可以优化,比如说压缩到一维动态规划<br>动态规划最重要的就是:初态+状态转移,这里的初态:<br><img src="https://sukunahust.com/wp-content/ql-cache/quicklatex.com-076590b86ba207ce143e94b2e823ad03_l3.svg" alt="dp[0][0]=1,dp[0][i]=0">,状态转移:来源于三个操作:一个是向左,一个是向右,一个是不动:<img src="https://sukunahust.com/wp-content/ql-cache/quicklatex.com-8c01feeb7f41da7bdd5ef7afa96f778d_l3.svg" alt="dp[i][j]=dp[i-1][j]+dp[i-1][j+1]+dp[i-1][j-1](if j+1,j-1 exists)"></p>
+<p>5.14 整数转罗马数字<br>罗马数字包含以下七种字符： I， V， X， L，C，D 和 M。</p>
+<p>字符 数值<br>I 1<br>V 5<br>X 10<br>L 50<br>C 100<br>D 500<br>M 1000<br>例如， 罗马数字 2 写做 II ，即为两个并列的 1。12 写做 XII ，即为 X + II 。 27 写做  XXVII, 即为 XX + V + II 。</p>
+<p>通常情况下，罗马数字中小的数字在大的数字的右边。但也存在特例，例如 4 不写做 IIII，而是 IV。数字 1 在数字 5 的左边，所表示的数等于大数 5 减小数 1 得到的数值 4 。同样地，数字 9 表示为 IX。这个特殊的规则只适用于以下六种情况：<br>I 可以放在 V (5) 和 X (10) 的左边，来表示 4 和 9。<br>X 可以放在 L (50) 和 C (100) 的左边，来表示 40 和 90。 <br>C 可以放在 D (500) 和 M (1000) 的左边，来表示 400 和 900。<br>给你一个整数，将其转为罗马数字。</p>
+<p>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/integer-to-roman">https://leetcode-cn.com/problems/integer-to-roman</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<p>变相的数位转换罢了,注意的是1000-900-500-400-100-90-50-40-10-9-5-4-1这套转化法则,一开始就是没反应过来23333</p>
+<p>5.15 罗马数字转整数</p>
+<p>还是一样的,读取罗马数字,如果下一个罗马数字对应的值比我这个大,那么说明应该是IX之类的问题,就要减去这个罗马数字对应的值如果小,就加这个罗马数字对应的值就行</p>
+<p>5.16 数组中最大的异或值</p>
+<p><strong>输入：</strong>nums &#x3D; [3,10,5,25,2,8]<br><strong>输出：</strong>28<br><strong>解释：</strong>最大运算结果是 5 XOR 25 &#x3D; 28.</p>
+<p>这个代码是题解里面的</p>
+<p>第一种方法是贪心算法,就是我们已经知道<img src="https://sukunahust.com/wp-content/ql-cache/quicklatex.com-062b76d533174cda72c813758355544f_l3.svg" alt="x=a_i \oplus a_j">所以说我们就假设x,然后找有没有适合的a_i和a_j就好了,我们按位查找,从高位到低位查找:<br>首先看最高位有没有<img src="https://sukunahust.com/wp-content/ql-cache/quicklatex.com-259b6415756adf3480ea5e8a80d1d578_l3.svg" alt="a_i\oplus a_j=x">有的话就取1:就是<img src="https://sukunahust.com/wp-content/ql-cache/quicklatex.com-0ac3fe2e28e9326d90e0c98613c1491d_l3.svg" alt="2x+1">没有的话就取0,就是<img src="https://sukunahust.com/wp-content/ql-cache/quicklatex.com-da4556c0a02b580047678d308649edf9_l3.svg" alt="2x">,以此类推</p>
+<p>第二种方法就是字典法:</p>
+<p>这个是一个字典树,每个元素从高位到低位按照0和1的顺序建立树<br>当检查x的最大性的时候的做法:<br>因为要让异或最大,那就读取一个数,从高位到低位判断,如果这个位为0,那就看看这个位有没有位1的数,反之亦然.有的话异或的值就可以<img src="https://sukunahust.com/wp-content/ql-cache/quicklatex.com-0ac3fe2e28e9326d90e0c98613c1491d_l3.svg" alt="2x+1">,没有的话就是<img src="https://sukunahust.com/wp-content/ql-cache/quicklatex.com-da4556c0a02b580047678d308649edf9_l3.svg" alt="2x"></p>
+<p>这里需要说明一下二进制的求值方法:从高位到低位扫描,扫描到1的话<img src="https://sukunahust.com/wp-content/ql-cache/quicklatex.com-73e0257639a78306bcf13ad0c68fcbdb_l3.svg" alt="2y+1">,扫描到0的时候就为<img src="https://sukunahust.com/wp-content/ql-cache/quicklatex.com-85ca23a1e42ccdfafecd1cf9622b44c3_l3.svg" alt="2y"></p>
+<p>struct Trie {<br>    &#x2F;&#x2F; 左子树指向表示 0 的子节点<br>    Trie* left &#x3D; nullptr;<br>    &#x2F;&#x2F; 右子树指向表示 1 的子节点<br>    Trie* right &#x3D; nullptr;</p>
+<pre><code>Trie() &#123;&#125;
+</code></pre>
+<p>};</p>
+<p>class Solution {<br>private:<br>    &#x2F;&#x2F; 字典树的根节点<br>    Trie* root &#x3D; new Trie();<br>    &#x2F;&#x2F; 最高位的二进制位编号为 30<br>    static constexpr int HIGH_BIT &#x3D; 30;</p>
+<p>public:<br>    void add(int num) {<br>        Trie* cur &#x3D; root;<br>        for (int k &#x3D; HIGH_BIT; k &gt;&#x3D; 0; –k) {<br>            int bit &#x3D; (num &gt;&gt; k) &amp; 1;<br>            if (bit &#x3D;&#x3D; 0) {<br>                if (!cur-&gt;left) {<br>                    cur-&gt;left &#x3D; new Trie();<br>                }<br>                cur &#x3D; cur-&gt;left;<br>            }<br>            else {<br>                if (!cur-&gt;right) {<br>                    cur-&gt;right &#x3D; new Trie();<br>                }<br>                cur &#x3D; cur-&gt;right;<br>            }<br>        }<br>    }</p>
+<pre><code>int check(int num) &#123;
+    Trie\* cur = root;
+    int x = 0;
+    for (int k = HIGH\_BIT; k &gt;= 0; --k) &#123;
+        int bit = (num &gt;&gt; k) &amp; 1;
+        if (bit == 0) &#123;
+            // a\_i 的第 k 个二进制位为 0，应当往表示 1 的子节点 right 走
+            if (cur-&gt;right) &#123;
+                cur = cur-&gt;right;
+                x = x \* 2 + 1;
+            &#125;
+            else &#123;
+                cur = cur-&gt;left;
+                x = x \* 2;
+            &#125;
+        &#125;
+        else &#123;
+            // a\_i 的第 k 个二进制位为 1，应当往表示 0 的子节点 left 走
+            if (cur-&gt;left) &#123;
+                cur = cur-&gt;left;
+                x = x \* 2 + 1;
+            &#125;
+            else &#123;
+                cur = cur-&gt;right;
+                x = x \* 2;
+            &#125;
+        &#125;
+    &#125;
+    return x;
+&#125;
+
+int findMaximumXOR(vector&lt;int&gt;&amp; nums) &#123;
+    int n = nums.size();
+    int x = 0;
+    for (int i = 1; i &lt; n; ++i) &#123;
+        // 将 nums\[i-1\] 放入字典树，此时 nums\[0 .. i-1\] 都在字典树中
+        add(nums\[i - 1\]);
+    &#125;
+    for (int i = 1; i &lt; n; ++i)&#123;
+        // 将 nums\[i\] 看作 ai，找出最大的 x 更新答案
+        x = max(x, check(nums\[i\]));
+    &#125;
+    return x;
+&#125;
+</code></pre>
+<p>};</p>
+<p>5.17 二叉树的堂兄弟节点</p>
+<p>这个东西就是做一遍二叉树的遍历,找到:层数+父节点,比较就行了.传参数比较麻烦的话就开全局变量就好了</p>
+<p>class Solution {<br>public:<br>    &#x2F;&#x2F; x 的信息<br>    int x;<br>    TreeNode* x_parent;<br>    int x_depth;</p>
+<pre><code>// y 的信息
+int y;
+TreeNode\* y\_parent;
+int y\_depth;
+
+void level1(TreeNode\* root,int x,int k)&#123;
+    if(!root)&#123;
+        return;
+    &#125;
+    if(root-&gt;val==x)&#123;
+        x\_depth=k;
+    &#125;
+    if(root-&gt;left)&#123;
+        level1(root-&gt;left,x,k+1);
+    &#125;
+    if(root-&gt;right)&#123;
+        level1(root-&gt;right,x,k+1);
+    &#125;
+    return;
+&#125;
+void level2(TreeNode\* root,int y,int k)&#123;
+    if(!root)&#123;
+        return;
+    &#125;
+    if(root-&gt;val==y)&#123;
+        y\_depth=k;
+    &#125;
+    if(root-&gt;left)&#123;
+        level2(root-&gt;left,y,k+1);
+    &#125;
+    if(root-&gt;right)&#123;
+        level2(root-&gt;right,y,k+1);
+    &#125;
+    return;
+&#125;
+void parent2(TreeNode\* root,int y)&#123;
+    if(!root)&#123;
+        return;
+    &#125;
+    if(root-&gt;right&amp;&amp;root-&gt;right-&gt;val==y)&#123;
+        y\_parent=root;
+    &#125;
+    if(root-&gt;left&amp;&amp;root-&gt;left-&gt;val==y)&#123;
+        y\_parent=root;
+    &#125;
+    if(root-&gt;left)&#123;
+        parent2(root-&gt;left,y);
+    &#125;
+    if(root-&gt;right)&#123;
+        parent2(root-&gt;right,y);
+    &#125;
+    return;
+&#125;
+void parent1(TreeNode\* root,int x)&#123;
+    if(!root)&#123;
+        return;
+    &#125;
+    if(root-&gt;right&amp;&amp;root-&gt;right-&gt;val==x)&#123;
+        x\_parent=root;
+    &#125;
+    if(root-&gt;left&amp;&amp;root-&gt;left-&gt;val==x)&#123;
+        x\_parent=root;
+    &#125;
+    if(root-&gt;left)&#123;
+        parent1(root-&gt;left,x);
+    &#125;
+    if(root-&gt;right)&#123;
+        parent1(root-&gt;right,x);
+    &#125;
+    return;
+&#125;
+bool isCousins(TreeNode\* root, int x, int y) &#123;
+    parent1(root,x);
+    parent2(root,y);
+    level1(root,x,0);
+    level2(root,y,0);
+    return (x\_depth==y\_depth)&amp;&amp;(x\_parent!=y\_parent);
+&#125;
+</code></pre>
+<p>};</p>
+<p>5.18 形成两个异或相等的三元组数目</p>
+<p>给你一个整数数组 arr 。<br>现需要从数组中取三个下标 i、j 和 k ，其中 (0 &lt;&#x3D; i &lt; j &lt;&#x3D; k &lt; arr.length) 。<br>a 和 b 定义如下：<br>a &#x3D; arr[i] ^ arr[i + 1] ^ … ^ arr[j – 1]<br>b &#x3D; arr[j] ^ arr[j + 1] ^ … ^ arr[k]<br>注意：^ 表示 按位异或 操作。<br>请返回能够令 a &#x3D;&#x3D; b 成立的三元组 (i, j , k) 的数目。</p>
+<p>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/count-triplets-that-can-form-two-arrays-of-equal-xor">https://leetcode-cn.com/problems/count-triplets-that-can-form-two-arrays-of-equal-xor</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<p>还是那张图</p>
+<p><img src="https://sukunahust.com/wp-content/uploads/2021/05/image-1024x205.png" alt="此图像的alt属性为空；文件名为image-1024x205.png"></p>
+<p>class Solution {<br>public:<br>    int countTriplets(vector<int>&amp; arr) {<br>        int ans&#x3D;0;<br>        int count&#x3D;arr.size();<br>        vector<int> abab(count+1);<br>        for(int i&#x3D;0;i&lt;count;i++){<br>            abab[i+1]&#x3D;abab[i]^arr[i];<br>        }<br>        for(int i&#x3D;0;i&lt;count;i++){<br>            for(int j&#x3D;i+1;j&lt;count;j++){<br>                for(int k&#x3D;j;k&lt;count;k++){<br>                    if(abab[i]&#x3D;&#x3D;abab[k+1]){<br>                        ++ans;<br>                    }<br>                }<br>            }<br>        }<br>        return ans;<br>    }<br>};</p>
+<p>5.19 找出第K大的异或坐标值</p>
+<p>最近力扣是和这个公式杠上了么…,这道题就是一个模拟就行的了,但是我们可以建表来记录(m,k)之内的元素异或的和,这三项刚好可以表示</p>
+<p>给你一个二维矩阵 matrix 和一个整数 k ，矩阵大小为 m x n 由非负整数组成。<br>矩阵中坐标 (a, b) 的 值 可由对所有满足 0 &lt;&#x3D; i &lt;&#x3D; a &lt; m 且 0 &lt;&#x3D; j &lt;&#x3D; b &lt; n 的元素 matrix[i][j]（下标从 0 开始计数）执行异或运算得到。<br>请你找出 matrix 的所有坐标中第 k 大的值（k 的值从 1 开始计数）。<br>示例 1：<br>输入：matrix &#x3D; [[5,2],[1,6]], k &#x3D; 1<br>输出：7<br>解释：坐标 (0,1) 的值是 5 XOR 2 &#x3D; 7 ，为最大的值。</p>
+<p>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/find-kth-largest-xor-coordinate-value">https://leetcode-cn.com/problems/find-kth-largest-xor-coordinate-value</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<h1 id="CSP考试–练手"><a href="#CSP考试–练手" class="headerlink" title="CSP考试–练手"></a>CSP考试–练手</h1><p>202009-01 检测点推荐 源代码丢了 100&#x2F;100</p>
+<p>202009-02 密切接触人群 源代码丢了 100&#x2F;100</p>
+<p>202009-03 点亮数字人生 图论的题目</p>
+<p>#include<cstdio><br>#include<vector><br>#include<string><br>#include<iostream><br>#include<queue><br>#include&lt;string.h&gt;<br>#include<algorithm><br>using namespace std;</p>
+<p>int read() {<br>  int x &#x3D; 0, f &#x3D; 1;<br>  int ch &#x3D; getchar();<br>  while (ch &lt; ‘0’  ch &gt; ‘9’) {<br>    if (ch &#x3D;&#x3D; ‘-‘) f &#x3D; -1;<br>    ch &#x3D; getchar();<br>  }<br>  while (ch &gt;&#x3D; ‘0’ &amp;&amp; ch &lt;&#x3D; ‘9’) {<br>    x &#x3D; x * 10 + (int)(ch - ‘0’);<br>    ch &#x3D; getchar();<br>  }<br>  return x * f;<br>}<br>const int MAXV &#x3D; 510;<br>int G[MAXV][MAXV] &#x3D; {0};&#x2F;&#x2F;邻接矩阵<br>int w[MAXV];&#x2F;&#x2F;边权重<br>bool inq[MAXV] &#x3D; {false};&#x2F;&#x2F;是否访问过<br>bool initV[MAXV] &#x3D; {false};&#x2F;&#x2F;是否初始化过边<br>int inDegree[MAXV] &#x3D; {0};&#x2F;&#x2F;入度<br>int outDegree[MAXV] &#x3D; {0};&#x2F;&#x2F;出度（未使用）<br>std::string type[MAXV]; &#x2F;&#x2F;器件类型<br>std::vector<int> testInput[10010];&#x2F;&#x2F;测试输入<br>std::vector<int> testOutput[10010];&#x2F;&#x2F;测试输出</p>
+<p>bool TopologicalSort(int n, int m){<br>    &#x2F;&#x2F;<br>    &#x2F;&#x2F;拓扑排序<br>    int num &#x3D; 0;<br>    std::queue<int> q;<br>    int tempInDegree[MAXV];&#x2F;&#x2F;临时存储入度<br>    memcpy(tempInDegree, inDegree, (m+n)* sizeof(int));&#x2F;&#x2F;复制的字节数<br>    &#x2F;&#x2F;防止更改全局变量导致问题<br>    for(int i &#x3D; 0;i &lt; n + m;i++){&#x2F;&#x2F;将所有入度为0的顶点入队<br>        if(tempInDegree[i] &#x3D;&#x3D; 0){<br>            q.push(i);<br>        }<br>    }<br>    while(!q.empty()){<br>    &#x2F;&#x2F;直到队列里没元素为止<br>        int u &#x3D; q.front();<br>        &#x2F;&#x2F;取出第一个元素<br>        q.pop();<br>        for(int i &#x3D; 0; i &lt; m + n;i++){<br>            if(inq[i] &#x3D;&#x3D; false &amp;&amp; G[u][i] !&#x3D; 0){<br>                &#x2F;&#x2F;入度不为0,而且从u到i有元素<br>                tempInDegree[i]–;<br>                &#x2F;&#x2F;<br>                if(tempInDegree[i] &#x3D;&#x3D; 0){<br>                    &#x2F;&#x2F;入度减1后元素入度为0,可以放进去<br>                    q.push(i);<br>                    inq[i] &#x3D; true;&#x2F;&#x2F;i被入度为0了,减不了了<br>                }<br>            }<br>        }<br>        num++;&#x2F;&#x2F;这是一个入度为0的元素,处理完毕了!<br>    }<br>    if(num &#x3D;&#x3D; n + m) return true;&#x2F;&#x2F;可以生成拓扑排序序列<br>    else return false;<br>}<br>&#x2F;&#x2F;计算值<br>void calculateValue(int n, int m){</p>
+<pre><code>std::queue&lt;int&gt; q;
+int tempInDegree\[MAXV\];//临时存储入度
+memcpy(tempInDegree, inDegree, (m+n)\* sizeof(int));//复制的字节数
+for(int i = 0;i &lt; n + m;i++)&#123;//将所有入度为0的顶点入队
+    if(tempInDegree\[i\] == 0)&#123;
+        q.push(i);
+    &#125;
+&#125;
+//利用队列进行深度优先遍历
+while(!q.empty())&#123;
+    int u = q.front();//起始点
+    q.pop();
+
+    for(int i = 0; i &lt; m + n;i++)&#123;
+        if(inq\[i\] == false &amp;&amp; G\[u\]\[i\] != 0)&#123;
+            tempInDegree\[i\]--;
+    //有链接
+            if(initV\[i\] == false)&#123;//之前没有被访问过
+                w\[i\] = w\[u\];//赋予初始值
+                if(type\[i\] == &quot;NOT&quot;)&#123;//最多或者最少都只有一个输入
+                    w\[i\] = (!w\[i\]);
+                &#125;
+                initV\[i\] = true;
+            &#125;
+            else&#123;
+                //一个一个对输入进行处理
+                if(type\[i\] == &quot;AND&quot;  type\[i\] == &quot;NAND&quot;)&#123;//有n个输入的
+                    w\[i\] &amp;= w\[u\];
+                &#125;else if(type\[i\] == &quot;OR&quot;  type\[i\] == &quot;NOR&quot;)&#123;
+                    w\[i\] = w\[u\];
+                &#125;else if(type\[i\] == &quot;XOR&quot;)&#123;
+                    w\[i\] ^= w\[u\];
+                &#125;
+            &#125;
+
+            if(tempInDegree\[i\] == 0)&#123;//入度为零，以它为终点的边数为0
+                if(type\[i\] == &quot;NAND&quot;  type\[i\] == &quot;NOR&quot;)&#123;
+                    w\[i\] = (!w\[i\]);
+                &#125;//NAND和NOR的话,要把最后结果置反
+                q.push(i);
+                inq\[i\] = true;
+                //i这个结点算是遍历好了
+            &#125;
+        &#125;
+    &#125;
+&#125;
+</code></pre>
+<p>}</p>
+<p>int main(){<br>    int q, m, n;<br>    &#x2F;&#x2F;输入q和m,n<br>    scanf(“%d”, &amp;q);<br>    while(q–){&#x2F;&#x2F;问题个数<br>        &#x2F;&#x2F;初始化<br>        std::fill(G[0], G[0] + MAXV*MAXV, 0);<br>        memset(inDegree, 0, sizeof(inDegree));<br>        memset(outDegree, 0, sizeof(outDegree));<br>        &#x2F;&#x2F;入度和出度为0<br>        std::fill(inq, inq + MAXV, false);<br>        std::fill(initV, initV + MAXV, false);<br>        &#x2F;&#x2F;点和边的初始化为全部为NO<br>        for(int i &#x3D; 0;i &lt; MAXV;i++){<br>            type[i].clear();<br>        }<br>        for(int i &#x3D; 0;i &lt; 10010;i++){<br>            for(std::vector<int>::iterator j &#x3D; testInput[i].begin();j !&#x3D; testInput[i].end();){<br>                j &#x3D; testInput[i].erase(j);<br>            }<br>        }</p>
+<pre><code>    for(int i = 0;i &lt; 10010;i++)&#123;
+        for(std::vector&lt;int&gt;::iterator j = testOutput\[i\].begin();j != testOutput\[i\].end();)&#123;
+            j = testOutput\[i\].erase(j);
+        &#125;
+    &#125;
+    //测试输入输出清空
+    scanf(&quot;%d%d&quot;, &amp;m, &amp;n);//输入个数，器件个数
+    for(int num = m;num &lt; n + m;num++)&#123;
+        std::string FUNC;//器件描述
+        int k;
+        std::cin&gt;&gt;FUNC;
+        type\[num\] = FUNC;
+
+        scanf(&quot;%d&quot;, &amp;k);
+        for(int i = 0;i &lt; k;i++)&#123;
+            std::string L;
+            std::cin&gt;&gt;L;
+            int startPoint = std::atoi(L.substr(1, L.length() - 1).c\_str()) - 1;//计算起始点编号
+            if(L\[0\] != &#39;I&#39;)&#123;//如果是输出点，则加上输入点的偏移
+                startPoint += m;//加上输入的个数,每个器件有每个器件的输入
+            &#125;
+            G\[startPoint\]\[num\] = 1;//把边放进去
+            outDegree\[startPoint\]++;//计算出度
+            inDegree\[num\]++;//计算入度
+        &#125;
+    &#125;
+    //输入储存的数据
+    int s;
+    scanf(&quot;%d&quot;, &amp;s);
+    for(int i = 0;i &lt; s;i++)&#123;//输入数据
+        for(int j = 0;j &lt; m;j++)&#123;
+            int input;
+            scanf(&quot;%d&quot;, &amp;input);
+            testInput\[i\].push\_back(input);
+        &#125;
+    &#125;
+    //把输入的数据存进去(是s\*j的矩阵)
+    for(int i = 0;i &lt; s;i++)&#123;//输出数据
+        int OutNum;
+        scanf(&quot;%d&quot;, &amp;OutNum);//储存输出的元素
+        while(OutNum--)&#123;
+            int output;
+            scanf(&quot;%d&quot;, &amp;output);
+            output = output + m - 1;//加入偏移量
+            testOutput\[i\].push\_back(output);
+        &#125;
+    &#125;
+
+    if(TopologicalSort(n, m) == false)&#123;
+        printf(&quot;LOOP\\n&quot;);//有环,输出LOOP
+    &#125;else&#123;
+        for(int i = 0;i &lt; s;i++)&#123;
+            memset(w, 0, sizeof(w));
+            std::fill(inq, inq + 510, false);
+            std::fill(initV, initV + MAXV, false);
+            for(int j = 0;j &lt; testInput\[i\].size();j++)&#123;
+                w\[j\] = testInput\[i\]\[j\];
+            &#125;
+            //首先把输入存进去
+            calculateValue(n, m);
+            //一个一个输出结果
+            for(int j = 0; j &lt; testOutput\[i\].size();j++)&#123;
+                if(j != 0) printf(&quot; &quot;);
+                printf(&quot;%d&quot;, w\[testOutput\[i\]\[j\]\]);//输出要计算的值
+            &#125;
+            printf(&quot;\\n&quot;);
+
+        &#125;
+    &#125;
+&#125;//q
+
+return 0;
+</code></pre>
+<p>}</p>
+<p>202009-04 星际迷航 100&#x2F;100</p>
+<p>#include “stdio.h”<br>#include “stdlib.h”<br>#include “string.h”<br>#include <iostream><br>using namespace std;<br>const int N &#x3D; 100 + 5;<br>const int M &#x3D; 2000 + 5;<br>double o[105], r;<br>double point[2005][105], result[2005][2005];<br>double d[2005], rd[2005];&#x2F;&#x2F;到黑洞距离和切线长度<br>int read() {<br>    int x &#x3D; 0, f &#x3D; 1;<br>    int ch &#x3D; getchar();<br>    while (ch &lt; ‘0’  ch &gt; ‘9’) {<br>        if (ch &#x3D;&#x3D; ‘-‘) f &#x3D; -1;<br>        ch &#x3D; getchar();<br>    }<br>    while (ch &gt;&#x3D; ‘0’ &amp;&amp; ch &lt;&#x3D; ‘9’) {<br>        x &#x3D; x * 10 + (int)(ch - ‘0’);<br>        ch &#x3D; getchar();<br>    }<br>    return x * f;<br>}</p>
+<p>int main()<br>{<br>    int n, m;</p>
+<pre><code>n = read();
+m = read();
+r = read();
+for (int i = 1; i &lt;= n; i++)
+    o\[i\] = read();
+for (int i = 1; i &lt;= m; i++)
+    for (int j = 1; j &lt;= n; j++)
+        point\[i\]\[j\] = read();
+for (int i = 1; i &lt;= m; i++)
+&#123;
+    double temp = 0;
+    for (int j = 1; j &lt;= n; j++)
+    &#123;
+        temp += (point\[i\]\[j\] - o\[j\]) \* (point\[i\]\[j\] - o\[j\]);
+    &#125;
+    d\[i\] = sqrt(temp);
+    rd\[i\] = sqrt(d\[i\] \* d\[i\] - r \* r);
+&#125;
+for (int i = 1; i &lt;= m; i++)
+&#123;
+    for (int j = i + 1; j &lt;= m; j++)
+    &#123;
+        double temp = 0;
+        for (int k = 1; k &lt;= n; k++)
+            temp += (point\[i\]\[k\] - point\[j\]\[k\]) \* (point\[i\]\[k\] - point\[j\]\[k\]);
+        double x = sqrt(temp);
+        double p = (d\[i\] + d\[j\] + x) / 2;
+        double s = sqrt(p \* (p - x) \* (p - d\[i\]) \* (p - d\[j\]));//海伦-秦九韶公式
+        double h = 2 \* s / x;//h是垂直平分线长度
+        if (h &gt;= r  (x \* x + d\[i\] \* d\[i\] &lt;= d\[j\] \* d\[j\])  (x \* x + d\[j\] \* d\[j\] &lt;= d\[i\] \* d\[i\]))
+        &#123;
+            result\[i\]\[j\] = result\[j\]\[i\] = x;
+            continue;
+        &#125;
+        double angle1 = acos((d\[i\] \* d\[i\] + d\[j\] \* d\[j\] - x \* x) / (2 \* d\[i\] \* d\[j\]));
+        double angle2 = acos(r / d\[i\]);
+        double angle3 = acos(r / d\[j\]);
+        result\[i\]\[j\] = result\[j\]\[i\] = (angle1 - angle2 - angle3) \* r + rd\[i\] + rd\[j\];
+    &#125;
+&#125;
+for (int i = 1; i &lt;= m; i++)
+&#123;
+    double sum = 0;
+    for (int j = 1; j &lt;= m; j++)
+    &#123;
+        if (i == j) continue;
+        sum += result\[i\]\[j\];
+    &#125;
+    printf(&quot;%.14f\\n&quot;, sum);
+&#125;
+return 0;
+</code></pre>
+<p>}</p>
+<p>n维也不用怕.各种各样的距离求和本质上就是向量点积,面积可以用行列式的性质求出面积,当然它不需要我们求出向量本身,那我们可以用秦九韶公式求面积,也可以求角度用正弦公式</p>
+<p>202006-03 Markdown渲染器 100&#x2F;100(抄的,我做不了满分)</p>
+<p>ios::sync_with_stdio(false),cin.tie(0),cout.tie(0);这个语句可以很好的保持效率</p>
+<p>#include <iostream><br>#include <vector><br>using namespace std;</p>
+<p>struct Markdown{<br>    int type;&#x2F;&#x2F;标记相应的类型 0 空行，1 项目列表第一行 2项目列表其余行 3段落<br>    string s;<br>};<br>&#x2F;&#x2F;存储每一行<br>bool isSpace(string s){&#x2F;&#x2F;判断是否为空行<br>    for(int i&#x3D;0;i&lt;s.size();++i)<br>    {<br>        if(s[i]!&#x3D;’ ‘)<br>        return false;<br>     }<br>     return true;<br>}</p>
+<p>string remove_space(string s){&#x2F;&#x2F;去除首尾的空格<br>    int pos1&#x3D;0,pos2&#x3D;s.length()-1;<br>    for(int i&#x3D;0;i&lt;s.length();++i){<br>        if(s[i]!&#x3D;’ ‘){<br>            pos1 &#x3D;i;<br>            break;<br>        }<br>    }<br>&#x2F;&#x2F;从前往后更改<br>    for(int i&#x3D;s.length()-1;i&gt;&#x3D;0;i–){<br>        if(s[i]!&#x3D;’ ‘){<br>            pos2&#x3D;i;<br>            break;<br>        }<br>    }<br>&#x2F;&#x2F;从后往前更改<br>    string temp &#x3D;s.substr(pos1,pos2-pos1+1);<br>&#x2F;&#x2F;返回去除了空行的子串<br>    return temp;<br>}<br>vector<Markdown> vec;<br>int main()<br>{<br>    ios::sync_with_stdio(false),cin.tie(0),cout.tie(0);<br>&#x2F;&#x2F;保证cin和cout的效率<br>    Markdown temp;<br>&#x2F;&#x2F;保存每一行<br>    int w,flag&#x3D;0;&#x2F;&#x2F;flag标记当前输入行的前一行类型<br>    string str;<br>    cin&gt;&gt;w;<br>    while(getline(cin,str))<br>    {<br>&#x2F;&#x2F;将元素通过cin存进str(按行存储)<br>        if(isSpace(str)){&#x2F;&#x2F;处理空行<br>            if(flag){&#x2F;&#x2F;上一行不是空行，就添加一个空行<br>                temp.s&#x3D;””;<br>                temp.type&#x3D;0;<br>                vec.push_back(temp);<br>                flag&#x3D;0;<br>            }<br>            continue;<br>        }<br>&#x2F;&#x2F;空行,直接放一个flag为0的元素进去<br>        if(str.size()&gt;&#x3D;2 &amp;&amp; str[0]&#x3D;&#x3D;’*‘ &amp;&amp; str[1]&#x3D;&#x3D;’ ‘){<br>&#x2F;&#x2F;处理项目列表的第一行<br>            if(flag&#x3D;&#x3D;3){&#x2F;&#x2F;上一行是一个段落，就插入一行空行隔开<br>                temp.s&#x3D;””;<br>                temp.type&#x3D;0;<br>                vec.push_back(temp);<br>            }<br>            &#x2F;&#x2F;把项目列表第一行再放入vec中</p>
+<pre><code>        temp.type=1;temp.s=remove\_space(str.substr(2,str.size()));
+        vec.push\_back(temp);
+        flag=1;
+</code></pre>
+<p>&#x2F;&#x2F;注意放的时候要把前面的*_去掉<br>        }<br>        else if(str.size()&gt;&#x3D;2 &amp;&amp; str[0]&#x3D;&#x3D;’ ‘ &amp;&amp; str[1]&#x3D;&#x3D;’ ‘    &amp;&amp;(flag&#x3D;&#x3D;1  flag&#x3D;&#x3D;2)){<br>&#x2F;&#x2F;上一个是项目<br>            if(vec[vec.size()-1].s&#x3D;&#x3D;””){&#x2F;&#x2F;项目列表第一行为空<br>                vec[vec.size()-1].s &#x3D; remove_space(str);<br>            }<br>&#x2F;&#x2F;第一行为空的话就从这一行开始算<br>            else<br>            {<br>                vec[vec.size()-1].s &#x3D;vec[vec.size()-1].s+” “+remove_space(str);<br>&#x2F;&#x2F;把这一行加进去<br>            }<br>            flag&#x3D;2;<br>        }<br>        else{&#x2F;&#x2F;处理段落<br>            if(flag&#x3D;&#x3D;1  flag&#x3D;&#x3D;2){<br>                temp.s&#x3D;””;<br>                temp.type&#x3D;0;<br>                vec.push_back(temp);<br>                temp.s&#x3D;remove_space(str);<br>                temp.type&#x3D;3;<br>                vec.push_back(temp);<br>&#x2F;&#x2F;上面的是项目的话,之间加一个空行<br>            }else if(flag &#x3D;&#x3D;3){<br>                vec[vec.size()-1].s &#x3D; vec[vec.size()-1].s+” “ +remove_space(str);<br>&#x2F;&#x2F;上面那一行是项目的话就继续加进去<br>            }<br>            else{<br>                temp.s &#x3D; remove_space(str);<br>                temp.type &#x3D; 3;<br>                vec.push_back(temp);<br>            }<br>&#x2F;&#x2F;前面是空段落<br>            flag&#x3D;3;<br>        }<br>    }<br>&#x2F;&#x2F;下面开始处理<br>        long long int ans&#x3D;0;<br>        for(int i&#x3D;0;i&lt;vec.size();++i){<br>            int type &#x3D;vec[i].type;<br>            string s&#x3D;vec[i].s;<br>&#x2F;&#x2F;取出来元素<br>            if(!type) {<br>            ans++;<br>            &#x2F;&#x2F;cout&lt;&lt;endl;&#x2F;&#x2F;空行<br>            }<br>            else if(type &#x3D;&#x3D;1 type &#x3D;&#x3D;2){&#x2F;&#x2F;项目列表<br>                if(!s.size()){<br>                    ans++;<br>                    continue;<br>                }<br>                int t&#x3D;0;<br>                while(t&lt;s.size()){<br>&#x2F;&#x2F;处理行<br>                    while(1){&#x2F;&#x2F;保证每行的开头不是空格<br>                    if(t&gt;&#x3D;s.size()) break;<br>                    if(s[t]!&#x3D;’ ‘)break;<br>                    t++;<br>                    }<br>                    &#x2F;&#x2F;cout&lt;&lt;s.substr(t,w-3)&lt;&lt;endl;<br>                    t+&#x3D;(w-3);<br>&#x2F;&#x2F;把空格算进去<br>                    ans++;<br>                }<br>            }<br>            else{<br>&#x2F;&#x2F;处理段落<br>                int t&#x3D;0;<br>                while(t&lt;s.size()){<br>                    while(1){&#x2F;&#x2F;保证每行的开头不是空格<br>                    if(t&gt;&#x3D;s.size()) break;<br>                    if(s[t]!&#x3D;’ ‘)break;<br>                    t++;<br>                    }<br>                    &#x2F;&#x2F;cout&lt;&lt;s.substr(t,w)&lt;&lt;endl;<br>                    t+&#x3D;w;<br>                    ans++;<br>            }<br>        }<br>    }<br>    if(!vec[vec.size()-1].type)<br>&#x2F;&#x2F;最后一行是空行<br>    ans–;<br>    cout&lt;&lt;ans&lt;&lt;endl;<br>    return 0;<br>}</p>
+<p>202006-04 1246<br>我只能做32分</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/project/">首页</a></li>
+        
+          <li><a href="/project/about/">关于</a></li>
+        
+          <li><a href="/project/archives/">归档</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/SukunaShinmyoumaru-hust/Hust-opensource-Xuejie">HUST-学解</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B4%9B%E8%B0%B7%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95-%E6%A9%99%E5%88%B0%E9%BB%84"><span class="toc-number">1.</span> <span class="toc-text">洛谷刷题记录(橙到黄)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#P2367-%E8%AF%AD%E6%96%87%E6%88%90%E7%BB%A9-%E5%B7%AE%E5%88%86%E5%89%8D%E7%BC%80%E5%92%8C"><span class="toc-number">1.0.0.1.</span> <span class="toc-text">P2367 语文成绩(差分前缀和)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%8C%E5%80%8D%E7%BB%8F%E9%AA%8C-CF44C-Holiday-%E5%B7%AE%E5%88%86%E5%89%8D%E7%BC%80%E5%92%8C"><span class="toc-number">1.0.0.2.</span> <span class="toc-text">双倍经验:CF44C Holiday (差分前缀和)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P1160-%E9%98%9F%E5%88%97%E5%AE%89%E6%8E%92-%E9%98%9F%E5%88%97%E6%A8%A1%E7%89%88%E9%A2%98-%E5%8C%85%E5%90%AB%E9%98%9F%E5%88%97%E7%9A%84%E6%B7%BB%E5%8A%A0%E5%92%8C%E5%88%A0%E9%99%A4%E6%93%8D%E4%BD%9C"><span class="toc-number">1.0.0.3.</span> <span class="toc-text">P1160 队列安排(队列模版题,包含队列的添加和删除操作)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#P1044-%E6%A0%88"><span class="toc-number">1.0.1.</span> <span class="toc-text">P1044 栈</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#P1449-%E5%90%8E%E7%BC%80%E8%A1%A8%E8%BE%BE%E5%BC%8F-%E6%A0%88%E7%9A%84%E7%BB%8F%E5%85%B8%E9%97%AE%E9%A2%98"><span class="toc-number">1.0.1.1.</span> <span class="toc-text">P1449 后缀表达式(栈的经典问题)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%8C%E5%80%8D%E7%BB%8F%E9%AA%8C-P1981-%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%B1%82%E5%80%BC"><span class="toc-number">1.0.1.2.</span> <span class="toc-text">(双倍经验) P1981 表达式求值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P1165-%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90-%E6%A8%A1%E6%8B%9F%E6%A0%88"><span class="toc-number">1.0.1.3.</span> <span class="toc-text">P1165 日志分析(模拟栈)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P5788-%E5%8D%95%E8%B0%83%E6%A0%88%E6%A8%A1%E7%89%88"><span class="toc-number">1.0.1.4.</span> <span class="toc-text">P5788 单调栈模版</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P1886-%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3-%E5%8D%95%E8%B0%83%E9%98%9F%E5%88%97%E6%A8%A1%E7%89%88"><span class="toc-number">1.0.1.5.</span> <span class="toc-text">P1886 滑动窗口&#x2F;单调队列模版.</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#UVA540-%E5%9B%A2%E4%BD%93%E9%98%9F%E5%88%97-%E9%98%9F%E5%88%97%E6%A8%A1%E6%8B%9F"><span class="toc-number">1.0.1.6.</span> <span class="toc-text">UVA540 团体队列(队列模拟)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#P1162-%E5%A1%AB%E6%B6%82%E9%A2%9C%E8%89%B2-%E7%AE%80%E5%8D%95%E6%B7%B1%E6%90%9C"><span class="toc-number">1.0.2.</span> <span class="toc-text">P1162 填涂颜色(简单深搜)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#P1042-%E4%B9%92%E4%B9%93%E7%90%83-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%B0%8F%E6%A8%A1%E6%8B%9F"><span class="toc-number">1.0.2.1.</span> <span class="toc-text">P1042 乒乓球(字符串小模拟)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P1553-%E6%95%B0%E5%AD%97%E5%8F%8D%E8%BD%AC%E5%8D%87%E7%BA%A7%E7%89%88-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%B0%8F%E6%A8%A1%E6%8B%9F"><span class="toc-number">1.0.2.2.</span> <span class="toc-text">P1553 数字反转升级版(字符串小模拟)</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#include"><span class="toc-number">2.</span> <span class="toc-text">include</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#P1332-Logo%E8%AF%AD%E8%A8%80-%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%80%92%E5%BD%92"><span class="toc-number">2.0.0.1.</span> <span class="toc-text">P1332 Logo语言(字符串递归)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P3375-KMP%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D-KMP%E6%A8%A1%E7%89%88"><span class="toc-number">2.0.0.2.</span> <span class="toc-text">P3375 KMP字符串匹配(KMP模版)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P1030-%E7%BB%99%E5%AE%9A%E4%B8%AD%E5%BA%8F%E5%90%8E%E5%BA%8F%E6%B1%82%E5%85%88%E5%BA%8F-%E5%8F%8C%E5%80%8D%E7%BB%8F%E9%AA%8CP1827-%E7%BE%8E%E5%9B%BD%E8%A1%80%E7%BB%9F"><span class="toc-number">2.0.0.3.</span> <span class="toc-text">P1030 给定中序后序求先序(双倍经验P1827 美国血统)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P1087-FBI%E6%A0%91-%E4%BA%8C%E5%8F%89%E6%A0%91%E9%80%92%E5%BD%92%E6%9E%84%E9%80%A0%E5%92%8C%E6%A8%A1%E6%8B%9F"><span class="toc-number">2.0.0.4.</span> <span class="toc-text">P1087 FBI树(二叉树递归构造和模拟)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P3884-%E4%BA%8C%E5%8F%89%E6%A0%91%E9%97%AE%E9%A2%98-LCA%E2%80%93%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88-%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86"><span class="toc-number">2.0.0.5.</span> <span class="toc-text">P3884 二叉树问题(LCA–最近公共祖先,树链剖分)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P4913-%E4%BA%8C%E5%8F%89%E6%A0%91%E6%B7%B1%E5%BA%A6"><span class="toc-number">2.0.0.6.</span> <span class="toc-text">P4913 二叉树深度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P5318-%E6%9F%A5%E6%89%BE%E6%96%87%E7%8C%AE-BFS%E5%92%8CDFS"><span class="toc-number">2.0.0.7.</span> <span class="toc-text">P5318 查找文献(BFS和DFS)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P3371-%E5%8D%95%E5%85%83%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84-%E9%82%BB%E6%8E%A5%E8%A1%A8%E7%89%88%E6%9C%AC"><span class="toc-number">2.0.0.8.</span> <span class="toc-text">P3371 单元最短路径(邻接表版本)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P2910-%E5%8F%8C%E5%80%8D%E7%BB%8F%E9%AA%8C-%E9%82%BB%E6%8E%A5%E7%9F%A9%E9%98%B5%E7%89%88%E6%9C%AC"><span class="toc-number">2.0.0.9.</span> <span class="toc-text">P2910 双倍经验(邻接矩阵版本)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P3367-%E5%B9%B6%E6%9F%A5%E9%9B%86-%E5%BE%80%E4%B8%8A%E6%90%9C%E7%B4%A2%E7%9A%84%E6%A0%91"><span class="toc-number">2.0.0.10.</span> <span class="toc-text">P3367 并查集(往上搜索的树)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P3366-%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91"><span class="toc-number">2.0.0.11.</span> <span class="toc-text">P3366 最小生成树</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P3370-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%93%88%E5%B8%8C"><span class="toc-number">2.0.0.12.</span> <span class="toc-text">P3370 字符串哈希</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P1908-%E9%80%86%E5%BA%8F%E5%AF%B9-%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F"><span class="toc-number">2.0.0.13.</span> <span class="toc-text">P1908 逆序对(归并排序)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P1309-%E5%8F%8C%E5%80%8D%E7%BB%8F%E9%AA%8C-%E9%80%86%E5%BA%8F%E5%AF%B9"><span class="toc-number">2.0.0.14.</span> <span class="toc-text">P1309 (双倍经验) 逆序对</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P1090-%E5%90%88%E5%B9%B6%E6%9E%9C%E5%AD%90"><span class="toc-number">2.0.0.15.</span> <span class="toc-text">P1090 合并果子</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P1138-%E6%9C%80k%E5%B0%8F%E6%95%B4%E6%95%B0"><span class="toc-number">2.0.0.16.</span> <span class="toc-text">P1138 最k小整数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P1918-%E4%BF%9D%E9%BE%84%E7%90%83"><span class="toc-number">2.0.0.17.</span> <span class="toc-text">P1918 保龄球</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B4%9B%E8%B0%B7%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95-%E7%BB%BF%E5%88%B0%E8%93%9D"><span class="toc-number">3.</span> <span class="toc-text">洛谷刷题记录(绿到蓝)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#P6510-%E5%A5%B6%E7%89%9B%E6%8E%92%E9%98%9F"><span class="toc-number">3.0.0.1.</span> <span class="toc-text">P6510 奶牛排队</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P3719-rexp"><span class="toc-number">3.0.0.2.</span> <span class="toc-text">P3719 rexp.</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P1185-%E7%BB%98%E5%88%B6%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="toc-number">3.0.0.3.</span> <span class="toc-text">P1185 绘制二叉树</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P3956-%E6%A3%8B%E7%9B%98"><span class="toc-number">3.0.0.4.</span> <span class="toc-text">P3956 棋盘</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P1983-%E8%BD%A6%E7%AB%99%E5%88%86%E7%BA%A7-%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F"><span class="toc-number">3.0.0.5.</span> <span class="toc-text">P1983 车站分级(拓扑排序)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P1038-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C"><span class="toc-number">3.0.0.6.</span> <span class="toc-text">P1038 神经网络</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P1381-%E5%8D%95%E8%AF%8D%E8%83%8C%E8%AF%B5"><span class="toc-number">3.0.0.7.</span> <span class="toc-text">P1381 单词背诵</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86"><span class="toc-number">4.</span> <span class="toc-text">基础部分</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#P1002-NOIP2002-%E6%99%AE%E5%8F%8A%E7%BB%84-%E8%BF%87%E6%B2%B3%E5%8D%92"><span class="toc-number">5.</span> <span class="toc-text">P1002 [NOIP2002 普及组] 过河卒</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#P1095-NOIP2007-%E6%99%AE%E5%8F%8A%E7%BB%84-%E5%AE%88%E6%9C%9B%E8%80%85%E7%9A%84%E9%80%83%E7%A6%BB"><span class="toc-number">6.</span> <span class="toc-text">P1095 [NOIP2007 普及组] 守望者的逃离</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%83%8C%E5%8C%85"><span class="toc-number">7.</span> <span class="toc-text">背包</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#P1048-NOIP2005-%E6%99%AE%E5%8F%8A%E7%BB%84-%E9%87%87%E8%8D%AF"><span class="toc-number">8.</span> <span class="toc-text">P1048 [NOIP2005 普及组] 采药</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#P1616-%E7%96%AF%E7%8B%82%E7%9A%84%E9%87%87%E8%8D%AF"><span class="toc-number">9.</span> <span class="toc-text">P1616 疯狂的采药</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7"><span class="toc-number">10.</span> <span class="toc-text">线性</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#P1091-NOIP2004-%E6%8F%90%E9%AB%98%E7%BB%84-%E5%90%88%E5%94%B1%E9%98%9F%E5%BD%A2"><span class="toc-number">11.</span> <span class="toc-text">P1091 [NOIP2004 提高组] 合唱队形</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#P1439-%E3%80%90%E6%A8%A1%E6%9D%BF%E3%80%91%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%AD%90%E5%BA%8F%E5%88%97"><span class="toc-number">12.</span> <span class="toc-text">P1439 【模板】最长公共子序列</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8C%BA%E9%97%B4"><span class="toc-number">13.</span> <span class="toc-text">区间</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#P1880-NOI1995-%E7%9F%B3%E5%AD%90%E5%90%88%E5%B9%B6"><span class="toc-number">14.</span> <span class="toc-text">P1880 [NOI1995] 石子合并</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%9B%E6%89%A3%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98"><span class="toc-number">14.0.1.</span> <span class="toc-text">力扣每日一题</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8A%9B%E6%89%A3%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98%E8%AE%B0%E5%BD%95"><span class="toc-number">15.</span> <span class="toc-text">力扣每日一题记录</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CSP%E8%80%83%E8%AF%95%E2%80%93%E7%BB%83%E6%89%8B"><span class="toc-number">16.</span> <span class="toc-text">CSP考试–练手</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sukunashinmyoumaru-hust.github.io/project/2022/04/17/luogu-al/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sukunashinmyoumaru-hust.github.io/project/2022/04/17/luogu-al/&text=做算法题综合"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sukunashinmyoumaru-hust.github.io/project/2022/04/17/luogu-al/&title=做算法题综合"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sukunashinmyoumaru-hust.github.io/project/2022/04/17/luogu-al/&is_video=false&description=做算法题综合"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=做算法题综合&body=Check out this article: https://sukunashinmyoumaru-hust.github.io/project/2022/04/17/luogu-al/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sukunashinmyoumaru-hust.github.io/project/2022/04/17/luogu-al/&title=做算法题综合"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sukunashinmyoumaru-hust.github.io/project/2022/04/17/luogu-al/&title=做算法题综合"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sukunashinmyoumaru-hust.github.io/project/2022/04/17/luogu-al/&title=做算法题综合"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sukunashinmyoumaru-hust.github.io/project/2022/04/17/luogu-al/&title=做算法题综合"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sukunashinmyoumaru-hust.github.io/project/2022/04/17/luogu-al/&name=做算法题综合&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sukunashinmyoumaru-hust.github.io/project/2022/04/17/luogu-al/&t=做算法题综合"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2024
+    Sukuna
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/project/">首页</a></li><!--
+     --><!--
+       --><li><a href="/project/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/project/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/SukunaShinmyoumaru-hust/Hust-opensource-Xuejie">HUST-学解</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功！");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/project/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
