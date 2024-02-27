@@ -9,7 +9,7 @@
     <meta name="description" content="链接 题目大意：给定n个饭盒，和q次询问，每个饭盒拥有美味值v，代价w，取走时间e。每次询问包含一个时间t，和代价上限k。问再此时间，此代价下，能获得的最大美味值是多少？ 背包问题，dp[i][j]表示当前可以取走i件物品，且代价为小于等于j可获得的最大值。那么在这问题里，最直接的方法就是选出符合条件的饭盒进行背包DP，但是这会超时。 其实我们只需要把饭盒按照取走时间降序排序，然后做一遍背包DP">
 <meta property="og:type" content="article">
 <meta property="og:title" content="UFPE Starters Final Try-Outs 2019 Problem L">
-<meta property="og:url" content="https://sukunashinmyoumaru-hust.github.io/project/2020/05/24/ufpe-starters-final-try-outs-2019-problem-l/index.html">
+<meta property="og:url" content="https://sukunashinmyoumaru-hust.github.io/2020/05/24/ufpe-starters-final-try-outs-2019-problem-l/index.html">
 <meta property="og:site_name" content="Suwa shrine">
 <meta property="og:description" content="链接 题目大意：给定n个饭盒，和q次询问，每个饭盒拥有美味值v，代价w，取走时间e。每次询问包含一个时间t，和代价上限k。问再此时间，此代价下，能获得的最大美味值是多少？ 背包问题，dp[i][j]表示当前可以取走i件物品，且代价为小于等于j可获得的最大值。那么在这问题里，最直接的方法就是选出符合条件的饭盒进行背包DP，但是这会超时。 其实我们只需要把饭盒按照取走时间降序排序，然后做一遍背包DP">
 <meta property="og:locale" content="zh_CN">
@@ -23,17 +23,17 @@
     
       
         
-          <link rel="shortcut icon" href="/project/images/favicon.ico">
+          <link rel="shortcut icon" href="/images/favicon.ico">
         
       
       
         
-          <link rel="icon" type="image/png" href="/project/images/favicon-192x192.png" sizes="192x192">
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
         
       
       
         
-          <link rel="apple-touch-icon" sizes="180x180" href="/project/images/favicon-192x192.png">
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-192x192.png">
         
       
     
@@ -48,7 +48,7 @@
 
     <!-- styles -->
     
-<link rel="stylesheet" href="/project/css/style.css">
+<link rel="stylesheet" href="/css/style.css">
 
     <!-- persian styles -->
     
@@ -69,11 +69,11 @@
     <span id="nav">
       <ul>
         <!--
-       --><li><a href="/project/">首页</a></li><!--
+       --><li><a href="/">首页</a></li><!--
      --><!--
-       --><li><a href="/project/about/">关于</a></li><!--
+       --><li><a href="/about/">关于</a></li><!--
      --><!--
-       --><li><a href="/project/archives/">归档</a></li><!--
+       --><li><a href="/archives/">归档</a></li><!--
      --><!--
        --><li><a target="_blank" rel="noopener" href="https://github.com/SukunaShinmyoumaru-hust/Hust-opensource-Xuejie">HUST-学解</a></li><!--
      -->
@@ -83,10 +83,10 @@
     <span id="actions">
       <ul>
         
-        <li><a class="icon" aria-label="上一篇" href="/project/2020/05/25/ufpe-starters-final-try-outs-2019-recife-brazil-dec-1-2018-problem-j%EF%BC%88%E7%BA%BF%E6%AE%B5%E6%A0%91%E4%BA%8C%E5%88%86%EF%BC%89/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="上一篇" href="/2020/05/25/ufpe-starters-final-try-outs-2019-recife-brazil-dec-1-2018-problem-j%EF%BC%88%E7%BA%BF%E6%AE%B5%E6%A0%91%E4%BA%8C%E5%88%86%EF%BC%89/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
         
-        <li><a class="icon" aria-label="下一篇" href="/project/2020/05/02/%E5%BB%BA%E7%AB%99/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="下一篇" href="/2020/05/02/%E5%BB%BA%E7%AB%99/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
         <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
         <li><a class="icon" aria-label="分享文章" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
@@ -99,17 +99,17 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sukunashinmyoumaru-hust.github.io/project/2020/05/24/ufpe-starters-final-try-outs-2019-problem-l/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sukunashinmyoumaru-hust.github.io/project/2020/05/24/ufpe-starters-final-try-outs-2019-problem-l/&text=UFPE Starters Final Try-Outs 2019 Problem L"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sukunashinmyoumaru-hust.github.io/project/2020/05/24/ufpe-starters-final-try-outs-2019-problem-l/&title=UFPE Starters Final Try-Outs 2019 Problem L"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sukunashinmyoumaru-hust.github.io/project/2020/05/24/ufpe-starters-final-try-outs-2019-problem-l/&is_video=false&description=UFPE Starters Final Try-Outs 2019 Problem L"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=UFPE Starters Final Try-Outs 2019 Problem L&body=Check out this article: https://sukunashinmyoumaru-hust.github.io/project/2020/05/24/ufpe-starters-final-try-outs-2019-problem-l/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sukunashinmyoumaru-hust.github.io/project/2020/05/24/ufpe-starters-final-try-outs-2019-problem-l/&title=UFPE Starters Final Try-Outs 2019 Problem L"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sukunashinmyoumaru-hust.github.io/project/2020/05/24/ufpe-starters-final-try-outs-2019-problem-l/&title=UFPE Starters Final Try-Outs 2019 Problem L"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sukunashinmyoumaru-hust.github.io/project/2020/05/24/ufpe-starters-final-try-outs-2019-problem-l/&title=UFPE Starters Final Try-Outs 2019 Problem L"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sukunashinmyoumaru-hust.github.io/project/2020/05/24/ufpe-starters-final-try-outs-2019-problem-l/&title=UFPE Starters Final Try-Outs 2019 Problem L"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sukunashinmyoumaru-hust.github.io/project/2020/05/24/ufpe-starters-final-try-outs-2019-problem-l/&name=UFPE Starters Final Try-Outs 2019 Problem L&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sukunashinmyoumaru-hust.github.io/project/2020/05/24/ufpe-starters-final-try-outs-2019-problem-l/&t=UFPE Starters Final Try-Outs 2019 Problem L"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sukunashinmyoumaru-hust.github.io/2020/05/24/ufpe-starters-final-try-outs-2019-problem-l/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sukunashinmyoumaru-hust.github.io/2020/05/24/ufpe-starters-final-try-outs-2019-problem-l/&text=UFPE Starters Final Try-Outs 2019 Problem L"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sukunashinmyoumaru-hust.github.io/2020/05/24/ufpe-starters-final-try-outs-2019-problem-l/&title=UFPE Starters Final Try-Outs 2019 Problem L"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sukunashinmyoumaru-hust.github.io/2020/05/24/ufpe-starters-final-try-outs-2019-problem-l/&is_video=false&description=UFPE Starters Final Try-Outs 2019 Problem L"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=UFPE Starters Final Try-Outs 2019 Problem L&body=Check out this article: https://sukunashinmyoumaru-hust.github.io/2020/05/24/ufpe-starters-final-try-outs-2019-problem-l/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sukunashinmyoumaru-hust.github.io/2020/05/24/ufpe-starters-final-try-outs-2019-problem-l/&title=UFPE Starters Final Try-Outs 2019 Problem L"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sukunashinmyoumaru-hust.github.io/2020/05/24/ufpe-starters-final-try-outs-2019-problem-l/&title=UFPE Starters Final Try-Outs 2019 Problem L"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sukunashinmyoumaru-hust.github.io/2020/05/24/ufpe-starters-final-try-outs-2019-problem-l/&title=UFPE Starters Final Try-Outs 2019 Problem L"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sukunashinmyoumaru-hust.github.io/2020/05/24/ufpe-starters-final-try-outs-2019-problem-l/&title=UFPE Starters Final Try-Outs 2019 Problem L"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sukunashinmyoumaru-hust.github.io/2020/05/24/ufpe-starters-final-try-outs-2019-problem-l/&name=UFPE Starters Final Try-Outs 2019 Problem L&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sukunashinmyoumaru-hust.github.io/2020/05/24/ufpe-starters-final-try-outs-2019-problem-l/&t=UFPE Starters Final Try-Outs 2019 Problem L"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -146,7 +146,7 @@
       
     <div class="article-category">
         <i class="fa-solid fa-archive"></i>
-        <a class="category-link" href="/project/categories/%E7%AE%97%E6%B3%95%E9%A2%98/">算法题</a>
+        <a class="category-link" href="/categories/%E7%AE%97%E6%B3%95%E9%A2%98/">算法题</a>
     </div>
 
 
@@ -175,11 +175,11 @@
     <div id="nav-footer" style="display: none">
       <ul>
         
-          <li><a href="/project/">首页</a></li>
+          <li><a href="/">首页</a></li>
         
-          <li><a href="/project/about/">关于</a></li>
+          <li><a href="/about/">关于</a></li>
         
-          <li><a href="/project/archives/">归档</a></li>
+          <li><a href="/archives/">归档</a></li>
         
           <li><a target="_blank" rel="noopener" href="https://github.com/SukunaShinmyoumaru-hust/Hust-opensource-Xuejie">HUST-学解</a></li>
         
@@ -191,17 +191,17 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sukunashinmyoumaru-hust.github.io/project/2020/05/24/ufpe-starters-final-try-outs-2019-problem-l/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sukunashinmyoumaru-hust.github.io/project/2020/05/24/ufpe-starters-final-try-outs-2019-problem-l/&text=UFPE Starters Final Try-Outs 2019 Problem L"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sukunashinmyoumaru-hust.github.io/project/2020/05/24/ufpe-starters-final-try-outs-2019-problem-l/&title=UFPE Starters Final Try-Outs 2019 Problem L"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sukunashinmyoumaru-hust.github.io/project/2020/05/24/ufpe-starters-final-try-outs-2019-problem-l/&is_video=false&description=UFPE Starters Final Try-Outs 2019 Problem L"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=UFPE Starters Final Try-Outs 2019 Problem L&body=Check out this article: https://sukunashinmyoumaru-hust.github.io/project/2020/05/24/ufpe-starters-final-try-outs-2019-problem-l/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sukunashinmyoumaru-hust.github.io/project/2020/05/24/ufpe-starters-final-try-outs-2019-problem-l/&title=UFPE Starters Final Try-Outs 2019 Problem L"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sukunashinmyoumaru-hust.github.io/project/2020/05/24/ufpe-starters-final-try-outs-2019-problem-l/&title=UFPE Starters Final Try-Outs 2019 Problem L"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sukunashinmyoumaru-hust.github.io/project/2020/05/24/ufpe-starters-final-try-outs-2019-problem-l/&title=UFPE Starters Final Try-Outs 2019 Problem L"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sukunashinmyoumaru-hust.github.io/project/2020/05/24/ufpe-starters-final-try-outs-2019-problem-l/&title=UFPE Starters Final Try-Outs 2019 Problem L"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sukunashinmyoumaru-hust.github.io/project/2020/05/24/ufpe-starters-final-try-outs-2019-problem-l/&name=UFPE Starters Final Try-Outs 2019 Problem L&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sukunashinmyoumaru-hust.github.io/project/2020/05/24/ufpe-starters-final-try-outs-2019-problem-l/&t=UFPE Starters Final Try-Outs 2019 Problem L"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sukunashinmyoumaru-hust.github.io/2020/05/24/ufpe-starters-final-try-outs-2019-problem-l/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sukunashinmyoumaru-hust.github.io/2020/05/24/ufpe-starters-final-try-outs-2019-problem-l/&text=UFPE Starters Final Try-Outs 2019 Problem L"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sukunashinmyoumaru-hust.github.io/2020/05/24/ufpe-starters-final-try-outs-2019-problem-l/&title=UFPE Starters Final Try-Outs 2019 Problem L"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sukunashinmyoumaru-hust.github.io/2020/05/24/ufpe-starters-final-try-outs-2019-problem-l/&is_video=false&description=UFPE Starters Final Try-Outs 2019 Problem L"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=UFPE Starters Final Try-Outs 2019 Problem L&body=Check out this article: https://sukunashinmyoumaru-hust.github.io/2020/05/24/ufpe-starters-final-try-outs-2019-problem-l/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sukunashinmyoumaru-hust.github.io/2020/05/24/ufpe-starters-final-try-outs-2019-problem-l/&title=UFPE Starters Final Try-Outs 2019 Problem L"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sukunashinmyoumaru-hust.github.io/2020/05/24/ufpe-starters-final-try-outs-2019-problem-l/&title=UFPE Starters Final Try-Outs 2019 Problem L"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sukunashinmyoumaru-hust.github.io/2020/05/24/ufpe-starters-final-try-outs-2019-problem-l/&title=UFPE Starters Final Try-Outs 2019 Problem L"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sukunashinmyoumaru-hust.github.io/2020/05/24/ufpe-starters-final-try-outs-2019-problem-l/&title=UFPE Starters Final Try-Outs 2019 Problem L"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sukunashinmyoumaru-hust.github.io/2020/05/24/ufpe-starters-final-try-outs-2019-problem-l/&name=UFPE Starters Final Try-Outs 2019 Problem L&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sukunashinmyoumaru-hust.github.io/2020/05/24/ufpe-starters-final-try-outs-2019-problem-l/&t=UFPE Starters Final Try-Outs 2019 Problem L"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -229,11 +229,11 @@
     <nav>
       <ul>
         <!--
-       --><li><a href="/project/">首页</a></li><!--
+       --><li><a href="/">首页</a></li><!--
      --><!--
-       --><li><a href="/project/about/">关于</a></li><!--
+       --><li><a href="/about/">关于</a></li><!--
      --><!--
-       --><li><a href="/project/archives/">归档</a></li><!--
+       --><li><a href="/archives/">归档</a></li><!--
      --><!--
        --><li><a target="_blank" rel="noopener" href="https://github.com/SukunaShinmyoumaru-hust/Hust-opensource-Xuejie">HUST-学解</a></li><!--
      -->
@@ -283,7 +283,7 @@
   </script>
 
 
-<script src="/project/js/main.js"></script>
+<script src="/js/main.js"></script>
 
 <!-- search -->
 

@@ -9,7 +9,7 @@
     <meta name="description" content="[latexpage] 题目描述您需要写一种数据结构（可参考题目标题），来维护一些数，其中需要提供以下操作：  插入$x$ 数 删除 $x$ 数(若有多个相同的数，因只删除一个) 查询 $x$ 数的排名(排名定义为比当前数小的数的个数 +1 ) 查询排名为 $x$ 的数 求 $x$ 的前驱(前驱定义为小于 $x$，且最大的数) 求 $x$ 的后继(后继定义为大于 $x$，且最小的数)  输入格式第">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Splay模版:P3369[模版&#x2F;普通平衡树]">
-<meta property="og:url" content="https://sukunashinmyoumaru-hust.github.io/project/2022/03/30/splay/index.html">
+<meta property="og:url" content="https://sukunashinmyoumaru-hust.github.io/2022/03/30/splay/index.html">
 <meta property="og:site_name" content="Suwa shrine">
 <meta property="og:description" content="[latexpage] 题目描述您需要写一种数据结构（可参考题目标题），来维护一些数，其中需要提供以下操作：  插入$x$ 数 删除 $x$ 数(若有多个相同的数，因只删除一个) 查询 $x$ 数的排名(排名定义为比当前数小的数的个数 +1 ) 查询排名为 $x$ 的数 求 $x$ 的前驱(前驱定义为小于 $x$，且最大的数) 求 $x$ 的后继(后继定义为大于 $x$，且最小的数)  输入格式第">
 <meta property="og:locale" content="zh_CN">
@@ -24,17 +24,17 @@
     
       
         
-          <link rel="shortcut icon" href="/project/images/favicon.ico">
+          <link rel="shortcut icon" href="/images/favicon.ico">
         
       
       
         
-          <link rel="icon" type="image/png" href="/project/images/favicon-192x192.png" sizes="192x192">
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
         
       
       
         
-          <link rel="apple-touch-icon" sizes="180x180" href="/project/images/favicon-192x192.png">
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-192x192.png">
         
       
     
@@ -49,7 +49,7 @@
 
     <!-- styles -->
     
-<link rel="stylesheet" href="/project/css/style.css">
+<link rel="stylesheet" href="/css/style.css">
 
     <!-- persian styles -->
     
@@ -70,11 +70,11 @@
     <span id="nav">
       <ul>
         <!--
-       --><li><a href="/project/">首页</a></li><!--
+       --><li><a href="/">首页</a></li><!--
      --><!--
-       --><li><a href="/project/about/">关于</a></li><!--
+       --><li><a href="/about/">关于</a></li><!--
      --><!--
-       --><li><a href="/project/archives/">归档</a></li><!--
+       --><li><a href="/archives/">归档</a></li><!--
      --><!--
        --><li><a target="_blank" rel="noopener" href="https://github.com/SukunaShinmyoumaru-hust/Hust-opensource-Xuejie">HUST-学解</a></li><!--
      -->
@@ -84,10 +84,10 @@
     <span id="actions">
       <ul>
         
-        <li><a class="icon" aria-label="上一篇" href="/project/2022/04/17/luogu-al/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="上一篇" href="/2022/04/17/luogu-al/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
         
-        <li><a class="icon" aria-label="下一篇" href="/project/2022/03/17/missing-semester/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="下一篇" href="/2022/03/17/missing-semester/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
         <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
         <li><a class="icon" aria-label="分享文章" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
@@ -100,17 +100,17 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sukunashinmyoumaru-hust.github.io/project/2022/03/30/splay/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sukunashinmyoumaru-hust.github.io/project/2022/03/30/splay/&text=Splay模版:P3369[模版/普通平衡树]"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sukunashinmyoumaru-hust.github.io/project/2022/03/30/splay/&title=Splay模版:P3369[模版/普通平衡树]"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sukunashinmyoumaru-hust.github.io/project/2022/03/30/splay/&is_video=false&description=Splay模版:P3369[模版/普通平衡树]"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Splay模版:P3369[模版/普通平衡树]&body=Check out this article: https://sukunashinmyoumaru-hust.github.io/project/2022/03/30/splay/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sukunashinmyoumaru-hust.github.io/project/2022/03/30/splay/&title=Splay模版:P3369[模版/普通平衡树]"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sukunashinmyoumaru-hust.github.io/project/2022/03/30/splay/&title=Splay模版:P3369[模版/普通平衡树]"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sukunashinmyoumaru-hust.github.io/project/2022/03/30/splay/&title=Splay模版:P3369[模版/普通平衡树]"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sukunashinmyoumaru-hust.github.io/project/2022/03/30/splay/&title=Splay模版:P3369[模版/普通平衡树]"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sukunashinmyoumaru-hust.github.io/project/2022/03/30/splay/&name=Splay模版:P3369[模版/普通平衡树]&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sukunashinmyoumaru-hust.github.io/project/2022/03/30/splay/&t=Splay模版:P3369[模版/普通平衡树]"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sukunashinmyoumaru-hust.github.io/2022/03/30/splay/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sukunashinmyoumaru-hust.github.io/2022/03/30/splay/&text=Splay模版:P3369[模版/普通平衡树]"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sukunashinmyoumaru-hust.github.io/2022/03/30/splay/&title=Splay模版:P3369[模版/普通平衡树]"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sukunashinmyoumaru-hust.github.io/2022/03/30/splay/&is_video=false&description=Splay模版:P3369[模版/普通平衡树]"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Splay模版:P3369[模版/普通平衡树]&body=Check out this article: https://sukunashinmyoumaru-hust.github.io/2022/03/30/splay/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sukunashinmyoumaru-hust.github.io/2022/03/30/splay/&title=Splay模版:P3369[模版/普通平衡树]"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sukunashinmyoumaru-hust.github.io/2022/03/30/splay/&title=Splay模版:P3369[模版/普通平衡树]"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sukunashinmyoumaru-hust.github.io/2022/03/30/splay/&title=Splay模版:P3369[模版/普通平衡树]"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sukunashinmyoumaru-hust.github.io/2022/03/30/splay/&title=Splay模版:P3369[模版/普通平衡树]"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sukunashinmyoumaru-hust.github.io/2022/03/30/splay/&name=Splay模版:P3369[模版/普通平衡树]&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sukunashinmyoumaru-hust.github.io/2022/03/30/splay/&t=Splay模版:P3369[模版/普通平衡树]"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -151,7 +151,7 @@
       
     <div class="article-category">
         <i class="fa-solid fa-archive"></i>
-        <a class="category-link" href="/project/categories/%E7%AE%97%E6%B3%95%E9%A2%98/">算法题</a>
+        <a class="category-link" href="/categories/%E7%AE%97%E6%B3%95%E9%A2%98/">算法题</a>
     </div>
 
 
@@ -233,11 +233,11 @@
     <div id="nav-footer" style="display: none">
       <ul>
         
-          <li><a href="/project/">首页</a></li>
+          <li><a href="/">首页</a></li>
         
-          <li><a href="/project/about/">关于</a></li>
+          <li><a href="/about/">关于</a></li>
         
-          <li><a href="/project/archives/">归档</a></li>
+          <li><a href="/archives/">归档</a></li>
         
           <li><a target="_blank" rel="noopener" href="https://github.com/SukunaShinmyoumaru-hust/Hust-opensource-Xuejie">HUST-学解</a></li>
         
@@ -253,17 +253,17 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sukunashinmyoumaru-hust.github.io/project/2022/03/30/splay/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sukunashinmyoumaru-hust.github.io/project/2022/03/30/splay/&text=Splay模版:P3369[模版/普通平衡树]"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sukunashinmyoumaru-hust.github.io/project/2022/03/30/splay/&title=Splay模版:P3369[模版/普通平衡树]"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sukunashinmyoumaru-hust.github.io/project/2022/03/30/splay/&is_video=false&description=Splay模版:P3369[模版/普通平衡树]"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Splay模版:P3369[模版/普通平衡树]&body=Check out this article: https://sukunashinmyoumaru-hust.github.io/project/2022/03/30/splay/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sukunashinmyoumaru-hust.github.io/project/2022/03/30/splay/&title=Splay模版:P3369[模版/普通平衡树]"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sukunashinmyoumaru-hust.github.io/project/2022/03/30/splay/&title=Splay模版:P3369[模版/普通平衡树]"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sukunashinmyoumaru-hust.github.io/project/2022/03/30/splay/&title=Splay模版:P3369[模版/普通平衡树]"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sukunashinmyoumaru-hust.github.io/project/2022/03/30/splay/&title=Splay模版:P3369[模版/普通平衡树]"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sukunashinmyoumaru-hust.github.io/project/2022/03/30/splay/&name=Splay模版:P3369[模版/普通平衡树]&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sukunashinmyoumaru-hust.github.io/project/2022/03/30/splay/&t=Splay模版:P3369[模版/普通平衡树]"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sukunashinmyoumaru-hust.github.io/2022/03/30/splay/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sukunashinmyoumaru-hust.github.io/2022/03/30/splay/&text=Splay模版:P3369[模版/普通平衡树]"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sukunashinmyoumaru-hust.github.io/2022/03/30/splay/&title=Splay模版:P3369[模版/普通平衡树]"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sukunashinmyoumaru-hust.github.io/2022/03/30/splay/&is_video=false&description=Splay模版:P3369[模版/普通平衡树]"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Splay模版:P3369[模版/普通平衡树]&body=Check out this article: https://sukunashinmyoumaru-hust.github.io/2022/03/30/splay/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sukunashinmyoumaru-hust.github.io/2022/03/30/splay/&title=Splay模版:P3369[模版/普通平衡树]"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sukunashinmyoumaru-hust.github.io/2022/03/30/splay/&title=Splay模版:P3369[模版/普通平衡树]"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sukunashinmyoumaru-hust.github.io/2022/03/30/splay/&title=Splay模版:P3369[模版/普通平衡树]"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sukunashinmyoumaru-hust.github.io/2022/03/30/splay/&title=Splay模版:P3369[模版/普通平衡树]"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sukunashinmyoumaru-hust.github.io/2022/03/30/splay/&name=Splay模版:P3369[模版/普通平衡树]&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sukunashinmyoumaru-hust.github.io/2022/03/30/splay/&t=Splay模版:P3369[模版/普通平衡树]"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -293,11 +293,11 @@
     <nav>
       <ul>
         <!--
-       --><li><a href="/project/">首页</a></li><!--
+       --><li><a href="/">首页</a></li><!--
      --><!--
-       --><li><a href="/project/about/">关于</a></li><!--
+       --><li><a href="/about/">关于</a></li><!--
      --><!--
-       --><li><a href="/project/archives/">归档</a></li><!--
+       --><li><a href="/archives/">归档</a></li><!--
      --><!--
        --><li><a target="_blank" rel="noopener" href="https://github.com/SukunaShinmyoumaru-hust/Hust-opensource-Xuejie">HUST-学解</a></li><!--
      -->
@@ -347,7 +347,7 @@
   </script>
 
 
-<script src="/project/js/main.js"></script>
+<script src="/js/main.js"></script>
 
 <!-- search -->
 

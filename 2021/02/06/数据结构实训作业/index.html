@@ -9,7 +9,7 @@
     <meta name="description" content="(I) 第一关 本关任务：已知顺序表L中的数据元素递增有序，数据元素类型为int。相关定义如下： #define LIST_INIT_SIZE 20 #define LISTINCREMENT 10 typedef int ElemType; typedef struct { ElemType *elem; int length; int listsize; } SqList; 试写一算法，将x插">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据结构实训作业">
-<meta property="og:url" content="https://sukunashinmyoumaru-hust.github.io/project/2021/02/06/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E8%AE%AD%E4%BD%9C%E4%B8%9A/index.html">
+<meta property="og:url" content="https://sukunashinmyoumaru-hust.github.io/2021/02/06/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E8%AE%AD%E4%BD%9C%E4%B8%9A/index.html">
 <meta property="og:site_name" content="Suwa shrine">
 <meta property="og:description" content="(I) 第一关 本关任务：已知顺序表L中的数据元素递增有序，数据元素类型为int。相关定义如下： #define LIST_INIT_SIZE 20 #define LISTINCREMENT 10 typedef int ElemType; typedef struct { ElemType *elem; int length; int listsize; } SqList; 试写一算法，将x插">
 <meta property="og:locale" content="zh_CN">
@@ -23,17 +23,17 @@
     
       
         
-          <link rel="shortcut icon" href="/project/images/favicon.ico">
+          <link rel="shortcut icon" href="/images/favicon.ico">
         
       
       
         
-          <link rel="icon" type="image/png" href="/project/images/favicon-192x192.png" sizes="192x192">
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
         
       
       
         
-          <link rel="apple-touch-icon" sizes="180x180" href="/project/images/favicon-192x192.png">
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-192x192.png">
         
       
     
@@ -48,7 +48,7 @@
 
     <!-- styles -->
     
-<link rel="stylesheet" href="/project/css/style.css">
+<link rel="stylesheet" href="/css/style.css">
 
     <!-- persian styles -->
     
@@ -69,11 +69,11 @@
     <span id="nav">
       <ul>
         <!--
-       --><li><a href="/project/">首页</a></li><!--
+       --><li><a href="/">首页</a></li><!--
      --><!--
-       --><li><a href="/project/about/">关于</a></li><!--
+       --><li><a href="/about/">关于</a></li><!--
      --><!--
-       --><li><a href="/project/archives/">归档</a></li><!--
+       --><li><a href="/archives/">归档</a></li><!--
      --><!--
        --><li><a target="_blank" rel="noopener" href="https://github.com/SukunaShinmyoumaru-hust/Hust-opensource-Xuejie">HUST-学解</a></li><!--
      -->
@@ -83,10 +83,10 @@
     <span id="actions">
       <ul>
         
-        <li><a class="icon" aria-label="上一篇" href="/project/2021/02/06/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%9B%B8%E5%85%B3%E4%B8%93%E9%A2%98/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="上一篇" href="/2021/02/06/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%9B%B8%E5%85%B3%E4%B8%93%E9%A2%98/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
         
-        <li><a class="icon" aria-label="下一篇" href="/project/2020/10/11/%E7%83%82%E6%B4%BB%E7%94%A8cmd%E7%AA%97%E5%8F%A3%E8%BE%93%E5%87%BA%E5%9B%BE%E7%94%BB/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="下一篇" href="/2020/10/11/%E7%83%82%E6%B4%BB%E7%94%A8cmd%E7%AA%97%E5%8F%A3%E8%BE%93%E5%87%BA%E5%9B%BE%E7%94%BB/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
         <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
         <li><a class="icon" aria-label="分享文章" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
@@ -99,17 +99,17 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sukunashinmyoumaru-hust.github.io/project/2021/02/06/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E8%AE%AD%E4%BD%9C%E4%B8%9A/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sukunashinmyoumaru-hust.github.io/project/2021/02/06/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E8%AE%AD%E4%BD%9C%E4%B8%9A/&text=数据结构实训作业"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sukunashinmyoumaru-hust.github.io/project/2021/02/06/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E8%AE%AD%E4%BD%9C%E4%B8%9A/&title=数据结构实训作业"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sukunashinmyoumaru-hust.github.io/project/2021/02/06/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E8%AE%AD%E4%BD%9C%E4%B8%9A/&is_video=false&description=数据结构实训作业"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=数据结构实训作业&body=Check out this article: https://sukunashinmyoumaru-hust.github.io/project/2021/02/06/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E8%AE%AD%E4%BD%9C%E4%B8%9A/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sukunashinmyoumaru-hust.github.io/project/2021/02/06/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E8%AE%AD%E4%BD%9C%E4%B8%9A/&title=数据结构实训作业"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sukunashinmyoumaru-hust.github.io/project/2021/02/06/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E8%AE%AD%E4%BD%9C%E4%B8%9A/&title=数据结构实训作业"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sukunashinmyoumaru-hust.github.io/project/2021/02/06/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E8%AE%AD%E4%BD%9C%E4%B8%9A/&title=数据结构实训作业"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sukunashinmyoumaru-hust.github.io/project/2021/02/06/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E8%AE%AD%E4%BD%9C%E4%B8%9A/&title=数据结构实训作业"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sukunashinmyoumaru-hust.github.io/project/2021/02/06/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E8%AE%AD%E4%BD%9C%E4%B8%9A/&name=数据结构实训作业&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sukunashinmyoumaru-hust.github.io/project/2021/02/06/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E8%AE%AD%E4%BD%9C%E4%B8%9A/&t=数据结构实训作业"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sukunashinmyoumaru-hust.github.io/2021/02/06/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E8%AE%AD%E4%BD%9C%E4%B8%9A/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sukunashinmyoumaru-hust.github.io/2021/02/06/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E8%AE%AD%E4%BD%9C%E4%B8%9A/&text=数据结构实训作业"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sukunashinmyoumaru-hust.github.io/2021/02/06/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E8%AE%AD%E4%BD%9C%E4%B8%9A/&title=数据结构实训作业"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sukunashinmyoumaru-hust.github.io/2021/02/06/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E8%AE%AD%E4%BD%9C%E4%B8%9A/&is_video=false&description=数据结构实训作业"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=数据结构实训作业&body=Check out this article: https://sukunashinmyoumaru-hust.github.io/2021/02/06/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E8%AE%AD%E4%BD%9C%E4%B8%9A/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sukunashinmyoumaru-hust.github.io/2021/02/06/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E8%AE%AD%E4%BD%9C%E4%B8%9A/&title=数据结构实训作业"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sukunashinmyoumaru-hust.github.io/2021/02/06/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E8%AE%AD%E4%BD%9C%E4%B8%9A/&title=数据结构实训作业"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sukunashinmyoumaru-hust.github.io/2021/02/06/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E8%AE%AD%E4%BD%9C%E4%B8%9A/&title=数据结构实训作业"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sukunashinmyoumaru-hust.github.io/2021/02/06/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E8%AE%AD%E4%BD%9C%E4%B8%9A/&title=数据结构实训作业"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sukunashinmyoumaru-hust.github.io/2021/02/06/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E8%AE%AD%E4%BD%9C%E4%B8%9A/&name=数据结构实训作业&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sukunashinmyoumaru-hust.github.io/2021/02/06/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E8%AE%AD%E4%BD%9C%E4%B8%9A/&t=数据结构实训作业"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -146,7 +146,7 @@
       
     <div class="article-category">
         <i class="fa-solid fa-archive"></i>
-        <a class="category-link" href="/project/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/">实验记录</a>
+        <a class="category-link" href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/">实验记录</a>
     </div>
 
 
@@ -259,11 +259,11 @@ while (pb &amp;&amp; pc &amp;&amp; pa)&#123;
     <div id="nav-footer" style="display: none">
       <ul>
         
-          <li><a href="/project/">首页</a></li>
+          <li><a href="/">首页</a></li>
         
-          <li><a href="/project/about/">关于</a></li>
+          <li><a href="/about/">关于</a></li>
         
-          <li><a href="/project/archives/">归档</a></li>
+          <li><a href="/archives/">归档</a></li>
         
           <li><a target="_blank" rel="noopener" href="https://github.com/SukunaShinmyoumaru-hust/Hust-opensource-Xuejie">HUST-学解</a></li>
         
@@ -275,17 +275,17 @@ while (pb &amp;&amp; pc &amp;&amp; pa)&#123;
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sukunashinmyoumaru-hust.github.io/project/2021/02/06/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E8%AE%AD%E4%BD%9C%E4%B8%9A/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sukunashinmyoumaru-hust.github.io/project/2021/02/06/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E8%AE%AD%E4%BD%9C%E4%B8%9A/&text=数据结构实训作业"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sukunashinmyoumaru-hust.github.io/project/2021/02/06/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E8%AE%AD%E4%BD%9C%E4%B8%9A/&title=数据结构实训作业"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sukunashinmyoumaru-hust.github.io/project/2021/02/06/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E8%AE%AD%E4%BD%9C%E4%B8%9A/&is_video=false&description=数据结构实训作业"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=数据结构实训作业&body=Check out this article: https://sukunashinmyoumaru-hust.github.io/project/2021/02/06/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E8%AE%AD%E4%BD%9C%E4%B8%9A/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sukunashinmyoumaru-hust.github.io/project/2021/02/06/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E8%AE%AD%E4%BD%9C%E4%B8%9A/&title=数据结构实训作业"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sukunashinmyoumaru-hust.github.io/project/2021/02/06/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E8%AE%AD%E4%BD%9C%E4%B8%9A/&title=数据结构实训作业"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sukunashinmyoumaru-hust.github.io/project/2021/02/06/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E8%AE%AD%E4%BD%9C%E4%B8%9A/&title=数据结构实训作业"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sukunashinmyoumaru-hust.github.io/project/2021/02/06/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E8%AE%AD%E4%BD%9C%E4%B8%9A/&title=数据结构实训作业"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sukunashinmyoumaru-hust.github.io/project/2021/02/06/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E8%AE%AD%E4%BD%9C%E4%B8%9A/&name=数据结构实训作业&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sukunashinmyoumaru-hust.github.io/project/2021/02/06/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E8%AE%AD%E4%BD%9C%E4%B8%9A/&t=数据结构实训作业"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sukunashinmyoumaru-hust.github.io/2021/02/06/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E8%AE%AD%E4%BD%9C%E4%B8%9A/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sukunashinmyoumaru-hust.github.io/2021/02/06/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E8%AE%AD%E4%BD%9C%E4%B8%9A/&text=数据结构实训作业"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sukunashinmyoumaru-hust.github.io/2021/02/06/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E8%AE%AD%E4%BD%9C%E4%B8%9A/&title=数据结构实训作业"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sukunashinmyoumaru-hust.github.io/2021/02/06/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E8%AE%AD%E4%BD%9C%E4%B8%9A/&is_video=false&description=数据结构实训作业"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=数据结构实训作业&body=Check out this article: https://sukunashinmyoumaru-hust.github.io/2021/02/06/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E8%AE%AD%E4%BD%9C%E4%B8%9A/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sukunashinmyoumaru-hust.github.io/2021/02/06/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E8%AE%AD%E4%BD%9C%E4%B8%9A/&title=数据结构实训作业"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sukunashinmyoumaru-hust.github.io/2021/02/06/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E8%AE%AD%E4%BD%9C%E4%B8%9A/&title=数据结构实训作业"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sukunashinmyoumaru-hust.github.io/2021/02/06/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E8%AE%AD%E4%BD%9C%E4%B8%9A/&title=数据结构实训作业"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sukunashinmyoumaru-hust.github.io/2021/02/06/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E8%AE%AD%E4%BD%9C%E4%B8%9A/&title=数据结构实训作业"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sukunashinmyoumaru-hust.github.io/2021/02/06/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E8%AE%AD%E4%BD%9C%E4%B8%9A/&name=数据结构实训作业&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sukunashinmyoumaru-hust.github.io/2021/02/06/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E8%AE%AD%E4%BD%9C%E4%B8%9A/&t=数据结构实训作业"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -313,11 +313,11 @@ while (pb &amp;&amp; pc &amp;&amp; pa)&#123;
     <nav>
       <ul>
         <!--
-       --><li><a href="/project/">首页</a></li><!--
+       --><li><a href="/">首页</a></li><!--
      --><!--
-       --><li><a href="/project/about/">关于</a></li><!--
+       --><li><a href="/about/">关于</a></li><!--
      --><!--
-       --><li><a href="/project/archives/">归档</a></li><!--
+       --><li><a href="/archives/">归档</a></li><!--
      --><!--
        --><li><a target="_blank" rel="noopener" href="https://github.com/SukunaShinmyoumaru-hust/Hust-opensource-Xuejie">HUST-学解</a></li><!--
      -->
@@ -367,7 +367,7 @@ while (pb &amp;&amp; pc &amp;&amp; pa)&#123;
   </script>
 
 
-<script src="/project/js/main.js"></script>
+<script src="/js/main.js"></script>
 
 <!-- search -->
 
