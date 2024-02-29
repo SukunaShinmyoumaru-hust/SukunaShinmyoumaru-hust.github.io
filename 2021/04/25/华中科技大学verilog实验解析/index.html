@@ -9,7 +9,7 @@
     <meta name="description" content="实验二:基本的组合逻辑电路 这里只展示2.3的一部分代码 12345678910111213141516module decoder_3to8(in, out);    input [2:0] in;    output reg [7:0] out;        always@(in)          case(in)              3&#x27;b000 : out[7:0] &#x3D;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="华中科技大学Verilog实验解析">
-<meta property="og:url" content="https://sukunashinmyoumaru-hust.github.io/2021/04/25/%E5%8D%8E%E4%B8%AD%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%A6verilog%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90/index.html">
+<meta property="og:url" content="https://sukunahust.moe/2021/04/25/%E5%8D%8E%E4%B8%AD%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%A6verilog%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90/index.html">
 <meta property="og:site_name" content="Suwa shrine">
 <meta property="og:description" content="实验二:基本的组合逻辑电路 这里只展示2.3的一部分代码 12345678910111213141516module decoder_3to8(in, out);    input [2:0] in;    output reg [7:0] out;        always@(in)          case(in)              3&#x27;b000 : out[7:0] &#x3D;">
 <meta property="og:locale" content="zh_CN">
@@ -74,6 +74,10 @@
        --><li><a href="/archives/">归档</a></li><!--
      --><!--
        --><li><a target="_blank" rel="noopener" href="https://github.com/SukunaShinmyoumaru-hust/Hust-opensource-Xuejie">HUST-学解</a></li><!--
+     --><!--
+       --><li><a href="/picture/">赠画感谢</a></li><!--
+     --><!--
+       --><li><a href="/ziliao/">资料下载</a></li><!--
      -->
       </ul>
     </span>
@@ -97,17 +101,17 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sukunashinmyoumaru-hust.github.io/2021/04/25/%E5%8D%8E%E4%B8%AD%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%A6verilog%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sukunashinmyoumaru-hust.github.io/2021/04/25/%E5%8D%8E%E4%B8%AD%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%A6verilog%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90/&text=华中科技大学Verilog实验解析"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sukunashinmyoumaru-hust.github.io/2021/04/25/%E5%8D%8E%E4%B8%AD%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%A6verilog%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90/&title=华中科技大学Verilog实验解析"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sukunashinmyoumaru-hust.github.io/2021/04/25/%E5%8D%8E%E4%B8%AD%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%A6verilog%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90/&is_video=false&description=华中科技大学Verilog实验解析"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=华中科技大学Verilog实验解析&body=Check out this article: https://sukunashinmyoumaru-hust.github.io/2021/04/25/%E5%8D%8E%E4%B8%AD%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%A6verilog%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sukunashinmyoumaru-hust.github.io/2021/04/25/%E5%8D%8E%E4%B8%AD%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%A6verilog%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90/&title=华中科技大学Verilog实验解析"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sukunashinmyoumaru-hust.github.io/2021/04/25/%E5%8D%8E%E4%B8%AD%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%A6verilog%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90/&title=华中科技大学Verilog实验解析"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sukunashinmyoumaru-hust.github.io/2021/04/25/%E5%8D%8E%E4%B8%AD%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%A6verilog%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90/&title=华中科技大学Verilog实验解析"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sukunashinmyoumaru-hust.github.io/2021/04/25/%E5%8D%8E%E4%B8%AD%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%A6verilog%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90/&title=华中科技大学Verilog实验解析"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sukunashinmyoumaru-hust.github.io/2021/04/25/%E5%8D%8E%E4%B8%AD%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%A6verilog%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90/&name=华中科技大学Verilog实验解析&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sukunashinmyoumaru-hust.github.io/2021/04/25/%E5%8D%8E%E4%B8%AD%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%A6verilog%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90/&t=华中科技大学Verilog实验解析"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sukunahust.moe/2021/04/25/%E5%8D%8E%E4%B8%AD%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%A6verilog%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sukunahust.moe/2021/04/25/%E5%8D%8E%E4%B8%AD%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%A6verilog%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90/&text=华中科技大学Verilog实验解析"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sukunahust.moe/2021/04/25/%E5%8D%8E%E4%B8%AD%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%A6verilog%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90/&title=华中科技大学Verilog实验解析"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sukunahust.moe/2021/04/25/%E5%8D%8E%E4%B8%AD%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%A6verilog%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90/&is_video=false&description=华中科技大学Verilog实验解析"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=华中科技大学Verilog实验解析&body=Check out this article: https://sukunahust.moe/2021/04/25/%E5%8D%8E%E4%B8%AD%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%A6verilog%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sukunahust.moe/2021/04/25/%E5%8D%8E%E4%B8%AD%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%A6verilog%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90/&title=华中科技大学Verilog实验解析"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sukunahust.moe/2021/04/25/%E5%8D%8E%E4%B8%AD%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%A6verilog%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90/&title=华中科技大学Verilog实验解析"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sukunahust.moe/2021/04/25/%E5%8D%8E%E4%B8%AD%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%A6verilog%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90/&title=华中科技大学Verilog实验解析"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sukunahust.moe/2021/04/25/%E5%8D%8E%E4%B8%AD%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%A6verilog%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90/&title=华中科技大学Verilog实验解析"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sukunahust.moe/2021/04/25/%E5%8D%8E%E4%B8%AD%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%A6verilog%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90/&name=华中科技大学Verilog实验解析&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sukunahust.moe/2021/04/25/%E5%8D%8E%E4%B8%AD%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%A6verilog%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90/&t=华中科技大学Verilog实验解析"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -215,6 +219,10 @@
         
           <li><a target="_blank" rel="noopener" href="https://github.com/SukunaShinmyoumaru-hust/Hust-opensource-Xuejie">HUST-学解</a></li>
         
+          <li><a href="/picture/">赠画感谢</a></li>
+        
+          <li><a href="/ziliao/">资料下载</a></li>
+        
       </ul>
     </div>
 
@@ -223,17 +231,17 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sukunashinmyoumaru-hust.github.io/2021/04/25/%E5%8D%8E%E4%B8%AD%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%A6verilog%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sukunashinmyoumaru-hust.github.io/2021/04/25/%E5%8D%8E%E4%B8%AD%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%A6verilog%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90/&text=华中科技大学Verilog实验解析"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sukunashinmyoumaru-hust.github.io/2021/04/25/%E5%8D%8E%E4%B8%AD%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%A6verilog%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90/&title=华中科技大学Verilog实验解析"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sukunashinmyoumaru-hust.github.io/2021/04/25/%E5%8D%8E%E4%B8%AD%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%A6verilog%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90/&is_video=false&description=华中科技大学Verilog实验解析"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=华中科技大学Verilog实验解析&body=Check out this article: https://sukunashinmyoumaru-hust.github.io/2021/04/25/%E5%8D%8E%E4%B8%AD%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%A6verilog%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sukunashinmyoumaru-hust.github.io/2021/04/25/%E5%8D%8E%E4%B8%AD%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%A6verilog%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90/&title=华中科技大学Verilog实验解析"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sukunashinmyoumaru-hust.github.io/2021/04/25/%E5%8D%8E%E4%B8%AD%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%A6verilog%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90/&title=华中科技大学Verilog实验解析"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sukunashinmyoumaru-hust.github.io/2021/04/25/%E5%8D%8E%E4%B8%AD%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%A6verilog%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90/&title=华中科技大学Verilog实验解析"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sukunashinmyoumaru-hust.github.io/2021/04/25/%E5%8D%8E%E4%B8%AD%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%A6verilog%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90/&title=华中科技大学Verilog实验解析"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sukunashinmyoumaru-hust.github.io/2021/04/25/%E5%8D%8E%E4%B8%AD%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%A6verilog%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90/&name=华中科技大学Verilog实验解析&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sukunashinmyoumaru-hust.github.io/2021/04/25/%E5%8D%8E%E4%B8%AD%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%A6verilog%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90/&t=华中科技大学Verilog实验解析"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sukunahust.moe/2021/04/25/%E5%8D%8E%E4%B8%AD%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%A6verilog%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sukunahust.moe/2021/04/25/%E5%8D%8E%E4%B8%AD%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%A6verilog%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90/&text=华中科技大学Verilog实验解析"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sukunahust.moe/2021/04/25/%E5%8D%8E%E4%B8%AD%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%A6verilog%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90/&title=华中科技大学Verilog实验解析"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sukunahust.moe/2021/04/25/%E5%8D%8E%E4%B8%AD%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%A6verilog%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90/&is_video=false&description=华中科技大学Verilog实验解析"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=华中科技大学Verilog实验解析&body=Check out this article: https://sukunahust.moe/2021/04/25/%E5%8D%8E%E4%B8%AD%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%A6verilog%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sukunahust.moe/2021/04/25/%E5%8D%8E%E4%B8%AD%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%A6verilog%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90/&title=华中科技大学Verilog实验解析"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sukunahust.moe/2021/04/25/%E5%8D%8E%E4%B8%AD%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%A6verilog%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90/&title=华中科技大学Verilog实验解析"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sukunahust.moe/2021/04/25/%E5%8D%8E%E4%B8%AD%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%A6verilog%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90/&title=华中科技大学Verilog实验解析"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sukunahust.moe/2021/04/25/%E5%8D%8E%E4%B8%AD%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%A6verilog%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90/&title=华中科技大学Verilog实验解析"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sukunahust.moe/2021/04/25/%E5%8D%8E%E4%B8%AD%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%A6verilog%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90/&name=华中科技大学Verilog实验解析&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sukunahust.moe/2021/04/25/%E5%8D%8E%E4%B8%AD%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%A6verilog%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90/&t=华中科技大学Verilog实验解析"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -268,6 +276,10 @@
        --><li><a href="/archives/">归档</a></li><!--
      --><!--
        --><li><a target="_blank" rel="noopener" href="https://github.com/SukunaShinmyoumaru-hust/Hust-opensource-Xuejie">HUST-学解</a></li><!--
+     --><!--
+       --><li><a href="/picture/">赠画感谢</a></li><!--
+     --><!--
+       --><li><a href="/ziliao/">资料下载</a></li><!--
      -->
       </ul>
     </nav>
