@@ -9,7 +9,7 @@
     <meta name="description" content="许可证: 版权归华中科技大学操作系统团队所有,下面是许可证书,本文档是对https:&#x2F;&#x2F;gitee.com&#x2F;hustos&#x2F;pke-doc的部分修改和解释. 3.1 实验1的基础知识本章我们将首先获得代码，接下来介绍程序的编译链接和ELF文件的基础知识，接着讲述riscv-pke操作系统内核的启动原理，最后开始实验1的3个实验。 3.1.1 RISC-V程序的编译和链接下面，我们将简要介绍RISC-">
 <meta property="og:type" content="article">
 <meta property="og:title" content="华中科技大学OS实验解析(Lab1)">
-<meta property="og:url" content="https://sukunahust.moe/2021/12/18/oslab1/index.html">
+<meta property="og:url" content="https://sukunashinmyoumaru-hust.github.io/2021/12/18/oslab1/index.html">
 <meta property="og:site_name" content="Suwa shrine">
 <meta property="og:description" content="许可证: 版权归华中科技大学操作系统团队所有,下面是许可证书,本文档是对https:&#x2F;&#x2F;gitee.com&#x2F;hustos&#x2F;pke-doc的部分修改和解释. 3.1 实验1的基础知识本章我们将首先获得代码，接下来介绍程序的编译链接和ELF文件的基础知识，接着讲述riscv-pke操作系统内核的启动原理，最后开始实验1的3个实验。 3.1.1 RISC-V程序的编译和链接下面，我们将简要介绍RISC-">
 <meta property="og:locale" content="zh_CN">
@@ -103,17 +103,17 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sukunahust.moe/2021/12/18/oslab1/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sukunahust.moe/2021/12/18/oslab1/&text=华中科技大学OS实验解析(Lab1)"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sukunahust.moe/2021/12/18/oslab1/&title=华中科技大学OS实验解析(Lab1)"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sukunahust.moe/2021/12/18/oslab1/&is_video=false&description=华中科技大学OS实验解析(Lab1)"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=华中科技大学OS实验解析(Lab1)&body=Check out this article: https://sukunahust.moe/2021/12/18/oslab1/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sukunahust.moe/2021/12/18/oslab1/&title=华中科技大学OS实验解析(Lab1)"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sukunahust.moe/2021/12/18/oslab1/&title=华中科技大学OS实验解析(Lab1)"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sukunahust.moe/2021/12/18/oslab1/&title=华中科技大学OS实验解析(Lab1)"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sukunahust.moe/2021/12/18/oslab1/&title=华中科技大学OS实验解析(Lab1)"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sukunahust.moe/2021/12/18/oslab1/&name=华中科技大学OS实验解析(Lab1)&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sukunahust.moe/2021/12/18/oslab1/&t=华中科技大学OS实验解析(Lab1)"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sukunashinmyoumaru-hust.github.io/2021/12/18/oslab1/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sukunashinmyoumaru-hust.github.io/2021/12/18/oslab1/&text=华中科技大学OS实验解析(Lab1)"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sukunashinmyoumaru-hust.github.io/2021/12/18/oslab1/&title=华中科技大学OS实验解析(Lab1)"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sukunashinmyoumaru-hust.github.io/2021/12/18/oslab1/&is_video=false&description=华中科技大学OS实验解析(Lab1)"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=华中科技大学OS实验解析(Lab1)&body=Check out this article: https://sukunashinmyoumaru-hust.github.io/2021/12/18/oslab1/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sukunashinmyoumaru-hust.github.io/2021/12/18/oslab1/&title=华中科技大学OS实验解析(Lab1)"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sukunashinmyoumaru-hust.github.io/2021/12/18/oslab1/&title=华中科技大学OS实验解析(Lab1)"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sukunashinmyoumaru-hust.github.io/2021/12/18/oslab1/&title=华中科技大学OS实验解析(Lab1)"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sukunashinmyoumaru-hust.github.io/2021/12/18/oslab1/&title=华中科技大学OS实验解析(Lab1)"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sukunashinmyoumaru-hust.github.io/2021/12/18/oslab1/&name=华中科技大学OS实验解析(Lab1)&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sukunashinmyoumaru-hust.github.io/2021/12/18/oslab1/&t=华中科技大学OS实验解析(Lab1)"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -457,17 +457,17 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sukunahust.moe/2021/12/18/oslab1/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sukunahust.moe/2021/12/18/oslab1/&text=华中科技大学OS实验解析(Lab1)"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sukunahust.moe/2021/12/18/oslab1/&title=华中科技大学OS实验解析(Lab1)"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sukunahust.moe/2021/12/18/oslab1/&is_video=false&description=华中科技大学OS实验解析(Lab1)"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=华中科技大学OS实验解析(Lab1)&body=Check out this article: https://sukunahust.moe/2021/12/18/oslab1/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sukunahust.moe/2021/12/18/oslab1/&title=华中科技大学OS实验解析(Lab1)"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sukunahust.moe/2021/12/18/oslab1/&title=华中科技大学OS实验解析(Lab1)"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sukunahust.moe/2021/12/18/oslab1/&title=华中科技大学OS实验解析(Lab1)"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sukunahust.moe/2021/12/18/oslab1/&title=华中科技大学OS实验解析(Lab1)"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sukunahust.moe/2021/12/18/oslab1/&name=华中科技大学OS实验解析(Lab1)&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sukunahust.moe/2021/12/18/oslab1/&t=华中科技大学OS实验解析(Lab1)"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sukunashinmyoumaru-hust.github.io/2021/12/18/oslab1/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sukunashinmyoumaru-hust.github.io/2021/12/18/oslab1/&text=华中科技大学OS实验解析(Lab1)"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sukunashinmyoumaru-hust.github.io/2021/12/18/oslab1/&title=华中科技大学OS实验解析(Lab1)"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sukunashinmyoumaru-hust.github.io/2021/12/18/oslab1/&is_video=false&description=华中科技大学OS实验解析(Lab1)"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=华中科技大学OS实验解析(Lab1)&body=Check out this article: https://sukunashinmyoumaru-hust.github.io/2021/12/18/oslab1/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sukunashinmyoumaru-hust.github.io/2021/12/18/oslab1/&title=华中科技大学OS实验解析(Lab1)"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sukunashinmyoumaru-hust.github.io/2021/12/18/oslab1/&title=华中科技大学OS实验解析(Lab1)"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sukunashinmyoumaru-hust.github.io/2021/12/18/oslab1/&title=华中科技大学OS实验解析(Lab1)"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sukunashinmyoumaru-hust.github.io/2021/12/18/oslab1/&title=华中科技大学OS实验解析(Lab1)"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sukunashinmyoumaru-hust.github.io/2021/12/18/oslab1/&name=华中科技大学OS实验解析(Lab1)&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sukunashinmyoumaru-hust.github.io/2021/12/18/oslab1/&t=华中科技大学OS实验解析(Lab1)"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
