@@ -14,7 +14,7 @@
 <meta property="og:description" content="暂停一下！在做pa2的时候，你可以简单的认为，nemu是模拟硬件的执行，而am-kernel（abstract-machine）模拟最基础的软件的执行。abstract-machine里面模拟了最简单的运行时环境（你可以理解为是“头文件”） 那首先，我们先尝试理解一下nemu的运行机理。nemu尝试去实现了一个简单的硬件，这个简单的硬件完成了一个简单的图灵机，就是设置一个PC，取指令，执行指令，设">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-03-14T07:37:45.000Z">
-<meta property="article:modified_time" content="2024-03-14T08:32:39.224Z">
+<meta property="article:modified_time" content="2024-03-18T00:41:55.847Z">
 <meta property="article:author" content="Sukuna">
 <meta name="twitter:card" content="summary">
     
@@ -88,7 +88,7 @@
       <ul>
         
         
-        <li><a class="icon" aria-label="下一篇" href="/2023/09/13/pa-lab1/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="下一篇" href="/2024/03/14/pa-lab3/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
         <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
         <li><a class="icon" aria-label="分享文章" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
@@ -182,7 +182,10 @@
 <p>到这里其实我们可以知道一点，其实nemu也是一个程序！这个程序在我们的cpu上执行，它的职责，其实是模拟一个cpu！这个程序分为两个部分，一个是代码部分，用于模拟cpu上的执行，一个是数据部分，用于模拟内存，这个数据部分，存储了要被模拟器模拟的程序，和要被模拟器模拟的程序所用的内存！</p>
 <h3 id="一次模拟执行"><a href="#一次模拟执行" class="headerlink" title="一次模拟执行"></a>一次模拟执行</h3><p>上文中说到，nemu执行完初始化的操作之后就开始执行用户程序的代码，那究竟是怎样执行的呢？具体的执行可以推导<code>execute()-&gt;execute_once()-&gt;isa_exectue()</code>，这是isa_execute()的执行，和五段流水线的操作一模一样。</p>
 <h3 id="IOE的实现"><a href="#IOE的实现" class="headerlink" title="IOE的实现"></a>IOE的实现</h3><p>上述实现了一个非常简单的图灵机（TRM），当时只有图灵机的实现是不足以解决问题的。只会计算的计算机，是没有人机交互的能力的，于是实现IO是迫在眉睫的问题。</p>
-<p>IO设备有两种模式，一种是中断的模式，一种是内存映射。这里使用内存映射的模式，举个例子吧！比如说你想在命令行窗口里面输出一个字母A，那么你只需要往一个特殊的地方输入”A”这个字母，那么设备从这个特殊的地方获取A这个数据，然后输出字母A。那么特殊的地方在哪里呢？在init_device()中已经规定好了。</p>
+<p>IO设备有两种模式，一种是中断的模式，一种是内存映射。这里使用内存映射的模式，举个例子吧！比如说你想在命令行窗口里面输出一个字母A，那么你只需要往一个特殊的地方输入”A”这个字母，那么设备从这个特殊的地方获取A这个数据，然后输出字母A。那么特殊的地方在哪里呢？在init_device()</p>
+<p>设备是沟通外界物理世界（模拟信号）和逻辑世界（数字信号）的桥梁。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">状态机模型            |           状态机模型之外</span><br><span class="line">  S = &lt;R, M&gt;         |        D</span><br><span class="line">  计算机/程序  &lt;----I/O指令----&gt; 设备 &lt;----模拟电路----&gt; 物理世界</span><br><span class="line">                     |</span><br><span class="line">                     |</span><br></pre></td></tr></table></figure>
+
 <h3 id="“内存”读写"><a href="#“内存”读写" class="headerlink" title="“内存”读写"></a>“内存”读写</h3><p>为什么要给内存打上引号？是因为内存的读写不再是内存本身了，为什么这样说呢？RTFSC（当执行L类指令和S类指令的时候）</p>
 <p>内存的读写要分为两部分，第一部分是设备，第二部分是内存本体。对于内存本体的读写很简单，由于这部分的实验没有页表，那么就很简单的移动处理，虚拟地址+offset&#x3D;物理地址。如果是设备读写，就要调用专门的设备读写函数。</p>
 <h3 id="在AM中加上设备读写的支持"><a href="#在AM中加上设备读写的支持" class="headerlink" title="在AM中加上设备读写的支持"></a>在AM中加上设备读写的支持</h3><p>这下知道驱动是怎么写的了吧？（应该叫驱动）比如说你要输出一个图片，经过驱动程序的转化，会变成一组S指令和L指令。本次实验的所有IOE完成全部都是这么来的，具体不表。</p>
