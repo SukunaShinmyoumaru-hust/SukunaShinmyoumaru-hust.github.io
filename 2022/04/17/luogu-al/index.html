@@ -1,191 +1,156 @@
+
+
+
+
 <!DOCTYPE html>
-<html lang=zh>
+<html lang="zh-CN">
 <head>
-    <!-- so meta -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="洛谷刷题记录(2022）P2367 语文成绩(差分前缀和)题目描述 语文老师总是写错成绩，所以当她修改成绩的时候，总是累得不行。她总是要一遍遍地给某些同学增加分数，又要注意最低分是多少。你能帮帮她吗？ 输入格式 首先我们需要做一个差分数组,差分数组是数组的两个元素之间的差值.然后对每一个区间做加减运算的时候,我们只需要在首尾处对差分树组进行操作.进行操作.然后再进行合并即可.合并的操作就是给定数组">
-<meta property="og:type" content="article">
-<meta property="og:title" content="做算法题综合">
-<meta property="og:url" content="https://sukunashinmyoumaru-hust.github.io/2022/04/17/luogu-al/index.html">
-<meta property="og:site_name" content="Suwa shrine">
-<meta property="og:description" content="洛谷刷题记录(2022）P2367 语文成绩(差分前缀和)题目描述 语文老师总是写错成绩，所以当她修改成绩的时候，总是累得不行。她总是要一遍遍地给某些同学增加分数，又要注意最低分是多少。你能帮帮她吗？ 输入格式 首先我们需要做一个差分数组,差分数组是数组的两个元素之间的差值.然后对每一个区间做加减运算的时候,我们只需要在首尾处对差分树组进行操作.进行操作.然后再进行合并即可.合并的操作就是给定数组">
-<meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://sukunahust.com/wp-content/uploads/2021/11/image-1024x916.png">
-<meta property="og:image" content="https://sukunahust.com/wp-content/uploads/2021/11/image-1-1006x1024.png">
-<meta property="og:image" content="https://sukunahust.com/wp-content/uploads/2021/11/image-2-1024x941.png">
-<meta property="og:image" content="https://sukunahust.com/wp-content/uploads/2021/11/image-4-1024x795.png">
-<meta property="og:image" content="https://sukunahust.com/wp-content/uploads/2021/11/image-5-1024x841.png">
-<meta property="og:image" content="https://sukunahust.com/wp-content/uploads/2021/11/image-6-1024x415.png">
-<meta property="og:image" content="https://sukunahust.com/wp-content/uploads/2021/11/image-12-1024x719.png">
-<meta property="og:image" content="https://sukunahust.com/wp-content/ql-cache/quicklatex.com-c34b52deeb305f9413f534b570f9fed7_l3.svg">
-<meta property="og:image" content="https://sukunahust.com/wp-content/ql-cache/quicklatex.com-131d0c2aa952b43d45bba07dfc407e81_l3.svg">
-<meta property="og:image" content="https://sukunahust.com/wp-content/ql-cache/quicklatex.com-dbe284a90142f25d096bec9394436c2a_l3.svg">
-<meta property="og:image" content="https://sukunahust.com/wp-content/ql-cache/quicklatex.com-076590b86ba207ce143e94b2e823ad03_l3.svg">
-<meta property="og:image" content="https://sukunahust.com/wp-content/ql-cache/quicklatex.com-8c01feeb7f41da7bdd5ef7afa96f778d_l3.svg">
-<meta property="og:image" content="https://sukunahust.com/wp-content/ql-cache/quicklatex.com-062b76d533174cda72c813758355544f_l3.svg">
-<meta property="og:image" content="https://sukunahust.com/wp-content/ql-cache/quicklatex.com-259b6415756adf3480ea5e8a80d1d578_l3.svg">
-<meta property="og:image" content="https://sukunahust.com/wp-content/ql-cache/quicklatex.com-0ac3fe2e28e9326d90e0c98613c1491d_l3.svg">
-<meta property="og:image" content="https://sukunahust.com/wp-content/ql-cache/quicklatex.com-da4556c0a02b580047678d308649edf9_l3.svg">
-<meta property="og:image" content="https://sukunahust.com/wp-content/ql-cache/quicklatex.com-0ac3fe2e28e9326d90e0c98613c1491d_l3.svg">
-<meta property="og:image" content="https://sukunahust.com/wp-content/ql-cache/quicklatex.com-da4556c0a02b580047678d308649edf9_l3.svg">
-<meta property="og:image" content="https://sukunahust.com/wp-content/ql-cache/quicklatex.com-73e0257639a78306bcf13ad0c68fcbdb_l3.svg">
-<meta property="og:image" content="https://sukunahust.com/wp-content/ql-cache/quicklatex.com-85ca23a1e42ccdfafecd1cf9622b44c3_l3.svg">
-<meta property="article:published_time" content="2022-04-17T13:10:37.000Z">
-<meta property="article:modified_time" content="2024-02-29T06:51:51.693Z">
-<meta property="article:author" content="Sukuna">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://sukunahust.com/wp-content/uploads/2021/11/image-1024x916.png">
-    
-    
-      
-        
-          <link rel="shortcut icon" href="/images/favicon.ico">
-        
-      
-      
-        
-          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
-        
-      
-      
-        
-          <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-192x192.png">
-        
-      
-    
-    <!-- title -->
-    <title>做算法题综合</title>
-    <!-- async scripts -->
-    <!-- Google Analytics -->
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#FFF">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="icon" type="image/ico" sizes="32x32" href="/images/favicon.ico">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
 
 
-    <!-- Umami Analytics -->
+<link rel="alternate" type="application/rss+xml" title="灵山之上神风起" href="https://sukunashinmyoumaru-hust.github.io/rss.xml" />
+<link rel="alternate" type="application/atom+xml" title="灵山之上神风起" href="https://sukunashinmyoumaru-hust.github.io/atom.xml" />
+<link rel="alternate" type="application/json" title="灵山之上神风起" href="https://sukunashinmyoumaru-hust.github.io/feed.json" />
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Mulish:300,300italic,400,400italic,700,700italic%7CFredericka%20the%20Great:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20JP:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20SC:300,300italic,400,400italic,700,700italic%7CInconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="/css/app.css?v=0.2.5">
+
+  
+
+<link rel="canonical" href="https://sukunashinmyoumaru-hust.github.io/2022/04/17/luogu-al/">
 
 
-    <!-- styles -->
-    
-<link rel="stylesheet" href="/css/style.css">
 
-    <!-- persian styles -->
-    
-    <!-- rss -->
-    
-    
-	<!-- mathjax -->
-	
+  <title>
+做算法题综合 - uncategorized |
+Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
 <meta name="generator" content="Hexo 7.1.1"></head>
-
-<body class="max-width mx-auto px3 ltr">
-    
-      <div id="header-post">
-  <a id="menu-icon" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
-  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
-  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
-  <span id="menu">
-    <span id="nav">
-      <ul>
-        <!--
-       --><li><a href="/">首页</a></li><!--
-     --><!--
-       --><li><a href="/about/">关于</a></li><!--
-     --><!--
-       --><li><a href="/archives/">归档</a></li><!--
-     --><!--
-       --><li><a target="_blank" rel="noopener" href="https://github.com/SukunaShinmyoumaru-hust/Hust-opensource-Xuejie">HUST-学解</a></li><!--
-     --><!--
-       --><li><a href="/picture/">赠画感谢</a></li><!--
-     --><!--
-       --><li><a href="/ziliao/">资料下载</a></li><!--
-     --><!--
-       --><li><a href="/friend/">友链</a></li><!--
-     -->
-      </ul>
-    </span>
-    <br/>
-    <span id="actions">
-      <ul>
-        
-        <li><a class="icon" aria-label="上一篇" href="/2022/06/06/nju-ics/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
-        
-        
-        <li><a class="icon" aria-label="下一篇" href="/2022/03/30/splay/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
-        
-        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
-        <li><a class="icon" aria-label="分享文章" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
-      </ul>
-      <span id="i-prev" class="info" style="display:none;">上一篇</span>
-      <span id="i-next" class="info" style="display:none;">下一篇</span>
-      <span id="i-top" class="info" style="display:none;">返回顶部</span>
-      <span id="i-share" class="info" style="display:none;">分享文章</span>
-    </span>
-    <br/>
-    <div id="share" style="display: none">
-      <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sukunashinmyoumaru-hust.github.io/2022/04/17/luogu-al/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sukunashinmyoumaru-hust.github.io/2022/04/17/luogu-al/&text=做算法题综合"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sukunashinmyoumaru-hust.github.io/2022/04/17/luogu-al/&title=做算法题综合"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sukunashinmyoumaru-hust.github.io/2022/04/17/luogu-al/&is_video=false&description=做算法题综合"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=做算法题综合&body=Check out this article: https://sukunashinmyoumaru-hust.github.io/2022/04/17/luogu-al/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sukunashinmyoumaru-hust.github.io/2022/04/17/luogu-al/&title=做算法题综合"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sukunashinmyoumaru-hust.github.io/2022/04/17/luogu-al/&title=做算法题综合"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sukunashinmyoumaru-hust.github.io/2022/04/17/luogu-al/&title=做算法题综合"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sukunashinmyoumaru-hust.github.io/2022/04/17/luogu-al/&title=做算法题综合"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sukunashinmyoumaru-hust.github.io/2022/04/17/luogu-al/&name=做算法题综合&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sukunashinmyoumaru-hust.github.io/2022/04/17/luogu-al/&t=做算法题综合"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
-</ul>
-
-    </div>
-    
-    
-      <div id="toc">
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B4%9B%E8%B0%B7%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95-2022%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">洛谷刷题记录(2022）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#P2367-%E8%AF%AD%E6%96%87%E6%88%90%E7%BB%A9-%E5%B7%AE%E5%88%86%E5%89%8D%E7%BC%80%E5%92%8C"><span class="toc-number">1.0.0.1.</span> <span class="toc-text">P2367 语文成绩(差分前缀和)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%8C%E5%80%8D%E7%BB%8F%E9%AA%8C-CF44C-Holiday-%E5%B7%AE%E5%88%86%E5%89%8D%E7%BC%80%E5%92%8C"><span class="toc-number">1.0.0.2.</span> <span class="toc-text">双倍经验:CF44C Holiday (差分前缀和)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P1160-%E9%98%9F%E5%88%97%E5%AE%89%E6%8E%92-%E9%98%9F%E5%88%97%E6%A8%A1%E7%89%88%E9%A2%98-%E5%8C%85%E5%90%AB%E9%98%9F%E5%88%97%E7%9A%84%E6%B7%BB%E5%8A%A0%E5%92%8C%E5%88%A0%E9%99%A4%E6%93%8D%E4%BD%9C"><span class="toc-number">1.0.0.3.</span> <span class="toc-text">P1160 队列安排(队列模版题,包含队列的添加和删除操作)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#P1044-%E6%A0%88"><span class="toc-number">1.0.1.</span> <span class="toc-text">P1044 栈</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#P1449-%E5%90%8E%E7%BC%80%E8%A1%A8%E8%BE%BE%E5%BC%8F-%E6%A0%88%E7%9A%84%E7%BB%8F%E5%85%B8%E9%97%AE%E9%A2%98"><span class="toc-number">1.0.1.1.</span> <span class="toc-text">P1449 后缀表达式(栈的经典问题)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%8C%E5%80%8D%E7%BB%8F%E9%AA%8C-P1981-%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%B1%82%E5%80%BC"><span class="toc-number">1.0.1.2.</span> <span class="toc-text">(双倍经验) P1981 表达式求值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P1165-%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90-%E6%A8%A1%E6%8B%9F%E6%A0%88"><span class="toc-number">1.0.1.3.</span> <span class="toc-text">P1165 日志分析(模拟栈)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P5788-%E5%8D%95%E8%B0%83%E6%A0%88%E6%A8%A1%E7%89%88"><span class="toc-number">1.0.1.4.</span> <span class="toc-text">P5788 单调栈模版</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P1886-%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3-%E5%8D%95%E8%B0%83%E9%98%9F%E5%88%97%E6%A8%A1%E7%89%88"><span class="toc-number">1.0.1.5.</span> <span class="toc-text">P1886 滑动窗口&#x2F;单调队列模版.</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#UVA540-%E5%9B%A2%E4%BD%93%E9%98%9F%E5%88%97-%E9%98%9F%E5%88%97%E6%A8%A1%E6%8B%9F"><span class="toc-number">1.0.1.6.</span> <span class="toc-text">UVA540 团体队列(队列模拟)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#P1162-%E5%A1%AB%E6%B6%82%E9%A2%9C%E8%89%B2-%E7%AE%80%E5%8D%95%E6%B7%B1%E6%90%9C"><span class="toc-number">1.0.2.</span> <span class="toc-text">P1162 填涂颜色(简单深搜)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#P1042-%E4%B9%92%E4%B9%93%E7%90%83-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%B0%8F%E6%A8%A1%E6%8B%9F"><span class="toc-number">1.0.2.1.</span> <span class="toc-text">P1042 乒乓球(字符串小模拟)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P1553-%E6%95%B0%E5%AD%97%E5%8F%8D%E8%BD%AC%E5%8D%87%E7%BA%A7%E7%89%88-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%B0%8F%E6%A8%A1%E6%8B%9F"><span class="toc-number">1.0.2.2.</span> <span class="toc-text">P1553 数字反转升级版(字符串小模拟)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P1332-Logo%E8%AF%AD%E8%A8%80-%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%80%92%E5%BD%92"><span class="toc-number">1.0.2.3.</span> <span class="toc-text">P1332 Logo语言(字符串递归)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P3375-KMP%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D-KMP%E6%A8%A1%E7%89%88"><span class="toc-number">1.0.2.4.</span> <span class="toc-text">P3375 KMP字符串匹配(KMP模版)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P1030-%E7%BB%99%E5%AE%9A%E4%B8%AD%E5%BA%8F%E5%90%8E%E5%BA%8F%E6%B1%82%E5%85%88%E5%BA%8F-%E5%8F%8C%E5%80%8D%E7%BB%8F%E9%AA%8CP1827-%E7%BE%8E%E5%9B%BD%E8%A1%80%E7%BB%9F"><span class="toc-number">1.0.2.5.</span> <span class="toc-text">P1030 给定中序后序求先序(双倍经验P1827 美国血统)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P1087-FBI%E6%A0%91-%E4%BA%8C%E5%8F%89%E6%A0%91%E9%80%92%E5%BD%92%E6%9E%84%E9%80%A0%E5%92%8C%E6%A8%A1%E6%8B%9F"><span class="toc-number">1.0.2.6.</span> <span class="toc-text">P1087 FBI树(二叉树递归构造和模拟)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P3884-%E4%BA%8C%E5%8F%89%E6%A0%91%E9%97%AE%E9%A2%98-LCA%E2%80%93%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88-%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86"><span class="toc-number">1.0.2.7.</span> <span class="toc-text">P3884 二叉树问题(LCA–最近公共祖先,树链剖分)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P4913-%E4%BA%8C%E5%8F%89%E6%A0%91%E6%B7%B1%E5%BA%A6"><span class="toc-number">1.0.2.8.</span> <span class="toc-text">P4913 二叉树深度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P5318-%E6%9F%A5%E6%89%BE%E6%96%87%E7%8C%AE-BFS%E5%92%8CDFS"><span class="toc-number">1.0.2.9.</span> <span class="toc-text">P5318 查找文献(BFS和DFS)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P3371-%E5%8D%95%E5%85%83%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84-%E9%82%BB%E6%8E%A5%E8%A1%A8%E7%89%88%E6%9C%AC"><span class="toc-number">1.0.2.10.</span> <span class="toc-text">P3371 单元最短路径(邻接表版本)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P2910-%E5%8F%8C%E5%80%8D%E7%BB%8F%E9%AA%8C-%E9%82%BB%E6%8E%A5%E7%9F%A9%E9%98%B5%E7%89%88%E6%9C%AC"><span class="toc-number">1.0.2.11.</span> <span class="toc-text">P2910 双倍经验(邻接矩阵版本)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P3367-%E5%B9%B6%E6%9F%A5%E9%9B%86-%E5%BE%80%E4%B8%8A%E6%90%9C%E7%B4%A2%E7%9A%84%E6%A0%91"><span class="toc-number">1.0.2.12.</span> <span class="toc-text">P3367 并查集(往上搜索的树)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P3366-%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91"><span class="toc-number">1.0.2.13.</span> <span class="toc-text">P3366 最小生成树</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P3370-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%93%88%E5%B8%8C"><span class="toc-number">1.0.2.14.</span> <span class="toc-text">P3370 字符串哈希</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P1908-%E9%80%86%E5%BA%8F%E5%AF%B9-%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F"><span class="toc-number">1.0.2.15.</span> <span class="toc-text">P1908 逆序对(归并排序)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P1309-%E5%8F%8C%E5%80%8D%E7%BB%8F%E9%AA%8C-%E9%80%86%E5%BA%8F%E5%AF%B9"><span class="toc-number">1.0.2.16.</span> <span class="toc-text">P1309 (双倍经验) 逆序对</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P1090-%E5%90%88%E5%B9%B6%E6%9E%9C%E5%AD%90"><span class="toc-number">1.0.2.17.</span> <span class="toc-text">P1090 合并果子</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P1138-%E6%9C%80k%E5%B0%8F%E6%95%B4%E6%95%B0"><span class="toc-number">1.0.2.18.</span> <span class="toc-text">P1138 最k小整数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P1918-%E4%BF%9D%E9%BE%84%E7%90%83"><span class="toc-number">1.0.2.19.</span> <span class="toc-text">P1918 保龄球</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P6510-%E5%A5%B6%E7%89%9B%E6%8E%92%E9%98%9F"><span class="toc-number">1.0.2.20.</span> <span class="toc-text">P6510 奶牛排队</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P3719-rexp"><span class="toc-number">1.0.2.21.</span> <span class="toc-text">P3719 rexp.</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P1185-%E7%BB%98%E5%88%B6%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="toc-number">1.0.2.22.</span> <span class="toc-text">P1185 绘制二叉树</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P3956-%E6%A3%8B%E7%9B%98"><span class="toc-number">1.0.2.23.</span> <span class="toc-text">P3956 棋盘</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P1983-%E8%BD%A6%E7%AB%99%E5%88%86%E7%BA%A7-%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F"><span class="toc-number">1.0.2.24.</span> <span class="toc-text">P1983 车站分级(拓扑排序)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P1038-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C"><span class="toc-number">1.0.2.25.</span> <span class="toc-text">P1038 神经网络</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P1381-%E5%8D%95%E8%AF%8D%E8%83%8C%E8%AF%B5"><span class="toc-number">1.0.2.26.</span> <span class="toc-text">P1381 单词背诵</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#P1002-NOIP2002-%E6%99%AE%E5%8F%8A%E7%BB%84-%E8%BF%87%E6%B2%B3%E5%8D%92"><span class="toc-number">2.</span> <span class="toc-text">P1002 [NOIP2002 普及组] 过河卒</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#P1095-NOIP2007-%E6%99%AE%E5%8F%8A%E7%BB%84-%E5%AE%88%E6%9C%9B%E8%80%85%E7%9A%84%E9%80%83%E7%A6%BB"><span class="toc-number">3.</span> <span class="toc-text">P1095 [NOIP2007 普及组] 守望者的逃离</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%83%8C%E5%8C%85"><span class="toc-number">4.</span> <span class="toc-text">背包</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#P1048-NOIP2005-%E6%99%AE%E5%8F%8A%E7%BB%84-%E9%87%87%E8%8D%AF"><span class="toc-number">5.</span> <span class="toc-text">P1048 [NOIP2005 普及组] 采药</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#P1616-%E7%96%AF%E7%8B%82%E7%9A%84%E9%87%87%E8%8D%AF"><span class="toc-number">6.</span> <span class="toc-text">P1616 疯狂的采药</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7"><span class="toc-number">7.</span> <span class="toc-text">线性</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#P1091-NOIP2004-%E6%8F%90%E9%AB%98%E7%BB%84-%E5%90%88%E5%94%B1%E9%98%9F%E5%BD%A2"><span class="toc-number">8.</span> <span class="toc-text">P1091 [NOIP2004 提高组] 合唱队形</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#P1439-%E3%80%90%E6%A8%A1%E6%9D%BF%E3%80%91%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%AD%90%E5%BA%8F%E5%88%97"><span class="toc-number">9.</span> <span class="toc-text">P1439 【模板】最长公共子序列</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#P1880-NOI1995-%E7%9F%B3%E5%AD%90%E5%90%88%E5%B9%B6"><span class="toc-number">10.</span> <span class="toc-text">P1880 [NOI1995] 石子合并</span></a></li></ol>
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div id="loading">
+    <div class="cat">
+      <div class="body"></div>
+      <div class="head">
+        <div class="face"></div>
       </div>
-    
+      <div class="foot">
+        <div class="tummy-end"></div>
+        <div class="bottom"></div>
+        <div class="legs left"></div>
+        <div class="legs right"></div>
+      </div>
+      <div class="paw">
+        <div class="hands left"></div>
+        <div class="hands right"></div>
+      </div>
+    </div>
+  </div>
+  <div id="container">
+    <header id="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="inner">
+        <div id="brand">
+          <div class="pjax">
+          
+  <h1 itemprop="name headline">做算法题综合
+  </h1>
+  
+<div class="meta">
+  <span class="item" title="创建时间：2022-04-17 21:10:37">
+    <span class="icon">
+      <i class="ic i-calendar"></i>
+    </span>
+    <span class="text">发表于</span>
+    <time itemprop="dateCreated datePublished" datetime="2022-04-17T21:10:37+08:00">2022-04-17</time>
   </span>
 </div>
 
+
+          </div>
+        </div>
+        <nav id="nav">
+  <div class="inner">
+    <div class="toggle">
+      <div class="lines" aria-label="切换导航栏">
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line"></span>
+      </div>
+    </div>
+    <ul class="menu">
+      <li class="item title"><a href="/" rel="start">Suwa shrine</a></li>
+    </ul>
+    <ul class="right">
+      <li class="item theme">
+        <i class="ic i-sun"></i>
+      </li>
+      <li class="item search">
+        <i class="ic i-search"></i>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+      </div>
+      <div id="imgs" class="pjax">
+        <ul>
+          <li class="item" data-background-image="https://s2.loli.net/2024/03/21/JC67Q4LIjnT9fig.jpg"></li>
+          <li class="item" data-background-image="https://s2.loli.net/2024/03/21/nBKjz8OQYVMTHE1.jpg"></li>
+          <li class="item" data-background-image="https://s2.loli.net/2024/03/21/etuIv2DAC8wpdKs.png"></li>
+          <li class="item" data-background-image="https://i.loli.net/2020/10/30/Z5W6r2BSoiThHG1.jpg"></li>
+          <li class="item" data-background-image="https://s2.loli.net/2024/03/21/KgXYlCHOW4jSdoL.jpg"></li>
+          <li class="item" data-background-image="https://s2.loli.net/2024/03/21/N7AWrf8Xs9VTL4P.jpg"></li>
+        </ul>
+      </div>
+    </header>
+    <div id="waves">
+      <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+        <defs>
+          <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+        </defs>
+        <g class="parallax">
+          <use xlink:href="#gentle-wave" x="48" y="0" />
+          <use xlink:href="#gentle-wave" x="48" y="3" />
+          <use xlink:href="#gentle-wave" x="48" y="5" />
+          <use xlink:href="#gentle-wave" x="48" y="7" />
+        </g>
+      </svg>
+    </div>
+    <main>
+      <div class="inner">
+        <div id="main" class="pjax">
+          
+  <div class="article wrap">
     
-    <div class="content index py4 ">
-        
-        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
-  <header>
+<div class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+<i class="ic i-home"></i>
+<span><a href="/">首页</a></span><i class="ic i-angle-right"></i>
+<span  class="current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="/categories/uncategorized/" itemprop="item" rel="index" title="分类于 uncategorized"><span itemprop="name">uncategorized</span></a>
+<meta itemprop="position" content="1" /></span>
+</div>
+
+    <article itemscope itemtype="http://schema.org/Article" class="post block" lang="zh-CN">
+  <link itemprop="mainEntityOfPage" href="https://sukunashinmyoumaru-hust.github.io/2022/04/17/luogu-al/">
+
+  <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="image" content="/images/meili.JPG">
+    <meta itemprop="name" content="Sukuna">
+    <meta itemprop="description" content="Sukuna_wireless, ">
+  </span>
+
+  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="灵山之上神风起">
+  </span>
+
+  <div class="body md" itemprop="articleBody">
     
-    <h1 class="posttitle p-name" itemprop="name headline">
-        做算法题综合
-    </h1>
 
-
-
-    <div class="meta">
-      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
-        <span class="p-name" itemprop="name">Sukuna</span>
-      </span>
-      
-    <div class="postdate">
-      
-        <time datetime="2022-04-17T13:10:37.000Z" class="dt-published" itemprop="datePublished">2022-04-17</time>
-        
-      
-    </div>
-
-
-      
-    <div class="article-category">
-        <i class="fa-solid fa-archive"></i>
-        <a class="category-link" href="/categories/uncategorized/">uncategorized</a>
-    </div>
-
-
-      
-
-    </div>
-  </header>
-  
-
-  <div class="content e-content" itemprop="articleBody">
     <h1 id="洛谷刷题记录-2022）"><a href="#洛谷刷题记录-2022）" class="headerlink" title="洛谷刷题记录(2022）"></a>洛谷刷题记录(2022）</h1><h4 id="P2367-语文成绩-差分前缀和"><a href="#P2367-语文成绩-差分前缀和" class="headerlink" title="P2367 语文成绩(差分前缀和)"></a>P2367 语文成绩(差分前缀和)</h4><p><strong>题目描述</strong></p>
 <p>语文老师总是写错成绩，所以当她修改成绩的时候，总是累得不行。她总是要一遍遍地给某些同学增加分数，又要注意最低分是多少。你能帮帮她吗？</p>
 <p><strong>输入格式</strong></p>
@@ -404,28 +369,28 @@
 <p>我们每次记录此时有多少个单词，若比之前多，则直接更新长度与数量。 然后在更新左边 l，若最左边的单词不想背，或后文已出现就更新，把长度去最短即可。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;map&gt;</span><br><span class="line">#include &lt;string&gt;</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;algorithm&gt;</span><br><span class="line">#define N 100005</span><br><span class="line">std::map&lt;std::string,int&gt; tongji;</span><br><span class="line">std::map&lt;std::string,bool&gt; flags;</span><br><span class="line">std::string s1[N];</span><br><span class="line">std::string s2;</span><br><span class="line">int n,m,l;</span><br><span class="line">int ans1,ans2;</span><br><span class="line">int main()&#123;</span><br><span class="line">    scanf(&quot;%d&quot;,&amp;n);</span><br><span class="line">    for(int i=1;i&lt;=n;i++)&#123;</span><br><span class="line">        std::cin&gt;&gt;s2;</span><br><span class="line">        flags[s2]=1;</span><br><span class="line">    &#125;</span><br><span class="line">    scanf(&quot;%d&quot;,&amp;m);</span><br><span class="line">    l++;</span><br><span class="line">    for(int i=1;i&lt;=m;i++)&#123;</span><br><span class="line">        std::cin&gt;&gt;s1[i];</span><br><span class="line">        if(flags[s1[i]]) tongji[s1[i]]++;</span><br><span class="line">        if(tongji[s1[i]]==1) &#123;</span><br><span class="line">            ans1++;</span><br><span class="line">            ans2=i-l+1;</span><br><span class="line">        &#125;</span><br><span class="line">        while(l&lt;=i)&#123;</span><br><span class="line">            //不用背</span><br><span class="line">            if(!flags[s1[l]]) &#123;</span><br><span class="line">                l++;</span><br><span class="line">                continue;</span><br><span class="line">            &#125;</span><br><span class="line">            //后问已经出现了</span><br><span class="line">            if(tongji[s1[l]]&gt;1)&#123;</span><br><span class="line">                tongji[s1[l]]--;</span><br><span class="line">                l++;</span><br><span class="line">                continue;</span><br><span class="line">            &#125;</span><br><span class="line">            break;</span><br><span class="line">        &#125;</span><br><span class="line">        ans2=std::min(ans2,i-l+1);</span><br><span class="line">    &#125;</span><br><span class="line">    printf(&quot;%d\\n%d\\n&quot;,ans1,ans2);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h1 id="P1002-NOIP2002-普及组-过河卒"><a href="#P1002-NOIP2002-普及组-过河卒" class="headerlink" title="P1002 [NOIP2002 普及组] 过河卒"></a>P1002 [NOIP2002 普及组] 过河卒</h1><p><img src="https://sukunahust.com/wp-content/uploads/2021/11/image-1024x916.png"></p>
+<h1 id="P1002-NOIP2002-普及组-过河卒"><a href="#P1002-NOIP2002-普及组-过河卒" class="headerlink" title="P1002 [NOIP2002 普及组] 过河卒"></a>P1002 [NOIP2002 普及组] 过河卒</h1><p><img data-src="https://sukunahust.com/wp-content/uploads/2021/11/image-1024x916.png"></p>
 <p>dp方程:因为小兵只能往下或者右走,我们设一个二维dp数组dp[i][j]表示从起点到坐标为(i,j)的路径数,如果这个点能被马能吃掉的,那就dp[i][j]&#x3D;0,这个可以告诉它下面和右边的点,我这是不能到达的.然后输出dp[N][M]就行了</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">#include&amp;lt;stdio.h&gt;</span><br><span class="line">#include&amp;lt;iostream&gt;</span><br><span class="line">#include&amp;lt;algorithm&gt;</span><br><span class="line">#include&amp;lt;vector&gt;</span><br><span class="line">#include&amp;lt;stack&gt;</span><br><span class="line">#include &amp;lt;math.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">#define N 40</span><br><span class="line">int t[N];</span><br><span class="line">int a[N][N];</span><br><span class="line">long long dp[N][N];</span><br><span class="line">bool beimalanzhu[N][N]; //判断这个点有没有马拦住</span><br><span class="line">const int madex[] = &#123;-2, -1, 1, 2, 2, 1, -1, -2&#125;;</span><br><span class="line">const int madey[] = &#123;1, 2, 2, 1, -1, -2, -2, -1&#125;;</span><br><span class="line">int c,n;</span><br><span class="line">//long long count(long long a,long long b,long long p)&#123;</span><br><span class="line">//    if(b==0) return 1;</span><br><span class="line">//    if(b==1) return a%p;</span><br><span class="line">//    long long c = count(a,b/2,p)%p;</span><br><span class="line">//    return ((b%2==0?1:a)\*c\*c)%p;</span><br><span class="line">//&#125;</span><br><span class="line"></span><br><span class="line">int main()&#123;</span><br><span class="line">    int ma_x,ma_y;</span><br><span class="line">    int b_x,b_y;</span><br><span class="line">    scanf(&quot;%d %d %d %d&quot;,&amp;amp;b_x,&amp;amp;b_y,&amp;amp;ma_x,&amp;amp;ma_y);</span><br><span class="line">    ma_x+=2;</span><br><span class="line">    ma_y+=2;</span><br><span class="line">    b_x+=2;</span><br><span class="line">    b_y+=2;</span><br><span class="line">    </span><br><span class="line">    dp[2][1]=1;</span><br><span class="line">    for(int i=0;i&amp;lt;8;i++)&#123;</span><br><span class="line">        beimalanzhu[ma_x+madex[i]][ma_y+madey[i]]=true;</span><br><span class="line">    &#125;</span><br><span class="line">    //忘记讨论马自己了</span><br><span class="line">    beimalanzhu[ma_x][ma_y] = true;</span><br><span class="line">    for(int i=2;i&amp;lt;=b_x;i++)&#123;</span><br><span class="line">        for(int j=2;j&amp;lt;=b_y;j++)&#123;</span><br><span class="line">            if(beimalanzhu[i][j]) continue;</span><br><span class="line">            dp[i][j]=dp[i-1][j]+dp[i][j-1];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    printf(&quot;%lld&quot;,dp[b_x][b_y]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="P1095-NOIP2007-普及组-守望者的逃离"><a href="#P1095-NOIP2007-普及组-守望者的逃离" class="headerlink" title="P1095 [NOIP2007 普及组] 守望者的逃离"></a>P1095 [NOIP2007 普及组] 守望者的逃离</h1><p><img src="https://sukunahust.com/wp-content/uploads/2021/11/image-1-1006x1024.png"></p>
+<h1 id="P1095-NOIP2007-普及组-守望者的逃离"><a href="#P1095-NOIP2007-普及组-守望者的逃离" class="headerlink" title="P1095 [NOIP2007 普及组] 守望者的逃离"></a>P1095 [NOIP2007 普及组] 守望者的逃离</h1><p><img data-src="https://sukunahust.com/wp-content/uploads/2021/11/image-1-1006x1024.png"></p>
 <p>这个其实我们都知道,根据中学物理的知识都知道我们瞬移最好,但是有这么一种情况,就是你瞬移没蓝了,但是终点离你不远,这时候还不如直接开跑,等在这里等蓝还不如直接run<br>这个时候就有个最优选择了:维护一个一维的dp数组dp[T]来表示到t时间最远能run多远,那我们假设一个dp[t],dp[1,….t-1]都是已知的了,那就可以维护了dp[t]&#x3D;max[dp[t-1]+17,r[t]],r[t]就代表一直瞬移的距离,如果这个时候一直瞬移还不如现在直接跑来得快,那就选跑</p>
 <p>对于这位可怜的人,一直闪现肯定是最优解,但是这里dp其实判断的是,对于这个时刻,没有蓝了,是停在原地回蓝好还是直接撒腿就跑好,是判断这俩的选择的.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">#include&amp;lt;stdio.h&amp;gt;</span><br><span class="line">#define N 300005</span><br><span class="line">int dp[N];</span><br><span class="line">int main()&#123;</span><br><span class="line">    int M,S,T;</span><br><span class="line">    scanf(&quot;%d %d %d&quot;,&amp;amp;M,&amp;amp;S,&amp;amp;T);</span><br><span class="line">    dp[0]=0;</span><br><span class="line">    int run;</span><br><span class="line">    int flash;</span><br><span class="line">    for(int i=1;i&amp;lt;=T;i++)&#123;</span><br><span class="line">        if(M&amp;gt;=10) &#123;</span><br><span class="line">            dp[i]=dp[i-1]+60;</span><br><span class="line">            M-=10;</span><br><span class="line">        &#125;</span><br><span class="line">        else&#123;</span><br><span class="line">            dp[i]=dp[i-1];</span><br><span class="line">            M+=4;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    for(int i=1;i&amp;lt;=T;i++)&#123;</span><br><span class="line">        if(dp[i]&amp;lt;dp[i-1]+17) dp[i]=dp[i-1]+17;</span><br><span class="line">        if(dp[i]&amp;gt;S)&#123;</span><br><span class="line">            printf(&quot;Yes\\n%d&quot;,i);</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    printf(&quot;No\\n%d&quot;,dp[T]);</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="背包"><a href="#背包" class="headerlink" title="背包"></a>背包</h1><h1 id="P1048-NOIP2005-普及组-采药"><a href="#P1048-NOIP2005-普及组-采药" class="headerlink" title="P1048 [NOIP2005 普及组] 采药"></a>P1048 [NOIP2005 普及组] 采药</h1><p><img src="https://sukunahust.com/wp-content/uploads/2021/11/image-2-1024x941.png"></p>
+<h1 id="背包"><a href="#背包" class="headerlink" title="背包"></a>背包</h1><h1 id="P1048-NOIP2005-普及组-采药"><a href="#P1048-NOIP2005-普及组-采药" class="headerlink" title="P1048 [NOIP2005 普及组] 采药"></a>P1048 [NOIP2005 普及组] 采药</h1><p><img data-src="https://sukunahust.com/wp-content/uploads/2021/11/image-2-1024x941.png"></p>
 <p>动态规划方程</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">#include &quot;iostream&quot;</span><br><span class="line">#include &quot;stdio.h&quot;</span><br><span class="line">using namespace std;</span><br><span class="line">int  weigth[105],value[105];</span><br><span class="line">//dp[i][j]代表处理第i个,背包容量还剩下j个</span><br><span class="line">int dp[105][1005];</span><br><span class="line">int total,m;</span><br><span class="line"></span><br><span class="line">int main()&#123;</span><br><span class="line">    scanf(&quot;%d %d&quot;,&amp;amp;total,&amp;amp;m);</span><br><span class="line">    for(int i=1;i&amp;lt;=m;i++)&#123;</span><br><span class="line">        scanf(&quot;%d %d&quot;,&amp;amp;weigth[i],&amp;amp;value[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    for(int i=1;i&amp;lt;=m;i++)&#123;</span><br><span class="line">        for(int j=total;j&amp;gt;=0;j--)&#123;</span><br><span class="line">            //表示这个元素可以选入</span><br><span class="line">            if(j&amp;gt;=weigth[i])&#123;</span><br><span class="line">                dp[i][j]=max(dp[i-1][j-weigth[i]]+value[i],dp[i-1][j]);</span><br><span class="line">            &#125;</span><br><span class="line">            //不可以</span><br><span class="line">            else&#123;</span><br><span class="line">                dp[i][j]=dp[i-1][j];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    printf(&quot;%d&quot;,dp[m][total]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="P1616-疯狂的采药"><a href="#P1616-疯狂的采药" class="headerlink" title="P1616 疯狂的采药"></a>P1616 疯狂的采药</h1><p><img src="https://sukunahust.com/wp-content/uploads/2021/11/image-4-1024x795.png"></p>
+<h1 id="P1616-疯狂的采药"><a href="#P1616-疯狂的采药" class="headerlink" title="P1616 疯狂的采药"></a>P1616 疯狂的采药</h1><p><img data-src="https://sukunahust.com/wp-content/uploads/2021/11/image-4-1024x795.png"></p>
 <p>一维dp数组,dp[m]代表用m的背包就可以获得的最大元素,还是两层循环,外循环是对物品种类进行讨论,内循环对dp方程进行处理,看看对于一个重量$j$,我要不要选择第$i$号元素放入背包中.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;stdio.h&gt;;</span><br><span class="line">#include&lt;iostream&amp;gt;</span><br><span class="line">#include&lt;algorithm&amp;gt;</span><br><span class="line">using namespace std;</span><br><span class="line">const int M = 1e7+5;</span><br><span class="line">long long  weigth[M],value[10005];</span><br><span class="line">//dp[i][j]代表处理第i个,背包容量还剩下j个</span><br><span class="line">long long dp[M];</span><br><span class="line">long long total,m;</span><br><span class="line"></span><br><span class="line">int main()&#123;</span><br><span class="line">    scanf(&quot;%lld %lld&quot;,&amp;amp;total,&amp;amp;m);</span><br><span class="line">    for(int i=1;i&amp;lt;=m;i++)&#123;</span><br><span class="line">        scanf(&quot;%lld %lld&quot;,&amp;amp;weigth[i],&amp;amp;value[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    for(int i=1;i&amp;lt;=m;i++)&#123;</span><br><span class="line">        for(int j=weigth[i];j&amp;lt;=total;j++)&#123;</span><br><span class="line">            dp[j]=max(dp[j],dp[j-weigth[i]]+value[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    printf(&quot;%lld&quot;,dp[total]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="线性"><a href="#线性" class="headerlink" title="线性"></a>线性</h1><h1 id="P1091-NOIP2004-提高组-合唱队形"><a href="#P1091-NOIP2004-提高组-合唱队形" class="headerlink" title="P1091 [NOIP2004 提高组] 合唱队形"></a>P1091 [NOIP2004 提高组] 合唱队形</h1><p><img src="https://sukunahust.com/wp-content/uploads/2021/11/image-5-1024x841.png"></p>
+<h1 id="线性"><a href="#线性" class="headerlink" title="线性"></a>线性</h1><h1 id="P1091-NOIP2004-提高组-合唱队形"><a href="#P1091-NOIP2004-提高组-合唱队形" class="headerlink" title="P1091 [NOIP2004 提高组] 合唱队形"></a>P1091 [NOIP2004 提高组] 合唱队形</h1><p><img data-src="https://sukunahust.com/wp-content/uploads/2021/11/image-5-1024x841.png"></p>
 <p>这是一个脑筋急转弯类型的题目,第一步就是计算[1,i]的最长上升子序列的长度,记在dp[i][0]中,第二步就是计算[i,n]的最长下降子序列的长度,记在dp[i][1].但是有一点就是这个最长上升子序列长度是要包括自己的.<br>记dp1[i]&#x3D;dp[i][0]+dp[i][1]<br>最后的结果就是需要找到一个点使得dp1[i]最大,这样就代表这个点左右更加光滑.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">#include&amp;lt;stdio.h&amp;gt;</span><br><span class="line">#define N 105</span><br><span class="line">int a[N];</span><br><span class="line">int dp[N][2];</span><br><span class="line">int res[N];</span><br><span class="line">//dp数组,dp[i][0]</span><br><span class="line">int main()&#123;</span><br><span class="line">    int n;</span><br><span class="line">    scanf(&quot;%d&quot;,&amp;amp;n);</span><br><span class="line">    for(int i=1;i&amp;lt;=n;i++)&#123;</span><br><span class="line">        scanf(&quot;%d&quot;,&amp;amp;a[i]);</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    //从左到右扫描</span><br><span class="line">    for(int i=2;i&amp;lt;=n;i++)&#123;</span><br><span class="line">        for(int j=1;j&amp;lt;i;j++)&#123;</span><br><span class="line">            if(a[i]&amp;gt;a[j]&amp;amp;&amp;amp;dp[i][0]&amp;lt;=dp[j][0]+1)&#123;</span><br><span class="line">                dp[i][0]=dp[j][0]+1;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    for(int i=n-1;i&amp;gt;=1;i--)&#123;</span><br><span class="line">        for(int j=i+1;j&amp;lt;=n;j++)&#123;</span><br><span class="line">            if(a[i]&amp;gt;a[j]&amp;amp;&amp;amp;dp[i][1]&amp;lt;=dp[j][1]+1)&#123;</span><br><span class="line">                dp[i][1]=dp[j][1]+1;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    int result=0;</span><br><span class="line">    for(int i=1;i&amp;lt;=n;i++)&#123;</span><br><span class="line">        res[i]=dp[i][0]+dp[i][1]+1;</span><br><span class="line">        if(res[i]&amp;gt;result) result=res[i];</span><br><span class="line">    &#125;</span><br><span class="line">    printf(&quot;%d&quot;,n-result);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="P1439-【模板】最长公共子序列"><a href="#P1439-【模板】最长公共子序列" class="headerlink" title="P1439 【模板】最长公共子序列"></a>P1439 【模板】最长公共子序列</h1><p><img src="https://sukunahust.com/wp-content/uploads/2021/11/image-6-1024x415.png"></p>
+<h1 id="P1439-【模板】最长公共子序列"><a href="#P1439-【模板】最长公共子序列" class="headerlink" title="P1439 【模板】最长公共子序列"></a>P1439 【模板】最长公共子序列</h1><p><img data-src="https://sukunahust.com/wp-content/uploads/2021/11/image-6-1024x415.png"></p>
 <p>排列中没有重复元素，俩排列置换后 (重命名) 的 LCS 长度不变:不妨用置换$\sigma$将排列$P_1$$\to$[1:n].  </p>
 <p>这个时候我们可以将排列$P_1$变成[1,2,3,….,n]然后排列$P_2$映射成与$P_1$相匹配的形式.排列$P_2$中第$i$个元素存储的就是原来的元素在$P_1$中的位置  </p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">#include&amp;lt;stdio.h&amp;gt;</span><br><span class="line">#include&amp;lt;algorithm&amp;gt;</span><br><span class="line">#define N 100005</span><br><span class="line">using namespace std;</span><br><span class="line">int a[N],b[N],c[N],found[N];</span><br><span class="line">int main()&#123;</span><br><span class="line">    int n;</span><br><span class="line">    scanf(&quot;%d&quot;,&amp;amp;n);</span><br><span class="line">    for(int i=1;i&amp;lt;=n;i++)&#123;</span><br><span class="line">        scanf(&quot;%d&quot;,&amp;amp;a[i]);</span><br><span class="line">        c[a[i]]=i;</span><br><span class="line">    &#125;</span><br><span class="line">    for(int i=1;i&amp;lt;=n;i++)&#123;</span><br><span class="line">        scanf(&quot;%d&quot;,&amp;amp;b[i]);</span><br><span class="line">        found[i]=114514;</span><br><span class="line">    &#125;</span><br><span class="line">    int LCS_length=0;</span><br><span class="line">    for (int i=1; i&amp;lt;=n; i++) &#123;</span><br><span class="line">        int l=0,r=LCS_length,mid;</span><br><span class="line">        //如果大于:直接放在后面</span><br><span class="line">        if(c[b[i]]&amp;gt;found[LCS_length])&#123;</span><br><span class="line">            found[++LCS_length]=c[b[i]];</span><br><span class="line">        &#125;</span><br><span class="line">        //如果小于二分查找</span><br><span class="line">        else&#123;</span><br><span class="line">            while (l&amp;lt;r) &#123;</span><br><span class="line">                mid=(l+r)/2;</span><br><span class="line">                if(found[mid]&amp;gt;c[b[i]])&#123;</span><br><span class="line">                    r=mid;</span><br><span class="line">                &#125;</span><br><span class="line">                else&#123;</span><br><span class="line">                    l=mid+1;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            found[l]=min(c[b[i]],found[l]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    printf(&quot;%d\\n&quot;,LCS_length);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h1 id="P1880-NOI1995-石子合并"><a href="#P1880-NOI1995-石子合并" class="headerlink" title="P1880 [NOI1995] 石子合并"></a>P1880 [NOI1995] 石子合并</h1><p><img src="https://sukunahust.com/wp-content/uploads/2021/11/image-12-1024x719.png"></p>
+<h1 id="P1880-NOI1995-石子合并"><a href="#P1880-NOI1995-石子合并" class="headerlink" title="P1880 [NOI1995] 石子合并"></a>P1880 [NOI1995] 石子合并</h1><p><img data-src="https://sukunahust.com/wp-content/uploads/2021/11/image-12-1024x719.png"></p>
 <p>让dp[i][j]代表第i堆到第j堆的合并分数,我们要做的事$dp[i][i+n-1]$最大(小),只需要在区间[i][j]中找到一个最佳的分划k,让i-k,k+1,j这两个区域内部得分和合并这两个区域的得分最大(小),即$max(a[i][k]+a[k+1][j]+d(i,j))$分别代表两个区域的分划和合并两部分的得分</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;stdio.h&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">#define N 205</span><br><span class="line">int mins[N][N];</span><br><span class="line">int maxs[N][N];</span><br><span class="line">int stones[N];</span><br><span class="line">int sums[N];//前缀和</span><br><span class="line">int main()&#123;</span><br><span class="line">    int n;</span><br><span class="line">    scanf(&quot;%d&quot;,&amp;n);</span><br><span class="line">    for(int i=1;i&lt;=n;i++)&#123;</span><br><span class="line">        scanf(&quot;%d&quot;,&amp;stones[i]);</span><br><span class="line">        sums[i]=sums[i-1]+stones[i];</span><br><span class="line">        stones[i+n]=stones[i];</span><br><span class="line">    &#125;</span><br><span class="line">    for(int i=n+1;i&lt;=2\*n;i++)&#123;</span><br><span class="line">        sums[i]=sums[i-1]+stones[i];</span><br><span class="line">    &#125;</span><br><span class="line">    for(int length=1;length&lt;n;length++)&#123;</span><br><span class="line">        for(int i=1,j=i+length;j&lt;2\*n&amp;&amp;i&lt;2\*n;i++,j=length+i)&#123;</span><br><span class="line">            mins[i][j]=1145141919;</span><br><span class="line">            for(int k=i;k&lt;j;k++)&#123;</span><br><span class="line">                maxs[i][j]=std::max(maxs[i][j],maxs[i][k]+maxs[k+1][j]+sums[j]-sums[i-1]);</span><br><span class="line">                mins[i][j]=std::min(mins[i][j],mins[i][k]+mins[k+1][j]+sums[j]-sums[i-1]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    int min_res=114514;</span><br><span class="line">    int max_res=0;</span><br><span class="line">    for(int i=1;i&lt;=n;i++)&#123;</span><br><span class="line">        max_res=std::max(max_res,maxs[i][i+n-1]);</span><br><span class="line">        min_res=std::min(min_res,mins[i][i+n-1]);</span><br><span class="line">    &#125;</span><br><span class="line">    printf(&quot;%d\\n%d&quot;,min_res,max_res);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -434,7 +399,7 @@
 <p>异或是满足交换律和结合律的,就是x和y异或&#x3D;z,已知x和z,y是能求出来的!</p>
 <p>5.7 数组的异或操作:这个不想说了,太简单了</p>
 <p>5.8 完成工作的最短时间<br>这道题我犯了四个很低级的错误:<br>1.二分查找的时候没有更新mid<br>2.传参数没有传引用,导致所有的结果都没变<br>3.判断能否完成的时候没有考虑刚好完成所带来<br>4.工作时间加了之后,如果判断不行没减回去<br>给你一个整数数组 jobs ，其中 jobs[i] 是完成第 i 项工作要花费的时间。<br>请你将这些工作分配给 k 位工人。所有工作都应该分配给工人，且每项工作只能分配给一位工人。工人的 工作时间 是完成分配给他们的所有工作花费时间的总和。请你设计一套最佳的工作分配方案，使工人的 最大工作时间 得以 最小化 。<br>返回分配方案中尽可能 最小 的 最大工作时间 。<br>示例 1：<br>输入：jobs &#x3D; [3,2,3], k &#x3D; 3<br>输出：3<br>解释：给每位工人分配一项工作，最大工作时间是 3 。</p>
-<p>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/find-minimum-time-to-finish-all-jobs">https://leetcode-cn.com/problems/find-minimum-time-to-finish-all-jobs</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<p>来源：力扣（LeetCode）<br>链接：<span class="exturl" data-url="aHR0cHM6Ly9sZWV0Y29kZS1jbi5jb20vcHJvYmxlbXMvZmluZC1taW5pbXVtLXRpbWUtdG8tZmluaXNoLWFsbC1qb2Jz">https://leetcode-cn.com/problems/find-minimum-time-to-finish-all-jobs</span><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
 <p>这道题是一道搜索类型的题目,是一道直接搜索答案的题目,总的思路就两点<br>1.主函数做二分搜索<br>2.子函数验证这个结果对不对,来帮助主函数做二分搜索</p>
 <p>这道题要注意一点,要不然时间这一块把握不住<br>1.建议使用贪心算法,就是把大的任务先安排下去<br>2.在任务已经明确不能完成或者说是一定能够完成的情况下自动退出</p>
 <p>判断的方法也稍微提一下:就是给每个工人分配任务,分配任务的形式就是更改一个数组,这个数组存放了每个工人工作的总时间,分配就是依据每个总时间进行分配的,分配的方式就是递归,有一步出现问题就返回报错,到达叶节点(分配完成)就返回OK</p>
@@ -442,7 +407,7 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int minimumTimeRequired(vector&lt;int&gt;&amp; jobs, int k) &#123;</span><br><span class="line">        sort(jobs.begin(), jobs.end(), greater&lt;int&gt;());</span><br><span class="line">        int first = jobs[0], total = accumulate(jobs.begin(), jobs.end(), 0);</span><br><span class="line">        //没有达到最优解</span><br><span class="line">        while(first&lt;total)&#123;</span><br><span class="line">            //检查一下mid行不行</span><br><span class="line">            int mid = (first+total)/2;</span><br><span class="line">            if(ok(jobs,k,mid))&#123;</span><br><span class="line">                total=mid;</span><br><span class="line">            &#125;</span><br><span class="line">            else&#123;</span><br><span class="line">                first=mid+1;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return first;</span><br><span class="line">    &#125;</span><br><span class="line">    bool ok(vector&lt;int&gt;&amp; jobs, int k, int value)&#123;</span><br><span class="line">        vector&lt;int&gt; workers(k,0);</span><br><span class="line">        return check(jobs,workers,0,value);</span><br><span class="line">    &#125;</span><br><span class="line">    //递归寻找</span><br><span class="line">    bool check (vector&lt;int&gt;&amp; jobs,vector&lt;int&gt; workers, int now,int value)&#123;</span><br><span class="line">        if(jobs.size()&lt;=now)&#123;</span><br><span class="line">            return true;</span><br><span class="line">        &#125;</span><br><span class="line">        else&#123;</span><br><span class="line">            int cur=jobs[now];</span><br><span class="line">            for (auto&amp; workload : workers) &#123;</span><br><span class="line">                if (workload+cur&lt;=value) &#123;</span><br><span class="line">                    workload+=cur;</span><br><span class="line">                    if (check(jobs,workers,now+1,value)) &#123;</span><br><span class="line">                        return true;</span><br><span class="line">                    &#125;</span><br><span class="line">                    workload-=cur;</span><br><span class="line">                &#125;</span><br><span class="line">                if (workload==0workload+cur==value) &#123;</span><br><span class="line">                    break;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p>5.9 制作花束的最少天数<br>给你一个整数数组 bloomDay，以及两个整数 m 和 k 。<br>现需要制作 m 束花。制作花束时，需要使用花园中 相邻的 k 朵花 。<br>花园中有 n 朵花，第 i 朵花会在 bloomDay[i] 时盛开，恰好 可以用于 一束 花中。<br>请你返回从花园中摘 m 束花需要等待的最少的天数。如果不能摘到 m 束花则返回 -1 。</p>
 <p>示例 1：<br>输入：bloomDay &#x3D; [1,10,3,10,2], m &#x3D; 3, k &#x3D; 1<br>输出：3<br>解释：让我们一起观察这三天的花开过程，x 表示花开，而 _ 表示花还未开。<br>现在需要制作 3 束花，每束只需要 1 朵。<br>1 天后：[x, <em>,</em> , <em>,</em> ] &#x2F;&#x2F; 只能制作 1 束花<br>2 天后：[x, <em>,</em> , <em>, x] &#x2F;&#x2F; 只能制作 2 束花 3 天后：[x,</em> , x, _, x] &#x2F;&#x2F; 可以制作 3 束花，答案为 3</p>
-<p>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/minimum-number-of-days-to-make-m-bouquets">https://leetcode-cn.com/problems/minimum-number-of-days-to-make-m-bouquets</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<p>来源：力扣（LeetCode）<br>链接：<span class="exturl" data-url="aHR0cHM6Ly9sZWV0Y29kZS1jbi5jb20vcHJvYmxlbXMvbWluaW11bS1udW1iZXItb2YtZGF5cy10by1tYWtlLW0tYm91cXVldHM=">https://leetcode-cn.com/problems/minimum-number-of-days-to-make-m-bouquets</span><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
 <p>这道题的思路和昨天的其实很像,就说说判断在某一天之内能否生产那么多花束的思路:其实就是一个遍历+模拟就可以完成的,就是假设这一天已经来到,看看有哪些花盛开了.就取哪些花,有连续的几朵就可以组成一个花束,这么简单</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int minDays(vector&lt;int&gt;&amp; bloomDay, int m, int k) &#123;</span><br><span class="line">        if(bloomDay.size()&lt;m\*k)&#123;</span><br><span class="line">            return -1;</span><br><span class="line">        &#125;</span><br><span class="line">        int high=0,low=INT_MAX;</span><br><span class="line">        for (int i = 0; i &lt; bloomDay.size(); i++) &#123;</span><br><span class="line">            low=min(low, bloomDay[i]);</span><br><span class="line">            high=max(high, bloomDay[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        while(high&gt;low)&#123;</span><br><span class="line">            int mid=(high+low)/2;</span><br><span class="line">            if(check(bloomDay,m,k,mid))&#123;</span><br><span class="line">                high=mid;</span><br><span class="line">            &#125;</span><br><span class="line">            else&#123;</span><br><span class="line">                low=mid+1;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return low;</span><br><span class="line">    &#125;</span><br><span class="line">    bool check(vector&lt;int&gt;&amp; bloomDay, int m, int k,int days)&#123;</span><br><span class="line">        int hua=0,huashu=0;</span><br><span class="line">        for(int i=0;i&lt;bloomDay.size()&amp;&amp;huashu&lt;m;i++)&#123;</span><br><span class="line">            if(bloomDay[i]&lt;=days)&#123;</span><br><span class="line">                hua++;</span><br><span class="line">                if(hua==k)&#123;</span><br><span class="line">                    huashu++;</span><br><span class="line">                    hua=0;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            else&#123;</span><br><span class="line">                    hua=0;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return huashu&gt;=m;</span><br><span class="line">    &#125;   </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p>上面两题向我们展示了一个利用二分搜索搜索答案的思路:<br>1.主函数二分搜索<br>2.子函数验证<br>众所周知,求解比验证难许多</p>
@@ -451,195 +416,418 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    bool leafSimilar(TreeNode\* root1, TreeNode\* root2) &#123;</span><br><span class="line">        vector&lt;int&gt; a1;</span><br><span class="line">        vector&lt;int&gt; a2;</span><br><span class="line">        if(root1) forwardTraverse(root1,a1);</span><br><span class="line">        if(root2) forwardTraverse(root2,a2);</span><br><span class="line">        return a1==a2;</span><br><span class="line">    &#125;</span><br><span class="line">    void forwardTraverse(TreeNode\* root,vector&lt;int&gt;&amp;list)&#123;</span><br><span class="line">        if(!(root-&gt;left)&amp;&amp;!(root-&gt;right))&#123;</span><br><span class="line">            list.push_back(root-&gt;val);</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        if(root-&gt;left) forwardTraverse(root-&gt;left,list);</span><br><span class="line">        if(root-&gt;right) forwardTraverse(root-&gt;right,list);</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p>5.11 解码异或后的排列<br>给你一个整数数组 perm ，它是前 n 个正整数的排列，且 n 是个 奇数 。<br>它被加密成另一个长度为 n – 1 的整数数组 encoded ，满足 encoded[i] &#x3D; perm[i] XOR perm[i + 1] 。比方说，如果 perm &#x3D; [1,3,2] ，那么 encoded &#x3D; [2,1] 。<br>给你 encoded 数组，请你返回原始数组 perm 。题目保证答案存在且唯一。<br>示例 1：<br>输入：encoded &#x3D; [3,1]<br>输出：[1,2,3]<br>解释：如果 perm &#x3D; [1,2,3] ，那么 encoded &#x3D; [1 XOR 2,2 XOR 3] &#x3D; [3,1]<br>示例 2：</p>
 <p>之前我们就做过异或之后的数组怎么解码:最重要的就是寻找到那个first元素,这里我们也可以寻找到first元素</p>
-<p>我们知道<img src="https://sukunahust.com/wp-content/ql-cache/quicklatex.com-c34b52deeb305f9413f534b570f9fed7_l3.svg" alt="x\lxor x=0">,那我们寻找到第一个元素,就是<img src="https://sukunahust.com/wp-content/ql-cache/quicklatex.com-131d0c2aa952b43d45bba07dfc407e81_l3.svg" alt="(x_0\oplus x_1\oplus x_2...\oplus x_n)\oplus (x_1 \oplus x_2\oplus x_3....x_n)=x1"></p>
-<p>我们还知道<img src="https://sukunahust.com/wp-content/ql-cache/quicklatex.com-dbe284a90142f25d096bec9394436c2a_l3.svg" alt="encode[2k+1]=a[2k]\oplus a[2k+1]">刚好对所有奇数元素的数列一异或就可以把上述式子异或符号右边的元素求出来</p>
+<p>我们知道<img data-src="https://sukunahust.com/wp-content/ql-cache/quicklatex.com-c34b52deeb305f9413f534b570f9fed7_l3.svg" alt="x\lxor x=0">,那我们寻找到第一个元素,就是<img data-src="https://sukunahust.com/wp-content/ql-cache/quicklatex.com-131d0c2aa952b43d45bba07dfc407e81_l3.svg" alt="(x_0\oplus x_1\oplus x_2...\oplus x_n)\oplus (x_1 \oplus x_2\oplus x_3....x_n)=x1"></p>
+<p>我们还知道<img data-src="https://sukunahust.com/wp-content/ql-cache/quicklatex.com-dbe284a90142f25d096bec9394436c2a_l3.svg" alt="encode[2k+1]=a[2k]\oplus a[2k+1]">刚好对所有奇数元素的数列一异或就可以把上述式子异或符号右边的元素求出来</p>
 <p>注意,原来的数据是从1-n的排列</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    vector&lt;int&gt; decode(vector&lt;int&gt;&amp; encode) &#123;</span><br><span class="line">        int n=encode.size()+1;</span><br><span class="line">        vector&lt;int&gt; decode(n,0);</span><br><span class="line">        int total=0;</span><br><span class="line">        int except_0=0;</span><br><span class="line">        for(int i=0;i&lt;=n;i++)&#123;</span><br><span class="line">            total=total^i;</span><br><span class="line">        &#125;</span><br><span class="line">        for(int i=1;i&lt;n;i+=2)&#123;</span><br><span class="line">            except_0=except_0^encode[i];</span><br><span class="line">        &#125;</span><br><span class="line">        decode[0]=except_0^total;</span><br><span class="line">        for(int i=1;i&lt;n;i++)&#123;</span><br><span class="line">            decode[i]=decode[i-1]^encode[i-1];</span><br><span class="line">        &#125;</span><br><span class="line">        return decode;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p>5.12 字数组异或查询<br>有一个正整数数组 arr，现给你一个对应的查询数组 queries，其中 queries[i] &#x3D; [Li, Ri]。<br>对于每个查询 i，请你计算从 Li 到 Ri 的 XOR 值（即 arr[Li] xor arr[Li+1] xor … xor arr[Ri]）作为本次查询的结果。<br>并返回一个包含给定查询 queries 所有结果的数组。<br>示例 1：<br>输入：arr &#x3D; [1,3,4,8], queries &#x3D; [[0,1],[1,2],[0,3],[3,3]]<br>输出：[2,7,14,8]<br>解释：<br>数组中元素的二进制表示形式是：<br>1 &#x3D; 0001<br>3 &#x3D; 0011<br>4 &#x3D; 0100<br>8 &#x3D; 1000<br>查询的 XOR 值为：<br>[0,1] &#x3D; 1 xor 3 &#x3D; 2<br>[1,2] &#x3D; 3 xor 4 &#x3D; 7<br>[0,3] &#x3D; 1 xor 3 xor 4 xor 8 &#x3D; 14<br>[3,3] &#x3D; 8</p>
-<p>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/xor-queries-of-a-subarray">https://leetcode-cn.com/problems/xor-queries-of-a-subarray</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<p>来源：力扣（LeetCode）<br>链接：<span class="exturl" data-url="aHR0cHM6Ly9sZWV0Y29kZS1jbi5jb20vcHJvYmxlbXMveG9yLXF1ZXJpZXMtb2YtYS1zdWJhcnJheQ==">https://leetcode-cn.com/problems/xor-queries-of-a-subarray</span><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
 <p>一个式子就可以明白:这里截取官方题解了:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    vector&lt;int&gt; xorQueries(vector&lt;int&gt;&amp; arr, vector&lt;vector&lt;int&gt;&gt;&amp; queries) &#123;</span><br><span class="line">        vector&lt;int&gt; result;</span><br><span class="line">        vector&lt;int&gt; xors(arr.size()+1);</span><br><span class="line">        for (int i=0;i&lt;arr.size();i++) &#123;</span><br><span class="line">            xors[i+1]=xors[i]^arr[i];</span><br><span class="line">        &#125;</span><br><span class="line">        for(vector&lt;int&gt;temp:queries)&#123;</span><br><span class="line">            int total=0;</span><br><span class="line">            total=xors[temp[0]]^xors[temp[1]+1];</span><br><span class="line">            result.push_back(total);</span><br><span class="line">        &#125;</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p>5.13 停在原地的方案数<br>有一个长度为 arrLen 的数组，开始有一个指针在索引 0 处。<br>每一步操作中，你可以将指针向左或向右移动 1 步，或者停在原地（指针不能被移动到数组范围外）。<br>给你两个整数 steps 和 arrLen ，请你计算并返回：在恰好执行 steps 次操作以后，指针仍然指向索引 0 处的方案数。<br>由于答案可能会很大，请返回方案数 模 10^9 + 7 后的结果。<br>示例 1<br>输入：steps &#x3D; 3, arrLen &#x3D; 2<br>输出：4<br>解释：3 步后，总共有 4 种不同的方法可以停在索引 0 处。<br>向右，向左，不动<br>不动，向右，向左<br>向右，不动，向左<br>不动，不动，不动</p>
-<p>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/number-of-ways-to-stay-in-the-same-place-after-some-steps">https://leetcode-cn.com/problems/number-of-ways-to-stay-in-the-same-place-after-some-steps</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<p>来源：力扣（LeetCode）<br>链接：<span class="exturl" data-url="aHR0cHM6Ly9sZWV0Y29kZS1jbi5jb20vcHJvYmxlbXMvbnVtYmVyLW9mLXdheXMtdG8tc3RheS1pbi10aGUtc2FtZS1wbGFjZS1hZnRlci1zb21lLXN0ZXBz">https://leetcode-cn.com/problems/number-of-ways-to-stay-in-the-same-place-after-some-steps</span><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    const int MODULO = 1000000007;</span><br><span class="line">    int numWays(int steps, int arrLen) &#123;</span><br><span class="line">        int maxc=min(arrLen-1,steps/2);</span><br><span class="line">        vector&lt;vector&lt;int&gt;&gt; dp(steps+1, vector&lt;int&gt;(maxc+1));</span><br><span class="line">        dp[0][0]=1;</span><br><span class="line">        for(int i=1;i&lt;=steps;i++)&#123;</span><br><span class="line">            for(int j=0;j&lt;=maxc;j++)&#123;</span><br><span class="line">                dp[i][j]=dp[i-1][j];</span><br><span class="line">                if(j-1&gt;=0)&#123;</span><br><span class="line">                    dp[i][j]=(dp[i][j]+dp[i-1][j-1])%MODULO;</span><br><span class="line">                &#125;</span><br><span class="line">                if(j+1&lt;=maxc)&#123;</span><br><span class="line">                    dp[i][j]=(dp[i][j]+dp[i-1][j+1])%MODULO;</span><br><span class="line">                &#125;</span><br><span class="line">                </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return dp[steps][0];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>动态规划:dp[行动的步数][获得的这个结果]&#x3D;走的方案数<br>官方题解还可以优化,比如说压缩到一维动态规划<br>动态规划最重要的就是:初态+状态转移,这里的初态:<br><img src="https://sukunahust.com/wp-content/ql-cache/quicklatex.com-076590b86ba207ce143e94b2e823ad03_l3.svg" alt="dp[0][0]=1,dp[0][i]=0">,状态转移:来源于三个操作:一个是向左,一个是向右,一个是不动:<img src="https://sukunahust.com/wp-content/ql-cache/quicklatex.com-8c01feeb7f41da7bdd5ef7afa96f778d_l3.svg" alt="dp[i][j]=dp[i-1][j]+dp[i-1][j+1]+dp[i-1][j-1](if j+1,j-1 exists)"></p>
+<p>动态规划:dp[行动的步数][获得的这个结果]&#x3D;走的方案数<br>官方题解还可以优化,比如说压缩到一维动态规划<br>动态规划最重要的就是:初态+状态转移,这里的初态:<br><img data-src="https://sukunahust.com/wp-content/ql-cache/quicklatex.com-076590b86ba207ce143e94b2e823ad03_l3.svg" alt="dp[0][0]=1,dp[0][i]=0">,状态转移:来源于三个操作:一个是向左,一个是向右,一个是不动:<img data-src="https://sukunahust.com/wp-content/ql-cache/quicklatex.com-8c01feeb7f41da7bdd5ef7afa96f778d_l3.svg" alt="dp[i][j]=dp[i-1][j]+dp[i-1][j+1]+dp[i-1][j-1](if j+1,j-1 exists)"></p>
 <p>5.14 整数转罗马数字<br>罗马数字包含以下七种字符： I， V， X， L，C，D 和 M。</p>
 <p>字符 数值<br>I 1<br>V 5<br>X 10<br>L 50<br>C 100<br>D 500<br>M 1000<br>例如， 罗马数字 2 写做 II ，即为两个并列的 1。12 写做 XII ，即为 X + II 。 27 写做  XXVII, 即为 XX + V + II 。</p>
 <p>通常情况下，罗马数字中小的数字在大的数字的右边。但也存在特例，例如 4 不写做 IIII，而是 IV。数字 1 在数字 5 的左边，所表示的数等于大数 5 减小数 1 得到的数值 4 。同样地，数字 9 表示为 IX。这个特殊的规则只适用于以下六种情况：<br>I 可以放在 V (5) 和 X (10) 的左边，来表示 4 和 9。<br>X 可以放在 L (50) 和 C (100) 的左边，来表示 40 和 90。 <br>C 可以放在 D (500) 和 M (1000) 的左边，来表示 400 和 900。<br>给你一个整数，将其转为罗马数字。</p>
-<p>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/integer-to-roman">https://leetcode-cn.com/problems/integer-to-roman</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<p>来源：力扣（LeetCode）<br>链接：<span class="exturl" data-url="aHR0cHM6Ly9sZWV0Y29kZS1jbi5jb20vcHJvYmxlbXMvaW50ZWdlci10by1yb21hbg==">https://leetcode-cn.com/problems/integer-to-roman</span><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
 <p>变相的数位转换罢了,注意的是1000-900-500-400-100-90-50-40-10-9-5-4-1这套转化法则,一开始就是没反应过来23333</p>
 <p>5.15 罗马数字转整数</p>
 <p>还是一样的,读取罗马数字,如果下一个罗马数字对应的值比我这个大,那么说明应该是IX之类的问题,就要减去这个罗马数字对应的值如果小,就加这个罗马数字对应的值就行</p>
 <p>5.16 数组中最大的异或值</p>
 <p><strong>输入：</strong>nums &#x3D; [3,10,5,25,2,8]<br><strong>输出：</strong>28<br><strong>解释：</strong>最大运算结果是 5 XOR 25 &#x3D; 28.</p>
 <p>这个代码是题解里面的</p>
-<p>第一种方法是贪心算法,就是我们已经知道<img src="https://sukunahust.com/wp-content/ql-cache/quicklatex.com-062b76d533174cda72c813758355544f_l3.svg" alt="x=a_i \oplus a_j">所以说我们就假设x,然后找有没有适合的a_i和a_j就好了,我们按位查找,从高位到低位查找:<br>首先看最高位有没有<img src="https://sukunahust.com/wp-content/ql-cache/quicklatex.com-259b6415756adf3480ea5e8a80d1d578_l3.svg" alt="a_i\oplus a_j=x">有的话就取1:就是<img src="https://sukunahust.com/wp-content/ql-cache/quicklatex.com-0ac3fe2e28e9326d90e0c98613c1491d_l3.svg" alt="2x+1">没有的话就取0,就是<img src="https://sukunahust.com/wp-content/ql-cache/quicklatex.com-da4556c0a02b580047678d308649edf9_l3.svg" alt="2x">,以此类推</p>
+<p>第一种方法是贪心算法,就是我们已经知道<img data-src="https://sukunahust.com/wp-content/ql-cache/quicklatex.com-062b76d533174cda72c813758355544f_l3.svg" alt="x=a_i \oplus a_j">所以说我们就假设x,然后找有没有适合的a_i和a_j就好了,我们按位查找,从高位到低位查找:<br>首先看最高位有没有<img data-src="https://sukunahust.com/wp-content/ql-cache/quicklatex.com-259b6415756adf3480ea5e8a80d1d578_l3.svg" alt="a_i\oplus a_j=x">有的话就取1:就是<img data-src="https://sukunahust.com/wp-content/ql-cache/quicklatex.com-0ac3fe2e28e9326d90e0c98613c1491d_l3.svg" alt="2x+1">没有的话就取0,就是<img data-src="https://sukunahust.com/wp-content/ql-cache/quicklatex.com-da4556c0a02b580047678d308649edf9_l3.svg" alt="2x">,以此类推</p>
 <p>第二种方法就是字典法:</p>
-<p>这个是一个字典树,每个元素从高位到低位按照0和1的顺序建立树<br>当检查x的最大性的时候的做法:<br>因为要让异或最大,那就读取一个数,从高位到低位判断,如果这个位为0,那就看看这个位有没有位1的数,反之亦然.有的话异或的值就可以<img src="https://sukunahust.com/wp-content/ql-cache/quicklatex.com-0ac3fe2e28e9326d90e0c98613c1491d_l3.svg" alt="2x+1">,没有的话就是<img src="https://sukunahust.com/wp-content/ql-cache/quicklatex.com-da4556c0a02b580047678d308649edf9_l3.svg" alt="2x"></p>
-<p>这里需要说明一下二进制的求值方法:从高位到低位扫描,扫描到1的话<img src="https://sukunahust.com/wp-content/ql-cache/quicklatex.com-73e0257639a78306bcf13ad0c68fcbdb_l3.svg" alt="2y+1">,扫描到0的时候就为<img src="https://sukunahust.com/wp-content/ql-cache/quicklatex.com-85ca23a1e42ccdfafecd1cf9622b44c3_l3.svg" alt="2y"></p>
+<p>这个是一个字典树,每个元素从高位到低位按照0和1的顺序建立树<br>当检查x的最大性的时候的做法:<br>因为要让异或最大,那就读取一个数,从高位到低位判断,如果这个位为0,那就看看这个位有没有位1的数,反之亦然.有的话异或的值就可以<img data-src="https://sukunahust.com/wp-content/ql-cache/quicklatex.com-0ac3fe2e28e9326d90e0c98613c1491d_l3.svg" alt="2x+1">,没有的话就是<img data-src="https://sukunahust.com/wp-content/ql-cache/quicklatex.com-da4556c0a02b580047678d308649edf9_l3.svg" alt="2x"></p>
+<p>这里需要说明一下二进制的求值方法:从高位到低位扫描,扫描到1的话<img data-src="https://sukunahust.com/wp-content/ql-cache/quicklatex.com-73e0257639a78306bcf13ad0c68fcbdb_l3.svg" alt="2y+1">,扫描到0的时候就为<img data-src="https://sukunahust.com/wp-content/ql-cache/quicklatex.com-85ca23a1e42ccdfafecd1cf9622b44c3_l3.svg" alt="2y"></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line">struct Trie &#123;</span><br><span class="line">    // 左子树指向表示 0 的子节点</span><br><span class="line">    Trie\* left = nullptr;</span><br><span class="line">    // 右子树指向表示 1 的子节点</span><br><span class="line">    Trie\* right = nullptr;</span><br><span class="line"></span><br><span class="line">    Trie() &#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">class Solution &#123;</span><br><span class="line">private:</span><br><span class="line">    // 字典树的根节点</span><br><span class="line">    Trie\* root = new Trie();</span><br><span class="line">    // 最高位的二进制位编号为 30</span><br><span class="line">    static constexpr int HIGH_BIT = 30;</span><br><span class="line"></span><br><span class="line">public:</span><br><span class="line">    void add(int num) &#123;</span><br><span class="line">        Trie\* cur = root;</span><br><span class="line">        for (int k = HIGH_BIT; k &gt;= 0; --k) &#123;</span><br><span class="line">            int bit = (num &gt;&gt; k) &amp; 1;</span><br><span class="line">            if (bit == 0) &#123;</span><br><span class="line">                if (!cur-&gt;left) &#123;</span><br><span class="line">                    cur-&gt;left = new Trie();</span><br><span class="line">                &#125;</span><br><span class="line">                cur = cur-&gt;left;</span><br><span class="line">            &#125;</span><br><span class="line">            else &#123;</span><br><span class="line">                if (!cur-&gt;right) &#123;</span><br><span class="line">                    cur-&gt;right = new Trie();</span><br><span class="line">                &#125;</span><br><span class="line">                cur = cur-&gt;right;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    int check(int num) &#123;</span><br><span class="line">        Trie\* cur = root;</span><br><span class="line">        int x = 0;</span><br><span class="line">        for (int k = HIGH_BIT; k &gt;= 0; --k) &#123;</span><br><span class="line">            int bit = (num &gt;&gt; k) &amp; 1;</span><br><span class="line">            if (bit == 0) &#123;</span><br><span class="line">                // a_i 的第 k 个二进制位为 0，应当往表示 1 的子节点 right 走</span><br><span class="line">                if (cur-&gt;right) &#123;</span><br><span class="line">                    cur = cur-&gt;right;</span><br><span class="line">                    x = x \* 2 + 1;</span><br><span class="line">                &#125;</span><br><span class="line">                else &#123;</span><br><span class="line">                    cur = cur-&gt;left;</span><br><span class="line">                    x = x \* 2;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            else &#123;</span><br><span class="line">                // a_i 的第 k 个二进制位为 1，应当往表示 0 的子节点 left 走</span><br><span class="line">                if (cur-&gt;left) &#123;</span><br><span class="line">                    cur = cur-&gt;left;</span><br><span class="line">                    x = x \* 2 + 1;</span><br><span class="line">                &#125;</span><br><span class="line">                else &#123;</span><br><span class="line">                    cur = cur-&gt;right;</span><br><span class="line">                    x = x \* 2;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return x;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    int findMaximumXOR(vector&lt;int&gt;&amp; nums) &#123;</span><br><span class="line">        int n = nums.size();</span><br><span class="line">        int x = 0;</span><br><span class="line">        for (int i = 1; i &lt; n; ++i) &#123;</span><br><span class="line">            // 将 nums[i-1] 放入字典树，此时 nums[0 .. i-1] 都在字典树中</span><br><span class="line">            add(nums[i - 1]);</span><br><span class="line">        &#125;</span><br><span class="line">        for (int i = 1; i &lt; n; ++i)&#123;</span><br><span class="line">            // 将 nums[i] 看作 ai，找出最大的 x 更新答案</span><br><span class="line">            x = max(x, check(nums[i]));</span><br><span class="line">        &#125;</span><br><span class="line">        return x;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p>5.17 二叉树的堂兄弟节点</p>
 <p>这个东西就是做一遍二叉树的遍历,找到:层数+父节点,比较就行了.传参数比较麻烦的话就开全局变量就好了</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    // x 的信息</span><br><span class="line">    int x;</span><br><span class="line">    TreeNode\* x_parent;</span><br><span class="line">    int x_depth;</span><br><span class="line"></span><br><span class="line">    // y 的信息</span><br><span class="line">    int y;</span><br><span class="line">    TreeNode\* y_parent;</span><br><span class="line">    int y_depth;</span><br><span class="line"></span><br><span class="line">    void level1(TreeNode\* root,int x,int k)&#123;</span><br><span class="line">        if(!root)&#123;</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        if(root-&gt;val==x)&#123;</span><br><span class="line">            x_depth=k;</span><br><span class="line">        &#125;</span><br><span class="line">        if(root-&gt;left)&#123;</span><br><span class="line">            level1(root-&gt;left,x,k+1);</span><br><span class="line">        &#125;</span><br><span class="line">        if(root-&gt;right)&#123;</span><br><span class="line">            level1(root-&gt;right,x,k+1);</span><br><span class="line">        &#125;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    void level2(TreeNode\* root,int y,int k)&#123;</span><br><span class="line">        if(!root)&#123;</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        if(root-&gt;val==y)&#123;</span><br><span class="line">            y_depth=k;</span><br><span class="line">        &#125;</span><br><span class="line">        if(root-&gt;left)&#123;</span><br><span class="line">            level2(root-&gt;left,y,k+1);</span><br><span class="line">        &#125;</span><br><span class="line">        if(root-&gt;right)&#123;</span><br><span class="line">            level2(root-&gt;right,y,k+1);</span><br><span class="line">        &#125;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    void parent2(TreeNode\* root,int y)&#123;</span><br><span class="line">        if(!root)&#123;</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        if(root-&gt;right&amp;&amp;root-&gt;right-&gt;val==y)&#123;</span><br><span class="line">            y_parent=root;</span><br><span class="line">        &#125;</span><br><span class="line">        if(root-&gt;left&amp;&amp;root-&gt;left-&gt;val==y)&#123;</span><br><span class="line">            y_parent=root;</span><br><span class="line">        &#125;</span><br><span class="line">        if(root-&gt;left)&#123;</span><br><span class="line">            parent2(root-&gt;left,y);</span><br><span class="line">        &#125;</span><br><span class="line">        if(root-&gt;right)&#123;</span><br><span class="line">            parent2(root-&gt;right,y);</span><br><span class="line">        &#125;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    void parent1(TreeNode\* root,int x)&#123;</span><br><span class="line">        if(!root)&#123;</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        if(root-&gt;right&amp;&amp;root-&gt;right-&gt;val==x)&#123;</span><br><span class="line">            x_parent=root;</span><br><span class="line">        &#125;</span><br><span class="line">        if(root-&gt;left&amp;&amp;root-&gt;left-&gt;val==x)&#123;</span><br><span class="line">            x_parent=root;</span><br><span class="line">        &#125;</span><br><span class="line">        if(root-&gt;left)&#123;</span><br><span class="line">            parent1(root-&gt;left,x);</span><br><span class="line">        &#125;</span><br><span class="line">        if(root-&gt;right)&#123;</span><br><span class="line">            parent1(root-&gt;right,x);</span><br><span class="line">        &#125;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    bool isCousins(TreeNode\* root, int x, int y) &#123;</span><br><span class="line">        parent1(root,x);</span><br><span class="line">        parent2(root,y);</span><br><span class="line">        level1(root,x,0);</span><br><span class="line">        level2(root,y,0);</span><br><span class="line">        return (x_depth==y_depth)&amp;&amp;(x_parent!=y_parent);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p>5.18 形成两个异或相等的三元组数目</p>
 <p>给你一个整数数组 arr 。<br>现需要从数组中取三个下标 i、j 和 k ，其中 (0 &lt;&#x3D; i &lt; j &lt;&#x3D; k &lt; arr.length) 。<br>a 和 b 定义如下：<br>a &#x3D; arr[i] ^ arr[i + 1] ^ … ^ arr[j – 1]<br>b &#x3D; arr[j] ^ arr[j + 1] ^ … ^ arr[k]<br>注意：^ 表示 按位异或 操作。<br>请返回能够令 a &#x3D;&#x3D; b 成立的三元组 (i, j , k) 的数目。</p>
-<p>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/count-triplets-that-can-form-two-arrays-of-equal-xor">https://leetcode-cn.com/problems/count-triplets-that-can-form-two-arrays-of-equal-xor</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<p>来源：力扣（LeetCode）<br>链接：<span class="exturl" data-url="aHR0cHM6Ly9sZWV0Y29kZS1jbi5jb20vcHJvYmxlbXMvY291bnQtdHJpcGxldHMtdGhhdC1jYW4tZm9ybS10d28tYXJyYXlzLW9mLWVxdWFsLXhvcg==">https://leetcode-cn.com/problems/count-triplets-that-can-form-two-arrays-of-equal-xor</span><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
 <p>还是那张图</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int countTriplets(vector&lt;int&gt;&amp; arr) &#123;</span><br><span class="line">        int ans=0;</span><br><span class="line">        int count=arr.size();</span><br><span class="line">        vector&lt;int&gt; abab(count+1);</span><br><span class="line">        for(int i=0;i&lt;count;i++)&#123;</span><br><span class="line">            abab[i+1]=abab[i]^arr[i];</span><br><span class="line">        &#125;</span><br><span class="line">        for(int i=0;i&lt;count;i++)&#123;</span><br><span class="line">            for(int j=i+1;j&lt;count;j++)&#123;</span><br><span class="line">                for(int k=j;k&lt;count;k++)&#123;</span><br><span class="line">                    if(abab[i]==abab[k+1])&#123;</span><br><span class="line">                        ++ans;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p>5.19 找出第K大的异或坐标值</p>
 <p>最近力扣是和这个公式杠上了么…,这道题就是一个模拟就行的了,但是我们可以建表来记录(m,k)之内的元素异或的和,这三项刚好可以表示</p>
 <p>给你一个二维矩阵 matrix 和一个整数 k ，矩阵大小为 m x n 由非负整数组成。<br>矩阵中坐标 (a, b) 的 值 可由对所有满足 0 &lt;&#x3D; i &lt;&#x3D; a &lt; m 且 0 &lt;&#x3D; j &lt;&#x3D; b &lt; n 的元素 matrix[i][j]（下标从 0 开始计数）执行异或运算得到。<br>请你找出 matrix 的所有坐标中第 k 大的值（k 的值从 1 开始计数）。<br>示例 1：<br>输入：matrix &#x3D; [[5,2],[1,6]], k &#x3D; 1<br>输出：7<br>解释：坐标 (0,1) 的值是 5 XOR 2 &#x3D; 7 ，为最大的值。</p>
-<p>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/find-kth-largest-xor-coordinate-value">https://leetcode-cn.com/problems/find-kth-largest-xor-coordinate-value</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<p>来源：力扣（LeetCode）<br>链接：<span class="exturl" data-url="aHR0cHM6Ly9sZWV0Y29kZS1jbi5jb20vcHJvYmxlbXMvZmluZC1rdGgtbGFyZ2VzdC14b3ItY29vcmRpbmF0ZS12YWx1ZQ==">https://leetcode-cn.com/problems/find-kth-largest-xor-coordinate-value</span><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
 
   </div>
-</article>
 
+   <footer>
 
+    <div class="meta">
+  <span class="item">
+    <span class="icon">
+      <i class="ic i-calendar-check"></i>
+    </span>
+    <span class="text">更新于</span>
+    <time title="修改时间：2024-02-29 14:51:51" itemprop="dateModified" datetime="2024-02-29T14:51:51+08:00">2024-02-29</time>
+  </span>
+</div>
 
-        
-          <div id="footer-post-container">
-  <div id="footer-post">
-
-    <div id="nav-footer" style="display: none">
-      <ul>
-        
-          <li><a href="/">首页</a></li>
-        
-          <li><a href="/about/">关于</a></li>
-        
-          <li><a href="/archives/">归档</a></li>
-        
-          <li><a target="_blank" rel="noopener" href="https://github.com/SukunaShinmyoumaru-hust/Hust-opensource-Xuejie">HUST-学解</a></li>
-        
-          <li><a href="/picture/">赠画感谢</a></li>
-        
-          <li><a href="/ziliao/">资料下载</a></li>
-        
-          <li><a href="/friend/">友链</a></li>
-        
-      </ul>
-    </div>
-
-    
-    
-      <div id="toc-footer" style="display: none">
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B4%9B%E8%B0%B7%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95-2022%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">洛谷刷题记录(2022）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#P2367-%E8%AF%AD%E6%96%87%E6%88%90%E7%BB%A9-%E5%B7%AE%E5%88%86%E5%89%8D%E7%BC%80%E5%92%8C"><span class="toc-number">1.0.0.1.</span> <span class="toc-text">P2367 语文成绩(差分前缀和)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%8C%E5%80%8D%E7%BB%8F%E9%AA%8C-CF44C-Holiday-%E5%B7%AE%E5%88%86%E5%89%8D%E7%BC%80%E5%92%8C"><span class="toc-number">1.0.0.2.</span> <span class="toc-text">双倍经验:CF44C Holiday (差分前缀和)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P1160-%E9%98%9F%E5%88%97%E5%AE%89%E6%8E%92-%E9%98%9F%E5%88%97%E6%A8%A1%E7%89%88%E9%A2%98-%E5%8C%85%E5%90%AB%E9%98%9F%E5%88%97%E7%9A%84%E6%B7%BB%E5%8A%A0%E5%92%8C%E5%88%A0%E9%99%A4%E6%93%8D%E4%BD%9C"><span class="toc-number">1.0.0.3.</span> <span class="toc-text">P1160 队列安排(队列模版题,包含队列的添加和删除操作)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#P1044-%E6%A0%88"><span class="toc-number">1.0.1.</span> <span class="toc-text">P1044 栈</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#P1449-%E5%90%8E%E7%BC%80%E8%A1%A8%E8%BE%BE%E5%BC%8F-%E6%A0%88%E7%9A%84%E7%BB%8F%E5%85%B8%E9%97%AE%E9%A2%98"><span class="toc-number">1.0.1.1.</span> <span class="toc-text">P1449 后缀表达式(栈的经典问题)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%8C%E5%80%8D%E7%BB%8F%E9%AA%8C-P1981-%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%B1%82%E5%80%BC"><span class="toc-number">1.0.1.2.</span> <span class="toc-text">(双倍经验) P1981 表达式求值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P1165-%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90-%E6%A8%A1%E6%8B%9F%E6%A0%88"><span class="toc-number">1.0.1.3.</span> <span class="toc-text">P1165 日志分析(模拟栈)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P5788-%E5%8D%95%E8%B0%83%E6%A0%88%E6%A8%A1%E7%89%88"><span class="toc-number">1.0.1.4.</span> <span class="toc-text">P5788 单调栈模版</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P1886-%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3-%E5%8D%95%E8%B0%83%E9%98%9F%E5%88%97%E6%A8%A1%E7%89%88"><span class="toc-number">1.0.1.5.</span> <span class="toc-text">P1886 滑动窗口&#x2F;单调队列模版.</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#UVA540-%E5%9B%A2%E4%BD%93%E9%98%9F%E5%88%97-%E9%98%9F%E5%88%97%E6%A8%A1%E6%8B%9F"><span class="toc-number">1.0.1.6.</span> <span class="toc-text">UVA540 团体队列(队列模拟)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#P1162-%E5%A1%AB%E6%B6%82%E9%A2%9C%E8%89%B2-%E7%AE%80%E5%8D%95%E6%B7%B1%E6%90%9C"><span class="toc-number">1.0.2.</span> <span class="toc-text">P1162 填涂颜色(简单深搜)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#P1042-%E4%B9%92%E4%B9%93%E7%90%83-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%B0%8F%E6%A8%A1%E6%8B%9F"><span class="toc-number">1.0.2.1.</span> <span class="toc-text">P1042 乒乓球(字符串小模拟)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P1553-%E6%95%B0%E5%AD%97%E5%8F%8D%E8%BD%AC%E5%8D%87%E7%BA%A7%E7%89%88-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%B0%8F%E6%A8%A1%E6%8B%9F"><span class="toc-number">1.0.2.2.</span> <span class="toc-text">P1553 数字反转升级版(字符串小模拟)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P1332-Logo%E8%AF%AD%E8%A8%80-%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%80%92%E5%BD%92"><span class="toc-number">1.0.2.3.</span> <span class="toc-text">P1332 Logo语言(字符串递归)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P3375-KMP%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D-KMP%E6%A8%A1%E7%89%88"><span class="toc-number">1.0.2.4.</span> <span class="toc-text">P3375 KMP字符串匹配(KMP模版)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P1030-%E7%BB%99%E5%AE%9A%E4%B8%AD%E5%BA%8F%E5%90%8E%E5%BA%8F%E6%B1%82%E5%85%88%E5%BA%8F-%E5%8F%8C%E5%80%8D%E7%BB%8F%E9%AA%8CP1827-%E7%BE%8E%E5%9B%BD%E8%A1%80%E7%BB%9F"><span class="toc-number">1.0.2.5.</span> <span class="toc-text">P1030 给定中序后序求先序(双倍经验P1827 美国血统)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P1087-FBI%E6%A0%91-%E4%BA%8C%E5%8F%89%E6%A0%91%E9%80%92%E5%BD%92%E6%9E%84%E9%80%A0%E5%92%8C%E6%A8%A1%E6%8B%9F"><span class="toc-number">1.0.2.6.</span> <span class="toc-text">P1087 FBI树(二叉树递归构造和模拟)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P3884-%E4%BA%8C%E5%8F%89%E6%A0%91%E9%97%AE%E9%A2%98-LCA%E2%80%93%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88-%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86"><span class="toc-number">1.0.2.7.</span> <span class="toc-text">P3884 二叉树问题(LCA–最近公共祖先,树链剖分)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P4913-%E4%BA%8C%E5%8F%89%E6%A0%91%E6%B7%B1%E5%BA%A6"><span class="toc-number">1.0.2.8.</span> <span class="toc-text">P4913 二叉树深度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P5318-%E6%9F%A5%E6%89%BE%E6%96%87%E7%8C%AE-BFS%E5%92%8CDFS"><span class="toc-number">1.0.2.9.</span> <span class="toc-text">P5318 查找文献(BFS和DFS)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P3371-%E5%8D%95%E5%85%83%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84-%E9%82%BB%E6%8E%A5%E8%A1%A8%E7%89%88%E6%9C%AC"><span class="toc-number">1.0.2.10.</span> <span class="toc-text">P3371 单元最短路径(邻接表版本)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P2910-%E5%8F%8C%E5%80%8D%E7%BB%8F%E9%AA%8C-%E9%82%BB%E6%8E%A5%E7%9F%A9%E9%98%B5%E7%89%88%E6%9C%AC"><span class="toc-number">1.0.2.11.</span> <span class="toc-text">P2910 双倍经验(邻接矩阵版本)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P3367-%E5%B9%B6%E6%9F%A5%E9%9B%86-%E5%BE%80%E4%B8%8A%E6%90%9C%E7%B4%A2%E7%9A%84%E6%A0%91"><span class="toc-number">1.0.2.12.</span> <span class="toc-text">P3367 并查集(往上搜索的树)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P3366-%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91"><span class="toc-number">1.0.2.13.</span> <span class="toc-text">P3366 最小生成树</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P3370-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%93%88%E5%B8%8C"><span class="toc-number">1.0.2.14.</span> <span class="toc-text">P3370 字符串哈希</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P1908-%E9%80%86%E5%BA%8F%E5%AF%B9-%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F"><span class="toc-number">1.0.2.15.</span> <span class="toc-text">P1908 逆序对(归并排序)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P1309-%E5%8F%8C%E5%80%8D%E7%BB%8F%E9%AA%8C-%E9%80%86%E5%BA%8F%E5%AF%B9"><span class="toc-number">1.0.2.16.</span> <span class="toc-text">P1309 (双倍经验) 逆序对</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P1090-%E5%90%88%E5%B9%B6%E6%9E%9C%E5%AD%90"><span class="toc-number">1.0.2.17.</span> <span class="toc-text">P1090 合并果子</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P1138-%E6%9C%80k%E5%B0%8F%E6%95%B4%E6%95%B0"><span class="toc-number">1.0.2.18.</span> <span class="toc-text">P1138 最k小整数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P1918-%E4%BF%9D%E9%BE%84%E7%90%83"><span class="toc-number">1.0.2.19.</span> <span class="toc-text">P1918 保龄球</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P6510-%E5%A5%B6%E7%89%9B%E6%8E%92%E9%98%9F"><span class="toc-number">1.0.2.20.</span> <span class="toc-text">P6510 奶牛排队</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P3719-rexp"><span class="toc-number">1.0.2.21.</span> <span class="toc-text">P3719 rexp.</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P1185-%E7%BB%98%E5%88%B6%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="toc-number">1.0.2.22.</span> <span class="toc-text">P1185 绘制二叉树</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P3956-%E6%A3%8B%E7%9B%98"><span class="toc-number">1.0.2.23.</span> <span class="toc-text">P3956 棋盘</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P1983-%E8%BD%A6%E7%AB%99%E5%88%86%E7%BA%A7-%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F"><span class="toc-number">1.0.2.24.</span> <span class="toc-text">P1983 车站分级(拓扑排序)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P1038-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C"><span class="toc-number">1.0.2.25.</span> <span class="toc-text">P1038 神经网络</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P1381-%E5%8D%95%E8%AF%8D%E8%83%8C%E8%AF%B5"><span class="toc-number">1.0.2.26.</span> <span class="toc-text">P1381 单词背诵</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#P1002-NOIP2002-%E6%99%AE%E5%8F%8A%E7%BB%84-%E8%BF%87%E6%B2%B3%E5%8D%92"><span class="toc-number">2.</span> <span class="toc-text">P1002 [NOIP2002 普及组] 过河卒</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#P1095-NOIP2007-%E6%99%AE%E5%8F%8A%E7%BB%84-%E5%AE%88%E6%9C%9B%E8%80%85%E7%9A%84%E9%80%83%E7%A6%BB"><span class="toc-number">3.</span> <span class="toc-text">P1095 [NOIP2007 普及组] 守望者的逃离</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%83%8C%E5%8C%85"><span class="toc-number">4.</span> <span class="toc-text">背包</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#P1048-NOIP2005-%E6%99%AE%E5%8F%8A%E7%BB%84-%E9%87%87%E8%8D%AF"><span class="toc-number">5.</span> <span class="toc-text">P1048 [NOIP2005 普及组] 采药</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#P1616-%E7%96%AF%E7%8B%82%E7%9A%84%E9%87%87%E8%8D%AF"><span class="toc-number">6.</span> <span class="toc-text">P1616 疯狂的采药</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7"><span class="toc-number">7.</span> <span class="toc-text">线性</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#P1091-NOIP2004-%E6%8F%90%E9%AB%98%E7%BB%84-%E5%90%88%E5%94%B1%E9%98%9F%E5%BD%A2"><span class="toc-number">8.</span> <span class="toc-text">P1091 [NOIP2004 提高组] 合唱队形</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#P1439-%E3%80%90%E6%A8%A1%E6%9D%BF%E3%80%91%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%AD%90%E5%BA%8F%E5%88%97"><span class="toc-number">9.</span> <span class="toc-text">P1439 【模板】最长公共子序列</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#P1880-NOI1995-%E7%9F%B3%E5%AD%90%E5%90%88%E5%B9%B6"><span class="toc-number">10.</span> <span class="toc-text">P1880 [NOI1995] 石子合并</span></a></li></ol>
+      
+<div class="reward">
+  <button><i class="ic i-heartbeat"></i> 赞赏</button>
+  <p>请我喝[茶]~(￣▽￣)~*</p>
+  <div id="qr">
+      
+      <div>
+        <img data-src="/images/wechatpay.jpg" alt="Sukuna 微信支付">
+        <p>微信支付</p>
       </div>
-    
-
-    <div id="share-footer" style="display: none">
-      <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sukunashinmyoumaru-hust.github.io/2022/04/17/luogu-al/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sukunashinmyoumaru-hust.github.io/2022/04/17/luogu-al/&text=做算法题综合"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sukunashinmyoumaru-hust.github.io/2022/04/17/luogu-al/&title=做算法题综合"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sukunashinmyoumaru-hust.github.io/2022/04/17/luogu-al/&is_video=false&description=做算法题综合"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=做算法题综合&body=Check out this article: https://sukunashinmyoumaru-hust.github.io/2022/04/17/luogu-al/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sukunashinmyoumaru-hust.github.io/2022/04/17/luogu-al/&title=做算法题综合"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sukunashinmyoumaru-hust.github.io/2022/04/17/luogu-al/&title=做算法题综合"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sukunashinmyoumaru-hust.github.io/2022/04/17/luogu-al/&title=做算法题综合"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sukunashinmyoumaru-hust.github.io/2022/04/17/luogu-al/&title=做算法题综合"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sukunashinmyoumaru-hust.github.io/2022/04/17/luogu-al/&name=做算法题综合&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sukunashinmyoumaru-hust.github.io/2022/04/17/luogu-al/&t=做算法题综合"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
-</ul>
-
-    </div>
-
-    <div id="actions-footer">
-        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
-        
-          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> 目录</a>
-        
-        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
-        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
-    </div>
-
+      
+      <div>
+        <img data-src="/images/alipay.jpg" alt="Sukuna 支付宝">
+        <p>支付宝</p>
+      </div>
   </div>
 </div>
 
-        
-        <footer id="footer">
-  <div class="footer-left">
-    Copyright &copy;
-    
-    
-    2020-2024
-    Sukuna
+      
+
+<div id="copyright">
+<ul>
+  <li class="author">
+    <strong>本文作者： </strong>Sukuna <i class="ic i-at"><em>@</em></i>灵山之上神风起
+  </li>
+  <li class="link">
+    <strong>本文链接：</strong>
+    <a href="https://sukunashinmyoumaru-hust.github.io/2022/04/17/luogu-al/" title="做算法题综合">https://sukunashinmyoumaru-hust.github.io/2022/04/17/luogu-al/</a>
+  </li>
+  <li class="license">
+    <strong>版权声明： </strong>本站所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+  </footer>
+
+</article>
+
   </div>
-  <div class="footer-right">
-    <nav>
-      <ul>
-        <!--
-       --><li><a href="/">首页</a></li><!--
-     --><!--
-       --><li><a href="/about/">关于</a></li><!--
-     --><!--
-       --><li><a href="/archives/">归档</a></li><!--
-     --><!--
-       --><li><a target="_blank" rel="noopener" href="https://github.com/SukunaShinmyoumaru-hust/Hust-opensource-Xuejie">HUST-学解</a></li><!--
-     --><!--
-       --><li><a href="/picture/">赠画感谢</a></li><!--
-     --><!--
-       --><li><a href="/ziliao/">资料下载</a></li><!--
-     --><!--
-       --><li><a href="/friend/">友链</a></li><!--
-     -->
-      </ul>
-    </nav>
-  </div>
-</footer>
+  
+
+<div class="post-nav">
+    <div class="item left">
+      
+
+  <a href="/2022/03/30/splay/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;s2.loli.net&#x2F;2024&#x2F;03&#x2F;21&#x2F;8PBD6GfINvWY5tU.jpg" title="Splay模版:P3369[模版&#x2F;普通平衡树]">
+  <span class="type">上一篇</span>
+  <span class="category"><i class="ic i-flag"></i> 算法题</span>
+  <h3>Splay模版:P3369[模版/普通平衡树]</h3>
+  </a>
 
     </div>
-    <!-- styles -->
+    <div class="item right">
+      
 
+  <a href="/2022/06/06/nju-ics/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;s2.loli.net&#x2F;2024&#x2F;03&#x2F;21&#x2F;N7AWrf8Xs9VTL4P.jpg" title="南大ics面试记录">
+  <span class="type">下一篇</span>
+  <span class="category"><i class="ic i-flag"></i> 杂记</span>
+  <h3>南大ics面试记录</h3>
+  </a>
 
-
-  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
-
-
-    <!-- jquery -->
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
-
-
-
-
-<!-- clipboard -->
+    </div>
+</div>
 
   
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  <div class="wrap" id="comments"></div>
+
+
+        </div>
+        <div id="sidebar">
+          
+
+<div class="inner">
+
+  <div class="panels">
+    <div class="inner">
+      <div class="contents panel pjax" data-title="文章目录">
+          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B4%9B%E8%B0%B7%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95-2022%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">洛谷刷题记录(2022）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#P2367-%E8%AF%AD%E6%96%87%E6%88%90%E7%BB%A9-%E5%B7%AE%E5%88%86%E5%89%8D%E7%BC%80%E5%92%8C"><span class="toc-number">1.0.0.1.</span> <span class="toc-text">P2367 语文成绩(差分前缀和)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%8C%E5%80%8D%E7%BB%8F%E9%AA%8C-CF44C-Holiday-%E5%B7%AE%E5%88%86%E5%89%8D%E7%BC%80%E5%92%8C"><span class="toc-number">1.0.0.2.</span> <span class="toc-text">双倍经验:CF44C Holiday (差分前缀和)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P1160-%E9%98%9F%E5%88%97%E5%AE%89%E6%8E%92-%E9%98%9F%E5%88%97%E6%A8%A1%E7%89%88%E9%A2%98-%E5%8C%85%E5%90%AB%E9%98%9F%E5%88%97%E7%9A%84%E6%B7%BB%E5%8A%A0%E5%92%8C%E5%88%A0%E9%99%A4%E6%93%8D%E4%BD%9C"><span class="toc-number">1.0.0.3.</span> <span class="toc-text">P1160 队列安排(队列模版题,包含队列的添加和删除操作)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#P1044-%E6%A0%88"><span class="toc-number">1.0.1.</span> <span class="toc-text">P1044 栈</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#P1449-%E5%90%8E%E7%BC%80%E8%A1%A8%E8%BE%BE%E5%BC%8F-%E6%A0%88%E7%9A%84%E7%BB%8F%E5%85%B8%E9%97%AE%E9%A2%98"><span class="toc-number">1.0.1.1.</span> <span class="toc-text">P1449 后缀表达式(栈的经典问题)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%8C%E5%80%8D%E7%BB%8F%E9%AA%8C-P1981-%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%B1%82%E5%80%BC"><span class="toc-number">1.0.1.2.</span> <span class="toc-text">(双倍经验) P1981 表达式求值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P1165-%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90-%E6%A8%A1%E6%8B%9F%E6%A0%88"><span class="toc-number">1.0.1.3.</span> <span class="toc-text">P1165 日志分析(模拟栈)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P5788-%E5%8D%95%E8%B0%83%E6%A0%88%E6%A8%A1%E7%89%88"><span class="toc-number">1.0.1.4.</span> <span class="toc-text">P5788 单调栈模版</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P1886-%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3-%E5%8D%95%E8%B0%83%E9%98%9F%E5%88%97%E6%A8%A1%E7%89%88"><span class="toc-number">1.0.1.5.</span> <span class="toc-text">P1886 滑动窗口&#x2F;单调队列模版.</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#UVA540-%E5%9B%A2%E4%BD%93%E9%98%9F%E5%88%97-%E9%98%9F%E5%88%97%E6%A8%A1%E6%8B%9F"><span class="toc-number">1.0.1.6.</span> <span class="toc-text">UVA540 团体队列(队列模拟)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#P1162-%E5%A1%AB%E6%B6%82%E9%A2%9C%E8%89%B2-%E7%AE%80%E5%8D%95%E6%B7%B1%E6%90%9C"><span class="toc-number">1.0.2.</span> <span class="toc-text">P1162 填涂颜色(简单深搜)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#P1042-%E4%B9%92%E4%B9%93%E7%90%83-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%B0%8F%E6%A8%A1%E6%8B%9F"><span class="toc-number">1.0.2.1.</span> <span class="toc-text">P1042 乒乓球(字符串小模拟)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P1553-%E6%95%B0%E5%AD%97%E5%8F%8D%E8%BD%AC%E5%8D%87%E7%BA%A7%E7%89%88-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%B0%8F%E6%A8%A1%E6%8B%9F"><span class="toc-number">1.0.2.2.</span> <span class="toc-text">P1553 数字反转升级版(字符串小模拟)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P1332-Logo%E8%AF%AD%E8%A8%80-%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%80%92%E5%BD%92"><span class="toc-number">1.0.2.3.</span> <span class="toc-text">P1332 Logo语言(字符串递归)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P3375-KMP%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D-KMP%E6%A8%A1%E7%89%88"><span class="toc-number">1.0.2.4.</span> <span class="toc-text">P3375 KMP字符串匹配(KMP模版)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P1030-%E7%BB%99%E5%AE%9A%E4%B8%AD%E5%BA%8F%E5%90%8E%E5%BA%8F%E6%B1%82%E5%85%88%E5%BA%8F-%E5%8F%8C%E5%80%8D%E7%BB%8F%E9%AA%8CP1827-%E7%BE%8E%E5%9B%BD%E8%A1%80%E7%BB%9F"><span class="toc-number">1.0.2.5.</span> <span class="toc-text">P1030 给定中序后序求先序(双倍经验P1827 美国血统)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P1087-FBI%E6%A0%91-%E4%BA%8C%E5%8F%89%E6%A0%91%E9%80%92%E5%BD%92%E6%9E%84%E9%80%A0%E5%92%8C%E6%A8%A1%E6%8B%9F"><span class="toc-number">1.0.2.6.</span> <span class="toc-text">P1087 FBI树(二叉树递归构造和模拟)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P3884-%E4%BA%8C%E5%8F%89%E6%A0%91%E9%97%AE%E9%A2%98-LCA%E2%80%93%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88-%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86"><span class="toc-number">1.0.2.7.</span> <span class="toc-text">P3884 二叉树问题(LCA–最近公共祖先,树链剖分)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P4913-%E4%BA%8C%E5%8F%89%E6%A0%91%E6%B7%B1%E5%BA%A6"><span class="toc-number">1.0.2.8.</span> <span class="toc-text">P4913 二叉树深度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P5318-%E6%9F%A5%E6%89%BE%E6%96%87%E7%8C%AE-BFS%E5%92%8CDFS"><span class="toc-number">1.0.2.9.</span> <span class="toc-text">P5318 查找文献(BFS和DFS)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P3371-%E5%8D%95%E5%85%83%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84-%E9%82%BB%E6%8E%A5%E8%A1%A8%E7%89%88%E6%9C%AC"><span class="toc-number">1.0.2.10.</span> <span class="toc-text">P3371 单元最短路径(邻接表版本)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P2910-%E5%8F%8C%E5%80%8D%E7%BB%8F%E9%AA%8C-%E9%82%BB%E6%8E%A5%E7%9F%A9%E9%98%B5%E7%89%88%E6%9C%AC"><span class="toc-number">1.0.2.11.</span> <span class="toc-text">P2910 双倍经验(邻接矩阵版本)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P3367-%E5%B9%B6%E6%9F%A5%E9%9B%86-%E5%BE%80%E4%B8%8A%E6%90%9C%E7%B4%A2%E7%9A%84%E6%A0%91"><span class="toc-number">1.0.2.12.</span> <span class="toc-text">P3367 并查集(往上搜索的树)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P3366-%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91"><span class="toc-number">1.0.2.13.</span> <span class="toc-text">P3366 最小生成树</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P3370-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%93%88%E5%B8%8C"><span class="toc-number">1.0.2.14.</span> <span class="toc-text">P3370 字符串哈希</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P1908-%E9%80%86%E5%BA%8F%E5%AF%B9-%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F"><span class="toc-number">1.0.2.15.</span> <span class="toc-text">P1908 逆序对(归并排序)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P1309-%E5%8F%8C%E5%80%8D%E7%BB%8F%E9%AA%8C-%E9%80%86%E5%BA%8F%E5%AF%B9"><span class="toc-number">1.0.2.16.</span> <span class="toc-text">P1309 (双倍经验) 逆序对</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P1090-%E5%90%88%E5%B9%B6%E6%9E%9C%E5%AD%90"><span class="toc-number">1.0.2.17.</span> <span class="toc-text">P1090 合并果子</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P1138-%E6%9C%80k%E5%B0%8F%E6%95%B4%E6%95%B0"><span class="toc-number">1.0.2.18.</span> <span class="toc-text">P1138 最k小整数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P1918-%E4%BF%9D%E9%BE%84%E7%90%83"><span class="toc-number">1.0.2.19.</span> <span class="toc-text">P1918 保龄球</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P6510-%E5%A5%B6%E7%89%9B%E6%8E%92%E9%98%9F"><span class="toc-number">1.0.2.20.</span> <span class="toc-text">P6510 奶牛排队</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P3719-rexp"><span class="toc-number">1.0.2.21.</span> <span class="toc-text">P3719 rexp.</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P1185-%E7%BB%98%E5%88%B6%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="toc-number">1.0.2.22.</span> <span class="toc-text">P1185 绘制二叉树</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P3956-%E6%A3%8B%E7%9B%98"><span class="toc-number">1.0.2.23.</span> <span class="toc-text">P3956 棋盘</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P1983-%E8%BD%A6%E7%AB%99%E5%88%86%E7%BA%A7-%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F"><span class="toc-number">1.0.2.24.</span> <span class="toc-text">P1983 车站分级(拓扑排序)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P1038-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C"><span class="toc-number">1.0.2.25.</span> <span class="toc-text">P1038 神经网络</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P1381-%E5%8D%95%E8%AF%8D%E8%83%8C%E8%AF%B5"><span class="toc-number">1.0.2.26.</span> <span class="toc-text">P1381 单词背诵</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#P1002-NOIP2002-%E6%99%AE%E5%8F%8A%E7%BB%84-%E8%BF%87%E6%B2%B3%E5%8D%92"><span class="toc-number">2.</span> <span class="toc-text">P1002 [NOIP2002 普及组] 过河卒</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#P1095-NOIP2007-%E6%99%AE%E5%8F%8A%E7%BB%84-%E5%AE%88%E6%9C%9B%E8%80%85%E7%9A%84%E9%80%83%E7%A6%BB"><span class="toc-number">3.</span> <span class="toc-text">P1095 [NOIP2007 普及组] 守望者的逃离</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%83%8C%E5%8C%85"><span class="toc-number">4.</span> <span class="toc-text">背包</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#P1048-NOIP2005-%E6%99%AE%E5%8F%8A%E7%BB%84-%E9%87%87%E8%8D%AF"><span class="toc-number">5.</span> <span class="toc-text">P1048 [NOIP2005 普及组] 采药</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#P1616-%E7%96%AF%E7%8B%82%E7%9A%84%E9%87%87%E8%8D%AF"><span class="toc-number">6.</span> <span class="toc-text">P1616 疯狂的采药</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7"><span class="toc-number">7.</span> <span class="toc-text">线性</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#P1091-NOIP2004-%E6%8F%90%E9%AB%98%E7%BB%84-%E5%90%88%E5%94%B1%E9%98%9F%E5%BD%A2"><span class="toc-number">8.</span> <span class="toc-text">P1091 [NOIP2004 提高组] 合唱队形</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#P1439-%E3%80%90%E6%A8%A1%E6%9D%BF%E3%80%91%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%AD%90%E5%BA%8F%E5%88%97"><span class="toc-number">9.</span> <span class="toc-text">P1439 【模板】最长公共子序列</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#P1880-NOI1995-%E7%9F%B3%E5%AD%90%E5%90%88%E5%B9%B6"><span class="toc-number">10.</span> <span class="toc-text">P1880 [NOI1995] 石子合并</span></a></li></ol>
+      </div>
+      <div class="related panel pjax" data-title="系列文章">
+        <ul>
+          <li class="active"><a href="/2022/04/17/luogu-al/" rel="bookmark" title="做算法题综合">做算法题综合</a></li>
+        </ul>
+      </div>
+      <div class="overview panel" data-title="站点概览">
+        <div class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="image" itemprop="image" alt="Sukuna"
+      data-src="/images/meili.JPG">
+  <p class="name" itemprop="name">Sukuna</p>
+  <div class="description" itemprop="description"></div>
+</div>
+
+<nav class="state">
+    <div class="item posts">
+      <a href="/archives/">
+        <span class="count">20</span>
+        <span class="name">文章</span>
+      </a>
+    </div>
+    <div class="item categories">
+      <a href="/categories/">
+        <span class="count">4</span>
+        <span class="name">分类</span>
+      </a>
+    </div>
+</nav>
+
+<div class="social">
+      <span class="exturl item github" data-url="aHR0cHM6Ly9naXRodWIuY29tL1N1a3VuYXNoaW5teW91bWFydS1odXN0" title="https:&#x2F;&#x2F;github.com&#x2F;Sukunashinmyoumaru-hust"><i class="ic i-github"></i></span>
+      <span class="exturl item twitter" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9zdWt1bmFfd2lyZWxlc3M=" title="https:&#x2F;&#x2F;twitter.com&#x2F;sukuna_wireless"><i class="ic i-twitter"></i></span>
+      <a href="/sukuna@hust.edu.cn" title="sukuna@hust.edu.cn" class="item email"><i class="ic i-envelope"></i></a>
+</div>
+
+<ul class="menu">
   
-  <script type="text/javascript">
-  $(function() {
-    // copy-btn HTML
-    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
-    btn += '<i class="fa-regular fa-clone"></i>';
-    btn += '</span>';
-    // mount it!
-    $(".highlight table").before(btn);
-    var clip = new ClipboardJS('.btn-copy', {
-      text: function(trigger) {
-        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+    
+  <li class="item">
+    <a href="/" rel="section"><i class="ic i-home"></i>首页</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/about/" rel="section"><i class="ic i-user"></i>关于</a>
+  </li>
+
+        
+  <li class="item dropdown">
+      <a href="javascript:void(0);"><i class="ic i-feather"></i>文章</a>
+    <ul class="submenu">
+
+        
+  <li class="item">
+    <a href="/archives/" rel="section"><i class="ic i-list-alt"></i>归档</a>
+  </li>
+
+        
+  <li class="item">
+    <a href="/categories/" rel="section"><i class="ic i-th"></i>分类</a>
+  </li>
+
+        
+  <li class="item">
+    <a href="/tags/" rel="section"><i class="ic i-tags"></i>标签</a>
+  </li>
+
+  </ul>
+    
+  <li class="item">
+    <a href="/friend/" rel="section"><i class="ic i-heart"></i>friends</a>
+  </li>
+
+    
+  <li class="item">
+    <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1N1a3VuYVNoaW5teW91bWFydS1odXN0L0h1c3Qtb3BlbnNvdXJjZS1YdWVqaWU="><i class="ic i-heart"></i>HUST-学解</span>
+  </li>
+
+    
+  <li class="item">
+    <a href="/picture/" rel="section"><i class="ic i-heart"></i>赠画感谢</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/source/" rel="section"><i class="ic i-heart"></i>资料下载</a>
+  </li>
+
+
+</ul>
+
+      </div>
+    </div>
+  </div>
+
+  <ul id="quick">
+    <li class="prev pjax">
+        <a href="/2022/03/30/splay/" rel="prev" title="上一篇"><i class="ic i-chevron-left"></i></a>
+    </li>
+    <li class="up"><i class="ic i-arrow-up"></i></li>
+    <li class="down"><i class="ic i-arrow-down"></i></li>
+    <li class="next pjax">
+        <a href="/2022/06/06/nju-ics/" rel="next" title="下一篇"><i class="ic i-chevron-right"></i></a>
+    </li>
+    <li class="percent"></li>
+  </ul>
+</div>
+
+
+        </div>
+        <div class="dimmer"></div>
+      </div>
+    </main>
+    <footer id="footer">
+      <div class="inner">
+        <div class="widgets">
+          
+<div class="rpost pjax">
+  <h2>随机文章</h2>
+  <ul>
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E6%9D%82%E8%AE%B0/" title="分类于 杂记">杂记</a>
+</div>
+
+    <span><a href="/2020/10/11/cmd/" title="(烂活)用cmd窗口输出图画">(烂活)用cmd窗口输出图画</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
+</div>
+
+    <span><a href="/2024/03/14/pa-lab2/" title="南大pa-Lab2">南大pa-Lab2</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E6%9D%82%E8%AE%B0/" title="分类于 杂记">杂记</a>
+</div>
+
+    <span><a href="/2022/06/06/nju-ics/" title="南大ics面试记录">南大ics面试记录</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
+</div>
+
+    <span><a href="/2021/04/25/verilog/" title="华中科技大学Verilog实验解析">华中科技大学Verilog实验解析</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
+</div>
+
+    <span><a href="/2023/02/06/stanford-cs144-lab/" title="Stanford CS144 Lab">Stanford CS144 Lab</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
+</div>
+
+    <span><a href="/2023/02/06/mit-6-s081-xv6-information-%E9%9B%86%E5%90%88/" title="MIT_6.S081_xv6.Information 集合">MIT_6.S081_xv6.Information 集合</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
+</div>
+
+    <span><a href="/2023/02/06/cmu14-445-lab/" title="CMU14-445 Lab">CMU14-445 Lab</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E7%AE%97%E6%B3%95%E9%A2%98/" title="分类于 算法题">算法题</a>
+</div>
+
+    <span><a href="/2020/05/25/ufpe-starters-final-try-outs-2019-recife-brazil-dec-1-2018-problem-j%EF%BC%88%E7%BA%BF%E6%AE%B5%E6%A0%91%E4%BA%8C%E5%88%86%EF%BC%89/" title="UFPE Starters Final Try-Outs 2019 Recife, Brazil, Dec 1, 2018 Problem J（线段树+二分）">UFPE Starters Final Try-Outs 2019 Recife, Brazil, Dec 1, 2018 Problem J（线段树+二分）</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E6%9D%82%E8%AE%B0/" title="分类于 杂记">杂记</a>
+</div>
+
+    <span><a href="/2023/09/13/pa-lab1/" title="南大pa-Lab1">南大pa-Lab1</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/uncategorized/" title="分类于 uncategorized">uncategorized</a>
+</div>
+
+    <span><a href="/2022/04/17/luogu-al/" title="做算法题综合">做算法题综合</a></span>
+  </li>
+
+  </ul>
+</div>
+<div>
+  <h2>最新评论</h2>
+  <ul class="leancloud-recent-comment"></ul>
+</div>
+
+        </div>
+        <div class="status">
+  <div class="copyright">
+    
+    &copy; 2010 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="ic i-sakura rotate"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Sukuna @ Suwa shrine</span>
+  </div>
+  <div class="powered-by">
+    基于 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & Theme.<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FtZWhpbWUvaGV4by10aGVtZS1zaG9rYQ==">Shoka</span>
+  </div>
+</div>
+
+      </div>
+    </footer>
+  </div>
+<script data-config type="text/javascript">
+  var LOCAL = {
+    path: '2022/04/17/luogu-al/',
+    favicon: {
+      show: "（●´3｀●）あややややや～",
+      hide: "(´Д｀)大変だ！"
+    },
+    search : {
+      placeholder: "文章搜索",
+      empty: "关于 「 ${query} 」，什么也没搜到",
+      stats: "${time} ms 内找到 ${hits} 条结果"
+    },
+    valine: true,fancybox: true,
+    copyright: '复制成功，转载请遵守 <i class="ic i-creative-commons"></i>BY-NC-SA 协议。',
+    ignores : [
+      function(uri) {
+        return uri.includes('#');
+      },
+      function(uri) {
+        return new RegExp(LOCAL.path+"$").test(uri);
       }
-    });
-    clip.on('success', function(e) {
-      e.trigger.setAttribute('aria-label', "复制成功！");
-      e.clearSelection();
-    })
-  })
-  </script>
+    ]
+  };
+</script>
+
+<script src="https://cdn.polyfill.io/v2/polyfill.js"></script>
+
+<script src="//cdn.jsdelivr.net/combine/npm/pace-js@1.0.2/pace.min.js,npm/pjax@0.2.8/pjax.min.js,npm/whatwg-fetch@3.4.0/dist/fetch.umd.min.js,npm/animejs@3.2.0/lib/anime.min.js,npm/algoliasearch@4/dist/algoliasearch-lite.umd.js,npm/instantsearch.js@4/dist/instantsearch.production.min.js,npm/lozad@1/dist/lozad.min.js,npm/quicklink@2/dist/quicklink.umd.js"></script>
+
+<script src="/js/app.js?v=0.2.5"></script>
 
 
-<script src="/js/main.js"></script>
 
-<!-- search -->
 
-<!-- Baidu Analytics -->
-
-<!-- Cloudflare Analytics -->
-
-<!-- Disqus Comments -->
-
-<!-- utterances Comments -->
-
-</body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":200,"height":400},"mobile":{"show":true},"log":false});</script></body>
 </html>

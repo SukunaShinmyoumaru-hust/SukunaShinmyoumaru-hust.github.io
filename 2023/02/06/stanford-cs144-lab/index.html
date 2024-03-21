@@ -1,173 +1,156 @@
+
+
+
+
 <!DOCTYPE html>
-<html lang=zh>
+<html lang="zh-CN">
 <head>
-    <!-- so meta -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="Lab0.Warm Up1 Networking by hand这一个部分主要是体验一些基本的应用层协议,主要是HTTP协议和SMTP协议.  Both of these tasks rely on a networking abstraction called a reliable bidirectional in-order byte stream: you’ll type a sequenc">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Stanford CS144 Lab">
-<meta property="og:url" content="https://sukunashinmyoumaru-hust.github.io/2023/02/06/stanford-cs144-lab/index.html">
-<meta property="og:site_name" content="Suwa shrine">
-<meta property="og:description" content="Lab0.Warm Up1 Networking by hand这一个部分主要是体验一些基本的应用层协议,主要是HTTP协议和SMTP协议.  Both of these tasks rely on a networking abstraction called a reliable bidirectional in-order byte stream: you’ll type a sequenc">
-<meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://sukunahust.com/wp-content/uploads/2022/03/image-21-812x1024.png">
-<meta property="og:image" content="https://sukunahust.com/wp-content/uploads/2022/03/image-22-1024x617.png">
-<meta property="article:published_time" content="2023-02-06T02:50:55.000Z">
-<meta property="article:modified_time" content="2024-02-29T07:28:48.018Z">
-<meta property="article:author" content="Sukuna">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://sukunahust.com/wp-content/uploads/2022/03/image-21-812x1024.png">
-    
-    
-      
-        
-          <link rel="shortcut icon" href="/images/favicon.ico">
-        
-      
-      
-        
-          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
-        
-      
-      
-        
-          <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-192x192.png">
-        
-      
-    
-    <!-- title -->
-    <title>Stanford CS144 Lab</title>
-    <!-- async scripts -->
-    <!-- Google Analytics -->
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#FFF">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="icon" type="image/ico" sizes="32x32" href="/images/favicon.ico">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
 
 
-    <!-- Umami Analytics -->
+<link rel="alternate" type="application/rss+xml" title="灵山之上神风起" href="https://sukunashinmyoumaru-hust.github.io/rss.xml" />
+<link rel="alternate" type="application/atom+xml" title="灵山之上神风起" href="https://sukunashinmyoumaru-hust.github.io/atom.xml" />
+<link rel="alternate" type="application/json" title="灵山之上神风起" href="https://sukunashinmyoumaru-hust.github.io/feed.json" />
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Mulish:300,300italic,400,400italic,700,700italic%7CFredericka%20the%20Great:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20JP:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20SC:300,300italic,400,400italic,700,700italic%7CInconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="/css/app.css?v=0.2.5">
+
+  
+
+<link rel="canonical" href="https://sukunashinmyoumaru-hust.github.io/2023/02/06/stanford-cs144-lab/">
 
 
-    <!-- styles -->
-    
-<link rel="stylesheet" href="/css/style.css">
 
-    <!-- persian styles -->
-    
-    <!-- rss -->
-    
-    
-	<!-- mathjax -->
-	
+  <title>
+Stanford CS144 Lab - 实验记录 |
+Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
 <meta name="generator" content="Hexo 7.1.1"></head>
-
-<body class="max-width mx-auto px3 ltr">
-    
-      <div id="header-post">
-  <a id="menu-icon" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
-  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
-  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
-  <span id="menu">
-    <span id="nav">
-      <ul>
-        <!--
-       --><li><a href="/">首页</a></li><!--
-     --><!--
-       --><li><a href="/about/">关于</a></li><!--
-     --><!--
-       --><li><a href="/archives/">归档</a></li><!--
-     --><!--
-       --><li><a target="_blank" rel="noopener" href="https://github.com/SukunaShinmyoumaru-hust/Hust-opensource-Xuejie">HUST-学解</a></li><!--
-     --><!--
-       --><li><a href="/picture/">赠画感谢</a></li><!--
-     --><!--
-       --><li><a href="/ziliao/">资料下载</a></li><!--
-     --><!--
-       --><li><a href="/friend/">友链</a></li><!--
-     -->
-      </ul>
-    </span>
-    <br/>
-    <span id="actions">
-      <ul>
-        
-        <li><a class="icon" aria-label="上一篇" href="/2023/02/06/mit-6-s081-xv6-information-%E9%9B%86%E5%90%88/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
-        
-        
-        <li><a class="icon" aria-label="下一篇" href="/2023/02/06/cmu14-445-lab/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
-        
-        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
-        <li><a class="icon" aria-label="分享文章" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
-      </ul>
-      <span id="i-prev" class="info" style="display:none;">上一篇</span>
-      <span id="i-next" class="info" style="display:none;">下一篇</span>
-      <span id="i-top" class="info" style="display:none;">返回顶部</span>
-      <span id="i-share" class="info" style="display:none;">分享文章</span>
-    </span>
-    <br/>
-    <div id="share" style="display: none">
-      <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sukunashinmyoumaru-hust.github.io/2023/02/06/stanford-cs144-lab/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sukunashinmyoumaru-hust.github.io/2023/02/06/stanford-cs144-lab/&text=Stanford CS144 Lab"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sukunashinmyoumaru-hust.github.io/2023/02/06/stanford-cs144-lab/&title=Stanford CS144 Lab"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sukunashinmyoumaru-hust.github.io/2023/02/06/stanford-cs144-lab/&is_video=false&description=Stanford CS144 Lab"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Stanford CS144 Lab&body=Check out this article: https://sukunashinmyoumaru-hust.github.io/2023/02/06/stanford-cs144-lab/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sukunashinmyoumaru-hust.github.io/2023/02/06/stanford-cs144-lab/&title=Stanford CS144 Lab"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sukunashinmyoumaru-hust.github.io/2023/02/06/stanford-cs144-lab/&title=Stanford CS144 Lab"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sukunashinmyoumaru-hust.github.io/2023/02/06/stanford-cs144-lab/&title=Stanford CS144 Lab"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sukunashinmyoumaru-hust.github.io/2023/02/06/stanford-cs144-lab/&title=Stanford CS144 Lab"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sukunashinmyoumaru-hust.github.io/2023/02/06/stanford-cs144-lab/&name=Stanford CS144 Lab&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sukunashinmyoumaru-hust.github.io/2023/02/06/stanford-cs144-lab/&t=Stanford CS144 Lab"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
-</ul>
-
-    </div>
-    
-    
-      <div id="toc">
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Lab0-Warm-Up"><span class="toc-number">1.</span> <span class="toc-text">Lab0.Warm Up</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Networking-by-hand"><span class="toc-number"></span> <span class="toc-text">1 Networking by hand</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E8%8E%B7%E5%8F%96%E4%B8%80%E4%B8%AA%E7%BD%91%E9%A1%B5"><span class="toc-number">1.</span> <span class="toc-text">1.1 获取一个网页.</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-%E7%BB%99%E8%87%AA%E5%B7%B1%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6"><span class="toc-number">1.1.</span> <span class="toc-text">1.2 给自己发送邮件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-3-%E7%9B%91%E5%90%AC%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-number">1.2.</span> <span class="toc-text">1.3 监听服务器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E8%87%AA%E5%88%B6Socket"><span class="toc-number">1.3.</span> <span class="toc-text">2 自制Socket</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E7%BC%93%E5%86%B2%E5%8C%BA%E9%98%9F%E5%88%97"><span class="toc-number">1.4.</span> <span class="toc-text">3 缓冲区队列</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lab1-stitching-substrings-into-a-byte-stream"><span class="toc-number">2.</span> <span class="toc-text">Lab1.stitching substrings into a byte stream</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lab2-TCP-Reciever"><span class="toc-number">3.</span> <span class="toc-text">Lab2.TCP Reciever</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%9D%E5%AF%B9%E5%BA%8F%E5%8F%B7%E5%92%8C%E7%9B%B8%E5%AF%B9%E5%BA%8F%E5%8F%B7%E7%9A%84%E8%BD%AC%E6%8D%A2"><span class="toc-number">3.1.</span> <span class="toc-text">绝对序号和相对序号的转换:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Implementing-the-TCP-receiver"><span class="toc-number">3.2.</span> <span class="toc-text">Implementing the TCP receiver</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lab3-TCP-Sender"><span class="toc-number">4.</span> <span class="toc-text">Lab3 TCP Sender</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lab4-TCP-Connnection"><span class="toc-number">5.</span> <span class="toc-text">Lab4 TCP Connnection</span></a></li></ol>
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div id="loading">
+    <div class="cat">
+      <div class="body"></div>
+      <div class="head">
+        <div class="face"></div>
       </div>
-    
+      <div class="foot">
+        <div class="tummy-end"></div>
+        <div class="bottom"></div>
+        <div class="legs left"></div>
+        <div class="legs right"></div>
+      </div>
+      <div class="paw">
+        <div class="hands left"></div>
+        <div class="hands right"></div>
+      </div>
+    </div>
+  </div>
+  <div id="container">
+    <header id="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="inner">
+        <div id="brand">
+          <div class="pjax">
+          
+  <h1 itemprop="name headline">Stanford CS144 Lab
+  </h1>
+  
+<div class="meta">
+  <span class="item" title="创建时间：2023-02-06 10:50:55">
+    <span class="icon">
+      <i class="ic i-calendar"></i>
+    </span>
+    <span class="text">发表于</span>
+    <time itemprop="dateCreated datePublished" datetime="2023-02-06T10:50:55+08:00">2023-02-06</time>
   </span>
 </div>
 
+
+          </div>
+        </div>
+        <nav id="nav">
+  <div class="inner">
+    <div class="toggle">
+      <div class="lines" aria-label="切换导航栏">
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line"></span>
+      </div>
+    </div>
+    <ul class="menu">
+      <li class="item title"><a href="/" rel="start">Suwa shrine</a></li>
+    </ul>
+    <ul class="right">
+      <li class="item theme">
+        <i class="ic i-sun"></i>
+      </li>
+      <li class="item search">
+        <i class="ic i-search"></i>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+      </div>
+      <div id="imgs" class="pjax">
+        <ul>
+          <li class="item" data-background-image="https://s2.loli.net/2024/03/21/GeYMagTskVub2io.jpg"></li>
+          <li class="item" data-background-image="https://s2.loli.net/2024/03/21/N7AWrf8Xs9VTL4P.jpg"></li>
+          <li class="item" data-background-image="https://i.loli.net/2020/10/30/Z5W6r2BSoiThHG1.jpg"></li>
+          <li class="item" data-background-image="https://s2.loli.net/2024/03/21/nBKjz8OQYVMTHE1.jpg"></li>
+          <li class="item" data-background-image="https://s2.loli.net/2024/03/21/8PBD6GfINvWY5tU.jpg"></li>
+          <li class="item" data-background-image="https://s2.loli.net/2024/03/21/ySW2Z5V4oheEaRc.jpg"></li>
+        </ul>
+      </div>
+    </header>
+    <div id="waves">
+      <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+        <defs>
+          <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+        </defs>
+        <g class="parallax">
+          <use xlink:href="#gentle-wave" x="48" y="0" />
+          <use xlink:href="#gentle-wave" x="48" y="3" />
+          <use xlink:href="#gentle-wave" x="48" y="5" />
+          <use xlink:href="#gentle-wave" x="48" y="7" />
+        </g>
+      </svg>
+    </div>
+    <main>
+      <div class="inner">
+        <div id="main" class="pjax">
+          
+  <div class="article wrap">
     
-    <div class="content index py4 ">
-        
-        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
-  <header>
+<div class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+<i class="ic i-home"></i>
+<span><a href="/">首页</a></span><i class="ic i-angle-right"></i>
+<span  class="current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" itemprop="item" rel="index" title="分类于 实验记录"><span itemprop="name">实验记录</span></a>
+<meta itemprop="position" content="1" /></span>
+</div>
+
+    <article itemscope itemtype="http://schema.org/Article" class="post block" lang="zh-CN">
+  <link itemprop="mainEntityOfPage" href="https://sukunashinmyoumaru-hust.github.io/2023/02/06/stanford-cs144-lab/">
+
+  <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="image" content="/images/meili.JPG">
+    <meta itemprop="name" content="Sukuna">
+    <meta itemprop="description" content="Sukuna_wireless, ">
+  </span>
+
+  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="灵山之上神风起">
+  </span>
+
+  <div class="body md" itemprop="articleBody">
     
-    <h1 class="posttitle p-name" itemprop="name headline">
-        Stanford CS144 Lab
-    </h1>
 
-
-
-    <div class="meta">
-      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
-        <span class="p-name" itemprop="name">Sukuna</span>
-      </span>
-      
-    <div class="postdate">
-      
-        <time datetime="2023-02-06T02:50:55.000Z" class="dt-published" itemprop="datePublished">2023-02-06</time>
-        
-      
-    </div>
-
-
-      
-    <div class="article-category">
-        <i class="fa-solid fa-archive"></i>
-        <a class="category-link" href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/">实验记录</a>
-    </div>
-
-
-      
-
-    </div>
-  </header>
-  
-
-  <div class="content e-content" itemprop="articleBody">
     <h3 id="Lab0-Warm-Up"><a href="#Lab0-Warm-Up" class="headerlink" title="Lab0.Warm Up"></a>Lab0.Warm Up</h3><h2 id="1-Networking-by-hand"><a href="#1-Networking-by-hand" class="headerlink" title="1 Networking by hand"></a>1 Networking by hand</h2><p>这一个部分主要是体验一些基本的应用层协议,主要是HTTP协议和SMTP协议.</p>
 <blockquote>
 <p>Both of these tasks rely on a networking abstraction called a reliable bidirectional in-order byte stream: you’ll type a sequence of bytes into the terminal, and the same sequence of bytes will eventually be delivered, in the same order, to a program running on another computer (a server). The server responds with its own sequence of bytes, delivered back to your terminal.</p>
@@ -187,20 +170,20 @@
 <p>总的来说就是做一个桶,可以从下方获得内容,也可以从上方添加内容,当桶满的时候就不可以添加东西了</p>
 <p>ByteStream具有一定的容量，最大允许存储该容量大小的数据；在读取端读出一部分数据后，它会释放掉已经被读出的内容，以腾出空间继续让写端写入数据。  </p>
 <p>这个实验为我们后期实现TCP协议有着帮助.</p>
-<p><img src="https://sukunahust.com/wp-content/uploads/2022/03/image-21-812x1024.png"></p>
+<p><img data-src="https://sukunahust.com/wp-content/uploads/2022/03/image-21-812x1024.png"></p>
 <p>上面的是缓冲区队列的一些声明,对于读写两方,操作是不同的.</p>
 <p>有个小提示,如果C++的构造函数可以使用像这样的方法进行初始化的</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">class baba (const int abab) _abab(abab)&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>这个本质上就是数据结构题,完成缓冲区队列罢了.</p>
-<p><img src="https://sukunahust.com/wp-content/uploads/2022/03/image-22-1024x617.png"></p>
+<p><img data-src="https://sukunahust.com/wp-content/uploads/2022/03/image-22-1024x617.png"></p>
 <h3 id="Lab1-stitching-substrings-into-a-byte-stream"><a href="#Lab1-stitching-substrings-into-a-byte-stream" class="headerlink" title="Lab1.stitching substrings into a byte stream"></a>Lab1.stitching substrings into a byte stream</h3><p>该lab要求我们实现一个流重组类，可以将Sender发来的带索引号的字节碎片重组成有序的字节写入到byte_stream。接收端从发送端读取数据，调用流重组器，流重组器对数据进行排序，排序好后写入byte_stream。</p>
 <p>流重组器也是有capasity的,也就是说流重组器也有一定的容量,一次性处理太多的信息会导致流重组器不能够正常地工作.同样的我们把流处理器当成一个双端队列即可.</p>
 <p>private类中还有一个ByteStream类型的变量,所有的内容都输出给ByteStream,还有一个容量变量.其中ByteStream中的bytes_read返回ByteStream处理了多少元素.</p>
 <p>因为重组类的函数中,支持的index是first unread&#x3D;_output.bytes_read()(已经读取的元素)到first unacceptable的这一块区域,我们要保证输入的字节编号是在这个区域里面的.</p>
 <p>在重组器类的函数中，push_substring函数完成重组工作。其参数有data(string),index(size_t),eof(bool),data是待排序的数据，index是数据首元素的序号，eof用于判断是否结束。结束后将不再有数据输入。</p>
 <p>在重组的过程中，我们会遇到重复、丢包、重叠、乱序的现象。为了使乱序的数据找到有序的位置，我使用’\0’维护重组器中数据的相对序号，例如，第一次data为make,index为0,第二次data为great,index为13,而处于两组数据中间的数据未知，我们就用’\0’代替，即make\0\0\0\0\0\0\0\0\0great。这样就维护了已经进入重组器的数据的有序。当然，写入的data中也有可能含有\0,这是，我们就需要一个bool双端队列，来记录相应位置的数据是否有序，在上述例子中，队列的bool值为111100000000011111。</p>
-<p>所以说我们在数据结构中添加几项,一个是_unassembled_byte,是一个<a href="std::deque">std::deque</a><char>,暂时存储还乱序的字符串,_check_byte是<a href="std::deque">std::deque</a><bool>,这个元素与_unassembled_byte一一对应,当un[i]存储着还没有发送的字符的时候,ch[I]&#x3D;true,否则为false,还有一个_lens_un,这个记录乱序的字符的长度.</p>
+<p>所以说我们在数据结构中添加几项,一个是_unassembled_byte,是一个<span class="exturl" data-url="c3RkOjpkZXF1ZQ==">std::deque</span><char>,暂时存储还乱序的字符串,_check_byte是<span class="exturl" data-url="c3RkOjpkZXF1ZQ==">std::deque</span><bool>,这个元素与_unassembled_byte一一对应,当un[i]存储着还没有发送的字符的时候,ch[I]&#x3D;true,否则为false,还有一个_lens_un,这个记录乱序的字符的长度.</p>
 <p>程序的总体结构:</p>
 <p>发送端的数据-&gt;流重组器(重组成有序的数据)-&gt;Bytestream(在Lab0就做好的队列)-&gt;TCP接收端.<br>流重组器需要做的是,把所有有序的数据写入到接收端.<br>其中字符的编号是从1一直往后延伸的,因为队列的首和尾都可以记录.TCP的发送端发送的数据也是(字符号、字符串)字符的编号一直往后延伸.</p>
 <p>这个时候我们回忆一下对应数据的表示:</p>
@@ -275,154 +258,377 @@
 <p>4、真正的发送信息:读取sender中的消息缓存,然后加上ack和窗口信息信息,发送出去.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">void TCPConnection::send_sender_segments ()&#123;</span><br><span class="line">    //travel the queue to set the ack and windows size.</span><br><span class="line">    while(!_sender.segments_out().empty())&#123;</span><br><span class="line">        TCPSegment seg = _sender.segments_out().front();</span><br><span class="line">        _sender.segments_out().pop();</span><br><span class="line">        // the ack number is bot null</span><br><span class="line">        if(_receiver.ackno().has_value())&#123;</span><br><span class="line">            seg.header().ack=true;</span><br><span class="line">            seg.header().ackno=_receiver.ackno().value();</span><br><span class="line">            seg.header().win=_receiver.window_size();</span><br><span class="line">        &#125;</span><br><span class="line">        _segments_out.push(seg);</span><br><span class="line">    &#125;</span><br><span class="line">    //every time send segment,we need to shutdown.</span><br><span class="line">    clean_shutdown();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
   </div>
-</article>
 
+   <footer>
 
+    <div class="meta">
+  <span class="item">
+    <span class="icon">
+      <i class="ic i-calendar-check"></i>
+    </span>
+    <span class="text">更新于</span>
+    <time title="修改时间：2024-02-29 15:28:48" itemprop="dateModified" datetime="2024-02-29T15:28:48+08:00">2024-02-29</time>
+  </span>
+</div>
 
-        
-          <div id="footer-post-container">
-  <div id="footer-post">
-
-    <div id="nav-footer" style="display: none">
-      <ul>
-        
-          <li><a href="/">首页</a></li>
-        
-          <li><a href="/about/">关于</a></li>
-        
-          <li><a href="/archives/">归档</a></li>
-        
-          <li><a target="_blank" rel="noopener" href="https://github.com/SukunaShinmyoumaru-hust/Hust-opensource-Xuejie">HUST-学解</a></li>
-        
-          <li><a href="/picture/">赠画感谢</a></li>
-        
-          <li><a href="/ziliao/">资料下载</a></li>
-        
-          <li><a href="/friend/">友链</a></li>
-        
-      </ul>
-    </div>
-
-    
-    
-      <div id="toc-footer" style="display: none">
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Lab0-Warm-Up"><span class="toc-number">1.</span> <span class="toc-text">Lab0.Warm Up</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Networking-by-hand"><span class="toc-number"></span> <span class="toc-text">1 Networking by hand</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E8%8E%B7%E5%8F%96%E4%B8%80%E4%B8%AA%E7%BD%91%E9%A1%B5"><span class="toc-number">1.</span> <span class="toc-text">1.1 获取一个网页.</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-%E7%BB%99%E8%87%AA%E5%B7%B1%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6"><span class="toc-number">1.1.</span> <span class="toc-text">1.2 给自己发送邮件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-3-%E7%9B%91%E5%90%AC%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-number">1.2.</span> <span class="toc-text">1.3 监听服务器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E8%87%AA%E5%88%B6Socket"><span class="toc-number">1.3.</span> <span class="toc-text">2 自制Socket</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E7%BC%93%E5%86%B2%E5%8C%BA%E9%98%9F%E5%88%97"><span class="toc-number">1.4.</span> <span class="toc-text">3 缓冲区队列</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lab1-stitching-substrings-into-a-byte-stream"><span class="toc-number">2.</span> <span class="toc-text">Lab1.stitching substrings into a byte stream</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lab2-TCP-Reciever"><span class="toc-number">3.</span> <span class="toc-text">Lab2.TCP Reciever</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%9D%E5%AF%B9%E5%BA%8F%E5%8F%B7%E5%92%8C%E7%9B%B8%E5%AF%B9%E5%BA%8F%E5%8F%B7%E7%9A%84%E8%BD%AC%E6%8D%A2"><span class="toc-number">3.1.</span> <span class="toc-text">绝对序号和相对序号的转换:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Implementing-the-TCP-receiver"><span class="toc-number">3.2.</span> <span class="toc-text">Implementing the TCP receiver</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lab3-TCP-Sender"><span class="toc-number">4.</span> <span class="toc-text">Lab3 TCP Sender</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lab4-TCP-Connnection"><span class="toc-number">5.</span> <span class="toc-text">Lab4 TCP Connnection</span></a></li></ol>
+      
+<div class="reward">
+  <button><i class="ic i-heartbeat"></i> 赞赏</button>
+  <p>请我喝[茶]~(￣▽￣)~*</p>
+  <div id="qr">
+      
+      <div>
+        <img data-src="/images/wechatpay.jpg" alt="Sukuna 微信支付">
+        <p>微信支付</p>
       </div>
-    
-
-    <div id="share-footer" style="display: none">
-      <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sukunashinmyoumaru-hust.github.io/2023/02/06/stanford-cs144-lab/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sukunashinmyoumaru-hust.github.io/2023/02/06/stanford-cs144-lab/&text=Stanford CS144 Lab"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sukunashinmyoumaru-hust.github.io/2023/02/06/stanford-cs144-lab/&title=Stanford CS144 Lab"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sukunashinmyoumaru-hust.github.io/2023/02/06/stanford-cs144-lab/&is_video=false&description=Stanford CS144 Lab"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Stanford CS144 Lab&body=Check out this article: https://sukunashinmyoumaru-hust.github.io/2023/02/06/stanford-cs144-lab/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sukunashinmyoumaru-hust.github.io/2023/02/06/stanford-cs144-lab/&title=Stanford CS144 Lab"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sukunashinmyoumaru-hust.github.io/2023/02/06/stanford-cs144-lab/&title=Stanford CS144 Lab"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sukunashinmyoumaru-hust.github.io/2023/02/06/stanford-cs144-lab/&title=Stanford CS144 Lab"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sukunashinmyoumaru-hust.github.io/2023/02/06/stanford-cs144-lab/&title=Stanford CS144 Lab"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sukunashinmyoumaru-hust.github.io/2023/02/06/stanford-cs144-lab/&name=Stanford CS144 Lab&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sukunashinmyoumaru-hust.github.io/2023/02/06/stanford-cs144-lab/&t=Stanford CS144 Lab"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
-</ul>
-
-    </div>
-
-    <div id="actions-footer">
-        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
-        
-          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> 目录</a>
-        
-        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
-        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
-    </div>
-
+      
+      <div>
+        <img data-src="/images/alipay.jpg" alt="Sukuna 支付宝">
+        <p>支付宝</p>
+      </div>
   </div>
 </div>
 
-        
-        <footer id="footer">
-  <div class="footer-left">
-    Copyright &copy;
-    
-    
-    2020-2024
-    Sukuna
+      
+
+<div id="copyright">
+<ul>
+  <li class="author">
+    <strong>本文作者： </strong>Sukuna <i class="ic i-at"><em>@</em></i>灵山之上神风起
+  </li>
+  <li class="link">
+    <strong>本文链接：</strong>
+    <a href="https://sukunashinmyoumaru-hust.github.io/2023/02/06/stanford-cs144-lab/" title="Stanford CS144 Lab">https://sukunashinmyoumaru-hust.github.io/2023/02/06/stanford-cs144-lab/</a>
+  </li>
+  <li class="license">
+    <strong>版权声明： </strong>本站所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+  </footer>
+
+</article>
+
   </div>
-  <div class="footer-right">
-    <nav>
-      <ul>
-        <!--
-       --><li><a href="/">首页</a></li><!--
-     --><!--
-       --><li><a href="/about/">关于</a></li><!--
-     --><!--
-       --><li><a href="/archives/">归档</a></li><!--
-     --><!--
-       --><li><a target="_blank" rel="noopener" href="https://github.com/SukunaShinmyoumaru-hust/Hust-opensource-Xuejie">HUST-学解</a></li><!--
-     --><!--
-       --><li><a href="/picture/">赠画感谢</a></li><!--
-     --><!--
-       --><li><a href="/ziliao/">资料下载</a></li><!--
-     --><!--
-       --><li><a href="/friend/">友链</a></li><!--
-     -->
-      </ul>
-    </nav>
-  </div>
-</footer>
+  
+
+<div class="post-nav">
+    <div class="item left">
+      
+
+  <a href="/2023/02/06/cmu14-445-lab/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;s2.loli.net&#x2F;2024&#x2F;03&#x2F;21&#x2F;KgXYlCHOW4jSdoL.jpg" title="CMU14-445 Lab">
+  <span class="type">上一篇</span>
+  <span class="category"><i class="ic i-flag"></i> 实验记录</span>
+  <h3>CMU14-445 Lab</h3>
+  </a>
 
     </div>
-    <!-- styles -->
+    <div class="item right">
+      
 
+  <a href="/2023/02/06/mit-6-s081-xv6-information-%E9%9B%86%E5%90%88/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;s2.loli.net&#x2F;2024&#x2F;03&#x2F;21&#x2F;ySW2Z5V4oheEaRc.jpg" title="MIT_6.S081_xv6.Information 集合">
+  <span class="type">下一篇</span>
+  <span class="category"><i class="ic i-flag"></i> 实验记录</span>
+  <h3>MIT_6.S081_xv6.Information 集合</h3>
+  </a>
 
-
-  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
-
-
-    <!-- jquery -->
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
-
-
-
-
-<!-- clipboard -->
+    </div>
+</div>
 
   
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  <div class="wrap" id="comments"></div>
+
+
+        </div>
+        <div id="sidebar">
+          
+
+<div class="inner">
+
+  <div class="panels">
+    <div class="inner">
+      <div class="contents panel pjax" data-title="文章目录">
+          <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Lab0-Warm-Up"><span class="toc-number">1.</span> <span class="toc-text">Lab0.Warm Up</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Networking-by-hand"><span class="toc-number"></span> <span class="toc-text">1 Networking by hand</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E8%8E%B7%E5%8F%96%E4%B8%80%E4%B8%AA%E7%BD%91%E9%A1%B5"><span class="toc-number">1.</span> <span class="toc-text">1.1 获取一个网页.</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-%E7%BB%99%E8%87%AA%E5%B7%B1%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6"><span class="toc-number">1.1.</span> <span class="toc-text">1.2 给自己发送邮件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-3-%E7%9B%91%E5%90%AC%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-number">1.2.</span> <span class="toc-text">1.3 监听服务器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E8%87%AA%E5%88%B6Socket"><span class="toc-number">1.3.</span> <span class="toc-text">2 自制Socket</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E7%BC%93%E5%86%B2%E5%8C%BA%E9%98%9F%E5%88%97"><span class="toc-number">1.4.</span> <span class="toc-text">3 缓冲区队列</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lab1-stitching-substrings-into-a-byte-stream"><span class="toc-number">2.</span> <span class="toc-text">Lab1.stitching substrings into a byte stream</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lab2-TCP-Reciever"><span class="toc-number">3.</span> <span class="toc-text">Lab2.TCP Reciever</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%9D%E5%AF%B9%E5%BA%8F%E5%8F%B7%E5%92%8C%E7%9B%B8%E5%AF%B9%E5%BA%8F%E5%8F%B7%E7%9A%84%E8%BD%AC%E6%8D%A2"><span class="toc-number">3.1.</span> <span class="toc-text">绝对序号和相对序号的转换:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Implementing-the-TCP-receiver"><span class="toc-number">3.2.</span> <span class="toc-text">Implementing the TCP receiver</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lab3-TCP-Sender"><span class="toc-number">4.</span> <span class="toc-text">Lab3 TCP Sender</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lab4-TCP-Connnection"><span class="toc-number">5.</span> <span class="toc-text">Lab4 TCP Connnection</span></a></li></ol>
+      </div>
+      <div class="related panel pjax" data-title="系列文章">
+        <ul>
+          <li><a href="/2021/04/25/verilog/" rel="bookmark" title="华中科技大学Verilog实验解析">华中科技大学Verilog实验解析</a></li><li><a href="/2021/12/18/oslab1/" rel="bookmark" title="华中科技大学OS实验解析(Lab1)">华中科技大学OS实验解析(Lab1)</a></li><li><a href="/2021/12/18/oslab2/" rel="bookmark" title="华中科技大学OS实验解析(Lab2)">华中科技大学OS实验解析(Lab2)</a></li><li><a href="/2022/02/26/oschallengelab/" rel="bookmark" title="华中科技大学操作系统挑战实验(PKE)基础解析">华中科技大学操作系统挑战实验(PKE)基础解析</a></li><li><a href="/2023/02/06/rustilings/" rel="bookmark" title="Rustilings 练习笔记">Rustilings 练习笔记</a></li><li><a href="/2023/02/06/cmu14-445-lab/" rel="bookmark" title="CMU14-445 Lab">CMU14-445 Lab</a></li><li class="active"><a href="/2023/02/06/stanford-cs144-lab/" rel="bookmark" title="Stanford CS144 Lab">Stanford CS144 Lab</a></li><li><a href="/2023/02/06/mit-6-s081-xv6-information-%E9%9B%86%E5%90%88/" rel="bookmark" title="MIT_6.S081_xv6.Information 集合">MIT_6.S081_xv6.Information 集合</a></li><li><a href="/2023/02/06/mit-6-s081-lab/" rel="bookmark" title="MIT_6.s081_Lab">MIT_6.s081_Lab</a></li><li><a href="/2024/03/14/pa-lab2/" rel="bookmark" title="南大pa-Lab2">南大pa-Lab2</a></li><li><a href="/2024/03/19/pa-lab3/" rel="bookmark" title="南大pa-Lab3">南大pa-Lab3</a></li>
+        </ul>
+      </div>
+      <div class="overview panel" data-title="站点概览">
+        <div class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="image" itemprop="image" alt="Sukuna"
+      data-src="/images/meili.JPG">
+  <p class="name" itemprop="name">Sukuna</p>
+  <div class="description" itemprop="description"></div>
+</div>
+
+<nav class="state">
+    <div class="item posts">
+      <a href="/archives/">
+        <span class="count">20</span>
+        <span class="name">文章</span>
+      </a>
+    </div>
+    <div class="item categories">
+      <a href="/categories/">
+        <span class="count">4</span>
+        <span class="name">分类</span>
+      </a>
+    </div>
+</nav>
+
+<div class="social">
+      <span class="exturl item github" data-url="aHR0cHM6Ly9naXRodWIuY29tL1N1a3VuYXNoaW5teW91bWFydS1odXN0" title="https:&#x2F;&#x2F;github.com&#x2F;Sukunashinmyoumaru-hust"><i class="ic i-github"></i></span>
+      <span class="exturl item twitter" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9zdWt1bmFfd2lyZWxlc3M=" title="https:&#x2F;&#x2F;twitter.com&#x2F;sukuna_wireless"><i class="ic i-twitter"></i></span>
+      <a href="/sukuna@hust.edu.cn" title="sukuna@hust.edu.cn" class="item email"><i class="ic i-envelope"></i></a>
+</div>
+
+<ul class="menu">
   
-  <script type="text/javascript">
-  $(function() {
-    // copy-btn HTML
-    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
-    btn += '<i class="fa-regular fa-clone"></i>';
-    btn += '</span>';
-    // mount it!
-    $(".highlight table").before(btn);
-    var clip = new ClipboardJS('.btn-copy', {
-      text: function(trigger) {
-        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+    
+  <li class="item">
+    <a href="/" rel="section"><i class="ic i-home"></i>首页</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/about/" rel="section"><i class="ic i-user"></i>关于</a>
+  </li>
+
+        
+  <li class="item dropdown">
+      <a href="javascript:void(0);"><i class="ic i-feather"></i>文章</a>
+    <ul class="submenu">
+
+        
+  <li class="item">
+    <a href="/archives/" rel="section"><i class="ic i-list-alt"></i>归档</a>
+  </li>
+
+        
+  <li class="item">
+    <a href="/categories/" rel="section"><i class="ic i-th"></i>分类</a>
+  </li>
+
+        
+  <li class="item">
+    <a href="/tags/" rel="section"><i class="ic i-tags"></i>标签</a>
+  </li>
+
+  </ul>
+    
+  <li class="item">
+    <a href="/friend/" rel="section"><i class="ic i-heart"></i>friends</a>
+  </li>
+
+    
+  <li class="item">
+    <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1N1a3VuYVNoaW5teW91bWFydS1odXN0L0h1c3Qtb3BlbnNvdXJjZS1YdWVqaWU="><i class="ic i-heart"></i>HUST-学解</span>
+  </li>
+
+    
+  <li class="item">
+    <a href="/picture/" rel="section"><i class="ic i-heart"></i>赠画感谢</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/source/" rel="section"><i class="ic i-heart"></i>资料下载</a>
+  </li>
+
+
+</ul>
+
+      </div>
+    </div>
+  </div>
+
+  <ul id="quick">
+    <li class="prev pjax">
+        <a href="/2023/02/06/cmu14-445-lab/" rel="prev" title="上一篇"><i class="ic i-chevron-left"></i></a>
+    </li>
+    <li class="up"><i class="ic i-arrow-up"></i></li>
+    <li class="down"><i class="ic i-arrow-down"></i></li>
+    <li class="next pjax">
+        <a href="/2023/02/06/mit-6-s081-xv6-information-%E9%9B%86%E5%90%88/" rel="next" title="下一篇"><i class="ic i-chevron-right"></i></a>
+    </li>
+    <li class="percent"></li>
+  </ul>
+</div>
+
+
+        </div>
+        <div class="dimmer"></div>
+      </div>
+    </main>
+    <footer id="footer">
+      <div class="inner">
+        <div class="widgets">
+          
+<div class="rpost pjax">
+  <h2>随机文章</h2>
+  <ul>
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E6%9D%82%E8%AE%B0/" title="分类于 杂记">杂记</a>
+</div>
+
+    <span><a href="/2020/05/02/setup/" title="建站">建站</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E7%AE%97%E6%B3%95%E9%A2%98/" title="分类于 算法题">算法题</a>
+</div>
+
+    <span><a href="/2022/03/30/splay/" title="Splay模版:P3369[模版&#x2F;普通平衡树]">Splay模版:P3369[模版/普通平衡树]</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E6%9D%82%E8%AE%B0/" title="分类于 杂记">杂记</a>
+</div>
+
+    <span><a href="/2023/09/13/pa-lab1/" title="南大pa-Lab1">南大pa-Lab1</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
+</div>
+
+    <span><a href="/2024/03/19/pa-lab3/" title="南大pa-Lab3">南大pa-Lab3</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/uncategorized/" title="分类于 uncategorized">uncategorized</a>
+</div>
+
+    <span><a href="/2022/04/17/luogu-al/" title="做算法题综合">做算法题综合</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
+</div>
+
+    <span><a href="/2023/02/06/cmu14-445-lab/" title="CMU14-445 Lab">CMU14-445 Lab</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
+</div>
+
+    <span><a href="/2023/02/06/rustilings/" title="Rustilings 练习笔记">Rustilings 练习笔记</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
+</div>
+
+    <span><a href="/2023/02/06/mit-6-s081-xv6-information-%E9%9B%86%E5%90%88/" title="MIT_6.S081_xv6.Information 集合">MIT_6.S081_xv6.Information 集合</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
+</div>
+
+    <span><a href="/2021/12/18/oslab2/" title="华中科技大学OS实验解析(Lab2)">华中科技大学OS实验解析(Lab2)</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E6%9D%82%E8%AE%B0/" title="分类于 杂记">杂记</a>
+</div>
+
+    <span><a href="/2022/02/13/how-to-dress-up/" title="论如何女装">论如何女装</a></span>
+  </li>
+
+  </ul>
+</div>
+<div>
+  <h2>最新评论</h2>
+  <ul class="leancloud-recent-comment"></ul>
+</div>
+
+        </div>
+        <div class="status">
+  <div class="copyright">
+    
+    &copy; 2010 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="ic i-sakura rotate"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Sukuna @ Suwa shrine</span>
+  </div>
+  <div class="powered-by">
+    基于 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & Theme.<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FtZWhpbWUvaGV4by10aGVtZS1zaG9rYQ==">Shoka</span>
+  </div>
+</div>
+
+      </div>
+    </footer>
+  </div>
+<script data-config type="text/javascript">
+  var LOCAL = {
+    path: '2023/02/06/stanford-cs144-lab/',
+    favicon: {
+      show: "（●´3｀●）あややややや～",
+      hide: "(´Д｀)大変だ！"
+    },
+    search : {
+      placeholder: "文章搜索",
+      empty: "关于 「 ${query} 」，什么也没搜到",
+      stats: "${time} ms 内找到 ${hits} 条结果"
+    },
+    valine: true,fancybox: true,
+    copyright: '复制成功，转载请遵守 <i class="ic i-creative-commons"></i>BY-NC-SA 协议。',
+    ignores : [
+      function(uri) {
+        return uri.includes('#');
+      },
+      function(uri) {
+        return new RegExp(LOCAL.path+"$").test(uri);
       }
-    });
-    clip.on('success', function(e) {
-      e.trigger.setAttribute('aria-label', "复制成功！");
-      e.clearSelection();
-    })
-  })
-  </script>
+    ]
+  };
+</script>
+
+<script src="https://cdn.polyfill.io/v2/polyfill.js"></script>
+
+<script src="//cdn.jsdelivr.net/combine/npm/pace-js@1.0.2/pace.min.js,npm/pjax@0.2.8/pjax.min.js,npm/whatwg-fetch@3.4.0/dist/fetch.umd.min.js,npm/animejs@3.2.0/lib/anime.min.js,npm/algoliasearch@4/dist/algoliasearch-lite.umd.js,npm/instantsearch.js@4/dist/instantsearch.production.min.js,npm/lozad@1/dist/lozad.min.js,npm/quicklink@2/dist/quicklink.umd.js"></script>
+
+<script src="/js/app.js?v=0.2.5"></script>
 
 
-<script src="/js/main.js"></script>
 
-<!-- search -->
 
-<!-- Baidu Analytics -->
-
-<!-- Cloudflare Analytics -->
-
-<!-- Disqus Comments -->
-
-<!-- utterances Comments -->
-
-</body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":200,"height":400},"mobile":{"show":true},"log":false});</script></body>
 </html>

@@ -1,170 +1,156 @@
+
+
+
+
 <!DOCTYPE html>
-<html lang=zh>
+<html lang="zh-CN">
 <head>
-    <!-- so meta -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="暂停一下！在做pa2的时候，你可以简单的认为，nemu是模拟硬件的执行，而am-kernel（abstract-machine）模拟最基础的软件的执行。abstract-machine里面模拟了最简单的运行时环境（你可以理解为是“头文件”） 那首先，我们先尝试理解一下nemu的运行机理。nemu尝试去实现了一个简单的硬件，这个简单的硬件完成了一个简单的图灵机，就是设置一个PC，取指令，执行指令，设">
-<meta property="og:type" content="article">
-<meta property="og:title" content="南大pa-Lab2">
-<meta property="og:url" content="https://sukunashinmyoumaru-hust.github.io/2024/03/14/pa-lab2/index.html">
-<meta property="og:site_name" content="Suwa shrine">
-<meta property="og:description" content="暂停一下！在做pa2的时候，你可以简单的认为，nemu是模拟硬件的执行，而am-kernel（abstract-machine）模拟最基础的软件的执行。abstract-machine里面模拟了最简单的运行时环境（你可以理解为是“头文件”） 那首先，我们先尝试理解一下nemu的运行机理。nemu尝试去实现了一个简单的硬件，这个简单的硬件完成了一个简单的图灵机，就是设置一个PC，取指令，执行指令，设">
-<meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-03-14T07:37:45.000Z">
-<meta property="article:modified_time" content="2024-03-18T00:41:55.847Z">
-<meta property="article:author" content="Sukuna">
-<meta name="twitter:card" content="summary">
-    
-    
-      
-        
-          <link rel="shortcut icon" href="/images/favicon.ico">
-        
-      
-      
-        
-          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
-        
-      
-      
-        
-          <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-192x192.png">
-        
-      
-    
-    <!-- title -->
-    <title>南大pa-Lab2</title>
-    <!-- async scripts -->
-    <!-- Google Analytics -->
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#FFF">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="icon" type="image/ico" sizes="32x32" href="/images/favicon.ico">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
 
 
-    <!-- Umami Analytics -->
+<link rel="alternate" type="application/rss+xml" title="灵山之上神风起" href="https://sukunashinmyoumaru-hust.github.io/rss.xml" />
+<link rel="alternate" type="application/atom+xml" title="灵山之上神风起" href="https://sukunashinmyoumaru-hust.github.io/atom.xml" />
+<link rel="alternate" type="application/json" title="灵山之上神风起" href="https://sukunashinmyoumaru-hust.github.io/feed.json" />
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Mulish:300,300italic,400,400italic,700,700italic%7CFredericka%20the%20Great:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20JP:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20SC:300,300italic,400,400italic,700,700italic%7CInconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="/css/app.css?v=0.2.5">
+
+  
+
+<link rel="canonical" href="https://sukunashinmyoumaru-hust.github.io/2024/03/14/pa-lab2/">
 
 
-    <!-- styles -->
-    
-<link rel="stylesheet" href="/css/style.css">
 
-    <!-- persian styles -->
-    
-    <!-- rss -->
-    
-    
-	<!-- mathjax -->
-	
+  <title>
+南大pa-Lab2 - 实验记录 |
+Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
 <meta name="generator" content="Hexo 7.1.1"></head>
-
-<body class="max-width mx-auto px3 ltr">
-    
-      <div id="header-post">
-  <a id="menu-icon" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
-  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
-  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
-  <span id="menu">
-    <span id="nav">
-      <ul>
-        <!--
-       --><li><a href="/">首页</a></li><!--
-     --><!--
-       --><li><a href="/about/">关于</a></li><!--
-     --><!--
-       --><li><a href="/archives/">归档</a></li><!--
-     --><!--
-       --><li><a target="_blank" rel="noopener" href="https://github.com/SukunaShinmyoumaru-hust/Hust-opensource-Xuejie">HUST-学解</a></li><!--
-     --><!--
-       --><li><a href="/picture/">赠画感谢</a></li><!--
-     --><!--
-       --><li><a href="/ziliao/">资料下载</a></li><!--
-     --><!--
-       --><li><a href="/friend/">友链</a></li><!--
-     -->
-      </ul>
-    </span>
-    <br/>
-    <span id="actions">
-      <ul>
-        
-        <li><a class="icon" aria-label="上一篇" href="/2024/03/19/pa-lab3/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
-        
-        
-        <li><a class="icon" aria-label="下一篇" href="/2023/09/13/pa-lab1/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
-        
-        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
-        <li><a class="icon" aria-label="分享文章" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
-      </ul>
-      <span id="i-prev" class="info" style="display:none;">上一篇</span>
-      <span id="i-next" class="info" style="display:none;">下一篇</span>
-      <span id="i-top" class="info" style="display:none;">返回顶部</span>
-      <span id="i-share" class="info" style="display:none;">分享文章</span>
-    </span>
-    <br/>
-    <div id="share" style="display: none">
-      <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sukunashinmyoumaru-hust.github.io/2024/03/14/pa-lab2/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sukunashinmyoumaru-hust.github.io/2024/03/14/pa-lab2/&text=南大pa-Lab2"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sukunashinmyoumaru-hust.github.io/2024/03/14/pa-lab2/&title=南大pa-Lab2"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sukunashinmyoumaru-hust.github.io/2024/03/14/pa-lab2/&is_video=false&description=南大pa-Lab2"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=南大pa-Lab2&body=Check out this article: https://sukunashinmyoumaru-hust.github.io/2024/03/14/pa-lab2/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sukunashinmyoumaru-hust.github.io/2024/03/14/pa-lab2/&title=南大pa-Lab2"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sukunashinmyoumaru-hust.github.io/2024/03/14/pa-lab2/&title=南大pa-Lab2"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sukunashinmyoumaru-hust.github.io/2024/03/14/pa-lab2/&title=南大pa-Lab2"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sukunashinmyoumaru-hust.github.io/2024/03/14/pa-lab2/&title=南大pa-Lab2"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sukunashinmyoumaru-hust.github.io/2024/03/14/pa-lab2/&name=南大pa-Lab2&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sukunashinmyoumaru-hust.github.io/2024/03/14/pa-lab2/&t=南大pa-Lab2"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
-</ul>
-
-    </div>
-    
-    
-      <div id="toc">
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9A%82%E5%81%9C%E4%B8%80%E4%B8%8B%EF%BC%81"><span class="toc-number">1.</span> <span class="toc-text">暂停一下！</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E6%AC%A1%E6%A8%A1%E6%8B%9F%E6%89%A7%E8%A1%8C"><span class="toc-number">2.</span> <span class="toc-text">一次模拟执行</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IOE%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-number">3.</span> <span class="toc-text">IOE的实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%80%9C%E5%86%85%E5%AD%98%E2%80%9D%E8%AF%BB%E5%86%99"><span class="toc-number">4.</span> <span class="toc-text">“内存”读写</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8AM%E4%B8%AD%E5%8A%A0%E4%B8%8A%E8%AE%BE%E5%A4%87%E8%AF%BB%E5%86%99%E7%9A%84%E6%94%AF%E6%8C%81"><span class="toc-number">5.</span> <span class="toc-text">在AM中加上设备读写的支持</span></a></li></ol>
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div id="loading">
+    <div class="cat">
+      <div class="body"></div>
+      <div class="head">
+        <div class="face"></div>
       </div>
-    
+      <div class="foot">
+        <div class="tummy-end"></div>
+        <div class="bottom"></div>
+        <div class="legs left"></div>
+        <div class="legs right"></div>
+      </div>
+      <div class="paw">
+        <div class="hands left"></div>
+        <div class="hands right"></div>
+      </div>
+    </div>
+  </div>
+  <div id="container">
+    <header id="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="inner">
+        <div id="brand">
+          <div class="pjax">
+          
+  <h1 itemprop="name headline">南大pa-Lab2
+  </h1>
+  
+<div class="meta">
+  <span class="item" title="创建时间：2024-03-14 15:37:45">
+    <span class="icon">
+      <i class="ic i-calendar"></i>
+    </span>
+    <span class="text">发表于</span>
+    <time itemprop="dateCreated datePublished" datetime="2024-03-14T15:37:45+08:00">2024-03-14</time>
   </span>
 </div>
 
+
+          </div>
+        </div>
+        <nav id="nav">
+  <div class="inner">
+    <div class="toggle">
+      <div class="lines" aria-label="切换导航栏">
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line"></span>
+      </div>
+    </div>
+    <ul class="menu">
+      <li class="item title"><a href="/" rel="start">Suwa shrine</a></li>
+    </ul>
+    <ul class="right">
+      <li class="item theme">
+        <i class="ic i-sun"></i>
+      </li>
+      <li class="item search">
+        <i class="ic i-search"></i>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+      </div>
+      <div id="imgs" class="pjax">
+        <ul>
+          <li class="item" data-background-image="https://s2.loli.net/2024/03/21/JC67Q4LIjnT9fig.jpg"></li>
+          <li class="item" data-background-image="https://s2.loli.net/2024/03/21/8PBD6GfINvWY5tU.jpg"></li>
+          <li class="item" data-background-image="https://s2.loli.net/2024/03/21/nBKjz8OQYVMTHE1.jpg"></li>
+          <li class="item" data-background-image="https://i.loli.net/2020/10/30/Z5W6r2BSoiThHG1.jpg"></li>
+          <li class="item" data-background-image="https://s2.loli.net/2024/03/21/ySW2Z5V4oheEaRc.jpg"></li>
+          <li class="item" data-background-image="https://s2.loli.net/2024/03/21/N7AWrf8Xs9VTL4P.jpg"></li>
+        </ul>
+      </div>
+    </header>
+    <div id="waves">
+      <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+        <defs>
+          <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+        </defs>
+        <g class="parallax">
+          <use xlink:href="#gentle-wave" x="48" y="0" />
+          <use xlink:href="#gentle-wave" x="48" y="3" />
+          <use xlink:href="#gentle-wave" x="48" y="5" />
+          <use xlink:href="#gentle-wave" x="48" y="7" />
+        </g>
+      </svg>
+    </div>
+    <main>
+      <div class="inner">
+        <div id="main" class="pjax">
+          
+  <div class="article wrap">
     
-    <div class="content index py4 ">
-        
-        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
-  <header>
+<div class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+<i class="ic i-home"></i>
+<span><a href="/">首页</a></span><i class="ic i-angle-right"></i>
+<span  class="current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" itemprop="item" rel="index" title="分类于 实验记录"><span itemprop="name">实验记录</span></a>
+<meta itemprop="position" content="1" /></span>
+</div>
+
+    <article itemscope itemtype="http://schema.org/Article" class="post block" lang="zh-CN">
+  <link itemprop="mainEntityOfPage" href="https://sukunashinmyoumaru-hust.github.io/2024/03/14/pa-lab2/">
+
+  <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="image" content="/images/meili.JPG">
+    <meta itemprop="name" content="Sukuna">
+    <meta itemprop="description" content="Sukuna_wireless, ">
+  </span>
+
+  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="灵山之上神风起">
+  </span>
+
+  <div class="body md" itemprop="articleBody">
     
-    <h1 class="posttitle p-name" itemprop="name headline">
-        南大pa-Lab2
-    </h1>
 
-
-
-    <div class="meta">
-      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
-        <span class="p-name" itemprop="name">Sukuna</span>
-      </span>
-      
-    <div class="postdate">
-      
-        <time datetime="2024-03-14T07:37:45.000Z" class="dt-published" itemprop="datePublished">2024-03-14</time>
-        
-      
-    </div>
-
-
-      
-    <div class="article-category">
-        <i class="fa-solid fa-archive"></i>
-        <a class="category-link" href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/">实验记录</a>
-    </div>
-
-
-      
-
-    </div>
-  </header>
-  
-
-  <div class="content e-content" itemprop="articleBody">
     <h3 id="暂停一下！"><a href="#暂停一下！" class="headerlink" title="暂停一下！"></a>暂停一下！</h3><p>在做pa2的时候，你可以简单的认为，nemu是模拟硬件的执行，而am-kernel（abstract-machine）模拟最基础的软件的执行。abstract-machine里面模拟了最简单的运行时环境（你可以理解为是“头文件”）</p>
 <p>那首先，我们先尝试理解一下nemu的运行机理。nemu尝试去实现了一个简单的硬件，这个简单的硬件完成了一个简单的图灵机，就是设置一个PC，取指令，执行指令，设置下一次执行的PC。对于所有的软件，包括am和用户程序，它是一个二进制字节码。nemu阅读这个二进制字节码，然后执行字节码对应的指令。</p>
 <p>现在RTFSC。了解一下程序的运行。首先程序执行<code>am_init_monitor()</code>，然后执行若干个初始化的操作：</p>
@@ -193,154 +179,377 @@
 <h3 id="在AM中加上设备读写的支持"><a href="#在AM中加上设备读写的支持" class="headerlink" title="在AM中加上设备读写的支持"></a>在AM中加上设备读写的支持</h3><p>这下知道驱动是怎么写的了吧？（应该叫驱动）比如说你要输出一个图片，经过驱动程序的转化，会变成一组S指令和L指令。本次实验的所有IOE完成全部都是这么来的，具体不表。</p>
 
   </div>
-</article>
 
+   <footer>
 
+    <div class="meta">
+  <span class="item">
+    <span class="icon">
+      <i class="ic i-calendar-check"></i>
+    </span>
+    <span class="text">更新于</span>
+    <time title="修改时间：2024-03-18 08:41:55" itemprop="dateModified" datetime="2024-03-18T08:41:55+08:00">2024-03-18</time>
+  </span>
+</div>
 
-        
-          <div id="footer-post-container">
-  <div id="footer-post">
-
-    <div id="nav-footer" style="display: none">
-      <ul>
-        
-          <li><a href="/">首页</a></li>
-        
-          <li><a href="/about/">关于</a></li>
-        
-          <li><a href="/archives/">归档</a></li>
-        
-          <li><a target="_blank" rel="noopener" href="https://github.com/SukunaShinmyoumaru-hust/Hust-opensource-Xuejie">HUST-学解</a></li>
-        
-          <li><a href="/picture/">赠画感谢</a></li>
-        
-          <li><a href="/ziliao/">资料下载</a></li>
-        
-          <li><a href="/friend/">友链</a></li>
-        
-      </ul>
-    </div>
-
-    
-    
-      <div id="toc-footer" style="display: none">
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9A%82%E5%81%9C%E4%B8%80%E4%B8%8B%EF%BC%81"><span class="toc-number">1.</span> <span class="toc-text">暂停一下！</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E6%AC%A1%E6%A8%A1%E6%8B%9F%E6%89%A7%E8%A1%8C"><span class="toc-number">2.</span> <span class="toc-text">一次模拟执行</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IOE%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-number">3.</span> <span class="toc-text">IOE的实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%80%9C%E5%86%85%E5%AD%98%E2%80%9D%E8%AF%BB%E5%86%99"><span class="toc-number">4.</span> <span class="toc-text">“内存”读写</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8AM%E4%B8%AD%E5%8A%A0%E4%B8%8A%E8%AE%BE%E5%A4%87%E8%AF%BB%E5%86%99%E7%9A%84%E6%94%AF%E6%8C%81"><span class="toc-number">5.</span> <span class="toc-text">在AM中加上设备读写的支持</span></a></li></ol>
+      
+<div class="reward">
+  <button><i class="ic i-heartbeat"></i> 赞赏</button>
+  <p>请我喝[茶]~(￣▽￣)~*</p>
+  <div id="qr">
+      
+      <div>
+        <img data-src="/images/wechatpay.jpg" alt="Sukuna 微信支付">
+        <p>微信支付</p>
       </div>
-    
-
-    <div id="share-footer" style="display: none">
-      <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sukunashinmyoumaru-hust.github.io/2024/03/14/pa-lab2/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sukunashinmyoumaru-hust.github.io/2024/03/14/pa-lab2/&text=南大pa-Lab2"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sukunashinmyoumaru-hust.github.io/2024/03/14/pa-lab2/&title=南大pa-Lab2"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sukunashinmyoumaru-hust.github.io/2024/03/14/pa-lab2/&is_video=false&description=南大pa-Lab2"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=南大pa-Lab2&body=Check out this article: https://sukunashinmyoumaru-hust.github.io/2024/03/14/pa-lab2/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sukunashinmyoumaru-hust.github.io/2024/03/14/pa-lab2/&title=南大pa-Lab2"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sukunashinmyoumaru-hust.github.io/2024/03/14/pa-lab2/&title=南大pa-Lab2"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sukunashinmyoumaru-hust.github.io/2024/03/14/pa-lab2/&title=南大pa-Lab2"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sukunashinmyoumaru-hust.github.io/2024/03/14/pa-lab2/&title=南大pa-Lab2"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sukunashinmyoumaru-hust.github.io/2024/03/14/pa-lab2/&name=南大pa-Lab2&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sukunashinmyoumaru-hust.github.io/2024/03/14/pa-lab2/&t=南大pa-Lab2"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
-</ul>
-
-    </div>
-
-    <div id="actions-footer">
-        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
-        
-          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> 目录</a>
-        
-        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
-        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
-    </div>
-
+      
+      <div>
+        <img data-src="/images/alipay.jpg" alt="Sukuna 支付宝">
+        <p>支付宝</p>
+      </div>
   </div>
 </div>
 
-        
-        <footer id="footer">
-  <div class="footer-left">
-    Copyright &copy;
-    
-    
-    2020-2024
-    Sukuna
+      
+
+<div id="copyright">
+<ul>
+  <li class="author">
+    <strong>本文作者： </strong>Sukuna <i class="ic i-at"><em>@</em></i>灵山之上神风起
+  </li>
+  <li class="link">
+    <strong>本文链接：</strong>
+    <a href="https://sukunashinmyoumaru-hust.github.io/2024/03/14/pa-lab2/" title="南大pa-Lab2">https://sukunashinmyoumaru-hust.github.io/2024/03/14/pa-lab2/</a>
+  </li>
+  <li class="license">
+    <strong>版权声明： </strong>本站所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+  </footer>
+
+</article>
+
   </div>
-  <div class="footer-right">
-    <nav>
-      <ul>
-        <!--
-       --><li><a href="/">首页</a></li><!--
-     --><!--
-       --><li><a href="/about/">关于</a></li><!--
-     --><!--
-       --><li><a href="/archives/">归档</a></li><!--
-     --><!--
-       --><li><a target="_blank" rel="noopener" href="https://github.com/SukunaShinmyoumaru-hust/Hust-opensource-Xuejie">HUST-学解</a></li><!--
-     --><!--
-       --><li><a href="/picture/">赠画感谢</a></li><!--
-     --><!--
-       --><li><a href="/ziliao/">资料下载</a></li><!--
-     --><!--
-       --><li><a href="/friend/">友链</a></li><!--
-     -->
-      </ul>
-    </nav>
-  </div>
-</footer>
+  
+
+<div class="post-nav">
+    <div class="item left">
+      
+
+  <a href="/2023/09/13/pa-lab1/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;s2.loli.net&#x2F;2024&#x2F;03&#x2F;21&#x2F;GeYMagTskVub2io.jpg" title="南大pa-Lab1">
+  <span class="type">上一篇</span>
+  <span class="category"><i class="ic i-flag"></i> 杂记</span>
+  <h3>南大pa-Lab1</h3>
+  </a>
 
     </div>
-    <!-- styles -->
+    <div class="item right">
+      
 
+  <a href="/2024/03/19/pa-lab3/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;s2.loli.net&#x2F;2024&#x2F;03&#x2F;21&#x2F;ySW2Z5V4oheEaRc.jpg" title="南大pa-Lab3">
+  <span class="type">下一篇</span>
+  <span class="category"><i class="ic i-flag"></i> 实验记录</span>
+  <h3>南大pa-Lab3</h3>
+  </a>
 
-
-  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
-
-
-    <!-- jquery -->
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
-
-
-
-
-<!-- clipboard -->
+    </div>
+</div>
 
   
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  <div class="wrap" id="comments"></div>
+
+
+        </div>
+        <div id="sidebar">
+          
+
+<div class="inner">
+
+  <div class="panels">
+    <div class="inner">
+      <div class="contents panel pjax" data-title="文章目录">
+          <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9A%82%E5%81%9C%E4%B8%80%E4%B8%8B%EF%BC%81"><span class="toc-number">1.</span> <span class="toc-text">暂停一下！</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E6%AC%A1%E6%A8%A1%E6%8B%9F%E6%89%A7%E8%A1%8C"><span class="toc-number">2.</span> <span class="toc-text">一次模拟执行</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IOE%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-number">3.</span> <span class="toc-text">IOE的实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%80%9C%E5%86%85%E5%AD%98%E2%80%9D%E8%AF%BB%E5%86%99"><span class="toc-number">4.</span> <span class="toc-text">“内存”读写</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8AM%E4%B8%AD%E5%8A%A0%E4%B8%8A%E8%AE%BE%E5%A4%87%E8%AF%BB%E5%86%99%E7%9A%84%E6%94%AF%E6%8C%81"><span class="toc-number">5.</span> <span class="toc-text">在AM中加上设备读写的支持</span></a></li></ol>
+      </div>
+      <div class="related panel pjax" data-title="系列文章">
+        <ul>
+          <li><a href="/2021/04/25/verilog/" rel="bookmark" title="华中科技大学Verilog实验解析">华中科技大学Verilog实验解析</a></li><li><a href="/2021/12/18/oslab1/" rel="bookmark" title="华中科技大学OS实验解析(Lab1)">华中科技大学OS实验解析(Lab1)</a></li><li><a href="/2021/12/18/oslab2/" rel="bookmark" title="华中科技大学OS实验解析(Lab2)">华中科技大学OS实验解析(Lab2)</a></li><li><a href="/2022/02/26/oschallengelab/" rel="bookmark" title="华中科技大学操作系统挑战实验(PKE)基础解析">华中科技大学操作系统挑战实验(PKE)基础解析</a></li><li><a href="/2023/02/06/rustilings/" rel="bookmark" title="Rustilings 练习笔记">Rustilings 练习笔记</a></li><li><a href="/2023/02/06/cmu14-445-lab/" rel="bookmark" title="CMU14-445 Lab">CMU14-445 Lab</a></li><li><a href="/2023/02/06/stanford-cs144-lab/" rel="bookmark" title="Stanford CS144 Lab">Stanford CS144 Lab</a></li><li><a href="/2023/02/06/mit-6-s081-xv6-information-%E9%9B%86%E5%90%88/" rel="bookmark" title="MIT_6.S081_xv6.Information 集合">MIT_6.S081_xv6.Information 集合</a></li><li><a href="/2023/02/06/mit-6-s081-lab/" rel="bookmark" title="MIT_6.s081_Lab">MIT_6.s081_Lab</a></li><li class="active"><a href="/2024/03/14/pa-lab2/" rel="bookmark" title="南大pa-Lab2">南大pa-Lab2</a></li><li><a href="/2024/03/19/pa-lab3/" rel="bookmark" title="南大pa-Lab3">南大pa-Lab3</a></li>
+        </ul>
+      </div>
+      <div class="overview panel" data-title="站点概览">
+        <div class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="image" itemprop="image" alt="Sukuna"
+      data-src="/images/meili.JPG">
+  <p class="name" itemprop="name">Sukuna</p>
+  <div class="description" itemprop="description"></div>
+</div>
+
+<nav class="state">
+    <div class="item posts">
+      <a href="/archives/">
+        <span class="count">20</span>
+        <span class="name">文章</span>
+      </a>
+    </div>
+    <div class="item categories">
+      <a href="/categories/">
+        <span class="count">4</span>
+        <span class="name">分类</span>
+      </a>
+    </div>
+</nav>
+
+<div class="social">
+      <span class="exturl item github" data-url="aHR0cHM6Ly9naXRodWIuY29tL1N1a3VuYXNoaW5teW91bWFydS1odXN0" title="https:&#x2F;&#x2F;github.com&#x2F;Sukunashinmyoumaru-hust"><i class="ic i-github"></i></span>
+      <span class="exturl item twitter" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9zdWt1bmFfd2lyZWxlc3M=" title="https:&#x2F;&#x2F;twitter.com&#x2F;sukuna_wireless"><i class="ic i-twitter"></i></span>
+      <a href="/sukuna@hust.edu.cn" title="sukuna@hust.edu.cn" class="item email"><i class="ic i-envelope"></i></a>
+</div>
+
+<ul class="menu">
   
-  <script type="text/javascript">
-  $(function() {
-    // copy-btn HTML
-    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
-    btn += '<i class="fa-regular fa-clone"></i>';
-    btn += '</span>';
-    // mount it!
-    $(".highlight table").before(btn);
-    var clip = new ClipboardJS('.btn-copy', {
-      text: function(trigger) {
-        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+    
+  <li class="item">
+    <a href="/" rel="section"><i class="ic i-home"></i>首页</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/about/" rel="section"><i class="ic i-user"></i>关于</a>
+  </li>
+
+        
+  <li class="item dropdown">
+      <a href="javascript:void(0);"><i class="ic i-feather"></i>文章</a>
+    <ul class="submenu">
+
+        
+  <li class="item">
+    <a href="/archives/" rel="section"><i class="ic i-list-alt"></i>归档</a>
+  </li>
+
+        
+  <li class="item">
+    <a href="/categories/" rel="section"><i class="ic i-th"></i>分类</a>
+  </li>
+
+        
+  <li class="item">
+    <a href="/tags/" rel="section"><i class="ic i-tags"></i>标签</a>
+  </li>
+
+  </ul>
+    
+  <li class="item">
+    <a href="/friend/" rel="section"><i class="ic i-heart"></i>friends</a>
+  </li>
+
+    
+  <li class="item">
+    <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1N1a3VuYVNoaW5teW91bWFydS1odXN0L0h1c3Qtb3BlbnNvdXJjZS1YdWVqaWU="><i class="ic i-heart"></i>HUST-学解</span>
+  </li>
+
+    
+  <li class="item">
+    <a href="/picture/" rel="section"><i class="ic i-heart"></i>赠画感谢</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/source/" rel="section"><i class="ic i-heart"></i>资料下载</a>
+  </li>
+
+
+</ul>
+
+      </div>
+    </div>
+  </div>
+
+  <ul id="quick">
+    <li class="prev pjax">
+        <a href="/2023/09/13/pa-lab1/" rel="prev" title="上一篇"><i class="ic i-chevron-left"></i></a>
+    </li>
+    <li class="up"><i class="ic i-arrow-up"></i></li>
+    <li class="down"><i class="ic i-arrow-down"></i></li>
+    <li class="next pjax">
+        <a href="/2024/03/19/pa-lab3/" rel="next" title="下一篇"><i class="ic i-chevron-right"></i></a>
+    </li>
+    <li class="percent"></li>
+  </ul>
+</div>
+
+
+        </div>
+        <div class="dimmer"></div>
+      </div>
+    </main>
+    <footer id="footer">
+      <div class="inner">
+        <div class="widgets">
+          
+<div class="rpost pjax">
+  <h2>随机文章</h2>
+  <ul>
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
+</div>
+
+    <span><a href="/2024/03/19/pa-lab3/" title="南大pa-Lab3">南大pa-Lab3</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
+</div>
+
+    <span><a href="/2023/02/06/mit-6-s081-xv6-information-%E9%9B%86%E5%90%88/" title="MIT_6.S081_xv6.Information 集合">MIT_6.S081_xv6.Information 集合</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
+</div>
+
+    <span><a href="/2023/02/06/rustilings/" title="Rustilings 练习笔记">Rustilings 练习笔记</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
+</div>
+
+    <span><a href="/2023/02/06/mit-6-s081-lab/" title="MIT_6.s081_Lab">MIT_6.s081_Lab</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E6%9D%82%E8%AE%B0/" title="分类于 杂记">杂记</a>
+</div>
+
+    <span><a href="/2020/05/02/setup/" title="建站">建站</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E7%AE%97%E6%B3%95%E9%A2%98/" title="分类于 算法题">算法题</a>
+</div>
+
+    <span><a href="/2020/05/24/ufpe-starters-final-try-outs-2019-problem-l/" title="UFPE Starters Final Try-Outs 2019 Problem L">UFPE Starters Final Try-Outs 2019 Problem L</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E7%AE%97%E6%B3%95%E9%A2%98/" title="分类于 算法题">算法题</a>
+</div>
+
+    <span><a href="/2020/05/25/ufpe-starters-final-try-outs-2019-recife-brazil-dec-1-2018-problem-j%EF%BC%88%E7%BA%BF%E6%AE%B5%E6%A0%91%E4%BA%8C%E5%88%86%EF%BC%89/" title="UFPE Starters Final Try-Outs 2019 Recife, Brazil, Dec 1, 2018 Problem J（线段树+二分）">UFPE Starters Final Try-Outs 2019 Recife, Brazil, Dec 1, 2018 Problem J（线段树+二分）</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
+</div>
+
+    <span><a href="/2024/03/14/pa-lab2/" title="南大pa-Lab2">南大pa-Lab2</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/uncategorized/" title="分类于 uncategorized">uncategorized</a>
+</div>
+
+    <span><a href="/2022/04/17/luogu-al/" title="做算法题综合">做算法题综合</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E6%9D%82%E8%AE%B0/" title="分类于 杂记">杂记</a>
+</div>
+
+    <span><a href="/2022/06/06/nju-ics/" title="南大ics面试记录">南大ics面试记录</a></span>
+  </li>
+
+  </ul>
+</div>
+<div>
+  <h2>最新评论</h2>
+  <ul class="leancloud-recent-comment"></ul>
+</div>
+
+        </div>
+        <div class="status">
+  <div class="copyright">
+    
+    &copy; 2010 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="ic i-sakura rotate"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Sukuna @ Suwa shrine</span>
+  </div>
+  <div class="powered-by">
+    基于 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & Theme.<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FtZWhpbWUvaGV4by10aGVtZS1zaG9rYQ==">Shoka</span>
+  </div>
+</div>
+
+      </div>
+    </footer>
+  </div>
+<script data-config type="text/javascript">
+  var LOCAL = {
+    path: '2024/03/14/pa-lab2/',
+    favicon: {
+      show: "（●´3｀●）あややややや～",
+      hide: "(´Д｀)大変だ！"
+    },
+    search : {
+      placeholder: "文章搜索",
+      empty: "关于 「 ${query} 」，什么也没搜到",
+      stats: "${time} ms 内找到 ${hits} 条结果"
+    },
+    valine: true,fancybox: true,
+    copyright: '复制成功，转载请遵守 <i class="ic i-creative-commons"></i>BY-NC-SA 协议。',
+    ignores : [
+      function(uri) {
+        return uri.includes('#');
+      },
+      function(uri) {
+        return new RegExp(LOCAL.path+"$").test(uri);
       }
-    });
-    clip.on('success', function(e) {
-      e.trigger.setAttribute('aria-label', "复制成功！");
-      e.clearSelection();
-    })
-  })
-  </script>
+    ]
+  };
+</script>
+
+<script src="https://cdn.polyfill.io/v2/polyfill.js"></script>
+
+<script src="//cdn.jsdelivr.net/combine/npm/pace-js@1.0.2/pace.min.js,npm/pjax@0.2.8/pjax.min.js,npm/whatwg-fetch@3.4.0/dist/fetch.umd.min.js,npm/animejs@3.2.0/lib/anime.min.js,npm/algoliasearch@4/dist/algoliasearch-lite.umd.js,npm/instantsearch.js@4/dist/instantsearch.production.min.js,npm/lozad@1/dist/lozad.min.js,npm/quicklink@2/dist/quicklink.umd.js"></script>
+
+<script src="/js/app.js?v=0.2.5"></script>
 
 
-<script src="/js/main.js"></script>
 
-<!-- search -->
 
-<!-- Baidu Analytics -->
-
-<!-- Cloudflare Analytics -->
-
-<!-- Disqus Comments -->
-
-<!-- utterances Comments -->
-
-</body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":200,"height":400},"mobile":{"show":true},"log":false});</script></body>
 </html>

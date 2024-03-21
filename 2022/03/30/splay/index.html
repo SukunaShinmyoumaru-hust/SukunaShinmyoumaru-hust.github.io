@@ -1,173 +1,156 @@
+
+
+
+
 <!DOCTYPE html>
-<html lang=zh>
+<html lang="zh-CN">
 <head>
-    <!-- so meta -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="[latexpage] 题目描述您需要写一种数据结构（可参考题目标题），来维护一些数，其中需要提供以下操作：  插入$x$ 数 删除 $x$ 数(若有多个相同的数，因只删除一个) 查询 $x$ 数的排名(排名定义为比当前数小的数的个数 +1 ) 查询排名为 $x$ 的数 求 $x$ 的前驱(前驱定义为小于 $x$，且最大的数) 求 $x$ 的后继(后继定义为大于 $x$，且最小的数)  输入格式第">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Splay模版:P3369[模版&#x2F;普通平衡树]">
-<meta property="og:url" content="https://sukunashinmyoumaru-hust.github.io/2022/03/30/splay/index.html">
-<meta property="og:site_name" content="Suwa shrine">
-<meta property="og:description" content="[latexpage] 题目描述您需要写一种数据结构（可参考题目标题），来维护一些数，其中需要提供以下操作：  插入$x$ 数 删除 $x$ 数(若有多个相同的数，因只删除一个) 查询 $x$ 数的排名(排名定义为比当前数小的数的个数 +1 ) 查询排名为 $x$ 的数 求 $x$ 的前驱(前驱定义为小于 $x$，且最大的数) 求 $x$ 的后继(后继定义为大于 $x$，且最小的数)  输入格式第">
-<meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://sukunahust.com/wp-content/uploads/2022/03/1A952F557921D8DA96AB618F3912CFFE-1024x473.jpg">
-<meta property="og:image" content="https://sukunahust.com/wp-content/uploads/2022/03/3C5D880B2DA25B8A1D0A78A6B9E34390-1024x473.jpg">
-<meta property="article:published_time" content="2022-03-30T13:20:56.000Z">
-<meta property="article:modified_time" content="2024-02-29T07:26:09.260Z">
-<meta property="article:author" content="Sukuna">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://sukunahust.com/wp-content/uploads/2022/03/1A952F557921D8DA96AB618F3912CFFE-1024x473.jpg">
-    
-    
-      
-        
-          <link rel="shortcut icon" href="/images/favicon.ico">
-        
-      
-      
-        
-          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
-        
-      
-      
-        
-          <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-192x192.png">
-        
-      
-    
-    <!-- title -->
-    <title>Splay模版:P3369[模版/普通平衡树]</title>
-    <!-- async scripts -->
-    <!-- Google Analytics -->
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#FFF">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="icon" type="image/ico" sizes="32x32" href="/images/favicon.ico">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
 
 
-    <!-- Umami Analytics -->
+<link rel="alternate" type="application/rss+xml" title="灵山之上神风起" href="https://sukunashinmyoumaru-hust.github.io/rss.xml" />
+<link rel="alternate" type="application/atom+xml" title="灵山之上神风起" href="https://sukunashinmyoumaru-hust.github.io/atom.xml" />
+<link rel="alternate" type="application/json" title="灵山之上神风起" href="https://sukunashinmyoumaru-hust.github.io/feed.json" />
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Mulish:300,300italic,400,400italic,700,700italic%7CFredericka%20the%20Great:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20JP:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20SC:300,300italic,400,400italic,700,700italic%7CInconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="/css/app.css?v=0.2.5">
+
+  
+
+<link rel="canonical" href="https://sukunashinmyoumaru-hust.github.io/2022/03/30/splay/">
 
 
-    <!-- styles -->
-    
-<link rel="stylesheet" href="/css/style.css">
 
-    <!-- persian styles -->
-    
-    <!-- rss -->
-    
-    
-	<!-- mathjax -->
-	
+  <title>
+Splay模版:P3369[模版/普通平衡树] - 算法题 |
+Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
 <meta name="generator" content="Hexo 7.1.1"></head>
-
-<body class="max-width mx-auto px3 ltr">
-    
-      <div id="header-post">
-  <a id="menu-icon" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
-  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
-  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
-  <span id="menu">
-    <span id="nav">
-      <ul>
-        <!--
-       --><li><a href="/">首页</a></li><!--
-     --><!--
-       --><li><a href="/about/">关于</a></li><!--
-     --><!--
-       --><li><a href="/archives/">归档</a></li><!--
-     --><!--
-       --><li><a target="_blank" rel="noopener" href="https://github.com/SukunaShinmyoumaru-hust/Hust-opensource-Xuejie">HUST-学解</a></li><!--
-     --><!--
-       --><li><a href="/picture/">赠画感谢</a></li><!--
-     --><!--
-       --><li><a href="/ziliao/">资料下载</a></li><!--
-     --><!--
-       --><li><a href="/friend/">友链</a></li><!--
-     -->
-      </ul>
-    </span>
-    <br/>
-    <span id="actions">
-      <ul>
-        
-        <li><a class="icon" aria-label="上一篇" href="/2022/04/17/luogu-al/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
-        
-        
-        <li><a class="icon" aria-label="下一篇" href="/2022/02/26/oschallengelab/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
-        
-        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
-        <li><a class="icon" aria-label="分享文章" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
-      </ul>
-      <span id="i-prev" class="info" style="display:none;">上一篇</span>
-      <span id="i-next" class="info" style="display:none;">下一篇</span>
-      <span id="i-top" class="info" style="display:none;">返回顶部</span>
-      <span id="i-share" class="info" style="display:none;">分享文章</span>
-    </span>
-    <br/>
-    <div id="share" style="display: none">
-      <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sukunashinmyoumaru-hust.github.io/2022/03/30/splay/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sukunashinmyoumaru-hust.github.io/2022/03/30/splay/&text=Splay模版:P3369[模版/普通平衡树]"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sukunashinmyoumaru-hust.github.io/2022/03/30/splay/&title=Splay模版:P3369[模版/普通平衡树]"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sukunashinmyoumaru-hust.github.io/2022/03/30/splay/&is_video=false&description=Splay模版:P3369[模版/普通平衡树]"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Splay模版:P3369[模版/普通平衡树]&body=Check out this article: https://sukunashinmyoumaru-hust.github.io/2022/03/30/splay/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sukunashinmyoumaru-hust.github.io/2022/03/30/splay/&title=Splay模版:P3369[模版/普通平衡树]"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sukunashinmyoumaru-hust.github.io/2022/03/30/splay/&title=Splay模版:P3369[模版/普通平衡树]"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sukunashinmyoumaru-hust.github.io/2022/03/30/splay/&title=Splay模版:P3369[模版/普通平衡树]"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sukunashinmyoumaru-hust.github.io/2022/03/30/splay/&title=Splay模版:P3369[模版/普通平衡树]"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sukunashinmyoumaru-hust.github.io/2022/03/30/splay/&name=Splay模版:P3369[模版/普通平衡树]&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sukunashinmyoumaru-hust.github.io/2022/03/30/splay/&t=Splay模版:P3369[模版/普通平衡树]"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
-</ul>
-
-    </div>
-    
-    
-      <div id="toc">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">题目描述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E6%A0%BC%E5%BC%8F"><span class="toc-number">2.</span> <span class="toc-text">输入格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E6%A0%BC%E5%BC%8F"><span class="toc-number">3.</span> <span class="toc-text">输出格式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#splay%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-number">3.1.</span> <span class="toc-text">splay的定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9A%E4%B9%89"><span class="toc-number">3.2.</span> <span class="toc-text">数据结构定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PushOff%E6%93%8D%E4%BD%9C"><span class="toc-number">3.3.</span> <span class="toc-text">PushOff操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%95%E6%97%8B%E8%BD%AC%E6%93%8D%E4%BD%9C"><span class="toc-number">3.4.</span> <span class="toc-text">单旋转操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#splay%E6%93%8D%E4%BD%9C"><span class="toc-number">3.5.</span> <span class="toc-text">splay操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#insert%E6%93%8D%E4%BD%9C"><span class="toc-number">3.6.</span> <span class="toc-text">insert操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#find%E6%93%8D%E4%BD%9C"><span class="toc-number">3.7.</span> <span class="toc-text">find操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E5%BA%8F%E5%92%8C%E5%90%8E%E5%BA%8F%E6%93%8D%E4%BD%9C"><span class="toc-number">3.8.</span> <span class="toc-text">前序和后序操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Delete%E6%93%8D%E4%BD%9C"><span class="toc-number">3.9.</span> <span class="toc-text">Delete操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%ACk%E4%B8%AA%E6%93%8D%E4%BD%9C"><span class="toc-number">3.10.</span> <span class="toc-text">第k个操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%92%E5%85%A5INF%E5%92%8C-INF"><span class="toc-number">3.11.</span> <span class="toc-text">插入INF和-INF</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%9A%84%E4%BB%A3%E7%A0%81"><span class="toc-number">3.12.</span> <span class="toc-text">总的代码</span></a></li></ol></li></ol>
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div id="loading">
+    <div class="cat">
+      <div class="body"></div>
+      <div class="head">
+        <div class="face"></div>
       </div>
-    
+      <div class="foot">
+        <div class="tummy-end"></div>
+        <div class="bottom"></div>
+        <div class="legs left"></div>
+        <div class="legs right"></div>
+      </div>
+      <div class="paw">
+        <div class="hands left"></div>
+        <div class="hands right"></div>
+      </div>
+    </div>
+  </div>
+  <div id="container">
+    <header id="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="inner">
+        <div id="brand">
+          <div class="pjax">
+          
+  <h1 itemprop="name headline">Splay模版:P3369[模版/普通平衡树]
+  </h1>
+  
+<div class="meta">
+  <span class="item" title="创建时间：2022-03-30 21:20:56">
+    <span class="icon">
+      <i class="ic i-calendar"></i>
+    </span>
+    <span class="text">发表于</span>
+    <time itemprop="dateCreated datePublished" datetime="2022-03-30T21:20:56+08:00">2022-03-30</time>
   </span>
 </div>
 
+
+          </div>
+        </div>
+        <nav id="nav">
+  <div class="inner">
+    <div class="toggle">
+      <div class="lines" aria-label="切换导航栏">
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line"></span>
+      </div>
+    </div>
+    <ul class="menu">
+      <li class="item title"><a href="/" rel="start">Suwa shrine</a></li>
+    </ul>
+    <ul class="right">
+      <li class="item theme">
+        <i class="ic i-sun"></i>
+      </li>
+      <li class="item search">
+        <i class="ic i-search"></i>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+      </div>
+      <div id="imgs" class="pjax">
+        <ul>
+          <li class="item" data-background-image="https://s2.loli.net/2024/03/21/GeYMagTskVub2io.jpg"></li>
+          <li class="item" data-background-image="https://s2.loli.net/2024/03/21/etuIv2DAC8wpdKs.png"></li>
+          <li class="item" data-background-image="https://s2.loli.net/2024/03/21/JC67Q4LIjnT9fig.jpg"></li>
+          <li class="item" data-background-image="https://s2.loli.net/2024/03/21/KgXYlCHOW4jSdoL.jpg"></li>
+          <li class="item" data-background-image="https://s2.loli.net/2024/03/21/N7AWrf8Xs9VTL4P.jpg"></li>
+          <li class="item" data-background-image="https://s2.loli.net/2024/03/21/MEKc7eqDtPGHWBp.jpg"></li>
+        </ul>
+      </div>
+    </header>
+    <div id="waves">
+      <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+        <defs>
+          <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+        </defs>
+        <g class="parallax">
+          <use xlink:href="#gentle-wave" x="48" y="0" />
+          <use xlink:href="#gentle-wave" x="48" y="3" />
+          <use xlink:href="#gentle-wave" x="48" y="5" />
+          <use xlink:href="#gentle-wave" x="48" y="7" />
+        </g>
+      </svg>
+    </div>
+    <main>
+      <div class="inner">
+        <div id="main" class="pjax">
+          
+  <div class="article wrap">
     
-    <div class="content index py4 ">
-        
-        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
-  <header>
+<div class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+<i class="ic i-home"></i>
+<span><a href="/">首页</a></span><i class="ic i-angle-right"></i>
+<span  class="current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="/categories/%E7%AE%97%E6%B3%95%E9%A2%98/" itemprop="item" rel="index" title="分类于 算法题"><span itemprop="name">算法题</span></a>
+<meta itemprop="position" content="1" /></span>
+</div>
+
+    <article itemscope itemtype="http://schema.org/Article" class="post block" lang="zh-CN">
+  <link itemprop="mainEntityOfPage" href="https://sukunashinmyoumaru-hust.github.io/2022/03/30/splay/">
+
+  <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="image" content="/images/meili.JPG">
+    <meta itemprop="name" content="Sukuna">
+    <meta itemprop="description" content="Sukuna_wireless, ">
+  </span>
+
+  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="灵山之上神风起">
+  </span>
+
+  <div class="body md" itemprop="articleBody">
     
-    <h1 class="posttitle p-name" itemprop="name headline">
-        Splay模版:P3369[模版/普通平衡树]
-    </h1>
 
-
-
-    <div class="meta">
-      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
-        <span class="p-name" itemprop="name">Sukuna</span>
-      </span>
-      
-    <div class="postdate">
-      
-        <time datetime="2022-03-30T13:20:56.000Z" class="dt-published" itemprop="datePublished">2022-03-30</time>
-        
-      
-    </div>
-
-
-      
-    <div class="article-category">
-        <i class="fa-solid fa-archive"></i>
-        <a class="category-link" href="/categories/%E7%AE%97%E6%B3%95%E9%A2%98/">算法题</a>
-    </div>
-
-
-      
-
-    </div>
-  </header>
-  
-
-  <div class="content e-content" itemprop="articleBody">
     <p>[latexpage]</p>
 <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>您需要写一种数据结构（可参考题目标题），来维护一些数，其中需要提供以下操作：</p>
 <ol>
@@ -196,12 +179,12 @@
 <p>下面为了叙述方便,我们定义一个奇怪的定义,就是外孙,比如说x是fa的左儿子,那么x的右儿子就是fa的外孙;x是fa的右儿子,那么x的左儿子就是x的外孙.</p>
 <p>这个时候有三个点,分别是父亲、祖父和儿子,分别代表Gfa、fa和x.<br>首先第一步就是祖父的儿子从fa替换成x.<br>第二步就是父亲的儿子从x替换成x的外孙.<br>第三步就是原本x的外孙的位子由fa占领.</p>
 <p>这个是最难的一部分,还是希望还是可以记住执行的顺序,一个是替换祖父的儿子,然后替换父亲的儿子,然后替换儿子的儿子,这是替换顺序,替换成什么可以记下来,分别是儿子,父亲的外孙和父亲.</p>
-<p><img src="https://sukunahust.com/wp-content/uploads/2022/03/1A952F557921D8DA96AB618F3912CFFE-1024x473.jpg"></p>
+<p><img data-src="https://sukunahust.com/wp-content/uploads/2022/03/1A952F557921D8DA96AB618F3912CFFE-1024x473.jpg"></p>
 <p>实在太难怎么办?把旋转的画法画下来带进考场,反正CSP是开卷orz.</p>
 <h3 id="splay操作"><a href="#splay操作" class="headerlink" title="splay操作"></a>splay操作</h3><p>我们需要做到的就是增改查的节点送到根结点,那么我们可以设计一个函数,这个函数叫做splayed(x,y).目的就是把编号为x的节点送到y的儿子处.所以说用形式语言我们可以这么写$x.parent&#x3D;&#x3D;y$.就是x的父亲为y.</p>
 <p>说句题外话,因为节点是从1开始编号的,所以说有且只有一个结点就是根结点的父亲为0.所以说想把数送到根结点需要执行splayed(x,0).</p>
 <p>我们在之前还是知道rotate操作可以把一个数在树中的层数-1.这就好办,我们每次都做rorate操作,直到这个数的父亲是y为止.但是学过AVL的旋转我们知道,旋转可以分为单旋和双旋的,其实这个也是一样的.</p>
-<p><img src="https://sukunahust.com/wp-content/uploads/2022/03/3C5D880B2DA25B8A1D0A78A6B9E34390-1024x473.jpg"></p>
+<p><img data-src="https://sukunahust.com/wp-content/uploads/2022/03/3C5D880B2DA25B8A1D0A78A6B9E34390-1024x473.jpg"></p>
 <p>判断究竟是一字旋转还是之字旋转其实就判断<code>(splay[Gfa].ch[0] == fa) ^ (splay[fa].ch[0] == x)</code>.这个异或可以判断儿子情况是不是一样的.</p>
 <p>但是有一个问题就是,我们不知道旋转能不能做,因为在rotate函数中,我们充分相信fa和Gfa都是有意义的.所以说在splay操作调用rotate时我们要保证x是有意义的.</p>
 <p>由于旋转是两个两个来做的,首先第一步,我们判断我们能不能做两次旋转操作,然后判断我们能不能做一次操作.判断的方法在代码中有说.</p>
@@ -228,154 +211,377 @@
 <h3 id="插入INF和-INF"><a href="#插入INF和-INF" class="headerlink" title="插入INF和-INF"></a>插入INF和-INF</h3><p>INF和-INF可以作为哨兵,如果有哨兵存在，那么这些点永远都不会是死在最前面或者死的时候垫在最下面，就帮助我们少考虑很多边界，我昨天没有加哨兵，不停地补刀做手术，还是千疮百孔，病很多都是并发症，医不过来，加了个哨兵，自己就好了</p>
 <h3 id="总的代码"><a href="#总的代码" class="headerlink" title="总的代码"></a>总的代码</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">#define N 1000005</span><br><span class="line">#define INF 0x7f7f7f7f</span><br><span class="line">struct splay&#123;</span><br><span class="line">    int ch[2];</span><br><span class="line">    int val;//数值</span><br><span class="line">    int size;//子树大小</span><br><span class="line">    int cnt;//每个节点所含副本数</span><br><span class="line">    int parent;</span><br><span class="line">&#125;splay[N];</span><br><span class="line">int total;</span><br><span class="line">int root;</span><br><span class="line">int na;</span><br><span class="line">void pushup(int node_id)&#123;</span><br><span class="line">    int l=splay[node_id].ch[0];</span><br><span class="line">    int r=splay[node_id].ch[1];</span><br><span class="line">    splay[node_id].size=splay[l].size+splay[r].size+splay[node_id].cnt;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void rotate (int x) &#123;</span><br><span class="line">    int fa = splay[x].parent;</span><br><span class="line">    int Gfa = splay[fa].parent;</span><br><span class="line">    int k = (splay[fa].ch[1]== x);</span><br><span class="line">    splay[Gfa].ch[splay[Gfa].ch[1]==fa] = x;</span><br><span class="line">    splay[x].parent = Gfa;</span><br><span class="line">    splay[fa].ch[k] = splay[x].ch[k^1];</span><br><span class="line">    splay[splay[x].ch[k^1]].parent= fa;</span><br><span class="line">    splay[x].ch[k ^ 1] = fa;</span><br><span class="line">    splay[fa].parent = x;</span><br><span class="line">    pushup(fa);</span><br><span class="line">    pushup(x);</span><br><span class="line">&#125;</span><br><span class="line">//将x旋转到goal的儿子</span><br><span class="line">void splayed ( int x, int goal ) &#123;</span><br><span class="line">    while (splay[x].parent != goal) &#123;</span><br><span class="line">        int fa = splay[x].parent, Gfa = splay[fa].parent;</span><br><span class="line">        if (Gfa!= goal )</span><br><span class="line">            ( (splay[Gfa].ch[0] == fa) ^ (splay[fa].ch[0] == x)) ? rotate(x) : rotate (fa);</span><br><span class="line">        rotate (x);</span><br><span class="line">    &#125;</span><br><span class="line">    if (!goal)</span><br><span class="line">        root=x;</span><br><span class="line">&#125;</span><br><span class="line">void insert(int x) &#123;</span><br><span class="line">    int u=root, fa=0;</span><br><span class="line">    while (u &amp;&amp; splay[u].val!=x) &#123;</span><br><span class="line">        fa = u;</span><br><span class="line">        u=splay[u].ch[x&gt;splay[u].val];</span><br><span class="line">    &#125;</span><br><span class="line">    if (u)</span><br><span class="line">        splay[u].cnt ++;</span><br><span class="line">    else &#123;</span><br><span class="line">        u=++total;</span><br><span class="line">        if (fa)</span><br><span class="line">            splay[fa].ch[x &gt; splay[fa].val] = u;</span><br><span class="line">        splay[u].ch[0] = splay[u].ch[1] = 0;</span><br><span class="line">        splay[u].val = x;</span><br><span class="line">        splay[u].parent = fa;</span><br><span class="line">        splay[u].cnt = splay[u].size = 1;</span><br><span class="line">    &#125;</span><br><span class="line">    splayed(u,0);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void find(int x)&#123;</span><br><span class="line">    if (!root)</span><br><span class="line">            return;</span><br><span class="line">        int u=root;</span><br><span class="line">        while (splay[u].ch[x &gt; splay[u].val] &amp;&amp; x!=splay[u].val)</span><br><span class="line">            u=splay[u].ch[x &gt; splay[u].val];</span><br><span class="line">        splayed (u,0);</span><br><span class="line">&#125;</span><br><span class="line">int PreSuf (int x, int f) &#123;</span><br><span class="line">    find (x);</span><br><span class="line">    if (splay[root].val&gt;x&amp;&amp;f)</span><br><span class="line">        return root;</span><br><span class="line">    if (splay[root].val &lt; x &amp;&amp; !f)</span><br><span class="line">        return root;</span><br><span class="line">    int u = splay[root].ch[f];</span><br><span class="line">    if (!u)</span><br><span class="line">        return 0;</span><br><span class="line">    while (splay[u].ch[f ^ 1])</span><br><span class="line">        u =splay[u].ch[f ^ 1];</span><br><span class="line">    return u;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void Delete (int x) &#123;</span><br><span class="line">    int pre = PreSuf(x,0);</span><br><span class="line">    int suf = PreSuf(x,1);</span><br><span class="line">    splayed(pre,0);</span><br><span class="line">    splayed(suf,pre);</span><br><span class="line">    int u = splay[suf].ch[0];</span><br><span class="line">    if (splay[u].cnt&gt;1) &#123;</span><br><span class="line">        splay[u].cnt--;</span><br><span class="line">        splayed ( u, 0 );</span><br><span class="line">    &#125;</span><br><span class="line">    else&#123;</span><br><span class="line">        splay[suf].ch[0] = 0;</span><br><span class="line">    &#125;</span><br><span class="line">        </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int findkth (int x) &#123;</span><br><span class="line">    if (splay[root].size&lt;x)</span><br><span class="line">        return -1;</span><br><span class="line">    int u=root;</span><br><span class="line">    while (1) &#123;</span><br><span class="line">        if ( x &lt;= splay[splay[u].ch[0]].size )</span><br><span class="line">            u = splay[u].ch[0];</span><br><span class="line">        else if ( x &lt;= splay[u].cnt + splay[splay[u].ch[0]].size )</span><br><span class="line">                return u;</span><br><span class="line">            else &#123;</span><br><span class="line">                x -= ( splay[splay[u].ch[0]].size + splay[u].cnt );</span><br><span class="line">                u = splay[u].ch[1];</span><br><span class="line">            &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">void build()&#123;</span><br><span class="line">    insert(INF);</span><br><span class="line">    insert(-INF);</span><br><span class="line">&#125;</span><br><span class="line">int main()&#123;</span><br><span class="line">    int n;</span><br><span class="line">    build();</span><br><span class="line">    scanf(&quot;%d&quot;,&amp;n);</span><br><span class="line">    int opt,x;</span><br><span class="line">    int u;</span><br><span class="line">    while(n--)&#123;</span><br><span class="line">        scanf(&quot;%d %d&quot;,&amp;opt,&amp;x);</span><br><span class="line">        switch (opt) &#123;</span><br><span class="line">            case 1:</span><br><span class="line">                insert(x);</span><br><span class="line">                break;</span><br><span class="line">            case 2:</span><br><span class="line">                Delete(x);</span><br><span class="line">                break;</span><br><span class="line">            case 3:</span><br><span class="line">                find(x);</span><br><span class="line">                printf(&quot;%d\n&quot;,splay[splay[root].ch[0]].size);</span><br><span class="line">                break;</span><br><span class="line">            case 4:</span><br><span class="line">                u=findkth(x+1);</span><br><span class="line">                printf(&quot;%d\n&quot;,splay[u].val);</span><br><span class="line">                break;</span><br><span class="line">            case 5:</span><br><span class="line">                u=PreSuf(x, 0);</span><br><span class="line">                printf(&quot;%d\n&quot;,splay[u].val);</span><br><span class="line">                break;</span><br><span class="line">            case 6:</span><br><span class="line">                u=PreSuf(x, 1);</span><br><span class="line">                printf(&quot;%d\n&quot;,splay[u].val);</span><br><span class="line">                break;</span><br><span class="line">            default:</span><br><span class="line">                break;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
   </div>
-</article>
 
+   <footer>
 
+    <div class="meta">
+  <span class="item">
+    <span class="icon">
+      <i class="ic i-calendar-check"></i>
+    </span>
+    <span class="text">更新于</span>
+    <time title="修改时间：2024-02-29 15:26:09" itemprop="dateModified" datetime="2024-02-29T15:26:09+08:00">2024-02-29</time>
+  </span>
+</div>
 
-        
-          <div id="footer-post-container">
-  <div id="footer-post">
-
-    <div id="nav-footer" style="display: none">
-      <ul>
-        
-          <li><a href="/">首页</a></li>
-        
-          <li><a href="/about/">关于</a></li>
-        
-          <li><a href="/archives/">归档</a></li>
-        
-          <li><a target="_blank" rel="noopener" href="https://github.com/SukunaShinmyoumaru-hust/Hust-opensource-Xuejie">HUST-学解</a></li>
-        
-          <li><a href="/picture/">赠画感谢</a></li>
-        
-          <li><a href="/ziliao/">资料下载</a></li>
-        
-          <li><a href="/friend/">友链</a></li>
-        
-      </ul>
-    </div>
-
-    
-    
-      <div id="toc-footer" style="display: none">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">题目描述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E6%A0%BC%E5%BC%8F"><span class="toc-number">2.</span> <span class="toc-text">输入格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E6%A0%BC%E5%BC%8F"><span class="toc-number">3.</span> <span class="toc-text">输出格式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#splay%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-number">3.1.</span> <span class="toc-text">splay的定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9A%E4%B9%89"><span class="toc-number">3.2.</span> <span class="toc-text">数据结构定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PushOff%E6%93%8D%E4%BD%9C"><span class="toc-number">3.3.</span> <span class="toc-text">PushOff操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%95%E6%97%8B%E8%BD%AC%E6%93%8D%E4%BD%9C"><span class="toc-number">3.4.</span> <span class="toc-text">单旋转操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#splay%E6%93%8D%E4%BD%9C"><span class="toc-number">3.5.</span> <span class="toc-text">splay操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#insert%E6%93%8D%E4%BD%9C"><span class="toc-number">3.6.</span> <span class="toc-text">insert操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#find%E6%93%8D%E4%BD%9C"><span class="toc-number">3.7.</span> <span class="toc-text">find操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E5%BA%8F%E5%92%8C%E5%90%8E%E5%BA%8F%E6%93%8D%E4%BD%9C"><span class="toc-number">3.8.</span> <span class="toc-text">前序和后序操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Delete%E6%93%8D%E4%BD%9C"><span class="toc-number">3.9.</span> <span class="toc-text">Delete操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%ACk%E4%B8%AA%E6%93%8D%E4%BD%9C"><span class="toc-number">3.10.</span> <span class="toc-text">第k个操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%92%E5%85%A5INF%E5%92%8C-INF"><span class="toc-number">3.11.</span> <span class="toc-text">插入INF和-INF</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%9A%84%E4%BB%A3%E7%A0%81"><span class="toc-number">3.12.</span> <span class="toc-text">总的代码</span></a></li></ol></li></ol>
+      
+<div class="reward">
+  <button><i class="ic i-heartbeat"></i> 赞赏</button>
+  <p>请我喝[茶]~(￣▽￣)~*</p>
+  <div id="qr">
+      
+      <div>
+        <img data-src="/images/wechatpay.jpg" alt="Sukuna 微信支付">
+        <p>微信支付</p>
       </div>
-    
-
-    <div id="share-footer" style="display: none">
-      <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sukunashinmyoumaru-hust.github.io/2022/03/30/splay/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sukunashinmyoumaru-hust.github.io/2022/03/30/splay/&text=Splay模版:P3369[模版/普通平衡树]"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sukunashinmyoumaru-hust.github.io/2022/03/30/splay/&title=Splay模版:P3369[模版/普通平衡树]"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sukunashinmyoumaru-hust.github.io/2022/03/30/splay/&is_video=false&description=Splay模版:P3369[模版/普通平衡树]"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Splay模版:P3369[模版/普通平衡树]&body=Check out this article: https://sukunashinmyoumaru-hust.github.io/2022/03/30/splay/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sukunashinmyoumaru-hust.github.io/2022/03/30/splay/&title=Splay模版:P3369[模版/普通平衡树]"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sukunashinmyoumaru-hust.github.io/2022/03/30/splay/&title=Splay模版:P3369[模版/普通平衡树]"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sukunashinmyoumaru-hust.github.io/2022/03/30/splay/&title=Splay模版:P3369[模版/普通平衡树]"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sukunashinmyoumaru-hust.github.io/2022/03/30/splay/&title=Splay模版:P3369[模版/普通平衡树]"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sukunashinmyoumaru-hust.github.io/2022/03/30/splay/&name=Splay模版:P3369[模版/普通平衡树]&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sukunashinmyoumaru-hust.github.io/2022/03/30/splay/&t=Splay模版:P3369[模版/普通平衡树]"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
-</ul>
-
-    </div>
-
-    <div id="actions-footer">
-        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
-        
-          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> 目录</a>
-        
-        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
-        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
-    </div>
-
+      
+      <div>
+        <img data-src="/images/alipay.jpg" alt="Sukuna 支付宝">
+        <p>支付宝</p>
+      </div>
   </div>
 </div>
 
-        
-        <footer id="footer">
-  <div class="footer-left">
-    Copyright &copy;
-    
-    
-    2020-2024
-    Sukuna
+      
+
+<div id="copyright">
+<ul>
+  <li class="author">
+    <strong>本文作者： </strong>Sukuna <i class="ic i-at"><em>@</em></i>灵山之上神风起
+  </li>
+  <li class="link">
+    <strong>本文链接：</strong>
+    <a href="https://sukunashinmyoumaru-hust.github.io/2022/03/30/splay/" title="Splay模版:P3369[模版&#x2F;普通平衡树]">https://sukunashinmyoumaru-hust.github.io/2022/03/30/splay/</a>
+  </li>
+  <li class="license">
+    <strong>版权声明： </strong>本站所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+  </footer>
+
+</article>
+
   </div>
-  <div class="footer-right">
-    <nav>
-      <ul>
-        <!--
-       --><li><a href="/">首页</a></li><!--
-     --><!--
-       --><li><a href="/about/">关于</a></li><!--
-     --><!--
-       --><li><a href="/archives/">归档</a></li><!--
-     --><!--
-       --><li><a target="_blank" rel="noopener" href="https://github.com/SukunaShinmyoumaru-hust/Hust-opensource-Xuejie">HUST-学解</a></li><!--
-     --><!--
-       --><li><a href="/picture/">赠画感谢</a></li><!--
-     --><!--
-       --><li><a href="/ziliao/">资料下载</a></li><!--
-     --><!--
-       --><li><a href="/friend/">友链</a></li><!--
-     -->
-      </ul>
-    </nav>
-  </div>
-</footer>
+  
+
+<div class="post-nav">
+    <div class="item left">
+      
+
+  <a href="/2022/02/26/oschallengelab/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;s2.loli.net&#x2F;2024&#x2F;03&#x2F;21&#x2F;nBKjz8OQYVMTHE1.jpg" title="华中科技大学操作系统挑战实验(PKE)基础解析">
+  <span class="type">上一篇</span>
+  <span class="category"><i class="ic i-flag"></i> 实验记录</span>
+  <h3>华中科技大学操作系统挑战实验(PKE)基础解析</h3>
+  </a>
 
     </div>
-    <!-- styles -->
+    <div class="item right">
+      
 
+  <a href="/2022/04/17/luogu-al/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;i.loli.net&#x2F;2020&#x2F;10&#x2F;30&#x2F;Z5W6r2BSoiThHG1.jpg" title="做算法题综合">
+  <span class="type">下一篇</span>
+  <span class="category"><i class="ic i-flag"></i> uncategorized</span>
+  <h3>做算法题综合</h3>
+  </a>
 
-
-  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
-
-
-    <!-- jquery -->
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
-
-
-
-
-<!-- clipboard -->
+    </div>
+</div>
 
   
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  <div class="wrap" id="comments"></div>
+
+
+        </div>
+        <div id="sidebar">
+          
+
+<div class="inner">
+
+  <div class="panels">
+    <div class="inner">
+      <div class="contents panel pjax" data-title="文章目录">
+          <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">题目描述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E6%A0%BC%E5%BC%8F"><span class="toc-number">2.</span> <span class="toc-text">输入格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E6%A0%BC%E5%BC%8F"><span class="toc-number">3.</span> <span class="toc-text">输出格式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#splay%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-number">3.1.</span> <span class="toc-text">splay的定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9A%E4%B9%89"><span class="toc-number">3.2.</span> <span class="toc-text">数据结构定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PushOff%E6%93%8D%E4%BD%9C"><span class="toc-number">3.3.</span> <span class="toc-text">PushOff操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%95%E6%97%8B%E8%BD%AC%E6%93%8D%E4%BD%9C"><span class="toc-number">3.4.</span> <span class="toc-text">单旋转操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#splay%E6%93%8D%E4%BD%9C"><span class="toc-number">3.5.</span> <span class="toc-text">splay操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#insert%E6%93%8D%E4%BD%9C"><span class="toc-number">3.6.</span> <span class="toc-text">insert操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#find%E6%93%8D%E4%BD%9C"><span class="toc-number">3.7.</span> <span class="toc-text">find操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E5%BA%8F%E5%92%8C%E5%90%8E%E5%BA%8F%E6%93%8D%E4%BD%9C"><span class="toc-number">3.8.</span> <span class="toc-text">前序和后序操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Delete%E6%93%8D%E4%BD%9C"><span class="toc-number">3.9.</span> <span class="toc-text">Delete操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%ACk%E4%B8%AA%E6%93%8D%E4%BD%9C"><span class="toc-number">3.10.</span> <span class="toc-text">第k个操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%92%E5%85%A5INF%E5%92%8C-INF"><span class="toc-number">3.11.</span> <span class="toc-text">插入INF和-INF</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%9A%84%E4%BB%A3%E7%A0%81"><span class="toc-number">3.12.</span> <span class="toc-text">总的代码</span></a></li></ol></li></ol>
+      </div>
+      <div class="related panel pjax" data-title="系列文章">
+        <ul>
+          <li><a href="/2020/05/24/ufpe-starters-final-try-outs-2019-problem-l/" rel="bookmark" title="UFPE Starters Final Try-Outs 2019 Problem L">UFPE Starters Final Try-Outs 2019 Problem L</a></li><li><a href="/2020/05/25/ufpe-starters-final-try-outs-2019-recife-brazil-dec-1-2018-problem-j%EF%BC%88%E7%BA%BF%E6%AE%B5%E6%A0%91%E4%BA%8C%E5%88%86%EF%BC%89/" rel="bookmark" title="UFPE Starters Final Try-Outs 2019 Recife, Brazil, Dec 1, 2018 Problem J（线段树+二分）">UFPE Starters Final Try-Outs 2019 Recife, Brazil, Dec 1, 2018 Problem J（线段树+二分）</a></li><li class="active"><a href="/2022/03/30/splay/" rel="bookmark" title="Splay模版:P3369[模版/普通平衡树]">Splay模版:P3369[模版/普通平衡树]</a></li>
+        </ul>
+      </div>
+      <div class="overview panel" data-title="站点概览">
+        <div class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="image" itemprop="image" alt="Sukuna"
+      data-src="/images/meili.JPG">
+  <p class="name" itemprop="name">Sukuna</p>
+  <div class="description" itemprop="description"></div>
+</div>
+
+<nav class="state">
+    <div class="item posts">
+      <a href="/archives/">
+        <span class="count">20</span>
+        <span class="name">文章</span>
+      </a>
+    </div>
+    <div class="item categories">
+      <a href="/categories/">
+        <span class="count">4</span>
+        <span class="name">分类</span>
+      </a>
+    </div>
+</nav>
+
+<div class="social">
+      <span class="exturl item github" data-url="aHR0cHM6Ly9naXRodWIuY29tL1N1a3VuYXNoaW5teW91bWFydS1odXN0" title="https:&#x2F;&#x2F;github.com&#x2F;Sukunashinmyoumaru-hust"><i class="ic i-github"></i></span>
+      <span class="exturl item twitter" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9zdWt1bmFfd2lyZWxlc3M=" title="https:&#x2F;&#x2F;twitter.com&#x2F;sukuna_wireless"><i class="ic i-twitter"></i></span>
+      <a href="/sukuna@hust.edu.cn" title="sukuna@hust.edu.cn" class="item email"><i class="ic i-envelope"></i></a>
+</div>
+
+<ul class="menu">
   
-  <script type="text/javascript">
-  $(function() {
-    // copy-btn HTML
-    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
-    btn += '<i class="fa-regular fa-clone"></i>';
-    btn += '</span>';
-    // mount it!
-    $(".highlight table").before(btn);
-    var clip = new ClipboardJS('.btn-copy', {
-      text: function(trigger) {
-        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+    
+  <li class="item">
+    <a href="/" rel="section"><i class="ic i-home"></i>首页</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/about/" rel="section"><i class="ic i-user"></i>关于</a>
+  </li>
+
+        
+  <li class="item dropdown">
+      <a href="javascript:void(0);"><i class="ic i-feather"></i>文章</a>
+    <ul class="submenu">
+
+        
+  <li class="item">
+    <a href="/archives/" rel="section"><i class="ic i-list-alt"></i>归档</a>
+  </li>
+
+        
+  <li class="item">
+    <a href="/categories/" rel="section"><i class="ic i-th"></i>分类</a>
+  </li>
+
+        
+  <li class="item">
+    <a href="/tags/" rel="section"><i class="ic i-tags"></i>标签</a>
+  </li>
+
+  </ul>
+    
+  <li class="item">
+    <a href="/friend/" rel="section"><i class="ic i-heart"></i>friends</a>
+  </li>
+
+    
+  <li class="item">
+    <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1N1a3VuYVNoaW5teW91bWFydS1odXN0L0h1c3Qtb3BlbnNvdXJjZS1YdWVqaWU="><i class="ic i-heart"></i>HUST-学解</span>
+  </li>
+
+    
+  <li class="item">
+    <a href="/picture/" rel="section"><i class="ic i-heart"></i>赠画感谢</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/source/" rel="section"><i class="ic i-heart"></i>资料下载</a>
+  </li>
+
+
+</ul>
+
+      </div>
+    </div>
+  </div>
+
+  <ul id="quick">
+    <li class="prev pjax">
+        <a href="/2022/02/26/oschallengelab/" rel="prev" title="上一篇"><i class="ic i-chevron-left"></i></a>
+    </li>
+    <li class="up"><i class="ic i-arrow-up"></i></li>
+    <li class="down"><i class="ic i-arrow-down"></i></li>
+    <li class="next pjax">
+        <a href="/2022/04/17/luogu-al/" rel="next" title="下一篇"><i class="ic i-chevron-right"></i></a>
+    </li>
+    <li class="percent"></li>
+  </ul>
+</div>
+
+
+        </div>
+        <div class="dimmer"></div>
+      </div>
+    </main>
+    <footer id="footer">
+      <div class="inner">
+        <div class="widgets">
+          
+<div class="rpost pjax">
+  <h2>随机文章</h2>
+  <ul>
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E7%AE%97%E6%B3%95%E9%A2%98/" title="分类于 算法题">算法题</a>
+</div>
+
+    <span><a href="/2020/05/24/ufpe-starters-final-try-outs-2019-problem-l/" title="UFPE Starters Final Try-Outs 2019 Problem L">UFPE Starters Final Try-Outs 2019 Problem L</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
+</div>
+
+    <span><a href="/2021/04/25/verilog/" title="华中科技大学Verilog实验解析">华中科技大学Verilog实验解析</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
+</div>
+
+    <span><a href="/2023/02/06/rustilings/" title="Rustilings 练习笔记">Rustilings 练习笔记</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
+</div>
+
+    <span><a href="/2023/02/06/mit-6-s081-lab/" title="MIT_6.s081_Lab">MIT_6.s081_Lab</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E6%9D%82%E8%AE%B0/" title="分类于 杂记">杂记</a>
+</div>
+
+    <span><a href="/2022/02/13/how-to-dress-up/" title="论如何女装">论如何女装</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
+</div>
+
+    <span><a href="/2024/03/14/pa-lab2/" title="南大pa-Lab2">南大pa-Lab2</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
+</div>
+
+    <span><a href="/2023/02/06/stanford-cs144-lab/" title="Stanford CS144 Lab">Stanford CS144 Lab</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
+</div>
+
+    <span><a href="/2021/12/18/oslab2/" title="华中科技大学OS实验解析(Lab2)">华中科技大学OS实验解析(Lab2)</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
+</div>
+
+    <span><a href="/2024/03/19/pa-lab3/" title="南大pa-Lab3">南大pa-Lab3</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E7%AE%97%E6%B3%95%E9%A2%98/" title="分类于 算法题">算法题</a>
+</div>
+
+    <span><a href="/2022/03/30/splay/" title="Splay模版:P3369[模版&#x2F;普通平衡树]">Splay模版:P3369[模版/普通平衡树]</a></span>
+  </li>
+
+  </ul>
+</div>
+<div>
+  <h2>最新评论</h2>
+  <ul class="leancloud-recent-comment"></ul>
+</div>
+
+        </div>
+        <div class="status">
+  <div class="copyright">
+    
+    &copy; 2010 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="ic i-sakura rotate"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Sukuna @ Suwa shrine</span>
+  </div>
+  <div class="powered-by">
+    基于 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & Theme.<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FtZWhpbWUvaGV4by10aGVtZS1zaG9rYQ==">Shoka</span>
+  </div>
+</div>
+
+      </div>
+    </footer>
+  </div>
+<script data-config type="text/javascript">
+  var LOCAL = {
+    path: '2022/03/30/splay/',
+    favicon: {
+      show: "（●´3｀●）あややややや～",
+      hide: "(´Д｀)大変だ！"
+    },
+    search : {
+      placeholder: "文章搜索",
+      empty: "关于 「 ${query} 」，什么也没搜到",
+      stats: "${time} ms 内找到 ${hits} 条结果"
+    },
+    valine: true,fancybox: true,
+    copyright: '复制成功，转载请遵守 <i class="ic i-creative-commons"></i>BY-NC-SA 协议。',
+    ignores : [
+      function(uri) {
+        return uri.includes('#');
+      },
+      function(uri) {
+        return new RegExp(LOCAL.path+"$").test(uri);
       }
-    });
-    clip.on('success', function(e) {
-      e.trigger.setAttribute('aria-label', "复制成功！");
-      e.clearSelection();
-    })
-  })
-  </script>
+    ]
+  };
+</script>
+
+<script src="https://cdn.polyfill.io/v2/polyfill.js"></script>
+
+<script src="//cdn.jsdelivr.net/combine/npm/pace-js@1.0.2/pace.min.js,npm/pjax@0.2.8/pjax.min.js,npm/whatwg-fetch@3.4.0/dist/fetch.umd.min.js,npm/animejs@3.2.0/lib/anime.min.js,npm/algoliasearch@4/dist/algoliasearch-lite.umd.js,npm/instantsearch.js@4/dist/instantsearch.production.min.js,npm/lozad@1/dist/lozad.min.js,npm/quicklink@2/dist/quicklink.umd.js"></script>
+
+<script src="/js/app.js?v=0.2.5"></script>
 
 
-<script src="/js/main.js"></script>
 
-<!-- search -->
 
-<!-- Baidu Analytics -->
-
-<!-- Cloudflare Analytics -->
-
-<!-- Disqus Comments -->
-
-<!-- utterances Comments -->
-
-</body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":200,"height":400},"mobile":{"show":true},"log":false});</script></body>
 </html>
