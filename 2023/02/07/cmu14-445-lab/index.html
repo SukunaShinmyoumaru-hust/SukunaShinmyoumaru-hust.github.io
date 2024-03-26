@@ -25,7 +25,7 @@
 
   
 
-<link rel="canonical" href="https://sukunashinmyoumaru-hust.github.io/2023/02/06/cmu14-445-lab/">
+<link rel="canonical" href="https://sukunashinmyoumaru-hust.github.io/2023/02/07/cmu14-445-lab/">
 
 
 
@@ -62,12 +62,27 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
   </h1>
   
 <div class="meta">
-  <span class="item" title="创建时间：2023-02-06 10:46:50">
+  <span class="item" title="创建时间：2023-02-07 10:46:50">
     <span class="icon">
       <i class="ic i-calendar"></i>
     </span>
     <span class="text">发表于</span>
-    <time itemprop="dateCreated datePublished" datetime="2023-02-06T10:46:50+08:00">2023-02-06</time>
+    <time itemprop="dateCreated datePublished" datetime="2023-02-07T10:46:50+08:00">2023-02-07</time>
+  </span>
+  <span class="item" title="本文字数">
+    <span class="icon">
+      <i class="ic i-pen"></i>
+    </span>
+    <span class="text">本文字数</span>
+    <span>19k</span>
+    <span class="text">字</span>
+  </span>
+  <span class="item" title="阅读时长">
+    <span class="icon">
+      <i class="ic i-clock"></i>
+    </span>
+    <span class="text">阅读时长</span>
+    <span>17 分钟</span>
   </span>
 </div>
 
@@ -100,12 +115,12 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
       </div>
       <div id="imgs" class="pjax">
         <ul>
-          <li class="item" data-background-image="https://s2.loli.net/2024/03/21/JC67Q4LIjnT9fig.jpg"></li>
-          <li class="item" data-background-image="https://s2.loli.net/2024/03/21/MEKc7eqDtPGHWBp.jpg"></li>
           <li class="item" data-background-image="https://s2.loli.net/2024/03/21/8PBD6GfINvWY5tU.jpg"></li>
-          <li class="item" data-background-image="https://s2.loli.net/2024/03/21/N7AWrf8Xs9VTL4P.jpg"></li>
+          <li class="item" data-background-image="https://s2.loli.net/2024/03/21/GeYMagTskVub2io.jpg"></li>
           <li class="item" data-background-image="https://s2.loli.net/2024/03/21/etuIv2DAC8wpdKs.png"></li>
-          <li class="item" data-background-image="https://s2.loli.net/2024/03/21/nBKjz8OQYVMTHE1.jpg"></li>
+          <li class="item" data-background-image="https://s2.loli.net/2024/03/21/JC67Q4LIjnT9fig.jpg"></li>
+          <li class="item" data-background-image="https://s2.loli.net/2024/03/21/KgXYlCHOW4jSdoL.jpg"></li>
+          <li class="item" data-background-image="https://s2.loli.net/2024/03/21/ySW2Z5V4oheEaRc.jpg"></li>
         </ul>
       </div>
     </header>
@@ -136,10 +151,10 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
 </div>
 
     <article itemscope itemtype="http://schema.org/Article" class="post block" lang="zh-CN">
-  <link itemprop="mainEntityOfPage" href="https://sukunashinmyoumaru-hust.github.io/2023/02/06/cmu14-445-lab/">
+  <link itemprop="mainEntityOfPage" href="https://sukunashinmyoumaru-hust.github.io/2023/02/07/cmu14-445-lab/">
 
   <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="image" content="/images/meili.JPG">
+    <meta itemprop="image" content="/images/IMG_1335.PNG">
     <meta itemprop="name" content="Sukuna">
     <meta itemprop="description" content="Sukuna_wireless, ">
   </span>
@@ -151,9 +166,9 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
   <div class="body md" itemprop="articleBody">
     
 
-    <h3 id="Lab1-Buffer-Pool"><a href="#Lab1-Buffer-Pool" class="headerlink" title="Lab1.Buffer Pool"></a>Lab1.Buffer Pool</h3><p>这是CMU数据库系列的第一个实验,第一个实验需要我们完成关于Buffer的一些功能.在完善Buffer的功能之前,我们先了解一下buffer的一些基本知识.</p>
+    <h1 id="Lab1-Buffer-Pool"><a href="#Lab1-Buffer-Pool" class="headerlink" title="Lab1.Buffer Pool"></a>Lab1.Buffer Pool</h1><p>这是CMU数据库系列的第一个实验,第一个实验需要我们完成关于Buffer的一些功能.在完善Buffer的功能之前,我们先了解一下buffer的一些基本知识.</p>
 <p>buffer在这里面和操作系统很像,是主存和辅存的缓冲地带,我们需要完成的是两个特别重要的数据结构,一个是Disk Manager,用我的话说就是页表,一个是LRU Replacer,这个数据结构研究,在缓冲地带满的时候我们应该替换谁进入到辅存.这两个数据结构所存储的信息单位量是一样的(也就是说这两个数据结构都存储了n个块[你也可以认为是“页”]的信息).两个数据结构通过Pin和Unpin来互相作用.</p>
-<h4 id="实验1-1-LRU-REPLACEMENT"><a href="#实验1-1-LRU-REPLACEMENT" class="headerlink" title="实验1.1 LRU REPLACEMENT"></a>实验1.1 LRU REPLACEMENT</h4><p>实验提示:修改src&#x2F;include&#x2F;buffer&#x2F;lru_replacer.h和src&#x2F;buffer&#x2F;lru_replacer.cpp.</p>
+<h2 id="实验1-1-LRU-REPLACEMENT"><a href="#实验1-1-LRU-REPLACEMENT" class="headerlink" title="实验1.1 LRU REPLACEMENT"></a>实验1.1 LRU REPLACEMENT</h2><p>实验提示:修改src&#x2F;include&#x2F;buffer&#x2F;lru_replacer.h和src&#x2F;buffer&#x2F;lru_replacer.cpp.</p>
 <p>首先我们知道LRU Replacer是一个依赖LRU算法进行替换的一个结构体,我们在操作系统和组成原理的课程中已经知道,模拟LRU算法一般使用堆栈,我们现在使用堆栈来进行模拟:</p>
 <p>首先在头文件中添加有关堆栈的一些信息;</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">size_t capacity;      //容量</span><br><span class="line">size_t size;          //当前大小</span><br><span class="line">std::list&lt;frame_id_t&gt; lists;           //存储帧的栈,用list实现</span><br><span class="line">std::unordered_map&lt;frame_id_t , int&gt; maps;      //哈希映射,映射帧和是否在LRU Replacer里面.</span><br><span class="line">std::mutex locks;</span><br></pre></td></tr></table></figure>
@@ -171,7 +186,7 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">void LRUReplacer::Unpin(frame_id_t frame_id) &#123;</span><br><span class="line">    if(maps.count(frame_id) != 0) return;</span><br><span class="line">    locks.lock();</span><br><span class="line">    //如果已经满了,则需要淘汰一个然后放入 LRUReplacer 中</span><br><span class="line">    if (lists.size() == capacity) &#123;</span><br><span class="line">        frame_id_t last_frame = lists.back();</span><br><span class="line">        maps.erase(last_frame);</span><br><span class="line">        lists.pop_back();</span><br><span class="line">    &#125;</span><br><span class="line">    lists.push_front(frame_id);</span><br><span class="line">    maps[frame_id] = 1;</span><br><span class="line">    locks.unlock();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>先看实验的最后怎么make的吧,一开始太智障直接cd进目录调gcc,这下丑大了,重写了一份…</p>
-<h4 id="实验1-2-BUFFER-POOL-MANAGER-INSTANCE"><a href="#实验1-2-BUFFER-POOL-MANAGER-INSTANCE" class="headerlink" title="实验1.2 BUFFER POOL MANAGER INSTANCE"></a>实验1.2 BUFFER POOL MANAGER INSTANCE</h4><p>提示:修改src&#x2F;include&#x2F;buffer&#x2F;buffer_pool_manager_instance.h和src&#x2F;buffer&#x2F;buffer_pool_manager_instance.cpp</p>
+<h2 id="实验1-2-BUFFER-POOL-MANAGER-INSTANCE"><a href="#实验1-2-BUFFER-POOL-MANAGER-INSTANCE" class="headerlink" title="实验1.2 BUFFER POOL MANAGER INSTANCE"></a>实验1.2 BUFFER POOL MANAGER INSTANCE</h2><p>提示:修改src&#x2F;include&#x2F;buffer&#x2F;buffer_pool_manager_instance.h和src&#x2F;buffer&#x2F;buffer_pool_manager_instance.cpp</p>
 <p>首先我们先来了解一下BUFFER POOL的一些成员(这个实验不需要我们添加成员),一个是存储每个页的指针的指针数组,在后面我们会使用这个结构来给定页的id获得一个页的指针,接着就是页表成员,将物理帧和页的id进行对应,接着就是空闲物理帧以及之前做的替换器元素.(其实页和物理帧是相互统一的概念,物理帧是一个物理概念,代表了一块空闲的内存空间,页就是记录数据的单位,当物理帧被赋值,被填入数据的时候,它就变成了一个页.**当然,页表的id某种程度上反映了辅存的位置**)</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">/\*\* Array of buffer pool pages. \*/</span><br><span class="line">Page \*pages_;</span><br><span class="line">/\*\* Pointer to the disk manager. \*/</span><br><span class="line">DiskManager \*disk_manager_ __attribute__((__unused__));</span><br><span class="line">/\*\* Pointer to the log manager. \*/</span><br><span class="line">LogManager \*log_manager_ __attribute__((__unused__));</span><br><span class="line">/\*\* Page table for keeping track of buffer pool pages. \*/</span><br><span class="line">std::unordered_map&lt;page_id_t, frame_id_t&gt; page_table_;</span><br><span class="line">/\*\* Replacer to find unpinned pages for replacement. \*/</span><br><span class="line">Replacer \*replacer_;</span><br><span class="line">/\*\* List of free pages. \*/</span><br><span class="line">std::list&lt;frame_id_t&gt; free_list_;</span><br><span class="line">/\*\* This latch protects shared data structures. We recommend updating this comment to describe what it protects. \*/</span><br><span class="line">std::mutex latch_;</span><br></pre></td></tr></table></figure>
 <p>1、NewPgImp函数</p>
@@ -199,7 +214,7 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
 <p>找到一个页,首先置脏位,然后让pin数-1,如果减为0就调用Replacer的Unpin函数.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">bool BufferPoolManagerInstance::UnpinPgImp(page_id_t page_id, bool is_dirty) &#123;</span><br><span class="line">  std::lock_guard&lt;std::mutex&gt; lock(latch_); </span><br><span class="line">  frame_id_t fid = page_table_[page_id];</span><br><span class="line">  Page\* p = &amp;pages_[fid];</span><br><span class="line">  p-&gt;is_dirty_ = is_dirty;  // hold the state until victim.</span><br><span class="line">  if (p-&gt;pin_count_ &lt;= 0)</span><br><span class="line">    return false;</span><br><span class="line">  --p-&gt;pin_count_;</span><br><span class="line">  if (p-&gt;pin_count_ == 0) &#123;</span><br><span class="line">    replacer_-&gt;Unpin(fid);</span><br><span class="line">    return true;</span><br><span class="line">  &#125;</span><br><span class="line">  return false;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h4 id="实验1-3-PARALLEL-BUFFER-POOL-MANAGER"><a href="#实验1-3-PARALLEL-BUFFER-POOL-MANAGER" class="headerlink" title="实验1.3 PARALLEL BUFFER POOL MANAGER"></a>实验1.3 PARALLEL BUFFER POOL MANAGER</h4><p>并行的manager,先前是一个manager工作,现在是多个manager工作,具体的思路大同小异,就是先选择究竟是哪一个manager,然后再调用这个manager的函数.</p>
+<h2 id="实验1-3-PARALLEL-BUFFER-POOL-MANAGER"><a href="#实验1-3-PARALLEL-BUFFER-POOL-MANAGER" class="headerlink" title="实验1.3 PARALLEL BUFFER POOL MANAGER"></a>实验1.3 PARALLEL BUFFER POOL MANAGER</h2><p>并行的manager,先前是一个manager工作,现在是多个manager工作,具体的思路大同小异,就是先选择究竟是哪一个manager,然后再调用这个manager的函数.</p>
 <p>选择的方式比较淳朴,假设有N个manager,那个调用manager的序号就是id % N.</p>
 <p>这一部分的函数,除了创建新页面这个不确定初始页面id的情况下,其他的都一模一样.</p>
 <p>1、NewPgImp函数.</p>
@@ -210,12 +225,12 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
 <p>先选Manager,再调用,没啥好说的.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">BufferPoolManager \*ParallelBufferPoolManager::GetBufferPoolManager(page_id_t page_id) &#123;</span><br><span class="line">  // Get BufferPoolManager responsible for handling given page id. You can use this method in your other methods.</span><br><span class="line">  return manager_[page_id % num_instances_];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Page \*ParallelBufferPoolManager::FetchPgImp(page_id_t page_id) &#123;</span><br><span class="line">  // Fetch page for page_id from responsible BufferPoolManagerInstance</span><br><span class="line">  return GetBufferPoolManager(page_id)-&gt;FetchPage(page_id);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">bool ParallelBufferPoolManager::UnpinPgImp(page_id_t page_id, bool is_dirty) &#123;</span><br><span class="line">  // Unpin page_id from responsible BufferPoolManagerInstance</span><br><span class="line">  return GetBufferPoolManager(page_id)-&gt;UnpinPage(page_id,is_dirty);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">bool ParallelBufferPoolManager::FlushPgImp(page_id_t page_id) &#123;</span><br><span class="line">  // Flush page_id from responsible BufferPoolManagerInstance</span><br><span class="line">  return GetBufferPoolManager(page_id)-&gt;FlushPage(page_id);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="Lab2-EXTENDIBLE-HASH-INDEX"><a href="#Lab2-EXTENDIBLE-HASH-INDEX" class="headerlink" title="Lab2.EXTENDIBLE HASH INDEX"></a>Lab2.EXTENDIBLE HASH INDEX</h3><h4 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h4><p><img data-src="https://sukunahust.com/wp-content/uploads/2022/10/image-1024x573.png"></p>
+<h1 id="Lab2-EXTENDIBLE-HASH-INDEX"><a href="#Lab2-EXTENDIBLE-HASH-INDEX" class="headerlink" title="Lab2.EXTENDIBLE HASH INDEX"></a>Lab2.EXTENDIBLE HASH INDEX</h1><h2 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h2><p><img data-src="https://sukunahust.com/wp-content/uploads/2022/10/image-1024x573.png"></p>
 <p>左边那个就是directory page，它有一个参数叫做global depth，1&lt;&lt;global depth 为directory的大小。它存储了指向各个bucket page的指针。bucket page里面存储的则是实际的数据（在本实验中是std::pair类型的键值），每个bucket都有一个自己的local depth。</p>
 <p>插入一个键值的过程是：先把key代入hash函数计算得到一个中间结果，取这个中间结果的最后global depth位（这就是global depth mask的作用,就是 数据&amp;global mask(具体请看下面的例子) ），得到一个数组下标，bucket的page id就在这个下标里。根据page id调入bucket，然后把这个键值插入到bucket里面。</p>
-<h4 id="实验2-1-PAGE-LAYOUTS"><a href="#实验2-1-PAGE-LAYOUTS" class="headerlink" title="实验2.1 PAGE LAYOUTS"></a>实验2.1 PAGE LAYOUTS</h4><p>提示:完成两种页的设计,一个是桶一个是目录.</p>
+<h2 id="实验2-1-PAGE-LAYOUTS"><a href="#实验2-1-PAGE-LAYOUTS" class="headerlink" title="实验2.1 PAGE LAYOUTS"></a>实验2.1 PAGE LAYOUTS</h2><p>提示:完成两种页的设计,一个是桶一个是目录.</p>
 <p>修改src&#x2F;include&#x2F;storage&#x2F;page&#x2F;hash_table_bucket_page.h、src&#x2F;storage&#x2F;page&#x2F;hash_table_bucket_page.cpp、src&#x2F;include&#x2F;storage&#x2F;page&#x2F;hash_table_directory_page.h和src&#x2F;storage&#x2F;page&#x2F;hash_table_directory_page.cpp</p>
-<h5 id="实验2-1-1-目录页的设计"><a href="#实验2-1-1-目录页的设计" class="headerlink" title="实验2.1.1 目录页的设计"></a>实验2.1.1 目录页的设计</h5><p>我们先来看看头文件(头文件不需要修改)</p>
+<h3 id="实验2-1-1-目录页的设计"><a href="#实验2-1-1-目录页的设计" class="headerlink" title="实验2.1.1 目录页的设计"></a>实验2.1.1 目录页的设计</h3><p>我们先来看看头文件(头文件不需要修改)</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">page_id_t page_id_; // 页的id</span><br><span class="line">lsn_t lsn_;</span><br><span class="line">uint32_t global_depth_&#123;0&#125;;//全局深度,也就是说下面的数组有几个元素.2^i的关系,所有局部深度不能比全局深度大</span><br><span class="line">uint8_t local_depths_[DIRECTORY_ARRAY_SIZE];//每一个页的局部深度,这个类似三级页表.第一级的页表局部深度就是2.局部深度代表你作为目录项离叶结点(bucket有多远)</span><br><span class="line">page_id_t bucket_page_ids_[DIRECTORY_ARRAY_SIZE];//下一级的页号</span><br></pre></td></tr></table></figure>
 <p>1、GetGlobalDepthMask函数</p>
 <p>这个函数要求我们返回一个掩码,掩码的概念我们在计算机网络中学过,对于网络地址,网络地址有几位,就有几个1,在这里,全局深度为几就有几个1.</p>
@@ -227,7 +242,7 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
 <p>能否缩小全局变量,那就判断有没有一个局部深度比全局深度深.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">bool HashTableDirectoryPage::CanShrink() &#123;</span><br><span class="line">  int original_depth = 1 &lt;&lt; global_depth_;</span><br><span class="line">  for(int i = 0;i &lt; original_depth;i++)&#123;</span><br><span class="line">    if(local_depths_[i] &gt;= global_depth_) return false;</span><br><span class="line">  &#125;</span><br><span class="line">  return true;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>其他的函数都是set和get,相信各位都可以做出来.</p>
-<h5 id="2-1-2-桶页的设计"><a href="#2-1-2-桶页的设计" class="headerlink" title="2.1.2 桶页的设计"></a>2.1.2 桶页的设计</h5><p>首先我们来看头文件:</p>
+<h3 id="2-1-2-桶页的设计"><a href="#2-1-2-桶页的设计" class="headerlink" title="2.1.2 桶页的设计"></a>2.1.2 桶页的设计</h3><p>首先我们来看头文件:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//  For more on BUCKET_ARRAY_SIZE see storage/page/hash_table_page_defs.h</span><br><span class="line">char occupied_[(BUCKET_ARRAY_SIZE - 1) / 8 + 1];</span><br><span class="line">// 0 if tombstone/brand new (never occupied), 1 otherwise.</span><br><span class="line">char readable_[(BUCKET_ARRAY_SIZE - 1) / 8 + 1];</span><br><span class="line">MappingType array_[0];</span><br></pre></td></tr></table></figure>
 <p>首先就是MappingType,保存了一系列键值对,还有一个bitmap,来表示占用与存储有效信息.</p>
 <p>1、可读和占用的判断和设置</p>
@@ -243,7 +258,7 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
 <p>这类思路都是一样的,对于bitmap的全部数据,进行遍历.只不过这一次遍历的粒度不需要下降到位的级别,只需要看看,char[]里面的值是不是全0或者是全1,这下我们可以使用mask&#x3D;0xFF来进行与或运算.</p>
 <p>这时候有小伙伴会问,万一桶的元素不为8的整数,剩下的5个怎么比较呢?我们可以把最后一个char类型的元素取出来,然后可以利用10000000取高位来进行取值.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">template &lt;typename KeyType, typename ValueType, typename KeyComparator&gt;</span><br><span class="line">bool HASH_TABLE_BUCKET_TYPE::IsEmpty() &#123;</span><br><span class="line">  u_int8_t mask = 0;</span><br><span class="line">  size_t times = BUCKET_ARRAY_SIZE / 8;</span><br><span class="line">  for (size_t i = 0; i &lt; times; i++) &#123;</span><br><span class="line">    char c = readable_[i];</span><br><span class="line">    uint8_t ic = static_cast&lt;uint8_t&gt;(c);</span><br><span class="line">    if ((ic  mask) != mask) &#123;</span><br><span class="line">      return false;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">//剩下的</span><br><span class="line">  size_t remain = BUCKET_ARRAY_SIZE % 8;</span><br><span class="line">  if (remain &gt; 0) &#123;</span><br><span class="line">    char c = readable_[times];</span><br><span class="line">    uint8_t ic = static_cast&lt;uint8_t&gt;(c);</span><br><span class="line">    for (size_t i = 0; i &lt; remain; i++) &#123;</span><br><span class="line">//每次取1位</span><br><span class="line">      if ((ic &amp; 1) != 1) &#123;</span><br><span class="line">        return false;</span><br><span class="line">      &#125;</span><br><span class="line">//迭代</span><br><span class="line">      ic = ic &gt;&gt; 1;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  return true;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="实验2-2-HASH-TABLE-IMPLEMENTATION"><a href="#实验2-2-HASH-TABLE-IMPLEMENTATION" class="headerlink" title="实验2.2 HASH TABLE IMPLEMENTATION"></a>实验2.2 HASH TABLE IMPLEMENTATION</h4><p>0、概要</p>
+<h2 id="实验2-2-HASH-TABLE-IMPLEMENTATION"><a href="#实验2-2-HASH-TABLE-IMPLEMENTATION" class="headerlink" title="实验2.2 HASH TABLE IMPLEMENTATION"></a>实验2.2 HASH TABLE IMPLEMENTATION</h2><p>0、概要</p>
 <p>这一个部分我们需要结合之前的BufferPoolManager来完善哈希表的增删改查的操作.</p>
 <p>初始情况下global depth为0，directory大小为1&lt;&lt;0&#x3D;1，因此只有一个bucket，此bucket的local depth为0。这时插入键值，取哈希函数中间结果的后0位，得到的directory下标总是为0，所有的元素全进入这个初始bucket。</p>
 <p>如果一个桶满了,就需要分裂成两个桶,分裂的伪代码如下:</p>
@@ -290,7 +305,7 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
       <i class="ic i-calendar-check"></i>
     </span>
     <span class="text">更新于</span>
-    <time title="修改时间：2024-02-29 11:05:03" itemprop="dateModified" datetime="2024-02-29T11:05:03+08:00">2024-02-29</time>
+    <time title="修改时间：2024-03-25 09:34:26" itemprop="dateModified" datetime="2024-03-25T09:34:26+08:00">2024-03-25</time>
   </span>
 </div>
 
@@ -321,7 +336,7 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
   </li>
   <li class="link">
     <strong>本文链接：</strong>
-    <a href="https://sukunashinmyoumaru-hust.github.io/2023/02/06/cmu14-445-lab/" title="CMU14-445 Lab">https://sukunashinmyoumaru-hust.github.io/2023/02/06/cmu14-445-lab/</a>
+    <a href="https://sukunashinmyoumaru-hust.github.io/2023/02/07/cmu14-445-lab/" title="CMU14-445 Lab">https://sukunashinmyoumaru-hust.github.io/2023/02/07/cmu14-445-lab/</a>
   </li>
   <li class="license">
     <strong>版权声明： </strong>本站所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</span> 许可协议。转载请注明出处！
@@ -340,20 +355,20 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
     <div class="item left">
       
 
-  <a href="/2023/02/06/rustilings/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;s2.loli.net&#x2F;2024&#x2F;03&#x2F;21&#x2F;KgXYlCHOW4jSdoL.jpg" title="Rustilings 练习笔记">
+  <a href="/2023/02/06/stanford-cs144-lab/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;s2.loli.net&#x2F;2024&#x2F;03&#x2F;21&#x2F;ySW2Z5V4oheEaRc.jpg" title="Stanford CS144 Lab">
   <span class="type">上一篇</span>
   <span class="category"><i class="ic i-flag"></i> 实验记录</span>
-  <h3>Rustilings 练习笔记</h3>
+  <h3>Stanford CS144 Lab</h3>
   </a>
 
     </div>
     <div class="item right">
       
 
-  <a href="/2023/02/06/stanford-cs144-lab/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;s2.loli.net&#x2F;2024&#x2F;03&#x2F;21&#x2F;GeYMagTskVub2io.jpg" title="Stanford CS144 Lab">
+  <a href="/2023/02/08/mit-6-s081-lab/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;s2.loli.net&#x2F;2024&#x2F;03&#x2F;21&#x2F;8PBD6GfINvWY5tU.jpg" title="MIT_6.s081_Lab">
   <span class="type">下一篇</span>
   <span class="category"><i class="ic i-flag"></i> 实验记录</span>
-  <h3>Stanford CS144 Lab</h3>
+  <h3>MIT_6.s081_Lab</h3>
   </a>
 
     </div>
@@ -372,17 +387,17 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
   <div class="panels">
     <div class="inner">
       <div class="contents panel pjax" data-title="文章目录">
-          <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Lab1-Buffer-Pool"><span class="toc-number">1.</span> <span class="toc-text">Lab1.Buffer Pool</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C1-1-LRU-REPLACEMENT"><span class="toc-number">1.1.</span> <span class="toc-text">实验1.1 LRU REPLACEMENT</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C1-2-BUFFER-POOL-MANAGER-INSTANCE"><span class="toc-number">1.2.</span> <span class="toc-text">实验1.2 BUFFER POOL MANAGER INSTANCE</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C1-3-PARALLEL-BUFFER-POOL-MANAGER"><span class="toc-number">1.3.</span> <span class="toc-text">实验1.3 PARALLEL BUFFER POOL MANAGER</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lab2-EXTENDIBLE-HASH-INDEX"><span class="toc-number">2.</span> <span class="toc-text">Lab2.EXTENDIBLE HASH INDEX</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A6%82%E8%A6%81"><span class="toc-number">2.1.</span> <span class="toc-text">概要</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C2-1-PAGE-LAYOUTS"><span class="toc-number">2.2.</span> <span class="toc-text">实验2.1 PAGE LAYOUTS</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C2-1-1-%E7%9B%AE%E5%BD%95%E9%A1%B5%E7%9A%84%E8%AE%BE%E8%AE%A1"><span class="toc-number">2.2.1.</span> <span class="toc-text">实验2.1.1 目录页的设计</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-1-2-%E6%A1%B6%E9%A1%B5%E7%9A%84%E8%AE%BE%E8%AE%A1"><span class="toc-number">2.2.2.</span> <span class="toc-text">2.1.2 桶页的设计</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C2-2-HASH-TABLE-IMPLEMENTATION"><span class="toc-number">2.3.</span> <span class="toc-text">实验2.2 HASH TABLE IMPLEMENTATION</span></a></li></ol></li></ol>
+          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Lab1-Buffer-Pool"><span class="toc-number">1.</span> <span class="toc-text">Lab1.Buffer Pool</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C1-1-LRU-REPLACEMENT"><span class="toc-number">1.1.</span> <span class="toc-text">实验1.1 LRU REPLACEMENT</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C1-2-BUFFER-POOL-MANAGER-INSTANCE"><span class="toc-number">1.2.</span> <span class="toc-text">实验1.2 BUFFER POOL MANAGER INSTANCE</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C1-3-PARALLEL-BUFFER-POOL-MANAGER"><span class="toc-number">1.3.</span> <span class="toc-text">实验1.3 PARALLEL BUFFER POOL MANAGER</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Lab2-EXTENDIBLE-HASH-INDEX"><span class="toc-number">2.</span> <span class="toc-text">Lab2.EXTENDIBLE HASH INDEX</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A6%82%E8%A6%81"><span class="toc-number">2.1.</span> <span class="toc-text">概要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C2-1-PAGE-LAYOUTS"><span class="toc-number">2.2.</span> <span class="toc-text">实验2.1 PAGE LAYOUTS</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C2-1-1-%E7%9B%AE%E5%BD%95%E9%A1%B5%E7%9A%84%E8%AE%BE%E8%AE%A1"><span class="toc-number">2.2.1.</span> <span class="toc-text">实验2.1.1 目录页的设计</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-2-%E6%A1%B6%E9%A1%B5%E7%9A%84%E8%AE%BE%E8%AE%A1"><span class="toc-number">2.2.2.</span> <span class="toc-text">2.1.2 桶页的设计</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C2-2-HASH-TABLE-IMPLEMENTATION"><span class="toc-number">2.3.</span> <span class="toc-text">实验2.2 HASH TABLE IMPLEMENTATION</span></a></li></ol></li></ol>
       </div>
       <div class="related panel pjax" data-title="系列文章">
         <ul>
-          <li><a href="/2021/04/25/verilog/" rel="bookmark" title="华中科技大学Verilog实验解析">华中科技大学Verilog实验解析</a></li><li><a href="/2021/12/18/oslab1/" rel="bookmark" title="华中科技大学OS实验解析(Lab1)">华中科技大学OS实验解析(Lab1)</a></li><li><a href="/2021/12/18/oslab2/" rel="bookmark" title="华中科技大学OS实验解析(Lab2)">华中科技大学OS实验解析(Lab2)</a></li><li><a href="/2022/02/26/oschallengelab/" rel="bookmark" title="华中科技大学操作系统挑战实验(PKE)基础解析">华中科技大学操作系统挑战实验(PKE)基础解析</a></li><li><a href="/2023/02/06/rustilings/" rel="bookmark" title="Rustilings 练习笔记">Rustilings 练习笔记</a></li><li class="active"><a href="/2023/02/06/cmu14-445-lab/" rel="bookmark" title="CMU14-445 Lab">CMU14-445 Lab</a></li><li><a href="/2023/02/06/stanford-cs144-lab/" rel="bookmark" title="Stanford CS144 Lab">Stanford CS144 Lab</a></li><li><a href="/2023/02/06/mit-6-s081-xv6-information-%E9%9B%86%E5%90%88/" rel="bookmark" title="MIT_6.S081_xv6.Information 集合">MIT_6.S081_xv6.Information 集合</a></li><li><a href="/2023/02/06/mit-6-s081-lab/" rel="bookmark" title="MIT_6.s081_Lab">MIT_6.s081_Lab</a></li><li><a href="/2024/03/14/pa-lab2/" rel="bookmark" title="南大pa-Lab2">南大pa-Lab2</a></li><li><a href="/2024/03/19/pa-lab3/" rel="bookmark" title="南大pa-Lab3">南大pa-Lab3</a></li>
+          <li><a href="/2021/04/25/verilog/" rel="bookmark" title="华中科技大学Verilog实验解析">华中科技大学Verilog实验解析</a></li><li><a href="/2021/12/18/oslab1/" rel="bookmark" title="华中科技大学OS实验解析(Lab1)">华中科技大学OS实验解析(Lab1)</a></li><li><a href="/2021/12/18/oslab2/" rel="bookmark" title="华中科技大学OS实验解析(Lab2)">华中科技大学OS实验解析(Lab2)</a></li><li><a href="/2022/02/26/oschallengelab/" rel="bookmark" title="华中科技大学操作系统挑战实验(PKE)基础解析">华中科技大学操作系统挑战实验(PKE)基础解析</a></li><li><a href="/2023/02/06/rustilings/" rel="bookmark" title="Rustilings 练习笔记">Rustilings 练习笔记</a></li><li><a href="/2023/02/06/stanford-cs144-lab/" rel="bookmark" title="Stanford CS144 Lab">Stanford CS144 Lab</a></li><li class="active"><a href="/2023/02/07/cmu14-445-lab/" rel="bookmark" title="CMU14-445 Lab">CMU14-445 Lab</a></li><li><a href="/2023/02/08/mit-6-s081-lab/" rel="bookmark" title="MIT_6.s081_Lab">MIT_6.s081_Lab</a></li><li><a href="/2023/02/09/mit-6-s081-xv6-information-%E9%9B%86%E5%90%88/" rel="bookmark" title="MIT_6.S081_xv6.Information 集合">MIT_6.S081_xv6.Information 集合</a></li><li><a href="/2024/03/14/pa-lab2/" rel="bookmark" title="南大pa-Lab2">南大pa-Lab2</a></li><li><a href="/2024/03/19/pa-lab3/" rel="bookmark" title="南大pa-Lab3">南大pa-Lab3</a></li><li><a href="/2024/03/25/stanford-cs143-PA2/" rel="bookmark" title="Stanford CS143 PA2">Stanford CS143 PA2</a></li>
         </ul>
       </div>
       <div class="overview panel" data-title="站点概览">
         <div class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
   <img class="image" itemprop="image" alt="Sukuna"
-      data-src="/images/meili.JPG">
+      data-src="/images/IMG_1335.PNG">
   <p class="name" itemprop="name">Sukuna</p>
   <div class="description" itemprop="description"></div>
 </div>
@@ -390,13 +405,13 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
 <nav class="state">
     <div class="item posts">
       <a href="/archives/">
-        <span class="count">20</span>
+        <span class="count">21</span>
         <span class="name">文章</span>
       </a>
     </div>
     <div class="item categories">
       <a href="/categories/">
-        <span class="count">4</span>
+        <span class="count">3</span>
         <span class="name">分类</span>
       </a>
     </div>
@@ -448,17 +463,17 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
 
     
   <li class="item">
-    <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1N1a3VuYVNoaW5teW91bWFydS1odXN0L0h1c3Qtb3BlbnNvdXJjZS1YdWVqaWU="><i class="ic i-heart"></i>HUST-学解</span>
+    <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1N1a3VuYVNoaW5teW91bWFydS1odXN0L0h1c3Qtb3BlbnNvdXJjZS1YdWVqaWU="><i class="ic i-github"></i>HUST-学解</span>
   </li>
 
     
   <li class="item">
-    <a href="/picture/" rel="section"><i class="ic i-heart"></i>赠画感谢</a>
+    <a href="/picture/" rel="section"><i class="ic i-magic"></i>赠画感谢</a>
   </li>
 
     
   <li class="item">
-    <a href="/source/" rel="section"><i class="ic i-heart"></i>资料下载</a>
+    <a href="/source/" rel="section"><i class="ic i-address-card"></i>资料下载</a>
   </li>
 
 
@@ -470,12 +485,12 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
 
   <ul id="quick">
     <li class="prev pjax">
-        <a href="/2023/02/06/rustilings/" rel="prev" title="上一篇"><i class="ic i-chevron-left"></i></a>
+        <a href="/2023/02/06/stanford-cs144-lab/" rel="prev" title="上一篇"><i class="ic i-chevron-left"></i></a>
     </li>
     <li class="up"><i class="ic i-arrow-up"></i></li>
     <li class="down"><i class="ic i-arrow-down"></i></li>
     <li class="next pjax">
-        <a href="/2023/02/06/stanford-cs144-lab/" rel="next" title="下一篇"><i class="ic i-chevron-right"></i></a>
+        <a href="/2023/02/08/mit-6-s081-lab/" rel="next" title="下一篇"><i class="ic i-chevron-right"></i></a>
     </li>
     <li class="percent"></li>
   </ul>
@@ -497,10 +512,10 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
   <li class="item">
     
 <div class="breadcrumb">
-<a href="/categories/%E7%AE%97%E6%B3%95%E9%A2%98/" title="分类于 算法题">算法题</a>
+<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
 </div>
 
-    <span><a href="/2020/05/24/ufpe-starters-final-try-outs-2019-problem-l/" title="UFPE Starters Final Try-Outs 2019 Problem L">UFPE Starters Final Try-Outs 2019 Problem L</a></span>
+    <span><a href="/2024/03/19/pa-lab3/" title="南大pa-Lab3">南大pa-Lab3</a></span>
   </li>
 
       
@@ -510,7 +525,7 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
 <a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
 </div>
 
-    <span><a href="/2023/02/06/cmu14-445-lab/" title="CMU14-445 Lab">CMU14-445 Lab</a></span>
+    <span><a href="/2023/02/07/cmu14-445-lab/" title="CMU14-445 Lab">CMU14-445 Lab</a></span>
   </li>
 
       
@@ -520,57 +535,17 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
 <a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
 </div>
 
-    <span><a href="/2023/02/06/stanford-cs144-lab/" title="Stanford CS144 Lab">Stanford CS144 Lab</a></span>
+    <span><a href="/2022/02/26/oschallengelab/" title="华中科技大学操作系统挑战实验(PKE)基础解析">华中科技大学操作系统挑战实验(PKE)基础解析</a></span>
   </li>
 
       
   <li class="item">
     
 <div class="breadcrumb">
-<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
+<a href="/categories/%E6%9D%82%E8%AE%B0/" title="分类于 杂记">杂记</a>
 </div>
 
-    <span><a href="/2021/12/18/oslab2/" title="华中科技大学OS实验解析(Lab2)">华中科技大学OS实验解析(Lab2)</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/%E7%AE%97%E6%B3%95%E9%A2%98/" title="分类于 算法题">算法题</a>
-</div>
-
-    <span><a href="/2020/05/25/ufpe-starters-final-try-outs-2019-recife-brazil-dec-1-2018-problem-j%EF%BC%88%E7%BA%BF%E6%AE%B5%E6%A0%91%E4%BA%8C%E5%88%86%EF%BC%89/" title="UFPE Starters Final Try-Outs 2019 Recife, Brazil, Dec 1, 2018 Problem J（线段树+二分）">UFPE Starters Final Try-Outs 2019 Recife, Brazil, Dec 1, 2018 Problem J（线段树+二分）</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
-</div>
-
-    <span><a href="/2023/02/06/mit-6-s081-xv6-information-%E9%9B%86%E5%90%88/" title="MIT_6.S081_xv6.Information 集合">MIT_6.S081_xv6.Information 集合</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
-</div>
-
-    <span><a href="/2023/02/06/mit-6-s081-lab/" title="MIT_6.s081_Lab">MIT_6.s081_Lab</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
-</div>
-
-    <span><a href="/2024/03/14/pa-lab2/" title="南大pa-Lab2">南大pa-Lab2</a></span>
+    <span><a href="/2022/06/06/nju-ics/" title="南大ics面试记录">南大ics面试记录</a></span>
   </li>
 
       
@@ -587,10 +562,50 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
   <li class="item">
     
 <div class="breadcrumb">
+<a href="/categories/%E7%AE%97%E6%B3%95%E9%A2%98/" title="分类于 算法题">算法题</a>
+</div>
+
+    <span><a href="/2020/05/24/ufpe-starters-final-try-outs-2019-problem-l/" title="UFPE Starters Final Try-Outs 2019 Problem L">UFPE Starters Final Try-Outs 2019 Problem L</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
+</div>
+
+    <span><a href="/2023/02/08/mit-6-s081-lab/" title="MIT_6.s081_Lab">MIT_6.s081_Lab</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
 <a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
 </div>
 
     <span><a href="/2023/02/06/rustilings/" title="Rustilings 练习笔记">Rustilings 练习笔记</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E6%9D%82%E8%AE%B0/" title="分类于 杂记">杂记</a>
+</div>
+
+    <span><a href="/2022/04/17/luogu-al/" title="做算法题综合">做算法题综合</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
+</div>
+
+    <span><a href="/2024/03/25/stanford-cs143-PA2/" title="Stanford CS143 PA2">Stanford CS143 PA2</a></span>
   </li>
 
   </ul>
@@ -604,12 +619,24 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
         <div class="status">
   <div class="copyright">
     
-    &copy; 2010 – 
+    &copy; 2020 – 
     <span itemprop="copyrightYear">2024</span>
     <span class="with-love">
       <i class="ic i-sakura rotate"></i>
     </span>
     <span class="author" itemprop="copyrightHolder">Sukuna @ Suwa shrine</span>
+  </div>
+  <div class="count">
+    <span class="post-meta-item-icon">
+      <i class="ic i-chart-area"></i>
+    </span>
+    <span title="站点总字数">403k 字</span>
+
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="ic i-coffee"></i>
+    </span>
+    <span title="站点阅读时长">6:06</span>
   </div>
   <div class="powered-by">
     基于 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & Theme.<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FtZWhpbWUvaGV4by10aGVtZS1zaG9rYQ==">Shoka</span>
@@ -621,7 +648,7 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
   </div>
 <script data-config type="text/javascript">
   var LOCAL = {
-    path: '2023/02/06/cmu14-445-lab/',
+    path: '2023/02/07/cmu14-445-lab/',
     favicon: {
       show: "（●´3｀●）あややややや～",
       hide: "(´Д｀)大変だ！"
