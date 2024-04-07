@@ -115,12 +115,12 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
       </div>
       <div id="imgs" class="pjax">
         <ul>
-          <li class="item" data-background-image="https://s2.loli.net/2024/03/21/KgXYlCHOW4jSdoL.jpg"></li>
-          <li class="item" data-background-image="https://s2.loli.net/2024/03/21/8PBD6GfINvWY5tU.jpg"></li>
+          <li class="item" data-background-image="https://s2.loli.net/2024/03/21/GeYMagTskVub2io.jpg"></li>
+          <li class="item" data-background-image="https://s2.loli.net/2024/03/21/ySW2Z5V4oheEaRc.jpg"></li>
           <li class="item" data-background-image="https://s2.loli.net/2024/03/21/nBKjz8OQYVMTHE1.jpg"></li>
-          <li class="item" data-background-image="https://s2.loli.net/2024/03/21/etuIv2DAC8wpdKs.png"></li>
-          <li class="item" data-background-image="https://s2.loli.net/2024/03/21/MEKc7eqDtPGHWBp.jpg"></li>
           <li class="item" data-background-image="https://s2.loli.net/2024/03/21/JC67Q4LIjnT9fig.jpg"></li>
+          <li class="item" data-background-image="https://s2.loli.net/2024/03/21/MEKc7eqDtPGHWBp.jpg"></li>
+          <li class="item" data-background-image="https://s2.loli.net/2024/03/21/etuIv2DAC8wpdKs.png"></li>
         </ul>
       </div>
     </header>
@@ -173,7 +173,12 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
 <p>再flex内部中，我们可以讲<code>yylval</code>的成员进行赋值以保存相关信息，最原始的匹配信息（比如”abc\n”匹配到了STRING，那么最原始的匹配信息就是”abc\n”）保存在yytext中，yymore的用途是，本次匹配的yytext会保存在下次匹配的yytext前面。</p>
 <h3 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h3><p>CS143的实验要在cool语言上作为基础。对于一个语言来说，注释是必要的，但是对于编译器来说，注释是没必要去理解的。作为编译器的第一环，就需要略掉。cool语言的多行注释的语法是（**），单行注释的语法是–。</p>
 <p>首先处理多行注释，按照实验文档中所示，当处于INITIAL状态的时候，遇到了（*，就代表遇到了注释，就要进入注释状态。（这个注释可能是嵌套的，还要保存这是第几层），遇到了*）就是代表推出注释。注释内部所有字符全部忽略。接着处理单行注释，当处于INITIAL状态的时候，遇到了–，就代表遇到了单行注释，就要进入单行注释状态。</p>
-<h3 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h3><p>cool语言也支持字符串，对于字符串的定义是从”开始的，当遇到”的符号，就代表进入了字符串状态。对于一个字符串，首先字符串是不能包含’\\‘ ‘&quot;‘ ‘\n’ ，字符串的定义是可以换行的，但是换行的时候一定要加\\。最后编译器要对转译字符进行翻译。</p>
+<h3 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h3><p>cool语言也支持字符串，对于字符串的定义是从”开始的，当遇到”的符号，就代表进入了字符串状态。</p>
+<ul>
+<li>对于一个字符串，首先字符串是不能包含’\\‘ ‘&quot;‘ ‘\n’ </li>
+<li>字符串的定义是可以换行的，但是换行的时候一定要加\\</li>
+<li>最后编译器要对转译字符进行翻译</li>
+</ul>
 <p>cool语言要求，类型名大写，类型对应的实例是小写的。</p>
 
   </div>
@@ -186,7 +191,7 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
       <i class="ic i-calendar-check"></i>
     </span>
     <span class="text">更新于</span>
-    <time title="修改时间：2024-03-26 10:05:36" itemprop="dateModified" datetime="2024-03-26T10:05:36+08:00">2024-03-26</time>
+    <time title="修改时间：2024-04-07 10:15:43" itemprop="dateModified" datetime="2024-04-07T10:15:43+08:00">2024-04-07</time>
   </span>
 </div>
 
@@ -349,6 +354,11 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
     <a href="/source/" rel="section"><i class="ic i-address-card"></i>资料下载</a>
   </li>
 
+    
+  <li class="item">
+    <a href="/travel/" rel="section"><i class="ic i-heart"></i>旅行日志</a>
+  </li>
+
 
 </ul>
 
@@ -383,20 +393,10 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
   <li class="item">
     
 <div class="breadcrumb">
-<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
+<a href="/categories/%E6%9D%82%E8%AE%B0/" title="分类于 杂记">杂记</a>
 </div>
 
-    <span><a href="/2023/02/06/stanford-cs144-lab/" title="Stanford CS144 Lab">Stanford CS144 Lab</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
-</div>
-
-    <span><a href="/2023/02/06/rustilings/" title="Rustilings 练习笔记">Rustilings 练习笔记</a></span>
+    <span><a href="/2020/10/11/cmd/" title="(烂活)用cmd窗口输出图画">(烂活)用cmd窗口输出图画</a></span>
   </li>
 
       
@@ -406,17 +406,7 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
 <a href="/categories/%E7%AE%97%E6%B3%95%E9%A2%98/" title="分类于 算法题">算法题</a>
 </div>
 
-    <span><a href="/2022/03/30/splay/" title="Splay模版:P3369[模版&#x2F;普通平衡树]">Splay模版:P3369[模版/普通平衡树]</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/%E6%9D%82%E8%AE%B0/" title="分类于 杂记">杂记</a>
-</div>
-
-    <span><a href="/2022/02/13/how-to-dress-up/" title="论如何女装">论如何女装</a></span>
+    <span><a href="/2020/05/25/ufpe-starters-final-try-outs-2019-recife-brazil-dec-1-2018-problem-j%EF%BC%88%E7%BA%BF%E6%AE%B5%E6%A0%91%E4%BA%8C%E5%88%86%EF%BC%89/" title="UFPE Starters Final Try-Outs 2019 Recife, Brazil, Dec 1, 2018 Problem J（线段树+二分）">UFPE Starters Final Try-Outs 2019 Recife, Brazil, Dec 1, 2018 Problem J（线段树+二分）</a></span>
   </li>
 
       
@@ -436,7 +426,7 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
 <a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
 </div>
 
-    <span><a href="/2023/02/07/cmu14-445-lab/" title="CMU14-445 Lab">CMU14-445 Lab</a></span>
+    <span><a href="/2024/03/19/pa-lab3/" title="南大pa-Lab3">南大pa-Lab3</a></span>
   </li>
 
       
@@ -446,17 +436,17 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
 <a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
 </div>
 
-    <span><a href="/2024/03/19/pa-lab3/" title="南大pa-Lab3">南大pa-Lab3</a></span>
+    <span><a href="/2021/04/25/verilog/" title="华中科技大学Verilog实验解析">华中科技大学Verilog实验解析</a></span>
   </li>
 
       
   <li class="item">
     
 <div class="breadcrumb">
-<a href="/categories/%E6%9D%82%E8%AE%B0/" title="分类于 杂记">杂记</a>
+<a href="/categories/%E7%AE%97%E6%B3%95%E9%A2%98/" title="分类于 算法题">算法题</a>
 </div>
 
-    <span><a href="/2022/04/17/luogu-al/" title="做算法题综合">做算法题综合</a></span>
+    <span><a href="/2020/05/24/ufpe-starters-final-try-outs-2019-problem-l/" title="UFPE Starters Final Try-Outs 2019 Problem L">UFPE Starters Final Try-Outs 2019 Problem L</a></span>
   </li>
 
       
@@ -473,10 +463,30 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
   <li class="item">
     
 <div class="breadcrumb">
+<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
+</div>
+
+    <span><a href="/2023/02/09/mit-6-s081-xv6-information-%E9%9B%86%E5%90%88/" title="MIT_6.S081_xv6.Information 集合">MIT_6.S081_xv6.Information 集合</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
+</div>
+
+    <span><a href="/2023/02/08/mit-6-s081-lab/" title="MIT_6.s081_Lab">MIT_6.s081_Lab</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
 <a href="/categories/%E6%9D%82%E8%AE%B0/" title="分类于 杂记">杂记</a>
 </div>
 
-    <span><a href="/2020/05/02/setup/" title="建站">建站</a></span>
+    <span><a href="/2022/04/17/luogu-al/" title="做算法题综合">做算法题综合</a></span>
   </li>
 
   </ul>
