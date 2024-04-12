@@ -115,12 +115,12 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
       </div>
       <div id="imgs" class="pjax">
         <ul>
-          <li class="item" data-background-image="https://s2.loli.net/2024/03/21/N7AWrf8Xs9VTL4P.jpg"></li>
-          <li class="item" data-background-image="https://s2.loli.net/2024/03/21/GeYMagTskVub2io.jpg"></li>
-          <li class="item" data-background-image="https://s2.loli.net/2024/03/21/nBKjz8OQYVMTHE1.jpg"></li>
-          <li class="item" data-background-image="https://s2.loli.net/2024/03/21/ySW2Z5V4oheEaRc.jpg"></li>
-          <li class="item" data-background-image="https://s2.loli.net/2024/03/21/8PBD6GfINvWY5tU.jpg"></li>
+          <li class="item" data-background-image="https://i.loli.net/2020/10/30/Z5W6r2BSoiThHG1.jpg"></li>
           <li class="item" data-background-image="https://s2.loli.net/2024/03/21/KgXYlCHOW4jSdoL.jpg"></li>
+          <li class="item" data-background-image="https://s2.loli.net/2024/03/21/etuIv2DAC8wpdKs.png"></li>
+          <li class="item" data-background-image="https://s2.loli.net/2024/03/21/N7AWrf8Xs9VTL4P.jpg"></li>
+          <li class="item" data-background-image="https://s2.loli.net/2024/03/21/nBKjz8OQYVMTHE1.jpg"></li>
+          <li class="item" data-background-image="https://s2.loli.net/2024/03/21/GeYMagTskVub2io.jpg"></li>
         </ul>
       </div>
     </header>
@@ -166,21 +166,21 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
   <div class="body md" itemprop="articleBody">
     
 
-    <h3 id="flex用法"><a href="#flex用法" class="headerlink" title="flex用法"></a>flex用法</h3><p>flex可以用于词法分析。一个flex文件可以分成2个部分：引导区和规则区（我起的名）</p>
+    <h1 id="flex用法"><a href="#flex用法" class="headerlink" title="flex用法"></a>flex用法</h1><p>flex可以用于词法分析。一个flex文件可以分成2个部分：引导区和规则区（我起的名）</p>
 <p>引导区的内容会原封不动地放到.c文件中。规则区是由若干个规则组成的区域，flex的目的就是为了把规则区的内容进行解释，变成词法分析的.c文件中。（理论：正则表达式转化为NFA，然后再转化为DFA）。规则区的每一个规则由三部分组成<code>&lt;执行状态&gt;&lt;正则式&gt;&lt;匹配规则&gt;</code>。在规则区内部可以执行两种特殊的操作，一种是正则式的宏定义，例如<code>[0-9] DIGIT</code>是将0-9的数字定义成DIGIT。一种是状态声明<code>%START STATE</code>，表示声明了一个新的状态，叫做STATE。最开始的时候的状态叫做INITIAL。</p>
 <p>flex执行的逻辑是规则匹配。规则的含义是，在某个执行状态下满足正则式就执行对应的匹配规则。规则匹配的顺序是从上到下的。也就是同时满足AB两种规则，先执行A规则对应的操作，再执行B规则对应的操作。</p>
 <p>flex生成的c文件是没有main函数的，main函数需要我们自己实现（本实验已经写好了），flex提供了接口给main函数调用，<code>yylex()</code>负责从文件流中进行读取分析，告诉main函数程序的下一个词是什么类型的。其内容保存在<code>yylval</code>类型的变量中。</p>
 <p>再flex内部中，我们可以讲<code>yylval</code>的成员进行赋值以保存相关信息，最原始的匹配信息（比如”abc\n”匹配到了STRING，那么最原始的匹配信息就是”abc\n”）保存在yytext中，yymore的用途是，本次匹配的yytext会保存在下次匹配的yytext前面。</p>
-<h3 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h3><p>CS143的实验要在cool语言上作为基础。对于一个语言来说，注释是必要的，但是对于编译器来说，注释是没必要去理解的。作为编译器的第一环，就需要略掉。cool语言的多行注释的语法是（**），单行注释的语法是–。</p>
+<h1 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h1><p>CS143的实验要在cool语言上作为基础。对于一个语言来说，注释是必要的，但是对于编译器来说，注释是没必要去理解的。作为编译器的第一环，就需要略掉。cool语言的多行注释的语法是（**），单行注释的语法是–。</p>
 <p>首先处理多行注释，按照实验文档中所示，当处于INITIAL状态的时候，遇到了（*，就代表遇到了注释，就要进入注释状态。（这个注释可能是嵌套的，还要保存这是第几层），遇到了*）就是代表推出注释。注释内部所有字符全部忽略。接着处理单行注释，当处于INITIAL状态的时候，遇到了–，就代表遇到了单行注释，就要进入单行注释状态。</p>
-<h3 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h3><p>cool语言也支持字符串，对于字符串的定义是从”开始的，当遇到”的符号，就代表进入了字符串状态。</p>
+<h1 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h1><p>cool语言也支持字符串，对于字符串的定义是从”开始的，当遇到”的符号，就代表进入了字符串状态。</p>
 <ul>
 <li>对于一个字符串，首先字符串是不能包含’\\‘ ‘&quot;‘ ‘\n’ </li>
 <li>字符串的定义是可以换行的，但是换行的时候一定要加\\</li>
 <li>最后编译器要对转译字符进行翻译</li>
 </ul>
 <p>cool语言要求，类型名大写，类型对应的实例是小写的。</p>
-<h3 id="flex编译出来的C语言文件"><a href="#flex编译出来的C语言文件" class="headerlink" title="flex编译出来的C语言文件"></a>flex编译出来的C语言文件</h3><p>对flex编译出来的C语言文件进行简单的分析：最前面的一部分是flex自带的东西，对于每个flex文件都有的。还有一部分是flex中引导区的内容，编译的时候会原封不动地放进新生成的.c文件里面。下面是规则区，众所周知，词法分析是用DFA表示的，对于flex文件里面的每一个规则，都对应DFA的一个终止状态，当DFA进入到终止状态之后，就执行我们之前flex文件定义好的动作。下面的一部分是执行DFA操作的代码。</p>
+<h1 id="flex编译出来的C语言文件"><a href="#flex编译出来的C语言文件" class="headerlink" title="flex编译出来的C语言文件"></a>flex编译出来的C语言文件</h1><p>对flex编译出来的C语言文件进行简单的分析：最前面的一部分是flex自带的东西，对于每个flex文件都有的。还有一部分是flex中引导区的内容，编译的时候会原封不动地放进新生成的.c文件里面。下面是规则区，众所周知，词法分析是用DFA表示的，对于flex文件里面的每一个规则，都对应DFA的一个终止状态，当DFA进入到终止状态之后，就执行我们之前flex文件定义好的动作。下面的一部分是执行DFA操作的代码。</p>
 
   </div>
 
@@ -192,7 +192,7 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
       <i class="ic i-calendar-check"></i>
     </span>
     <span class="text">更新于</span>
-    <time title="修改时间：2024-04-09 16:11:02" itemprop="dateModified" datetime="2024-04-09T16:11:02+08:00">2024-04-09</time>
+    <time title="修改时间：2024-04-12 16:31:36" itemprop="dateModified" datetime="2024-04-12T16:31:36+08:00">2024-04-12</time>
   </span>
 </div>
 
@@ -242,7 +242,7 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
     <div class="item left">
       
 
-  <a href="/2024/03/19/pa-lab3/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;s2.loli.net&#x2F;2024&#x2F;03&#x2F;21&#x2F;GeYMagTskVub2io.jpg" title="南大pa-Lab3">
+  <a href="/2024/03/19/pa-lab3/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;i.loli.net&#x2F;2020&#x2F;10&#x2F;30&#x2F;Z5W6r2BSoiThHG1.jpg" title="南大pa-Lab3">
   <span class="type">上一篇</span>
   <span class="category"><i class="ic i-flag"></i> 实验记录</span>
   <h3>南大pa-Lab3</h3>
@@ -252,7 +252,7 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
     <div class="item right">
       
 
-  <a href="/2024/04/11/stanford-cs143-PA3/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;s2.loli.net&#x2F;2024&#x2F;03&#x2F;21&#x2F;8PBD6GfINvWY5tU.jpg" title="Stanford CS143 PA3">
+  <a href="/2024/04/11/stanford-cs143-PA3/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;s2.loli.net&#x2F;2024&#x2F;03&#x2F;21&#x2F;ySW2Z5V4oheEaRc.jpg" title="Stanford CS143 PA3">
   <span class="type">下一篇</span>
   <span class="category"><i class="ic i-flag"></i> 实验记录</span>
   <h3>Stanford CS143 PA3</h3>
@@ -274,11 +274,11 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
   <div class="panels">
     <div class="inner">
       <div class="contents panel pjax" data-title="文章目录">
-          <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#flex%E7%94%A8%E6%B3%95"><span class="toc-number">1.</span> <span class="toc-text">flex用法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E9%87%8A"><span class="toc-number">2.</span> <span class="toc-text">注释</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-number">3.</span> <span class="toc-text">字符串</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#flex%E7%BC%96%E8%AF%91%E5%87%BA%E6%9D%A5%E7%9A%84C%E8%AF%AD%E8%A8%80%E6%96%87%E4%BB%B6"><span class="toc-number">4.</span> <span class="toc-text">flex编译出来的C语言文件</span></a></li></ol>
+          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#flex%E7%94%A8%E6%B3%95"><span class="toc-number">1.</span> <span class="toc-text">flex用法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B3%A8%E9%87%8A"><span class="toc-number">2.</span> <span class="toc-text">注释</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-number">3.</span> <span class="toc-text">字符串</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#flex%E7%BC%96%E8%AF%91%E5%87%BA%E6%9D%A5%E7%9A%84C%E8%AF%AD%E8%A8%80%E6%96%87%E4%BB%B6"><span class="toc-number">4.</span> <span class="toc-text">flex编译出来的C语言文件</span></a></li></ol>
       </div>
       <div class="related panel pjax" data-title="系列文章">
         <ul>
-          <li><a href="/2021/04/25/verilog/" rel="bookmark" title="华中科技大学Verilog实验解析">华中科技大学Verilog实验解析</a></li><li><a href="/2021/12/18/oslab1/" rel="bookmark" title="华中科技大学OS实验解析(Lab1)">华中科技大学OS实验解析(Lab1)</a></li><li><a href="/2021/12/18/oslab2/" rel="bookmark" title="华中科技大学OS实验解析(Lab2)">华中科技大学OS实验解析(Lab2)</a></li><li><a href="/2022/02/26/oschallengelab/" rel="bookmark" title="华中科技大学操作系统挑战实验(PKE)基础解析">华中科技大学操作系统挑战实验(PKE)基础解析</a></li><li><a href="/2023/02/06/rustilings/" rel="bookmark" title="Rustilings 练习笔记">Rustilings 练习笔记</a></li><li><a href="/2023/02/06/stanford-cs144-lab/" rel="bookmark" title="Stanford CS144 Lab">Stanford CS144 Lab</a></li><li><a href="/2023/02/07/cmu14-445-lab/" rel="bookmark" title="CMU14-445 Lab">CMU14-445 Lab</a></li><li><a href="/2023/02/08/mit-6-s081-lab/" rel="bookmark" title="MIT_6.s081_Lab">MIT_6.s081_Lab</a></li><li><a href="/2023/02/09/mit-6-s081-xv6-information-%E9%9B%86%E5%90%88/" rel="bookmark" title="MIT_6.S081_xv6.Information 集合">MIT_6.S081_xv6.Information 集合</a></li><li><a href="/2024/03/14/pa-lab2/" rel="bookmark" title="南大pa-Lab2">南大pa-Lab2</a></li><li><a href="/2024/03/19/pa-lab3/" rel="bookmark" title="南大pa-Lab3">南大pa-Lab3</a></li><li class="active"><a href="/2024/03/25/stanford-cs143-PA2/" rel="bookmark" title="Stanford CS143 PA2">Stanford CS143 PA2</a></li><li><a href="/2024/04/11/stanford-cs143-PA3/" rel="bookmark" title="Stanford CS143 PA3">Stanford CS143 PA3</a></li>
+          <li><a href="/2021/04/25/verilog/" rel="bookmark" title="华中科技大学Verilog实验解析">华中科技大学Verilog实验解析</a></li><li><a href="/2021/12/18/oslab1/" rel="bookmark" title="华中科技大学OS实验解析(Lab1)">华中科技大学OS实验解析(Lab1)</a></li><li><a href="/2021/12/18/oslab2/" rel="bookmark" title="华中科技大学OS实验解析(Lab2)">华中科技大学OS实验解析(Lab2)</a></li><li><a href="/2022/02/26/oschallengelab/" rel="bookmark" title="华中科技大学操作系统挑战实验(PKE)基础解析">华中科技大学操作系统挑战实验(PKE)基础解析</a></li><li><a href="/2023/02/06/rustilings/" rel="bookmark" title="Rustilings 练习笔记">Rustilings 练习笔记</a></li><li><a href="/2023/02/06/stanford-cs144-lab/" rel="bookmark" title="Stanford CS144 Lab">Stanford CS144 Lab</a></li><li><a href="/2023/02/07/cmu14-445-lab/" rel="bookmark" title="CMU14-445 Lab">CMU14-445 Lab</a></li><li><a href="/2023/02/08/mit-6-s081-lab/" rel="bookmark" title="MIT_6.s081_Lab">MIT_6.s081_Lab</a></li><li><a href="/2023/02/09/mit-6-s081-xv6-information-%E9%9B%86%E5%90%88/" rel="bookmark" title="MIT_6.S081_xv6.Information 集合">MIT_6.S081_xv6.Information 集合</a></li><li><a href="/2024/03/14/pa-lab2/" rel="bookmark" title="南大pa-Lab2">南大pa-Lab2</a></li><li><a href="/2024/03/19/pa-lab3/" rel="bookmark" title="南大pa-Lab3">南大pa-Lab3</a></li><li class="active"><a href="/2024/03/25/stanford-cs143-PA2/" rel="bookmark" title="Stanford CS143 PA2">Stanford CS143 PA2</a></li><li><a href="/2024/04/11/stanford-cs143-PA3/" rel="bookmark" title="Stanford CS143 PA3">Stanford CS143 PA3</a></li><li><a href="/2024/04/12/stanford-cs143-PA4/" rel="bookmark" title="Stanford CS143 PA3">Stanford CS143 PA3</a></li>
         </ul>
       </div>
       <div class="overview panel" data-title="站点概览">
@@ -292,7 +292,7 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
 <nav class="state">
     <div class="item posts">
       <a href="/archives/">
-        <span class="count">22</span>
+        <span class="count">23</span>
         <span class="name">文章</span>
       </a>
     </div>
@@ -404,10 +404,20 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
   <li class="item">
     
 <div class="breadcrumb">
-<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
+<a href="/categories/%E7%AE%97%E6%B3%95%E9%A2%98/" title="分类于 算法题">算法题</a>
 </div>
 
-    <span><a href="/2021/04/25/verilog/" title="华中科技大学Verilog实验解析">华中科技大学Verilog实验解析</a></span>
+    <span><a href="/2022/03/30/splay/" title="Splay模版:P3369[模版&#x2F;普通平衡树]">Splay模版:P3369[模版/普通平衡树]</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E6%9D%82%E8%AE%B0/" title="分类于 杂记">杂记</a>
+</div>
+
+    <span><a href="/2022/06/06/nju-ics/" title="南大ics面试记录">南大ics面试记录</a></span>
   </li>
 
       
@@ -427,37 +437,7 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
 <a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
 </div>
 
-    <span><a href="/2021/12/18/oslab2/" title="华中科技大学OS实验解析(Lab2)">华中科技大学OS实验解析(Lab2)</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/%E6%9D%82%E8%AE%B0/" title="分类于 杂记">杂记</a>
-</div>
-
-    <span><a href="/2022/02/13/how-to-dress-up/" title="论如何女装">论如何女装</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/%E6%9D%82%E8%AE%B0/" title="分类于 杂记">杂记</a>
-</div>
-
-    <span><a href="/2020/05/02/setup/" title="建站">建站</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/%E6%9D%82%E8%AE%B0/" title="分类于 杂记">杂记</a>
-</div>
-
-    <span><a href="/2022/06/06/nju-ics/" title="南大ics面试记录">南大ics面试记录</a></span>
+    <span><a href="/2024/03/19/pa-lab3/" title="南大pa-Lab3">南大pa-Lab3</a></span>
   </li>
 
       
@@ -467,17 +447,17 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
 <a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
 </div>
 
-    <span><a href="/2022/02/26/oschallengelab/" title="华中科技大学操作系统挑战实验(PKE)基础解析">华中科技大学操作系统挑战实验(PKE)基础解析</a></span>
+    <span><a href="/2023/02/08/mit-6-s081-lab/" title="MIT_6.s081_Lab">MIT_6.s081_Lab</a></span>
   </li>
 
       
   <li class="item">
     
 <div class="breadcrumb">
-<a href="/categories/%E7%AE%97%E6%B3%95%E9%A2%98/" title="分类于 算法题">算法题</a>
+<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
 </div>
 
-    <span><a href="/2022/03/30/splay/" title="Splay模版:P3369[模版&#x2F;普通平衡树]">Splay模版:P3369[模版/普通平衡树]</a></span>
+    <span><a href="/2021/04/25/verilog/" title="华中科技大学Verilog实验解析">华中科技大学Verilog实验解析</a></span>
   </li>
 
       
@@ -494,10 +474,30 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
   <li class="item">
     
 <div class="breadcrumb">
+<a href="/categories/%E6%9D%82%E8%AE%B0/" title="分类于 杂记">杂记</a>
+</div>
+
+    <span><a href="/2022/02/13/how-to-dress-up/" title="论如何女装">论如何女装</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
 <a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
 </div>
 
-    <span><a href="/2023/02/06/rustilings/" title="Rustilings 练习笔记">Rustilings 练习笔记</a></span>
+    <span><a href="/2023/02/06/stanford-cs144-lab/" title="Stanford CS144 Lab">Stanford CS144 Lab</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E7%AE%97%E6%B3%95%E9%A2%98/" title="分类于 算法题">算法题</a>
+</div>
+
+    <span><a href="/2020/05/25/ufpe-starters-final-try-outs-2019-recife-brazil-dec-1-2018-problem-j%EF%BC%88%E7%BA%BF%E6%AE%B5%E6%A0%91%E4%BA%8C%E5%88%86%EF%BC%89/" title="UFPE Starters Final Try-Outs 2019 Recife, Brazil, Dec 1, 2018 Problem J（线段树+二分）">UFPE Starters Final Try-Outs 2019 Recife, Brazil, Dec 1, 2018 Problem J（线段树+二分）</a></span>
   </li>
 
   </ul>
@@ -522,13 +522,13 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
     <span class="post-meta-item-icon">
       <i class="ic i-chart-area"></i>
     </span>
-    <span title="站点总字数">405k 字</span>
+    <span title="站点总字数">408k 字</span>
 
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="ic i-coffee"></i>
     </span>
-    <span title="站点阅读时长">6:08</span>
+    <span title="站点阅读时长">6:10</span>
   </div>
   <div class="powered-by">
     基于 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & Theme.<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FtZWhpbWUvaGV4by10aGVtZS1zaG9rYQ==">Shoka</span>

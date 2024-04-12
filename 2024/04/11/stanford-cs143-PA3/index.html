@@ -116,11 +116,11 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
       <div id="imgs" class="pjax">
         <ul>
           <li class="item" data-background-image="https://s2.loli.net/2024/03/21/nBKjz8OQYVMTHE1.jpg"></li>
-          <li class="item" data-background-image="https://s2.loli.net/2024/03/21/KgXYlCHOW4jSdoL.jpg"></li>
-          <li class="item" data-background-image="https://s2.loli.net/2024/03/21/GeYMagTskVub2io.jpg"></li>
+          <li class="item" data-background-image="https://s2.loli.net/2024/03/21/JC67Q4LIjnT9fig.jpg"></li>
           <li class="item" data-background-image="https://s2.loli.net/2024/03/21/etuIv2DAC8wpdKs.png"></li>
-          <li class="item" data-background-image="https://s2.loli.net/2024/03/21/8PBD6GfINvWY5tU.jpg"></li>
+          <li class="item" data-background-image="https://s2.loli.net/2024/03/21/KgXYlCHOW4jSdoL.jpg"></li>
           <li class="item" data-background-image="https://s2.loli.net/2024/03/21/MEKc7eqDtPGHWBp.jpg"></li>
+          <li class="item" data-background-image="https://s2.loli.net/2024/03/21/ySW2Z5V4oheEaRc.jpg"></li>
         </ul>
       </div>
     </header>
@@ -166,17 +166,17 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
   <div class="body md" itemprop="articleBody">
     
 
-    <h3 id="复习一下！移进和规约"><a href="#复习一下！移进和规约" class="headerlink" title="复习一下！移进和规约"></a>复习一下！移进和规约</h3><p>bison使用LR文法进行分析，分析的基础就基于移进和规约。比如说一个规则S-&gt;abc，当遇到a的时候就移进，遇到b的时候再移进，遇到c的时候再移进，这个时候移进到规则的尾部了。就可以规约成S。移进规约的基础是基于一个状态机的，状态机的每一个状态记录了可能被规约到的规则的集合，移进一个字母就会前往一个新的状态。比如说S-&gt;abc和T-&gt;abd，当遇到a的时候，这两个规则都可能被归约到，这个状态就是S-&gt;a.bc，T-&gt;a.bd。当进入了一个空状态（也就是说一个可能被归约到的规则都没有），就意味着，程序有语法错误。</p>
-<h3 id="文法规则"><a href="#文法规则" class="headerlink" title="文法规则"></a>文法规则</h3><p>经过了flex的词法分析，现在进入文法分析的部分。flex将程序分解成了若干个token。这些token被称为终结符。当然与之相对应的是非终结符。这个在编译原理中学过。终结符是以%token定义的，非终结符是以%type定义的。在抽象语法树中，非终结符是语法树的非叶节点，终结符是语法树的叶结点。</p>
-<h3 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h3><p>对于一个非终止符，需要有属性这一个概念来记录非终止符的相关信息。属性一般可以分为两种，一种叫做继承属性，这种属性一般是抽象语法树的上层结点直接赋予的属性；另外一种是综合属性，综合属性是抽象语法树下面的节点综合计算得来的属性。</p>
+    <h1 id="复习一下！移进和规约"><a href="#复习一下！移进和规约" class="headerlink" title="复习一下！移进和规约"></a>复习一下！移进和规约</h1><p>bison使用LR文法进行分析，分析的基础就基于移进和规约。比如说一个规则S-&gt;abc，当遇到a的时候就移进，遇到b的时候再移进，遇到c的时候再移进，这个时候移进到规则的尾部了。就可以规约成S。移进规约的基础是基于一个状态机的，状态机的每一个状态记录了可能被规约到的规则的集合，移进一个字母就会前往一个新的状态。比如说S-&gt;abc和T-&gt;abd，当遇到a的时候，这两个规则都可能被归约到，这个状态就是S-&gt;a.bc，T-&gt;a.bd。当进入了一个空状态（也就是说一个可能被归约到的规则都没有），就意味着，程序有语法错误。</p>
+<h1 id="文法规则"><a href="#文法规则" class="headerlink" title="文法规则"></a>文法规则</h1><p>经过了flex的词法分析，现在进入文法分析的部分。flex将程序分解成了若干个token。这些token被称为终结符。当然与之相对应的是非终结符。这个在编译原理中学过。终结符是以%token定义的，非终结符是以%type定义的。在抽象语法树中，非终结符是语法树的非叶节点，终结符是语法树的叶结点。</p>
+<h1 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h1><p>对于一个非终止符，需要有属性这一个概念来记录非终止符的相关信息。属性一般可以分为两种，一种叫做继承属性，这种属性一般是抽象语法树的上层结点直接赋予的属性；另外一种是综合属性，综合属性是抽象语法树下面的节点综合计算得来的属性。</p>
 <p>对于bison，当执行S-&gt;abc的规约的时候，可以规定一个规约动作，当执行规约操作的时候，规约动作也就一起执行了。在bison的实际应用中，规约动作一般是对S进行综合属性的赋值，和对a，b，c的继承属性的赋值。</p>
-<h3 id="是什么"><a href="#是什么" class="headerlink" title="$$是什么"></a>$$是什么</h3><p>在bison的规约操作中，一定会遇到对属性的操作，但是对属性的操作怎么体现在代码上呢？这里使用$开头的元素代指终结符或者非终结符。比如说$$就代替被规约的那个，$1就代表规约的元素的第一个，以此类推。所有元素都代指一个数据类型，在前面的union中定义：</p>
+<h1 id="是什么"><a href="#是什么" class="headerlink" title="$$是什么"></a>$$是什么</h1><p>在bison的规约操作中，一定会遇到对属性的操作，但是对属性的操作怎么体现在代码上呢？这里使用$开头的元素代指终结符或者非终结符。比如说$$就代替被规约的那个，$1就代表规约的元素的第一个，以此类推。所有元素都代指一个数据类型，在前面的union中定义：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">%<span class="class"><span class="keyword">union</span> &#123;</span></span><br><span class="line">    Boolean boolean;</span><br><span class="line">    Symbol symbol;</span><br><span class="line">    Program program;</span><br><span class="line">    Class_ class_;</span><br><span class="line">    Classes classes;</span><br><span class="line">    Feature feature;</span><br><span class="line">    Features features;</span><br><span class="line">    Formal formal;</span><br><span class="line">    Formals formals;</span><br><span class="line">    Case case_;</span><br><span class="line">    Cases cases;</span><br><span class="line">    Expression expression;</span><br><span class="line">    Expressions expressions;</span><br><span class="line">    <span class="type">char</span> *error_msg;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>其中二元组中，前面的具体类型名，后面是代指。比如说定义<code>%type &lt;classes&gt; class_list</code>就代表class_list对应的非终止符，其$类型的变量就是Classes。</p>
-<h3 id="规约冲突的化解"><a href="#规约冲突的化解" class="headerlink" title="规约冲突的化解"></a>规约冲突的化解</h3><p>有可能会出现移进-规约和规约-规约的冲突，比如说S-&gt;ab和T-&gt;abc，那读入了ab，是规约呢还是移进呢？这种冲突一般是由语法的二义性所导致的。有一种解决办法是定义结合性。比如说 x op y op z。那么我们可以定义<code>%left op</code>或者<code>%right op</code>。%left指定左相关性（将x与y优先分组）<br>%right指定右相关性（将y与z优先分组）。还有优先级的问题，后定义的要比前面定义的优先级要高。比如说：</p>
+<h1 id="规约冲突的化解"><a href="#规约冲突的化解" class="headerlink" title="规约冲突的化解"></a>规约冲突的化解</h1><p>有可能会出现移进-规约和规约-规约的冲突，比如说S-&gt;ab和T-&gt;abc，那读入了ab，是规约呢还是移进呢？这种冲突一般是由语法的二义性所导致的。有一种解决办法是定义结合性。比如说 x op y op z。那么我们可以定义<code>%left op</code>或者<code>%right op</code>。%left指定左相关性（将x与y优先分组）<br>%right指定右相关性（将y与z优先分组）。还有优先级的问题，后定义的要比前面定义的优先级要高。比如说：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">%left &#x27;+&#x27; &#x27;-&#x27;</span><br><span class="line">%left &#x27;*&#x27; &#x27;/&#x27;</span><br></pre></td></tr></table></figure>
 <p>就代表乘除的优先级要比加减高。</p>
-<h3 id="迭代定义的文法"><a href="#迭代定义的文法" class="headerlink" title="迭代定义的文法"></a>迭代定义的文法</h3><p>如果要写一个一种文法，由0个或者若干个1组成的句子，那怎么写呢？一般的方法就是这样：s-&gt;1S|空。在这里也是一样，对于若干个class组成的cool文件，就是classes-&gt;class classes | 空</p>
+<h1 id="迭代定义的文法"><a href="#迭代定义的文法" class="headerlink" title="迭代定义的文法"></a>迭代定义的文法</h1><p>如果要写一个一种文法，由0个或者若干个1组成的句子，那怎么写呢？一般的方法就是这样：s-&gt;1S|空。在这里也是一样，对于若干个class组成的cool文件，就是classes-&gt;class classes | 空</p>
 
   </div>
 
@@ -188,7 +188,7 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
       <i class="ic i-calendar-check"></i>
     </span>
     <span class="text">更新于</span>
-    <time title="修改时间：2024-04-11 11:48:03" itemprop="dateModified" datetime="2024-04-11T11:48:03+08:00">2024-04-11</time>
+    <time title="修改时间：2024-04-12 16:28:26" itemprop="dateModified" datetime="2024-04-12T16:28:26+08:00">2024-04-12</time>
   </span>
 </div>
 
@@ -238,7 +238,7 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
     <div class="item left">
       
 
-  <a href="/2024/03/25/stanford-cs143-PA2/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;i.loli.net&#x2F;2020&#x2F;10&#x2F;30&#x2F;Z5W6r2BSoiThHG1.jpg" title="Stanford CS143 PA2">
+  <a href="/2024/03/25/stanford-cs143-PA2/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;s2.loli.net&#x2F;2024&#x2F;03&#x2F;21&#x2F;GeYMagTskVub2io.jpg" title="Stanford CS143 PA2">
   <span class="type">上一篇</span>
   <span class="category"><i class="ic i-flag"></i> 实验记录</span>
   <h3>Stanford CS143 PA2</h3>
@@ -246,6 +246,14 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
 
     </div>
     <div class="item right">
+      
+
+  <a href="/2024/04/12/stanford-cs143-PA4/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;s2.loli.net&#x2F;2024&#x2F;03&#x2F;21&#x2F;8PBD6GfINvWY5tU.jpg" title="Stanford CS143 PA3">
+  <span class="type">下一篇</span>
+  <span class="category"><i class="ic i-flag"></i> 实验记录</span>
+  <h3>Stanford CS143 PA3</h3>
+  </a>
+
     </div>
 </div>
 
@@ -262,11 +270,11 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
   <div class="panels">
     <div class="inner">
       <div class="contents panel pjax" data-title="文章目录">
-          <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%8D%E4%B9%A0%E4%B8%80%E4%B8%8B%EF%BC%81%E7%A7%BB%E8%BF%9B%E5%92%8C%E8%A7%84%E7%BA%A6"><span class="toc-number">1.</span> <span class="toc-text">复习一下！移进和规约</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E6%B3%95%E8%A7%84%E5%88%99"><span class="toc-number">2.</span> <span class="toc-text">文法规则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B1%9E%E6%80%A7"><span class="toc-number">3.</span> <span class="toc-text">属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-number">4.</span> <span class="toc-text">$$是什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%84%E7%BA%A6%E5%86%B2%E7%AA%81%E7%9A%84%E5%8C%96%E8%A7%A3"><span class="toc-number">5.</span> <span class="toc-text">规约冲突的化解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%AD%E4%BB%A3%E5%AE%9A%E4%B9%89%E7%9A%84%E6%96%87%E6%B3%95"><span class="toc-number">6.</span> <span class="toc-text">迭代定义的文法</span></a></li></ol>
+          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%A4%8D%E4%B9%A0%E4%B8%80%E4%B8%8B%EF%BC%81%E7%A7%BB%E8%BF%9B%E5%92%8C%E8%A7%84%E7%BA%A6"><span class="toc-number">1.</span> <span class="toc-text">复习一下！移进和规约</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%87%E6%B3%95%E8%A7%84%E5%88%99"><span class="toc-number">2.</span> <span class="toc-text">文法规则</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B1%9E%E6%80%A7"><span class="toc-number">3.</span> <span class="toc-text">属性</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-number">4.</span> <span class="toc-text">$$是什么</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%A7%84%E7%BA%A6%E5%86%B2%E7%AA%81%E7%9A%84%E5%8C%96%E8%A7%A3"><span class="toc-number">5.</span> <span class="toc-text">规约冲突的化解</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%AD%E4%BB%A3%E5%AE%9A%E4%B9%89%E7%9A%84%E6%96%87%E6%B3%95"><span class="toc-number">6.</span> <span class="toc-text">迭代定义的文法</span></a></li></ol>
       </div>
       <div class="related panel pjax" data-title="系列文章">
         <ul>
-          <li><a href="/2021/04/25/verilog/" rel="bookmark" title="华中科技大学Verilog实验解析">华中科技大学Verilog实验解析</a></li><li><a href="/2021/12/18/oslab1/" rel="bookmark" title="华中科技大学OS实验解析(Lab1)">华中科技大学OS实验解析(Lab1)</a></li><li><a href="/2021/12/18/oslab2/" rel="bookmark" title="华中科技大学OS实验解析(Lab2)">华中科技大学OS实验解析(Lab2)</a></li><li><a href="/2022/02/26/oschallengelab/" rel="bookmark" title="华中科技大学操作系统挑战实验(PKE)基础解析">华中科技大学操作系统挑战实验(PKE)基础解析</a></li><li><a href="/2023/02/06/rustilings/" rel="bookmark" title="Rustilings 练习笔记">Rustilings 练习笔记</a></li><li><a href="/2023/02/06/stanford-cs144-lab/" rel="bookmark" title="Stanford CS144 Lab">Stanford CS144 Lab</a></li><li><a href="/2023/02/07/cmu14-445-lab/" rel="bookmark" title="CMU14-445 Lab">CMU14-445 Lab</a></li><li><a href="/2023/02/08/mit-6-s081-lab/" rel="bookmark" title="MIT_6.s081_Lab">MIT_6.s081_Lab</a></li><li><a href="/2023/02/09/mit-6-s081-xv6-information-%E9%9B%86%E5%90%88/" rel="bookmark" title="MIT_6.S081_xv6.Information 集合">MIT_6.S081_xv6.Information 集合</a></li><li><a href="/2024/03/14/pa-lab2/" rel="bookmark" title="南大pa-Lab2">南大pa-Lab2</a></li><li><a href="/2024/03/19/pa-lab3/" rel="bookmark" title="南大pa-Lab3">南大pa-Lab3</a></li><li><a href="/2024/03/25/stanford-cs143-PA2/" rel="bookmark" title="Stanford CS143 PA2">Stanford CS143 PA2</a></li><li class="active"><a href="/2024/04/11/stanford-cs143-PA3/" rel="bookmark" title="Stanford CS143 PA3">Stanford CS143 PA3</a></li>
+          <li><a href="/2021/04/25/verilog/" rel="bookmark" title="华中科技大学Verilog实验解析">华中科技大学Verilog实验解析</a></li><li><a href="/2021/12/18/oslab1/" rel="bookmark" title="华中科技大学OS实验解析(Lab1)">华中科技大学OS实验解析(Lab1)</a></li><li><a href="/2021/12/18/oslab2/" rel="bookmark" title="华中科技大学OS实验解析(Lab2)">华中科技大学OS实验解析(Lab2)</a></li><li><a href="/2022/02/26/oschallengelab/" rel="bookmark" title="华中科技大学操作系统挑战实验(PKE)基础解析">华中科技大学操作系统挑战实验(PKE)基础解析</a></li><li><a href="/2023/02/06/rustilings/" rel="bookmark" title="Rustilings 练习笔记">Rustilings 练习笔记</a></li><li><a href="/2023/02/06/stanford-cs144-lab/" rel="bookmark" title="Stanford CS144 Lab">Stanford CS144 Lab</a></li><li><a href="/2023/02/07/cmu14-445-lab/" rel="bookmark" title="CMU14-445 Lab">CMU14-445 Lab</a></li><li><a href="/2023/02/08/mit-6-s081-lab/" rel="bookmark" title="MIT_6.s081_Lab">MIT_6.s081_Lab</a></li><li><a href="/2023/02/09/mit-6-s081-xv6-information-%E9%9B%86%E5%90%88/" rel="bookmark" title="MIT_6.S081_xv6.Information 集合">MIT_6.S081_xv6.Information 集合</a></li><li><a href="/2024/03/14/pa-lab2/" rel="bookmark" title="南大pa-Lab2">南大pa-Lab2</a></li><li><a href="/2024/03/19/pa-lab3/" rel="bookmark" title="南大pa-Lab3">南大pa-Lab3</a></li><li><a href="/2024/03/25/stanford-cs143-PA2/" rel="bookmark" title="Stanford CS143 PA2">Stanford CS143 PA2</a></li><li class="active"><a href="/2024/04/11/stanford-cs143-PA3/" rel="bookmark" title="Stanford CS143 PA3">Stanford CS143 PA3</a></li><li><a href="/2024/04/12/stanford-cs143-PA4/" rel="bookmark" title="Stanford CS143 PA3">Stanford CS143 PA3</a></li>
         </ul>
       </div>
       <div class="overview panel" data-title="站点概览">
@@ -280,7 +288,7 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
 <nav class="state">
     <div class="item posts">
       <a href="/archives/">
-        <span class="count">22</span>
+        <span class="count">23</span>
         <span class="name">文章</span>
       </a>
     </div>
@@ -365,10 +373,12 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
 
   <ul id="quick">
     <li class="prev pjax">
+        <a href="/2024/03/25/stanford-cs143-PA2/" rel="prev" title="上一篇"><i class="ic i-chevron-left"></i></a>
     </li>
     <li class="up"><i class="ic i-arrow-up"></i></li>
     <li class="down"><i class="ic i-arrow-down"></i></li>
     <li class="next pjax">
+        <a href="/2024/04/12/stanford-cs143-PA4/" rel="next" title="下一篇"><i class="ic i-chevron-right"></i></a>
     </li>
     <li class="percent"></li>
   </ul>
@@ -393,36 +403,6 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
 <a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
 </div>
 
-    <span><a href="/2023/02/06/rustilings/" title="Rustilings 练习笔记">Rustilings 练习笔记</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/%E7%AE%97%E6%B3%95%E9%A2%98/" title="分类于 算法题">算法题</a>
-</div>
-
-    <span><a href="/2022/03/30/splay/" title="Splay模版:P3369[模版&#x2F;普通平衡树]">Splay模版:P3369[模版/普通平衡树]</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
-</div>
-
-    <span><a href="/2024/03/25/stanford-cs143-PA2/" title="Stanford CS143 PA2">Stanford CS143 PA2</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
-</div>
-
     <span><a href="/2023/02/06/stanford-cs144-lab/" title="Stanford CS144 Lab">Stanford CS144 Lab</a></span>
   </li>
 
@@ -433,7 +413,7 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
 <a href="/categories/%E6%9D%82%E8%AE%B0/" title="分类于 杂记">杂记</a>
 </div>
 
-    <span><a href="/2022/02/13/how-to-dress-up/" title="论如何女装">论如何女装</a></span>
+    <span><a href="/2020/10/11/cmd/" title="(烂活)用cmd窗口输出图画">(烂活)用cmd窗口输出图画</a></span>
   </li>
 
       
@@ -443,7 +423,7 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
 <a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
 </div>
 
-    <span><a href="/2021/12/18/oslab1/" title="华中科技大学OS实验解析(Lab1)">华中科技大学OS实验解析(Lab1)</a></span>
+    <span><a href="/2021/04/25/verilog/" title="华中科技大学Verilog实验解析">华中科技大学Verilog实验解析</a></span>
   </li>
 
       
@@ -453,7 +433,7 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
 <a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
 </div>
 
-    <span><a href="/2024/03/14/pa-lab2/" title="南大pa-Lab2">南大pa-Lab2</a></span>
+    <span><a href="/2023/02/07/cmu14-445-lab/" title="CMU14-445 Lab">CMU14-445 Lab</a></span>
   </li>
 
       
@@ -463,7 +443,7 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
 <a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
 </div>
 
-    <span><a href="/2023/02/09/mit-6-s081-xv6-information-%E9%9B%86%E5%90%88/" title="MIT_6.S081_xv6.Information 集合">MIT_6.S081_xv6.Information 集合</a></span>
+    <span><a href="/2024/04/12/stanford-cs143-PA4/" title="Stanford CS143 PA3">Stanford CS143 PA3</a></span>
   </li>
 
       
@@ -483,7 +463,37 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
 <a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
 </div>
 
-    <span><a href="/2023/02/07/cmu14-445-lab/" title="CMU14-445 Lab">CMU14-445 Lab</a></span>
+    <span><a href="/2023/02/09/mit-6-s081-xv6-information-%E9%9B%86%E5%90%88/" title="MIT_6.S081_xv6.Information 集合">MIT_6.S081_xv6.Information 集合</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
+</div>
+
+    <span><a href="/2024/04/11/stanford-cs143-PA3/" title="Stanford CS143 PA3">Stanford CS143 PA3</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
+</div>
+
+    <span><a href="/2023/02/06/rustilings/" title="Rustilings 练习笔记">Rustilings 练习笔记</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E6%9D%82%E8%AE%B0/" title="分类于 杂记">杂记</a>
+</div>
+
+    <span><a href="/2020/05/02/setup/" title="建站">建站</a></span>
   </li>
 
   </ul>
@@ -508,13 +518,13 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
     <span class="post-meta-item-icon">
       <i class="ic i-chart-area"></i>
     </span>
-    <span title="站点总字数">405k 字</span>
+    <span title="站点总字数">408k 字</span>
 
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="ic i-coffee"></i>
     </span>
-    <span title="站点阅读时长">6:08</span>
+    <span title="站点阅读时长">6:10</span>
   </div>
   <div class="powered-by">
     基于 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & Theme.<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FtZWhpbWUvaGV4by10aGVtZS1zaG9rYQ==">Shoka</span>
