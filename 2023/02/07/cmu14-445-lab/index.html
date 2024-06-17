@@ -1,0 +1,689 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#FFF">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/1.jpg">
+
+<link rel="icon" type="image/ico" sizes="32x32" href="/images/favicon.ico">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+<link rel="alternate" type="application/rss+xml" title="灵山之上神风起" href="https://sukunashinmyoumaru-hust.github.io/rss.xml" />
+<link rel="alternate" type="application/atom+xml" title="灵山之上神风起" href="https://sukunashinmyoumaru-hust.github.io/atom.xml" />
+<link rel="alternate" type="application/json" title="灵山之上神风起" href="https://sukunashinmyoumaru-hust.github.io/feed.json" />
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Mulish:300,300italic,400,400italic,700,700italic%7CFredericka%20the%20Great:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20JP:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20SC:300,300italic,400,400italic,700,700italic%7CInconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="/css/app.css?v=0.2.5">
+
+  
+
+<link rel="canonical" href="https://sukunashinmyoumaru-hust.github.io/2023/02/07/cmu14-445-lab/">
+
+
+
+  <title>
+CMU14-445 Lab - 实验记录 |
+Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
+<meta name="generator" content="Hexo 7.1.1"></head>
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div id="loading">
+    <div class="cat">
+      <div class="body"></div>
+      <div class="head">
+        <div class="face"></div>
+      </div>
+      <div class="foot">
+        <div class="tummy-end"></div>
+        <div class="bottom"></div>
+        <div class="legs left"></div>
+        <div class="legs right"></div>
+      </div>
+      <div class="paw">
+        <div class="hands left"></div>
+        <div class="hands right"></div>
+      </div>
+    </div>
+  </div>
+  <div id="container">
+    <header id="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="inner">
+        <div id="brand">
+          <div class="pjax">
+          
+  <h1 itemprop="name headline">CMU14-445 Lab
+  </h1>
+  
+<div class="meta">
+  <span class="item" title="创建时间：2023-02-07 10:46:50">
+    <span class="icon">
+      <i class="ic i-calendar"></i>
+    </span>
+    <span class="text">发表于</span>
+    <time itemprop="dateCreated datePublished" datetime="2023-02-07T10:46:50+08:00">2023-02-07</time>
+  </span>
+  <span class="item" title="本文字数">
+    <span class="icon">
+      <i class="ic i-pen"></i>
+    </span>
+    <span class="text">本文字数</span>
+    <span>19k</span>
+    <span class="text">字</span>
+  </span>
+  <span class="item" title="阅读时长">
+    <span class="icon">
+      <i class="ic i-clock"></i>
+    </span>
+    <span class="text">阅读时长</span>
+    <span>17 分钟</span>
+  </span>
+</div>
+
+
+          </div>
+        </div>
+        <nav id="nav">
+  <div class="inner">
+    <div class="toggle">
+      <div class="lines" aria-label="切换导航栏">
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line"></span>
+      </div>
+    </div>
+    <ul class="menu">
+      <li class="item title"><a href="/" rel="start">Suwa shrine</a></li>
+    </ul>
+    <ul class="right">
+      <li class="item theme">
+        <i class="ic i-sun"></i>
+      </li>
+      <li class="item search">
+        <i class="ic i-search"></i>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+      </div>
+      <div id="imgs" class="pjax">
+        <ul>
+          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/5d3d43e0f7dc0697.jpg"></li>
+          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/bac1b1e69e7ebfb7.jpg"></li>
+          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/f841728a51c3ae78.jpg"></li>
+          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/7d2279310f1bb2f7.jpg"></li>
+          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/7c97ca6398f62495.jpg"></li>
+          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/c10853f5c9aee06c.jpg"></li>
+        </ul>
+      </div>
+    </header>
+    <div id="waves">
+      <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+        <defs>
+          <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+        </defs>
+        <g class="parallax">
+          <use xlink:href="#gentle-wave" x="48" y="0" />
+          <use xlink:href="#gentle-wave" x="48" y="3" />
+          <use xlink:href="#gentle-wave" x="48" y="5" />
+          <use xlink:href="#gentle-wave" x="48" y="7" />
+        </g>
+      </svg>
+    </div>
+    <main>
+      <div class="inner">
+        <div id="main" class="pjax">
+          
+  <div class="article wrap">
+    
+<div class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+<i class="ic i-home"></i>
+<span><a href="/">首页</a></span><i class="ic i-angle-right"></i>
+<span  class="current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" itemprop="item" rel="index" title="分类于 实验记录"><span itemprop="name">实验记录</span></a>
+<meta itemprop="position" content="1" /></span>
+</div>
+
+    <article itemscope itemtype="http://schema.org/Article" class="post block" lang="zh-CN">
+  <link itemprop="mainEntityOfPage" href="https://sukunashinmyoumaru-hust.github.io/2023/02/07/cmu14-445-lab/">
+
+  <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="image" content="/images/IMG_1335.PNG">
+    <meta itemprop="name" content="Sukuna">
+    <meta itemprop="description" content="Sukuna_wireless, ">
+  </span>
+
+  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="灵山之上神风起">
+  </span>
+
+  <div class="body md" itemprop="articleBody">
+    
+
+    <h1 id="Lab1-Buffer-Pool"><a href="#Lab1-Buffer-Pool" class="headerlink" title="Lab1.Buffer Pool"></a>Lab1.Buffer Pool</h1><p>这是CMU数据库系列的第一个实验,第一个实验需要我们完成关于Buffer的一些功能.在完善Buffer的功能之前,我们先了解一下buffer的一些基本知识.</p>
+<p>buffer在这里面和操作系统很像,是主存和辅存的缓冲地带,我们需要完成的是两个特别重要的数据结构,一个是Disk Manager,用我的话说就是页表,一个是LRU Replacer,这个数据结构研究,在缓冲地带满的时候我们应该替换谁进入到辅存.这两个数据结构所存储的信息单位量是一样的(也就是说这两个数据结构都存储了n个块[你也可以认为是“页”]的信息).两个数据结构通过Pin和Unpin来互相作用.</p>
+<h2 id="实验1-1-LRU-REPLACEMENT"><a href="#实验1-1-LRU-REPLACEMENT" class="headerlink" title="实验1.1 LRU REPLACEMENT"></a>实验1.1 LRU REPLACEMENT</h2><p>实验提示:修改src&#x2F;include&#x2F;buffer&#x2F;lru_replacer.h和src&#x2F;buffer&#x2F;lru_replacer.cpp.</p>
+<p>首先我们知道LRU Replacer是一个依赖LRU算法进行替换的一个结构体,我们在操作系统和组成原理的课程中已经知道,模拟LRU算法一般使用堆栈,我们现在使用堆栈来进行模拟:</p>
+<p>首先在头文件中添加有关堆栈的一些信息;</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">size_t capacity;      //容量</span><br><span class="line">size_t size;          //当前大小</span><br><span class="line">std::list&lt;frame_id_t&gt; lists;           //存储帧的栈,用list实现</span><br><span class="line">std::unordered_map&lt;frame_id_t , int&gt; maps;      //哈希映射,映射帧和是否在LRU Replacer里面.</span><br><span class="line">std::mutex locks;</span><br></pre></td></tr></table></figure>
+<p>定义了这么多成员,我们可以实现类的方法了:</p>
+<p>1、构造函数.(略)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">LRUReplacer::LRUReplacer(size_t num_pages) &#123;</span><br><span class="line">    capacity = num_pages;</span><br><span class="line">    maps.clear();</span><br><span class="line">    lists.clear();</span><br><span class="line">    size = lists.size();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>2、Victim函数:</p>
+<p>这个函数选择一个帧来被替换.返回值是是否成功输出.具体的做法是从栈中选择栈顶返回即可.然后在maps中删除掉这个帧即可.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">bool LRUReplacer::Victim(frame_id_t \*frame_id) &#123; </span><br><span class="line">    if(lists.empty()) return false; </span><br><span class="line">    locks.lock();</span><br><span class="line">    frame_id_t lasts = lists.back();</span><br><span class="line">    maps.erase(lasts);</span><br><span class="line">    lists.pop_back();</span><br><span class="line">    \*frame_id = lasts; </span><br><span class="line">    locks.unlock();</span><br><span class="line">    return true;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>3、Pin函数</p>
+<p>Pin的意思就是固定,这个意思就是Disk Manager固定了某一个页,希望这个页不会被LRU Replacer选中然后被替换掉.那么首先调用maps,看看LRU Replacer中是否存在这个帧,存在的话就删除,不存在的话就不作任何处理.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">void LRUReplacer::Pin(frame_id_t frame_id) &#123;</span><br><span class="line">    if(maps.count(frame_id) == 0) return;</span><br><span class="line">    locks.lock();</span><br><span class="line">    lists.remove(frame_id);</span><br><span class="line">    maps.erase(frame_id);</span><br><span class="line">    locks.unlock();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>4、UnPin函数</p>
+<p>UnPin函数的意思是解除固定,这个意思就是Disk Manager解除固定某一个页,表示Disk Manager最近不需要使用这个页了,LRU Replacer最近可以对其进行替换操作.首先第一步就是查看这个帧是否存在于LRU Replacer中.如果没有就需要放进LRU Replacer中,那么就会存在问题,问题就是,万一我LRU Replacer满了怎么办?满了的话就可以选择一个元素替换下去,然后在插入.(跟我们在操作系统课程上面学习的一样,从栈顶取一个元素,然后把它放入栈底)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">void LRUReplacer::Unpin(frame_id_t frame_id) &#123;</span><br><span class="line">    if(maps.count(frame_id) != 0) return;</span><br><span class="line">    locks.lock();</span><br><span class="line">    //如果已经满了,则需要淘汰一个然后放入 LRUReplacer 中</span><br><span class="line">    if (lists.size() == capacity) &#123;</span><br><span class="line">        frame_id_t last_frame = lists.back();</span><br><span class="line">        maps.erase(last_frame);</span><br><span class="line">        lists.pop_back();</span><br><span class="line">    &#125;</span><br><span class="line">    lists.push_front(frame_id);</span><br><span class="line">    maps[frame_id] = 1;</span><br><span class="line">    locks.unlock();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>先看实验的最后怎么make的吧,一开始太智障直接cd进目录调gcc,这下丑大了,重写了一份…</p>
+<h2 id="实验1-2-BUFFER-POOL-MANAGER-INSTANCE"><a href="#实验1-2-BUFFER-POOL-MANAGER-INSTANCE" class="headerlink" title="实验1.2 BUFFER POOL MANAGER INSTANCE"></a>实验1.2 BUFFER POOL MANAGER INSTANCE</h2><p>提示:修改src&#x2F;include&#x2F;buffer&#x2F;buffer_pool_manager_instance.h和src&#x2F;buffer&#x2F;buffer_pool_manager_instance.cpp</p>
+<p>首先我们先来了解一下BUFFER POOL的一些成员(这个实验不需要我们添加成员),一个是存储每个页的指针的指针数组,在后面我们会使用这个结构来给定页的id获得一个页的指针,接着就是页表成员,将物理帧和页的id进行对应,接着就是空闲物理帧以及之前做的替换器元素.(其实页和物理帧是相互统一的概念,物理帧是一个物理概念,代表了一块空闲的内存空间,页就是记录数据的单位,当物理帧被赋值,被填入数据的时候,它就变成了一个页.**当然,页表的id某种程度上反映了辅存的位置**)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">/\*\* Array of buffer pool pages. \*/</span><br><span class="line">Page \*pages_;</span><br><span class="line">/\*\* Pointer to the disk manager. \*/</span><br><span class="line">DiskManager \*disk_manager_ __attribute__((__unused__));</span><br><span class="line">/\*\* Pointer to the log manager. \*/</span><br><span class="line">LogManager \*log_manager_ __attribute__((__unused__));</span><br><span class="line">/\*\* Page table for keeping track of buffer pool pages. \*/</span><br><span class="line">std::unordered_map&lt;page_id_t, frame_id_t&gt; page_table_;</span><br><span class="line">/\*\* Replacer to find unpinned pages for replacement. \*/</span><br><span class="line">Replacer \*replacer_;</span><br><span class="line">/\*\* List of free pages. \*/</span><br><span class="line">std::list&lt;frame_id_t&gt; free_list_;</span><br><span class="line">/\*\* This latch protects shared data structures. We recommend updating this comment to describe what it protects. \*/</span><br><span class="line">std::mutex latch_;</span><br></pre></td></tr></table></figure>
+<p>1、NewPgImp函数</p>
+<p>这个函数主要让我们申请一个新的Page,然后把Page的ID放入到page_id中,然后返回这个Page的指针.关于这个函数,提示已经说明地很明显了:</p>
+<p>首先第一步,遍历一遍pool_size_,看看是不是所有的Page都被Pin了,如果是,那么就返回空指针,代表找不到可以申请的页.</p>
+<p>第二步就是从freelist中获取一个新的帧,如果freelist为空,就代表我们不得不得替换一个页下来,这个页可以调用Replacer的Victim函数获得.如果要替换的页是脏的,我们要把这个页写进磁盘中.(脏块,参考组成原理)</p>
+<p>第三步就是从给这个页一些初始数据,比如说引用数为1,页的id是page_id,存储的内容为空,最后Pin一下这个页,返回即可.然后把这个页填入到物理帧中然后加入到页表中.</p>
+<p>代码略</p>
+<p>2、FetchPgImp函数</p>
+<p>这个函数主要根据页面的id来获取一个页的指针,这个提示说明的也很明显了</p>
+<p>首先第一步,在页表中寻找page_id,看这个页是否真正存在,如果存在就跳过,如果不存在,按照第一个函数的方式申请一个页,然后把页号加载一下,把辅存的内容加载到p-&gt;data_里面,Pin一下即可.</p>
+<p>代码如下:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">Page \*BufferPoolManagerInstance::FetchPgImp(page_id_t page_id) &#123;</span><br><span class="line">  // 1.     Search the page table for the requested page (P).</span><br><span class="line">  // 1.1    If P exists, pin it and return it immediately.</span><br><span class="line">  // 1.2    If P does not exist, find a replacement page (R) from either the free list or the replacer.</span><br><span class="line">  //        Note that pages are always found from the free list first.</span><br><span class="line">  // 2.     If R is dirty, write it back to the disk.</span><br><span class="line">  // 3.     Delete R from the page table and insert P.</span><br><span class="line">  // 4.     Update P&#x27;s metadata, read in the page content from disk, and then return a pointer to P.</span><br><span class="line">  frame_id_t fid;</span><br><span class="line">  Page\* p = nullptr;</span><br><span class="line">  // step 1.1.</span><br><span class="line">  if(page_table_.find(page_id) != page_table_.end())&#123;</span><br><span class="line">    fid = page_table_[page_id];</span><br><span class="line">    pages_[fid].pin_count_++;</span><br><span class="line">    // pin it.</span><br><span class="line">    replacer_-&gt;Pin(fid);</span><br><span class="line">    return &amp;pages_[fid];</span><br><span class="line">  &#125;</span><br><span class="line">  latch_.lock();</span><br><span class="line">  // step 1.2.</span><br><span class="line">  if (free_list_.empty()) &#123;  // pick from free list first.</span><br><span class="line">    //can&#x27;t find a page that can be flushed.</span><br><span class="line">    if (!replacer_-&gt;Victim(&amp;fid)) &#123;</span><br><span class="line">      return nullptr;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">      // the page placed in the lrureplacer need to be flushed.</span><br><span class="line">      // send it to the disk</span><br><span class="line">      p = &amp;pages_[fid];</span><br><span class="line">      if (p-&gt;is_dirty_) &#123;</span><br><span class="line">        disk_manager_-&gt;WritePage(p-&gt;page_id_, p-&gt;data_);</span><br><span class="line">        p-&gt;is_dirty_ = false;</span><br><span class="line">      &#125;</span><br><span class="line">      // erase the pagetable_.</span><br><span class="line">      page_table_.erase(p-&gt;page_id_);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; else &#123;</span><br><span class="line">    //found:</span><br><span class="line">    fid = free_list_.front();</span><br><span class="line">    free_list_.pop_front();</span><br><span class="line">    p = &amp;pages_[fid];</span><br><span class="line">  &#125;</span><br><span class="line">  // Step 3.</span><br><span class="line">  page_table_[page_id] = fid;</span><br><span class="line">  replacer_-&gt;Pin(fid);</span><br><span class="line">  // Step 4.</span><br><span class="line">  p-&gt;page_id_ = page_id;</span><br><span class="line">  p-&gt;pin_count_ = 1;</span><br><span class="line">  disk_manager_-&gt;ReadPage(page_id, p-&gt;data_);</span><br><span class="line">  latch_.unlock();</span><br><span class="line">  return p;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>3、DeletePgImp函数</p>
+<p>这个函数要求我们删除某个页.当然,代码的注释也给出了很详细的说明.</p>
+<p>首先判断要删除的那个页到底存不存在,如果不存在的话就跳过,然后判断被删除的那个页到底有没有被Pin,如果被Pin了的话也是不能删除的,接着判断这个页是不是为脏,如果是脏页就要写回,最后把这个页的一些信息初始化,然后把这个页的信息加入到freelist里面.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">bool BufferPoolManagerInstance::DeletePgImp(page_id_t page_id) &#123;</span><br><span class="line">  // 0.   Make sure you call DeallocatePage!</span><br><span class="line">  // 1.   Search the page table for the requested page (P).</span><br><span class="line">  // 1.   If P does not exist, return true.</span><br><span class="line">  // 2.   If P exists, but has a non-zero pin-count, return false. Someone is using the page.</span><br><span class="line">  // 3.   Otherwise, P can be deleted. Remove P from the page table, reset its metadata and return it to the free list.</span><br><span class="line">  </span><br><span class="line">  if (page_table_.find(page_id) == page_table_.end()) &#123;</span><br><span class="line">    return true;</span><br><span class="line">  &#125;</span><br><span class="line">  // P does exists.</span><br><span class="line">  frame_id_t fid = page_table_[page_id];</span><br><span class="line">  Page\* deletepage = &amp;pages_[fid];</span><br><span class="line">  // P is pinned</span><br><span class="line">  if (deletepage-&gt;pin_count_ != 0) &#123;</span><br><span class="line">      return false;</span><br><span class="line">  &#125;</span><br><span class="line">  // if dirty rewrite:</span><br><span class="line">  // flush the page before deallocate it.</span><br><span class="line">  latch_.lock();</span><br><span class="line">  if (deletepage-&gt;is_dirty_) &#123;</span><br><span class="line">    disk_manager_-&gt;WritePage(page_id, deletepage-&gt;data_);</span><br><span class="line">    deletepage-&gt;is_dirty_ = false;</span><br><span class="line">  &#125;</span><br><span class="line">  DeallocatePage(page_id);</span><br><span class="line">  // remove P from the page table.</span><br><span class="line">  page_table_.erase(page_id);</span><br><span class="line">  // reset its metadata.</span><br><span class="line">  // the page returned to freelist does not stores any page.</span><br><span class="line">  deletepage-&gt;page_id_ = INVALID_PAGE_ID;</span><br><span class="line">  deletepage-&gt;is_dirty_ = false;</span><br><span class="line">  deletepage-&gt;pin_count_ = 0;</span><br><span class="line">  // return it to free_list_.</span><br><span class="line">  free_list_.push_back(fid);</span><br><span class="line">  latch_.unlock();</span><br><span class="line">  return true;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>好了,最难的几个函数我们都做完了,剩下的几个都比较简单.</p>
+<p>4、FlushPgImp函数</p>
+<p>刷新一个页,把这个页里面的数据写入磁盘.</p>
+<p>找到这个页,然后调用WritePage就可以了.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">bool BufferPoolManagerInstance::FlushPgImp(page_id_t page_id) &#123;</span><br><span class="line">  // Make sure you call DiskManager::WritePage!</span><br><span class="line">  std::lock_guard&lt;std::mutex&gt; lock(latch_);</span><br><span class="line">  if (page_table_.find(page_id) == page_table_.end()  page_id == INVALID_PAGE_ID)</span><br><span class="line">    return false;</span><br><span class="line">  disk_manager_-&gt;WritePage(page_id, pages_[page_table_[page_id]].data_);</span><br><span class="line">  return true;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>5、UnpinPgImp函数</p>
+<p>让一个页的pin数减1.</p>
+<p>找到一个页,首先置脏位,然后让pin数-1,如果减为0就调用Replacer的Unpin函数.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">bool BufferPoolManagerInstance::UnpinPgImp(page_id_t page_id, bool is_dirty) &#123;</span><br><span class="line">  std::lock_guard&lt;std::mutex&gt; lock(latch_); </span><br><span class="line">  frame_id_t fid = page_table_[page_id];</span><br><span class="line">  Page\* p = &amp;pages_[fid];</span><br><span class="line">  p-&gt;is_dirty_ = is_dirty;  // hold the state until victim.</span><br><span class="line">  if (p-&gt;pin_count_ &lt;= 0)</span><br><span class="line">    return false;</span><br><span class="line">  --p-&gt;pin_count_;</span><br><span class="line">  if (p-&gt;pin_count_ == 0) &#123;</span><br><span class="line">    replacer_-&gt;Unpin(fid);</span><br><span class="line">    return true;</span><br><span class="line">  &#125;</span><br><span class="line">  return false;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="实验1-3-PARALLEL-BUFFER-POOL-MANAGER"><a href="#实验1-3-PARALLEL-BUFFER-POOL-MANAGER" class="headerlink" title="实验1.3 PARALLEL BUFFER POOL MANAGER"></a>实验1.3 PARALLEL BUFFER POOL MANAGER</h2><p>并行的manager,先前是一个manager工作,现在是多个manager工作,具体的思路大同小异,就是先选择究竟是哪一个manager,然后再调用这个manager的函数.</p>
+<p>选择的方式比较淳朴,假设有N个manager,那个调用manager的序号就是id % N.</p>
+<p>这一部分的函数,除了创建新页面这个不确定初始页面id的情况下,其他的都一模一样.</p>
+<p>1、NewPgImp函数.</p>
+<p>遍历一遍所有的Manager,然后调用所有的Manager的NewPgImp函数,找得到就返回,找不到就算了,返回空指针吧.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Page \*ParallelBufferPoolManager::NewPgImp(page_id_t \*page_id) &#123;</span><br><span class="line">  // create new page. We will request page allocation in a round robin manner from the underlying</span><br><span class="line">  // BufferPoolManagerInstances</span><br><span class="line">  // 1.   From a starting index of the BPMIs, call NewPageImpl until either 1) success and return 2) looped around to starting index and return nullptr    </span><br><span class="line">  // 2.   Bump the starting index (mod number of instances) to start search at a different BPMI each time this function is called</span><br><span class="line">  for(size_t i = 0; i &lt; num_instances_; i++)&#123;</span><br><span class="line">    BufferPoolManager\* one_manager_instance = manager_[next_instacnce_];</span><br><span class="line">    Page \*page = one_manager_instance-&gt;NewPage(page_id);</span><br><span class="line">    if(page != nullptr)&#123;</span><br><span class="line">      return page;</span><br><span class="line">    &#125;</span><br><span class="line">    next_instacnce_ = (next_instacnce_ + 1) % num_instances_;</span><br><span class="line">  &#125;</span><br><span class="line">  return nullptr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当然,有小伙伴就问了,你这样子做,有没有这样一种可能,就是生成这个页的时候是由i号Manager生成的,但是调用这个页的时候是由j号Manager管理,这个可以说应该是不可能的,因为next_instacnce_可以认为是和page_id同步的(起码模 N是一样的),各位做实验可以验证这个结论.</p>
+<p>2、其他函数.</p>
+<p>先选Manager,再调用,没啥好说的.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">BufferPoolManager \*ParallelBufferPoolManager::GetBufferPoolManager(page_id_t page_id) &#123;</span><br><span class="line">  // Get BufferPoolManager responsible for handling given page id. You can use this method in your other methods.</span><br><span class="line">  return manager_[page_id % num_instances_];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Page \*ParallelBufferPoolManager::FetchPgImp(page_id_t page_id) &#123;</span><br><span class="line">  // Fetch page for page_id from responsible BufferPoolManagerInstance</span><br><span class="line">  return GetBufferPoolManager(page_id)-&gt;FetchPage(page_id);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">bool ParallelBufferPoolManager::UnpinPgImp(page_id_t page_id, bool is_dirty) &#123;</span><br><span class="line">  // Unpin page_id from responsible BufferPoolManagerInstance</span><br><span class="line">  return GetBufferPoolManager(page_id)-&gt;UnpinPage(page_id,is_dirty);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">bool ParallelBufferPoolManager::FlushPgImp(page_id_t page_id) &#123;</span><br><span class="line">  // Flush page_id from responsible BufferPoolManagerInstance</span><br><span class="line">  return GetBufferPoolManager(page_id)-&gt;FlushPage(page_id);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Lab2-EXTENDIBLE-HASH-INDEX"><a href="#Lab2-EXTENDIBLE-HASH-INDEX" class="headerlink" title="Lab2.EXTENDIBLE HASH INDEX"></a>Lab2.EXTENDIBLE HASH INDEX</h1><h2 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h2><p><img data-src="https://sukunahust.com/wp-content/uploads/2022/10/image-1024x573.png"></p>
+<p>左边那个就是directory page，它有一个参数叫做global depth，1&lt;&lt;global depth 为directory的大小。它存储了指向各个bucket page的指针。bucket page里面存储的则是实际的数据（在本实验中是std::pair类型的键值），每个bucket都有一个自己的local depth。</p>
+<p>插入一个键值的过程是：先把key代入hash函数计算得到一个中间结果，取这个中间结果的最后global depth位（这就是global depth mask的作用,就是 数据&amp;global mask(具体请看下面的例子) ），得到一个数组下标，bucket的page id就在这个下标里。根据page id调入bucket，然后把这个键值插入到bucket里面。</p>
+<h2 id="实验2-1-PAGE-LAYOUTS"><a href="#实验2-1-PAGE-LAYOUTS" class="headerlink" title="实验2.1 PAGE LAYOUTS"></a>实验2.1 PAGE LAYOUTS</h2><p>提示:完成两种页的设计,一个是桶一个是目录.</p>
+<p>修改src&#x2F;include&#x2F;storage&#x2F;page&#x2F;hash_table_bucket_page.h、src&#x2F;storage&#x2F;page&#x2F;hash_table_bucket_page.cpp、src&#x2F;include&#x2F;storage&#x2F;page&#x2F;hash_table_directory_page.h和src&#x2F;storage&#x2F;page&#x2F;hash_table_directory_page.cpp</p>
+<h3 id="实验2-1-1-目录页的设计"><a href="#实验2-1-1-目录页的设计" class="headerlink" title="实验2.1.1 目录页的设计"></a>实验2.1.1 目录页的设计</h3><p>我们先来看看头文件(头文件不需要修改)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">page_id_t page_id_; // 页的id</span><br><span class="line">lsn_t lsn_;</span><br><span class="line">uint32_t global_depth_&#123;0&#125;;//全局深度,也就是说下面的数组有几个元素.2^i的关系,所有局部深度不能比全局深度大</span><br><span class="line">uint8_t local_depths_[DIRECTORY_ARRAY_SIZE];//每一个页的局部深度,这个类似三级页表.第一级的页表局部深度就是2.局部深度代表你作为目录项离叶结点(bucket有多远)</span><br><span class="line">page_id_t bucket_page_ids_[DIRECTORY_ARRAY_SIZE];//下一级的页号</span><br></pre></td></tr></table></figure>
+<p>1、GetGlobalDepthMask函数</p>
+<p>这个函数要求我们返回一个掩码,掩码的概念我们在计算机网络中学过,对于网络地址,网络地址有几位,就有几个1,在这里,全局深度为几就有几个1.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">uint32_t HashTableDirectoryPage::GetGlobalDepthMask() &#123; </span><br><span class="line">  uint32_t global_depth_mask =  ((1 &lt;&lt; GetGlobalDepth()) - 1);</span><br><span class="line">  return global_depth_mask; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>2、IncrGlobalDepth函数</p>
+<p>这需要我们增长全局深度,根据CMU的PPT里面介绍,我们不仅要增加变量的值(value),还需要进行local_depths和bucket的初始化.初始化的方法就是1:1复制,因为这种增长是成倍增长的,对于1<del>N的节点,给N+1</del>2N赋值的时候直接完全复制就可以了.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">void HashTableDirectoryPage::IncrGlobalDepth() &#123; </span><br><span class="line">  int original_depth = 1 &lt;&lt; global_depth_;</span><br><span class="line">  int new_index = original_depth;</span><br><span class="line">  for(int i = 0;i &lt; original_depth;i++)&#123;</span><br><span class="line">    local_depths_[new_index] = local_depths_[i];</span><br><span class="line">    bucket_page_ids_[new_index] = bucket_page_ids_[i];</span><br><span class="line">    new_index++;</span><br><span class="line">  &#125;</span><br><span class="line">  global_depth_++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>3、CanShrink函数</p>
+<p>能否缩小全局变量,那就判断有没有一个局部深度比全局深度深.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">bool HashTableDirectoryPage::CanShrink() &#123;</span><br><span class="line">  int original_depth = 1 &lt;&lt; global_depth_;</span><br><span class="line">  for(int i = 0;i &lt; original_depth;i++)&#123;</span><br><span class="line">    if(local_depths_[i] &gt;= global_depth_) return false;</span><br><span class="line">  &#125;</span><br><span class="line">  return true;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其他的函数都是set和get,相信各位都可以做出来.</p>
+<h3 id="2-1-2-桶页的设计"><a href="#2-1-2-桶页的设计" class="headerlink" title="2.1.2 桶页的设计"></a>2.1.2 桶页的设计</h3><p>首先我们来看头文件:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//  For more on BUCKET_ARRAY_SIZE see storage/page/hash_table_page_defs.h</span><br><span class="line">char occupied_[(BUCKET_ARRAY_SIZE - 1) / 8 + 1];</span><br><span class="line">// 0 if tombstone/brand new (never occupied), 1 otherwise.</span><br><span class="line">char readable_[(BUCKET_ARRAY_SIZE - 1) / 8 + 1];</span><br><span class="line">MappingType array_[0];</span><br></pre></td></tr></table></figure>
+<p>首先就是MappingType,保存了一系列键值对,还有一个bitmap,来表示占用与存储有效信息.</p>
+<p>1、可读和占用的判断和设置</p>
+<p>这个bitmap是一个char[]的数组,首先我们要判断出它们是在数组的哪一个元素,然后从这个元素中进行恰当的位运算.int A &#x3D; id&#x2F;8(哪一个元素) int B &#x3D; id % 8(这个元素的哪一位),这个就很像xv6文件系统中的bitmap.</p>
+<p>然后就是设置,设置的思路其实也是一样的,找到位置和具体哪一位,然后置0或者是1,大体上类似于get和set,但是有一点不一样的就是set和get的粒度是具体到bit的,这个需要我们使用正确且高效的位运算.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">template &lt;typename KeyType, typename ValueType, typename KeyComparator&gt;</span><br><span class="line">bool HASH_TABLE_BUCKET_TYPE::IsOccupied(uint32_t bucket_idx) const &#123;</span><br><span class="line">  size_t c = occupied_[bucket_idx / 8];</span><br><span class="line">  c = c &amp; (1 &lt;&lt; (bucket_idx % 8));</span><br><span class="line">  return c != 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">template &lt;typename KeyType, typename ValueType, typename KeyComparator&gt;</span><br><span class="line">void HASH_TABLE_BUCKET_TYPE::SetOccupied(uint32_t bucket_idx) &#123;</span><br><span class="line">  size_t c = occupied_[bucket_idx / 8];</span><br><span class="line">  c = c  (1 &lt;&lt; (bucket_idx % 8));</span><br><span class="line">  occupied_[bucket_idx / 8] = static_cast&lt;char&gt;(c);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">template &lt;typename KeyType, typename ValueType, typename KeyComparator&gt;</span><br><span class="line">bool HASH_TABLE_BUCKET_TYPE::IsReadable(uint32_t bucket_idx) const &#123;</span><br><span class="line">  size_t c = readable_[bucket_idx / 8];</span><br><span class="line">  c = c &amp; (1 &lt;&lt; (bucket_idx % 8));</span><br><span class="line">  return c != 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">template &lt;typename KeyType, typename ValueType, typename KeyComparator&gt;</span><br><span class="line">void HASH_TABLE_BUCKET_TYPE::SetReadable(uint32_t bucket_idx) &#123;</span><br><span class="line">  size_t c = readable_[bucket_idx / 8];</span><br><span class="line">  c = c  (1 &lt;&lt; (bucket_idx % 8));</span><br><span class="line">  readable_[bucket_idx / 8] = static_cast&lt;char&gt;(c);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>还记得我们在大一做的C语言位运算的题目嘛?这下用上了.</p>
+<p>2、Remove系列函数</p>
+<p>首先基础的函数就是RemoveAt函数,RemoveAt函数其实类似于SetReadable(i,0).接着就是Remove,基本思路就是比较,找到匹配的值然后删除掉即可.</p>
+<p>其实可以思考一下,为什么Key类型的需要使用比较器,但是Value的值不需要比较器,为什么设置的模版只有3个参数.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">template &lt;typename KeyType, typename ValueType, typename KeyComparator&gt;</span><br><span class="line">bool HASH_TABLE_BUCKET_TYPE::Remove(KeyType key, ValueType value, KeyComparator cmp) &#123;</span><br><span class="line">  for(size_t i = 0; i &lt; BUCKET_ARRAY_SIZE ; i++)&#123;</span><br><span class="line">    if(IsReadable(i))&#123;</span><br><span class="line">      if(cmp(key,array_[i].first) == 0 &amp;&amp; value == array_[i].second)&#123;</span><br><span class="line">        RemoveAt(i);</span><br><span class="line">        return true;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  return false;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">template &lt;typename KeyType, typename ValueType, typename KeyComparator&gt;</span><br><span class="line">void HASH_TABLE_BUCKET_TYPE::RemoveAt(uint32_t bucket_idx) &#123;</span><br><span class="line">  size_t c = readable_[bucket_idx / 8];</span><br><span class="line">  c = c &amp; (~(1 &lt;&lt; (bucket_idx % 8)));</span><br><span class="line">  readable_[bucket_idx / 8] = static_cast&lt;char&gt;(c);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>3、是否全满,是否全空.</p>
+<p>这类思路都是一样的,对于bitmap的全部数据,进行遍历.只不过这一次遍历的粒度不需要下降到位的级别,只需要看看,char[]里面的值是不是全0或者是全1,这下我们可以使用mask&#x3D;0xFF来进行与或运算.</p>
+<p>这时候有小伙伴会问,万一桶的元素不为8的整数,剩下的5个怎么比较呢?我们可以把最后一个char类型的元素取出来,然后可以利用10000000取高位来进行取值.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">template &lt;typename KeyType, typename ValueType, typename KeyComparator&gt;</span><br><span class="line">bool HASH_TABLE_BUCKET_TYPE::IsEmpty() &#123;</span><br><span class="line">  u_int8_t mask = 0;</span><br><span class="line">  size_t times = BUCKET_ARRAY_SIZE / 8;</span><br><span class="line">  for (size_t i = 0; i &lt; times; i++) &#123;</span><br><span class="line">    char c = readable_[i];</span><br><span class="line">    uint8_t ic = static_cast&lt;uint8_t&gt;(c);</span><br><span class="line">    if ((ic  mask) != mask) &#123;</span><br><span class="line">      return false;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">//剩下的</span><br><span class="line">  size_t remain = BUCKET_ARRAY_SIZE % 8;</span><br><span class="line">  if (remain &gt; 0) &#123;</span><br><span class="line">    char c = readable_[times];</span><br><span class="line">    uint8_t ic = static_cast&lt;uint8_t&gt;(c);</span><br><span class="line">    for (size_t i = 0; i &lt; remain; i++) &#123;</span><br><span class="line">//每次取1位</span><br><span class="line">      if ((ic &amp; 1) != 1) &#123;</span><br><span class="line">        return false;</span><br><span class="line">      &#125;</span><br><span class="line">//迭代</span><br><span class="line">      ic = ic &gt;&gt; 1;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  return true;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="实验2-2-HASH-TABLE-IMPLEMENTATION"><a href="#实验2-2-HASH-TABLE-IMPLEMENTATION" class="headerlink" title="实验2.2 HASH TABLE IMPLEMENTATION"></a>实验2.2 HASH TABLE IMPLEMENTATION</h2><p>0、概要</p>
+<p>这一个部分我们需要结合之前的BufferPoolManager来完善哈希表的增删改查的操作.</p>
+<p>初始情况下global depth为0，directory大小为1&lt;&lt;0&#x3D;1，因此只有一个bucket，此bucket的local depth为0。这时插入键值，取哈希函数中间结果的后0位，得到的directory下标总是为0，所有的元素全进入这个初始bucket。</p>
+<p>如果一个桶满了,就需要分裂成两个桶,分裂的伪代码如下:</p>
+<p>split–伪代码<br> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">bucket_page = Fetch(bucket_idx);</span><br><span class="line">    if(bucket为空)&#123;</span><br><span class="line">        构造分裂映像</span><br><span class="line">        split_page = NewPage(&amp;split_idx);</span><br><span class="line">        if(全局深度 == 局部深度)&#123;</span><br><span class="line">            需要增长目录;</span><br><span class="line">            产生的许多空索引需要进行填入page_id信息以及局部深度信息</span><br><span class="line">            指向相同的page_id的索引之间相差了1&lt;&lt;(全局深度);</span><br><span class="line">            修改目录的信息以及设置分裂后的桶的相关信息            </span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            仅需要分裂桶;</span><br><span class="line">            先增加局部深度，接着确定兄弟索引的个数;</span><br><span class="line">            修改分裂后兄弟索引的指向;</span><br><span class="line">        &#125;</span><br><span class="line">        分配旧桶里面的数据，一般会均分到两个桶里面</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure><br>执行插入即可</p>
+<p>假设global_depth&#x3D;1,就是两个桶:(目录桶对应的是key的最后一位)</p>
+<p>假设桶b满了,这个时候local_depth&#x3D;1&#x3D;global_depth.这个时候目录页需要扩充.</p>
+<p>桶b的内容(1),平均分成01和11.桶a的内容被00和10指着</p>
+<p>这个时候local_depth变成了2,原来的a桶depth还是1.</p>
+<p>如果a满了,也是一样分裂,但是local_depth&#x3D;1&lt;2,目录页是不用分裂的.</p>
+<p>插入讲完了,现在我们需要讲一讲合并.</p>
+<p>在删除bucket_page 000 后，如果这里的000空了，空了就尝试merge。参考官方做法就是：</p>
+<p>（1）两哈希桶均为空桶；</p>
+<p>（2）目录项及其目标目录项（一个目录项的目标目录项可由其低第<code>j</code>位反转得到）的局部深度相同且不为0。</p>
+<p>满足上述两个条件后就可以进行合并了。</p>
+<p>1、查(getValue)</p>
+<p>了解一下函数的做法首先第一步获取目录页,然后根据目录页调用KeyToPageId获取具体位于哪一个桶里面.然后调用getdata和getvalue函数进行查找.查找的返回值是有没有查找到相关信息,查找的结果返回在result变量里面.(注意page只是一个指针,你还是需要通过GetData来获得指针里面具体指向的内容),注意在最后需要调用unpin函数取消对页的pin.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">template &lt;typename KeyType, typename ValueType, typename KeyComparator&gt;</span><br><span class="line">bool HASH_TABLE_TYPE::GetValue(Transaction \*transaction, const KeyType &amp;key, std::vector&lt;ValueType&gt; \*result) &#123;</span><br><span class="line">  table_latch_.RLock();</span><br><span class="line">  HashTableDirectoryPage \*dir_page = FetchDirectoryPage();</span><br><span class="line">  page_id_t bucket_page_id = KeyToPageId(key,dir_page);</span><br><span class="line">  Page\* page = FetchBucketPage(bucket_page_id);</span><br><span class="line">  page-&gt;RLatch();</span><br><span class="line"></span><br><span class="line">  HASH_TABLE_BUCKET_TYPE \*bucket_page = reinterpret_cast&lt;HASH_TABLE_BUCKET_TYPE\*&gt;(page-&gt;GetData());</span><br><span class="line">  bool res = bucket_page-&gt;GetValue(key,comparator_,result);</span><br><span class="line"></span><br><span class="line">  page-&gt;RUnlatch();</span><br><span class="line"></span><br><span class="line">  buffer_pool_manager_-&gt;UnpinPage(directory_page_id_,false);</span><br><span class="line">  buffer_pool_manager_-&gt;UnpinPage(bucket_page_id,false);</span><br><span class="line"></span><br><span class="line">  table_latch_.RUnlock();</span><br><span class="line"></span><br><span class="line">  return res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>2、增(Insert)</p>
+<p>这是基本的插入操作.基本的操作还是和之前一样,获取目录,根据目录来获取桶,如果这个桶没有满的话,那么就可以直接调用桶页的相关操作,然后Unpin,返回即可.但是万一桶是满的怎么办,请往下看.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">template &lt;typename KeyType, typename ValueType, typename KeyComparator&gt;</span><br><span class="line">bool HASH_TABLE_TYPE::Insert(Transaction \*transaction, const KeyType &amp;key, const ValueType &amp;value) &#123;</span><br><span class="line">  table_latch_.WLock();</span><br><span class="line">  HashTableDirectoryPage\* dir_page = FetchDirectoryPage();</span><br><span class="line">  page_id_t bucket_page_id = KeyToPageId(key,dir_page);</span><br><span class="line">  Page\* page = FetchBucketPage(bucket_page_id);</span><br><span class="line"></span><br><span class="line">  page-&gt;WLatch();</span><br><span class="line"></span><br><span class="line">  HASH_TABLE_BUCKET_TYPE\* bucket_page = reinterpret_cast&lt;HASH_TABLE_BUCKET_TYPE\*&gt;(page-&gt;GetData());</span><br><span class="line"></span><br><span class="line">  bool flag = bucket_page-&gt;IsFull();</span><br><span class="line">  if(!flag)&#123;</span><br><span class="line">    bool ret = bucket_page-&gt;Insert(key,value,comparator_);</span><br><span class="line">    page-&gt;WUnlatch();</span><br><span class="line"></span><br><span class="line">    buffer_pool_manager_-&gt;UnpinPage(bucket_page_id,true);</span><br><span class="line">    buffer_pool_manager_-&gt;UnpinPage(dir_page-&gt;GetPageId(),false);</span><br><span class="line"></span><br><span class="line">    table_latch_.WUnlock();</span><br><span class="line">    return ret;</span><br><span class="line">  &#125;</span><br><span class="line">  page-&gt;WUnlatch();</span><br><span class="line">  buffer_pool_manager_-&gt;UnpinPage(bucket_page_id,false);</span><br><span class="line">  buffer_pool_manager_-&gt;UnpinPage(dir_page-&gt;GetPageId(),false);</span><br><span class="line"></span><br><span class="line">  table_latch_.WUnlock();</span><br><span class="line">  return SplitInsert(transaction,key,value);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>3、可扩展的增(Insert)</p>
+<p>对于一个比较大而且满的页,一个比较直观的想法就是分裂成两个页,这两个页都可以继续执行插入操作.这个操作比较复杂,在这里我就只用分步的形式来进行描述.</p>
+<ul>
+<li>跟前几个函数一样,首先获取要分裂的页.(这个页就是key对应的上一层的目录页)</li>
+<li>如果这个页的深度已经到达了最大深度,那么就不能再分裂下去,返回false.</li>
+<li>如果这个页和全局深度一样,就增加一下全局深度.</li>
+<li>然后获取这个桶里面的所有元素以及元素的数量.</li>
+<li>然后构造(申请一个新的)镜像页,把镜像页的基本信息写入到目录页里面,比如说页的局部深度以及ID等等.</li>
+</ul>
+<p>4、删(Remove)</p>
+<p>删除一个键值对.</p>
+<p>首先还是基础操作,获取桶页,然后调用remove函数就可以了.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">template &lt;typename KeyType, typename ValueType, typename KeyComparator&gt;</span><br><span class="line">bool HASH_TABLE_TYPE::Remove(Transaction \*transaction, const KeyType &amp;key, const ValueType &amp;value) &#123;</span><br><span class="line">  table_latch_.RLock();</span><br><span class="line"></span><br><span class="line">  HashTableDirectoryPage\* dir_page = FetchDirectoryPage();</span><br><span class="line">  uint32_t bucket_page_id = KeyToPageId(key,dir_page);</span><br><span class="line">  Page\* page = FetchBucketPage(bucket_page_id);</span><br><span class="line">  page-&gt;WLatch();</span><br><span class="line">  HASH_TABLE_BUCKET_TYPE\* bucket_page = reinterpret_cast&lt;HASH_TABLE_BUCKET_TYPE\*&gt;(page-&gt;GetData())  ;</span><br><span class="line"></span><br><span class="line">  bool ret = bucket_page-&gt;Remove(key,value,comparator_);</span><br><span class="line"></span><br><span class="line">  page-&gt;WUnlatch();</span><br><span class="line">  buffer_pool_manager_-&gt;UnpinPage(dir_page-&gt;GetPageId(),false);</span><br><span class="line">  buffer_pool_manager_-&gt;UnpinPage(bucket_page_id,true); </span><br><span class="line">  table_latch_.RUnlock();</span><br><span class="line"></span><br><span class="line">  if(bucket_page-&gt;IsEmpty())&#123;</span><br><span class="line">    Merge(transaction,key,value);</span><br><span class="line">    return ret;</span><br><span class="line">  &#125;</span><br><span class="line">  return ret;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>5、合并(Merge)</p>
+<p>删除了一个元组之后有可能产生空页,空页是没有意义的,要把空页和相对应的页做一个merge操作,合并在一起.</p>
+
+  </div>
+
+   <footer>
+
+    <div class="meta">
+  <span class="item">
+    <span class="icon">
+      <i class="ic i-calendar-check"></i>
+    </span>
+    <span class="text">更新于</span>
+    <time title="修改时间：2024-03-25 09:34:26" itemprop="dateModified" datetime="2024-03-25T09:34:26+08:00">2024-03-25</time>
+  </span>
+</div>
+
+      
+<div class="reward">
+  <button><i class="ic i-heartbeat"></i> 赞赏</button>
+  <p>请我喝[茶]~(￣▽￣)~*</p>
+  <div id="qr">
+      
+      <div>
+        <img data-src="/images/wechatpay.jpg" alt="Sukuna 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div>
+        <img data-src="/images/alipay.jpg" alt="Sukuna 支付宝">
+        <p>支付宝</p>
+      </div>
+  </div>
+</div>
+
+      
+
+<div id="copyright">
+<ul>
+  <li class="author">
+    <strong>本文作者： </strong>Sukuna <i class="ic i-at"><em>@</em></i>灵山之上神风起
+  </li>
+  <li class="link">
+    <strong>本文链接：</strong>
+    <a href="https://sukunashinmyoumaru-hust.github.io/2023/02/07/cmu14-445-lab/" title="CMU14-445 Lab">https://sukunashinmyoumaru-hust.github.io/2023/02/07/cmu14-445-lab/</a>
+  </li>
+  <li class="license">
+    <strong>版权声明： </strong>本站所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+  </footer>
+
+</article>
+
+  </div>
+  
+
+<div class="post-nav">
+    <div class="item left">
+      
+
+  <a href="/2023/02/06/stanford-cs144-lab/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;s3.bmp.ovh&#x2F;imgs&#x2F;2024&#x2F;06&#x2F;17&#x2F;bac1b1e69e7ebfb7.jpg" title="Stanford CS144 Lab">
+  <span class="type">上一篇</span>
+  <span class="category"><i class="ic i-flag"></i> 实验记录</span>
+  <h3>Stanford CS144 Lab</h3>
+  </a>
+
+    </div>
+    <div class="item right">
+      
+
+  <a href="/2023/02/08/mit-6-s081-lab/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;s3.bmp.ovh&#x2F;imgs&#x2F;2024&#x2F;06&#x2F;17&#x2F;bac1b1e69e7ebfb7.jpg" title="MIT_6.s081_Lab">
+  <span class="type">下一篇</span>
+  <span class="category"><i class="ic i-flag"></i> 实验记录</span>
+  <h3>MIT_6.s081_Lab</h3>
+  </a>
+
+    </div>
+</div>
+
+  
+  <div class="wrap" id="comments"></div>
+
+
+        </div>
+        <div id="sidebar">
+          
+
+<div class="inner">
+
+  <div class="panels">
+    <div class="inner">
+      <div class="contents panel pjax" data-title="文章目录">
+          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Lab1-Buffer-Pool"><span class="toc-number">1.</span> <span class="toc-text">Lab1.Buffer Pool</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C1-1-LRU-REPLACEMENT"><span class="toc-number">1.1.</span> <span class="toc-text">实验1.1 LRU REPLACEMENT</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C1-2-BUFFER-POOL-MANAGER-INSTANCE"><span class="toc-number">1.2.</span> <span class="toc-text">实验1.2 BUFFER POOL MANAGER INSTANCE</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C1-3-PARALLEL-BUFFER-POOL-MANAGER"><span class="toc-number">1.3.</span> <span class="toc-text">实验1.3 PARALLEL BUFFER POOL MANAGER</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Lab2-EXTENDIBLE-HASH-INDEX"><span class="toc-number">2.</span> <span class="toc-text">Lab2.EXTENDIBLE HASH INDEX</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A6%82%E8%A6%81"><span class="toc-number">2.1.</span> <span class="toc-text">概要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C2-1-PAGE-LAYOUTS"><span class="toc-number">2.2.</span> <span class="toc-text">实验2.1 PAGE LAYOUTS</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C2-1-1-%E7%9B%AE%E5%BD%95%E9%A1%B5%E7%9A%84%E8%AE%BE%E8%AE%A1"><span class="toc-number">2.2.1.</span> <span class="toc-text">实验2.1.1 目录页的设计</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-2-%E6%A1%B6%E9%A1%B5%E7%9A%84%E8%AE%BE%E8%AE%A1"><span class="toc-number">2.2.2.</span> <span class="toc-text">2.1.2 桶页的设计</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C2-2-HASH-TABLE-IMPLEMENTATION"><span class="toc-number">2.3.</span> <span class="toc-text">实验2.2 HASH TABLE IMPLEMENTATION</span></a></li></ol></li></ol>
+      </div>
+      <div class="related panel pjax" data-title="系列文章">
+        <ul>
+          <li><a href="/2021/04/25/verilog/" rel="bookmark" title="华中科技大学Verilog实验解析">华中科技大学Verilog实验解析</a></li><li><a href="/2021/12/18/oslab1/" rel="bookmark" title="华中科技大学OS实验解析(Lab1)">华中科技大学OS实验解析(Lab1)</a></li><li><a href="/2021/12/18/oslab2/" rel="bookmark" title="华中科技大学OS实验解析(Lab2)">华中科技大学OS实验解析(Lab2)</a></li><li><a href="/2022/02/26/oschallengelab/" rel="bookmark" title="华中科技大学操作系统挑战实验(PKE)基础解析">华中科技大学操作系统挑战实验(PKE)基础解析</a></li><li><a href="/2023/02/06/rustilings/" rel="bookmark" title="Rustilings 练习笔记">Rustilings 练习笔记</a></li><li><a href="/2023/02/06/stanford-cs144-lab/" rel="bookmark" title="Stanford CS144 Lab">Stanford CS144 Lab</a></li><li class="active"><a href="/2023/02/07/cmu14-445-lab/" rel="bookmark" title="CMU14-445 Lab">CMU14-445 Lab</a></li><li><a href="/2023/02/08/mit-6-s081-lab/" rel="bookmark" title="MIT_6.s081_Lab">MIT_6.s081_Lab</a></li><li><a href="/2023/02/09/mit-6-s081-xv6-information-%E9%9B%86%E5%90%88/" rel="bookmark" title="MIT_6.S081_xv6.Information 集合">MIT_6.S081_xv6.Information 集合</a></li><li><a href="/2023/09/13/nju-pa/" rel="bookmark" title="南大pa">南大pa</a></li><li><a href="/2024/04/17/stanford-cs143-PA/" rel="bookmark" title="Stanford CS143 PA">Stanford CS143 PA</a></li><li><a href="/2024/04/19/mit-6-824-mr/" rel="bookmark" title="MIT_6.824:PA1-MapReduce">MIT_6.824:PA1-MapReduce</a></li><li><a href="/2024/04/28/mit-6-824-raft/" rel="bookmark" title="In Search of an Understandable Consensus Algorithm (Extended Version)">In Search of an Understandable Consensus Algorithm (Extended Version)</a></li>
+        </ul>
+      </div>
+      <div class="overview panel" data-title="站点概览">
+        <div class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="image" itemprop="image" alt="Sukuna"
+      data-src="/images/IMG_1335.PNG">
+  <p class="name" itemprop="name">Sukuna</p>
+  <div class="description" itemprop="description"></div>
+</div>
+
+<nav class="state">
+    <div class="item posts">
+      <a href="/archives/">
+        <span class="count">20</span>
+        <span class="name">文章</span>
+      </a>
+    </div>
+    <div class="item categories">
+      <a href="/categories/">
+        <span class="count">3</span>
+        <span class="name">分类</span>
+      </a>
+    </div>
+</nav>
+
+<div class="social">
+      <span class="exturl item github" data-url="aHR0cHM6Ly9naXRodWIuY29tL1N1a3VuYXNoaW5teW91bWFydS1odXN0" title="https:&#x2F;&#x2F;github.com&#x2F;Sukunashinmyoumaru-hust"><i class="ic i-github"></i></span>
+      <span class="exturl item twitter" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9zdWt1bmFfd2lyZWxlc3M=" title="https:&#x2F;&#x2F;twitter.com&#x2F;sukuna_wireless"><i class="ic i-twitter"></i></span>
+      <a href="/sukuna@hust.edu.cn" title="sukuna@hust.edu.cn" class="item email"><i class="ic i-envelope"></i></a>
+</div>
+
+<ul class="menu">
+  
+    
+  <li class="item">
+    <a href="/" rel="section"><i class="ic i-home"></i>首页</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/about/" rel="section"><i class="ic i-user"></i>关于</a>
+  </li>
+
+        
+  <li class="item dropdown">
+      <a href="javascript:void(0);"><i class="ic i-feather"></i>文章</a>
+    <ul class="submenu">
+
+        
+  <li class="item">
+    <a href="/archives/" rel="section"><i class="ic i-list-alt"></i>归档</a>
+  </li>
+
+        
+  <li class="item">
+    <a href="/categories/" rel="section"><i class="ic i-th"></i>分类</a>
+  </li>
+
+        
+  <li class="item">
+    <a href="/tags/" rel="section"><i class="ic i-tags"></i>标签</a>
+  </li>
+
+  </ul>
+    
+  <li class="item">
+    <a href="/friend/" rel="section"><i class="ic i-heart"></i>friends</a>
+  </li>
+
+    
+  <li class="item">
+    <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1N1a3VuYVNoaW5teW91bWFydS1odXN0L0h1c3Qtb3BlbnNvdXJjZS1YdWVqaWU="><i class="ic i-github"></i>HUST-学解</span>
+  </li>
+
+    
+  <li class="item">
+    <a href="/picture/" rel="section"><i class="ic i-magic"></i>赠画感谢</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/source/" rel="section"><i class="ic i-address-card"></i>资料下载</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/travel/" rel="section"><i class="ic i-heart"></i>旅行日志</a>
+  </li>
+
+
+</ul>
+
+      </div>
+    </div>
+  </div>
+
+  <ul id="quick">
+    <li class="prev pjax">
+        <a href="/2023/02/06/stanford-cs144-lab/" rel="prev" title="上一篇"><i class="ic i-chevron-left"></i></a>
+    </li>
+    <li class="up"><i class="ic i-arrow-up"></i></li>
+    <li class="down"><i class="ic i-arrow-down"></i></li>
+    <li class="next pjax">
+        <a href="/2023/02/08/mit-6-s081-lab/" rel="next" title="下一篇"><i class="ic i-chevron-right"></i></a>
+    </li>
+    <li class="percent"></li>
+  </ul>
+</div>
+
+
+        </div>
+        <div class="dimmer"></div>
+      </div>
+    </main>
+    <footer id="footer">
+      <div class="inner">
+        <div class="widgets">
+          
+<div class="rpost pjax">
+  <h2>随机文章</h2>
+  <ul>
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E6%9D%82%E8%AE%B0/" title="分类于 杂记">杂记</a>
+</div>
+
+    <span><a href="/2020/05/02/setup/" title="建站">建站</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
+</div>
+
+    <span><a href="/2021/04/25/verilog/" title="华中科技大学Verilog实验解析">华中科技大学Verilog实验解析</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
+</div>
+
+    <span><a href="/2023/02/09/mit-6-s081-xv6-information-%E9%9B%86%E5%90%88/" title="MIT_6.S081_xv6.Information 集合">MIT_6.S081_xv6.Information 集合</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
+</div>
+
+    <span><a href="/2024/04/17/stanford-cs143-PA/" title="Stanford CS143 PA">Stanford CS143 PA</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E7%AE%97%E6%B3%95%E9%A2%98/" title="分类于 算法题">算法题</a>
+</div>
+
+    <span><a href="/2020/05/25/ufpe-starters-final-try-outs-2019-recife-brazil-dec-1-2018-problem-j/" title="UFPE Starters Final Try-Outs 2019 Recife, Brazil, Dec 1, 2018 Problem J（线段树+二分）">UFPE Starters Final Try-Outs 2019 Recife, Brazil, Dec 1, 2018 Problem J（线段树+二分）</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E6%9D%82%E8%AE%B0/" title="分类于 杂记">杂记</a>
+</div>
+
+    <span><a href="/2022/06/06/nju-ics/" title="南大ics面试记录">南大ics面试记录</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
+</div>
+
+    <span><a href="/2021/12/18/oslab2/" title="华中科技大学OS实验解析(Lab2)">华中科技大学OS实验解析(Lab2)</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E7%AE%97%E6%B3%95%E9%A2%98/" title="分类于 算法题">算法题</a>
+</div>
+
+    <span><a href="/2022/03/30/splay/" title="Splay模版:P3369[模版&#x2F;普通平衡树]">Splay模版:P3369[模版/普通平衡树]</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
+</div>
+
+    <span><a href="/2024/04/19/mit-6-824-mr/" title="MIT_6.824:PA1-MapReduce">MIT_6.824:PA1-MapReduce</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
+</div>
+
+    <span><a href="/2021/12/18/oslab1/" title="华中科技大学OS实验解析(Lab1)">华中科技大学OS实验解析(Lab1)</a></span>
+  </li>
+
+  </ul>
+</div>
+<div>
+  <h2>最新评论</h2>
+  <ul class="leancloud-recent-comment"></ul>
+</div>
+
+        </div>
+        <div class="status">
+  <div class="copyright">
+    
+    &copy; 2020 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="ic i-sakura rotate"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Sukuna @ Suwa shrine</span>
+  </div>
+  <div class="count">
+    <span class="post-meta-item-icon">
+      <i class="ic i-chart-area"></i>
+    </span>
+    <span title="站点总字数">412k 字</span>
+
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="ic i-coffee"></i>
+    </span>
+    <span title="站点阅读时长">6:15</span>
+  </div>
+  <div class="powered-by">
+    基于 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & Theme.<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FtZWhpbWUvaGV4by10aGVtZS1zaG9rYQ==">Shoka</span>
+  </div>
+</div>
+
+      </div>
+    </footer>
+  </div>
+<script data-config type="text/javascript">
+  var LOCAL = {
+    path: '2023/02/07/cmu14-445-lab/',
+    favicon: {
+      show: "（●´3｀●）あややややや～",
+      hide: "(´Д｀)大変だ！"
+    },
+    search : {
+      placeholder: "文章搜索",
+      empty: "关于 「 ${query} 」，什么也没搜到",
+      stats: "${time} ms 内找到 ${hits} 条结果"
+    },
+    valine: true,fancybox: true,
+    copyright: '复制成功，转载请遵守 <i class="ic i-creative-commons"></i>BY-NC-SA 协议。',
+    ignores : [
+      function(uri) {
+        return uri.includes('#');
+      },
+      function(uri) {
+        return new RegExp(LOCAL.path+"$").test(uri);
+      }
+    ]
+  };
+</script>
+
+<script src="https://cdn.polyfill.io/v2/polyfill.js"></script>
+
+<script src="//cdn.jsdelivr.net/combine/npm/pace-js@1.0.2/pace.min.js,npm/pjax@0.2.8/pjax.min.js,npm/whatwg-fetch@3.4.0/dist/fetch.umd.min.js,npm/animejs@3.2.0/lib/anime.min.js,npm/algoliasearch@4/dist/algoliasearch-lite.umd.js,npm/instantsearch.js@4/dist/instantsearch.production.min.js,npm/lozad@1/dist/lozad.min.js,npm/quicklink@2/dist/quicklink.umd.js"></script>
+
+<script src="/js/app.js?v=0.2.5"></script>
+
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":200,"height":400},"mobile":{"show":true},"log":false});</script></body>
+</html>

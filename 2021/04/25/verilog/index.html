@@ -1,0 +1,599 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#FFF">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/1.jpg">
+
+<link rel="icon" type="image/ico" sizes="32x32" href="/images/favicon.ico">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+<link rel="alternate" type="application/rss+xml" title="灵山之上神风起" href="https://sukunashinmyoumaru-hust.github.io/rss.xml" />
+<link rel="alternate" type="application/atom+xml" title="灵山之上神风起" href="https://sukunashinmyoumaru-hust.github.io/atom.xml" />
+<link rel="alternate" type="application/json" title="灵山之上神风起" href="https://sukunashinmyoumaru-hust.github.io/feed.json" />
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Mulish:300,300italic,400,400italic,700,700italic%7CFredericka%20the%20Great:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20JP:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20SC:300,300italic,400,400italic,700,700italic%7CInconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="/css/app.css?v=0.2.5">
+
+  
+
+<link rel="canonical" href="https://sukunashinmyoumaru-hust.github.io/2021/04/25/verilog/">
+
+
+
+  <title>
+华中科技大学Verilog实验解析 - 实验记录 |
+Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
+<meta name="generator" content="Hexo 7.1.1"></head>
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div id="loading">
+    <div class="cat">
+      <div class="body"></div>
+      <div class="head">
+        <div class="face"></div>
+      </div>
+      <div class="foot">
+        <div class="tummy-end"></div>
+        <div class="bottom"></div>
+        <div class="legs left"></div>
+        <div class="legs right"></div>
+      </div>
+      <div class="paw">
+        <div class="hands left"></div>
+        <div class="hands right"></div>
+      </div>
+    </div>
+  </div>
+  <div id="container">
+    <header id="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="inner">
+        <div id="brand">
+          <div class="pjax">
+          
+  <h1 itemprop="name headline">华中科技大学Verilog实验解析
+  </h1>
+  
+<div class="meta">
+  <span class="item" title="创建时间：2021-04-25 20:59:20">
+    <span class="icon">
+      <i class="ic i-calendar"></i>
+    </span>
+    <span class="text">发表于</span>
+    <time itemprop="dateCreated datePublished" datetime="2021-04-25T20:59:20+08:00">2021-04-25</time>
+  </span>
+  <span class="item" title="本文字数">
+    <span class="icon">
+      <i class="ic i-pen"></i>
+    </span>
+    <span class="text">本文字数</span>
+    <span>3.6k</span>
+    <span class="text">字</span>
+  </span>
+  <span class="item" title="阅读时长">
+    <span class="icon">
+      <i class="ic i-clock"></i>
+    </span>
+    <span class="text">阅读时长</span>
+    <span>3 分钟</span>
+  </span>
+</div>
+
+
+          </div>
+        </div>
+        <nav id="nav">
+  <div class="inner">
+    <div class="toggle">
+      <div class="lines" aria-label="切换导航栏">
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line"></span>
+      </div>
+    </div>
+    <ul class="menu">
+      <li class="item title"><a href="/" rel="start">Suwa shrine</a></li>
+    </ul>
+    <ul class="right">
+      <li class="item theme">
+        <i class="ic i-sun"></i>
+      </li>
+      <li class="item search">
+        <i class="ic i-search"></i>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+      </div>
+      <div id="imgs" class="pjax">
+        <ul>
+          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/8d1e248fe0f62130.jpg"></li>
+          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/7d2279310f1bb2f7.jpg"></li>
+          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/bac1b1e69e7ebfb7.jpg"></li>
+          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/f841728a51c3ae78.jpg"></li>
+          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/7c97ca6398f62495.jpg"></li>
+          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/4663c8f5b7019dfd.jpg"></li>
+        </ul>
+      </div>
+    </header>
+    <div id="waves">
+      <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+        <defs>
+          <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+        </defs>
+        <g class="parallax">
+          <use xlink:href="#gentle-wave" x="48" y="0" />
+          <use xlink:href="#gentle-wave" x="48" y="3" />
+          <use xlink:href="#gentle-wave" x="48" y="5" />
+          <use xlink:href="#gentle-wave" x="48" y="7" />
+        </g>
+      </svg>
+    </div>
+    <main>
+      <div class="inner">
+        <div id="main" class="pjax">
+          
+  <div class="article wrap">
+    
+<div class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+<i class="ic i-home"></i>
+<span><a href="/">首页</a></span><i class="ic i-angle-right"></i>
+<span  class="current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" itemprop="item" rel="index" title="分类于 实验记录"><span itemprop="name">实验记录</span></a>
+<meta itemprop="position" content="1" /></span>
+</div>
+
+    <article itemscope itemtype="http://schema.org/Article" class="post block" lang="zh-CN">
+  <link itemprop="mainEntityOfPage" href="https://sukunashinmyoumaru-hust.github.io/2021/04/25/verilog/">
+
+  <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="image" content="/images/IMG_1335.PNG">
+    <meta itemprop="name" content="Sukuna">
+    <meta itemprop="description" content="Sukuna_wireless, ">
+  </span>
+
+  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="灵山之上神风起">
+  </span>
+
+  <div class="body md" itemprop="articleBody">
+    
+
+    <p>实验二:基本的组合逻辑电路</p>
+<p>这里只展示2.3的一部分代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">module decoder_3to8(in, out);</span><br><span class="line">    input [2:0] in;</span><br><span class="line">    output reg [7:0] out;</span><br><span class="line">    </span><br><span class="line">    always@(in)  </span><br><span class="line">        case(in)  </span><br><span class="line">            3&#x27;b000 : out[7:0] = 8&#x27;b11111110;</span><br><span class="line">            3&#x27;b001 : out[7:0] = 8&#x27;b11111101;</span><br><span class="line">            3&#x27;b010 : out[7:0] = 8&#x27;b11111011;</span><br><span class="line">            3&#x27;b011 : out[7:0] = 8&#x27;b11110111;</span><br><span class="line">            3&#x27;b100 : out[7:0] = 8&#x27;b11101111;</span><br><span class="line">            3&#x27;b101 : out[7:0] = 8&#x27;b11011111;</span><br><span class="line">            3&#x27;b110 : out[7:0] = 8&#x27;b10111111;</span><br><span class="line">            default : out[7:0] = 8&#x27;b01111111;</span><br><span class="line">        endcase</span><br><span class="line">endmodule</span><br></pre></td></tr></table></figure>
+
+<p>这里我需要提一点,就是always语句或者initial语句里面是数据流的形式,数据流的形式和其他形式的区别有以下几点</p>
+<ul>
+<li>左边的元素一定是reg类型的</li>
+<li>不允许使用assign赋值</li>
+<li>@(…..)表示…..里面的值发生变化的时候就进入语句块</li>
+</ul>
+<p>这里可以使用case(…)来模仿C里面的switch语句来进行赋值(真值表)<br>用逻辑函数也可以(做运算或者申明逻辑门[逻辑门之间使用wire连接])</p>
+<p>对于4-16的亦是如此</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">module decoder_4to16(in, out);</span><br><span class="line">    input [3:0] in;</span><br><span class="line">    output reg [7:0] out;</span><br><span class="line"></span><br><span class="line">    always@(in)</span><br><span class="line">        begin</span><br><span class="line">            case(in)</span><br><span class="line">                4&#x27;b0000 : out[7:0] = 8&#x27;b11000000;</span><br><span class="line">                4&#x27;b0001 : out[7:0] = 8&#x27;b11111001;</span><br><span class="line">                4&#x27;b0010 : out[7:0] = 8&#x27;b10100100;</span><br><span class="line">                4&#x27;b0011 : out[7:0] = 8&#x27;b10110000;</span><br><span class="line">                4&#x27;b0100 : out[7:0] = 8&#x27;b10011001;</span><br><span class="line">                4&#x27;b0101 : out[7:0] = 8&#x27;b10010010;</span><br><span class="line">                4&#x27;b0110 : out[7:0] = 8&#x27;b10000010;</span><br><span class="line">                4&#x27;b0111 : out[7:0] = 8&#x27;b11111000;</span><br><span class="line">                4&#x27;b1000 : out[7:0] = 8&#x27;b10000000;</span><br><span class="line">                4&#x27;b1001 : out[7:0] = 8&#x27;b10011000;</span><br><span class="line">                4&#x27;b1010 : out[7:0] = 8&#x27;b10001000;</span><br><span class="line">                4&#x27;b1011 : out[7:0] = 8&#x27;b10000011;</span><br><span class="line">                4&#x27;b1100 : out[7:0] = 8&#x27;b11000110;</span><br><span class="line">                4&#x27;b1101 : out[7:0] = 8&#x27;b10100001;</span><br><span class="line">                4&#x27;b1110 : out[7:0] = 8&#x27;b10000110;</span><br><span class="line">                default : out[7:0] = 8&#x27;b10001110;</span><br><span class="line">            endcase</span><br><span class="line">        end</span><br><span class="line">endmodule</span><br></pre></td></tr></table></figure>
+
+<p>最后使用结构声明来组装零件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">module Last(SW, SEG, AN, LED);</span><br><span class="line">    input [15:0] SW;       // 16位拨动开关</span><br><span class="line">    output [7:0] SEG;      // 7段数码管驱动，低电平有效</span><br><span class="line">    output [7:0] AN;       // 7段数码管片选信号，低电平有效</span><br><span class="line">    output [15:0] LED;     // 16位LED显示</span><br><span class="line"></span><br><span class="line">    decoder_3to8(.in(SW[15:13]), .out(AN[7:0]));</span><br><span class="line">    decoder_4to16(.in(SW[3:0]), .out(SEG[7:0]));</span><br><span class="line">    </span><br><span class="line">    assign LED[15:0] = SW[15:0];</span><br><span class="line">endmodule</span><br></pre></td></tr></table></figure>
+
+<p>说明一下.xxx(yyy)说明yyy这个值传进结构声明中xxx这个变量,.in(SW[15:13])表示SW[15:13]这个东西放到decoder_3to8里面的in</p>
+<p>实验三:简单的同步时许逻辑电路</p>
+<p>首先就是滤波器</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">module divider(clk, clk_N);</span><br><span class="line">    input clk;                      // 系统时钟</span><br><span class="line">    output reg clk_N;                   // 分频后的时钟</span><br><span class="line">    parameter N = 100_000_000;     // 1Hz的时钟,N=fclk/fclk_N</span><br><span class="line">    reg [31:0] counter;             /* 计数器变量，通过计数实现分频。当计数器从0计数到(N/2-1)时，输出时钟翻转，计数器清零 */</span><br><span class="line"></span><br><span class="line">    initial</span><br><span class="line">    begin                           // 赋初始值</span><br><span class="line">        counter = 0;</span><br><span class="line">        clk_N = 0;</span><br><span class="line">    end</span><br><span class="line">    always @(posedge clk)           // 时钟上升</span><br><span class="line">    begin</span><br><span class="line">        counter &lt;= counter + 1;</span><br><span class="line">        if (counter &gt; N / 2)</span><br><span class="line">            begin</span><br><span class="line">                clk_N &lt;= ~clk_N;</span><br><span class="line">                counter &lt;= 0;</span><br><span class="line">            end</span><br><span class="line">    end</span><br><span class="line">endmodule</span><br></pre></td></tr></table></figure>
+
+<p>posedge代表上升的意思,这个就是clk(板子里面的E3)每一次上升就会触发,其实板子里面的E3会一直变化(速度非常快)这个就是板子里的E3变化了1亿次之后就会传输一个信号出去的意思</p>
+<p>就是clk进.clk_N出clk变化100000000次,clk_N变化一次,这个就是分频的定义,所以说在always里面加上了一个if语句就是这个意思</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">module counter(clk, out);</span><br><span class="line">    input clk;                    // 计数时钟</span><br><span class="line">    output reg [2:0] out;         // 计数值</span><br><span class="line"></span><br><span class="line">    always @(posedge clk)         // 在时钟上升沿计数器加1</span><br><span class="line">    begin</span><br><span class="line">        out &lt;= out + 1;</span><br><span class="line">    end</span><br><span class="line">endmodule</span><br></pre></td></tr></table></figure>
+
+<p>计数器,就是每一次clk上升out就会加1,至于触发器怎么用,咱也不用管,就说明功能就完事了</p>
+<p>第三个实验就是测试一下计数器和过滤器组合的原理</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">module divide_and_count(clk, out);</span><br><span class="line">    input clk;</span><br><span class="line">    output [2:0] out;</span><br><span class="line">    wire clk_tmp;</span><br><span class="line"></span><br><span class="line">    divider d1(.clk(clk), .clk_N(clk_tmp));</span><br><span class="line">    counter c1(.clk(clk_tmp), .out(out[2:0]));</span><br><span class="line">endmodule</span><br></pre></td></tr></table></figure>
+
+<p>这个是不是有点像Java里面的装饰器,对传进来的信号进行逐级装饰,传递来的信号经过计数器的转化进行输出</p>
+<p>实验四:只读存储器:打个表就行了</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">module rom8x4(addr, data);</span><br><span class="line">    input [2:0] addr;               // 地址</span><br><span class="line">    output [3:0] data;              // 地址addr处存储的数据 </span><br><span class="line">    reg [3: 0] mem [7: 0];          //  8个4位的存储器</span><br><span class="line"></span><br><span class="line">    initial                         // 初始化存储器</span><br><span class="line">        begin</span><br><span class="line">            mem[0]=4&#x27;b0000;</span><br><span class="line">            mem[1]=4&#x27;b0010;</span><br><span class="line">            mem[2]=4&#x27;b0100;</span><br><span class="line">            mem[3]=4&#x27;b0110;</span><br><span class="line">            mem[4]=4&#x27;b1000;</span><br><span class="line">            mem[5]=4&#x27;b1010;</span><br><span class="line">            mem[6]=4&#x27;b1100;</span><br><span class="line">            mem[7]=4&#x27;b1110;</span><br><span class="line">        end</span><br><span class="line"></span><br><span class="line">    assign data[3:0] = mem[addr];   // 读取addr单元的值输出</span><br><span class="line"></span><br><span class="line">endmodule</span><br></pre></td></tr></table></figure>
+
+<p>下面就是把信号分解成七位表示器了.上面提到过</p>
+<p>最后把这些东西组在一块,又用到组织模块</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">module dynamic_scan(clk, SEG, AN);</span><br><span class="line">    input clk;              // 系统时钟</span><br><span class="line">    output [7:0] SEG;  // 分别对应CA、CB、CC、CD、CE、CF、CG和DP</span><br><span class="line">    output [7:0] AN;        // 8位数码管片选信</span><br><span class="line">    wire clk_tmp;</span><br><span class="line">    wire [2:0] num;</span><br><span class="line">    wire [3:0] code;</span><br><span class="line"></span><br><span class="line">    divider d1(.clk(clk), .clk_N(clk_tmp));</span><br><span class="line">    counter c1(.clk(clk_tmp), .out(num[2:0]));</span><br><span class="line">    decoder_3to8(.in(num[2:0]), .out(AN[7:0]));</span><br><span class="line">    rom8x4(.addr(num[2:0]), .data(code[3:0]));</span><br><span class="line">    decoder_4to16(.in(code[3:0]), .out(SEG[7:0]));</span><br><span class="line"></span><br><span class="line">endmodule</span><br></pre></td></tr></table></figure>
+
+<p>可以使用wire连接,也可以直接你的输出就是我的输入</p>
+
+  </div>
+
+   <footer>
+
+    <div class="meta">
+  <span class="item">
+    <span class="icon">
+      <i class="ic i-calendar-check"></i>
+    </span>
+    <span class="text">更新于</span>
+    <time title="修改时间：2024-02-29 10:51:26" itemprop="dateModified" datetime="2024-02-29T10:51:26+08:00">2024-02-29</time>
+  </span>
+</div>
+
+      
+<div class="reward">
+  <button><i class="ic i-heartbeat"></i> 赞赏</button>
+  <p>请我喝[茶]~(￣▽￣)~*</p>
+  <div id="qr">
+      
+      <div>
+        <img data-src="/images/wechatpay.jpg" alt="Sukuna 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div>
+        <img data-src="/images/alipay.jpg" alt="Sukuna 支付宝">
+        <p>支付宝</p>
+      </div>
+  </div>
+</div>
+
+      
+
+<div id="copyright">
+<ul>
+  <li class="author">
+    <strong>本文作者： </strong>Sukuna <i class="ic i-at"><em>@</em></i>灵山之上神风起
+  </li>
+  <li class="link">
+    <strong>本文链接：</strong>
+    <a href="https://sukunashinmyoumaru-hust.github.io/2021/04/25/verilog/" title="华中科技大学Verilog实验解析">https://sukunashinmyoumaru-hust.github.io/2021/04/25/verilog/</a>
+  </li>
+  <li class="license">
+    <strong>版权声明： </strong>本站所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+  </footer>
+
+</article>
+
+  </div>
+  
+
+<div class="post-nav">
+    <div class="item left">
+      
+
+  <a href="/2020/10/11/cmd/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;s3.bmp.ovh&#x2F;imgs&#x2F;2024&#x2F;06&#x2F;17&#x2F;8d1e248fe0f62130.jpg" title="(烂活)用cmd窗口输出图画">
+  <span class="type">上一篇</span>
+  <span class="category"><i class="ic i-flag"></i> 杂记</span>
+  <h3>(烂活)用cmd窗口输出图画</h3>
+  </a>
+
+    </div>
+    <div class="item right">
+      
+
+  <a href="/2021/12/18/oslab1/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;s3.bmp.ovh&#x2F;imgs&#x2F;2024&#x2F;06&#x2F;17&#x2F;7d2279310f1bb2f7.jpg" title="华中科技大学OS实验解析(Lab1)">
+  <span class="type">下一篇</span>
+  <span class="category"><i class="ic i-flag"></i> 实验记录</span>
+  <h3>华中科技大学OS实验解析(Lab1)</h3>
+  </a>
+
+    </div>
+</div>
+
+  
+  <div class="wrap" id="comments"></div>
+
+
+        </div>
+        <div id="sidebar">
+          
+
+<div class="inner">
+
+  <div class="panels">
+    <div class="inner">
+      <div class="contents panel pjax" data-title="文章目录">
+      </div>
+      <div class="related panel pjax" data-title="系列文章">
+        <ul>
+          <li class="active"><a href="/2021/04/25/verilog/" rel="bookmark" title="华中科技大学Verilog实验解析">华中科技大学Verilog实验解析</a></li><li><a href="/2021/12/18/oslab1/" rel="bookmark" title="华中科技大学OS实验解析(Lab1)">华中科技大学OS实验解析(Lab1)</a></li><li><a href="/2021/12/18/oslab2/" rel="bookmark" title="华中科技大学OS实验解析(Lab2)">华中科技大学OS实验解析(Lab2)</a></li><li><a href="/2022/02/26/oschallengelab/" rel="bookmark" title="华中科技大学操作系统挑战实验(PKE)基础解析">华中科技大学操作系统挑战实验(PKE)基础解析</a></li><li><a href="/2023/02/06/rustilings/" rel="bookmark" title="Rustilings 练习笔记">Rustilings 练习笔记</a></li><li><a href="/2023/02/06/stanford-cs144-lab/" rel="bookmark" title="Stanford CS144 Lab">Stanford CS144 Lab</a></li><li><a href="/2023/02/07/cmu14-445-lab/" rel="bookmark" title="CMU14-445 Lab">CMU14-445 Lab</a></li><li><a href="/2023/02/08/mit-6-s081-lab/" rel="bookmark" title="MIT_6.s081_Lab">MIT_6.s081_Lab</a></li><li><a href="/2023/02/09/mit-6-s081-xv6-information-%E9%9B%86%E5%90%88/" rel="bookmark" title="MIT_6.S081_xv6.Information 集合">MIT_6.S081_xv6.Information 集合</a></li><li><a href="/2023/09/13/nju-pa/" rel="bookmark" title="南大pa">南大pa</a></li><li><a href="/2024/04/17/stanford-cs143-PA/" rel="bookmark" title="Stanford CS143 PA">Stanford CS143 PA</a></li><li><a href="/2024/04/19/mit-6-824-mr/" rel="bookmark" title="MIT_6.824:PA1-MapReduce">MIT_6.824:PA1-MapReduce</a></li><li><a href="/2024/04/28/mit-6-824-raft/" rel="bookmark" title="In Search of an Understandable Consensus Algorithm (Extended Version)">In Search of an Understandable Consensus Algorithm (Extended Version)</a></li>
+        </ul>
+      </div>
+      <div class="overview panel" data-title="站点概览">
+        <div class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="image" itemprop="image" alt="Sukuna"
+      data-src="/images/IMG_1335.PNG">
+  <p class="name" itemprop="name">Sukuna</p>
+  <div class="description" itemprop="description"></div>
+</div>
+
+<nav class="state">
+    <div class="item posts">
+      <a href="/archives/">
+        <span class="count">20</span>
+        <span class="name">文章</span>
+      </a>
+    </div>
+    <div class="item categories">
+      <a href="/categories/">
+        <span class="count">3</span>
+        <span class="name">分类</span>
+      </a>
+    </div>
+</nav>
+
+<div class="social">
+      <span class="exturl item github" data-url="aHR0cHM6Ly9naXRodWIuY29tL1N1a3VuYXNoaW5teW91bWFydS1odXN0" title="https:&#x2F;&#x2F;github.com&#x2F;Sukunashinmyoumaru-hust"><i class="ic i-github"></i></span>
+      <span class="exturl item twitter" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9zdWt1bmFfd2lyZWxlc3M=" title="https:&#x2F;&#x2F;twitter.com&#x2F;sukuna_wireless"><i class="ic i-twitter"></i></span>
+      <a href="/sukuna@hust.edu.cn" title="sukuna@hust.edu.cn" class="item email"><i class="ic i-envelope"></i></a>
+</div>
+
+<ul class="menu">
+  
+    
+  <li class="item">
+    <a href="/" rel="section"><i class="ic i-home"></i>首页</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/about/" rel="section"><i class="ic i-user"></i>关于</a>
+  </li>
+
+        
+  <li class="item dropdown">
+      <a href="javascript:void(0);"><i class="ic i-feather"></i>文章</a>
+    <ul class="submenu">
+
+        
+  <li class="item">
+    <a href="/archives/" rel="section"><i class="ic i-list-alt"></i>归档</a>
+  </li>
+
+        
+  <li class="item">
+    <a href="/categories/" rel="section"><i class="ic i-th"></i>分类</a>
+  </li>
+
+        
+  <li class="item">
+    <a href="/tags/" rel="section"><i class="ic i-tags"></i>标签</a>
+  </li>
+
+  </ul>
+    
+  <li class="item">
+    <a href="/friend/" rel="section"><i class="ic i-heart"></i>friends</a>
+  </li>
+
+    
+  <li class="item">
+    <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1N1a3VuYVNoaW5teW91bWFydS1odXN0L0h1c3Qtb3BlbnNvdXJjZS1YdWVqaWU="><i class="ic i-github"></i>HUST-学解</span>
+  </li>
+
+    
+  <li class="item">
+    <a href="/picture/" rel="section"><i class="ic i-magic"></i>赠画感谢</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/source/" rel="section"><i class="ic i-address-card"></i>资料下载</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/travel/" rel="section"><i class="ic i-heart"></i>旅行日志</a>
+  </li>
+
+
+</ul>
+
+      </div>
+    </div>
+  </div>
+
+  <ul id="quick">
+    <li class="prev pjax">
+        <a href="/2020/10/11/cmd/" rel="prev" title="上一篇"><i class="ic i-chevron-left"></i></a>
+    </li>
+    <li class="up"><i class="ic i-arrow-up"></i></li>
+    <li class="down"><i class="ic i-arrow-down"></i></li>
+    <li class="next pjax">
+        <a href="/2021/12/18/oslab1/" rel="next" title="下一篇"><i class="ic i-chevron-right"></i></a>
+    </li>
+    <li class="percent"></li>
+  </ul>
+</div>
+
+
+        </div>
+        <div class="dimmer"></div>
+      </div>
+    </main>
+    <footer id="footer">
+      <div class="inner">
+        <div class="widgets">
+          
+<div class="rpost pjax">
+  <h2>随机文章</h2>
+  <ul>
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
+</div>
+
+    <span><a href="/2024/04/19/mit-6-824-mr/" title="MIT_6.824:PA1-MapReduce">MIT_6.824:PA1-MapReduce</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
+</div>
+
+    <span><a href="/2021/12/18/oslab2/" title="华中科技大学OS实验解析(Lab2)">华中科技大学OS实验解析(Lab2)</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E6%9D%82%E8%AE%B0/" title="分类于 杂记">杂记</a>
+</div>
+
+    <span><a href="/2022/04/17/luogu-al/" title="做算法题综合">做算法题综合</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
+</div>
+
+    <span><a href="/2021/12/18/oslab1/" title="华中科技大学OS实验解析(Lab1)">华中科技大学OS实验解析(Lab1)</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
+</div>
+
+    <span><a href="/2022/02/26/oschallengelab/" title="华中科技大学操作系统挑战实验(PKE)基础解析">华中科技大学操作系统挑战实验(PKE)基础解析</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
+</div>
+
+    <span><a href="/2023/09/13/nju-pa/" title="南大pa">南大pa</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
+</div>
+
+    <span><a href="/2023/02/06/stanford-cs144-lab/" title="Stanford CS144 Lab">Stanford CS144 Lab</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
+</div>
+
+    <span><a href="/2023/02/09/mit-6-s081-xv6-information-%E9%9B%86%E5%90%88/" title="MIT_6.S081_xv6.Information 集合">MIT_6.S081_xv6.Information 集合</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
+</div>
+
+    <span><a href="/2023/02/06/rustilings/" title="Rustilings 练习笔记">Rustilings 练习笔记</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
+</div>
+
+    <span><a href="/2024/04/17/stanford-cs143-PA/" title="Stanford CS143 PA">Stanford CS143 PA</a></span>
+  </li>
+
+  </ul>
+</div>
+<div>
+  <h2>最新评论</h2>
+  <ul class="leancloud-recent-comment"></ul>
+</div>
+
+        </div>
+        <div class="status">
+  <div class="copyright">
+    
+    &copy; 2020 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="ic i-sakura rotate"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Sukuna @ Suwa shrine</span>
+  </div>
+  <div class="count">
+    <span class="post-meta-item-icon">
+      <i class="ic i-chart-area"></i>
+    </span>
+    <span title="站点总字数">412k 字</span>
+
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="ic i-coffee"></i>
+    </span>
+    <span title="站点阅读时长">6:15</span>
+  </div>
+  <div class="powered-by">
+    基于 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & Theme.<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FtZWhpbWUvaGV4by10aGVtZS1zaG9rYQ==">Shoka</span>
+  </div>
+</div>
+
+      </div>
+    </footer>
+  </div>
+<script data-config type="text/javascript">
+  var LOCAL = {
+    path: '2021/04/25/verilog/',
+    favicon: {
+      show: "（●´3｀●）あややややや～",
+      hide: "(´Д｀)大変だ！"
+    },
+    search : {
+      placeholder: "文章搜索",
+      empty: "关于 「 ${query} 」，什么也没搜到",
+      stats: "${time} ms 内找到 ${hits} 条结果"
+    },
+    valine: true,fancybox: true,
+    copyright: '复制成功，转载请遵守 <i class="ic i-creative-commons"></i>BY-NC-SA 协议。',
+    ignores : [
+      function(uri) {
+        return uri.includes('#');
+      },
+      function(uri) {
+        return new RegExp(LOCAL.path+"$").test(uri);
+      }
+    ]
+  };
+</script>
+
+<script src="https://cdn.polyfill.io/v2/polyfill.js"></script>
+
+<script src="//cdn.jsdelivr.net/combine/npm/pace-js@1.0.2/pace.min.js,npm/pjax@0.2.8/pjax.min.js,npm/whatwg-fetch@3.4.0/dist/fetch.umd.min.js,npm/animejs@3.2.0/lib/anime.min.js,npm/algoliasearch@4/dist/algoliasearch-lite.umd.js,npm/instantsearch.js@4/dist/instantsearch.production.min.js,npm/lozad@1/dist/lozad.min.js,npm/quicklink@2/dist/quicklink.umd.js"></script>
+
+<script src="/js/app.js?v=0.2.5"></script>
+
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":200,"height":400},"mobile":{"show":true},"log":false});</script></body>
+</html>

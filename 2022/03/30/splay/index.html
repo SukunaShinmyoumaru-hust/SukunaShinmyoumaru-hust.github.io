@@ -1,0 +1,619 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#FFF">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/1.jpg">
+
+<link rel="icon" type="image/ico" sizes="32x32" href="/images/favicon.ico">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+<link rel="alternate" type="application/rss+xml" title="灵山之上神风起" href="https://sukunashinmyoumaru-hust.github.io/rss.xml" />
+<link rel="alternate" type="application/atom+xml" title="灵山之上神风起" href="https://sukunashinmyoumaru-hust.github.io/atom.xml" />
+<link rel="alternate" type="application/json" title="灵山之上神风起" href="https://sukunashinmyoumaru-hust.github.io/feed.json" />
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Mulish:300,300italic,400,400italic,700,700italic%7CFredericka%20the%20Great:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20JP:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20SC:300,300italic,400,400italic,700,700italic%7CInconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="/css/app.css?v=0.2.5">
+
+  
+
+<link rel="canonical" href="https://sukunashinmyoumaru-hust.github.io/2022/03/30/splay/">
+
+
+
+  <title>
+Splay模版:P3369[模版/普通平衡树] - 算法题 |
+Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
+<meta name="generator" content="Hexo 7.1.1"></head>
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div id="loading">
+    <div class="cat">
+      <div class="body"></div>
+      <div class="head">
+        <div class="face"></div>
+      </div>
+      <div class="foot">
+        <div class="tummy-end"></div>
+        <div class="bottom"></div>
+        <div class="legs left"></div>
+        <div class="legs right"></div>
+      </div>
+      <div class="paw">
+        <div class="hands left"></div>
+        <div class="hands right"></div>
+      </div>
+    </div>
+  </div>
+  <div id="container">
+    <header id="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="inner">
+        <div id="brand">
+          <div class="pjax">
+          
+  <h1 itemprop="name headline">Splay模版:P3369[模版/普通平衡树]
+  </h1>
+  
+<div class="meta">
+  <span class="item" title="创建时间：2022-03-30 21:20:56">
+    <span class="icon">
+      <i class="ic i-calendar"></i>
+    </span>
+    <span class="text">发表于</span>
+    <time itemprop="dateCreated datePublished" datetime="2022-03-30T21:20:56+08:00">2022-03-30</time>
+  </span>
+  <span class="item" title="本文字数">
+    <span class="icon">
+      <i class="ic i-pen"></i>
+    </span>
+    <span class="text">本文字数</span>
+    <span>7.8k</span>
+    <span class="text">字</span>
+  </span>
+  <span class="item" title="阅读时长">
+    <span class="icon">
+      <i class="ic i-clock"></i>
+    </span>
+    <span class="text">阅读时长</span>
+    <span>7 分钟</span>
+  </span>
+</div>
+
+
+          </div>
+        </div>
+        <nav id="nav">
+  <div class="inner">
+    <div class="toggle">
+      <div class="lines" aria-label="切换导航栏">
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line"></span>
+      </div>
+    </div>
+    <ul class="menu">
+      <li class="item title"><a href="/" rel="start">Suwa shrine</a></li>
+    </ul>
+    <ul class="right">
+      <li class="item theme">
+        <i class="ic i-sun"></i>
+      </li>
+      <li class="item search">
+        <i class="ic i-search"></i>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+      </div>
+      <div id="imgs" class="pjax">
+        <ul>
+          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/7d2279310f1bb2f7.jpg"></li>
+          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/c10853f5c9aee06c.jpg"></li>
+          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/4663c8f5b7019dfd.jpg"></li>
+          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/8d1e248fe0f62130.jpg"></li>
+          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/7c97ca6398f62495.jpg"></li>
+          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/97c3cfc23ec60f4c.jpg"></li>
+        </ul>
+      </div>
+    </header>
+    <div id="waves">
+      <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+        <defs>
+          <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+        </defs>
+        <g class="parallax">
+          <use xlink:href="#gentle-wave" x="48" y="0" />
+          <use xlink:href="#gentle-wave" x="48" y="3" />
+          <use xlink:href="#gentle-wave" x="48" y="5" />
+          <use xlink:href="#gentle-wave" x="48" y="7" />
+        </g>
+      </svg>
+    </div>
+    <main>
+      <div class="inner">
+        <div id="main" class="pjax">
+          
+  <div class="article wrap">
+    
+<div class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+<i class="ic i-home"></i>
+<span><a href="/">首页</a></span><i class="ic i-angle-right"></i>
+<span  class="current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="/categories/%E7%AE%97%E6%B3%95%E9%A2%98/" itemprop="item" rel="index" title="分类于 算法题"><span itemprop="name">算法题</span></a>
+<meta itemprop="position" content="1" /></span>
+</div>
+
+    <article itemscope itemtype="http://schema.org/Article" class="post block" lang="zh-CN">
+  <link itemprop="mainEntityOfPage" href="https://sukunashinmyoumaru-hust.github.io/2022/03/30/splay/">
+
+  <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="image" content="/images/IMG_1335.PNG">
+    <meta itemprop="name" content="Sukuna">
+    <meta itemprop="description" content="Sukuna_wireless, ">
+  </span>
+
+  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="灵山之上神风起">
+  </span>
+
+  <div class="body md" itemprop="articleBody">
+    
+
+    <p>[latexpage]</p>
+<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>您需要写一种数据结构（可参考题目标题），来维护一些数，其中需要提供以下操作：</p>
+<ol>
+<li>插入$x$ 数</li>
+<li>删除 $x$ 数(若有多个相同的数，因只删除一个)</li>
+<li>查询 $x$ 数的排名(排名定义为比当前数小的数的个数 +1 )</li>
+<li>查询排名为 $x$ 的数</li>
+<li>求 $x$ 的前驱(前驱定义为小于 $x$，且最大的数)</li>
+<li>求 $x$ 的后继(后继定义为大于 $x$，且最小的数)</li>
+</ol>
+<h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><p>第一行为 $n$，表示操作的个数,下面 $x$ 行每行有两个数 opt 和 $x$，opt 表示操作的序号.</p>
+<h2 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h2><p>对于操作 3,4,5,6.每行输出一个数，表示对应答案.</p>
+<h3 id="splay的定义"><a href="#splay的定义" class="headerlink" title="splay的定义"></a>splay的定义</h3><p>伸展树（Splay Tree），也叫分裂树，是一种二叉排序树，它能在 O(logn)内完成插入、查找和删除操作.<br>它由丹尼尔·斯立特Daniel Sleator 和 罗伯特·恩卓·塔扬Robert Endre Tarjan在1985年发明的.</p>
+<p>在伸展树上的一般操作都基于伸展操作：<br>假设想要对一个二叉查找树执行一系列的查找操作，为了使整个查找时间更小，被查频率高的那些条目就应当经常处于靠近树根的位置.<br>于是想到设计一个简单方法：<br>在每次查找之后对树进行重构，把被查找的条目搬移到离树根近一些的地方.<br>伸展树应运而生：<br>伸展树是一种自调整形式的二叉查找树，它会沿着从某个节点到树根之间的路径，通过一系列的旋转把这个节点搬移到树根去.<br>它的优势在于不需要记录用于平衡树的冗余信息.</p>
+<p>总的来说,伸展树在每一次增改查之后就会把被查询的元素放到根部</p>
+<h3 id="数据结构定义"><a href="#数据结构定义" class="headerlink" title="数据结构定义"></a>数据结构定义</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">struct splay&#123;</span><br><span class="line">    int ch[2];</span><br><span class="line">    int val;//数值</span><br><span class="line">    int size;//子树大小</span><br><span class="line">    int cnt;//每个节点所含副本数</span><br><span class="line">    int parent;</span><br><span class="line">&#125;splay[N];</span><br><span class="line">int total;</span><br><span class="line">int root;</span><br></pre></td></tr></table></figure>
+
+<p>这里用数组来模拟树,树的节点个数为total,根结点记录在root,那么splay[root]就是根结点,其中每个节点记录本身的值,左子树和右子树信息,每个节点含有副本数量,和这个节点对应子树的大小.</p>
+<h3 id="PushOff操作"><a href="#PushOff操作" class="headerlink" title="PushOff操作"></a>PushOff操作</h3><p>在每一次对树进行操作的之后都要进行一次pushoff操作,来更新size区域.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">void pushup(int node_id)&#123;</span><br><span class="line">    int l=splay[node_id].ch[0];</span><br><span class="line">    int r=splay[node_id].ch[1];</span><br><span class="line">    splay[node_id].size=splay[l].size+splay[r].size+splay[node_id].cnt;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="单旋转操作"><a href="#单旋转操作" class="headerlink" title="单旋转操作"></a>单旋转操作</h3><p>每次旋转操作其实上都是将父亲和儿子进行交换,就是x和x.parent进行交换.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">void rotate (int x) &#123;</span><br><span class="line">    int fa = splay[x].parent;</span><br><span class="line">    int Gfa = splay[fa].parent;</span><br><span class="line">    int k = (splay[fa].ch[1]==x);</span><br><span class="line">    int g = (splay[Gfa].ch[1]==fa);</span><br><span class="line">    splay[Gfa].ch[g]=x;</span><br><span class="line">    splay[x].parent=Gfa;</span><br><span class="line">    </span><br><span class="line">    splay[fa].ch[k]=splay[x].ch[k^1];</span><br><span class="line">    splay[splay[x].ch[k^1]].parent=fa;</span><br><span class="line">    </span><br><span class="line">    splay[x].ch[k ^ 1]=fa;</span><br><span class="line">    splay[fa].parent=x;</span><br><span class="line">    pushup(fa);</span><br><span class="line">    pushup(x);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>交换需要借助父亲的父亲,也就是祖父的力量,首先我们先记录x是fa&#x3D;x.parent左儿子还是右儿子,结果记为k(1:右儿子,0:左儿子),然后记录fa是Gfa&#x3D;fa.parent的左儿子还是右儿子,计为g(1:右儿子,0:左儿子).</p>
+<p>下面为了叙述方便,我们定义一个奇怪的定义,就是外孙,比如说x是fa的左儿子,那么x的右儿子就是fa的外孙;x是fa的右儿子,那么x的左儿子就是x的外孙.</p>
+<p>这个时候有三个点,分别是父亲、祖父和儿子,分别代表Gfa、fa和x.<br>首先第一步就是祖父的儿子从fa替换成x.<br>第二步就是父亲的儿子从x替换成x的外孙.<br>第三步就是原本x的外孙的位子由fa占领.</p>
+<p>这个是最难的一部分,还是希望还是可以记住执行的顺序,一个是替换祖父的儿子,然后替换父亲的儿子,然后替换儿子的儿子,这是替换顺序,替换成什么可以记下来,分别是儿子,父亲的外孙和父亲.</p>
+<p><img data-src="https://sukunahust.com/wp-content/uploads/2022/03/1A952F557921D8DA96AB618F3912CFFE-1024x473.jpg"></p>
+<p>实在太难怎么办?把旋转的画法画下来带进考场,反正CSP是开卷orz.</p>
+<h3 id="splay操作"><a href="#splay操作" class="headerlink" title="splay操作"></a>splay操作</h3><p>我们需要做到的就是增改查的节点送到根结点,那么我们可以设计一个函数,这个函数叫做splayed(x,y).目的就是把编号为x的节点送到y的儿子处.所以说用形式语言我们可以这么写$x.parent&#x3D;&#x3D;y$.就是x的父亲为y.</p>
+<p>说句题外话,因为节点是从1开始编号的,所以说有且只有一个结点就是根结点的父亲为0.所以说想把数送到根结点需要执行splayed(x,0).</p>
+<p>我们在之前还是知道rotate操作可以把一个数在树中的层数-1.这就好办,我们每次都做rorate操作,直到这个数的父亲是y为止.但是学过AVL的旋转我们知道,旋转可以分为单旋和双旋的,其实这个也是一样的.</p>
+<p><img data-src="https://sukunahust.com/wp-content/uploads/2022/03/3C5D880B2DA25B8A1D0A78A6B9E34390-1024x473.jpg"></p>
+<p>判断究竟是一字旋转还是之字旋转其实就判断<code>(splay[Gfa].ch[0] == fa) ^ (splay[fa].ch[0] == x)</code>.这个异或可以判断儿子情况是不是一样的.</p>
+<p>但是有一个问题就是,我们不知道旋转能不能做,因为在rotate函数中,我们充分相信fa和Gfa都是有意义的.所以说在splay操作调用rotate时我们要保证x是有意义的.</p>
+<p>由于旋转是两个两个来做的,首先第一步,我们判断我们能不能做两次旋转操作,然后判断我们能不能做一次操作.判断的方法在代码中有说.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">//将x旋转到goal的儿子</span><br><span class="line">void splayed ( int x, int goal ) &#123;</span><br><span class="line">    while (splay[x].parent != goal) &#123;</span><br><span class="line">        int fa = splay[x].parent, Gfa = splay[fa].parent;</span><br><span class="line">        //能做两次吗?</span><br><span class="line">        if (Gfa!= goal)</span><br><span class="line">            ((splay[Gfa].ch[0] == fa) ^ (splay[fa].ch[0] == x)) ? rotate(x) : rotate (fa);</span><br><span class="line">        //splay[x].parent != goal 判断能做一次旋转操作吗?</span><br><span class="line">        rotate (x);</span><br><span class="line">    &#125;</span><br><span class="line">    //如果goal为0,代表要改根结点</span><br><span class="line">    if (!goal)</span><br><span class="line">        root=x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="insert操作"><a href="#insert操作" class="headerlink" title="insert操作"></a>insert操作</h3><p>解决了最核心的旋转问题,我们可以专注搞增删改查了.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">void insert(int x) &#123;</span><br><span class="line">    int u=root, fa=0;</span><br><span class="line">    while (u &amp;&amp; splay[u].val!=x) &#123;</span><br><span class="line">        fa = u;</span><br><span class="line">        u=splay[u].ch[x&gt;splay[u].val];</span><br><span class="line">    &#125;</span><br><span class="line">    if (u)</span><br><span class="line">        splay[u].cnt ++;</span><br><span class="line">    else &#123;</span><br><span class="line">        u=++total;</span><br><span class="line">        if (fa)</span><br><span class="line">            splay[fa].ch[x &gt; splay[fa].val] = u;</span><br><span class="line">        splay[u].ch[0] = splay[u].ch[1] = 0;</span><br><span class="line">        splay[u].val = x;</span><br><span class="line">        splay[u].parent = fa;</span><br><span class="line">        splay[u].cnt = splay[u].size = 1;</span><br><span class="line">    &#125;</span><br><span class="line">    splayed(u,0);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们注意到有一个前提,这个前提就是这个树是一个BST,也就是说我们查找可以根据BST性质来进行查找,查找的目的就是找到合适的地方来处理.</p>
+<p>如果查找到的地方是空,说明之前没有插入过值为x的结点,如果找到了就增加引用数即可.</p>
+<h3 id="find操作"><a href="#find操作" class="headerlink" title="find操作"></a>find操作</h3><p>insert操作其实就是基于find操作执行的,也是满足BST性质,如果你忘了我就告诉你一下,小的往左,大的往右,在空和找到了的地方下停下来.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">void find(int x)&#123;</span><br><span class="line">    if (!root)</span><br><span class="line">            return;</span><br><span class="line">        int u=root;</span><br><span class="line">        while (splay[u].ch[x &gt; splay[u].val] &amp;&amp; x!=splay[u].val)</span><br><span class="line">            u=splay[u].ch[x &gt; splay[u].val];</span><br><span class="line">        splayed (u,0);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="前序和后序操作"><a href="#前序和后序操作" class="headerlink" title="前序和后序操作"></a>前序和后序操作</h3><p>我们首先调用find(x)函数,find(x)函数会帮我找到x并且把x放到根.我们假设x存在,那么x是根结点.那么就很好做,前序结点就是先往左然后一直往右,后序结点就是先往右然后一直往左.</p>
+<p>但是万一x没找到呢?也不要紧,那么我们可以知道查询的结果往往是最接近x的结果,所以说我们可以假设,如果找的是前序结点并且当前根结点小于x,那就是根结点.同样的,如果要找后序结点并且根结点大于x,那就是根结点.如果不对的话,那我们还是按照x存在的方法寻找.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">int PreSuf (int x, int f) &#123;</span><br><span class="line">    find (x);</span><br><span class="line">    if (splay[root].val&gt;x&amp;&amp;f)</span><br><span class="line">        return root;</span><br><span class="line">    if (splay[root].val &lt; x &amp;&amp; !f)</span><br><span class="line">        return root;</span><br><span class="line">    int u = splay[root].ch[f];</span><br><span class="line">    if (!u)</span><br><span class="line">        return 0;</span><br><span class="line">    while (splay[u].ch[f ^ 1])</span><br><span class="line">        u =splay[u].ch[f ^ 1];</span><br><span class="line">    return u;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Delete操作"><a href="#Delete操作" class="headerlink" title="Delete操作"></a>Delete操作</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">void Delete (int x) &#123;</span><br><span class="line">    int pre = PreSuf(x,0);</span><br><span class="line">    int suf = PreSuf(x,1);</span><br><span class="line">    splayed(pre,0);</span><br><span class="line">    splayed(suf,pre);</span><br><span class="line">    int u = splay[suf].ch[0];</span><br><span class="line">    if (splay[u].cnt&gt;1) &#123;</span><br><span class="line">        splay[u].cnt--;</span><br><span class="line">        splayed ( u, 0 );</span><br><span class="line">    &#125;</span><br><span class="line">    else&#123;</span><br><span class="line">        splay[suf].ch[0] = 0;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们求得x的前序和后序,然后把前序放到根,后序在根的右儿子,这个时候比x前序还小的在根结点左儿子,比x后序还大的在根结点的右儿子的右儿子,x就在根结点的右儿子的左儿子.然后比较cnt,删除即可.</p>
+<h3 id="第k个操作"><a href="#第k个操作" class="headerlink" title="第k个操作"></a>第k个操作</h3><p>之前的size派上用场了!因为左子树的size就是比x小的个数,右子树的size是比x大的个数.那么我们可以选择往左还是往右,判断的依据是$k&gt;left.size?right:left$.如果往右的话,k要减去left.size+1,因为我们不考虑最小的left.size+1个元素了,你现在是k-left.size+1小的元素了.以此类推.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">int findkth (int x) &#123;</span><br><span class="line">    if (splay[root].size&lt;x)</span><br><span class="line">        return -1;</span><br><span class="line">    int u=root;</span><br><span class="line">    while (1) &#123;</span><br><span class="line">        if ( x &lt;= splay[splay[u].ch[0]].size )</span><br><span class="line">            u = splay[u].ch[0];</span><br><span class="line">        else if ( x &lt;= splay[u].cnt + splay[splay[u].ch[0]].size )</span><br><span class="line">                return u;</span><br><span class="line">            else &#123;</span><br><span class="line">                x -= ( splay[splay[u].ch[0]].size + splay[u].cnt );</span><br><span class="line">                u = splay[u].ch[1];</span><br><span class="line">            &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="插入INF和-INF"><a href="#插入INF和-INF" class="headerlink" title="插入INF和-INF"></a>插入INF和-INF</h3><p>INF和-INF可以作为哨兵,如果有哨兵存在，那么这些点永远都不会是死在最前面或者死的时候垫在最下面，就帮助我们少考虑很多边界，我昨天没有加哨兵，不停地补刀做手术，还是千疮百孔，病很多都是并发症，医不过来，加了个哨兵，自己就好了</p>
+<h3 id="总的代码"><a href="#总的代码" class="headerlink" title="总的代码"></a>总的代码</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">#define N 1000005</span><br><span class="line">#define INF 0x7f7f7f7f</span><br><span class="line">struct splay&#123;</span><br><span class="line">    int ch[2];</span><br><span class="line">    int val;//数值</span><br><span class="line">    int size;//子树大小</span><br><span class="line">    int cnt;//每个节点所含副本数</span><br><span class="line">    int parent;</span><br><span class="line">&#125;splay[N];</span><br><span class="line">int total;</span><br><span class="line">int root;</span><br><span class="line">int na;</span><br><span class="line">void pushup(int node_id)&#123;</span><br><span class="line">    int l=splay[node_id].ch[0];</span><br><span class="line">    int r=splay[node_id].ch[1];</span><br><span class="line">    splay[node_id].size=splay[l].size+splay[r].size+splay[node_id].cnt;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void rotate (int x) &#123;</span><br><span class="line">    int fa = splay[x].parent;</span><br><span class="line">    int Gfa = splay[fa].parent;</span><br><span class="line">    int k = (splay[fa].ch[1]== x);</span><br><span class="line">    splay[Gfa].ch[splay[Gfa].ch[1]==fa] = x;</span><br><span class="line">    splay[x].parent = Gfa;</span><br><span class="line">    splay[fa].ch[k] = splay[x].ch[k^1];</span><br><span class="line">    splay[splay[x].ch[k^1]].parent= fa;</span><br><span class="line">    splay[x].ch[k ^ 1] = fa;</span><br><span class="line">    splay[fa].parent = x;</span><br><span class="line">    pushup(fa);</span><br><span class="line">    pushup(x);</span><br><span class="line">&#125;</span><br><span class="line">//将x旋转到goal的儿子</span><br><span class="line">void splayed ( int x, int goal ) &#123;</span><br><span class="line">    while (splay[x].parent != goal) &#123;</span><br><span class="line">        int fa = splay[x].parent, Gfa = splay[fa].parent;</span><br><span class="line">        if (Gfa!= goal )</span><br><span class="line">            ( (splay[Gfa].ch[0] == fa) ^ (splay[fa].ch[0] == x)) ? rotate(x) : rotate (fa);</span><br><span class="line">        rotate (x);</span><br><span class="line">    &#125;</span><br><span class="line">    if (!goal)</span><br><span class="line">        root=x;</span><br><span class="line">&#125;</span><br><span class="line">void insert(int x) &#123;</span><br><span class="line">    int u=root, fa=0;</span><br><span class="line">    while (u &amp;&amp; splay[u].val!=x) &#123;</span><br><span class="line">        fa = u;</span><br><span class="line">        u=splay[u].ch[x&gt;splay[u].val];</span><br><span class="line">    &#125;</span><br><span class="line">    if (u)</span><br><span class="line">        splay[u].cnt ++;</span><br><span class="line">    else &#123;</span><br><span class="line">        u=++total;</span><br><span class="line">        if (fa)</span><br><span class="line">            splay[fa].ch[x &gt; splay[fa].val] = u;</span><br><span class="line">        splay[u].ch[0] = splay[u].ch[1] = 0;</span><br><span class="line">        splay[u].val = x;</span><br><span class="line">        splay[u].parent = fa;</span><br><span class="line">        splay[u].cnt = splay[u].size = 1;</span><br><span class="line">    &#125;</span><br><span class="line">    splayed(u,0);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void find(int x)&#123;</span><br><span class="line">    if (!root)</span><br><span class="line">            return;</span><br><span class="line">        int u=root;</span><br><span class="line">        while (splay[u].ch[x &gt; splay[u].val] &amp;&amp; x!=splay[u].val)</span><br><span class="line">            u=splay[u].ch[x &gt; splay[u].val];</span><br><span class="line">        splayed (u,0);</span><br><span class="line">&#125;</span><br><span class="line">int PreSuf (int x, int f) &#123;</span><br><span class="line">    find (x);</span><br><span class="line">    if (splay[root].val&gt;x&amp;&amp;f)</span><br><span class="line">        return root;</span><br><span class="line">    if (splay[root].val &lt; x &amp;&amp; !f)</span><br><span class="line">        return root;</span><br><span class="line">    int u = splay[root].ch[f];</span><br><span class="line">    if (!u)</span><br><span class="line">        return 0;</span><br><span class="line">    while (splay[u].ch[f ^ 1])</span><br><span class="line">        u =splay[u].ch[f ^ 1];</span><br><span class="line">    return u;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void Delete (int x) &#123;</span><br><span class="line">    int pre = PreSuf(x,0);</span><br><span class="line">    int suf = PreSuf(x,1);</span><br><span class="line">    splayed(pre,0);</span><br><span class="line">    splayed(suf,pre);</span><br><span class="line">    int u = splay[suf].ch[0];</span><br><span class="line">    if (splay[u].cnt&gt;1) &#123;</span><br><span class="line">        splay[u].cnt--;</span><br><span class="line">        splayed ( u, 0 );</span><br><span class="line">    &#125;</span><br><span class="line">    else&#123;</span><br><span class="line">        splay[suf].ch[0] = 0;</span><br><span class="line">    &#125;</span><br><span class="line">        </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int findkth (int x) &#123;</span><br><span class="line">    if (splay[root].size&lt;x)</span><br><span class="line">        return -1;</span><br><span class="line">    int u=root;</span><br><span class="line">    while (1) &#123;</span><br><span class="line">        if ( x &lt;= splay[splay[u].ch[0]].size )</span><br><span class="line">            u = splay[u].ch[0];</span><br><span class="line">        else if ( x &lt;= splay[u].cnt + splay[splay[u].ch[0]].size )</span><br><span class="line">                return u;</span><br><span class="line">            else &#123;</span><br><span class="line">                x -= ( splay[splay[u].ch[0]].size + splay[u].cnt );</span><br><span class="line">                u = splay[u].ch[1];</span><br><span class="line">            &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">void build()&#123;</span><br><span class="line">    insert(INF);</span><br><span class="line">    insert(-INF);</span><br><span class="line">&#125;</span><br><span class="line">int main()&#123;</span><br><span class="line">    int n;</span><br><span class="line">    build();</span><br><span class="line">    scanf(&quot;%d&quot;,&amp;n);</span><br><span class="line">    int opt,x;</span><br><span class="line">    int u;</span><br><span class="line">    while(n--)&#123;</span><br><span class="line">        scanf(&quot;%d %d&quot;,&amp;opt,&amp;x);</span><br><span class="line">        switch (opt) &#123;</span><br><span class="line">            case 1:</span><br><span class="line">                insert(x);</span><br><span class="line">                break;</span><br><span class="line">            case 2:</span><br><span class="line">                Delete(x);</span><br><span class="line">                break;</span><br><span class="line">            case 3:</span><br><span class="line">                find(x);</span><br><span class="line">                printf(&quot;%d\n&quot;,splay[splay[root].ch[0]].size);</span><br><span class="line">                break;</span><br><span class="line">            case 4:</span><br><span class="line">                u=findkth(x+1);</span><br><span class="line">                printf(&quot;%d\n&quot;,splay[u].val);</span><br><span class="line">                break;</span><br><span class="line">            case 5:</span><br><span class="line">                u=PreSuf(x, 0);</span><br><span class="line">                printf(&quot;%d\n&quot;,splay[u].val);</span><br><span class="line">                break;</span><br><span class="line">            case 6:</span><br><span class="line">                u=PreSuf(x, 1);</span><br><span class="line">                printf(&quot;%d\n&quot;,splay[u].val);</span><br><span class="line">                break;</span><br><span class="line">            default:</span><br><span class="line">                break;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+  </div>
+
+   <footer>
+
+    <div class="meta">
+  <span class="item">
+    <span class="icon">
+      <i class="ic i-calendar-check"></i>
+    </span>
+    <span class="text">更新于</span>
+    <time title="修改时间：2024-02-29 15:26:09" itemprop="dateModified" datetime="2024-02-29T15:26:09+08:00">2024-02-29</time>
+  </span>
+</div>
+
+      
+<div class="reward">
+  <button><i class="ic i-heartbeat"></i> 赞赏</button>
+  <p>请我喝[茶]~(￣▽￣)~*</p>
+  <div id="qr">
+      
+      <div>
+        <img data-src="/images/wechatpay.jpg" alt="Sukuna 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div>
+        <img data-src="/images/alipay.jpg" alt="Sukuna 支付宝">
+        <p>支付宝</p>
+      </div>
+  </div>
+</div>
+
+      
+
+<div id="copyright">
+<ul>
+  <li class="author">
+    <strong>本文作者： </strong>Sukuna <i class="ic i-at"><em>@</em></i>灵山之上神风起
+  </li>
+  <li class="link">
+    <strong>本文链接：</strong>
+    <a href="https://sukunashinmyoumaru-hust.github.io/2022/03/30/splay/" title="Splay模版:P3369[模版&#x2F;普通平衡树]">https://sukunashinmyoumaru-hust.github.io/2022/03/30/splay/</a>
+  </li>
+  <li class="license">
+    <strong>版权声明： </strong>本站所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+  </footer>
+
+</article>
+
+  </div>
+  
+
+<div class="post-nav">
+    <div class="item left">
+      
+
+  <a href="/2022/02/26/oschallengelab/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;s3.bmp.ovh&#x2F;imgs&#x2F;2024&#x2F;06&#x2F;17&#x2F;5d3d43e0f7dc0697.jpg" title="华中科技大学操作系统挑战实验(PKE)基础解析">
+  <span class="type">上一篇</span>
+  <span class="category"><i class="ic i-flag"></i> 实验记录</span>
+  <h3>华中科技大学操作系统挑战实验(PKE)基础解析</h3>
+  </a>
+
+    </div>
+    <div class="item right">
+      
+
+  <a href="/2022/04/17/luogu-al/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;s3.bmp.ovh&#x2F;imgs&#x2F;2024&#x2F;06&#x2F;17&#x2F;f841728a51c3ae78.jpg" title="做算法题综合">
+  <span class="type">下一篇</span>
+  <span class="category"><i class="ic i-flag"></i> 杂记</span>
+  <h3>做算法题综合</h3>
+  </a>
+
+    </div>
+</div>
+
+  
+  <div class="wrap" id="comments"></div>
+
+
+        </div>
+        <div id="sidebar">
+          
+
+<div class="inner">
+
+  <div class="panels">
+    <div class="inner">
+      <div class="contents panel pjax" data-title="文章目录">
+          <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">题目描述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E6%A0%BC%E5%BC%8F"><span class="toc-number">2.</span> <span class="toc-text">输入格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E6%A0%BC%E5%BC%8F"><span class="toc-number">3.</span> <span class="toc-text">输出格式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#splay%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-number">3.1.</span> <span class="toc-text">splay的定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9A%E4%B9%89"><span class="toc-number">3.2.</span> <span class="toc-text">数据结构定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PushOff%E6%93%8D%E4%BD%9C"><span class="toc-number">3.3.</span> <span class="toc-text">PushOff操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%95%E6%97%8B%E8%BD%AC%E6%93%8D%E4%BD%9C"><span class="toc-number">3.4.</span> <span class="toc-text">单旋转操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#splay%E6%93%8D%E4%BD%9C"><span class="toc-number">3.5.</span> <span class="toc-text">splay操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#insert%E6%93%8D%E4%BD%9C"><span class="toc-number">3.6.</span> <span class="toc-text">insert操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#find%E6%93%8D%E4%BD%9C"><span class="toc-number">3.7.</span> <span class="toc-text">find操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E5%BA%8F%E5%92%8C%E5%90%8E%E5%BA%8F%E6%93%8D%E4%BD%9C"><span class="toc-number">3.8.</span> <span class="toc-text">前序和后序操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Delete%E6%93%8D%E4%BD%9C"><span class="toc-number">3.9.</span> <span class="toc-text">Delete操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%ACk%E4%B8%AA%E6%93%8D%E4%BD%9C"><span class="toc-number">3.10.</span> <span class="toc-text">第k个操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%92%E5%85%A5INF%E5%92%8C-INF"><span class="toc-number">3.11.</span> <span class="toc-text">插入INF和-INF</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%9A%84%E4%BB%A3%E7%A0%81"><span class="toc-number">3.12.</span> <span class="toc-text">总的代码</span></a></li></ol></li></ol>
+      </div>
+      <div class="related panel pjax" data-title="系列文章">
+        <ul>
+          <li><a href="/2020/05/24/ufpe-starters-final-try-outs-2019-problem-l/" rel="bookmark" title="UFPE Starters Final Try-Outs 2019 Problem L">UFPE Starters Final Try-Outs 2019 Problem L</a></li><li><a href="/2020/05/25/ufpe-starters-final-try-outs-2019-recife-brazil-dec-1-2018-problem-j/" rel="bookmark" title="UFPE Starters Final Try-Outs 2019 Recife, Brazil, Dec 1, 2018 Problem J（线段树+二分）">UFPE Starters Final Try-Outs 2019 Recife, Brazil, Dec 1, 2018 Problem J（线段树+二分）</a></li><li class="active"><a href="/2022/03/30/splay/" rel="bookmark" title="Splay模版:P3369[模版/普通平衡树]">Splay模版:P3369[模版/普通平衡树]</a></li>
+        </ul>
+      </div>
+      <div class="overview panel" data-title="站点概览">
+        <div class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="image" itemprop="image" alt="Sukuna"
+      data-src="/images/IMG_1335.PNG">
+  <p class="name" itemprop="name">Sukuna</p>
+  <div class="description" itemprop="description"></div>
+</div>
+
+<nav class="state">
+    <div class="item posts">
+      <a href="/archives/">
+        <span class="count">20</span>
+        <span class="name">文章</span>
+      </a>
+    </div>
+    <div class="item categories">
+      <a href="/categories/">
+        <span class="count">3</span>
+        <span class="name">分类</span>
+      </a>
+    </div>
+</nav>
+
+<div class="social">
+      <span class="exturl item github" data-url="aHR0cHM6Ly9naXRodWIuY29tL1N1a3VuYXNoaW5teW91bWFydS1odXN0" title="https:&#x2F;&#x2F;github.com&#x2F;Sukunashinmyoumaru-hust"><i class="ic i-github"></i></span>
+      <span class="exturl item twitter" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9zdWt1bmFfd2lyZWxlc3M=" title="https:&#x2F;&#x2F;twitter.com&#x2F;sukuna_wireless"><i class="ic i-twitter"></i></span>
+      <a href="/sukuna@hust.edu.cn" title="sukuna@hust.edu.cn" class="item email"><i class="ic i-envelope"></i></a>
+</div>
+
+<ul class="menu">
+  
+    
+  <li class="item">
+    <a href="/" rel="section"><i class="ic i-home"></i>首页</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/about/" rel="section"><i class="ic i-user"></i>关于</a>
+  </li>
+
+        
+  <li class="item dropdown">
+      <a href="javascript:void(0);"><i class="ic i-feather"></i>文章</a>
+    <ul class="submenu">
+
+        
+  <li class="item">
+    <a href="/archives/" rel="section"><i class="ic i-list-alt"></i>归档</a>
+  </li>
+
+        
+  <li class="item">
+    <a href="/categories/" rel="section"><i class="ic i-th"></i>分类</a>
+  </li>
+
+        
+  <li class="item">
+    <a href="/tags/" rel="section"><i class="ic i-tags"></i>标签</a>
+  </li>
+
+  </ul>
+    
+  <li class="item">
+    <a href="/friend/" rel="section"><i class="ic i-heart"></i>friends</a>
+  </li>
+
+    
+  <li class="item">
+    <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1N1a3VuYVNoaW5teW91bWFydS1odXN0L0h1c3Qtb3BlbnNvdXJjZS1YdWVqaWU="><i class="ic i-github"></i>HUST-学解</span>
+  </li>
+
+    
+  <li class="item">
+    <a href="/picture/" rel="section"><i class="ic i-magic"></i>赠画感谢</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/source/" rel="section"><i class="ic i-address-card"></i>资料下载</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/travel/" rel="section"><i class="ic i-heart"></i>旅行日志</a>
+  </li>
+
+
+</ul>
+
+      </div>
+    </div>
+  </div>
+
+  <ul id="quick">
+    <li class="prev pjax">
+        <a href="/2022/02/26/oschallengelab/" rel="prev" title="上一篇"><i class="ic i-chevron-left"></i></a>
+    </li>
+    <li class="up"><i class="ic i-arrow-up"></i></li>
+    <li class="down"><i class="ic i-arrow-down"></i></li>
+    <li class="next pjax">
+        <a href="/2022/04/17/luogu-al/" rel="next" title="下一篇"><i class="ic i-chevron-right"></i></a>
+    </li>
+    <li class="percent"></li>
+  </ul>
+</div>
+
+
+        </div>
+        <div class="dimmer"></div>
+      </div>
+    </main>
+    <footer id="footer">
+      <div class="inner">
+        <div class="widgets">
+          
+<div class="rpost pjax">
+  <h2>随机文章</h2>
+  <ul>
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E7%AE%97%E6%B3%95%E9%A2%98/" title="分类于 算法题">算法题</a>
+</div>
+
+    <span><a href="/2020/05/24/ufpe-starters-final-try-outs-2019-problem-l/" title="UFPE Starters Final Try-Outs 2019 Problem L">UFPE Starters Final Try-Outs 2019 Problem L</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
+</div>
+
+    <span><a href="/2023/02/09/mit-6-s081-xv6-information-%E9%9B%86%E5%90%88/" title="MIT_6.S081_xv6.Information 集合">MIT_6.S081_xv6.Information 集合</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
+</div>
+
+    <span><a href="/2024/04/17/stanford-cs143-PA/" title="Stanford CS143 PA">Stanford CS143 PA</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
+</div>
+
+    <span><a href="/2021/12/18/oslab1/" title="华中科技大学OS实验解析(Lab1)">华中科技大学OS实验解析(Lab1)</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
+</div>
+
+    <span><a href="/2023/02/07/cmu14-445-lab/" title="CMU14-445 Lab">CMU14-445 Lab</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
+</div>
+
+    <span><a href="/2021/12/18/oslab2/" title="华中科技大学OS实验解析(Lab2)">华中科技大学OS实验解析(Lab2)</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
+</div>
+
+    <span><a href="/2023/02/06/rustilings/" title="Rustilings 练习笔记">Rustilings 练习笔记</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E6%9D%82%E8%AE%B0/" title="分类于 杂记">杂记</a>
+</div>
+
+    <span><a href="/2022/06/06/nju-ics/" title="南大ics面试记录">南大ics面试记录</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
+</div>
+
+    <span><a href="/2023/02/06/stanford-cs144-lab/" title="Stanford CS144 Lab">Stanford CS144 Lab</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
+</div>
+
+    <span><a href="/2023/09/13/nju-pa/" title="南大pa">南大pa</a></span>
+  </li>
+
+  </ul>
+</div>
+<div>
+  <h2>最新评论</h2>
+  <ul class="leancloud-recent-comment"></ul>
+</div>
+
+        </div>
+        <div class="status">
+  <div class="copyright">
+    
+    &copy; 2020 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="ic i-sakura rotate"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Sukuna @ Suwa shrine</span>
+  </div>
+  <div class="count">
+    <span class="post-meta-item-icon">
+      <i class="ic i-chart-area"></i>
+    </span>
+    <span title="站点总字数">412k 字</span>
+
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="ic i-coffee"></i>
+    </span>
+    <span title="站点阅读时长">6:15</span>
+  </div>
+  <div class="powered-by">
+    基于 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & Theme.<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FtZWhpbWUvaGV4by10aGVtZS1zaG9rYQ==">Shoka</span>
+  </div>
+</div>
+
+      </div>
+    </footer>
+  </div>
+<script data-config type="text/javascript">
+  var LOCAL = {
+    path: '2022/03/30/splay/',
+    favicon: {
+      show: "（●´3｀●）あややややや～",
+      hide: "(´Д｀)大変だ！"
+    },
+    search : {
+      placeholder: "文章搜索",
+      empty: "关于 「 ${query} 」，什么也没搜到",
+      stats: "${time} ms 内找到 ${hits} 条结果"
+    },
+    valine: true,fancybox: true,
+    copyright: '复制成功，转载请遵守 <i class="ic i-creative-commons"></i>BY-NC-SA 协议。',
+    ignores : [
+      function(uri) {
+        return uri.includes('#');
+      },
+      function(uri) {
+        return new RegExp(LOCAL.path+"$").test(uri);
+      }
+    ]
+  };
+</script>
+
+<script src="https://cdn.polyfill.io/v2/polyfill.js"></script>
+
+<script src="//cdn.jsdelivr.net/combine/npm/pace-js@1.0.2/pace.min.js,npm/pjax@0.2.8/pjax.min.js,npm/whatwg-fetch@3.4.0/dist/fetch.umd.min.js,npm/animejs@3.2.0/lib/anime.min.js,npm/algoliasearch@4/dist/algoliasearch-lite.umd.js,npm/instantsearch.js@4/dist/instantsearch.production.min.js,npm/lozad@1/dist/lozad.min.js,npm/quicklink@2/dist/quicklink.umd.js"></script>
+
+<script src="/js/app.js?v=0.2.5"></script>
+
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":200,"height":400},"mobile":{"show":true},"log":false});</script></body>
+</html>

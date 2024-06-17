@@ -1,0 +1,665 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#FFF">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/1.jpg">
+
+<link rel="icon" type="image/ico" sizes="32x32" href="/images/favicon.ico">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+<link rel="alternate" type="application/rss+xml" title="灵山之上神风起" href="https://sukunashinmyoumaru-hust.github.io/rss.xml" />
+<link rel="alternate" type="application/atom+xml" title="灵山之上神风起" href="https://sukunashinmyoumaru-hust.github.io/atom.xml" />
+<link rel="alternate" type="application/json" title="灵山之上神风起" href="https://sukunashinmyoumaru-hust.github.io/feed.json" />
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Mulish:300,300italic,400,400italic,700,700italic%7CFredericka%20the%20Great:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20JP:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20SC:300,300italic,400,400italic,700,700italic%7CInconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="/css/app.css?v=0.2.5">
+
+  
+
+<link rel="canonical" href="https://sukunashinmyoumaru-hust.github.io/2023/02/06/stanford-cs144-lab/">
+
+
+
+  <title>
+Stanford CS144 Lab - 实验记录 |
+Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
+<meta name="generator" content="Hexo 7.1.1"></head>
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div id="loading">
+    <div class="cat">
+      <div class="body"></div>
+      <div class="head">
+        <div class="face"></div>
+      </div>
+      <div class="foot">
+        <div class="tummy-end"></div>
+        <div class="bottom"></div>
+        <div class="legs left"></div>
+        <div class="legs right"></div>
+      </div>
+      <div class="paw">
+        <div class="hands left"></div>
+        <div class="hands right"></div>
+      </div>
+    </div>
+  </div>
+  <div id="container">
+    <header id="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="inner">
+        <div id="brand">
+          <div class="pjax">
+          
+  <h1 itemprop="name headline">Stanford CS144 Lab
+  </h1>
+  
+<div class="meta">
+  <span class="item" title="创建时间：2023-02-06 10:50:55">
+    <span class="icon">
+      <i class="ic i-calendar"></i>
+    </span>
+    <span class="text">发表于</span>
+    <time itemprop="dateCreated datePublished" datetime="2023-02-06T10:50:55+08:00">2023-02-06</time>
+  </span>
+  <span class="item" title="本文字数">
+    <span class="icon">
+      <i class="ic i-pen"></i>
+    </span>
+    <span class="text">本文字数</span>
+    <span>27k</span>
+    <span class="text">字</span>
+  </span>
+  <span class="item" title="阅读时长">
+    <span class="icon">
+      <i class="ic i-clock"></i>
+    </span>
+    <span class="text">阅读时长</span>
+    <span>25 分钟</span>
+  </span>
+</div>
+
+
+          </div>
+        </div>
+        <nav id="nav">
+  <div class="inner">
+    <div class="toggle">
+      <div class="lines" aria-label="切换导航栏">
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line"></span>
+      </div>
+    </div>
+    <ul class="menu">
+      <li class="item title"><a href="/" rel="start">Suwa shrine</a></li>
+    </ul>
+    <ul class="right">
+      <li class="item theme">
+        <i class="ic i-sun"></i>
+      </li>
+      <li class="item search">
+        <i class="ic i-search"></i>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+      </div>
+      <div id="imgs" class="pjax">
+        <ul>
+          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/f841728a51c3ae78.jpg"></li>
+          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/bac1b1e69e7ebfb7.jpg"></li>
+          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/97c3cfc23ec60f4c.jpg"></li>
+          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/4663c8f5b7019dfd.jpg"></li>
+          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/8d1e248fe0f62130.jpg"></li>
+          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/5d3d43e0f7dc0697.jpg"></li>
+        </ul>
+      </div>
+    </header>
+    <div id="waves">
+      <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+        <defs>
+          <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+        </defs>
+        <g class="parallax">
+          <use xlink:href="#gentle-wave" x="48" y="0" />
+          <use xlink:href="#gentle-wave" x="48" y="3" />
+          <use xlink:href="#gentle-wave" x="48" y="5" />
+          <use xlink:href="#gentle-wave" x="48" y="7" />
+        </g>
+      </svg>
+    </div>
+    <main>
+      <div class="inner">
+        <div id="main" class="pjax">
+          
+  <div class="article wrap">
+    
+<div class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+<i class="ic i-home"></i>
+<span><a href="/">首页</a></span><i class="ic i-angle-right"></i>
+<span  class="current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" itemprop="item" rel="index" title="分类于 实验记录"><span itemprop="name">实验记录</span></a>
+<meta itemprop="position" content="1" /></span>
+</div>
+
+    <article itemscope itemtype="http://schema.org/Article" class="post block" lang="zh-CN">
+  <link itemprop="mainEntityOfPage" href="https://sukunashinmyoumaru-hust.github.io/2023/02/06/stanford-cs144-lab/">
+
+  <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="image" content="/images/IMG_1335.PNG">
+    <meta itemprop="name" content="Sukuna">
+    <meta itemprop="description" content="Sukuna_wireless, ">
+  </span>
+
+  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="灵山之上神风起">
+  </span>
+
+  <div class="body md" itemprop="articleBody">
+    
+
+    <h1 id="Lab0-Warm-Up"><a href="#Lab0-Warm-Up" class="headerlink" title="Lab0.Warm Up"></a>Lab0.Warm Up</h1><h2 id="1-Networking-by-hand"><a href="#1-Networking-by-hand" class="headerlink" title="1 Networking by hand"></a>1 Networking by hand</h2><p>这一个部分主要是体验一些基本的应用层协议,主要是HTTP协议和SMTP协议.</p>
+<blockquote>
+<p>Both of these tasks rely on a networking abstraction called a reliable bidirectional in-order byte stream: you’ll type a sequence of bytes into the terminal, and the same sequence of bytes will eventually be delivered, in the same order, to a program running on another computer (a server). The server responds with its own sequence of bytes, delivered back to your terminal.</p>
+</blockquote>
+<p>在实验资料中给出的是这么一段话,这句话的意思就是所有的应用层协议都是由底层支撑的,这个底层可以理解成可靠的二进制比特流的传输,一方应用程序会产生比特流投入到传输通道中,另一方的应用程序会从传输通道中获取到比特流信息.这个传输通道就是Socket,套接字.</p>
+<h2 id="2-自制Socket"><a href="#2-自制Socket" class="headerlink" title="2 自制Socket"></a>2 自制Socket</h2><blockquote>
+<p>This feature is known as a stream socket. To your program and to the Web server, the socket looks like an ordinary file descriptor (similar to a file on disk, or to the stdin or stdout I&#x2F;O streams). When two stream sockets are connected, any bytes written to one socket will eventually come out in the same order from the other socket on the other computer.</p>
+</blockquote>
+<p>Socket在Linux操作系统中本质上就是一个文件,一旦两个Socket相互连接,应用程序会往一个Socket递交数据,另外一个Socket就会原封不动地把数据传递过来.连接的方式在运输层有讲,客户端的一个网络端口创建一个Socket,往服务器的一个网络端口发送请求,这是第一次握手,接着服务器的网络端口传输ACK给客户端,这是第二次握手,接着客户端会传输一个最后的请求,这个叫三次握手.三次握手后,连接就完成了,这个时候两个Socket(可以理解成网络端口?)相互链接了.</p>
+<p>需要注意的是,在应用层我们一般是注重逻辑通信,Socket是一个逻辑概念,应用程序把数据投给一个叫做Socket的东西,你可以理解成逻辑通信的一端,但是具体Socket往下是怎么做的不是应用程序需要关注的.</p>
+<p>这个实验就需要我们模拟一个Socket应用,与一个服务器的端口建立连接.然后获取网页.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">void get_URL(const string &amp;host, const string &amp;path) &#123;</span><br><span class="line">    // Your code here.</span><br><span class="line"></span><br><span class="line">    // You will need to connect to the &quot;http&quot; service on</span><br><span class="line">    // the computer whose name is in the &quot;host&quot; string,</span><br><span class="line">    // then request the URL path given in the &quot;path&quot; string.</span><br><span class="line"></span><br><span class="line">    // Then you&#x27;ll need to print out everything the server sends back,</span><br><span class="line">    // (not just one call to rearequestd() -- everything) until you reach</span><br><span class="line">    // the &quot;eof&quot; (end of file).</span><br><span class="line">    // create a TCPSocket</span><br><span class="line">    TCPSocket client_socket;</span><br><span class="line">    // connect with host. host is a parameter.</span><br><span class="line">    client_socket.connect(Address(host, &quot;http&quot;));</span><br><span class="line">    // send a request Message. the request is made of 2 sentences.</span><br><span class="line">    string request = &quot;GET &quot;+path+&quot; HTTP/1.1\r\n&quot;+&quot;Host: &quot;+host+&quot;\r\nConnection: close\r\n\r\n&quot;;</span><br><span class="line">    client_socket.write(request);</span><br><span class="line"></span><br><span class="line">    // get the Message</span><br><span class="line">    while(!client_socket.eof())&#123;</span><br><span class="line">        string reply = client_socket.read();</span><br><span class="line">        cout&lt;&lt;reply;</span><br><span class="line">    &#125;</span><br><span class="line">    cerr &lt;&lt; &quot;Function called: get_URL(&quot; &lt;&lt; host &lt;&lt; &quot;, &quot; &lt;&lt; path &lt;&lt; &quot;).\n&quot;;</span><br><span class="line">    cerr &lt;&lt; &quot;Warning: get_URL() has not been implemented yet.\n&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个时候先创建一个TCPSocket,首先先进行连接,然后像之前一样创建request,接着这个Socket就可以把request写进去.然后服务器会返回数据,这个数据是读取到Socket的,读数据一直读到EOF即可.</p>
+<p>由于这个实验是面向初学者的,具体Socket怎么读怎么写我们没有考虑,我们只用调用教授已经写好的写,读操作.</p>
+<h2 id="3-缓冲区队列"><a href="#3-缓冲区队列" class="headerlink" title="3 缓冲区队列"></a>3 缓冲区队列</h2><p>要求实现一个有序字节流类（in-order byte stream），使之支持读写、容量控制。这个字节流类似于一个带容量的队列，从一头读，从另一头写。当流中的数据达到容量上限时，便无法再写入新的数据。特别的，写操作被分为了peek和pop两步。peek为从头部开始读取指定数量的字节，pop为弹出指定数量的字节。</p>
+<p>总的来说就是做一个桶,可以从下方获得内容,也可以从上方添加内容,当桶满的时候就不可以添加东西了</p>
+<p>ByteStream具有一定的容量，最大允许存储该容量大小的数据；在读取端读出一部分数据后，它会释放掉已经被读出的内容，以腾出空间继续让写端写入数据。  </p>
+<p>这个实验为我们后期实现TCP协议有着帮助.</p>
+<p>上面的是缓冲区队列的一些声明,对于读写两方,操作是不同的.</p>
+<p>有个小提示,如果C++的构造函数可以使用像这样的方法进行初始化的</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">class baba (const int abab) _abab(abab)&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个本质上就是数据结构题,完成缓冲区队列罢了.</p>
+<p><img data-src="https://sukunahust.com/wp-content/uploads/2022/03/image-22-1024x617.png"></p>
+<h1 id="Lab1-stitching-substrings-into-a-byte-stream"><a href="#Lab1-stitching-substrings-into-a-byte-stream" class="headerlink" title="Lab1.stitching substrings into a byte stream"></a>Lab1.stitching substrings into a byte stream</h1><p>该lab要求我们实现一个流重组类，可以将Sender发来的带索引号的字节碎片重组成有序的字节写入到byte_stream。接收端从发送端读取数据，调用流重组器，流重组器对数据进行排序，排序好后写入byte_stream。</p>
+<p>流重组器也是有capasity的,也就是说流重组器也有一定的容量,一次性处理太多的信息会导致流重组器不能够正常地工作.同样的我们把流处理器当成一个双端队列即可.</p>
+<p>private类中还有一个ByteStream类型的变量,所有的内容都输出给ByteStream,还有一个容量变量.其中ByteStream中的bytes_read返回ByteStream处理了多少元素.</p>
+<p>因为重组类的函数中,支持的index是first unread&#x3D;_output.bytes_read()(已经读取的元素)到first unacceptable的这一块区域,我们要保证输入的字节编号是在这个区域里面的.</p>
+<p>在重组器类的函数中，push_substring函数完成重组工作。其参数有data(string),index(size_t),eof(bool),data是待排序的数据，index是数据首元素的序号，eof用于判断是否结束。结束后将不再有数据输入。</p>
+<p>在重组的过程中，我们会遇到重复、丢包、重叠、乱序的现象。为了使乱序的数据找到有序的位置，我使用’\0’维护重组器中数据的相对序号，例如，第一次data为make,index为0,第二次data为great,index为13,而处于两组数据中间的数据未知，我们就用’\0’代替，即make\0\0\0\0\0\0\0\0\0great。这样就维护了已经进入重组器的数据的有序。当然，写入的data中也有可能含有\0,这是，我们就需要一个bool双端队列，来记录相应位置的数据是否有序，在上述例子中，队列的bool值为111100000000011111。</p>
+<p>所以说我们在数据结构中添加几项,一个是_unassembled_byte,是一个<span class="exturl" data-url="c3RkOjpkZXF1ZQ==">std::deque</span><char>,暂时存储还乱序的字符串,_check_byte是<span class="exturl" data-url="c3RkOjpkZXF1ZQ==">std::deque</span><bool>,这个元素与_unassembled_byte一一对应,当un[i]存储着还没有发送的字符的时候,ch[I]&#x3D;true,否则为false,还有一个_lens_un,这个记录乱序的字符的长度.</p>
+<p>程序的总体结构:</p>
+<p>发送端的数据-&gt;流重组器(重组成有序的数据)-&gt;Bytestream(在Lab0就做好的队列)-&gt;TCP接收端.<br>流重组器需要做的是,把所有有序的数据写入到接收端.<br>其中字符的编号是从1一直往后延伸的,因为队列的首和尾都可以记录.TCP的发送端发送的数据也是(字符号、字符串)字符的编号一直往后延伸.</p>
+<p>这个时候我们回忆一下对应数据的表示:</p>
+<p><code>output.bytes_read()</code>:接收端从ByteStream获得的字符数量.</p>
+<p><code>output.bytes_write()</code>:流重组器写入ByteStream的字符数量-1.而且是流重组器的有效数据中index最小的序号</p>
+<p><code>_lens_un</code>指的还在流重组器里面的数据的长度.</p>
+<p>其中:<code>output.bytes_read()+_capacity</code>是ByteStream可以接受的范围,<code>output.bytes_write()+_lens_un</code>是流重组器的有效数据中index最大的序号.</p>
+<p>1.我们判断输入序号是否大于内存与已读取数据之和，也就是说，该数据是否属于unacceptable中的数据，如果是这样的数据，我们没有足够的内存写入，因为写入这样的数据需要添加\0，从而超过capasity的大小。代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">if(index&gt;_output.bytes_read()+_capacity)&#123;  </span><br><span class="line">return;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>2.字符串部分在区域内,但是部分在区域外,那就把区域外的内容舍弃,只读取区域内的内容.</p>
+<p>我们需要判断data中最后一个数据的序号是否大于内存与已读取数据之和，如果大于，我们就要将能写入的部分写入，也就是按data的顺序尽可能地写入数据而不超过capasity,在写入的过程中，我们也会遇到两种情况，<strong>一种是序号index大于此时已经在流重组器的最后一个数据的序号</strong>，在这种情况下我们要在流重组器最后一个序号与index之间填入’\0′,同时将相应的bool双端队列(_check_byte)设置为false，做完这些工作后，才开始写入新的数据。<strong>另一种情况是index的小于或者等于流重组器最后一个数据的序号，我们需要弹出冲突的数据</strong>，举个例子就是，index序号为5,此时流重组器中的数据为stanford,我们就要从序号5的数据也就是o开始弹出，变成stanf,再写入data中的数据。代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">if(index+data.length()&gt;_capacity+_output.bytes_read())&#123;</span><br><span class="line">    for(size_t i=_lens_un+_output.bytes_written();i&lt;_capacity+_output.bytes_read();i++)&#123;</span><br><span class="line">        if(i&lt;index)&#123;</span><br><span class="line">            _unassembled_byte.push_back(&#x27;\\0&#x27;);</span><br><span class="line">            _check_byte.push_back(false);</span><br><span class="line"></span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            _unassembled_byte.push_back(data[i-index]);</span><br><span class="line">            _check_byte.push_back(true);</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        _lens_un++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>3.我们要判断index是否等于已经写入byte_stream(_output)中的数据，如果是的，我们就直接将data中的数据写入byte_stream,然后在重组器中弹出data.length()个数据，值得注意的是，当重组器中的数据个数小于data.length()，我们就全部弹出。但是后面的数据会被当成无效数据而不进行处理,代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">if(index==_output.bytes_written())&#123;</span><br><span class="line">//直接写</span><br><span class="line">    _output.write(data);</span><br><span class="line">    size_t temp_len=std::min(_lens_un,data.length());</span><br><span class="line">    _unassembled_byte.erase(_unassembled_byte.begin(),_unassembled_byte.begin()+temp_len);</span><br><span class="line">    _check_byte.erase(_check_byte.begin(),_check_byte.begin()+temp_len);</span><br><span class="line">    _lens_un-=temp_len;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>4.我们要判断index是否大于流重组器中的最后一个数据的序号和写入byte_stream中的数据个数之和，如果大于，我们就可以参考1的处理，代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">if(index&gt;_output.bytes_written()+_lens_un)&#123;</span><br><span class="line">    for(size_t i=_output.bytes_written()+_lens_un;i&lt;index;i++)&#123;</span><br><span class="line">        _unassembled_byte.push_back(&#x27;\\0&#x27;);</span><br><span class="line">        _check_byte.push_back(false);</span><br><span class="line">        _lens_un++;</span><br><span class="line">    &#125;</span><br><span class="line">[原来的data][空][新的data]</span><br><span class="line">    for(char i : data)&#123;</span><br><span class="line">        _unassembled_byte.push_back(i);</span><br><span class="line">        _lens_un++;</span><br><span class="line">        _check_byte.push_back(true);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>5.我们要判断data中的数据是否已经被写入byte_stream，这个说法有些不准确，准确的说是相应序号的数据被写入，如果data中的所有数据都被写入了byte_stream，我们就直接返回，如果只是部分被写入，我们就将data中未被写入的部分写入。代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">if(index&lt;_output.bytes_written())&#123;</span><br><span class="line">    if(_output.bytes_written()&gt;index+data.length())&#123;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">//[已经写入Byte_stream的][bytes_written()][新传来的data在bytes_written()之后的,入队][原来在_output.bytes_written()+_lens_un之后的data]</span><br><span class="line">//还是要写,一直写到data最后.</span><br><span class="line">    std::string data_cut(data.begin()+_output.bytes_written()-index,data.end());</span><br><span class="line">    _output.write(data_cut);</span><br><span class="line">    size_t temp_len=std::min(_lens_un,data_cut.length());</span><br><span class="line">    _unassembled_byte.erase(_unassembled_byte.begin(),_unassembled_byte.begin()+temp_len);</span><br><span class="line">    _check_byte.erase(_check_byte.begin(),_check_byte.begin()+temp_len);</span><br><span class="line">    _lens_un-=temp_len;</span><br></pre></td></tr></table></figure>
+<p>6.不是任何情况:首先我们知道要把_output.bytes_written()~index这一部分的内容保存好,然后再把data加入进去即可</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">//在中间插入元素</span><br><span class="line">//先弹出一部分数据保存到栈中</span><br><span class="line">std::stack&lt;char&gt; temp;</span><br><span class="line">std::stack&lt;bool&gt; temp_check;</span><br><span class="line">for(size_t i=0;i&lt;index-_output.bytes_written();i++)&#123;</span><br><span class="line">    temp.push(_unassembled_byte.at(i));</span><br><span class="line">    temp_check.push(_check_byte.at(i));</span><br><span class="line">&#125;</span><br><span class="line">[原data,入队][index][新传来的data,入队][原来在_output.bytes_written()+_lens_un之后的data]</span><br><span class="line">//这里是看数据的最后一个index有没有达到_output.bytes_written()+_lens_un,达到的话后面的内容要保留,没达到就全部删除即可</span><br><span class="line">size_t temp_len=std::min(_lens_un,data.length()+index-_output.bytes_written());</span><br><span class="line">_unassembled_byte.erase(_unassembled_byte.begin(),_unassembled_byte.begin()+temp_len);</span><br><span class="line">_check_byte.erase(_check_byte.begin(),_check_byte.begin()+temp_len);</span><br><span class="line">_lens_un-=temp_len;</span><br><span class="line">for(int i=data.length()-1;i&gt;=0;i--)&#123;</span><br><span class="line">    _unassembled_byte.push_front(data[i]);</span><br><span class="line">    _check_byte.push_front(true);</span><br><span class="line">    _lens_un++;</span><br><span class="line">&#125;</span><br><span class="line">while(!temp.empty())&#123;</span><br><span class="line">    _unassembled_byte.push_front(temp.top());</span><br><span class="line">    _check_byte.push_front(temp_check.top());</span><br><span class="line">    _lens_un++;</span><br><span class="line">    temp.pop();</span><br><span class="line">    temp_check.pop();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>7.输入字符串到ByteStream中:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">size_t i=0;</span><br><span class="line">while(i&lt;_lens_un)&#123;</span><br><span class="line">    if(!_check_byte.at(i))&#123;</span><br><span class="line">        break;</span><br><span class="line">    &#125;</span><br><span class="line">    i++;</span><br><span class="line">&#125;</span><br><span class="line">std::string n(_unassembled_byte.begin(),_unassembled_byte.begin()+i);</span><br><span class="line">_output.write(n);</span><br><span class="line">_unassembled_byte.erase(_unassembled_byte.begin(),_unassembled_byte.begin()+i);</span><br><span class="line">_lens_un-=i;</span><br><span class="line">_check_byte.erase(_check_byte.begin(),_check_byte.begin()+i);</span><br><span class="line">if(eof) input_end_index=index+data.length();</span><br><span class="line">if(input_end_index==_output.bytes_written()) _output.end_input();</span><br></pre></td></tr></table></figure>
+
+<h1 id="Lab2-TCP-Reciever"><a href="#Lab2-TCP-Reciever" class="headerlink" title="Lab2.TCP Reciever"></a>Lab2.TCP Reciever</h1><h2 id="绝对序号和相对序号的转换"><a href="#绝对序号和相对序号的转换" class="headerlink" title="绝对序号和相对序号的转换:"></a>绝对序号和相对序号的转换:</h2><p>在实践中，一个分组的序号承载在分组首部的一个固定长度的字段中。如果分组序号字段的比特数是k,则该序号范围是。 在一个有限的序号范围内，所有涉及序号的运算必须使用模运算。（即序号空间可被看作是一个长度为 的环，其中序号紧挨着0）。上面论述的序号是相对序号(相对序号的开始值是),还有一种不模的运算就是绝对序号.</p>
+<p>这个时候我们需要完成两个函数:</p>
+<p>1.wrap(绝对序号转化为相对序号)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">WrappingInt32 wrap(uint64_t n, WrappingInt32 isn) &#123;</span><br><span class="line">  DUMMY_CODE(n, isn);</span><br><span class="line">  WrappingInt32 res(n+isn.raw_value());</span><br><span class="line">  return res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个函数调用了<code>WrappingInt32</code>类的构造函数,构造函数获得一个int类型的数(uint_64等类型)然后取模之后获得32位的整形数,存放到raw_value成员中.</p>
+<p>2.unwrap(相对序号转绝对序号)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">uint64_t unwrap(WrappingInt32 n, WrappingInt32 isn, uint64_t checkpoint) &#123;</span><br><span class="line">    DUMMY_CODE(n, isn, checkpoint);</span><br><span class="line">    uint64_t temp=n.raw_value()-isn.raw_value();</span><br><span class="line">    if(checkpoint==0)&#123;</span><br><span class="line">        return temp;</span><br><span class="line">    &#125;</span><br><span class="line">    uint32_t div=checkpoint/(1ul&lt;&lt;32);</span><br><span class="line">    uint32_t res=checkpoint%(1ul&lt;&lt;32);</span><br><span class="line">    if (res&lt;=temp) &#123;</span><br><span class="line">        temp=(checkpoint-temp-(div-1)\*(1ul&lt;&lt;32))&lt;(temp+div\*(1ul&lt;&lt;32)-checkpoint)?temp+(div-1)\*(1ul&lt;&lt;32):temp+div\*(1ul&lt;&lt;32);</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        temp=(checkpoint-temp-div\*(1ul&lt;&lt;32))&lt;(temp+(div+1)\*(1ul&lt;&lt;32)-checkpoint)?temp+div\*(1ul&lt;&lt;32):temp+(div+1)\*(1ul&lt;&lt;32);</span><br><span class="line">    &#125;</span><br><span class="line">    return temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>给定checkpoint,找到最靠近checkpoint的那个temp,返回即可.</p>
+<h2 id="Implementing-the-TCP-receiver"><a href="#Implementing-the-TCP-receiver" class="headerlink" title="Implementing the TCP receiver"></a>Implementing the TCP receiver</h2><p>首先我们看一看TCP报文包的定义:主要是由首部和其中的元素组成:其中可以调用serialize和parse方法转化,</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">class TCPSegment &#123;</span><br><span class="line">  private:</span><br><span class="line">    TCPHeader _header&#123;&#125;;</span><br><span class="line">    Buffer _payload&#123;&#125;;</span><br><span class="line"></span><br><span class="line">  public:</span><br><span class="line">    //! \\brief Parse the segment from a string</span><br><span class="line">    ParseResult parse(const Buffer buffer, const uint32_t datagram_layer_checksum = 0);</span><br><span class="line"></span><br><span class="line">    //! \\brief Serialize the segment to a string</span><br><span class="line">    BufferList serialize(const uint32_t datagram_layer_checksum = 0) const;</span><br><span class="line"></span><br><span class="line">    //! \\name Accessors</span><br><span class="line">    //!@&#123;</span><br><span class="line">    const TCPHeader &amp;header() const &#123; return _header; &#125;</span><br><span class="line">    TCPHeader &amp;header() &#123; return _header; &#125;</span><br><span class="line"></span><br><span class="line">    const Buffer &amp;payload() const &#123; return _payload; &#125;</span><br><span class="line">    Buffer &amp;payload() &#123; return _payload; &#125;</span><br><span class="line">    //!@&#125;</span><br><span class="line"></span><br><span class="line">    //! \\brief Segment&#x27;s length in sequence space</span><br><span class="line">    //! \\note Equal to payload length plus one byte if SYN is set, plus one byte if FIN is set</span><br><span class="line">    size_t length_in_sequence_space() const;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>接着我们来看一看TCP首部:首部的元素主要是:</p>
+<ul>
+<li>序号：seqno，占32位，用来标识从发送端到接收端的字节流；</li>
+<li>确认号：ackno，占32位，只有ACK标志位为1时，确认号才有效，ackno&#x3D;seqno+1；</li>
+<li>标志位：<ul>
+<li>SYN：发起一个连接；</li>
+<li>FIN：释放一个连接；</li>
+<li>ACK：确认序号有效。<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">struct TCPHeader &#123;</span><br><span class="line">    static constexpr size_t LENGTH = 20;  //!&lt; [TCP](\\ref rfc::rfc793) header length, not including options</span><br><span class="line"></span><br><span class="line">    //! \\struct TCPHeader</span><br><span class="line">    //! ~~~&#123;.txt&#125;</span><br><span class="line">    //!   0                   1                   2                   3</span><br><span class="line">    //!   0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1</span><br><span class="line">    //!  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">    //!            Source Port                 Destination Port        </span><br><span class="line">    //!  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">    //!                          Sequence Number                        </span><br><span class="line">    //!  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">    //!                      Acknowledgment Number                      </span><br><span class="line">    //!  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">    //!    Data            UAPRSF                               </span><br><span class="line">    //!   Offset Reserved  RCSSYI            Window             </span><br><span class="line">    //!                    GKHTNN                               </span><br><span class="line">    //!  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">    //!             Checksum                     Urgent Pointer        </span><br><span class="line">    //!  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">    //!                      Options                        Padding    </span><br><span class="line">    //!  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">    //!                               data                              </span><br><span class="line">    //!  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">    //! ~~~</span><br><span class="line"></span><br><span class="line">    //! \\name TCP Header fields</span><br><span class="line">    //!@&#123;</span><br><span class="line">    uint16_t sport = 0;         //!&lt; source port</span><br><span class="line">    uint16_t dport = 0;         //!&lt; destination port</span><br><span class="line">    WrappingInt32 seqno&#123;0&#125;;     //!&lt; sequence number</span><br><span class="line">    WrappingInt32 ackno&#123;0&#125;;     //!&lt; ack number</span><br><span class="line">  uint8_t doff = LENGTH / 4;  //!&lt; data offset</span><br><span class="line">    bool urg = false;           //!&lt; urgent flag</span><br><span class="line">    bool ack = false;           //!&lt; ack flag</span><br><span class="line">    bool psh = false;           //!&lt; push flag</span><br><span class="line">    bool rst = false;           //!&lt; rst flag</span><br><span class="line">    bool syn = false;           //!&lt; syn flag</span><br><span class="line">    bool fin = false;           //!&lt; fin flag</span><br><span class="line">    uint16_t win = 0;           //!&lt; window size</span><br><span class="line">    uint16_t cksum = 0;         //!&lt; checksum</span><br><span class="line">    uint16_t uptr = 0;          //!&lt; urgent pointer</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+接着看一看TCP receiver的数据结构定义:<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line">#ifndef SPONGE_LIBSPONGE_TCP_RECEIVER_HH</span><br><span class="line">#define SPONGE_LIBSPONGE_TCP_RECEIVER_HH</span><br><span class="line"></span><br><span class="line">#include &quot;byte_stream.hh&quot;</span><br><span class="line">#include &quot;stream_reassembler.hh&quot;</span><br><span class="line">#include &quot;tcp_segment.hh&quot;</span><br><span class="line">#include &quot;wrapping_integers.hh&quot;</span><br><span class="line"></span><br><span class="line">#include &lt;optional&gt;</span><br><span class="line"></span><br><span class="line">//! \\brief The &quot;receiver&quot; part of a TCP implementation.</span><br><span class="line"></span><br><span class="line">//! Receives and reassembles segments into a ByteStream, and computes</span><br><span class="line">//! the acknowledgment number and window size to advertise back to the</span><br><span class="line">//! remote TCPSender.</span><br><span class="line">//接收重组segments为 ByteStream，并计算确认号和窗口大小以通告回远程 TCPSender。</span><br><span class="line">class TCPReceiver &#123;</span><br><span class="line">    //! Our data structure for re-assembling bytes.</span><br><span class="line">    //我们用于重新组装字节的数据结构。</span><br><span class="line">    StreamReassembler _reassembler;</span><br><span class="line"></span><br><span class="line">    //! The maximum number of bytes we&#x27;ll store.</span><br><span class="line">    //容量大小</span><br><span class="line">    size_t _capacity;</span><br><span class="line">    WrappingInt32 ISN;</span><br><span class="line">    bool syn_flag;</span><br><span class="line">  public:</span><br><span class="line"></span><br><span class="line">    //! \\brief Construct a TCP receiver</span><br><span class="line">    //!</span><br><span class="line">    //! \\param capacity the maximum number of bytes that the receiver will</span><br><span class="line">    //!                 store in its buffers at any give time.</span><br><span class="line">    //构造函数，构造一个 TCP 接收器，容量接收器在任何给定时间将存储在其缓冲区中的最大字节数。</span><br><span class="line">    TCPReceiver(const size_t capacity) : _reassembler(capacity), _capacity(capacity),ISN(0) ,syn_flag(0)&#123;&#125;</span><br><span class="line"></span><br><span class="line">    //! \\name Accessors to provide feedback to the remote TCPSender</span><br><span class="line">    //!@&#123;</span><br><span class="line"></span><br><span class="line">    //! \\brief The ackno that should be sent to the peer</span><br><span class="line">    //! \\returns empty if no SYN has been received</span><br><span class="line">    //!</span><br><span class="line">    //! This is the beginning of the receiver&#x27;s window, or in other words, the sequence number</span><br><span class="line">    //! of the first byte in the stream that the receiver hasn&#x27;t received.</span><br><span class="line">    // 如果没有收到 SYN，则应发送给对等方的 ackno 为空</span><br><span class="line">    //这是接收器窗口的开始，否则，接收器未接收到的流中第一个字节的序列号。</span><br><span class="line">    std::optional&lt;WrappingInt32&gt; ackno() const;</span><br><span class="line"></span><br><span class="line">    //! \\brief The window size that should be sent to the peer</span><br><span class="line">    //!</span><br><span class="line">    //! Operationally: the capacity minus the number of bytes that the</span><br><span class="line">    //! TCPReceiver is holding in its byte stream (those that have been</span><br><span class="line">    //! reassembled, but not consumed).</span><br><span class="line">    //!</span><br><span class="line">    //! Formally: the difference between (a) the sequence number of</span><br><span class="line">    //! the first byte that falls after the window (and will not be</span><br><span class="line">    //! accepted by the receiver) and (b) the sequence number of the</span><br><span class="line">    //! beginning of the window (the ackno).</span><br><span class="line">    size_t window_size() const;</span><br><span class="line">    //!@&#125;</span><br><span class="line"></span><br><span class="line">    //! \\brief number of bytes stored but not yet reassembled</span><br><span class="line">    size_t unassembled_bytes() const &#123; return _reassembler.unassembled_bytes(); &#125;</span><br><span class="line"></span><br><span class="line">    //! \\brief handle an inbound segment</span><br><span class="line">    void segment_received(const TCPSegment &amp;seg);</span><br><span class="line"></span><br><span class="line">    //! \\name &quot;Output&quot; interface for the reader</span><br><span class="line">    //!@&#123;</span><br><span class="line">    ByteStream &amp;stream_out() &#123; return _reassembler.stream_out(); &#125;</span><br><span class="line">    const ByteStream &amp;stream_out() const &#123; return _reassembler.stream_out(); &#125;</span><br><span class="line">    bool recv_fin() const;</span><br><span class="line">    //!@&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+我们知道TCP需要接受一个叫做segment类型的数据,然后存储起来,送入到Lab1已经实现好的reassemble_stream中.并返回适合的ACK.</li>
+</ul>
+</li>
+</ul>
+<p>对于接受的数据:分成两种可能,一种是第一个序列,另外的就是普通的数据</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">void TCPReceiver::segment_received(const TCPSegment &amp;seg) &#123;</span><br><span class="line">    DUMMY_CODE(seg);</span><br><span class="line">    //代表第一个传过来的seg</span><br><span class="line">    if(seg.header().syn)&#123;</span><br><span class="line">        syn_flag= true;</span><br><span class="line">        //窗口的左端</span><br><span class="line">        ISN=seg.header().seqno;</span><br><span class="line">    &#125; else if(!syn_flag)&#123;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">  //推断数据包的序号,序号比较靠近上一个已经接收到的序号,然后塞进我们在Lab1已经写好的流重组器.</span><br><span class="line">    uint64_t received_lens=_reassembler.stream_out().bytes_written();</span><br><span class="line">    size_t index= unwrap(seg.header().seqno,ISN,received_lens);</span><br><span class="line">    if(!seg.header().syn)&#123;</span><br><span class="line">        index--;</span><br><span class="line">    &#125;</span><br><span class="line">    //进行重组</span><br><span class="line">    _reassembler.push_substring(seg.payload().copy(),index,seg.header().fin);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>ACK的返回也很简单,流重组器输入到Byte stream的个数就代表已经输入了多少个有序的序列,返回对应的ACK即可.但是对于结束的时候的ACK回应,我们还是需要分类讨论.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">optional&lt;WrappingInt32&gt; TCPReceiver::ackno() const &#123;</span><br><span class="line">    if(!syn_flag)&#123;</span><br><span class="line">        return std::nullopt;</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">      //判断是否是最后一个</span><br><span class="line">        if(_reassembler.stream_out().input_ended())&#123;</span><br><span class="line">            return ISN+_reassembler.stream_out().bytes_written()+2;</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">          //返回的ACK的序号就是期望获得的下一个字符的数+1,流重组器的已连续写入的数据量就是最后一个有序的 //字符</span><br><span class="line">            return ISN+_reassembler.stream_out().bytes_written()+1;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="Lab3-TCP-Sender"><a href="#Lab3-TCP-Sender" class="headerlink" title="Lab3 TCP Sender"></a>Lab3 TCP Sender</h1><p>这一次我们要实现TCP的发送方,这一次我把必要的注释写在代码里面了.</p>
+<p>1.头文件:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><span class="line">class TCPSender &#123;</span><br><span class="line">  private:</span><br><span class="line">    //! our initial sequence number, the number for our SYN.</span><br><span class="line">    WrappingInt32 _isn;</span><br><span class="line">    uint64_t base&#123;0&#125;;</span><br><span class="line">    //! outbound queue of segments that the TCPSender wants sent</span><br><span class="line">    std::queue&lt;TCPSegment&gt; _segments_out&#123;&#125;;</span><br><span class="line">    //cached TCPSegment.</span><br><span class="line">    std::queue&lt;TCPSegment&gt; _segments_out_cached&#123;&#125;;</span><br><span class="line">    //! retransmission timer for the connection</span><br><span class="line">    unsigned int _initial_retransmission_timeout;</span><br><span class="line"></span><br><span class="line">    //! outgoing stream of bytes that have not yet been sent</span><br><span class="line">    ByteStream _stream;</span><br><span class="line">    //nextseq numbers as the absolute TCP number.</span><br><span class="line">    uint64_t _next_seqnum&#123;0&#125;;</span><br><span class="line">    //slide windows size</span><br><span class="line">    uint16_t _curr_window_size;</span><br><span class="line">    //isfinished?</span><br><span class="line">    bool _isfin;</span><br><span class="line">    size_t _times;</span><br><span class="line">    //ticking?</span><br><span class="line">    bool _time_waiting;</span><br><span class="line">    //remission times.</span><br><span class="line">    int _consecutive_remission;</span><br><span class="line">    // when is time out?</span><br><span class="line">    size_t _time_out;</span><br><span class="line">    //empty windows?</span><br><span class="line">    bool _window_zero;</span><br><span class="line">    //! the (absolute) sequence number for the next byte to be sent</span><br><span class="line">    uint64_t _next_seqno&#123;0&#125;;</span><br><span class="line"></span><br><span class="line">  public:</span><br><span class="line">    //! Initialize a TCPSender</span><br><span class="line">    TCPSender(const size_t capacity = TCPConfig::DEFAULT_CAPACITY,</span><br><span class="line">              const uint16_t retx_timeout = TCPConfig::TIMEOUT_DFLT,</span><br><span class="line">              const std::optional&lt;WrappingInt32&gt; fixed_isn = &#123;&#125;);</span><br><span class="line"></span><br><span class="line">    //! \\name &quot;Input&quot; interface for the writer</span><br><span class="line">    //!@&#123;</span><br><span class="line">    ByteStream &amp;stream_in() &#123; return _stream; &#125;</span><br><span class="line">    const ByteStream &amp;stream_in() const &#123; return _stream; &#125;</span><br><span class="line">    //!@&#125;</span><br><span class="line"></span><br><span class="line">    //! \\name Methods that can cause the TCPSender to send a segment</span><br><span class="line">    //!@&#123;</span><br><span class="line"></span><br><span class="line">    //! \\brief A new acknowledgment was received</span><br><span class="line">    void ack_received(const WrappingInt32 ackno, const uint16_t window_size);</span><br><span class="line"></span><br><span class="line">    //! \\brief Generate an empty-payload segment (useful for creating empty ACK segments)</span><br><span class="line">    void send_empty_segment();</span><br><span class="line"></span><br><span class="line">    //! \\brief create and send segments to fill as much of the window as possible</span><br><span class="line">    void fill_window();</span><br><span class="line"></span><br><span class="line">    //! \\brief Notifies the TCPSender of the passage of time</span><br><span class="line">    void tick(const size_t ms_since_last_tick);</span><br><span class="line">    //!@&#125;</span><br><span class="line"></span><br><span class="line">    //! \\name Accessors</span><br><span class="line">    //!@&#123;</span><br><span class="line"></span><br><span class="line">    //! \\brief How many sequence numbers are occupied by segments sent but not yet acknowledged?</span><br><span class="line">    //! \\note count is in &quot;sequence space,&quot; i.e. SYN and FIN each count for one byte</span><br><span class="line">    //! (see TCPSegment::length_in_sequence_space())</span><br><span class="line">    size_t bytes_in_flight() const;</span><br><span class="line"></span><br><span class="line">    //! \\brief Number of consecutive retransmissions that have occurred in a row</span><br><span class="line">    unsigned int consecutive_retransmissions() const;</span><br><span class="line"></span><br><span class="line">    //! \\brief TCPSegments that the TCPSender has enqueued for transmission.</span><br><span class="line">    //! \\note These must be dequeued and sent by the TCPConnection,</span><br><span class="line">    //! which will need to fill in the fields that are set by the TCPReceiver</span><br><span class="line">    //! (ackno and window size) before sending.</span><br><span class="line">    std::queue&lt;TCPSegment&gt; &amp;segments_out() &#123; return _segments_out; &#125;</span><br><span class="line">    //!@&#125;</span><br><span class="line"></span><br><span class="line">    //! \\name What is the next sequence number? (used for testing)</span><br><span class="line">    //!@&#123;</span><br><span class="line"></span><br><span class="line">    //! \\brief absolute seqno for the next byte to be sent</span><br><span class="line">    uint64_t next_seqno_absolute() const &#123; return _next_seqno; &#125;</span><br><span class="line"></span><br><span class="line">    //! \\brief relative seqno for the next byte to be sent</span><br><span class="line">    WrappingInt32 next_seqno() const &#123; return wrap(_next_seqno, _isn); &#125;</span><br><span class="line">    //!@&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>2.发送数据函数:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line">void TCPSender::fill_window() &#123;</span><br><span class="line">    // windows is full or the programe is finished.</span><br><span class="line">    if(_curr_window_size==0_isfin)&#123;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    //haven&#x27;t send any bytes.</span><br><span class="line">    if(_next_seqno==0)&#123;</span><br><span class="line">        TCPSegment seg;</span><br><span class="line">        // the TCP transmission start from _isn.</span><br><span class="line">        seg.header().seqno = _isn;</span><br><span class="line">        seg.header().syn = true;</span><br><span class="line">        // the TCP first connection just send 1 bytes;</span><br><span class="line">        _next_seqno = 1;</span><br><span class="line">        _curr_window_size--;</span><br><span class="line">        _segments_out.push(seg);</span><br><span class="line">        _segments_out_cached.push(seg);</span><br><span class="line">    &#125;</span><br><span class="line">    //the end of the file</span><br><span class="line">    else if(_stream.eof())&#123;</span><br><span class="line">        //set the finish flag to true;</span><br><span class="line">        _isfin = true;</span><br><span class="line">        TCPSegment seg;</span><br><span class="line">        seg.header().syn=false;</span><br><span class="line">        seg.header().fin=true;</span><br><span class="line">        //convert the absolute TCP number to TCP number.</span><br><span class="line">        seg.header().seqno = wrap(_next_seqno,_isn);</span><br><span class="line">        //the fin packet only send a byte.</span><br><span class="line">        _next_seqno++;</span><br><span class="line">        _curr_window_size--;</span><br><span class="line">        _segments_out.push(seg);</span><br><span class="line">        _segments_out_cached.push(seg);</span><br><span class="line">    &#125;</span><br><span class="line">    //normal file</span><br><span class="line">    else&#123;</span><br><span class="line">        //make sure the windows is not full and there&#x27;s any data to convert.</span><br><span class="line">        while(!_stream.buffer_empty()&amp;&amp;_curr_window_size&gt;0)&#123;</span><br><span class="line">            //decide the length of the TCP Segment.</span><br><span class="line">            //make sure the length of TCP segment is below the silde windows size and data length.</span><br><span class="line">            uint64_t lens_byte=std::min(_stream.buffer_size(),uint64_t (_curr_window_size));</span><br><span class="line">            lens_byte=std::min(lens_byte,TCPConfig::MAX_PAYLOAD_SIZE);</span><br><span class="line">            TCPSegment seg;</span><br><span class="line">            seg.header().seqno = wrap(_next_seqno,_isn);</span><br><span class="line">            seg.header().syn = false;</span><br><span class="line">            //get the lens_byte data to the payload.</span><br><span class="line">            seg.payload()=_stream.read(lens_byte);</span><br><span class="line">            // increase the next seq_no;</span><br><span class="line">            _next_seqno += lens_byte;</span><br><span class="line">            _curr_window_size -= lens_byte;</span><br><span class="line">            // get the end of the file.</span><br><span class="line">            if(_stream.eof()&amp;&amp;_curr_window_size&gt;0)&#123;</span><br><span class="line">                _isfin = true;</span><br><span class="line">                seg.header().fin=true;</span><br><span class="line">                //the fin packet only send a byte.</span><br><span class="line">                _next_seqno++;</span><br><span class="line">                _curr_window_size--;</span><br><span class="line">            &#125;</span><br><span class="line">            _segments_out.push(seg);</span><br><span class="line">            _segments_out_cached.push(seg);</span><br><span class="line">            if(_isfin)&#123;</span><br><span class="line">                break;</span><br><span class="line">            &#125;        </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    //start ticking...</span><br><span class="line">    if(!_time_waiting)&#123;</span><br><span class="line">        _time_out = _initial_retransmission_timeout;</span><br><span class="line">        _time_waiting = true;</span><br><span class="line">        _times = 0;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>3.接受ACK:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line">//! \\param ackno The remote receiver&#x27;s ackno (acknowledgment number)</span><br><span class="line">//! \\param window_size The remote receiver&#x27;s advertised window size</span><br><span class="line">void TCPSender::ack_received(const WrappingInt32 ackno, const uint16_t window_size) &#123; </span><br><span class="line">    DUMMY_CODE(ackno, window_size); </span><br><span class="line">    // get the absolute TCP number of ACK...</span><br><span class="line">    uint64_t acknos = unwrap(ackno,_isn,base);</span><br><span class="line">    //thrid connection...</span><br><span class="line">    //means the 0th bytes gets and desire to 1st bytes...</span><br><span class="line">    if(base==0&amp;&amp;acknos==1)&#123;</span><br><span class="line">        base=1;</span><br><span class="line">        _segments_out_cached.pop();</span><br><span class="line">        _consecutive_remission=0;</span><br><span class="line">    &#125;</span><br><span class="line">    else if(acknos &gt; _next_seqno)&#123;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    //the ack number is bigger than first cached segment...</span><br><span class="line">    //means the cached data gets by the reciever...</span><br><span class="line">    else if(!_segments_out_cached.empty() &amp;&amp; acknos &gt;= base + _segments_out_cached.front().length_in_sequence_space())&#123;</span><br><span class="line">        //first segment in cache, and get the seqno and length of the segment...</span><br><span class="line">        uint64_t copy_seg_seqno = unwrap(_segments_out_cached.front().header().seqno, _isn, base);</span><br><span class="line">        uint64_t copy_seg_len = _segments_out_cached.front().length_in_sequence_space();</span><br><span class="line">        //find the segments that acked by recevier...</span><br><span class="line">        //hint:if seqno+len&lt;=ackno:means the data is acked by recevier...</span><br><span class="line">        while(copy_seg_len+copy_seg_seqno&lt;=acknos)&#123;</span><br><span class="line">            //move the base, base is the 1st bytes that nor acked...</span><br><span class="line">            base += _segments_out_cached.front().length_in_sequence_space();</span><br><span class="line">            _segments_out_cached.pop();</span><br><span class="line">            if(_segments_out_cached.empty()) break;</span><br><span class="line">            // judge the 2nd segs...</span><br><span class="line">            copy_seg_seqno = unwrap(_segments_out_cached.front().header().seqno, _isn, base);</span><br><span class="line">            copy_seg_len = _segments_out_cached.front().length_in_sequence_space();</span><br><span class="line">        &#125;</span><br><span class="line">        _time_out = _initial_retransmission_timeout;</span><br><span class="line">        _times = 0;</span><br><span class="line">        _consecutive_remission = 0;</span><br><span class="line">    &#125;</span><br><span class="line">    // 3rd disconnection.</span><br><span class="line">    else if(acknos == _next_seqno &amp;&amp; _isfin)&#123;</span><br><span class="line">        base = acknos;</span><br><span class="line">        _segments_out_cached.pop();</span><br><span class="line">    &#125;</span><br><span class="line">    //the windows is empty</span><br><span class="line">    if(_next_seqno-base==0)&#123;</span><br><span class="line">        _time_waiting = false;</span><br><span class="line">    &#125;</span><br><span class="line">    // 流量控制,发送方窗口不大于接受方窗口</span><br><span class="line">    else if(_next_seqno-base&gt;=window_size)&#123;</span><br><span class="line">        _curr_window_size = 0;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    if(window_size==0)&#123;</span><br><span class="line">        _curr_window_size = 1;</span><br><span class="line">        _window_zero = true;</span><br><span class="line">    &#125;</span><br><span class="line">    else&#123;</span><br><span class="line">        _curr_window_size = window_size;</span><br><span class="line">        _window_zero = false;</span><br><span class="line">        _consecutive_remission = 0;</span><br><span class="line">    &#125;</span><br><span class="line">    fill_window();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>4. 构造函数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">//! \\param[in] capacity the capacity of the outgoing byte stream</span><br><span class="line">//! \\param[in] retx_timeout the initial amount of time to wait before retransmitting the oldest outstanding segment</span><br><span class="line">//! \\param[in] fixed_isn the Initial Sequence Number to use, if set (otherwise uses a random ISN)</span><br><span class="line">TCPSender::TCPSender(const size_t capacity, const uint16_t retx_timeout, const std::optional&lt;WrappingInt32&gt; fixed_isn)</span><br><span class="line">    : _isn(fixed_isn.value_or(WrappingInt32&#123;random_device()()&#125;))</span><br><span class="line">    , base(0)</span><br><span class="line">    , _initial_retransmission_timeout&#123;retx_timeout&#125;</span><br><span class="line">    , _stream(capacity)</span><br><span class="line">    , _curr_window_size(1)</span><br><span class="line">    , _isfin(false)</span><br><span class="line">    , _times(0)</span><br><span class="line">    , _time_waiting(false)</span><br><span class="line">    , _consecutive_remission(0)</span><br><span class="line">    , _time_out(0)</span><br><span class="line">    , _window_zero(false)</span><br><span class="line">    &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>5.超时处理:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">//! \\param[in] ms_since_last_tick the number of milliseconds since the last call to this method</span><br><span class="line">void TCPSender::tick(const size_t ms_since_last_tick) &#123; </span><br><span class="line">    DUMMY_CODE(ms_since_last_tick);</span><br><span class="line">    // the times pased by</span><br><span class="line">    _times += ms_since_last_tick;</span><br><span class="line">    //timeout and non-empty cache. resend...</span><br><span class="line">    if(!_segments_out_cached.empty()&amp;&amp;_time_waiting&amp;&amp;_times&gt;=_time_out)&#123;</span><br><span class="line">        //resend..</span><br><span class="line">        _segments_out.push(_segments_out_cached.front());</span><br><span class="line">        // increase the time out times...</span><br><span class="line">        if(!_window_zero)&#123;</span><br><span class="line">            //add remissions</span><br><span class="line">            _consecutive_remission++;</span><br><span class="line">            _time_out\*=2;</span><br><span class="line">            _time_waiting = true;</span><br><span class="line">        &#125;</span><br><span class="line">        _times=0;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="Lab4-TCP-Connnection"><a href="#Lab4-TCP-Connnection" class="headerlink" title="Lab4 TCP Connnection"></a>Lab4 TCP Connnection</h1><p>在这里我们需要实现一个TCP连接类,在这个TCP连接类里面,我们需要组合之前已经写好的TCP发送端和接收端的函数来进行处理.</p>
+<p>1、接受到segment的操作:</p>
+<p>分成两种操作,一种是正常的交互,一种是握手的操作.握手又分成主动请求链接和被动链接,在这两种模式下接受握手信息的处理是不一样的.对于正常的交互,需要交付给Sender和Reciever.因为对于TCP来说,两者是相互统一的.两个主机之间也会互相传递信息,所以说交给发送端处理ACK,交给接收端返回给上层.实际的TCP协议并不是完全的类似于GBN和SR,具体的差异就在ACK的数据是相互传递的,换句话说就是连着兼有.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">void TCPConnection::segment_received(const TCPSegment &amp;seg) &#123; </span><br><span class="line">    DUMMY_CODE(seg); </span><br><span class="line">    // get the segment from IP level;</span><br><span class="line">    if(!_active)&#123;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    _time_since_last_segment_received=0;</span><br><span class="line">    //not get segment no send ACK.</span><br><span class="line">    //passive connection...</span><br><span class="line">    //the ackno is null and no bytes is sent</span><br><span class="line">    if(!_receiver.ackno().has_value()&amp;&amp;_sender.next_seqno_absolute()==0)&#123;</span><br><span class="line">        //only recieve syn...</span><br><span class="line">        if(!seg.header().syn) return;</span><br><span class="line">        //as the Service side,passive connected.</span><br><span class="line">        _receiver.segment_received(seg);</span><br><span class="line">        //it&#x27;s OK to connect.</span><br><span class="line">        connect();</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    // active connected..</span><br><span class="line">    // first connection...</span><br><span class="line">    if(_sender.next_seqno_absolute() &gt; 0 &amp;&amp; _sender.bytes_in_flight() == _sender.next_seqno_absolute() &amp;&amp; </span><br><span class="line">       !_receiver.ackno().has_value())&#123;</span><br><span class="line">        // the length of payload is not 0</span><br><span class="line">        if(seg.payload().size() )&#123;</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        // if ack is no</span><br><span class="line">        // the twoside wants to setup the connection at the same time.</span><br><span class="line">        if(!seg.header().ack)&#123;</span><br><span class="line">            if(seg.header().syn)&#123;</span><br><span class="line">                _receiver.segment_received(seg);</span><br><span class="line">                // send empty ack to setup the connection.</span><br><span class="line">                _sender.send_empty_segment();</span><br><span class="line">            &#125;</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        // ifsyn=1,ack=1,rst=1,then shut down.</span><br><span class="line">        if(seg.header().rst)&#123;</span><br><span class="line">            _receiver.stream_out().set_error();</span><br><span class="line">            _sender.stream_in().set_error();</span><br><span class="line">            _active = false;</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    //otherwise...</span><br><span class="line">    //recieve the segment</span><br><span class="line">    _receiver.segment_received(seg);</span><br><span class="line">    _sender.ack_received(seg.header().ackno,seg.header().win);</span><br><span class="line">    // thrid connection</span><br><span class="line">    if (_sender.stream_in().buffer_empty() &amp;&amp; seg.length_in_sequence_space())</span><br><span class="line">        _sender.send_empty_segment();</span><br><span class="line">    if (seg.header().rst) &#123;</span><br><span class="line">        _sender.send_empty_segment();</span><br><span class="line">        unclean_shutdown();</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    send_sender_segments();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>2、写seg.</p>
+<p>将上层应用的数据写入到Bytestream中,提醒发送方发送.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">size_t TCPConnection::write(const string &amp;data) &#123;</span><br><span class="line">    DUMMY_CODE(data);</span><br><span class="line">    // get the OS data... ready to be sent by TCP</span><br><span class="line">    if(data.size()==0)&#123;</span><br><span class="line">        return 0;</span><br><span class="line">    &#125;</span><br><span class="line">    size_t write_size = _sender.stream_in().write(data);</span><br><span class="line">    _sender.fill_window();</span><br><span class="line">    send_sender_segments();</span><br><span class="line">    return write_size;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>3、时钟(操作系统不定期调用之)</p>
+<p>提醒Sender处理时间,看看是不是超时了.记录一下time_since_last_segment_received.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">//! \\param[in] ms_since_last_tick number of milliseconds since the last call to this method</span><br><span class="line">void TCPConnection::tick(const size_t ms_since_last_tick) &#123; </span><br><span class="line">    DUMMY_CODE(ms_since_last_tick); </span><br><span class="line">    if(!_active) return;</span><br><span class="line">    //count</span><br><span class="line">    _time_since_last_segment_received += ms_since_last_tick;</span><br><span class="line">    // tell the sender to tick</span><br><span class="line">    _sender.tick(ms_since_last_tick);</span><br><span class="line">    if(_sender.consecutive_retransmissions()&gt;TCPConfig::MAX_RETX_ATTEMPTS)&#123;</span><br><span class="line">        unclean_shutdown();</span><br><span class="line">    &#125;</span><br><span class="line">    send_sender_segments();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>4、真正的发送信息:读取sender中的消息缓存,然后加上ack和窗口信息信息,发送出去.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">void TCPConnection::send_sender_segments ()&#123;</span><br><span class="line">    //travel the queue to set the ack and windows size.</span><br><span class="line">    while(!_sender.segments_out().empty())&#123;</span><br><span class="line">        TCPSegment seg = _sender.segments_out().front();</span><br><span class="line">        _sender.segments_out().pop();</span><br><span class="line">        // the ack number is bot null</span><br><span class="line">        if(_receiver.ackno().has_value())&#123;</span><br><span class="line">            seg.header().ack=true;</span><br><span class="line">            seg.header().ackno=_receiver.ackno().value();</span><br><span class="line">            seg.header().win=_receiver.window_size();</span><br><span class="line">        &#125;</span><br><span class="line">        _segments_out.push(seg);</span><br><span class="line">    &#125;</span><br><span class="line">    //every time send segment,we need to shutdown.</span><br><span class="line">    clean_shutdown();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+  </div>
+
+   <footer>
+
+    <div class="meta">
+  <span class="item">
+    <span class="icon">
+      <i class="ic i-calendar-check"></i>
+    </span>
+    <span class="text">更新于</span>
+    <time title="修改时间：2024-04-12 16:29:56" itemprop="dateModified" datetime="2024-04-12T16:29:56+08:00">2024-04-12</time>
+  </span>
+</div>
+
+      
+<div class="reward">
+  <button><i class="ic i-heartbeat"></i> 赞赏</button>
+  <p>请我喝[茶]~(￣▽￣)~*</p>
+  <div id="qr">
+      
+      <div>
+        <img data-src="/images/wechatpay.jpg" alt="Sukuna 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div>
+        <img data-src="/images/alipay.jpg" alt="Sukuna 支付宝">
+        <p>支付宝</p>
+      </div>
+  </div>
+</div>
+
+      
+
+<div id="copyright">
+<ul>
+  <li class="author">
+    <strong>本文作者： </strong>Sukuna <i class="ic i-at"><em>@</em></i>灵山之上神风起
+  </li>
+  <li class="link">
+    <strong>本文链接：</strong>
+    <a href="https://sukunashinmyoumaru-hust.github.io/2023/02/06/stanford-cs144-lab/" title="Stanford CS144 Lab">https://sukunashinmyoumaru-hust.github.io/2023/02/06/stanford-cs144-lab/</a>
+  </li>
+  <li class="license">
+    <strong>版权声明： </strong>本站所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+  </footer>
+
+</article>
+
+  </div>
+  
+
+<div class="post-nav">
+    <div class="item left">
+      
+
+  <a href="/2023/02/06/rustilings/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;s3.bmp.ovh&#x2F;imgs&#x2F;2024&#x2F;06&#x2F;17&#x2F;97c3cfc23ec60f4c.jpg" title="Rustilings 练习笔记">
+  <span class="type">上一篇</span>
+  <span class="category"><i class="ic i-flag"></i> 实验记录</span>
+  <h3>Rustilings 练习笔记</h3>
+  </a>
+
+    </div>
+    <div class="item right">
+      
+
+  <a href="/2023/02/07/cmu14-445-lab/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;s3.bmp.ovh&#x2F;imgs&#x2F;2024&#x2F;06&#x2F;17&#x2F;5d3d43e0f7dc0697.jpg" title="CMU14-445 Lab">
+  <span class="type">下一篇</span>
+  <span class="category"><i class="ic i-flag"></i> 实验记录</span>
+  <h3>CMU14-445 Lab</h3>
+  </a>
+
+    </div>
+</div>
+
+  
+  <div class="wrap" id="comments"></div>
+
+
+        </div>
+        <div id="sidebar">
+          
+
+<div class="inner">
+
+  <div class="panels">
+    <div class="inner">
+      <div class="contents panel pjax" data-title="文章目录">
+          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Lab0-Warm-Up"><span class="toc-number">1.</span> <span class="toc-text">Lab0.Warm Up</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Networking-by-hand"><span class="toc-number">1.1.</span> <span class="toc-text">1 Networking by hand</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E8%87%AA%E5%88%B6Socket"><span class="toc-number">1.2.</span> <span class="toc-text">2 自制Socket</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E7%BC%93%E5%86%B2%E5%8C%BA%E9%98%9F%E5%88%97"><span class="toc-number">1.3.</span> <span class="toc-text">3 缓冲区队列</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Lab1-stitching-substrings-into-a-byte-stream"><span class="toc-number">2.</span> <span class="toc-text">Lab1.stitching substrings into a byte stream</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Lab2-TCP-Reciever"><span class="toc-number">3.</span> <span class="toc-text">Lab2.TCP Reciever</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%9D%E5%AF%B9%E5%BA%8F%E5%8F%B7%E5%92%8C%E7%9B%B8%E5%AF%B9%E5%BA%8F%E5%8F%B7%E7%9A%84%E8%BD%AC%E6%8D%A2"><span class="toc-number">3.1.</span> <span class="toc-text">绝对序号和相对序号的转换:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Implementing-the-TCP-receiver"><span class="toc-number">3.2.</span> <span class="toc-text">Implementing the TCP receiver</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Lab3-TCP-Sender"><span class="toc-number">4.</span> <span class="toc-text">Lab3 TCP Sender</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Lab4-TCP-Connnection"><span class="toc-number">5.</span> <span class="toc-text">Lab4 TCP Connnection</span></a></li></ol>
+      </div>
+      <div class="related panel pjax" data-title="系列文章">
+        <ul>
+          <li><a href="/2021/04/25/verilog/" rel="bookmark" title="华中科技大学Verilog实验解析">华中科技大学Verilog实验解析</a></li><li><a href="/2021/12/18/oslab1/" rel="bookmark" title="华中科技大学OS实验解析(Lab1)">华中科技大学OS实验解析(Lab1)</a></li><li><a href="/2021/12/18/oslab2/" rel="bookmark" title="华中科技大学OS实验解析(Lab2)">华中科技大学OS实验解析(Lab2)</a></li><li><a href="/2022/02/26/oschallengelab/" rel="bookmark" title="华中科技大学操作系统挑战实验(PKE)基础解析">华中科技大学操作系统挑战实验(PKE)基础解析</a></li><li><a href="/2023/02/06/rustilings/" rel="bookmark" title="Rustilings 练习笔记">Rustilings 练习笔记</a></li><li class="active"><a href="/2023/02/06/stanford-cs144-lab/" rel="bookmark" title="Stanford CS144 Lab">Stanford CS144 Lab</a></li><li><a href="/2023/02/07/cmu14-445-lab/" rel="bookmark" title="CMU14-445 Lab">CMU14-445 Lab</a></li><li><a href="/2023/02/08/mit-6-s081-lab/" rel="bookmark" title="MIT_6.s081_Lab">MIT_6.s081_Lab</a></li><li><a href="/2023/02/09/mit-6-s081-xv6-information-%E9%9B%86%E5%90%88/" rel="bookmark" title="MIT_6.S081_xv6.Information 集合">MIT_6.S081_xv6.Information 集合</a></li><li><a href="/2023/09/13/nju-pa/" rel="bookmark" title="南大pa">南大pa</a></li><li><a href="/2024/04/17/stanford-cs143-PA/" rel="bookmark" title="Stanford CS143 PA">Stanford CS143 PA</a></li><li><a href="/2024/04/19/mit-6-824-mr/" rel="bookmark" title="MIT_6.824:PA1-MapReduce">MIT_6.824:PA1-MapReduce</a></li><li><a href="/2024/04/28/mit-6-824-raft/" rel="bookmark" title="In Search of an Understandable Consensus Algorithm (Extended Version)">In Search of an Understandable Consensus Algorithm (Extended Version)</a></li>
+        </ul>
+      </div>
+      <div class="overview panel" data-title="站点概览">
+        <div class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="image" itemprop="image" alt="Sukuna"
+      data-src="/images/IMG_1335.PNG">
+  <p class="name" itemprop="name">Sukuna</p>
+  <div class="description" itemprop="description"></div>
+</div>
+
+<nav class="state">
+    <div class="item posts">
+      <a href="/archives/">
+        <span class="count">20</span>
+        <span class="name">文章</span>
+      </a>
+    </div>
+    <div class="item categories">
+      <a href="/categories/">
+        <span class="count">3</span>
+        <span class="name">分类</span>
+      </a>
+    </div>
+</nav>
+
+<div class="social">
+      <span class="exturl item github" data-url="aHR0cHM6Ly9naXRodWIuY29tL1N1a3VuYXNoaW5teW91bWFydS1odXN0" title="https:&#x2F;&#x2F;github.com&#x2F;Sukunashinmyoumaru-hust"><i class="ic i-github"></i></span>
+      <span class="exturl item twitter" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9zdWt1bmFfd2lyZWxlc3M=" title="https:&#x2F;&#x2F;twitter.com&#x2F;sukuna_wireless"><i class="ic i-twitter"></i></span>
+      <a href="/sukuna@hust.edu.cn" title="sukuna@hust.edu.cn" class="item email"><i class="ic i-envelope"></i></a>
+</div>
+
+<ul class="menu">
+  
+    
+  <li class="item">
+    <a href="/" rel="section"><i class="ic i-home"></i>首页</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/about/" rel="section"><i class="ic i-user"></i>关于</a>
+  </li>
+
+        
+  <li class="item dropdown">
+      <a href="javascript:void(0);"><i class="ic i-feather"></i>文章</a>
+    <ul class="submenu">
+
+        
+  <li class="item">
+    <a href="/archives/" rel="section"><i class="ic i-list-alt"></i>归档</a>
+  </li>
+
+        
+  <li class="item">
+    <a href="/categories/" rel="section"><i class="ic i-th"></i>分类</a>
+  </li>
+
+        
+  <li class="item">
+    <a href="/tags/" rel="section"><i class="ic i-tags"></i>标签</a>
+  </li>
+
+  </ul>
+    
+  <li class="item">
+    <a href="/friend/" rel="section"><i class="ic i-heart"></i>friends</a>
+  </li>
+
+    
+  <li class="item">
+    <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1N1a3VuYVNoaW5teW91bWFydS1odXN0L0h1c3Qtb3BlbnNvdXJjZS1YdWVqaWU="><i class="ic i-github"></i>HUST-学解</span>
+  </li>
+
+    
+  <li class="item">
+    <a href="/picture/" rel="section"><i class="ic i-magic"></i>赠画感谢</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/source/" rel="section"><i class="ic i-address-card"></i>资料下载</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/travel/" rel="section"><i class="ic i-heart"></i>旅行日志</a>
+  </li>
+
+
+</ul>
+
+      </div>
+    </div>
+  </div>
+
+  <ul id="quick">
+    <li class="prev pjax">
+        <a href="/2023/02/06/rustilings/" rel="prev" title="上一篇"><i class="ic i-chevron-left"></i></a>
+    </li>
+    <li class="up"><i class="ic i-arrow-up"></i></li>
+    <li class="down"><i class="ic i-arrow-down"></i></li>
+    <li class="next pjax">
+        <a href="/2023/02/07/cmu14-445-lab/" rel="next" title="下一篇"><i class="ic i-chevron-right"></i></a>
+    </li>
+    <li class="percent"></li>
+  </ul>
+</div>
+
+
+        </div>
+        <div class="dimmer"></div>
+      </div>
+    </main>
+    <footer id="footer">
+      <div class="inner">
+        <div class="widgets">
+          
+<div class="rpost pjax">
+  <h2>随机文章</h2>
+  <ul>
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
+</div>
+
+    <span><a href="/2023/02/09/mit-6-s081-xv6-information-%E9%9B%86%E5%90%88/" title="MIT_6.S081_xv6.Information 集合">MIT_6.S081_xv6.Information 集合</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
+</div>
+
+    <span><a href="/2023/09/13/nju-pa/" title="南大pa">南大pa</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
+</div>
+
+    <span><a href="/2024/04/28/mit-6-824-raft/" title="In Search of an Understandable Consensus Algorithm (Extended Version)">In Search of an Understandable Consensus Algorithm (Extended Version)</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
+</div>
+
+    <span><a href="/2023/02/08/mit-6-s081-lab/" title="MIT_6.s081_Lab">MIT_6.s081_Lab</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
+</div>
+
+    <span><a href="/2023/02/06/stanford-cs144-lab/" title="Stanford CS144 Lab">Stanford CS144 Lab</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
+</div>
+
+    <span><a href="/2023/02/06/rustilings/" title="Rustilings 练习笔记">Rustilings 练习笔记</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E7%AE%97%E6%B3%95%E9%A2%98/" title="分类于 算法题">算法题</a>
+</div>
+
+    <span><a href="/2022/03/30/splay/" title="Splay模版:P3369[模版&#x2F;普通平衡树]">Splay模版:P3369[模版/普通平衡树]</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
+</div>
+
+    <span><a href="/2024/04/17/stanford-cs143-PA/" title="Stanford CS143 PA">Stanford CS143 PA</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
+</div>
+
+    <span><a href="/2021/12/18/oslab1/" title="华中科技大学OS实验解析(Lab1)">华中科技大学OS实验解析(Lab1)</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E6%9D%82%E8%AE%B0/" title="分类于 杂记">杂记</a>
+</div>
+
+    <span><a href="/2020/05/02/setup/" title="建站">建站</a></span>
+  </li>
+
+  </ul>
+</div>
+<div>
+  <h2>最新评论</h2>
+  <ul class="leancloud-recent-comment"></ul>
+</div>
+
+        </div>
+        <div class="status">
+  <div class="copyright">
+    
+    &copy; 2020 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="ic i-sakura rotate"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Sukuna @ Suwa shrine</span>
+  </div>
+  <div class="count">
+    <span class="post-meta-item-icon">
+      <i class="ic i-chart-area"></i>
+    </span>
+    <span title="站点总字数">412k 字</span>
+
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="ic i-coffee"></i>
+    </span>
+    <span title="站点阅读时长">6:15</span>
+  </div>
+  <div class="powered-by">
+    基于 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & Theme.<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FtZWhpbWUvaGV4by10aGVtZS1zaG9rYQ==">Shoka</span>
+  </div>
+</div>
+
+      </div>
+    </footer>
+  </div>
+<script data-config type="text/javascript">
+  var LOCAL = {
+    path: '2023/02/06/stanford-cs144-lab/',
+    favicon: {
+      show: "（●´3｀●）あややややや～",
+      hide: "(´Д｀)大変だ！"
+    },
+    search : {
+      placeholder: "文章搜索",
+      empty: "关于 「 ${query} 」，什么也没搜到",
+      stats: "${time} ms 内找到 ${hits} 条结果"
+    },
+    valine: true,fancybox: true,
+    copyright: '复制成功，转载请遵守 <i class="ic i-creative-commons"></i>BY-NC-SA 协议。',
+    ignores : [
+      function(uri) {
+        return uri.includes('#');
+      },
+      function(uri) {
+        return new RegExp(LOCAL.path+"$").test(uri);
+      }
+    ]
+  };
+</script>
+
+<script src="https://cdn.polyfill.io/v2/polyfill.js"></script>
+
+<script src="//cdn.jsdelivr.net/combine/npm/pace-js@1.0.2/pace.min.js,npm/pjax@0.2.8/pjax.min.js,npm/whatwg-fetch@3.4.0/dist/fetch.umd.min.js,npm/animejs@3.2.0/lib/anime.min.js,npm/algoliasearch@4/dist/algoliasearch-lite.umd.js,npm/instantsearch.js@4/dist/instantsearch.production.min.js,npm/lozad@1/dist/lozad.min.js,npm/quicklink@2/dist/quicklink.umd.js"></script>
+
+<script src="/js/app.js?v=0.2.5"></script>
+
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":200,"height":400},"mobile":{"show":true},"log":false});</script></body>
+</html>
