@@ -25,12 +25,12 @@
 
   
 
-<link rel="canonical" href="https://sukunashinmyoumaru-hust.github.io/2020/05/02/setup/">
+<link rel="canonical" href="https://sukunashinmyoumaru-hust.github.io/2024/10/12/asycn/">
 
 
 
   <title>
-建站 - 杂记 |
+Python异步编程说明 - 杂记 |
 Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
 <meta name="generator" content="Hexo 7.1.1"></head>
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -58,23 +58,23 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
         <div id="brand">
           <div class="pjax">
           
-  <h1 itemprop="name headline">建站
+  <h1 itemprop="name headline">Python异步编程说明
   </h1>
   
 <div class="meta">
-  <span class="item" title="创建时间：2020-05-02 18:43:28">
+  <span class="item" title="创建时间：2024-10-12 23:56:31">
     <span class="icon">
       <i class="ic i-calendar"></i>
     </span>
     <span class="text">发表于</span>
-    <time itemprop="dateCreated datePublished" datetime="2020-05-02T18:43:28+08:00">2020-05-02</time>
+    <time itemprop="dateCreated datePublished" datetime="2024-10-12T23:56:31+08:00">2024-10-12</time>
   </span>
   <span class="item" title="本文字数">
     <span class="icon">
       <i class="ic i-pen"></i>
     </span>
     <span class="text">本文字数</span>
-    <span>6</span>
+    <span>1.4k</span>
     <span class="text">字</span>
   </span>
   <span class="item" title="阅读时长">
@@ -115,12 +115,12 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
       </div>
       <div id="imgs" class="pjax">
         <ul>
-          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/4663c8f5b7019dfd.jpg"></li>
-          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/f841728a51c3ae78.jpg"></li>
-          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/bac1b1e69e7ebfb7.jpg"></li>
-          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/7c97ca6398f62495.jpg"></li>
-          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/5d3d43e0f7dc0697.jpg"></li>
           <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/8d1e248fe0f62130.jpg"></li>
+          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/c10853f5c9aee06c.jpg"></li>
+          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/7d2279310f1bb2f7.jpg"></li>
+          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/7c97ca6398f62495.jpg"></li>
+          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/97c3cfc23ec60f4c.jpg"></li>
+          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/5d3d43e0f7dc0697.jpg"></li>
         </ul>
       </div>
     </header>
@@ -151,7 +151,7 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
 </div>
 
     <article itemscope itemtype="http://schema.org/Article" class="post block" lang="zh-CN">
-  <link itemprop="mainEntityOfPage" href="https://sukunashinmyoumaru-hust.github.io/2020/05/02/setup/">
+  <link itemprop="mainEntityOfPage" href="https://sukunashinmyoumaru-hust.github.io/2024/10/12/asycn/">
 
   <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="image" content="/images/IMG_1335.PNG">
@@ -166,7 +166,18 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
   <div class="body md" itemprop="articleBody">
     
 
-    <p>花了许多时间</p>
+    <p>Python异步编程使用<code>asycn</code>和<code>await</code>两个关键词进行修饰。其中<code>asycn</code>关键词修饰过程，而<code>await</code>修饰操作本身。</p>
+<h3 id="EventLoop（事件循环）"><a href="#EventLoop（事件循环）" class="headerlink" title="EventLoop（事件循环）"></a>EventLoop（事件循环）</h3><p>Python异步编程的核心是维护若干个事件循环，学过操作系统的可以把事件简单地认为是“进程”。Python的事件循环维护若干个Task（协程），当Task被阻塞或者Task完成了，就从Task池（我起的名字）中获取下一个可以用的Task来执行。你可以通过<code>get_running_loop()</code>和<code>get_event_loop()</code>来获取当前的事件循环。区别是前者如果没有正在运行的事件循环则会引发 RuntimeError并且只能由协程或回调来调用。后者如果没有正在运行的事件循环择新建一个事件循环。</p>
+<h3 id="Task"><a href="#Task" class="headerlink" title="Task"></a>Task</h3><p>事件循环本质就是管理Task。Task是一次协程的一次执行。协程使用<code>asycn</code>关键词进行修饰。这种函数最大特点是执行可以暂停，交出执行权。在<code>asycn</code>修饰的函数里面可以加上<code>await</code>修饰的<code>asycn</code>函数，就像这样：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">import asyncio</span><br><span class="line"></span><br><span class="line">async def get_data()</span><br><span class="line">	return 11</span><br><span class="line"></span><br><span class="line">async def main():</span><br><span class="line">	# get_data()</span><br><span class="line">	d = await get_data()</span><br><span class="line">	print(d)</span><br></pre></td></tr></table></figure>
+
+<p>当执行到await这一步的时候，就暂停当前Task命令的执行，反而去执行别的命令（就相当于阻塞）。这个时候会有人问，await修饰的那段任务执行情况是怎么样的呢，是作为一个新的Task放入事件循环中？其实不是，await代表异步执行，你可以简单地理解成开一个新的协程去做这件事情。这个协程首先把当前Task给暂停了，换一个新的Task。等那个新的协程把事情做完了，把之前那个被暂停的Task抓到Task池里面。其核心就是把IO密集型的任务进行重组，在IO等待的时候做点别的。</p>
+<p>那至于Python如何平衡这个协程和新协程，就是内核做的事情，程序员不需要思考这件事。你可以认为，在程序员的角度中，就是做到需要等待的任务，就交给别人先占用CPU，我等完了我再来占用CPU。异步的目的就是并发执行。并发执行计算和IO，并发执行若干个任务。（这里我猜有一种机制，可以让计算，也就是CPU操作和IO一起执行，其实硬件上是可以实现的，有一种叫做DMA的机器可以实现IO和计算分离，具体的实现可以去学学，但是我目前就只知道用法）</p>
+<h3 id="Push-task-to-eventloop"><a href="#Push-task-to-eventloop" class="headerlink" title="Push task to eventloop"></a>Push task to eventloop</h3><p>我们可以使用<code>asyncio.run()</code>来执行一个异步任务，也可以使用<code>asyncio.gather()</code>打包若干个Task进行执行。</p>
+<h3 id="Get-the-return-value-from-task"><a href="#Get-the-return-value-from-task" class="headerlink" title="Get the return value from task"></a>Get the return value from task</h3><p>我们可以使用<code>task.result()</code>来统一返回，可以配合barrier一起使用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">if __name__ == &#x27;__main__&#x27;:</span><br><span class="line"></span><br><span class="line">    start_time = time.time()#程序启动时间</span><br><span class="line"></span><br><span class="line">    loop = asyncio.get_event_loop()#获取本机事件循环</span><br><span class="line">    tasks = [loop.create_task(get_data(i)) for i in range(4)]</span><br><span class="line"> </span><br><span class="line">    loop.run_until_complete(asyncio.wait(tasks))</span><br><span class="line">    print()</span><br><span class="line">    for task in tasks:</span><br><span class="line">        print(task.result())</span><br></pre></td></tr></table></figure>
+
+
 
   </div>
 
@@ -178,7 +189,7 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
       <i class="ic i-calendar-check"></i>
     </span>
     <span class="text">更新于</span>
-    <time title="修改时间：2024-02-27 13:01:50" itemprop="dateModified" datetime="2024-02-27T13:01:50+08:00">2024-02-27</time>
+    <time title="修改时间：2024-10-12 15:20:32" itemprop="dateModified" datetime="2024-10-12T15:20:32+08:00">2024-10-12</time>
   </span>
 </div>
 
@@ -209,7 +220,7 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
   </li>
   <li class="link">
     <strong>本文链接：</strong>
-    <a href="https://sukunashinmyoumaru-hust.github.io/2020/05/02/setup/" title="建站">https://sukunashinmyoumaru-hust.github.io/2020/05/02/setup/</a>
+    <a href="https://sukunashinmyoumaru-hust.github.io/2024/10/12/asycn/" title="Python异步编程说明">https://sukunashinmyoumaru-hust.github.io/2024/10/12/asycn/</a>
   </li>
   <li class="license">
     <strong>版权声明： </strong>本站所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</span> 许可协议。转载请注明出处！
@@ -226,16 +237,16 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
 
 <div class="post-nav">
     <div class="item left">
-    </div>
-    <div class="item right">
       
 
-  <a href="/2020/05/24/ufpe-starters-final-try-outs-2019-problem-l/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;s3.bmp.ovh&#x2F;imgs&#x2F;2024&#x2F;06&#x2F;17&#x2F;7d2279310f1bb2f7.jpg" title="UFPE Starters Final Try-Outs 2019 Problem L">
-  <span class="type">下一篇</span>
-  <span class="category"><i class="ic i-flag"></i> 算法题</span>
-  <h3>UFPE Starters Final Try-Outs 2019 Problem L</h3>
+  <a href="/2024/04/28/mit-6-824-raft/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;s3.bmp.ovh&#x2F;imgs&#x2F;2024&#x2F;06&#x2F;17&#x2F;97c3cfc23ec60f4c.jpg" title="In Search of an Understandable Consensus Algorithm (Extended Version)">
+  <span class="type">上一篇</span>
+  <span class="category"><i class="ic i-flag"></i> 实验记录</span>
+  <h3>In Search of an Understandable Consensus Algorithm (Extended Version)</h3>
   </a>
 
+    </div>
+    <div class="item right">
     </div>
 </div>
 
@@ -252,10 +263,11 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
   <div class="panels">
     <div class="inner">
       <div class="contents panel pjax" data-title="文章目录">
+          <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#EventLoop%EF%BC%88%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">EventLoop（事件循环）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Task"><span class="toc-number">2.</span> <span class="toc-text">Task</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Push-task-to-eventloop"><span class="toc-number">3.</span> <span class="toc-text">Push task to eventloop</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Get-the-return-value-from-task"><span class="toc-number">4.</span> <span class="toc-text">Get the return value from task</span></a></li></ol>
       </div>
       <div class="related panel pjax" data-title="系列文章">
         <ul>
-          <li class="active"><a href="/2020/05/02/setup/" rel="bookmark" title="建站">建站</a></li><li><a href="/2020/10/11/cmd/" rel="bookmark" title="(烂活)用cmd窗口输出图画">(烂活)用cmd窗口输出图画</a></li><li><a href="/2022/04/17/luogu-al/" rel="bookmark" title="做算法题综合">做算法题综合</a></li><li><a href="/2022/06/06/nju-ics/" rel="bookmark" title="南大ics面试记录">南大ics面试记录</a></li><li><a href="/2024/10/12/asycn/" rel="bookmark" title="Python异步编程说明">Python异步编程说明</a></li>
+          <li><a href="/2020/05/02/setup/" rel="bookmark" title="建站">建站</a></li><li><a href="/2020/10/11/cmd/" rel="bookmark" title="(烂活)用cmd窗口输出图画">(烂活)用cmd窗口输出图画</a></li><li><a href="/2022/04/17/luogu-al/" rel="bookmark" title="做算法题综合">做算法题综合</a></li><li><a href="/2022/06/06/nju-ics/" rel="bookmark" title="南大ics面试记录">南大ics面试记录</a></li><li class="active"><a href="/2024/10/12/asycn/" rel="bookmark" title="Python异步编程说明">Python异步编程说明</a></li>
         </ul>
       </div>
       <div class="overview panel" data-title="站点概览">
@@ -392,47 +404,7 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
 <a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
 </div>
 
-    <span><a href="/2023/02/06/stanford-cs144-lab/" title="Stanford CS144 Lab">Stanford CS144 Lab</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/%E7%AE%97%E6%B3%95%E9%A2%98/" title="分类于 算法题">算法题</a>
-</div>
-
-    <span><a href="/2022/03/30/splay/" title="Splay模版:P3369[模版&#x2F;普通平衡树]">Splay模版:P3369[模版/普通平衡树]</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
-</div>
-
-    <span><a href="/2021/12/18/oslab2/" title="华中科技大学OS实验解析(Lab2)">华中科技大学OS实验解析(Lab2)</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
-</div>
-
     <span><a href="/2024/04/17/stanford-cs143-PA/" title="Stanford CS143 PA">Stanford CS143 PA</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
-</div>
-
-    <span><a href="/2023/02/09/mit-6-s081-xv6-information-%E9%9B%86%E5%90%88/" title="MIT_6.S081_xv6.Information 集合">MIT_6.S081_xv6.Information 集合</a></span>
   </li>
 
       
@@ -452,17 +424,47 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
 <a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
 </div>
 
-    <span><a href="/2023/02/06/rustilings/" title="Rustilings 练习笔记">Rustilings 练习笔记</a></span>
+    <span><a href="/2021/12/18/oslab2/" title="华中科技大学OS实验解析(Lab2)">华中科技大学OS实验解析(Lab2)</a></span>
   </li>
 
       
   <li class="item">
     
 <div class="breadcrumb">
-<a href="/categories/%E7%AE%97%E6%B3%95%E9%A2%98/" title="分类于 算法题">算法题</a>
+<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
 </div>
 
-    <span><a href="/2020/05/24/ufpe-starters-final-try-outs-2019-problem-l/" title="UFPE Starters Final Try-Outs 2019 Problem L">UFPE Starters Final Try-Outs 2019 Problem L</a></span>
+    <span><a href="/2023/02/08/mit-6-s081-lab/" title="MIT_6.s081_Lab">MIT_6.s081_Lab</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E6%9D%82%E8%AE%B0/" title="分类于 杂记">杂记</a>
+</div>
+
+    <span><a href="/2022/04/17/luogu-al/" title="做算法题综合">做算法题综合</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
+</div>
+
+    <span><a href="/2023/02/06/stanford-cs144-lab/" title="Stanford CS144 Lab">Stanford CS144 Lab</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
+</div>
+
+    <span><a href="/2022/02/26/oschallengelab/" title="华中科技大学操作系统挑战实验(PKE)基础解析">华中科技大学操作系统挑战实验(PKE)基础解析</a></span>
   </li>
 
       
@@ -473,6 +475,16 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
 </div>
 
     <span><a href="/2020/10/11/cmd/" title="(烂活)用cmd窗口输出图画">(烂活)用cmd窗口输出图画</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
+</div>
+
+    <span><a href="/2021/12/18/oslab1/" title="华中科技大学OS实验解析(Lab1)">华中科技大学OS实验解析(Lab1)</a></span>
   </li>
 
   </ul>
@@ -515,7 +527,7 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
   </div>
 <script data-config type="text/javascript">
   var LOCAL = {
-    path: '2020/05/02/setup/',
+    path: '2024/10/12/asycn/',
     favicon: {
       show: "（●´3｀●）あややややや～",
       hide: "(´Д｀)大変だ！"
