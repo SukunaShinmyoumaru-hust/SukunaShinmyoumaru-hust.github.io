@@ -1,0 +1,598 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#FFF">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/1.jpg">
+
+<link rel="icon" type="image/ico" sizes="32x32" href="/images/favicon.ico">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+<link rel="alternate" type="application/rss+xml" title="灵山之上神风起" href="https://sukunashinmyoumaru-hust.github.io/rss.xml" />
+<link rel="alternate" type="application/atom+xml" title="灵山之上神风起" href="https://sukunashinmyoumaru-hust.github.io/atom.xml" />
+<link rel="alternate" type="application/json" title="灵山之上神风起" href="https://sukunashinmyoumaru-hust.github.io/feed.json" />
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Mulish:300,300italic,400,400italic,700,700italic%7CFredericka%20the%20Great:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20JP:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20SC:300,300italic,400,400italic,700,700italic%7CInconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="/css/app.css?v=0.2.5">
+
+  
+
+<link rel="canonical" href="https://sukunashinmyoumaru-hust.github.io/2024/10/17/NN/">
+
+
+
+  <title>
+目标检测概论 - 杂记 |
+Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
+<meta name="generator" content="Hexo 7.1.1"></head>
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div id="loading">
+    <div class="cat">
+      <div class="body"></div>
+      <div class="head">
+        <div class="face"></div>
+      </div>
+      <div class="foot">
+        <div class="tummy-end"></div>
+        <div class="bottom"></div>
+        <div class="legs left"></div>
+        <div class="legs right"></div>
+      </div>
+      <div class="paw">
+        <div class="hands left"></div>
+        <div class="hands right"></div>
+      </div>
+    </div>
+  </div>
+  <div id="container">
+    <header id="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="inner">
+        <div id="brand">
+          <div class="pjax">
+          
+  <h1 itemprop="name headline">目标检测概论
+  </h1>
+  
+<div class="meta">
+  <span class="item" title="创建时间：2024-10-17 14:38:17">
+    <span class="icon">
+      <i class="ic i-calendar"></i>
+    </span>
+    <span class="text">发表于</span>
+    <time itemprop="dateCreated datePublished" datetime="2024-10-17T14:38:17+08:00">2024-10-17</time>
+  </span>
+  <span class="item" title="本文字数">
+    <span class="icon">
+      <i class="ic i-pen"></i>
+    </span>
+    <span class="text">本文字数</span>
+    <span>4.1k</span>
+    <span class="text">字</span>
+  </span>
+  <span class="item" title="阅读时长">
+    <span class="icon">
+      <i class="ic i-clock"></i>
+    </span>
+    <span class="text">阅读时长</span>
+    <span>4 分钟</span>
+  </span>
+</div>
+
+
+          </div>
+        </div>
+        <nav id="nav">
+  <div class="inner">
+    <div class="toggle">
+      <div class="lines" aria-label="切换导航栏">
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line"></span>
+      </div>
+    </div>
+    <ul class="menu">
+      <li class="item title"><a href="/" rel="start">Suwa shrine</a></li>
+    </ul>
+    <ul class="right">
+      <li class="item theme">
+        <i class="ic i-sun"></i>
+      </li>
+      <li class="item search">
+        <i class="ic i-search"></i>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+      </div>
+      <div id="imgs" class="pjax">
+        <ul>
+          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/f841728a51c3ae78.jpg"></li>
+          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/7c97ca6398f62495.jpg"></li>
+          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/c10853f5c9aee06c.jpg"></li>
+          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/8d1e248fe0f62130.jpg"></li>
+          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/5d3d43e0f7dc0697.jpg"></li>
+          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/7d2279310f1bb2f7.jpg"></li>
+        </ul>
+      </div>
+    </header>
+    <div id="waves">
+      <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+        <defs>
+          <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+        </defs>
+        <g class="parallax">
+          <use xlink:href="#gentle-wave" x="48" y="0" />
+          <use xlink:href="#gentle-wave" x="48" y="3" />
+          <use xlink:href="#gentle-wave" x="48" y="5" />
+          <use xlink:href="#gentle-wave" x="48" y="7" />
+        </g>
+      </svg>
+    </div>
+    <main>
+      <div class="inner">
+        <div id="main" class="pjax">
+          
+  <div class="article wrap">
+    
+<div class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+<i class="ic i-home"></i>
+<span><a href="/">首页</a></span><i class="ic i-angle-right"></i>
+<span  class="current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="/categories/%E6%9D%82%E8%AE%B0/" itemprop="item" rel="index" title="分类于 杂记"><span itemprop="name">杂记</span></a>
+<meta itemprop="position" content="1" /></span>
+</div>
+
+    <article itemscope itemtype="http://schema.org/Article" class="post block" lang="zh-CN">
+  <link itemprop="mainEntityOfPage" href="https://sukunashinmyoumaru-hust.github.io/2024/10/17/NN/">
+
+  <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="image" content="/images/IMG_1335.PNG">
+    <meta itemprop="name" content="Sukuna">
+    <meta itemprop="description" content="Sukuna_wireless, ">
+  </span>
+
+  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="灵山之上神风起">
+  </span>
+
+  <div class="body md" itemprop="articleBody">
+    
+
+    <h3 id="目标检测概论"><a href="#目标检测概论" class="headerlink" title="目标检测概论"></a>目标检测概论</h3><p>目标检测，通俗点说就是给定一个图像，在图像中框出符合要求的区域。</p>
+<p>用数学语言表达，就是：</p>
+<p>训练集的输入是$(x_1,b_1),\dots,(x_n,b_n)$（其中$x_i&#x3D;(x_{i1},x_{i2},…,x_{ik})\in R^{m<em>n}$ 是原始$m</em>n$，k通道的图片，$b_i &#x3D; {b_{i1},b_{i2},…,b_{ij},c_{i1},c_{i2},…,c_{ij}}$是若干个符合要求的区域$b_{ik}\in R^4$和它们的id$c_{ik}$），也就是说在神经网络的推理中，我们需要输入一个$x$得到一个$b$</p>
+<h3 id="R-CNN"><a href="#R-CNN" class="headerlink" title="R-CNN"></a>R-CNN</h3><p>传统目标检测方法包含预处理、窗口滑动、特征提取、特征选择、特征分类、后处理等步骤，而卷积神经网络本身具有特征提取、特征选择和特征分类的功能。那么，可以直接利用卷积神经网络对每个滑动窗口产生的候选区进行二分类，判断其是否为待检测目标。R-CNN因此而生。</p>
+<p>R-CNN就是在CNN的基础上加了一层滑动窗口的选择。它有几点创新点：</p>
+<ul>
+<li>确定了two stage网络的设计范式。two stage网络的基本思想是把网络拆分成分类（类别判断）和回归（位置判断）两个任务进行处理。</li>
+<li>形成日后主流的目标检测模型范式：input（输入）、backbone（主干）、neck（转化）、head（预测）。</li>
+</ul>
+<h4 id="R-CNN的Input部分"><a href="#R-CNN的Input部分" class="headerlink" title="R-CNN的Input部分"></a>R-CNN的Input部分</h4><p>这一部分是相较于CNN的关键区别，这一部分针对输入的图像，生成一系列可能有目标的识别框。对于每张输入的图片，采用Selective Search 方法，生成1K~2K个候选区域（region proposals&#x2F;region of interest，Rol）。</p>
+<p>首先先对图像做一次图像分割：这里使用Massachusetts Institute of Technology基于图计算的图像分割方法。首先建图$G(V,E)$。点集就是图像上的每一个像素。边集是相邻的像素集合。每条边上有一个非负的权重表示像素之间的相似度，图每条边的权值是基于像素点之间的关系，可以是像素点之间的灰度值差，也可以是像素点之间的距离。在图论中，图的分割是$S &#x3D; (C_1,C_2,..,C_n) when C &#x3D; G’(V’,E’) ,\sum V’ &#x3D; V$，其中$V’$是$V$的一个子集，$E’$是$E$的一个子集，问题就转化成了求一个最优的图分割。本算法过程就相当于先将图分割成一个个顶点，然后通过合并策略，将它们合并，最后得到一个既不”太精细“也不”太粗糙“的分割。那是怎么进行合并的呢？论文中提出了一个叫做$MInt(C_1,C_2) &#x3D; min(Int(C_1) + \tau(C_1),Int(C_2) + \tau(C_2))$的定义。这个定义基于$Int(C) &#x3D; \max w(e)$（e是C中的边）。如果$MInt(C_1,C_2) &gt; Dif(C_1,C_2)$，那么$C_1,C_2$就可以合并。（其中$Dif(C_1,C_2) &#x3D; \min w(v_i,v_j)$，$v_i$和$v_j$是$C_1$和$C_2$中的点）。做多次合并，可以得到一个合理的图的分割。</p>
+<p>原文地址：<span class="exturl" data-url="aHR0cHM6Ly9jcy5icm93bi5lZHUvcGVvcGxlL3BmZWx6ZW5zL3BhcGVycy9zZWctaWpjdi5wZGYlRUYlQkMlODk=">https://cs.brown.edu/people/pfelzens/papers/seg-ijcv.pdf）</span></p>
+<p>得到了图的分割后，再对这个基础的分割进行一次聚类。根据之前计算好的$S$，计算S中每一个部分之间的相似度。在这里相似度可以表示成$s(r_i,r_j) &#x3D; a_1s_{color}(r_i,r_j) + a_2s_{texture}(r_i,r_j)+ a_3s_{size}(r_i,r_j) + a_4s_{fill}$，其中每个相似度表示颜色相似度，纹理相似度，大小相似度和填充相似度。计算好相似度后对挑选相似度最高的两个区域进行合并。合并的方法是构建一个新的大框。</p>
+<p>原文地址：<span class="exturl" data-url="aHR0cHM6Ly9pdmkuZm53aS51dmEubmwvaXNpcy9wdWJsaWNhdGlvbnMvMjAxMy9VaWpsaW5nc0lKQ1YyMDEzL1VpamxpbmdzSUpDVjIwMTMucGRm">https://ivi.fnwi.uva.nl/isis/publications/2013/UijlingsIJCV2013/UijlingsIJCV2013.pdf</span></p>
+<h4 id="R-CNN的BackBone部分"><a href="#R-CNN的BackBone部分" class="headerlink" title="R-CNN的BackBone部分"></a>R-CNN的BackBone部分</h4><p>R-CNN使用了非常传统的AlexNet进行分析。</p>
+<p>第1层输入层： 输入为224×224×3 三通道的图像。</p>
+<p>第2层Conv层： 输入为224×224×3，经过96个kernel size为11×11×3的filter, stride &#x3D; 4，卷积后得到shape为55×55×96的卷积层。</p>
+<p>这里有2点值得注意的细节：(224-11)&#x2F;4 + 1 &#x3D; 54.25，</p>
+<p>（1）按照论文中filter size和stride的设计，输入的图片尺寸应该为227×227×3。</p>
+<p>（2）加上padding&#x3D;2，则(224-11+2*2)&#x2F;4 + 1 &#x3D; 55.25，步长会略去小数，得到55.</p>
+<p>第3层Max-pooling层： 输入为55×55×96，经Overlapping pooling(重叠池化)pool size &#x3D; 3,stride &#x3D; 2后得到尺寸为27×27×96 的池化层</p>
+<p>第4层Conv层： 输入尺寸为27×27×96，经256个5×5×96的filter卷积，padding&#x3D;same得到尺寸为27×27×256的卷积层。</p>
+<p>第5层池化层： 输入为27×27×256，，经pool size &#x3D; 3,stride &#x3D; 2的重叠池化，得到尺寸为13×13×256的池化层。</p>
+<p>第6～8层Conv层： 第6层输入为13×13×256，经384个3×3×256的filter卷积得到13×13×384的卷积层。 第7层输入为13×13×384，经384个3×3×384的filter卷积得到13×13×384的卷积层。 第8层输入为13×13×384，经256个3×3×384的filter卷积得到13×13×256的卷积层。 这里可见，这三层卷积层使用的kernel前两个维度都是3×3，只是通道维不同。</p>
+<p>第9层Max-pooling层： 输入尺寸为13×13×256，经pool size &#x3D; 3,stride &#x3D; 2的重叠池化得到尺寸为6×6×256的池化层。该层后面还隐藏了flatten操作，通过展平得到6×6×256&#x3D;9216个参数后与之后的全连接层相连。</p>
+<p>第10～12层Dense（全连接）层： 第10~12层神经元个数分别为4096，4096,1000。其中前两层在使用relu后还使用了Dropout对神经元随机失活，最后一层全连接层用softmax输出1000个分类。（分类数量根据具体应用的数量变化，比如数据集中有10个类别，则最后输出10）</p>
+<h4 id="R-CNN的Head部分"><a href="#R-CNN的Head部分" class="headerlink" title="R-CNN的Head部分"></a>R-CNN的Head部分</h4><p>R-CNN使用一个SVM分类器来判别图片的类别（一个one-hot向量），使用一个回归器来预测目标的位置坐标（一个坐标四元组）。到了最终的预测结果输出阶段，还需要使用非极大值抑制（NMS）算法去除多余的候选区域。非极大值抑制（Non-maximal suppression，NMS）合并相似的预测。原来的NMS是用于锚框的情况，这里用于网格的情况。先从所有锚框中选取一个置信度高的锚框并对其进行标记，然后去掉（抑制）与其IOU值大于$\epsilon$的锚框；重复上面步骤，直至所有的锚框都被标记。</p>
+<h3 id="SPPNet（Spatial-Pyramid-Pooling-Networks）"><a href="#SPPNet（Spatial-Pyramid-Pooling-Networks）" class="headerlink" title="SPPNet（Spatial Pyramid Pooling Networks）"></a>SPPNet（Spatial Pyramid Pooling Networks）</h3><ul>
+<li><p>卷积神经网络的全连接层需要固定输入的尺寸，而Selective search所得到的候选区域存在尺寸上的差异，无法直接输入到卷积神经网络中实现区域的特征提取，因此RCNN先将候选区缩放至指定大小随后再输入到模型中进行特征提取。</p>
+</li>
+<li><p>RCNN使用Selective Search从图像中获取候选区域，然后依次将候选区域输入到卷积神经网络中进行图像特征提取，如果有2000个候选区域，则需要进行2000次独立的特征提取过程。然后，这2000个候选区域是存在一定程度的重叠的，所以如此设计会导致大量的冗余计算。</p>
+</li>
+</ul>
+<p>SPP-Net究竟做了什么呢？CNN网络需要固定尺寸的图像输入，SPPNet将任意大小的图像池化生成固定长度的图像表示。SPPNet在最后一个卷积层后，接入了金字塔池化层，保证传到下一层全连接层的输入固定。池化的方式如下图所示：</p>
+<p><img data-src="https://i-blog.csdnimg.cn/blog_migrate/78eeead1a8538d0041f4489e950d1ea1.png"></p>
+<p>其次呢，SPPNet先做一次卷积，在卷积好的图像中进行Selective Search。由于做卷积操作不影响图像的位置，所以这样做是没问题的。</p>
+<p><img data-src="https://i-blog.csdnimg.cn/blog_migrate/09e2d275518438dd71a0e8f37440b631.png" alt="R-CNN和SPP-net的区别"></p>
+<p>原文地址：<span class="exturl" data-url="aHR0cDovL2FyeGl2Lm9yZy9wZGYvMTQwNi40NzI5">http://arxiv.org/pdf/1406.4729</span></p>
+<h3 id="Fast-R-CNN"><a href="#Fast-R-CNN" class="headerlink" title="Fast R-CNN"></a>Fast R-CNN</h3><p>Fast R-CNN最重要的改进就是利用SPPNet，与R-CNN一样，利用Selective Search算法通过图像分割的方法得到一些原始区域，然后使用一些合并策略将这些区域合并，得到一个层次化的区域结构，而这些结构就包含着可能需要的物体。</p>
+<p>但是，Fast R-CNN与R-CNN不同的是，这些生成出来的候选区域不需要每一个都丢到卷积神经网络里面提取特征，而且只需要在特征图上映射便可。</p>
+<p>这样做的好处就是对于每一个框出来的区间，不需要都做一次卷积操作，而是直接可以进行池化和全连接了。在这里所有的图像都会池化成$7 \times 7$的特征矩阵。最后全连接层中有一个概率分配器和位置回归器。和R-CNN同理。Loss函数也分成分类loss（一般来说就是引入一个softmax层做交叉熵）和回归loss（smooth-L1损失）两部分</p>
+<p>$$L(p,u,t^u,v) &#x3D; L_{cls}(p,u)+\lambda u(u&lt;1)L_{rgs}(t^u,v)$$</p>
+<p><img data-src="https://i-blog.csdnimg.cn/blog_migrate/394c30ee399375d92dc9ec14ab4c0de9.png"></p>
+<h3 id="Faster-R-CNN"><a href="#Faster-R-CNN" class="headerlink" title="Faster R-CNN"></a>Faster R-CNN</h3><p>相较于Fast R-CNN，做的优化就是引入了区域建议网络（Region Proposal Network，RPN）代替Selective Search算法。其核心思想就是利用锚点进行运算。</p>
+<p>原文地址：<span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzE1MDQuMDgwODM=">https://arxiv.org/pdf/1504.08083</span></p>
+<h3 id="Yolov5"><a href="#Yolov5" class="headerlink" title="Yolov5"></a>Yolov5</h3><p>Yolo是基于R-CNN的一种神经网络框架，如图所示：</p>
+<p><img data-src="https://pic4.zhimg.com/v2-c006bfdf549bd811fcbcf8a6260f1c05_r.jpg"></p>
+
+  </div>
+
+   <footer>
+
+    <div class="meta">
+  <span class="item">
+    <span class="icon">
+      <i class="ic i-calendar-check"></i>
+    </span>
+    <span class="text">更新于</span>
+    <time title="修改时间：2024-10-17 14:38:27" itemprop="dateModified" datetime="2024-10-17T14:38:27+08:00">2024-10-17</time>
+  </span>
+</div>
+
+      
+<div class="reward">
+  <button><i class="ic i-heartbeat"></i> 赞赏</button>
+  <p>请我喝[茶]~(￣▽￣)~*</p>
+  <div id="qr">
+      
+      <div>
+        <img data-src="/images/wechatpay.jpg" alt="Sukuna 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div>
+        <img data-src="/images/alipay.jpg" alt="Sukuna 支付宝">
+        <p>支付宝</p>
+      </div>
+  </div>
+</div>
+
+      
+
+<div id="copyright">
+<ul>
+  <li class="author">
+    <strong>本文作者： </strong>Sukuna <i class="ic i-at"><em>@</em></i>灵山之上神风起
+  </li>
+  <li class="link">
+    <strong>本文链接：</strong>
+    <a href="https://sukunashinmyoumaru-hust.github.io/2024/10/17/NN/" title="目标检测概论">https://sukunashinmyoumaru-hust.github.io/2024/10/17/NN/</a>
+  </li>
+  <li class="license">
+    <strong>版权声明： </strong>本站所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+  </footer>
+
+</article>
+
+  </div>
+  
+
+<div class="post-nav">
+    <div class="item left">
+      
+
+  <a href="/2024/10/12/asycn/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;s3.bmp.ovh&#x2F;imgs&#x2F;2024&#x2F;06&#x2F;17&#x2F;7d2279310f1bb2f7.jpg" title="Python异步编程说明">
+  <span class="type">上一篇</span>
+  <span class="category"><i class="ic i-flag"></i> 杂记</span>
+  <h3>Python异步编程说明</h3>
+  </a>
+
+    </div>
+    <div class="item right">
+    </div>
+</div>
+
+  
+  <div class="wrap" id="comments"></div>
+
+
+        </div>
+        <div id="sidebar">
+          
+
+<div class="inner">
+
+  <div class="panels">
+    <div class="inner">
+      <div class="contents panel pjax" data-title="文章目录">
+          <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B%E6%A6%82%E8%AE%BA"><span class="toc-number">1.</span> <span class="toc-text">目标检测概论</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#R-CNN"><span class="toc-number">2.</span> <span class="toc-text">R-CNN</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#R-CNN%E7%9A%84Input%E9%83%A8%E5%88%86"><span class="toc-number">2.1.</span> <span class="toc-text">R-CNN的Input部分</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#R-CNN%E7%9A%84BackBone%E9%83%A8%E5%88%86"><span class="toc-number">2.2.</span> <span class="toc-text">R-CNN的BackBone部分</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#R-CNN%E7%9A%84Head%E9%83%A8%E5%88%86"><span class="toc-number">2.3.</span> <span class="toc-text">R-CNN的Head部分</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SPPNet%EF%BC%88Spatial-Pyramid-Pooling-Networks%EF%BC%89"><span class="toc-number">3.</span> <span class="toc-text">SPPNet（Spatial Pyramid Pooling Networks）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Fast-R-CNN"><span class="toc-number">4.</span> <span class="toc-text">Fast R-CNN</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Faster-R-CNN"><span class="toc-number">5.</span> <span class="toc-text">Faster R-CNN</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Yolov5"><span class="toc-number">6.</span> <span class="toc-text">Yolov5</span></a></li></ol>
+      </div>
+      <div class="related panel pjax" data-title="系列文章">
+        <ul>
+          <li><a href="/2020/05/02/setup/" rel="bookmark" title="建站">建站</a></li><li><a href="/2020/10/11/cmd/" rel="bookmark" title="(烂活)用cmd窗口输出图画">(烂活)用cmd窗口输出图画</a></li><li><a href="/2022/04/17/luogu-al/" rel="bookmark" title="做算法题综合">做算法题综合</a></li><li><a href="/2022/06/06/nju-ics/" rel="bookmark" title="南大ics面试记录">南大ics面试记录</a></li><li><a href="/2024/10/12/asycn/" rel="bookmark" title="Python异步编程说明">Python异步编程说明</a></li><li class="active"><a href="/2024/10/17/NN/" rel="bookmark" title="目标检测概论">目标检测概论</a></li>
+        </ul>
+      </div>
+      <div class="overview panel" data-title="站点概览">
+        <div class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="image" itemprop="image" alt="Sukuna"
+      data-src="/images/IMG_1335.PNG">
+  <p class="name" itemprop="name">Sukuna</p>
+  <div class="description" itemprop="description"></div>
+</div>
+
+<nav class="state">
+    <div class="item posts">
+      <a href="/archives/">
+        <span class="count">22</span>
+        <span class="name">文章</span>
+      </a>
+    </div>
+    <div class="item categories">
+      <a href="/categories/">
+        <span class="count">3</span>
+        <span class="name">分类</span>
+      </a>
+    </div>
+</nav>
+
+<div class="social">
+      <span class="exturl item github" data-url="aHR0cHM6Ly9naXRodWIuY29tL1N1a3VuYXNoaW5teW91bWFydS1odXN0" title="https:&#x2F;&#x2F;github.com&#x2F;Sukunashinmyoumaru-hust"><i class="ic i-github"></i></span>
+      <span class="exturl item twitter" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9zdWt1bmFfd2lyZWxlc3M=" title="https:&#x2F;&#x2F;twitter.com&#x2F;sukuna_wireless"><i class="ic i-twitter"></i></span>
+      <a href="/sukuna@hust.edu.cn" title="sukuna@hust.edu.cn" class="item email"><i class="ic i-envelope"></i></a>
+</div>
+
+<ul class="menu">
+  
+    
+  <li class="item">
+    <a href="/" rel="section"><i class="ic i-home"></i>首页</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/about/" rel="section"><i class="ic i-user"></i>关于</a>
+  </li>
+
+        
+  <li class="item dropdown">
+      <a href="javascript:void(0);"><i class="ic i-feather"></i>文章</a>
+    <ul class="submenu">
+
+        
+  <li class="item">
+    <a href="/archives/" rel="section"><i class="ic i-list-alt"></i>归档</a>
+  </li>
+
+        
+  <li class="item">
+    <a href="/categories/" rel="section"><i class="ic i-th"></i>分类</a>
+  </li>
+
+        
+  <li class="item">
+    <a href="/tags/" rel="section"><i class="ic i-tags"></i>标签</a>
+  </li>
+
+  </ul>
+    
+  <li class="item">
+    <a href="/friend/" rel="section"><i class="ic i-heart"></i>friends</a>
+  </li>
+
+    
+  <li class="item">
+    <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1N1a3VuYVNoaW5teW91bWFydS1odXN0L0h1c3Qtb3BlbnNvdXJjZS1YdWVqaWU="><i class="ic i-github"></i>HUST-学解</span>
+  </li>
+
+    
+  <li class="item">
+    <a href="/picture/" rel="section"><i class="ic i-magic"></i>赠画感谢</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/source/" rel="section"><i class="ic i-address-card"></i>资料下载</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/travel/" rel="section"><i class="ic i-heart"></i>旅行日志</a>
+  </li>
+
+
+</ul>
+
+      </div>
+    </div>
+  </div>
+
+  <ul id="quick">
+    <li class="prev pjax">
+    </li>
+    <li class="up"><i class="ic i-arrow-up"></i></li>
+    <li class="down"><i class="ic i-arrow-down"></i></li>
+    <li class="next pjax">
+    </li>
+    <li class="percent"></li>
+  </ul>
+</div>
+
+
+        </div>
+        <div class="dimmer"></div>
+      </div>
+    </main>
+    <footer id="footer">
+      <div class="inner">
+        <div class="widgets">
+          
+<div class="rpost pjax">
+  <h2>随机文章</h2>
+  <ul>
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
+</div>
+
+    <span><a href="/2021/04/25/verilog/" title="华中科技大学Verilog实验解析">华中科技大学Verilog实验解析</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E6%9D%82%E8%AE%B0/" title="分类于 杂记">杂记</a>
+</div>
+
+    <span><a href="/2020/05/02/setup/" title="建站">建站</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
+</div>
+
+    <span><a href="/2023/02/06/rustilings/" title="Rustilings 练习笔记">Rustilings 练习笔记</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
+</div>
+
+    <span><a href="/2022/02/26/oschallengelab/" title="华中科技大学操作系统挑战实验(PKE)基础解析">华中科技大学操作系统挑战实验(PKE)基础解析</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
+</div>
+
+    <span><a href="/2024/04/28/mit-6-824-raft/" title="In Search of an Understandable Consensus Algorithm (Extended Version)">In Search of an Understandable Consensus Algorithm (Extended Version)</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E7%AE%97%E6%B3%95%E9%A2%98/" title="分类于 算法题">算法题</a>
+</div>
+
+    <span><a href="/2020/05/24/ufpe-starters-final-try-outs-2019-problem-l/" title="UFPE Starters Final Try-Outs 2019 Problem L">UFPE Starters Final Try-Outs 2019 Problem L</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E7%AE%97%E6%B3%95%E9%A2%98/" title="分类于 算法题">算法题</a>
+</div>
+
+    <span><a href="/2022/03/30/splay/" title="Splay模版:P3369[模版&#x2F;普通平衡树]">Splay模版:P3369[模版/普通平衡树]</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
+</div>
+
+    <span><a href="/2023/09/13/nju-pa/" title="南大pa">南大pa</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E6%9D%82%E8%AE%B0/" title="分类于 杂记">杂记</a>
+</div>
+
+    <span><a href="/2022/04/17/luogu-al/" title="做算法题综合">做算法题综合</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E6%9D%82%E8%AE%B0/" title="分类于 杂记">杂记</a>
+</div>
+
+    <span><a href="/2020/10/11/cmd/" title="(烂活)用cmd窗口输出图画">(烂活)用cmd窗口输出图画</a></span>
+  </li>
+
+  </ul>
+</div>
+<div>
+  <h2>最新评论</h2>
+  <ul class="leancloud-recent-comment"></ul>
+</div>
+
+        </div>
+        <div class="status">
+  <div class="copyright">
+    
+    &copy; 2020 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="ic i-sakura rotate"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Sukuna @ Suwa shrine</span>
+  </div>
+  <div class="count">
+    <span class="post-meta-item-icon">
+      <i class="ic i-chart-area"></i>
+    </span>
+    <span title="站点总字数">418k 字</span>
+
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="ic i-coffee"></i>
+    </span>
+    <span title="站点阅读时长">6:20</span>
+  </div>
+  <div class="powered-by">
+    基于 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & Theme.<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FtZWhpbWUvaGV4by10aGVtZS1zaG9rYQ==">Shoka</span>
+  </div>
+</div>
+
+      </div>
+    </footer>
+  </div>
+<script data-config type="text/javascript">
+  var LOCAL = {
+    path: '2024/10/17/NN/',
+    favicon: {
+      show: "（●´3｀●）あややややや～",
+      hide: "(´Д｀)大変だ！"
+    },
+    search : {
+      placeholder: "文章搜索",
+      empty: "关于 「 ${query} 」，什么也没搜到",
+      stats: "${time} ms 内找到 ${hits} 条结果"
+    },
+    valine: true,fancybox: true,
+    copyright: '复制成功，转载请遵守 <i class="ic i-creative-commons"></i>BY-NC-SA 协议。',
+    ignores : [
+      function(uri) {
+        return uri.includes('#');
+      },
+      function(uri) {
+        return new RegExp(LOCAL.path+"$").test(uri);
+      }
+    ]
+  };
+</script>
+
+<script src="https://cdn.polyfill.io/v2/polyfill.js"></script>
+
+<script src="//cdn.jsdelivr.net/combine/npm/pace-js@1.0.2/pace.min.js,npm/pjax@0.2.8/pjax.min.js,npm/whatwg-fetch@3.4.0/dist/fetch.umd.min.js,npm/animejs@3.2.0/lib/anime.min.js,npm/algoliasearch@4/dist/algoliasearch-lite.umd.js,npm/instantsearch.js@4/dist/instantsearch.production.min.js,npm/lozad@1/dist/lozad.min.js,npm/quicklink@2/dist/quicklink.umd.js"></script>
+
+<script src="/js/app.js?v=0.2.5"></script>
+
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":200,"height":400},"mobile":{"show":true},"log":false});</script></body>
+</html>
