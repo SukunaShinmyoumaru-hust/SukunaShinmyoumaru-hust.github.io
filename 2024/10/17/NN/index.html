@@ -74,7 +74,7 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
       <i class="ic i-pen"></i>
     </span>
     <span class="text">本文字数</span>
-    <span>4.1k</span>
+    <span>4.9k</span>
     <span class="text">字</span>
   </span>
   <span class="item" title="阅读时长">
@@ -115,12 +115,12 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
       </div>
       <div id="imgs" class="pjax">
         <ul>
-          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/f841728a51c3ae78.jpg"></li>
-          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/7d2279310f1bb2f7.jpg"></li>
+          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/c10853f5c9aee06c.jpg"></li>
           <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/5d3d43e0f7dc0697.jpg"></li>
+          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/7c97ca6398f62495.jpg"></li>
+          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/bac1b1e69e7ebfb7.jpg"></li>
           <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/4663c8f5b7019dfd.jpg"></li>
           <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/8d1e248fe0f62130.jpg"></li>
-          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/97c3cfc23ec60f4c.jpg"></li>
         </ul>
       </div>
     </header>
@@ -199,10 +199,8 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
 <li><p>RCNN使用Selective Search从图像中获取候选区域，然后依次将候选区域输入到卷积神经网络中进行图像特征提取，如果有2000个候选区域，则需要进行2000次独立的特征提取过程。然后，这2000个候选区域是存在一定程度的重叠的，所以如此设计会导致大量的冗余计算。</p>
 </li>
 </ul>
-<p>SPP-Net究竟做了什么呢？CNN网络需要固定尺寸的图像输入，SPPNet将任意大小的图像池化生成固定长度的图像表示。SPPNet在最后一个卷积层后，接入了金字塔池化层，保证传到下一层全连接层的输入固定。池化的方式如下图所示：</p>
-<p><img data-src="https://i-blog.csdnimg.cn/blog_migrate/78eeead1a8538d0041f4489e950d1ea1.png"></p>
+<p>SPP-Net究竟做了什么呢？CNN网络需要固定尺寸的图像输入，SPPNet将任意大小的图像池化生成固定长度的图像表示。SPPNet在最后一个卷积层后，接入了金字塔池化层，保证传到下一层全连接层的输入固定。</p>
 <p>其次呢，SPPNet先做一次卷积，在卷积好的图像中进行Selective Search。由于做卷积操作不影响图像的位置，所以这样做是没问题的。</p>
-<p><img data-src="https://i-blog.csdnimg.cn/blog_migrate/09e2d275518438dd71a0e8f37440b631.png" alt="R-CNN和SPP-net的区别"></p>
 <p>原文地址：<span class="exturl" data-url="aHR0cDovL2FyeGl2Lm9yZy9wZGYvMTQwNi40NzI5">http://arxiv.org/pdf/1406.4729</span></p>
 <h3 id="Fast-R-CNN"><a href="#Fast-R-CNN" class="headerlink" title="Fast R-CNN"></a>Fast R-CNN</h3><p>Fast R-CNN最重要的改进就是利用SPPNet，与R-CNN一样，利用Selective Search算法通过图像分割的方法得到一些原始区域，然后使用一些合并策略将这些区域合并，得到一个层次化的区域结构，而这些结构就包含着可能需要的物体。</p>
 <p>但是，Fast R-CNN与R-CNN不同的是，这些生成出来的候选区域不需要每一个都丢到卷积神经网络里面提取特征，而且只需要在特征图上映射便可。</p>
@@ -211,6 +209,10 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
 <p><img data-src="https://i-blog.csdnimg.cn/blog_migrate/394c30ee399375d92dc9ec14ab4c0de9.png"></p>
 <h3 id="Faster-R-CNN"><a href="#Faster-R-CNN" class="headerlink" title="Faster R-CNN"></a>Faster R-CNN</h3><p>相较于Fast R-CNN，做的优化就是引入了区域建议网络（Region Proposal Network，RPN）代替Selective Search算法。其核心思想就是利用锚点进行运算。</p>
 <p>原文地址：<span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzE1MDQuMDgwODM=">https://arxiv.org/pdf/1504.08083</span></p>
+<h3 id="Yolo"><a href="#Yolo" class="headerlink" title="Yolo"></a>Yolo</h3><p>Yolo是You only look once的简写。采用单阶段网络（one-stage）。预测（物体位置和类别）由一个网络进行。可以进行端到端（end-to-end）训练以提高准确性。所以叫Look Once（）</p>
+<p>YOLO将输入的图片resize成448 x 448，并且为 S x S（S &#x3D; 7）个grid，如果物体的中心落入该grid中，那么该grid就需要负责检测该物体。一次性输出所检测到的目标信息，包括类别和位置。综上，S×S 个网格，每个网格要预测 B个bounding box ，还要预测 C 个类。网络输出就是一个 S × S × (5×B+C)。（S x S个网格，每个网格都有B个预测框，每个框又有5个参数，再加上每个网格都有C个预测类）</p>
+<p>YOLOv1采用的是“分而治之”的策略，将一张图片平均分成7×7个网格，每个网格分别负责预测中心点落在该网格内的目标。回忆一下，在Faster R-CNN中，是通过一个RPN来获得目标的感兴趣区域，这种方法精度高，但是需要额外再训练一个RPN网络，这无疑增加了训练的负担。在YOLOv1中，通过划分得到了7×7个网格，这49个网格就相当于是目标的感兴趣区域。通过这种方式，我们就不需要再额外设计一个RPN网络，这正是YOLOv1作为单阶段网络的简单快捷之处！</p>
+<p>在Yolov1中是7 × 7 × 30（30等于两个框的xywh和置信度+所属类别的概率【20个】）。YOLO 有 24 个卷积层，后面是 2 个全连接层（FC）。一些卷积层交替使用 1×1 减少层来减少特征图的深度。在网络中，我们规定损失函数由分类预测损失、坐标预测损失（预测的bounding box和ground truth之间的差距）和置信度预测损失（框的客观真实性）组成，具体的损失函数的表示不表。</p>
 <h3 id="Yolov5"><a href="#Yolov5" class="headerlink" title="Yolov5"></a>Yolov5</h3><p>Yolo是基于R-CNN的一种神经网络框架，如图所示：</p>
 <p><img data-src="https://pic4.zhimg.com/v2-c006bfdf549bd811fcbcf8a6260f1c05_r.jpg"></p>
 
@@ -224,7 +226,7 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
       <i class="ic i-calendar-check"></i>
     </span>
     <span class="text">更新于</span>
-    <time title="修改时间：2024-10-17 14:38:27" itemprop="dateModified" datetime="2024-10-17T14:38:27+08:00">2024-10-17</time>
+    <time title="修改时间：2024-10-31 14:53:04" itemprop="dateModified" datetime="2024-10-31T14:53:04+08:00">2024-10-31</time>
   </span>
 </div>
 
@@ -274,7 +276,7 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
     <div class="item left">
       
 
-  <a href="/2024/10/12/asycn/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;s3.bmp.ovh&#x2F;imgs&#x2F;2024&#x2F;06&#x2F;17&#x2F;5d3d43e0f7dc0697.jpg" title="Python异步编程说明">
+  <a href="/2024/10/12/asycn/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;s3.bmp.ovh&#x2F;imgs&#x2F;2024&#x2F;06&#x2F;17&#x2F;4663c8f5b7019dfd.jpg" title="Python异步编程说明">
   <span class="type">上一篇</span>
   <span class="category"><i class="ic i-flag"></i> 杂记</span>
   <h3>Python异步编程说明</h3>
@@ -282,6 +284,14 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
 
     </div>
     <div class="item right">
+      
+
+  <a href="/2024/10/31/edgecompute/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;s3.bmp.ovh&#x2F;imgs&#x2F;2024&#x2F;06&#x2F;17&#x2F;7d2279310f1bb2f7.jpg" title="边缘智能应用论文阅读">
+  <span class="type">下一篇</span>
+  <span class="category"><i class="ic i-flag"></i> 杂记</span>
+  <h3>边缘智能应用论文阅读</h3>
+  </a>
+
     </div>
 </div>
 
@@ -298,11 +308,11 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
   <div class="panels">
     <div class="inner">
       <div class="contents panel pjax" data-title="文章目录">
-          <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B%E6%A6%82%E8%AE%BA"><span class="toc-number">1.</span> <span class="toc-text">目标检测概论</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#R-CNN"><span class="toc-number">2.</span> <span class="toc-text">R-CNN</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#R-CNN%E7%9A%84Input%E9%83%A8%E5%88%86"><span class="toc-number">2.1.</span> <span class="toc-text">R-CNN的Input部分</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#R-CNN%E7%9A%84BackBone%E9%83%A8%E5%88%86"><span class="toc-number">2.2.</span> <span class="toc-text">R-CNN的BackBone部分</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#R-CNN%E7%9A%84Head%E9%83%A8%E5%88%86"><span class="toc-number">2.3.</span> <span class="toc-text">R-CNN的Head部分</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SPPNet%EF%BC%88Spatial-Pyramid-Pooling-Networks%EF%BC%89"><span class="toc-number">3.</span> <span class="toc-text">SPPNet（Spatial Pyramid Pooling Networks）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Fast-R-CNN"><span class="toc-number">4.</span> <span class="toc-text">Fast R-CNN</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Faster-R-CNN"><span class="toc-number">5.</span> <span class="toc-text">Faster R-CNN</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Yolov5"><span class="toc-number">6.</span> <span class="toc-text">Yolov5</span></a></li></ol>
+          <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B%E6%A6%82%E8%AE%BA"><span class="toc-number">1.</span> <span class="toc-text">目标检测概论</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#R-CNN"><span class="toc-number">2.</span> <span class="toc-text">R-CNN</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#R-CNN%E7%9A%84Input%E9%83%A8%E5%88%86"><span class="toc-number">2.1.</span> <span class="toc-text">R-CNN的Input部分</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#R-CNN%E7%9A%84BackBone%E9%83%A8%E5%88%86"><span class="toc-number">2.2.</span> <span class="toc-text">R-CNN的BackBone部分</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#R-CNN%E7%9A%84Head%E9%83%A8%E5%88%86"><span class="toc-number">2.3.</span> <span class="toc-text">R-CNN的Head部分</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SPPNet%EF%BC%88Spatial-Pyramid-Pooling-Networks%EF%BC%89"><span class="toc-number">3.</span> <span class="toc-text">SPPNet（Spatial Pyramid Pooling Networks）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Fast-R-CNN"><span class="toc-number">4.</span> <span class="toc-text">Fast R-CNN</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Faster-R-CNN"><span class="toc-number">5.</span> <span class="toc-text">Faster R-CNN</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Yolo"><span class="toc-number">6.</span> <span class="toc-text">Yolo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Yolov5"><span class="toc-number">7.</span> <span class="toc-text">Yolov5</span></a></li></ol>
       </div>
       <div class="related panel pjax" data-title="系列文章">
         <ul>
-          <li><a href="/2020/05/02/setup/" rel="bookmark" title="建站">建站</a></li><li><a href="/2020/10/11/cmd/" rel="bookmark" title="(烂活)用cmd窗口输出图画">(烂活)用cmd窗口输出图画</a></li><li><a href="/2022/04/17/luogu-al/" rel="bookmark" title="做算法题综合">做算法题综合</a></li><li><a href="/2022/06/06/nju-ics/" rel="bookmark" title="南大ics面试记录">南大ics面试记录</a></li><li><a href="/2024/10/12/asycn/" rel="bookmark" title="Python异步编程说明">Python异步编程说明</a></li><li class="active"><a href="/2024/10/17/NN/" rel="bookmark" title="目标检测概论">目标检测概论</a></li>
+          <li><a href="/2020/05/02/setup/" rel="bookmark" title="建站">建站</a></li><li><a href="/2020/10/11/cmd/" rel="bookmark" title="(烂活)用cmd窗口输出图画">(烂活)用cmd窗口输出图画</a></li><li><a href="/2022/04/17/luogu-al/" rel="bookmark" title="做算法题综合">做算法题综合</a></li><li><a href="/2022/06/06/nju-ics/" rel="bookmark" title="南大ics面试记录">南大ics面试记录</a></li><li><a href="/2024/10/12/asycn/" rel="bookmark" title="Python异步编程说明">Python异步编程说明</a></li><li class="active"><a href="/2024/10/17/NN/" rel="bookmark" title="目标检测概论">目标检测概论</a></li><li><a href="/2024/10/31/edgecompute/" rel="bookmark" title="边缘智能应用论文阅读">边缘智能应用论文阅读</a></li>
         </ul>
       </div>
       <div class="overview panel" data-title="站点概览">
@@ -316,7 +326,7 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
 <nav class="state">
     <div class="item posts">
       <a href="/archives/">
-        <span class="count">22</span>
+        <span class="count">23</span>
         <span class="name">文章</span>
       </a>
     </div>
@@ -394,7 +404,7 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
 
     
   <li class="item">
-    <a href="/check.html" rel="section"><i class="ic i-magic"></i>相关查询</a>
+    <span class="exturl" data-url="aHR0cHM6Ly9nMmNlemVwZC55aWNoYWZlbi5jb20="><i class="ic i-magic"></i>相关查询</span>
   </li>
 
 
@@ -406,10 +416,12 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
 
   <ul id="quick">
     <li class="prev pjax">
+        <a href="/2024/10/12/asycn/" rel="prev" title="上一篇"><i class="ic i-chevron-left"></i></a>
     </li>
     <li class="up"><i class="ic i-arrow-up"></i></li>
     <li class="down"><i class="ic i-arrow-down"></i></li>
     <li class="next pjax">
+        <a href="/2024/10/31/edgecompute/" rel="next" title="下一篇"><i class="ic i-chevron-right"></i></a>
     </li>
     <li class="percent"></li>
   </ul>
@@ -434,7 +446,7 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
 <a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
 </div>
 
-    <span><a href="/2021/04/25/verilog/" title="华中科技大学Verilog实验解析">华中科技大学Verilog实验解析</a></span>
+    <span><a href="/2021/12/18/oslab1/" title="华中科技大学OS实验解析(Lab1)">华中科技大学OS实验解析(Lab1)</a></span>
   </li>
 
       
@@ -444,7 +456,17 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
 <a href="/categories/%E6%9D%82%E8%AE%B0/" title="分类于 杂记">杂记</a>
 </div>
 
-    <span><a href="/2024/10/12/asycn/" title="Python异步编程说明">Python异步编程说明</a></span>
+    <span><a href="/2020/05/02/setup/" title="建站">建站</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
+</div>
+
+    <span><a href="/2024/04/17/stanford-cs143-PA/" title="Stanford CS143 PA">Stanford CS143 PA</a></span>
   </li>
 
       
@@ -454,7 +476,27 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
 <a href="/categories/%E6%9D%82%E8%AE%B0/" title="分类于 杂记">杂记</a>
 </div>
 
-    <span><a href="/2020/10/11/cmd/" title="(烂活)用cmd窗口输出图画">(烂活)用cmd窗口输出图画</a></span>
+    <span><a href="/2022/06/06/nju-ics/" title="南大ics面试记录">南大ics面试记录</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
+</div>
+
+    <span><a href="/2024/04/19/mit-6-824-mr/" title="MIT_6.824:PA1-MapReduce">MIT_6.824:PA1-MapReduce</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
+</div>
+
+    <span><a href="/2023/02/07/cmu14-445-lab/" title="CMU14-445 Lab">CMU14-445 Lab</a></span>
   </li>
 
       
@@ -471,20 +513,10 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
   <li class="item">
     
 <div class="breadcrumb">
-<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
+<a href="/categories/%E6%9D%82%E8%AE%B0/" title="分类于 杂记">杂记</a>
 </div>
 
-    <span><a href="/2021/12/18/oslab1/" title="华中科技大学OS实验解析(Lab1)">华中科技大学OS实验解析(Lab1)</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
-</div>
-
-    <span><a href="/2021/12/18/oslab2/" title="华中科技大学OS实验解析(Lab2)">华中科技大学OS实验解析(Lab2)</a></span>
+    <span><a href="/2022/04/17/luogu-al/" title="做算法题综合">做算法题综合</a></span>
   </li>
 
       
@@ -501,30 +533,10 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
   <li class="item">
     
 <div class="breadcrumb">
-<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
+<a href="/categories/%E7%AE%97%E6%B3%95%E9%A2%98/" title="分类于 算法题">算法题</a>
 </div>
 
-    <span><a href="/2023/02/06/stanford-cs144-lab/" title="Stanford CS144 Lab">Stanford CS144 Lab</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" title="分类于 实验记录">实验记录</a>
-</div>
-
-    <span><a href="/2023/02/08/mit-6-s081-lab/" title="MIT_6.s081_Lab">MIT_6.s081_Lab</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/%E6%9D%82%E8%AE%B0/" title="分类于 杂记">杂记</a>
-</div>
-
-    <span><a href="/2020/05/02/setup/" title="建站">建站</a></span>
+    <span><a href="/2020/05/25/ufpe-starters-final-try-outs-2019-recife-brazil-dec-1-2018-problem-j/" title="UFPE Starters Final Try-Outs 2019 Recife, Brazil, Dec 1, 2018 Problem J（线段树+二分）">UFPE Starters Final Try-Outs 2019 Recife, Brazil, Dec 1, 2018 Problem J（线段树+二分）</a></span>
   </li>
 
   </ul>
@@ -549,13 +561,13 @@ Suwa shrine = 灵山之上神风起 = Sukuna_wireless</title>
     <span class="post-meta-item-icon">
       <i class="ic i-chart-area"></i>
     </span>
-    <span title="站点总字数">418k 字</span>
+    <span title="站点总字数">421k 字</span>
 
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="ic i-coffee"></i>
     </span>
-    <span title="站点阅读时长">6:20</span>
+    <span title="站点阅读时长">6:22</span>
   </div>
   <div class="powered-by">
     基于 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & Theme.<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FtZWhpbWUvaGV4by10aGVtZS1zaG9rYQ==">Shoka</span>
