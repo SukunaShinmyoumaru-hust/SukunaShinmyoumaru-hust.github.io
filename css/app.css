@@ -2949,6 +2949,18 @@ main >.inner {
 .social .item.twitter i {
   color: #00aff0;
 }
+.social .item.music::before {
+  background-color: #e60026;
+}
+.social .item.music i {
+  color: #e60026;
+}
+.social .item.about::before {
+  background-color: #3b5998;
+}
+.social .item.about i {
+  color: #3b5998;
+}
 .social .item.email::before {
   background-color: #55acd5;
 }
