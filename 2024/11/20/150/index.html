@@ -77,7 +77,7 @@ Suwa shrine = 灵山之上神风起 = 一个普通的华中科技大学在读硕
       <i class="ic i-pen"></i>
     </span>
     <span class="text">本文字数</span>
-    <span>356</span>
+    <span>2.8k</span>
     <span class="text">字</span>
   </span>
   <span class="item" title="阅读时长">
@@ -85,7 +85,7 @@ Suwa shrine = 灵山之上神风起 = 一个普通的华中科技大学在读硕
       <i class="ic i-clock"></i>
     </span>
     <span class="text">阅读时长</span>
-    <span>1 分钟</span>
+    <span>3 分钟</span>
   </span>
 </div>
 
@@ -118,12 +118,12 @@ Suwa shrine = 灵山之上神风起 = 一个普通的华中科技大学在读硕
       </div>
       <div id="imgs" class="pjax">
         <ul>
+          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/bac1b1e69e7ebfb7.jpg"></li>
+          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/8d1e248fe0f62130.jpg"></li>
           <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/7c97ca6398f62495.jpg"></li>
-          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/97c3cfc23ec60f4c.jpg"></li>
-          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/5d3d43e0f7dc0697.jpg"></li>
           <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/c10853f5c9aee06c.jpg"></li>
-          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/4663c8f5b7019dfd.jpg"></li>
-          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/f841728a51c3ae78.jpg"></li>
+          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/7d2279310f1bb2f7.jpg"></li>
+          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/5d3d43e0f7dc0697.jpg"></li>
         </ul>
       </div>
     </header>
@@ -169,7 +169,8 @@ Suwa shrine = 灵山之上神风起 = 一个普通的华中科技大学在读硕
   <div class="body md" itemprop="articleBody">
     
 
-    <h2 id="线性表"><a href="#线性表" class="headerlink" title="线性表"></a>线性表</h2><ol start="88">
+    <p>E 是Easy N 是 Normal，也就是Medium，H 是 Hard</p>
+<h2 id="Array-String"><a href="#Array-String" class="headerlink" title="Array &#x2F; String"></a>Array &#x2F; String</h2><ol start="88">
 <li>Merge Sorted Array E</li>
 </ol>
 <p>设置答案表ans，设置两个指针i和j，表示当前所指的位置，一开始指针指向表头。比较两个指针所指元素大小，谁小谁先进ans表。如果有一个指针指到了表尾就不比了，直接把剩下没处理完的内容直接放进ans表。</p>
@@ -180,7 +181,65 @@ Suwa shrine = 灵山之上神风起 = 一个普通的华中科技大学在读硕
 <ol start="26">
 <li>Remove Duplicates from Sorted Array E</li>
 </ol>
-<p>这是有序数组，那么一切都好办了。规定一个双指针i和j都指向开头，如果这是重复元素，就移动j，如果不是重复元素，是新元素，那就先把j上的元素放到i处，然后i和j都移动</p>
+<p>这是有序数组，那么一切都好办了。规定一个双指针i和j都指向开头，如果这是重复元素，就移动j，如果不是重复元素，是新元素，那就先把j上的元素放到i处，然后i和j都移动（j是快指针，i是慢指针）</p>
+<ol start="80">
+<li>Remove Duplicates from Sorted Array II N</li>
+</ol>
+<p>这和上一题的区别就是只允许存在一次和两次的区别。改动也就是重复元素的判断。上一题是判断i和i-1是不是相等，这一题是i和i-2是不是相等。</p>
+<ol start="169">
+<li>Majority Element E</li>
+</ol>
+<p>可以使用哈希表，统计每个元素出现的次数，然后输出出现次数最多的元素。如果想省空间复杂度的话可以先排序，然后最中间的那个元素就是结果（因为）</p>
+<ol start="189">
+<li>Rotate Array N</li>
+</ol>
+<p>这一题可以使用数组翻转。比如说 1 2 3 4 5 6 7，移动k下，新数组的[0,k - 1]来源于尾部的k个元素。那么可以做一次翻转（把后面的k个元素放到前面），然后对[0,k - 1]和[k,n - 1]的元素进行调转。（把顺序调整回来）</p>
+<ol start="121">
+<li>Best Time to Buy and Sell Stock E</li>
+</ol>
+<p>不知道为什么现在就出现了dp，我们可以把这个状态记录在dp[i][j]。j&#x3D;0的时候表示在第i天已经买入股票的收入最大值。j&#x3D;1的时候就是在第i天卖出股票的收入最大值。</p>
+<p>那么dp[i][0] &#x3D; max(dp[i-1][0],-price[i])。dp[i][1] &#x3D; max(dp[i-1][1],dp[i][0] + price[i])。初始值dp[0][0] &#x3D; -price[0],dp[0][1] &#x3D; 0。</p>
+<ol start="122">
+<li>Best Time to Buy and Sell Stock II N</li>
+</ol>
+<p>上面一题从只可以买一次编程可以买两次。那么dp的的第二维就是有4个状态。买了一个，买了一个卖了一个，买了两个卖了一个，买了两个卖了两个。</p>
+<p>dp[i][0] &#x3D; max(dp[i-1][0],-price[i])。dp[i][1] &#x3D; max(dp[i-1][1],dp[i][0] + price[i])。dp[i][2] &#x3D; max(dp[i-2][2],dp[i][1] - prices[i])。dp[i][3] &#x3D; max(dp[i-1][3],dp[i][2] + price[i])。</p>
+<ol start="55">
+<li>Jump Game N</li>
+</ol>
+<p>这一题看题解似乎是可以用贪心。但我用倒推dp做的，dp[i]记录了可以到达最后结束位置的可能性。dp[最后一个位置]肯定为1，记录一个使dp[k]&#x3D;1最小的k值，然后依次往后倒，如果nums[i] + i &lt;&#x3D; k的话就说明可以到达。dp[i] &#x3D; 1，否则为0，看看dp[0]的取值就好。</p>
+<ol start="45">
+<li>Jump Game II N</li>
+</ol>
+<p>这一题相较于上一题多了一个记录最小步数的。那么这次就用dp[i]表示从0到这里最少几步。这里可以有这样的递推方程对于j属于[i,i+nums[i]],dp[j]&#x3D;min(dp[j],dp[i]+1)</p>
+<ol start="274">
+<li>H-Index N</li>
+</ol>
+<p>对文章引用进行排序。h指的是什么，是h个index比h高的数，那就从0开始试，如果index[size - h - 1] &gt; h，说明可以往上升。</p>
+<ol start="380">
+<li>Insert Delete GetRandom O(1) N</li>
+</ol>
+<p>O(1)的CURD，空间换时间，用一个额外的哈希表记录是否有重复元素。这个哈希表不记录元素的个数，记录元素在表中的索引。添加的时候在表中添加这个元素，哈希表记录index。删除k，如果k没有，就返回false，如果k有的话，那么找到index。表的index位置替换成表尾元素。删掉表尾元素更换哈希表。在O(1)时间内查询不说，太简单。</p>
+<ol start="238">
+<li>Product of Array Except Self N</li>
+</ol>
+<p>这里为什么不能计算出所有元素的积然后再除本元素呢，是因为可能本元素是0，所以可能有问题。所以可以进行一次前缀后缀积。s[i]记录从0一直积到i的值，[i]记录从最后积到i的值，后面就是s[i-1]*b[i+1]（注意考虑一下边界）</p>
+<ol start="134">
+<li>Gas Station N</li>
+</ol>
+<p>先从0开始走，如果能绕一圈自然是好的，但是如果不能的话，在哪里走不动了，就在哪里的下一站试。为什么呢，比如说0-&gt;1-&gt;2，到2走不动了，那么从1出发从2出发也是不行的，只能试一下从3出发。这样可以减少搜索的次数。</p>
+<ol start="135">
+<li>Candy H</li>
+</ol>
+<p>分糖果，那么可以进行两次贪心。首先先从左往右走，如果i比i-1大，那么s[i] &#x3D; s[i-1] + 1，如果小，s[i] &#x3D; 1。然后从右往左走，如果i比i+1大，那么b[i] &#x3D; b[i+1] + 1，如果小那么b[i] &#x3D; 1。最后这个小孩分配的糖果数量是max(s[i],b[i])。首先这样可以保证题目的条件满足，如果是2 1 2的情况，那么就是1，如果是1 2 1的情况，那么就是max（左，右）。如果是3 2 1的情况，那么就以右边 + 1为准，右边+1怎么都比1大。所以这样做是可以保证对的。其次由于是贪心，我们可以保证分配的糖果数量是最少的。</p>
+<ol start="42">
+<li>Trapping Rain Water H</li>
+</ol>
+<p>维护一个单调栈，这里就是记录从[s[i],i]中的元素都满足单调性。（这里是单调递减）。这里说一下单调栈的维护，其实就是比较。如果元素比栈顶大，那么栈顶退出，一直到元素比栈顶小或者栈中没元素了。</p>
+<p>如果栈中有元素退栈了，但是栈中元素还是不空，这是发生了什么呢？就是有水背围住了，这个时候可以记录水的数量了。这里套用题解就是：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">int currWidth = i - left - 1;</span><br><span class="line">int currHeight = min(height[left], height[i]) - height[top];</span><br><span class="line">ans += currWidth * currHeight;</span><br></pre></td></tr></table></figure>
+
+<p>作者：力扣官方题解<br>链接：<span class="exturl" data-url="aHR0cHM6Ly9sZWV0Y29kZS5jbi9wcm9ibGVtcy90cmFwcGluZy1yYWluLXdhdGVyL3NvbHV0aW9ucy82OTIzNDIvamllLXl1LXNodWktYnktbGVldGNvZGUtc29sdXRpb24tdHV2Yy8=">https://leetcode.cn/problems/trapping-rain-water/solutions/692342/jie-yu-shui-by-leetcode-solution-tuvc/</span><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
 
   </div>
 
@@ -192,7 +251,7 @@ Suwa shrine = 灵山之上神风起 = 一个普通的华中科技大学在读硕
       <i class="ic i-calendar-check"></i>
     </span>
     <span class="text">更新于</span>
-    <time title="修改时间：2024-11-20 19:45:44" itemprop="dateModified" datetime="2024-11-20T19:45:44+08:00">2024-11-20</time>
+    <time title="修改时间：2024-11-21 14:44:49" itemprop="dateModified" datetime="2024-11-21T14:44:49+08:00">2024-11-21</time>
   </span>
 </div>
 
@@ -242,10 +301,10 @@ Suwa shrine = 灵山之上神风起 = 一个普通的华中科技大学在读硕
     <div class="item left">
       
 
-  <a href="/2024/10/31/edgecompute/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;s3.bmp.ovh&#x2F;imgs&#x2F;2024&#x2F;06&#x2F;17&#x2F;c10853f5c9aee06c.jpg" title="边缘智能应用论文阅读">
+  <a href="/2024/11/19/chinese/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;s3.bmp.ovh&#x2F;imgs&#x2F;2024&#x2F;06&#x2F;17&#x2F;c10853f5c9aee06c.jpg" title="Sukuna出的几道语文高考题">
   <span class="type">上一篇</span>
   <span class="category"><i class="ic i-flag"></i> 杂记</span>
-  <h3>边缘智能应用论文阅读</h3>
+  <h3>Sukuna出的几道语文高考题</h3>
   </a>
 
     </div>
@@ -266,7 +325,7 @@ Suwa shrine = 灵山之上神风起 = 一个普通的华中科技大学在读硕
   <div class="panels">
     <div class="inner">
       <div class="contents panel pjax" data-title="文章目录">
-          <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E8%A1%A8"><span class="toc-number">1.</span> <span class="toc-text">线性表</span></a></li></ol>
+          <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Array-String"><span class="toc-number">1.</span> <span class="toc-text">Array &#x2F; String</span></a></li></ol>
       </div>
       <div class="related panel pjax" data-title="系列文章">
         <ul>
@@ -284,7 +343,7 @@ Suwa shrine = 灵山之上神风起 = 一个普通的华中科技大学在读硕
 <nav class="state">
     <div class="item posts">
       <a href="/archives/">
-        <span class="count">24</span>
+        <span class="count">25</span>
         <span class="name">文章</span>
       </a>
     </div>
@@ -410,13 +469,13 @@ Suwa shrine = 灵山之上神风起 = 一个普通的华中科技大学在读硕
     <span class="post-meta-item-icon">
       <i class="ic i-chart-area"></i>
     </span>
-    <span title="站点总字数">421k 字</span>
+    <span title="站点总字数">437k 字</span>
 
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="ic i-coffee"></i>
     </span>
-    <span title="站点阅读时长">6:23</span>
+    <span title="站点阅读时长">6:38</span>
   </div>
   <div class="powered-by">
     基于 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & Theme.<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FtZWhpbWUvaGV4by10aGVtZS1zaG9rYQ==">Shoka</span>
