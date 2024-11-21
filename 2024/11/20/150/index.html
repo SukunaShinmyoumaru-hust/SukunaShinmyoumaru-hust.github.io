@@ -77,7 +77,7 @@ Suwa shrine = 灵山之上神风起 = 一个普通的华中科技大学在读硕
       <i class="ic i-pen"></i>
     </span>
     <span class="text">本文字数</span>
-    <span>2.8k</span>
+    <span>8.1k</span>
     <span class="text">字</span>
   </span>
   <span class="item" title="阅读时长">
@@ -85,7 +85,7 @@ Suwa shrine = 灵山之上神风起 = 一个普通的华中科技大学在读硕
       <i class="ic i-clock"></i>
     </span>
     <span class="text">阅读时长</span>
-    <span>3 分钟</span>
+    <span>7 分钟</span>
   </span>
 </div>
 
@@ -118,12 +118,12 @@ Suwa shrine = 灵山之上神风起 = 一个普通的华中科技大学在读硕
       </div>
       <div id="imgs" class="pjax">
         <ul>
-          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/bac1b1e69e7ebfb7.jpg"></li>
           <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/8d1e248fe0f62130.jpg"></li>
-          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/7c97ca6398f62495.jpg"></li>
-          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/c10853f5c9aee06c.jpg"></li>
+          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/97c3cfc23ec60f4c.jpg"></li>
           <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/7d2279310f1bb2f7.jpg"></li>
-          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/5d3d43e0f7dc0697.jpg"></li>
+          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/bac1b1e69e7ebfb7.jpg"></li>
+          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/f841728a51c3ae78.jpg"></li>
+          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/4663c8f5b7019dfd.jpg"></li>
         </ul>
       </div>
     </header>
@@ -170,69 +170,69 @@ Suwa shrine = 灵山之上神风起 = 一个普通的华中科技大学在读硕
     
 
     <p>E 是Easy N 是 Normal，也就是Medium，H 是 Hard</p>
-<h2 id="Array-String"><a href="#Array-String" class="headerlink" title="Array &#x2F; String"></a>Array &#x2F; String</h2><ol start="88">
+<h2 id="Array-String"><a href="#Array-String" class="headerlink" title="Array &#x2F; String"></a>Array &#x2F; String</h2><ol>
 <li>Merge Sorted Array E</li>
 </ol>
 <p>设置答案表ans，设置两个指针i和j，表示当前所指的位置，一开始指针指向表头。比较两个指针所指元素大小，谁小谁先进ans表。如果有一个指针指到了表尾就不比了，直接把剩下没处理完的内容直接放进ans表。</p>
-<ol start="27">
+<ol start="2">
 <li>Remove Element E</li>
 </ol>
 <p>太简单，略过。至于怎么使用O(1)的空间复杂度来进行操作。可以用双指针进行操作。i是表头，j是表尾，如果i表示的元素要被删除，就从j中取一个元素放到i对应的位置。（这样就被删掉了），如果不要被删除，那么让i+1就好。</p>
-<ol start="26">
+<ol start="3">
 <li>Remove Duplicates from Sorted Array E</li>
 </ol>
 <p>这是有序数组，那么一切都好办了。规定一个双指针i和j都指向开头，如果这是重复元素，就移动j，如果不是重复元素，是新元素，那就先把j上的元素放到i处，然后i和j都移动（j是快指针，i是慢指针）</p>
-<ol start="80">
+<ol start="4">
 <li>Remove Duplicates from Sorted Array II N</li>
 </ol>
 <p>这和上一题的区别就是只允许存在一次和两次的区别。改动也就是重复元素的判断。上一题是判断i和i-1是不是相等，这一题是i和i-2是不是相等。</p>
-<ol start="169">
+<ol start="5">
 <li>Majority Element E</li>
 </ol>
 <p>可以使用哈希表，统计每个元素出现的次数，然后输出出现次数最多的元素。如果想省空间复杂度的话可以先排序，然后最中间的那个元素就是结果（因为）</p>
-<ol start="189">
+<ol start="6">
 <li>Rotate Array N</li>
 </ol>
 <p>这一题可以使用数组翻转。比如说 1 2 3 4 5 6 7，移动k下，新数组的[0,k - 1]来源于尾部的k个元素。那么可以做一次翻转（把后面的k个元素放到前面），然后对[0,k - 1]和[k,n - 1]的元素进行调转。（把顺序调整回来）</p>
-<ol start="121">
+<ol start="7">
 <li>Best Time to Buy and Sell Stock E</li>
 </ol>
 <p>不知道为什么现在就出现了dp，我们可以把这个状态记录在dp[i][j]。j&#x3D;0的时候表示在第i天已经买入股票的收入最大值。j&#x3D;1的时候就是在第i天卖出股票的收入最大值。</p>
 <p>那么dp[i][0] &#x3D; max(dp[i-1][0],-price[i])。dp[i][1] &#x3D; max(dp[i-1][1],dp[i][0] + price[i])。初始值dp[0][0] &#x3D; -price[0],dp[0][1] &#x3D; 0。</p>
-<ol start="122">
+<ol start="8">
 <li>Best Time to Buy and Sell Stock II N</li>
 </ol>
 <p>上面一题从只可以买一次编程可以买两次。那么dp的的第二维就是有4个状态。买了一个，买了一个卖了一个，买了两个卖了一个，买了两个卖了两个。</p>
 <p>dp[i][0] &#x3D; max(dp[i-1][0],-price[i])。dp[i][1] &#x3D; max(dp[i-1][1],dp[i][0] + price[i])。dp[i][2] &#x3D; max(dp[i-2][2],dp[i][1] - prices[i])。dp[i][3] &#x3D; max(dp[i-1][3],dp[i][2] + price[i])。</p>
-<ol start="55">
+<ol start="9">
 <li>Jump Game N</li>
 </ol>
 <p>这一题看题解似乎是可以用贪心。但我用倒推dp做的，dp[i]记录了可以到达最后结束位置的可能性。dp[最后一个位置]肯定为1，记录一个使dp[k]&#x3D;1最小的k值，然后依次往后倒，如果nums[i] + i &lt;&#x3D; k的话就说明可以到达。dp[i] &#x3D; 1，否则为0，看看dp[0]的取值就好。</p>
-<ol start="45">
+<ol start="10">
 <li>Jump Game II N</li>
 </ol>
 <p>这一题相较于上一题多了一个记录最小步数的。那么这次就用dp[i]表示从0到这里最少几步。这里可以有这样的递推方程对于j属于[i,i+nums[i]],dp[j]&#x3D;min(dp[j],dp[i]+1)</p>
-<ol start="274">
+<ol start="11">
 <li>H-Index N</li>
 </ol>
 <p>对文章引用进行排序。h指的是什么，是h个index比h高的数，那就从0开始试，如果index[size - h - 1] &gt; h，说明可以往上升。</p>
-<ol start="380">
+<ol start="12">
 <li>Insert Delete GetRandom O(1) N</li>
 </ol>
 <p>O(1)的CURD，空间换时间，用一个额外的哈希表记录是否有重复元素。这个哈希表不记录元素的个数，记录元素在表中的索引。添加的时候在表中添加这个元素，哈希表记录index。删除k，如果k没有，就返回false，如果k有的话，那么找到index。表的index位置替换成表尾元素。删掉表尾元素更换哈希表。在O(1)时间内查询不说，太简单。</p>
-<ol start="238">
+<ol start="13">
 <li>Product of Array Except Self N</li>
 </ol>
 <p>这里为什么不能计算出所有元素的积然后再除本元素呢，是因为可能本元素是0，所以可能有问题。所以可以进行一次前缀后缀积。s[i]记录从0一直积到i的值，[i]记录从最后积到i的值，后面就是s[i-1]*b[i+1]（注意考虑一下边界）</p>
-<ol start="134">
+<ol start="14">
 <li>Gas Station N</li>
 </ol>
 <p>先从0开始走，如果能绕一圈自然是好的，但是如果不能的话，在哪里走不动了，就在哪里的下一站试。为什么呢，比如说0-&gt;1-&gt;2，到2走不动了，那么从1出发从2出发也是不行的，只能试一下从3出发。这样可以减少搜索的次数。</p>
-<ol start="135">
+<ol start="15">
 <li>Candy H</li>
 </ol>
 <p>分糖果，那么可以进行两次贪心。首先先从左往右走，如果i比i-1大，那么s[i] &#x3D; s[i-1] + 1，如果小，s[i] &#x3D; 1。然后从右往左走，如果i比i+1大，那么b[i] &#x3D; b[i+1] + 1，如果小那么b[i] &#x3D; 1。最后这个小孩分配的糖果数量是max(s[i],b[i])。首先这样可以保证题目的条件满足，如果是2 1 2的情况，那么就是1，如果是1 2 1的情况，那么就是max（左，右）。如果是3 2 1的情况，那么就以右边 + 1为准，右边+1怎么都比1大。所以这样做是可以保证对的。其次由于是贪心，我们可以保证分配的糖果数量是最少的。</p>
-<ol start="42">
+<ol start="16">
 <li>Trapping Rain Water H</li>
 </ol>
 <p>维护一个单调栈，这里就是记录从[s[i],i]中的元素都满足单调性。（这里是单调递减）。这里说一下单调栈的维护，其实就是比较。如果元素比栈顶大，那么栈顶退出，一直到元素比栈顶小或者栈中没元素了。</p>
@@ -240,6 +240,197 @@ Suwa shrine = 灵山之上神风起 = 一个普通的华中科技大学在读硕
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">int currWidth = i - left - 1;</span><br><span class="line">int currHeight = min(height[left], height[i]) - height[top];</span><br><span class="line">ans += currWidth * currHeight;</span><br></pre></td></tr></table></figure>
 
 <p>作者：力扣官方题解<br>链接：<span class="exturl" data-url="aHR0cHM6Ly9sZWV0Y29kZS5jbi9wcm9ibGVtcy90cmFwcGluZy1yYWluLXdhdGVyL3NvbHV0aW9ucy82OTIzNDIvamllLXl1LXNodWktYnktbGVldGNvZGUtc29sdXRpb24tdHV2Yy8=">https://leetcode.cn/problems/trapping-rain-water/solutions/692342/jie-yu-shui-by-leetcode-solution-tuvc/</span><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+<ol start="17">
+<li>Roman to Integer E</li>
+</ol>
+<p>模拟即可。对字符串进行遍历。</p>
+<ol start="18">
+<li>Integer to Roman N</li>
+</ol>
+<p>贪心算法，先算有多少个1000，再算900，再算500，再算400，以此类推。然后做字符串的加运算即可，有多少个1000就加多少个’M’。</p>
+<ol start="19">
+<li>Integer to Roman E</li>
+</ol>
+<p>统计连续的非空格字符数。有一种优化方式是从后往前遍历字符串，遇到非空格字符开始计数，计数到遇到空格字符，即为答案。</p>
+<ol start="20">
+<li>Longest Common Prefix E</li>
+</ol>
+<p>找最长公共前缀。就遍历一下即可。比如说第一个单词的第一个字母是A，看看别的单词的第一个字母是不是A，是的话就把A放入答案中，以此类推，直到有差异或者到了一个单词的末尾。</p>
+<ol start="21">
+<li>Reverse Words in a String N</li>
+</ol>
+<p>这道题就是考验对字符串处理的基本功，首先把所有的单词提取出来，然后把单词逆序处理即可。提取出来的办法我想得比较笨，就是str +&#x3D; 非空格元素。遇到空格就代表单词处理完毕了，加入到一个单词表中。</p>
+<ol start="22">
+<li>Zigzag Conversion N</li>
+</ol>
+<p>数学题，首先先计算要用到的行数和列数。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int route = numRows + (numRows &gt; 1? numRows - 2:0);</span><br><span class="line">int lie = numRows &lt; 2 ? 1 : numRows - 1;</span><br></pre></td></tr></table></figure>
+
+<p>然后分配一下具体的位置。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">if(r &lt; numRows) c[r][lie * p] = s[i];</span><br><span class="line">else c[2 * numRows - r - 2][lie * p + r - numRows + 1] = s[i];</span><br></pre></td></tr></table></figure>
+
+<p>其实就是数学题，建立字符串和Zigzag的映射。</p>
+<ol start="23">
+<li>Find the Index of the First Occurrence in a String E</li>
+</ol>
+<p>可以使用KMP算法进行匹配，但这里没有使用。就是使用朴素匹配的思路就可以。当然用KMP算法会更快。</p>
+<ol start="24">
+<li>Text Justification</li>
+</ol>
+<p>暂时略过。</p>
+<h2 id="Two-Pointers"><a href="#Two-Pointers" class="headerlink" title="Two Pointers"></a>Two Pointers</h2><ol start="25">
+<li>Valid Palindrome E</li>
+</ol>
+<p>设置两个指针i和j，i指向字符串头，j指向字符串尾。i和j相等的话就往内移。不相等返回false。如果i和j相遇了(i &gt;&#x3D; j)，就可以返回true。</p>
+<ol start="26">
+<li>Is Subsequence E</li>
+</ol>
+<p>这个比字符串匹配要简单一点，设置两个指针i和j，i指向长串，j指向慢串。i和j对应的相等，则i后移j后移，否则就只有i后移。当i移动到最后j没移动到最后就返回false，否则返回true。</p>
+<ol start="27">
+<li>Two Sum II - Input Array Is Sorted N</li>
+</ol>
+<p>设置两个指针i和j，i指向表前，j指向表后。如果s[i]+s[j]大了，那就j–，如果小了i++，如果j比i小了，说明没结果。如果s[i]+s[j]刚刚好，说明结果找到了！</p>
+<ol start="28">
+<li>Container With Most Water N</li>
+</ol>
+<p>设置两个指针i和j，i指向表前，j指向表后。记录ans &#x3D; min(height[i],height[j]) * (j - i)的最大值。如果s[i] &lt; s[j]，那就i++，否则j–，一直到j &lt; i为止。（贪心+双指针）</p>
+<ol start="29">
+<li>3Sum N</li>
+</ol>
+<p>基于第27题的题目，其实在第27题的基础上加了一个遍历。遍历1-n为i，然后在i+1~n之间做一次二数之和。</p>
+<h2 id="Sliding-Window（滑动窗口【单调队列】）"><a href="#Sliding-Window（滑动窗口【单调队列】）" class="headerlink" title="Sliding Window（滑动窗口【单调队列】）"></a>Sliding Window（滑动窗口【单调队列】）</h2><ol start="30">
+<li>Minimum Size Subarray Sum N</li>
+</ol>
+<p>首先先规定滑动窗口的范围[j,k]。假设滑动窗口内部的和是p。现在遍历这个数组，下标为i</p>
+<p>（1）如果p + a[i] &lt; target，让k &#x3D; i</p>
+<p>（2）p + a[i] &#x3D; target，这是一个可能的结果，记录一下。</p>
+<p>（3）p + a[i] &gt; target。这时候要吐出滑动窗口的元素了。做p -&#x3D; a[j++]一直到p + a[i] &lt;&#x3D; target为止。</p>
+<p>对所有的可能的结果找最小值。</p>
+<ol start="31">
+<li>Longest Substring Without Repeating Characters N</li>
+</ol>
+<p>首先先规定滑动窗口的范围[j,k]，然后构造一个Hash表来维护不重复性。遍历字符串，下标为i</p>
+<p>（1）s[i]不重复，可以扩展k &#x3D; i。记录一下当前滑动窗口长度。维护滑动窗口长度的最大值。</p>
+<p>（2）s[i]重复，j++到不重复为止。</p>
+<ol start="32">
+<li>Substring with Concatenation of All Words H</li>
+</ol>
+<p>首先先规定滑动窗口的范围[j,k]，然后构造一个Hash表来维护不重复性。首先我们直到滑动窗口的移动是按照单词表的元素为基准的。也就是说我们的初始滑动窗口是不同的，假设单词表元素的长度为k，那么从0,1,2…k-1开始都可以。所以说要遍历（0,k-1）。</p>
+<p>之后和之前的滑动窗口操作一样。但是每次取字符串都是k个k个去取。</p>
+<p>（1）不在单词表里。那么滑动窗口从[i+单词表长度,i+单词表长度]开始。</p>
+<p>（2）在单词表里，而且在滑动窗口内没出现过（用std::map来维护）。k+&#x3D;单词表长度。</p>
+<p>（3）在单词表里，而且在滑动窗口内出现过，那就移动j一直到滑动窗口内部没出现过。</p>
+<ol start="33">
+<li>Minimum Window Substring H</li>
+</ol>
+<p>滑动窗口的范围[j,k]，首先遍历一下要判别的串K。看看串内部字母的数量。构建一个hash表记录滑动窗口内部每个字母的数量。然后遍历字符串</p>
+<p>（1）没达到要求，滑动窗口向右拓展。</p>
+<p>（2）达到要求了，滑动窗口往左尽量收缩，尽量的含义是，收缩到i以致于滑动窗口[i+1,k]不满足要求而[i,k]满足要求，记录答案，维护答案的最小值。</p>
+<h2 id="矩阵（大部分就是做模拟）"><a href="#矩阵（大部分就是做模拟）" class="headerlink" title="矩阵（大部分就是做模拟）"></a>矩阵（大部分就是做模拟）</h2><ol start="34">
+<li>Valid Sudoku N</li>
+</ol>
+<p>模拟，首先先把数独构造出来，然后按行按列去检查有无重复项（哈希表）</p>
+<ol start="35">
+<li>Spiral Matrix N</li>
+</ol>
+<p>这道题也是模拟。就是模拟矩阵旋转的过程。旋转可以分为四个部分，左下右上。做几次旋转可以通过min(m,n) + 1这个式子算出。左下右上每次怎么放元素的也可以算出。</p>
+<ol start="36">
+<li>Rotate Image N</li>
+</ol>
+<p>旋转矩阵，其实可以拆成四块去做的。左上到右上，右上到右下，右下到左下，左下到左上。每一次都是四个四个做的，而且可以写出映射。那么矩阵一块有多大呢，一块就是(n&#x2F;2) * (n+1&#x2F;2)大，四块的具体的划分也可以说出来。那么就做那么多次的循环交换就好了。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">int temp = matrix[i][j];</span><br><span class="line">matrix[i][j] = matrix[n - j - 1][i];</span><br><span class="line">matrix[n - j - 1][i] = matrix[n - i - 1][n - j - 1];</span><br><span class="line">matrix[n - i - 1][n - j - 1] = matrix[j][n - i - 1];</span><br><span class="line">matrix[j][n - i - 1] = temp;</span><br></pre></td></tr></table></figure>
+
+<ol start="37">
+<li>Set Matrix Zeroes N</li>
+</ol>
+<p>维护一个表b，记录哪些元素要设置为0。遍历一遍矩阵，对0元素，其所在行和所在列上所有位置，在表b中设置为1。矩阵遍历完了就统一设置为0。这样做是防止新生成出来的0会干扰操作。</p>
+<ol start="38">
+<li>Game of Life N</li>
+</ol>
+<p>暂时略过。</p>
+<h2 id="HashMap（哈希表）"><a href="#HashMap（哈希表）" class="headerlink" title="HashMap（哈希表）"></a>HashMap（哈希表）</h2><ol start="39">
+<li>Ransom Note E</li>
+</ol>
+<p>首先遍历magazine，记录magazine每个元素出现的次数，记录在哈希表中。然后遍历ransomNote，记录ransomNote每个元素出现的次数，出现比magazine多就判定false，没有的话就判定true。</p>
+<ol start="40">
+<li>Isomorphic Strings E</li>
+</ol>
+<p>将两个串进行字数统计，记录在哈希表1和2中，然后排序哈希表1和2，比较哈希表中元素数量是否相同。（当然也可以对哈希表进行再哈希）</p>
+<ol start="41">
+<li>Word Pattern E</li>
+</ol>
+<p>感觉这题并不像E的难度。将句子拆成若干个单词组，然后尝试构建一个字符串对字符的哈希映射，如果出现了哈希冲突，就是false，反之就是true。比如说dog cat cat dog和abba，就可以成功建立 dog-a cat-b的映射，dog cat cat dog和abbc，那么dog可以对a或者c，就产生了冲突，dog cat cat fog和abba，a可以对dog或者fog，也是出现了冲突。（查冲突的方法就是查哈希表的元素是否为空或者是否为不空）</p>
+<ol start="42">
+<li>Valid Anagram E</li>
+</ol>
+<p>构建两个字符串的哈希表，看哈希表是否完全相等。</p>
+<ol start="43">
+<li>Group Anagrams N</li>
+</ol>
+<p>这里本来是想让每组单词之间两两调用42题的API，结果TLE。上网看题解发现可以对字符串做sort，这样互为Anagrams的单词就是一样的。</p>
+<ol start="44">
+<li>Two Sum E</li>
+</ol>
+<p>这里本来可以使用暴力方式，搜索一遍就可以过。但是可以用哈希表。首先构建一个哈希表，然后。遍历数组，对于数组的元素x，希望能找到target-x的存在性，就搜索哈希表即可。</p>
+<ol start="45">
+<li>Happy Number E</li>
+</ol>
+<p>首先我们模拟上述的操作，然后我们用一个哈希表记录操作的结果的循环性，如果结果循环出现，我们知道时遇到了循环，就要返回false。遇到了1就返回true（我们知道如果不是快乐数就是一定遇到了循环，因为在做操作的时候，对于高位数，会单调递减，对于三位数以内的值，最多最多只能到243，所以一定会出现循环）只不过我们知道当遇到4的时候就代表遇到了循环，可以以此为着手进行优化。</p>
+<ol start="46">
+<li>Contains Duplicate II E</li>
+</ol>
+<p>在这里依然使用哈希，但是我哈希表的值记录上一次出现在数组的下标。然后每次出现就使用哈希表的值进行判断。</p>
+<ol start="47">
+<li>Longest Consecutive Sequence N</li>
+</ol>
+<p>做哈希然后找哈希表上连续元素的个数。</p>
+<h2 id="Intervals"><a href="#Intervals" class="headerlink" title="Intervals"></a>Intervals</h2><ol start="48">
+<li>Summary Ranges E</li>
+</ol>
+<p>遍历数组。记录连续的区间，记录的方法就是比较当前元素和之前元素的关系，如果满足+1，就不管，不满足+1，就意味着新的区间已经出现了。然后把记录的结果转化成字符串。</p>
+<ol start="49">
+<li>Merge Intervals N</li>
+</ol>
+<p>将区间按照左端递增的方式进行排序，然后每次比较都是比较上一个区间的右端和下一个区间的左端，观察可合并性。如果可合并，就更改右端的值作为一个新的区间。如果不可合并就重新构建新的待合并区间。（最重要的还是排序这一步）</p>
+<ol start="50">
+<li>Insert Interval N</li>
+</ol>
+<p>其实就是把新区间加进去，然后调用一次49。当然还可以直接遍历一遍所有区间，找到合适的位置进行合并。（找位置其实就是插入排序，因为左端的值是递增的，按照左端递增的规律进行插入就好）</p>
+<ol start="51">
+<li>Minimum Number of Arrows to Burst Balloons N</li>
+</ol>
+<p>按照右端递增进行排序。然后取一个p&#x3D;第一个元素的右端。如果下一个元素的左端比上一个元素的右端要大，就说明不能在一起射了，就只能ans++，p&#x3D;下一个元素的右端。如果不大，说明可以一起射，就可以不用做任何操作。</p>
+<h2 id="Stack"><a href="#Stack" class="headerlink" title="Stack"></a>Stack</h2><ol start="52">
+<li>Valid Parentheses E</li>
+</ol>
+<p>非常典型的Stack问题，括号匹配，如果是左括号，入栈，右括号就和栈顶匹配。</p>
+<ol start="53">
+<li>Simplify Path N</li>
+</ol>
+<p>非常搞人心态的模拟题。首先用一个栈模拟文件夹路径。首先如果遇到了&#x2F;，就代表该往下或者往上走一步了，如果是一个dot，就啥也不用做，两个dot就退栈，如果都不是，就往栈里push一个新的文件夹名字。其实本题的难dot在dot的处理上，有量个变量k和p（只有dot和不是只有dot）来记录上一级的名字里面是不是只有dot，如果不是只有dot就一律按照普通的名字来。如果遇到了..word.，在遇到第一个dot的时候k++，第二个也是k++，在遇到w的时候就把k&#x3D;0，p&#x3D;1。当p&#x3D;1的时候，再遇到dot都不会k++了。而是保存起来。 反正是一个很折磨的模拟题。</p>
+<ol start="54">
+<li>Min Stack N</li>
+</ol>
+<p>维护最小值的栈。那就维护两个栈，一个是原始的栈，一个是到目前为止最小值的栈。在push的时候，就把要push的值push到原始栈中，要push的值和最小值栈的最小值push到最小值栈中。</p>
+<ol start="55">
+<li>Evaluate Reverse Polish Notation N</li>
+</ol>
+<p>暂时略过。</p>
+<ol start="56">
+<li>Basic Calculator</li>
+</ol>
+<p>力扣的链表数据结构定义：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Definition for singly-linked list.</span><br><span class="line"> * struct ListNode &#123;</span><br><span class="line"> *     int val;</span><br><span class="line"> *     ListNode *next;</span><br><span class="line"> *     ListNode(int x) : val(x), next(NULL) &#123;&#125;</span><br><span class="line"> * &#125;;</span><br><span class="line"> */</span><br></pre></td></tr></table></figure>
+
+<h2 id="LinkList"><a href="#LinkList" class="headerlink" title="LinkList"></a>LinkList</h2><ol start="57">
+<li>Linked List Cycle</li>
+</ol>
+<p>双指针。设置一个快指针和慢指针。快指针一次性走两次，慢指针一次性走一次。如果有环，那么快慢指针会碰面，如果没有环，那么快指针马上会指向NULL。（当然要注意边界条件，因为当链表为空或者链表根本只有一个元素不可能有环。）</p>
+<ol start="58">
+<li>Add Two Numbers</li>
+</ol>
+<p>用链表模拟加，很折磨。用数组模拟竖式加法本来就很折磨，更何况链表。构建result表，首先先判断l1和l2指针是不是为空，如果为空的话就默认这是0，不为空的话该是什么是什么（后面移动l1和l2指针也是判断是否为空，为空的话就不用做操作）。然后两个指针对应内容和上一级进位相加。得到这一级加数和进位。加数插入进result表。以此类推，一直到l1和l2都是空。都是空了之后，在result表的队尾加上carry对应的节点。</p>
+<p>这题和一般的模拟一样，首先要考虑两个加数不是同一个位的情况。然后还要考虑result表要构造头指针和尾指针。</p>
 
   </div>
 
@@ -251,7 +442,7 @@ Suwa shrine = 灵山之上神风起 = 一个普通的华中科技大学在读硕
       <i class="ic i-calendar-check"></i>
     </span>
     <span class="text">更新于</span>
-    <time title="修改时间：2024-11-21 14:44:49" itemprop="dateModified" datetime="2024-11-21T14:44:49+08:00">2024-11-21</time>
+    <time title="修改时间：2024-11-21 21:02:24" itemprop="dateModified" datetime="2024-11-21T21:02:24+08:00">2024-11-21</time>
   </span>
 </div>
 
@@ -325,7 +516,7 @@ Suwa shrine = 灵山之上神风起 = 一个普通的华中科技大学在读硕
   <div class="panels">
     <div class="inner">
       <div class="contents panel pjax" data-title="文章目录">
-          <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Array-String"><span class="toc-number">1.</span> <span class="toc-text">Array &#x2F; String</span></a></li></ol>
+          <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Array-String"><span class="toc-number">1.</span> <span class="toc-text">Array &#x2F; String</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Two-Pointers"><span class="toc-number">2.</span> <span class="toc-text">Two Pointers</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Sliding-Window%EF%BC%88%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E3%80%90%E5%8D%95%E8%B0%83%E9%98%9F%E5%88%97%E3%80%91%EF%BC%89"><span class="toc-number">3.</span> <span class="toc-text">Sliding Window（滑动窗口【单调队列】）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9F%A9%E9%98%B5%EF%BC%88%E5%A4%A7%E9%83%A8%E5%88%86%E5%B0%B1%E6%98%AF%E5%81%9A%E6%A8%A1%E6%8B%9F%EF%BC%89"><span class="toc-number">4.</span> <span class="toc-text">矩阵（大部分就是做模拟）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HashMap%EF%BC%88%E5%93%88%E5%B8%8C%E8%A1%A8%EF%BC%89"><span class="toc-number">5.</span> <span class="toc-text">HashMap（哈希表）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Intervals"><span class="toc-number">6.</span> <span class="toc-text">Intervals</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Stack"><span class="toc-number">7.</span> <span class="toc-text">Stack</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LinkList"><span class="toc-number">8.</span> <span class="toc-text">LinkList</span></a></li></ol>
       </div>
       <div class="related panel pjax" data-title="系列文章">
         <ul>
@@ -469,13 +660,13 @@ Suwa shrine = 灵山之上神风起 = 一个普通的华中科技大学在读硕
     <span class="post-meta-item-icon">
       <i class="ic i-chart-area"></i>
     </span>
-    <span title="站点总字数">437k 字</span>
+    <span title="站点总字数">443k 字</span>
 
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="ic i-coffee"></i>
     </span>
-    <span title="站点阅读时长">6:38</span>
+    <span title="站点阅读时长">6:42</span>
   </div>
   <div class="powered-by">
     基于 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & Theme.<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FtZWhpbWUvaGV4by10aGVtZS1zaG9rYQ==">Shoka</span>
