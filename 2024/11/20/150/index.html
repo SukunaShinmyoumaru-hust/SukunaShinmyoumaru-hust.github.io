@@ -77,7 +77,7 @@ Suwa shrine = 灵山之上神风起 = 一个普通的华中科技大学在读硕
       <i class="ic i-pen"></i>
     </span>
     <span class="text">本文字数</span>
-    <span>8.1k</span>
+    <span>17k</span>
     <span class="text">字</span>
   </span>
   <span class="item" title="阅读时长">
@@ -85,7 +85,7 @@ Suwa shrine = 灵山之上神风起 = 一个普通的华中科技大学在读硕
       <i class="ic i-clock"></i>
     </span>
     <span class="text">阅读时长</span>
-    <span>7 分钟</span>
+    <span>15 分钟</span>
   </span>
 </div>
 
@@ -118,12 +118,12 @@ Suwa shrine = 灵山之上神风起 = 一个普通的华中科技大学在读硕
       </div>
       <div id="imgs" class="pjax">
         <ul>
+          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/5d3d43e0f7dc0697.jpg"></li>
+          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/c10853f5c9aee06c.jpg"></li>
+          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/7d2279310f1bb2f7.jpg"></li>
+          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/f841728a51c3ae78.jpg"></li>
           <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/8d1e248fe0f62130.jpg"></li>
           <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/97c3cfc23ec60f4c.jpg"></li>
-          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/7d2279310f1bb2f7.jpg"></li>
-          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/bac1b1e69e7ebfb7.jpg"></li>
-          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/f841728a51c3ae78.jpg"></li>
-          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/4663c8f5b7019dfd.jpg"></li>
         </ul>
       </div>
     </header>
@@ -431,6 +431,199 @@ Suwa shrine = 灵山之上神风起 = 一个普通的华中科技大学在读硕
 </ol>
 <p>用链表模拟加，很折磨。用数组模拟竖式加法本来就很折磨，更何况链表。构建result表，首先先判断l1和l2指针是不是为空，如果为空的话就默认这是0，不为空的话该是什么是什么（后面移动l1和l2指针也是判断是否为空，为空的话就不用做操作）。然后两个指针对应内容和上一级进位相加。得到这一级加数和进位。加数插入进result表。以此类推，一直到l1和l2都是空。都是空了之后，在result表的队尾加上carry对应的节点。</p>
 <p>这题和一般的模拟一样，首先要考虑两个加数不是同一个位的情况。然后还要考虑result表要构造头指针和尾指针。</p>
+<ol start="59">
+<li>Merge Two Sorted Lists</li>
+</ol>
+<p>构建一个res表，然后构建三个指针。i，j，k。i指向链表1，j指向链表2。k指向res表。i比j小，k后面补个i，i往后移。反之k后面补个j，j往后移，一直到i或者j到了尾部，把剩下那个没到尾部的那个表补到k后面</p>
+<ol start="60">
+<li>Copy List with Random Pointer</li>
+</ol>
+<p>深拷贝复制一个链表。那就构建一个老链表结点到新链表结点的映射，新链表构建完了需要完善random指针和next指针。所以之后遍历老链表。假设现在老链表遍历到了k，那么新链表为Hash(k)，那么可以写出Hash(k)-&gt;next &#x3D; Hash(k-&gt;next[老链表])[新链表]，巧妙构建了新链表之间的联系。</p>
+<ol start="61">
+<li>Reverse Linked List II N</li>
+</ol>
+<p>详见62，62就是用了61的代码：</p>
+<ol start="62">
+<li>Reverse Nodes in k-Group H</li>
+</ol>
+<p>这一题就是折磨，狠狠地模拟了。这里Sukuna用了一个取巧的方法，用了一个Hash，把链表结点和结点所在的位置做了一次Hash。然后写了一个调换结点的代码。说白了就是对所有的next节点进行了狠狠地替换，代码非常长，算法很好懂，就是代码非常不好写：（注意一下首部的处理）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">void reverseBetween(ListNode* head, int left, int right) &#123;</span><br><span class="line">    if(!head) return;</span><br><span class="line">    if(left &gt; 1) &#123;</span><br><span class="line">        //printf(&quot;Let %d to %d\n&quot;,maps[left-1]-&gt;val,maps[right]-&gt;val);</span><br><span class="line">        maps[left-1]-&gt;next = maps[right];</span><br><span class="line">        //printf(&quot;Let %d to %d\n&quot;,maps[left]-&gt;val,maps[right+1]-&gt;val);</span><br><span class="line">        maps[left]-&gt;next = maps[right+1];</span><br><span class="line">        for(int i = right;i &gt; left;i--)&#123;</span><br><span class="line">            //printf(&quot;Let %d to %d\n&quot;,maps[i]-&gt;val,maps[i-1]-&gt;val);</span><br><span class="line">            maps[i]-&gt;next = maps[i-1];</span><br><span class="line">        &#125;</span><br><span class="line">        //return maps[1];</span><br><span class="line">    &#125;</span><br><span class="line">    else&#123;</span><br><span class="line">        //printf(&quot;Let %d to %d\n&quot;,maps[1]-&gt;val,maps[right + 1]-&gt;val);</span><br><span class="line">        maps[1]-&gt;next = maps[right + 1];</span><br><span class="line">        for(int i = right;i &gt; left;i--)&#123;</span><br><span class="line">            //printf(&quot;Let %d to %d\n&quot;,maps[i]-&gt;val,maps[i-1]-&gt;val);</span><br><span class="line">            maps[i]-&gt;next = maps[i-1];</span><br><span class="line">        &#125;</span><br><span class="line">        //return maps[right];</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后以k个为一组进行替换。最后不足k个的就直接复制过去。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">ListNode* reverseKGroup(ListNode* head, int k) &#123;</span><br><span class="line">       if(k==1)return head;</span><br><span class="line">       int i = 1;</span><br><span class="line">       ListNode* res = head;</span><br><span class="line">       while(res)&#123;</span><br><span class="line">           maps[i] = res;</span><br><span class="line">           res = res-&gt;next; </span><br><span class="line">           i++;</span><br><span class="line">       &#125;</span><br><span class="line">       maps[i]=nullptr;</span><br><span class="line">       i--;</span><br><span class="line">       int total = i;</span><br><span class="line">       int flag = 0;</span><br><span class="line">       for(int j = 1;j + k - 1 &lt;= total;j+=k)&#123;</span><br><span class="line">           </span><br><span class="line">           //printf(&quot;Do %d %d\n&quot;,j,j+k-1);</span><br><span class="line">           reverseBetween(head,j,j+k-1);</span><br><span class="line">           ListNode* head = maps[k];</span><br><span class="line">           while(head)&#123;</span><br><span class="line">               //printf(&quot;%d &quot;,head-&gt;val);</span><br><span class="line">               head = head-&gt;next;</span><br><span class="line">           &#125;</span><br><span class="line">           ListNode* res = flag?maps[1]:maps[k];</span><br><span class="line">           flag = 1;</span><br><span class="line">           i = 1;</span><br><span class="line">           while(res)&#123;</span><br><span class="line">               maps[i] = res;</span><br><span class="line">               res = res-&gt;next; </span><br><span class="line">               i++;</span><br><span class="line">           &#125;</span><br><span class="line">           i--;</span><br><span class="line">           //printf(&quot;\n&quot;);</span><br><span class="line">       &#125;</span><br><span class="line">       return maps[1];</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="63">
+<li>Remove Nth Node From End of List N</li>
+</ol>
+<p>链表的删除。首先计算链表的长度l，然后删除掉l - n + 1上的节点。删除的办法在C语言课上讲过了。首先找到l - n + 2上的节点，然后让l - n + 2指向l - n即可（第l个默认是NULL）这样有个好处就是，不用对空指针进行处理。</p>
+<p>但是如果要删除第一个的话，可以直接让head &#x3D; head-&gt;next，就不能找到前一个了。</p>
+<ol start="64">
+<li>Remove Duplicates from Sorted List II N</li>
+</ol>
+<p>构造hash表，然后构造一个新表，把hash表里所有出现次数为1的数插到新表里。</p>
+<ol start="65">
+<li>Rotate List N</li>
+</ol>
+<p>首先要明确一点，rotate的次数 &#x3D; k % 链表的长度。然后找到最后第k个元素，记作a，第k-1个元素为a-1。然后原链表的头head和尾tail。tail-&gt;next &#x3D; head。a-1-&gt;next &#x3D; NULL。（这里要考虑边界条件，如果k&#x3D;0，就什么都不用做）</p>
+<ol start="66">
+<li>Partition List N</li>
+</ol>
+<p>构建两个表1和2，小于x的放入1，否则放入2.如果表1或者2是空表，就直接返回表2或者表1.如果不是的话表1末尾-&gt;next&#x3D;表二开头。</p>
+<ol start="67">
+<li>LRU Cache N</li>
+</ol>
+<p>暂且不表。</p>
+<h2 id="Binariy-Tree"><a href="#Binariy-Tree" class="headerlink" title="Binariy Tree"></a>Binariy Tree</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Definition for a binary tree node.</span><br><span class="line"> * struct TreeNode &#123;</span><br><span class="line"> *     int val;</span><br><span class="line"> *     TreeNode *left;</span><br><span class="line"> *     TreeNode *right;</span><br><span class="line"> *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;</span><br><span class="line"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;</span><br><span class="line"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;</span><br><span class="line"> * &#125;;</span><br><span class="line"> */</span><br></pre></td></tr></table></figure>
+
+<ol start="68">
+<li>Maximum Depth of Binary Tree E</li>
+</ol>
+<p>求二叉树最大深度。那就是求左子树和右子树深度最大值+1。（如果是空树的话返回0）</p>
+<ol start="69">
+<li>Same Tree E</li>
+</ol>
+<p>先判空，如果两方有一个是空，返回false，如果两方都是空，返回true。如果都不是空，就看本节点值，左子树和右子树的一致性。(p-&gt;val &#x3D;&#x3D; q-&gt;val) &amp;&amp; (isSameTree(p-&gt;left,q-&gt;left)) &amp;&amp; (isSameTree(p-&gt;right,q-&gt;right))</p>
+<ol start="70">
+<li>Invert Binary Tree E</li>
+</ol>
+<p>如果该树为空，那就什么都不用做。如果不空，那就交换左右子树，然后对左右子树递归调用交换函数。</p>
+<ol start="71">
+<li>Symmetric Tree E</li>
+</ol>
+<p>调用一下70，把右子树进行一次调转。然后看左子树和右子树是不是一个树（69）</p>
+<ol start="72">
+<li>Construct Binary Tree from Preorder and Inorder Traversal N</li>
+</ol>
+<p>给定前序排列和中序排列，构建一个树。非常经典的数据结构题。如果排列只有一个，那么就直接返回即可。如果有两个及以上，那首先要知道前序排列的第一个元素，在中序排列的位置，假设为i，那么中序遍历的[0,i-1]就是左子树[i+1,n]是右子树。然后递归构造就好。</p>
+<ol start="73">
+<li>Construct Binary Tree from Inorder and Postorder Traversal N</li>
+</ol>
+<p>还是经典，只不过从前序改成后序，还是一样的做法。只不过是后序排列的最后一个元素，在中序的位置。</p>
+<ol start="74">
+<li>Populating Next Right Pointers in Each Node II N</li>
+</ol>
+<p>这个可以首先构造一个层次的链表数组L。然后假设一个节点r的层数为n，那么L[n]-&gt;next &#x3D; r，L[n] &#x3D; r。这样子就可以巧妙地构造一个层次表了。</p>
+<ol start="75">
+<li>Flatten Binary Tree to Linked List N</li>
+</ol>
+<p>这个可以用一个很笨的方法，就是先前序遍历，把前序遍历的结果放在一个vector内部，然后遍历vector以分配左右子树指针的朝向。</p>
+<ol start="76">
+<li>Path Sum E</li>
+</ol>
+<p>递归计算。假设target&#x3D;k，那就计算 左子树存在路径使路径和 &#x3D;&#x3D; k - val || 右子树存在路径使路径和 &#x3D;&#x3D; k - val。在递归的时候，有一个函数参数保留k - val的值。</p>
+<ol start="77">
+<li>Sum Root to Leaf Numbers N</li>
+</ol>
+<p>假设root的值是k，那么这个root对应的值可以这么表示，假设父亲传来了两个数，k和p（p是引用）【这相当于编译原理里面的综合变量和传递变量】，如果没有子树了，那么就让p +&#x3D; 10k + val。如果有子树，那么令k &#x3D; 10k + val。（这样子可以把之前几层的信息传递给最后的叶节点，让叶节点做加法有依据）。可以这么理解：就是有儿子，奖池还在继续，没有儿子了，那么就把奖池兑现。</p>
+<ol start="78">
+<li>Binary Tree Maximum Path Sum H</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int maxs = -1000000000;</span><br><span class="line">    int dfs(TreeNode* root,int isroot)&#123;</span><br><span class="line">        if(!root) return 0;</span><br><span class="line">        int res1 = dfs(root-&gt;left,0);</span><br><span class="line">        int res2 = dfs(root-&gt;right,0);</span><br><span class="line">        if(res1 + root-&gt;val + res2 &gt; maxs) maxs = res1 + root-&gt;val + res2;</span><br><span class="line">        if(max(res1,res2) + root-&gt;val &gt; maxs) maxs = max(res1,res2) + root-&gt;val;</span><br><span class="line">        if(root-&gt;val &gt; maxs) maxs = root-&gt;val;</span><br><span class="line">        return max(max(res1,res2),0) + root-&gt;val;</span><br><span class="line">    &#125;</span><br><span class="line">    int maxPathSum(TreeNode* root) &#123;</span><br><span class="line">        int k = dfs(root,1);</span><br><span class="line">        return max(maxs,k);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>其实这个代码用得挺笨，我也不知道我搞了个isroot有啥用。不过在这里解释一下代码是怎么做的。我们假设路径是I型和V型。I型就是直勾勾往下走，V型是在某处拐了个弯。首先先记录一下左子树和右子树的I型路径的最大值，假设为l，r。那么算上本路径的I型路径最大值是$max(l,r)+val$。</p>
+<p>那么在考虑V型路径（V型路径就是左右子树两部分构成的I型路径+自己，这样可以组成一个V型路径）：if(res1 + root-&gt;val + res2 &gt; maxs) maxs &#x3D; res1 + root-&gt;val + res2;</p>
+<p>那么维护一个最大值来记录答案。</p>
+<ol start="79">
+<li>Binary Search Tree Iterator N</li>
+</ol>
+<p>写一个基于二叉树的迭代器。这个非常简单，把二叉树做一次搜索，搜索结果放到stack里。</p>
+<ol start="80">
+<li>Count Complete Tree Nodes E</li>
+</ol>
+<p>左子树节点数 + 右子树节点数 + 1</p>
+<ol start="81">
+<li>Lowest Common Ancestor of a Binary Tree</li>
+</ol>
+<p>最近公共祖先（LCA）。首先维护一个dfs(k)，这个值代表k内部是否存在p和q（我们找公共祖先的节点）。</p>
+<p>如果左儿子的dfs和右儿子的dfs都是true，就说明本节点是一个公共祖先。或者本节点就是p或者q，然后左儿子的dfs和右儿子的dfs有一个是true，那也可以说明本节点是一个公共祖先。</p>
+<h2 id="Binariy-Tree-BFS"><a href="#Binariy-Tree-BFS" class="headerlink" title="Binariy Tree BFS"></a>Binariy Tree BFS</h2><ol start="82">
+<li>Binary Tree Right Side View N</li>
+</ol>
+<p>到了二叉树的层次遍历了。其实还是可以和之前一样，构造一个层次表L，然后做一次dfs(k,n)【代表第k个元素再第n层】然后令L[n] &#x3D; k即可。</p>
+<ol start="83">
+<li>Average of Levels in Binary Tree E</li>
+</ol>
+<p>计算每一层的平均值。dfs一下，计算每一层的总和和结点数。除一下就好。</p>
+<ol start="84">
+<li>Binary Tree Level Order Traversal</li>
+</ol>
+<p>其实还是可以和之前一样，构造一个层次表L，然后做一次dfs(k,n)【代表第k个元素再第n层】然后令L[n].push_back(k)即可。当然还可以用队列模拟层次遍历（广度优先搜索），这样做不仅要维护一个搜索队列，还要维护一个搜索队列对应的层次队列。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int getDepth(TreeNode* root)&#123;</span><br><span class="line">        if(!root) return 0;</span><br><span class="line">        return max(getDepth(root-&gt;left),getDepth(root-&gt;right)) + 1;</span><br><span class="line">    &#125;</span><br><span class="line">    vector&lt;vector&lt;int&gt;&gt; levelOrder(TreeNode* root) &#123;</span><br><span class="line">        int p = getDepth(root);</span><br><span class="line">        vector&lt;vector&lt;int&gt;&gt; res = *new vector&lt;vector&lt;int&gt;&gt;(p);</span><br><span class="line">        queue&lt;int&gt; l;</span><br><span class="line">        queue&lt;TreeNode*&gt; t;</span><br><span class="line">        l.push(1);</span><br><span class="line">        if(root) t.push(root);</span><br><span class="line">        while(!t.empty())&#123;</span><br><span class="line">            TreeNode* k = t.front();</span><br><span class="line">            int i = l.front();</span><br><span class="line">            t.pop();</span><br><span class="line">            l.pop();</span><br><span class="line">            res[i-1].push_back(k-&gt;val);</span><br><span class="line">            if(k-&gt;left) &#123;t.push(k-&gt;left); l.push(i+1);&#125;</span><br><span class="line">            if(k-&gt;right)&#123;t.push(k-&gt;right);l.push(i+1);&#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<ol start="85">
+<li>Binary Tree Zigzag Level Order Traversal N</li>
+</ol>
+<p>暂不讨论</p>
+<h2 id="BST"><a href="#BST" class="headerlink" title="BST"></a>BST</h2><ol start="86">
+<li>Minimum Absolute Difference in BST E</li>
+</ol>
+<p>BST的前序遍历是按照升序排序的。那就先前序遍历，存一下遍历的结果，然后遍历比较即可。</p>
+<ol start="87">
+<li>Kth Smallest Element in a BST N</li>
+</ol>
+<p>第K小元素，那就还是存前序遍历的结果，然后取第k个元素就好。</p>
+<ol start="88">
+<li>Validate Binary Search Tree N</li>
+</ol>
+<p>验证BST的性质，存前序遍历的结果，看是不是前面的比后面的小。</p>
+<h2 id="Graph"><a href="#Graph" class="headerlink" title="Graph"></a>Graph</h2><ol start="89">
+<li>Number of Islands N</li>
+</ol>
+<p>求连通分量的题目。首先找到一个1，把所有和这个连通分量一起的1全部改成0（这需要上下左右搜索，搜索的时候要注意边界条件）。再继续找1，以此循环往复。然后答案就是循环往复的次数。</p>
+<ol start="90">
+<li>Surrounded Regions N</li>
+</ol>
+<p>这里是将被围住的O变成X，那么标记和边界的O相同连通分量的O，没被标记的O就说明被围住了，变成X。</p>
+<ol start="91">
+<li>Clone Graph N</li>
+</ol>
+<p>深拷贝一个图。做一个老结点到新节点的Hash。然后对图做一次dfs。假设dfs(k)，那么先查询Hash(k)存在否，不存在的话赋新值，对k每一个链接的节点，做一次dfs。然后把dfs的结果加入到链接表中。如果存在，就什么也不做。最后直接返回Hash(k)。其实还是和之前链表深拷贝一样，做一个老结点到新节点的Hash。</p>
+<ol start="92">
+<li>Evaluate Division N</li>
+</ol>
+<p>暂时不表</p>
+<ol start="93">
+<li>Course Schedule N</li>
+</ol>
+<p>建图。节点是课程号，边是上x课之前要上y课。这里使用邻接表。用E[x]表示所有y-&gt;x。这样很好计算入度了，那就是E[x].length。取出一个入度为0的元素，从图中删掉，更新一下邻接表。如果找不到入度为0的元素，但是还是有元素存在，说明有环，返回false。所有元素都可以被处理，返回true。</p>
+<ol start="94">
+<li>Course Schedule II N</li>
+</ol>
+<p>和之前一样，只不过把每一个入度为0的元素从图中删除的顺序记录下来而已。</p>
+<h2 id="Graph-BFS"><a href="#Graph-BFS" class="headerlink" title="Graph BFS"></a>Graph BFS</h2><ol start="95">
+<li>Snakes and Ladders N</li>
+</ol>
+<p>暂且不表</p>
+<ol start="96">
+<li>Minimum Genetic Mutation</li>
+</ol>
+<p>建图，顶点是可能出现的基因序列。边x-&gt;y，代表x可以变到y。建图之后然后求步数。求步数的方法可以使用bfs。构建一个结点队列和结点对应的步数队列，做dfs。把初始结点和0加入队列中做搜索，搜索到了返回答案，搜索不到（队列空了）就返回-1。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:    </span><br><span class="line">    int minMutation(string start, string end, vector&lt;string&gt;&amp; bank) &#123;</span><br><span class="line">        unordered_set&lt;string&gt; cnt;</span><br><span class="line">        unordered_set&lt;string&gt; visited;</span><br><span class="line">        char keys[4] = &#123;&#x27;A&#x27;, &#x27;C&#x27;, &#x27;G&#x27;, &#x27;T&#x27;&#125;;        </span><br><span class="line">        for (auto &amp; w : bank) &#123;</span><br><span class="line">            cnt.emplace(w);</span><br><span class="line">        &#125;</span><br><span class="line">        if (start == end) &#123;</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;</span><br><span class="line">        if (!cnt.count(end)) &#123;</span><br><span class="line">            return -1;</span><br><span class="line">        &#125;</span><br><span class="line">        queue&lt;string&gt; qu;</span><br><span class="line">        qu.emplace(start);</span><br><span class="line">        visited.emplace(start);</span><br><span class="line">        int step = 1;</span><br><span class="line">        while (!qu.empty()) &#123;</span><br><span class="line">            int sz = qu.size();</span><br><span class="line">            for (int i = 0; i &lt; sz; i++) &#123;</span><br><span class="line">                string curr = qu.front();</span><br><span class="line">                qu.pop();</span><br><span class="line">                for (int j = 0; j &lt; 8; j++) &#123;</span><br><span class="line">                    for (int k = 0; k &lt; 4; k++) &#123;</span><br><span class="line">                        if (keys[k] != curr[j]) &#123;</span><br><span class="line">                            string next = curr;</span><br><span class="line">                            next[j] = keys[k];</span><br><span class="line">                            if (!visited.count(next) &amp;&amp; cnt.count(next)) &#123;</span><br><span class="line">                                if (next == end) &#123;</span><br><span class="line">                                    return step;</span><br><span class="line">                                &#125;</span><br><span class="line">                                qu.emplace(next);</span><br><span class="line">                                visited.emplace(next);</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            step++;</span><br><span class="line">        &#125;</span><br><span class="line">        return -1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<ol start="97">
+<li>Word Ladder</li>
+</ol>
+<p>和96一样的bfs。暂且不表。</p>
+<h2 id="Trie（字典树）"><a href="#Trie（字典树）" class="headerlink" title="Trie（字典树）"></a>Trie（字典树）</h2><ol start="98">
+<li>Implement Trie (Prefix Tree)</li>
+</ol>
+<p>字典树就是前缀树，通过查前缀来判断是不是有。那就构建下面的26叉树。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">class TrieNode &#123;</span><br><span class="line">public:</span><br><span class="line">    char c;</span><br><span class="line">    vector&lt;TrieNode*&gt; list;</span><br><span class="line">    bool end;</span><br><span class="line">    TrieNode(char c) &#123;</span><br><span class="line">        this-&gt;c = c;</span><br><span class="line">        list = vector&lt;TrieNode*&gt;(26);</span><br><span class="line">        end = false;</span><br><span class="line">    &#125;</span><br><span class="line">    // for root</span><br><span class="line">    TrieNode() &#123;</span><br><span class="line">        list = vector&lt;TrieNode*&gt;(26);</span><br><span class="line">        end = false;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>比如说插入了单词cat，那么从字典树头开始在头的list[3]建立一个新的结点，c&#x3D;’c’，然后再在这个结点的list[1]建立一个新的结点，c&#x3D;’a’。最后在这个新的结点的list[‘t’-‘a’]建立一个新的结点，标记end&#x3D;true，就是说有一个单词在这里结束了。</p>
+<p>然后查cat的存在性就是按照上面的逻辑去查。如果走到某一步节点为空，说明肯定不对，如果走完了前缀存在。（如果end&#x3D;true，说明这个单词也存在）这就是字典树，一个26叉树，树中有一个end标记代表有一个完整的单词的存在。</p>
+<ol start="99">
+<li>Design Add and Search Words Data Structure N</li>
+</ol>
+<p>是98的字典树的应用。</p>
+<ol start="100">
+<li>Word Search II H</li>
+</ol>
+<p>暂且不表。</p>
+<h2 id="Backtracking（回溯，其实也是一种搜索）"><a href="#Backtracking（回溯，其实也是一种搜索）" class="headerlink" title="Backtracking（回溯，其实也是一种搜索）"></a>Backtracking（回溯，其实也是一种搜索）</h2><ol start="101">
+<li>Letter Combinations of a Phone Number</li>
+</ol>
+<p>构建dfs(stage,target,str)。如果stage &#x3D;&#x3D; target，说明结束了，可以写入到res数组。如果是stage &lt; target，说明还要继续往下搜索。那么str +&#x3D; 所有有可出现的字母，然后搜索k次 dfs(stage+1,target,str’)（k&#x3D;所有可能出现的字母数量）</p>
 
   </div>
 
@@ -442,7 +635,7 @@ Suwa shrine = 灵山之上神风起 = 一个普通的华中科技大学在读硕
       <i class="ic i-calendar-check"></i>
     </span>
     <span class="text">更新于</span>
-    <time title="修改时间：2024-11-21 21:02:24" itemprop="dateModified" datetime="2024-11-21T21:02:24+08:00">2024-11-21</time>
+    <time title="修改时间：2024-11-22 17:39:46" itemprop="dateModified" datetime="2024-11-22T17:39:46+08:00">2024-11-22</time>
   </span>
 </div>
 
@@ -516,7 +709,7 @@ Suwa shrine = 灵山之上神风起 = 一个普通的华中科技大学在读硕
   <div class="panels">
     <div class="inner">
       <div class="contents panel pjax" data-title="文章目录">
-          <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Array-String"><span class="toc-number">1.</span> <span class="toc-text">Array &#x2F; String</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Two-Pointers"><span class="toc-number">2.</span> <span class="toc-text">Two Pointers</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Sliding-Window%EF%BC%88%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E3%80%90%E5%8D%95%E8%B0%83%E9%98%9F%E5%88%97%E3%80%91%EF%BC%89"><span class="toc-number">3.</span> <span class="toc-text">Sliding Window（滑动窗口【单调队列】）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9F%A9%E9%98%B5%EF%BC%88%E5%A4%A7%E9%83%A8%E5%88%86%E5%B0%B1%E6%98%AF%E5%81%9A%E6%A8%A1%E6%8B%9F%EF%BC%89"><span class="toc-number">4.</span> <span class="toc-text">矩阵（大部分就是做模拟）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HashMap%EF%BC%88%E5%93%88%E5%B8%8C%E8%A1%A8%EF%BC%89"><span class="toc-number">5.</span> <span class="toc-text">HashMap（哈希表）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Intervals"><span class="toc-number">6.</span> <span class="toc-text">Intervals</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Stack"><span class="toc-number">7.</span> <span class="toc-text">Stack</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LinkList"><span class="toc-number">8.</span> <span class="toc-text">LinkList</span></a></li></ol>
+          <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Array-String"><span class="toc-number">1.</span> <span class="toc-text">Array &#x2F; String</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Two-Pointers"><span class="toc-number">2.</span> <span class="toc-text">Two Pointers</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Sliding-Window%EF%BC%88%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E3%80%90%E5%8D%95%E8%B0%83%E9%98%9F%E5%88%97%E3%80%91%EF%BC%89"><span class="toc-number">3.</span> <span class="toc-text">Sliding Window（滑动窗口【单调队列】）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9F%A9%E9%98%B5%EF%BC%88%E5%A4%A7%E9%83%A8%E5%88%86%E5%B0%B1%E6%98%AF%E5%81%9A%E6%A8%A1%E6%8B%9F%EF%BC%89"><span class="toc-number">4.</span> <span class="toc-text">矩阵（大部分就是做模拟）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HashMap%EF%BC%88%E5%93%88%E5%B8%8C%E8%A1%A8%EF%BC%89"><span class="toc-number">5.</span> <span class="toc-text">HashMap（哈希表）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Intervals"><span class="toc-number">6.</span> <span class="toc-text">Intervals</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Stack"><span class="toc-number">7.</span> <span class="toc-text">Stack</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LinkList"><span class="toc-number">8.</span> <span class="toc-text">LinkList</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Binariy-Tree"><span class="toc-number">9.</span> <span class="toc-text">Binariy Tree</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Binariy-Tree-BFS"><span class="toc-number">10.</span> <span class="toc-text">Binariy Tree BFS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BST"><span class="toc-number">11.</span> <span class="toc-text">BST</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Graph"><span class="toc-number">12.</span> <span class="toc-text">Graph</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Graph-BFS"><span class="toc-number">13.</span> <span class="toc-text">Graph BFS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Trie%EF%BC%88%E5%AD%97%E5%85%B8%E6%A0%91%EF%BC%89"><span class="toc-number">14.</span> <span class="toc-text">Trie（字典树）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Backtracking%EF%BC%88%E5%9B%9E%E6%BA%AF%EF%BC%8C%E5%85%B6%E5%AE%9E%E4%B9%9F%E6%98%AF%E4%B8%80%E7%A7%8D%E6%90%9C%E7%B4%A2%EF%BC%89"><span class="toc-number">15.</span> <span class="toc-text">Backtracking（回溯，其实也是一种搜索）</span></a></li></ol>
       </div>
       <div class="related panel pjax" data-title="系列文章">
         <ul>
@@ -660,13 +853,13 @@ Suwa shrine = 灵山之上神风起 = 一个普通的华中科技大学在读硕
     <span class="post-meta-item-icon">
       <i class="ic i-chart-area"></i>
     </span>
-    <span title="站点总字数">443k 字</span>
+    <span title="站点总字数">451k 字</span>
 
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="ic i-coffee"></i>
     </span>
-    <span title="站点阅读时长">6:42</span>
+    <span title="站点阅读时长">6:50</span>
   </div>
   <div class="powered-by">
     基于 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & Theme.<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FtZWhpbWUvaGV4by10aGVtZS1zaG9rYQ==">Shoka</span>
