@@ -77,7 +77,7 @@ Suwa shrine = 灵山之上神风起 = 一个普通的华中科技大学在读硕
       <i class="ic i-pen"></i>
     </span>
     <span class="text">本文字数</span>
-    <span>17k</span>
+    <span>28k</span>
     <span class="text">字</span>
   </span>
   <span class="item" title="阅读时长">
@@ -85,7 +85,7 @@ Suwa shrine = 灵山之上神风起 = 一个普通的华中科技大学在读硕
       <i class="ic i-clock"></i>
     </span>
     <span class="text">阅读时长</span>
-    <span>15 分钟</span>
+    <span>26 分钟</span>
   </span>
 </div>
 
@@ -118,12 +118,12 @@ Suwa shrine = 灵山之上神风起 = 一个普通的华中科技大学在读硕
       </div>
       <div id="imgs" class="pjax">
         <ul>
-          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/5d3d43e0f7dc0697.jpg"></li>
           <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/c10853f5c9aee06c.jpg"></li>
-          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/7d2279310f1bb2f7.jpg"></li>
-          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/f841728a51c3ae78.jpg"></li>
           <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/8d1e248fe0f62130.jpg"></li>
+          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/7c97ca6398f62495.jpg"></li>
           <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/97c3cfc23ec60f4c.jpg"></li>
+          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/5d3d43e0f7dc0697.jpg"></li>
+          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/f841728a51c3ae78.jpg"></li>
         </ul>
       </div>
     </header>
@@ -621,10 +621,241 @@ Suwa shrine = 灵山之上神风起 = 一个普通的华中科技大学在读硕
 </ol>
 <p>暂且不表。</p>
 <h2 id="Backtracking（回溯，其实也是一种搜索）"><a href="#Backtracking（回溯，其实也是一种搜索）" class="headerlink" title="Backtracking（回溯，其实也是一种搜索）"></a>Backtracking（回溯，其实也是一种搜索）</h2><ol start="101">
-<li>Letter Combinations of a Phone Number</li>
+<li>Letter Combinations of a Phone Number N</li>
 </ol>
 <p>构建dfs(stage,target,str)。如果stage &#x3D;&#x3D; target，说明结束了，可以写入到res数组。如果是stage &lt; target，说明还要继续往下搜索。那么str +&#x3D; 所有有可出现的字母，然后搜索k次 dfs(stage+1,target,str’)（k&#x3D;所有可能出现的字母数量）</p>
+<ol start="102">
+<li>Combination N</li>
+</ol>
+<p>还是构建dfs(cur,n,k,temp)cur是当前所选的位置，n是个数，k是组合的个数。如果temp.size() &#x3D;&#x3D; k，那么temp是一个正确的答案，return。然后在考虑选择cur和不选择cur，两个问题上做搜索。一个是temp.push(cur)之后在做dfs(cur+1,n,k,temp)，做完这一部分搜索回溯之后 ，然后temp.pop()在做dfs(cur+1,n,k,temp)。</p>
+<p>这里涉及到n的问题，这里就要对不满足n的要求的做一次剪枝。如果当前temp.size()+n-cur+1 &lt; k，也就是说剩下的所有元素全放进去都不够k个的，那就趁早结束，不做了。</p>
+<ol start="103">
+<li>Permutations N</li>
+</ol>
+<p>涉及选不选的问题。还是构建dfs(p,n,temp,tag)，用tag数组标记访问的情况。如果p &#x3D;&#x3D; n，说明搜索到了终点。如果p &lt; n，那么就在把所有tag&#x3D;0的元素放入搜索中。首先找一个tag&#x3D;0的数据，然后令tag&#x3D;1，temp加入这个数，做dfs(p+1,n,temp,tag)，结束搜索，也就是回溯后tag&#x3D;0，temp丢出来。</p>
+<ol start="104">
+<li>Combination Sum N</li>
+</ol>
+<p>还是搜索。dfs(now,target,index)。搜索是对数组的每一项进行选取（dfs(now.push(x),target-x,index+1)）和不选取（dfs(now,target,index+1)）的搜索。搜索到的话就是target&#x3D;0。</p>
+<p>然后可以进行剪枝，就是index &#x3D; nums.size()的话，就没必要继续做了，还有target&lt;0，也没必要继续做了。</p>
+<ol start="105">
+<li>N-Queens II H</li>
+</ol>
+<p>太经典了，暂且不表。</p>
+<ol start="106">
+<li>Generate Parentheses N</li>
+</ol>
+<p>还是搜索，dfs(l,r,str,n)。对l和r构成的空间组进行搜索，要么加一个(，要么加一个)。dfs(l+1,r,str+’(‘),dfs(l,r+1,str+’)’)。搜索到了就是l&#x3D;r&#x3D;n。</p>
+<p>还可以进行剪枝。如果l &gt; n，r &gt; n，l &gt; r，都是不可以的。</p>
+<ol start="107">
+<li>Word Search N</li>
+</ol>
+<p>找存不存在word。dfs(pos,l,n)。上下左右搜索没有被搜索过的位置。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int m;</span><br><span class="line">    int n;</span><br><span class="line">    int w;</span><br><span class="line">    int hashset[130];</span><br><span class="line">    int b(int i,int j)&#123;</span><br><span class="line">        return i*n + j;</span><br><span class="line">    &#125;</span><br><span class="line">    void p(int k,int&amp; i,int&amp; j)&#123;</span><br><span class="line">        i = k / n;</span><br><span class="line">        j = k % n;</span><br><span class="line">    &#125;</span><br><span class="line">    bool dfs(int k,int q,string word,vector&lt;vector&lt;char&gt;&gt;&amp; board,vector&lt;int&gt; tag)&#123;</span><br><span class="line">        if(q == w - 1) return true;</span><br><span class="line">        int i,j;</span><br><span class="line">        p(k,i,j);</span><br><span class="line">        if(i &gt; 0 &amp;&amp; tag[b(i-1,j)] == 0 &amp;&amp; board[i-1][j] == word[q+1])&#123;</span><br><span class="line">            tag[b(i-1,j)] = 1;</span><br><span class="line">            if(dfs(b(i-1,j),q+1,word,board,tag)) return true;</span><br><span class="line">            tag[b(i-1,j)] = 0;</span><br><span class="line">        &#125;</span><br><span class="line">        if(i &lt; m - 1 &amp;&amp; tag[b(i+1,j)] == 0 &amp;&amp; board[i+1][j] == word[q+1])&#123;</span><br><span class="line">            tag[b(i+1,j)] = 1;</span><br><span class="line">            if(dfs(b(i+1,j),q+1,word,board,tag)) return true;</span><br><span class="line">            tag[b(i+1,j)] = 0;</span><br><span class="line">        &#125;</span><br><span class="line">        if(j &gt; 0 &amp;&amp; tag[b(i,j-1)] == 0 &amp;&amp; board[i][j-1] == word[q+1])&#123;</span><br><span class="line">            tag[b(i,j-1)] = 1;</span><br><span class="line">            if(dfs(b(i,j-1),q+1,word,board,tag)) return true;</span><br><span class="line">            tag[b(i,j-1)] = 0;</span><br><span class="line">        &#125;</span><br><span class="line">        if(j &lt; n - 1 &amp;&amp; tag[b(i,j+1)] == 0 &amp;&amp; board[i][j+1] == word[q+1])&#123;</span><br><span class="line">            tag[b(i,j+1)] = 1;</span><br><span class="line">            if(dfs(b(i,j+1),q+1,word,board,tag)) return true;</span><br><span class="line">            tag[b(i,j+1)] = 0;</span><br><span class="line">        &#125;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    bool exist(vector&lt;vector&lt;char&gt;&gt;&amp; board, string word) &#123;</span><br><span class="line">        m = board.size();</span><br><span class="line">        n = board[0].size();</span><br><span class="line">        w = word.size();</span><br><span class="line">        for(int i = 0;i &lt; m;i++)&#123;</span><br><span class="line">            for(int j = 0;j &lt; n;j++)&#123;</span><br><span class="line">                hashset[board[i][j]]++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        for(int i = 0;i &lt; w;i++)&#123;</span><br><span class="line">            if(--hashset[word[i]] &lt; 0) return false;</span><br><span class="line">        &#125;</span><br><span class="line">        vector&lt;int&gt; tag(m*n);</span><br><span class="line">        for(int i = 0;i &lt; m;i++)&#123;</span><br><span class="line">            for(int j = 0;j &lt; n;j++)&#123;</span><br><span class="line">                if(board[i][j] == word[0])&#123;</span><br><span class="line">                    tag[b(i,j)] = 1;</span><br><span class="line">                    if(dfs(b(i,j),0,word,board,tag)) return true;</span><br><span class="line">                    tag[b(i,j)] = 0;</span><br><span class="line">                &#125; </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
+<p>这样子会超时，要加一个hash的判断。比如说单词出现了N，但是matrix里一个N都没有，就可以直接剪枝了。</p>
+<h2 id="Divide-Conquer（分治）"><a href="#Divide-Conquer（分治）" class="headerlink" title="Divide &amp; Conquer（分治）"></a>Divide &amp; Conquer（分治）</h2><ol start="108">
+<li>Convert Sorted Array to Binary Search Tree E</li>
+</ol>
+<p>有序数组转化成BST。那就做分治。设置一个constructor，输入一个有序数组返回一个BST。那就c[0,n] &#x3D; {val &#x3D; c[n &#x2F; 2],left &#x3D; c[0, n &#x2F; 2 - 1],right &#x3D; [n &#x2F; 2 + 1,n]}</p>
+<ol start="109">
+<li>Sort List N</li>
+</ol>
+<p>为链表排序。那就先用快慢指针找到链表的中间，然后做一次分支排序。l1 &#x3D; sort(head),l2 &#x3D; sort(slow).l &#x3D; merge(l1,l2)。merge的办法是构建一个新的链表，方法参考题59。</p>
+<ol start="110">
+<li>Construct Quad Tree N</li>
+</ol>
+<p>暂且不表</p>
+<ol start="111">
+<li>Merge k Sorted Lists H</li>
+</ol>
+<p>假设有k个list。（力扣的测试集很弱，你按照顺序merge k次也可以过）</p>
+<p>可以只用merge logk 级的次数。就是做分治。把merge k次的任务分解成。merge[0,k&#x2F;2]和merge[k&#x2F;2+1,k]两个子问题+对于子问题的结果进行一次merge。</p>
+<h2 id="Kadane’s-Algorithm"><a href="#Kadane’s-Algorithm" class="headerlink" title="Kadane’s Algorithm"></a>Kadane’s Algorithm</h2><ol start="112">
+<li>Maximum Subarray N</li>
+</ol>
+<p>动态规划。dp[n] &#x3D; max[a[n],dp[n-1] + a[n]] 要么接着拿，要么重开。</p>
+<ol start="113">
+<li>Maximum Sum Circular Subarray N</li>
+</ol>
+<p>动态规划，正常操作：dp[n] &#x3D; max[a[n],dp[n-1] + a[n]]。现在有不涉及到循环的一个最大值max(dp[n])</p>
+<p>现在考虑涉及到循环的最大值。固定最右边的元素，找到左边的元素。首先记最大前缀和l[k] &#x3D; max(l[k-1],l1+l2+…lk)</p>
+<p>假设右边的元素选了k个。那么左边的元素是n-k个，假设dp1[k] &#x3D; (ln+ln-1+…l_k + l[n-k])</p>
+<p>那么答案是max(max(dp[n]),max(dp1[n]))</p>
+<h2 id="Binary-Search（二分搜索）"><a href="#Binary-Search（二分搜索）" class="headerlink" title="Binary Search（二分搜索）"></a>Binary Search（二分搜索）</h2><ol start="114">
+<li>Search Insert Position E</li>
+</ol>
+<p>二分搜索。b(0,n-1,target). <code>if a[mid] &lt; target,l = mid + 1,ans = mid. else r = mid - 1.</code></p>
+<ol start="115">
+<li>Search a 2D Matrix N</li>
+</ol>
+<p>把矩阵展开成向量形式进行二分搜索。</p>
+<ol start="116">
+<li>Find Peak Element N</li>
+</ol>
+<p>如果mid比mid+1位置的元素小，说明答案很有可能是在右边。反之，说明答案很有可能在左边。然后以此为逻辑二分查找即可。</p>
+<ol start="117">
+<li>Search in Rotated Sorted Array N</li>
+</ol>
+<p>二分查找，但是这个查找相较于其他查找不同的是，数组分成两部分[A][B]。如果nums[mid] &gt;&#x3D; nums[0]。就说明mid在A区。如果target &gt;&#x3D; nums[0] 并且 target &lt; nums[mid]。就说明target在A区mid左侧。否则target在A区mid右侧或者B区。</p>
+<p>如果mid在B区。那么需要保证target &gt; nums[mid]并且target &lt;&#x3D; nums[n-1]才能保证target在B区mid右侧。</p>
+<ol start="118">
+<li>Find First and Last Position of Element in Sorted Array N</li>
+</ol>
+<p>先二分查找，找到一个位置k，然后再往左往右遍历。</p>
+<ol start="119">
+<li>Find Minimum in Rotated Sorted Array N</li>
+</ol>
+<p>在这样的旋转表里找最小值。还是一样分成两部分[A][B]，我们找B区第一个。如果nums[mid] &lt; nums[r]，则说明mid在B区。那就应该在左边找。那就令r &#x3D; mid（因为mid可能是B区第一个）。的否则l &#x3D; mid + 1.</p>
+<ol start="120">
+<li>Median of Two Sorted Arrays H</li>
+</ol>
+<p>想不到特别好的办法，我这里用的是朴素思考。</p>
+<h2 id="Heap（堆）"><a href="#Heap（堆）" class="headerlink" title="Heap（堆）"></a>Heap（堆）</h2><p>堆是一种有序队列。在C++的STL里有一个数据结构满足堆的要求，这里不需要我们搓轮子了。（下面叫优先队列）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line">    第三个参数是自己写的cmp函数。</span><br><span class="line">    剩下的用法就是和队列一样</span><br><span class="line">*/</span><br><span class="line">priority_queue&lt;int, vector&lt;int&gt;, greater&lt;int&gt;&gt;</span><br></pre></td></tr></table></figure>
+
+<ol start="121">
+<li>Kth Largest Element in an Array N</li>
+</ol>
+<p>放进所有元素，pop K-1个元素，取队列的top</p>
+<ol start="122">
+<li>IPO H</li>
+</ol>
+<p>这一题就是贪心。因为确保了最小投入资本capital是递增的。所以可以先找到所有满足的最小资本数 &lt;&#x3D; 持有资本数的项目。然后按照净利润递减的顺序放入优先队列里，每一次取出优先队列的最大值作为净利润，更新持有资本 &#x3D; 之前持有资本 + 净利润。</p>
+<ol start="123">
+<li>Find K Pairs with Smallest Sums</li>
+</ol>
+<p>找到K个最小的pair。下面给一个使用这个STL，自定义比较函数的例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">struct lis &#123;</span><br><span class="line">    vector&lt;int&gt; p; // 存储的值</span><br><span class="line">    vector&lt;int&gt; w; // 相对数组的位置</span><br><span class="line">&#125;;</span><br><span class="line">struct compare &#123;</span><br><span class="line">    bool operator()(lis a, lis b) &#123; return a.p[0] + a.p[1] &gt; b.p[0] + b.p[1]; &#125;</span><br><span class="line">&#125;;</span><br><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    vector&lt;vector&lt;int&gt;&gt; kSmallestPairs(vector&lt;int&gt;&amp; nums1, vector&lt;int&gt;&amp; nums2,</span><br><span class="line">                                       int k) &#123;</span><br><span class="line">        priority_queue&lt;lis, vector&lt;lis&gt;, compare&gt; que;</span><br><span class="line">        int m = nums1.size(), n = nums2.size();</span><br><span class="line">        // 先把第1行的处理好</span><br><span class="line">        for (int i = 0; i &lt; min(m, k); i++) &#123;</span><br><span class="line">            vector&lt;int&gt; temp;</span><br><span class="line">            vector&lt;int&gt; temp1;</span><br><span class="line">            temp.push_back(nums1[i]);</span><br><span class="line">            temp.push_back(nums2[0]);</span><br><span class="line">            // printf(&quot;1 push %d %d %d %d\n&quot;, i, 0, nums1[i], nums2[0]);</span><br><span class="line">            temp1.push_back(i);</span><br><span class="line">            temp1.push_back(0);</span><br><span class="line">            lis l;</span><br><span class="line">            l.p = temp;</span><br><span class="line">            l.w = temp1;</span><br><span class="line">            que.push(l);</span><br><span class="line">        &#125;</span><br><span class="line">        // 取一个放一个。 取一个x，y。放一个x，y + 1</span><br><span class="line">        vector&lt;vector&lt;int&gt;&gt; p;</span><br><span class="line">        while (k-- &amp;&amp; !que.empty()) &#123;</span><br><span class="line"></span><br><span class="line">            lis r = que.top();</span><br><span class="line">            que.pop();</span><br><span class="line">            vector&lt;int&gt; temp;</span><br><span class="line">            vector&lt;int&gt; temp1;</span><br><span class="line">            p.push_back(r.p);</span><br><span class="line">            if (r.w[1] + 1 &lt; n) &#123;</span><br><span class="line">                temp.push_back(nums1[r.w[0]]);</span><br><span class="line">                temp.push_back(nums2[r.w[1] + 1]);</span><br><span class="line">                temp1.push_back(r.w[0]);</span><br><span class="line">                temp1.push_back(r.w[1] + 1);</span><br><span class="line">                lis l;</span><br><span class="line">                l.p = temp;</span><br><span class="line">                l.w = temp1;</span><br><span class="line">                que.push(l);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return p;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<ol start="124">
+<li>Find Median from Data Stream H</li>
+</ol>
+<p>找中位数。那就构建一个递增的优先队列和一个递减的优先队列。这两个优先队列分别记录大于中位数的数和小于中位数的数。还要保证小于中位数的数量和大于中位数的数量差不多一致。</p>
+<h2 id="Bit-Manipulation（位运算）"><a href="#Bit-Manipulation（位运算）" class="headerlink" title="Bit Manipulation（位运算）"></a>Bit Manipulation（位运算）</h2><ol start="125">
+<li>Add Binary E</li>
+</ol>
+<p>位运算没有任何算法，就是纯模拟。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    string addBinary(string a, string b) &#123;</span><br><span class="line">        string ans;</span><br><span class="line">        reverse(a.begin(), a.end());</span><br><span class="line">        reverse(b.begin(), b.end());</span><br><span class="line"></span><br><span class="line">        int n = max(a.size(), b.size()), carry = 0;</span><br><span class="line">        for (int i = 0; i &lt; n; ++i) &#123;</span><br><span class="line">            carry += i &lt; a.size() ? (a.at(i) == &#x27;1&#x27;) : 0;</span><br><span class="line">            carry += i &lt; b.size() ? (b.at(i) == &#x27;1&#x27;) : 0;</span><br><span class="line">            ans.push_back((carry % 2) ? &#x27;1&#x27; : &#x27;0&#x27;);</span><br><span class="line">            carry /= 2;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        if (carry) &#123;</span><br><span class="line">            ans.push_back(&#x27;1&#x27;);</span><br><span class="line">        &#125;</span><br><span class="line">        reverse(ans.begin(), ans.end());</span><br><span class="line"></span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<ol start="126">
+<li>Reverse Bits E</li>
+</ol>
+<p>先转化成二进制，在reverse一下。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    vector&lt;int&gt; temp;</span><br><span class="line">    uint32_t reverseBits(uint32_t n) &#123;</span><br><span class="line">        for(int i = 0;i &lt; 32;i++)&#123;</span><br><span class="line">            //printf(&quot;Push back %d\n&quot;,n%2);</span><br><span class="line">            temp.push_back(n % 2);</span><br><span class="line">            n /= 2;</span><br><span class="line">        &#125;</span><br><span class="line">        uint32_t res = 0;</span><br><span class="line">        uint32_t j = 1;</span><br><span class="line">        for(int i = 31;i &gt;= 0;i--)&#123;</span><br><span class="line">            res += (j * temp[i]);</span><br><span class="line">            //printf(&quot;get %d\n&quot;,temp[i]);</span><br><span class="line">            j *= 2;</span><br><span class="line">        &#125;</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<ol start="127">
+<li>Number of 1 Bits E</li>
+</ol>
+<p>一直÷2，然后找÷2的余数为1的次数。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int hammingWeight(int n) &#123;</span><br><span class="line">        int res = 0;</span><br><span class="line">        while(n &gt; 0)&#123;</span><br><span class="line">            res += (n % 2);</span><br><span class="line">            n /= 2;</span><br><span class="line">        &#125;</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<ol start="128">
+<li>Single Number E</li>
+</ol>
+<p>根据a ^ a &#x3D; 0的定律。对所有数异或在一起。剩下的那个数就是唯一一个。</p>
+<ol start="129">
+<li>Single Number II N</li>
+</ol>
+<p>这个比较搞。可以计算每一位出现1的次数。如果这一位出现1的次数 mod 3不为0，说明只出现1次的那个元素这一位为1.（看力扣题解好像可以用状态机来表示，感觉很酷）</p>
+<ol start="130">
+<li>Bitwise AND of Numbers Range N</li>
+</ol>
+<p>脑筋急转弯。对于按位与，我们知道，与里面出现一次0，那最终的答案就一定是0了。所以我们就可以推出，答案是m和n的二进制形态的公共前缀。</p>
+<h2 id="Math"><a href="#Math" class="headerlink" title="Math"></a>Math</h2><ol start="131">
+<li>Palindrome Number E</li>
+</ol>
+<p>回文数字。如果是负数就一定是错的。如果是正数的话可以构造逆数字，看看逆数字是不是和正数字一样。假设x的最后一位是k，那么令逆数字 &#x3D; 逆数字 * 10 + k。</p>
+<ol start="132">
+<li>Plus One E</li>
+</ol>
+<p>模拟加。这里需要注意万一全部为9的情况。</p>
+<ol start="133">
+<li>Factorial Trailing Zeroes N</li>
+</ol>
+<p>0的个数，大家知道0 是由 2 和 5构成的。2明显很充裕，那就是看项目中5因数的个数。（25算两个，125算三个，625算四个）</p>
+<ol start="134">
+<li>Sqrt(x) E</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int mySqrt(int x) &#123;</span><br><span class="line">        for(int i = 1;i &lt; 46341;i++)&#123;</span><br><span class="line">            if(i * i &gt; x) return i - 1;</span><br><span class="line">        &#125;</span><br><span class="line">        return 46340;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<ol start="135">
+<li>Pow(x, n) N</li>
+</ol>
+<p>快速幂算法。这里直接搬题解的。基于x^n + x^n &#x3D; x^{2n}的道理快速算出来</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    double quickMul(double x, long long N) &#123;</span><br><span class="line">        if (N == 0) &#123;</span><br><span class="line">            return 1.0;</span><br><span class="line">        &#125;</span><br><span class="line">        double y = quickMul(x, N / 2);</span><br><span class="line">        return N % 2 == 0 ? y * y : y * y * x;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    double myPow(double x, int n) &#123;</span><br><span class="line">        long long N = n;</span><br><span class="line">        return N &gt;= 0 ? quickMul(x, N) : 1.0 / quickMul(x, -N);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">作者：力扣官方题解</span><br><span class="line">链接：https://leetcode.cn/problems/powx-n/solutions/238559/powx-n-by-leetcode-solution/</span><br><span class="line">来源：力扣（LeetCode）</span><br><span class="line">著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</span><br></pre></td></tr></table></figure>
+
+<ol start="136">
+<li>Max Points on a Line H</li>
+</ol>
+<p>暂且不表</p>
+<h2 id="1D-DP（一维动态规划）"><a href="#1D-DP（一维动态规划）" class="headerlink" title="1D DP（一维动态规划）"></a>1D DP（一维动态规划）</h2><p>动态规划就需要把dp递推方程给出来。给出dp递推方程就好办了。</p>
+<ol start="137">
+<li>Climbing Stairs E</li>
+</ol>
+<p>dp[n] &#x3D; dp[n-1] + dp[n-2] dp[1] &#x3D; 1,dp[2] &#x3D; 2</p>
+<ol start="138">
+<li>House Robber N</li>
+</ol>
+<p>对于第n个要么偷，要么不偷（那就算上第n-1个）。可以写出</p>
+<p>dp[n] &#x3D; max(dp[n-2]+a[n],dp[n-1])<br>dp[1] &#x3D; a[1]<br>dp[2] &#x3D; max(a[1],a[2])</p>
+<ol start="139">
+<li>Word Break N</li>
+</ol>
+<p>dp[0] &#x3D; true. 如果有个单词，长度为k，单词的最后一位刚好到n处，那么dp[n] &#x3D; dp[n-k]。（这个的做法就是遍历n，然后从n往后推1，2，3….，k个字母，看构不构成单词，如果一个都构成不了，那就是false）</p>
+<ol start="140">
+<li>Coin Change N</li>
+</ol>
+<p>首先令dp[i] &#x3D; 114514。那么dp[i] &#x3D; min(dp[i],dp[i-coin[i]]+1)</p>
+<ol start="141">
+<li>Longest Increasing Subsequence N</li>
+</ol>
+<p>dp[0] &#x3D; 1. 对于所有a[n] &gt; a[k] dp[n] &#x3D; max(dp[n],dp[k] + 1)，然后找到最大的dp</p>
+<p>对于dp，其递推方程的数据来源可以是一个数据（之前一个，之前两个）；也可以一组数据中最大的或者是最小的。</p>
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2><ol start="142">
+<li>Triangle N</li>
+</ol>
+<p>dp[0][0] &#x3D; a[0][0]<br>dp[i][0] &#x3D; dp[i-1][0] + a[i][0]<br>dp[i][i] &#x3D; dp[i-1][i-1] + a[i][i]<br>dp[i][k] &#x3D; min(dp[i-1][k-1],dp[i-1][k]) + a[i][k]</p>
+<ol start="143">
+<li>Minimum Path Sum N</li>
+</ol>
+<p>dp[0][0] &#x3D; a[0][0]<br>dp[i][0] &#x3D; a[i][0] + dp[i-1][0]<br>dp[0][i] &#x3D; a[0][i] + dp[0][i-1]<br>dp[i][j] &#x3D; min(dp[i-1][j],dp[i][j-1]) + a[i][j]</p>
+<ol start="144">
+<li>Unique Paths II N</li>
+</ol>
+<p>dp[0][0] &#x3D; 1<br>dp[i][0] &#x3D; 有阻碍？0 : (上一个有无阻碍？0：dp[i-1][0])<br>dp[0][i] &#x3D; 有阻碍？0 : (左一个有无阻碍？0：dp[0][i-1])<br>dp[i][j] &#x3D; 有阻碍？0 : (上一个有无阻碍？0：dp[i-1][j]) + (左一个有无阻碍？0：dp[i][j-1])</p>
+<ol start="145">
+<li>Longest Palindromic Substring N</li>
+</ol>
+<p>暂时不表</p>
+<ol start="146">
+<li>Interleaving String N</li>
+</ol>
+<p>首先看两个字符串的长度，长度不等是不可能成立的。</p>
+<p>dp[0][0] &#x3D; T<br>dp[i][j] &#x3D; (dp[i-1][j] &amp; s1[i-1] &#x3D; s3[i+j-1]) | (dp[i][j-1] &amp; s2[j-1] &#x3D; s3[i+j-1])</p>
+<p>解释：dp[i][j]解释了s3[i+j-1]可以被s1[0…i-1]和s2[0…j-1]构造。</p>
+<ol start="147">
+<li>Edit Distance N</li>
+</ol>
+<p>D[i][j]&#x3D;min(D[i][j−1]+1,D[i−1][j]+1,D[i−1][j−1])&#x3D;1+min(D[i][j−1],D[i−1][j],D[i−1][j−1]−1)<br>​D[i][j]&#x3D;1+min(D[i][j−1],D[i−1][j],D[i−1][j−1])</p>
+<p>解释：D[i][j]是A[0..i]到B[0…j]的编辑距离。</p>
+<ol start="148">
+<li>Best Time to Buy and Sell Stock III H</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">p[0] = -prices[0]; // buy once</span><br><span class="line">p[1] = 0; // buy 1 sell 1</span><br><span class="line">p[2] = -prices[0]; // buy 2 sell 1</span><br><span class="line">p[3] = 0; // buy 2 sell 2</span><br><span class="line">for(int i = 1;i &lt; s;i++)&#123;</span><br><span class="line">    p[0] = max(p[0],-prices[i]); // for buy 1 when buy once?</span><br><span class="line">    p[1] = max(p[1],p[0]+prices[i]);</span><br><span class="line">    p[2] = max(p[2],p[1]-prices[i]);</span><br><span class="line">    p[3] = max(p[3],p[2]+prices[i]);</span><br><span class="line">    //printf(&quot;%d %d %d %d %d\n&quot;,prices[i],p[0],p[1],p[2],p[3]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="149">
+<li>Best Time to Buy and Sell Stock IV H</li>
+</ol>
+<p>从2次到k次，很快能能找到关系，从4个状态到2k个状态</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">for(int i = 1;i &lt;= k;i++)&#123;</span><br><span class="line">    p[2 * i - 1] = -prices[0];</span><br><span class="line">    p[2 * i + 0] = 0;</span><br><span class="line">&#125;</span><br><span class="line">for(int j = 1;j &lt; s;j++)&#123;</span><br><span class="line">    for(int i = 1;i &lt;= k;i++)&#123;</span><br><span class="line">        p[2 * i - 1] = max(p[2 * i - 1],p[2 * i - 2] - prices[j]);</span><br><span class="line">        p[2 * i + 0] = max(p[2 * i + 0],p[2 * i - 1] + prices[j]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="150">
+<li>Maximal Square</li>
+</ol>
+<p>dp(i,j)&#x3D;min(dp(i−1,j),dp(i−1,j−1),dp(i,j−1))+1（dp为为1的边长）</p>
+<p>这里我做了个很复杂的写法，贴在这里算了</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int maximalSquare(vector&lt;vector&lt;char&gt;&gt;&amp; matrix) &#123;</span><br><span class="line">        int m = matrix.size();</span><br><span class="line">        int n = matrix[0].size();</span><br><span class="line">        int dp[305][305];</span><br><span class="line">        dp[0][0] = matrix[0][0] - &#x27;0&#x27;;</span><br><span class="line">        for(int i = 1;i &lt; n;i++)&#123;</span><br><span class="line">            dp[0][i] =matrix[0][i] - &#x27;0&#x27;;</span><br><span class="line">        &#125;</span><br><span class="line">        for(int i = 1;i &lt; m;i++)&#123;</span><br><span class="line">            dp[i][0] = matrix[i][0] - &#x27;0&#x27;;</span><br><span class="line">        &#125;</span><br><span class="line">        for(int i = 1;i &lt; m;i++)&#123;</span><br><span class="line">            for(int j = 1;j &lt; n;j++)&#123;</span><br><span class="line">                if(matrix[i][j] == &#x27;0&#x27;)&#123;</span><br><span class="line">                    dp[i][j] = 0;</span><br><span class="line">                &#125;</span><br><span class="line">                else&#123;</span><br><span class="line">                    int flag = 1;</span><br><span class="line">                    int n = dp[i-1][j-1];</span><br><span class="line">                    int p = 0,q = 0;</span><br><span class="line">                    for(int k = 0;k &lt; n;k++)&#123;</span><br><span class="line">                        if(matrix[i][j-1-k] == &#x27;0&#x27;)&#123;</span><br><span class="line">                            flag = 0;</span><br><span class="line">                            </span><br><span class="line">                            break;</span><br><span class="line">                        &#125;</span><br><span class="line">                        p = k + 1;</span><br><span class="line">                    &#125;</span><br><span class="line">                    //p = min(p+1,n);</span><br><span class="line">                    for(int k = 0;k &lt; n;k++)&#123;</span><br><span class="line">                        if(matrix[i-1-k][j] == &#x27;0&#x27;)&#123;</span><br><span class="line">                            flag = 0;</span><br><span class="line">                            break;</span><br><span class="line">                        &#125;</span><br><span class="line">                        q = k + 1;</span><br><span class="line">                    &#125;</span><br><span class="line">                    //q = min(q+1,n);</span><br><span class="line">                    if(flag) dp[i][j] = dp[i-1][j-1] + flag;</span><br><span class="line">                    else dp[i][j] = min(p,q) + 1;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        for(int i = 0;i &lt; m;i++)&#123;</span><br><span class="line">            for(int j = 0;j &lt; n;j++)&#123;</span><br><span class="line">                printf(&quot;%d &quot;,dp[i][j]);</span><br><span class="line">            &#125;</span><br><span class="line">            printf(&quot;\n&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">        int ma = 0;</span><br><span class="line">        for(int i = 0;i &lt; m;i++)&#123;</span><br><span class="line">            for(int j = 0;j &lt; n;j++)&#123;</span><br><span class="line">                ma = max(ma,dp[i][j]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return ma*ma;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
   </div>
 
    <footer>
@@ -635,7 +866,7 @@ Suwa shrine = 灵山之上神风起 = 一个普通的华中科技大学在读硕
       <i class="ic i-calendar-check"></i>
     </span>
     <span class="text">更新于</span>
-    <time title="修改时间：2024-11-22 17:39:46" itemprop="dateModified" datetime="2024-11-22T17:39:46+08:00">2024-11-22</time>
+    <time title="修改时间：2024-11-25 15:08:58" itemprop="dateModified" datetime="2024-11-25T15:08:58+08:00">2024-11-25</time>
   </span>
 </div>
 
@@ -685,7 +916,7 @@ Suwa shrine = 灵山之上神风起 = 一个普通的华中科技大学在读硕
     <div class="item left">
       
 
-  <a href="/2024/11/19/chinese/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;s3.bmp.ovh&#x2F;imgs&#x2F;2024&#x2F;06&#x2F;17&#x2F;c10853f5c9aee06c.jpg" title="Sukuna出的几道语文高考题">
+  <a href="/2024/11/19/chinese/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;s3.bmp.ovh&#x2F;imgs&#x2F;2024&#x2F;06&#x2F;17&#x2F;7c97ca6398f62495.jpg" title="Sukuna出的几道语文高考题">
   <span class="type">上一篇</span>
   <span class="category"><i class="ic i-flag"></i> 杂记</span>
   <h3>Sukuna出的几道语文高考题</h3>
@@ -709,7 +940,7 @@ Suwa shrine = 灵山之上神风起 = 一个普通的华中科技大学在读硕
   <div class="panels">
     <div class="inner">
       <div class="contents panel pjax" data-title="文章目录">
-          <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Array-String"><span class="toc-number">1.</span> <span class="toc-text">Array &#x2F; String</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Two-Pointers"><span class="toc-number">2.</span> <span class="toc-text">Two Pointers</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Sliding-Window%EF%BC%88%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E3%80%90%E5%8D%95%E8%B0%83%E9%98%9F%E5%88%97%E3%80%91%EF%BC%89"><span class="toc-number">3.</span> <span class="toc-text">Sliding Window（滑动窗口【单调队列】）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9F%A9%E9%98%B5%EF%BC%88%E5%A4%A7%E9%83%A8%E5%88%86%E5%B0%B1%E6%98%AF%E5%81%9A%E6%A8%A1%E6%8B%9F%EF%BC%89"><span class="toc-number">4.</span> <span class="toc-text">矩阵（大部分就是做模拟）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HashMap%EF%BC%88%E5%93%88%E5%B8%8C%E8%A1%A8%EF%BC%89"><span class="toc-number">5.</span> <span class="toc-text">HashMap（哈希表）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Intervals"><span class="toc-number">6.</span> <span class="toc-text">Intervals</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Stack"><span class="toc-number">7.</span> <span class="toc-text">Stack</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LinkList"><span class="toc-number">8.</span> <span class="toc-text">LinkList</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Binariy-Tree"><span class="toc-number">9.</span> <span class="toc-text">Binariy Tree</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Binariy-Tree-BFS"><span class="toc-number">10.</span> <span class="toc-text">Binariy Tree BFS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BST"><span class="toc-number">11.</span> <span class="toc-text">BST</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Graph"><span class="toc-number">12.</span> <span class="toc-text">Graph</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Graph-BFS"><span class="toc-number">13.</span> <span class="toc-text">Graph BFS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Trie%EF%BC%88%E5%AD%97%E5%85%B8%E6%A0%91%EF%BC%89"><span class="toc-number">14.</span> <span class="toc-text">Trie（字典树）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Backtracking%EF%BC%88%E5%9B%9E%E6%BA%AF%EF%BC%8C%E5%85%B6%E5%AE%9E%E4%B9%9F%E6%98%AF%E4%B8%80%E7%A7%8D%E6%90%9C%E7%B4%A2%EF%BC%89"><span class="toc-number">15.</span> <span class="toc-text">Backtracking（回溯，其实也是一种搜索）</span></a></li></ol>
+          <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Array-String"><span class="toc-number">1.</span> <span class="toc-text">Array &#x2F; String</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Two-Pointers"><span class="toc-number">2.</span> <span class="toc-text">Two Pointers</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Sliding-Window%EF%BC%88%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E3%80%90%E5%8D%95%E8%B0%83%E9%98%9F%E5%88%97%E3%80%91%EF%BC%89"><span class="toc-number">3.</span> <span class="toc-text">Sliding Window（滑动窗口【单调队列】）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9F%A9%E9%98%B5%EF%BC%88%E5%A4%A7%E9%83%A8%E5%88%86%E5%B0%B1%E6%98%AF%E5%81%9A%E6%A8%A1%E6%8B%9F%EF%BC%89"><span class="toc-number">4.</span> <span class="toc-text">矩阵（大部分就是做模拟）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HashMap%EF%BC%88%E5%93%88%E5%B8%8C%E8%A1%A8%EF%BC%89"><span class="toc-number">5.</span> <span class="toc-text">HashMap（哈希表）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Intervals"><span class="toc-number">6.</span> <span class="toc-text">Intervals</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Stack"><span class="toc-number">7.</span> <span class="toc-text">Stack</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LinkList"><span class="toc-number">8.</span> <span class="toc-text">LinkList</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Binariy-Tree"><span class="toc-number">9.</span> <span class="toc-text">Binariy Tree</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Binariy-Tree-BFS"><span class="toc-number">10.</span> <span class="toc-text">Binariy Tree BFS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BST"><span class="toc-number">11.</span> <span class="toc-text">BST</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Graph"><span class="toc-number">12.</span> <span class="toc-text">Graph</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Graph-BFS"><span class="toc-number">13.</span> <span class="toc-text">Graph BFS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Trie%EF%BC%88%E5%AD%97%E5%85%B8%E6%A0%91%EF%BC%89"><span class="toc-number">14.</span> <span class="toc-text">Trie（字典树）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Backtracking%EF%BC%88%E5%9B%9E%E6%BA%AF%EF%BC%8C%E5%85%B6%E5%AE%9E%E4%B9%9F%E6%98%AF%E4%B8%80%E7%A7%8D%E6%90%9C%E7%B4%A2%EF%BC%89"><span class="toc-number">15.</span> <span class="toc-text">Backtracking（回溯，其实也是一种搜索）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Divide-Conquer%EF%BC%88%E5%88%86%E6%B2%BB%EF%BC%89"><span class="toc-number">16.</span> <span class="toc-text">Divide &amp; Conquer（分治）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Kadane%E2%80%99s-Algorithm"><span class="toc-number">17.</span> <span class="toc-text">Kadane’s Algorithm</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Binary-Search%EF%BC%88%E4%BA%8C%E5%88%86%E6%90%9C%E7%B4%A2%EF%BC%89"><span class="toc-number">18.</span> <span class="toc-text">Binary Search（二分搜索）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Heap%EF%BC%88%E5%A0%86%EF%BC%89"><span class="toc-number">19.</span> <span class="toc-text">Heap（堆）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Bit-Manipulation%EF%BC%88%E4%BD%8D%E8%BF%90%E7%AE%97%EF%BC%89"><span class="toc-number">20.</span> <span class="toc-text">Bit Manipulation（位运算）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Math"><span class="toc-number">21.</span> <span class="toc-text">Math</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1D-DP%EF%BC%88%E4%B8%80%E7%BB%B4%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%89"><span class="toc-number">22.</span> <span class="toc-text">1D DP（一维动态规划）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">23.</span> <span class="toc-text"></span></a></li></ol>
       </div>
       <div class="related panel pjax" data-title="系列文章">
         <ul>
@@ -853,13 +1084,13 @@ Suwa shrine = 灵山之上神风起 = 一个普通的华中科技大学在读硕
     <span class="post-meta-item-icon">
       <i class="ic i-chart-area"></i>
     </span>
-    <span title="站点总字数">451k 字</span>
+    <span title="站点总字数">463k 字</span>
 
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="ic i-coffee"></i>
     </span>
-    <span title="站点阅读时长">6:50</span>
+    <span title="站点阅读时长">7:01</span>
   </div>
   <div class="powered-by">
     基于 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & Theme.<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FtZWhpbWUvaGV4by10aGVtZS1zaG9rYQ==">Shoka</span>
