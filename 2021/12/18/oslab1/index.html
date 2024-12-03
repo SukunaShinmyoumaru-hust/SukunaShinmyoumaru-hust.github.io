@@ -1,179 +1,404 @@
 
-
-
-
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#FFF">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/1.jpg">
-
-<link rel="icon" type="image/ico" sizes="32x32" href="/images/favicon.ico">
-  <link rel="mask-icon" href="/images/1.jpg" color="">
-  <link rel="manifest" href="/images/manifest.json">
-  <meta name="msapplication-config" content="/images/browserconfig.xml">
-  <meta http-equiv="Cache-Control" content="no-transform">
-  <meta http-equiv="Cache-Control" content="no-siteapp">
-
-
-<link rel="alternate" type="application/rss+xml" title="灵山之上神风起" href="https://sukunashinmyoumaru-hust.github.io/rss.xml" />
-<link rel="alternate" type="application/atom+xml" title="灵山之上神风起" href="https://sukunashinmyoumaru-hust.github.io/atom.xml" />
-<link rel="alternate" type="application/json" title="灵山之上神风起" href="https://sukunashinmyoumaru-hust.github.io/feed.json" />
-
-<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Mulish:300,300italic,400,400italic,700,700italic%7CFredericka%20the%20Great:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20JP:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20SC:300,300italic,400,400italic,700,700italic%7CInconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
-
-<link rel="stylesheet" href="/css/app.css?v=0.2.5">
+  <!DOCTYPE html>
+  <html lang="zh-CN"  >
+  <head>
+  <meta charset="utf-8">
+  
 
   
 
-<link rel="canonical" href="https://sukunashinmyoumaru-hust.github.io/2021/12/18/oslab1/">
+  
 
-
-
+  
+  <script>window.REIMU_CONFIG = {};window.REIMU_CONFIG.icon_font = '4552607_tq6stt6tcg';window.REIMU_CONFIG.clipboard_tips = {"success":"复制成功(*^▽^*)","fail":"复制失败 (ﾟ⊿ﾟ)ﾂ","copyright":{"enable":false,"count":50,"content":"本文版权：本博客所有文章除特别声明外，均采用 BY-NC-SA 许可协议。转载请注明出处！"}};</script>
+  
+  
   <title>
-华中科技大学OS实验解析(Lab1) - 实验记录 |
-Suwa shrine = 灵山之上神风起 = 一个普通的华中科技大学在读硕士研究生</title>
-</head>
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div id="loading">
-    <div class="cat">
-      <div class="body"></div>
-      <div class="head">
-        <div class="face"></div>
-      </div>
-      <div class="foot">
-        <div class="tummy-end"></div>
-        <div class="bottom"></div>
-        <div class="legs left"></div>
-        <div class="legs right"></div>
-      </div>
-      <div class="paw">
-        <div class="hands left"></div>
-        <div class="hands right"></div>
-      </div>
-    </div>
-  </div>
-  <div id="container">
-    <header id="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="inner">
-        <div id="brand">
-          <div class="pjax">
-          
-  <h1 itemprop="name headline">华中科技大学OS实验解析(Lab1)
-  </h1>
+    华中科技大学OS实验解析(Lab1) |
+    
+    Suwa shrine
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin><link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=&display=swap" media="print" onload="this.media&#x3D;&#39;all&#39;">
   
-<div class="meta">
-  <span class="item" title="创建时间：2021-12-18 01:07:30">
-    <span class="icon">
-      <i class="ic i-calendar"></i>
-    </span>
-    <span class="text">发表于</span>
-    <time itemprop="dateCreated datePublished" datetime="2021-12-18T01:07:30+08:00">2021-12-18</time>
-  </span>
-  <span class="item" title="本文字数">
-    <span class="icon">
-      <i class="ic i-pen"></i>
-    </span>
-    <span class="text">本文字数</span>
-    <span>52k</span>
-    <span class="text">字</span>
-  </span>
-  <span class="item" title="阅读时长">
-    <span class="icon">
-      <i class="ic i-clock"></i>
-    </span>
-    <span class="text">阅读时长</span>
-    <span>47 分钟</span>
-  </span>
-</div>
+    <link rel="preload" href="//at.alicdn.com/t/c/font_4552607_tq6stt6tcg.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  
+  
+    
+<link rel="stylesheet" href="/css/loader.css">
 
+  
+  
+    <meta name="description" content="许可证: 版权归华中科技大学操作系统团队所有,下面是许可证书,本文档是对https:&#x2F;&#x2F;gitee.com&#x2F;hustos&#x2F;pke-doc的部分修改和解释. 3.1 实验1的基础知识本章我们将首先获得代码，接下来介绍程序的编译链接和ELF文件的基础知识，接着讲述riscv-pke操作系统内核的启动原理，最后开始实验1的3个实验。 3.1.1 RISC-V程序的编译和链接下面，我们将简要介绍RISC-">
+<meta property="og:type" content="article">
+<meta property="og:title" content="华中科技大学OS实验解析(Lab1)">
+<meta property="og:url" content="https://sukunashinmyoumaru-hust.github.io/2021/12/18/oslab1/index.html">
+<meta property="og:site_name" content="Suwa shrine">
+<meta property="og:description" content="许可证: 版权归华中科技大学操作系统团队所有,下面是许可证书,本文档是对https:&#x2F;&#x2F;gitee.com&#x2F;hustos&#x2F;pke-doc的部分修改和解释. 3.1 实验1的基础知识本章我们将首先获得代码，接下来介绍程序的编译链接和ELF文件的基础知识，接着讲述riscv-pke操作系统内核的启动原理，最后开始实验1的3个实验。 3.1.1 RISC-V程序的编译和链接下面，我们将简要介绍RISC-">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/hustos/pke-doc/raw/master/pictures/htif.png">
+<meta property="article:published_time" content="2021-12-17T17:07:30.000Z">
+<meta property="article:modified_time" content="2024-02-29T07:24:00.970Z">
+<meta property="article:author" content="Sukuna">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/hustos/pke-doc/raw/master/pictures/htif.png">
+  
+  
+    <link rel="alternate" href="/atom.xml" title="Suwa shrine" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/images/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
 
-          </div>
-        </div>
-        <nav id="nav">
-  <div class="inner">
-    <div class="toggle">
-      <div class="lines" aria-label="切换导航栏">
-        <span class="line"></span>
-        <span class="line"></span>
-        <span class="line"></span>
+  <link rel="preload" href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  
+    
+  
+  
+  
+  
+    
+<script src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js" integrity="sha384-k6YtvFUEIuEFBdrLKJ3YAUbBki333tj1CSUisai5Cswsg9wcLNaPzsTHDswp4Az8" crossorigin="anonymous"></script>
+
+  
+  
+    
+<link rel="stylesheet" href="https://npm.webcache.cn/@reimujs/aos@0.1.0/dist/aos.css">
+
+  
+  
+</head>
+
+  <body>
+    
+  <div id='loader'>
+    <div class="loading-left-bg loading-bg"></div>
+    <div class="loading-right-bg loading-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi">
+        
+          <svg width="150" height="150" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="https://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+            <path d="M303.5 432A80 80 0 0 1 291.5 592A80 80 0 0 1 303.5 432z" fill="var(--red-1, #ff5252)" />
+            <path d="M512 65A447 447 0 0 1 512 959L512 929A417 417 0 0 0 512 95A417 417 0 0 0 512 929L512 959A447 447 0 0 1 512 65z 
+           M512 95A417 417 0 0 1 929 512A208.5 208.5 0 0 1 720.5 720.5L720.5 592A80 80 0 0 0 720.5 432A80 80 0 0 0 720.5 592L720.5 720.5A208.5 208.5 0 0 1 512 512A208.5 208.5 0 0 0 303.5 303.5A208.5 208.5 0 0 0 95 512A417 417 0 0 1 512 95z" fill="var(--red-1, #ff5252)" />
+          </svg>
+        
       </div>
+      <div class="loading-word">少女祈祷中...</div>
     </div>
-    <ul class="menu">
-      <li class="item title"><a href="/" rel="start">Suwa shrine</a></li>
-    </ul>
-    <ul class="right">
-      <li class="item theme">
-        <i class="ic i-sun"></i>
-      </li>
-      <li class="item search">
-        <i class="ic i-search"></i>
-      </li>
-    </ul>
   </div>
-</nav>
+  </div>
+  <script>
+    var time = null;
+    var startLoading = () => {
+      time = Date.now();
+      document.getElementById('loader').classList.remove("loading");
+    }
+    var endLoading = () => {
+      if (!time) {
+        document.body.style.overflow = 'auto';
+        document.getElementById('loader').classList.add("loading");
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          document.body.style.overflow = 'auto';
+          document.getElementById('loader').classList.add("loading");
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('DOMContentLoaded', endLoading);
+    document.getElementById('loader').addEventListener('click', endLoading);
+  </script>
 
-      </div>
-      <div id="imgs" class="pjax">
-        <ul>
-          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/bac1b1e69e7ebfb7.jpg"></li>
-          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/f841728a51c3ae78.jpg"></li>
-          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/8d1e248fe0f62130.jpg"></li>
-          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/5d3d43e0f7dc0697.jpg"></li>
-          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/97c3cfc23ec60f4c.jpg"></li>
-          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/7d2279310f1bb2f7.jpg"></li>
-        </ul>
-      </div>
-    </header>
-    <div id="waves">
-      <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
-        <defs>
-          <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
-        </defs>
-        <g class="parallax">
-          <use xlink:href="#gentle-wave" x="48" y="0" />
-          <use xlink:href="#gentle-wave" x="48" y="3" />
-          <use xlink:href="#gentle-wave" x="48" y="5" />
-          <use xlink:href="#gentle-wave" x="48" y="7" />
-        </g>
-      </svg>
-    </div>
-    <main>
-      <div class="inner">
-        <div id="main" class="pjax">
-          
-  <div class="article wrap">
-    
-<div class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
-<i class="ic i-home"></i>
-<span><a href="/">首页</a></span><i class="ic i-angle-right"></i>
-<span  class="current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" itemprop="item" rel="index" title="分类于 实验记录"><span itemprop="name">实验记录</span></a>
-<meta itemprop="position" content="1" /></span>
+<div id="copy-tooltip" style="pointer-events: none; opacity: 0; transition: all 0.2s ease; position: fixed;top: 50%;left: 50%;z-index: 999;transform: translate(-50%, -50%);color: white;background: rgba(0, 0, 0, 0.5);padding: 10px 15px;border-radius: 10px;">
 </div>
 
-    <article itemscope itemtype="http://schema.org/Article" class="post block" lang="zh-CN">
-  <link itemprop="mainEntityOfPage" href="https://sukunashinmyoumaru-hust.github.io/2021/12/18/oslab1/">
 
-  <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="image" content="/images/IMG_1335.PNG">
-    <meta itemprop="name" content="Sukuna">
-    <meta itemprop="description" content="一个普通的华中科技大学在读硕士研究生, ">
-  </span>
+    <div id="container">
+      <div id="wrap">
+        <div id="header-nav">
+  <nav id="main-nav">
+    
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/">首页</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/archives">归档</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/about">关于</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/friend">友链</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" target="_blank" rel="noopener" href="https://github.com/SukunaShinmyoumaru-hust/Hust-opensource-Xuejie">HUST-学解</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/picture">赠画感谢</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/source">资料下载</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/travel">旅行日志</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/gbook">Sukuna冬令营</a>
+        </span>
+      
+    
+    <a id="main-nav-toggle" class="nav-icon"></a>
+  </nav>
+  <nav id="sub-nav">
+    
+      <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅" target="_blank"></a>
+    
+    
+    
+  </nav>
+</div>
+<header id="header">
+  
+    
+      <img fetchpriority="high" src="/images/IMG_0700.JPG" alt="华中科技大学OS实验解析(Lab1)">
+    
+  
+  <div id="header-outer">
+    <div id="header-title">
+      
+        
+        
+          <a href="/" id="logo">
+            <h1 data-aos="slide-up">华中科技大学OS实验解析(Lab1)</h1>
+          </a>
+        
+      
+      
+        
+        <h2 id="subtitle-wrap" data-aos="slide-down">
+          
+        </h2>
+      
+    </div>
+  </div>
+</header>
 
-  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="灵山之上神风起">
-  </span>
+        <div id="content">
+          
+            <aside id="sidebar">
+  <div class="sidebar-wrapper wrap-sticky">
+    <div class="sidebar-wrap" data-aos="fade-up">
+      
+        <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">文章目录</h3>
+  <div class="sidebar-toc-wrapper toc-div-class" >
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-%E5%AE%9E%E9%AA%8C1%E7%9A%84%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><span class="toc-number">1.</span> <span class="toc-text">3.1 实验1的基础知识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-1-RISC-V%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%BC%96%E8%AF%91%E5%92%8C%E9%93%BE%E6%8E%A5"><span class="toc-number">1.1.</span> <span class="toc-text">3.1.1 RISC-V程序的编译和链接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-2-%E6%8C%87%E5%AE%9A%E7%AC%A6%E5%8F%B7%E7%9A%84%E9%80%BB%E8%BE%91%E5%9C%B0%E5%9D%80"><span class="toc-number">1.2.</span> <span class="toc-text">3.1.2 指定符号的逻辑地址</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-3-%E4%BB%A3%E7%90%86%E5%86%85%E6%A0%B8%E7%9A%84%E6%9E%84%E9%80%A0%E8%BF%87%E7%A8%8B"><span class="toc-number">1.3.</span> <span class="toc-text">3.1.3 代理内核的构造过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-4-%E4%BB%A3%E7%90%86%E5%86%85%E6%A0%B8%E7%9A%84%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B"><span class="toc-number">1.4.</span> <span class="toc-text">3.1.4 代理内核的启动过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-5-ELF%E6%96%87%E4%BB%B6%EF%BC%88app%EF%BC%89%E7%9A%84%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B"><span class="toc-number">1.5.</span> <span class="toc-text">3.1.5 ELF文件（app）的加载过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-6-spike%E7%9A%84HTIF%E6%8E%A5%E5%8F%A3"><span class="toc-number">1.6.</span> <span class="toc-text">3.1.6 spike的HTIF接口</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-lab1-1-%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8"><span class="toc-number">2.</span> <span class="toc-text">3.2 lab1_1 系统调用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%99%E5%AE%9A%E5%BA%94%E7%94%A8"><span class="toc-number">2.0.1.</span> <span class="toc-text">给定应用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9"><span class="toc-number">2.0.2.</span> <span class="toc-text">实验内容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E6%8C%87%E5%AF%BC"><span class="toc-number">2.0.3.</span> <span class="toc-text">实验指导</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-lab1-2-%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86"><span class="toc-number">3.</span> <span class="toc-text">3.3 lab1_2 异常处理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%99%E5%AE%9A%E5%BA%94%E7%94%A8-1"><span class="toc-number">3.0.1.</span> <span class="toc-text">给定应用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9-1"><span class="toc-number">3.0.2.</span> <span class="toc-text">实验内容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E6%8C%87%E5%AF%BC-1"><span class="toc-number">3.0.3.</span> <span class="toc-text">实验指导</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-4-lab1-3-%EF%BC%88%E5%A4%96%E9%83%A8%EF%BC%89%E4%B8%AD%E6%96%AD"><span class="toc-number">4.</span> <span class="toc-text">3.4 lab1_3 （外部）中断</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%99%E5%AE%9A%E5%BA%94%E7%94%A8-2"><span class="toc-number">4.0.1.</span> <span class="toc-text">给定应用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9-2"><span class="toc-number">4.0.2.</span> <span class="toc-text">实验内容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E6%8C%87%E5%AF%BC-2"><span class="toc-number">4.0.3.</span> <span class="toc-text">实验指导</span></a></li></ol></li></ol></li></ol>
+      
+  </div>
+</div>
+</div>
+        <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/IMG_1335.PNG" data-sizes="auto" alt="Sukuna" class="lazyload">
+  <div class="sidebar-author-name">Sukuna</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">25</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">3</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">0</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+    <div class="icon-github sidebar-social-icon">
+      <a href=https://github.com/Sukunashinmyoumaru-hust || github || &#34;#191717&#34; itemprop="url" target="_blank" aria-label="github" rel="noopener external nofollow noreferrer"></a>
+    </div>
+  
+    <div class="icon-twitter sidebar-social-icon">
+      <a href=https://twitter.com/sukuna_wireless || twitter || &#34;#00aff0&#34; itemprop="url" target="_blank" aria-label="twitter" rel="noopener external nofollow noreferrer"></a>
+    </div>
+  
+    <div class="icon-email sidebar-social-icon">
+      <a href=sukuna@hust.edu.cn || envelope || &#34;#55acd5&#34; itemprop="url" target="_blank" aria-label="email" rel="noopener external nofollow noreferrer"></a>
+    </div>
+  
+    <div class="icon-bilibili sidebar-social-icon">
+      <a href=https://space.bilibili.com/5595530 itemprop="url" target="_blank" aria-label="bilibili" rel="noopener external nofollow noreferrer"></a>
+    </div>
+  
+</div>
+<div class="sidebar-menu">
+  
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="关于"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/friend" aria-label="友链"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">友链</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" target="_blank" rel="noopener" href="https://github.com/SukunaShinmyoumaru-hust/Hust-opensource-Xuejie" aria-label="HUST-学解"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">HUST-学解</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/picture" aria-label="赠画感谢"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">赠画感谢</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/source" aria-label="资料下载"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">资料下载</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/travel" aria-label="旅行日志"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">旅行日志</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/gbook" aria-label="Sukuna冬令营"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">Sukuna冬令营</div>
+      </div>
+    
+  
+</div>
+</div>
+      
+      
+        <div class="sidebar-btn-wrapper" style="position:static">
+          <div class="sidebar-toc-btn current"></div>
+          <div class="sidebar-common-btn"></div>
+        </div>
+      
+    </div>
+  </div>
 
-  <div class="body md" itemprop="articleBody">
+  
+  
+</aside>
+
+          
+          <section id="main"><article id="post-oslab1" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner" data-aos="fade-up">
+    <div class="article-meta">
+      <div class="article-date">
+  <a href="/2021/12/18/oslab1/" class="article-date-link" data-aos="zoom-in">
+    <time datetime="2021-12-17T17:07:30.000Z" itemprop="datePublished">2021-12-18</time>
+    <time style="display: none;" id="post-update-time">2024-02-29</time>
+  </a>
+</div>
+
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" data-aos="zoom-in">实验记录</a>
+  </div>
+
+
+    </div>
+    <div class="hr-line"></div>
     
 
-    <p>许可证:</p>
-<p>版权归<span class="exturl" data-url="aHR0cHM6Ly9naXRlZS5jb20vaHVzdG9z">华中科技大学操作系统团队</span>所有,下面是许可证书,本文档是对<span class="exturl" data-url="aHR0cHM6Ly9naXRlZS5jb20vaHVzdG9zL3BrZS1kb2MlRTclOUElODQlRTklODMlQTglRTUlODglODYlRTQlQkYlQUUlRTYlOTQlQjklRTUlOTIlOEMlRTglQTclQTMlRTklODclOEE=">https://gitee.com/hustos/pke-doc的部分修改和解释</span>.</p>
-<h2 id="3-1-实验1的基础知识"><a href="#3-1-实验1的基础知识" class="headerlink" title="3.1 实验1的基础知识"></a>3.1 实验1的基础知识</h2><p>本章我们将首先<span class="exturl" data-url="aHR0cHM6Ly9naXRlZS5jb20vaHVzdG9zL3BrZS1kb2Mjc3Vic2VjX3ByZXBhcmVjb2Rl">获得代码</span>，接下来介绍<span class="exturl" data-url="aHR0cHM6Ly9naXRlZS5jb20vaHVzdG9zL3BrZS1kb2Mjc3Vic2VjX2VsZmxvYWQ=">程序的编译链接和ELF文件</span>的基础知识，接着讲述riscv-pke操作系统内核的<span class="exturl" data-url="aHR0cHM6Ly9naXRlZS5jb20vaHVzdG9zL3BrZS1kb2Mjc3Vic2VjX2Jvb3Rpbmc=">启动原理</span>，最后开始实验1的3个实验。</p>
-<h3 id="3-1-1-RISC-V程序的编译和链接"><a href="#3-1-1-RISC-V程序的编译和链接" class="headerlink" title="3.1.1 RISC-V程序的编译和链接"></a><span class="exturl" data-url="aHR0cHM6Ly9naXRlZS5jb20vaHVzdG9zL3BrZS1kb2MjMzExLXJpc2MtdiVFNyVBOCU4QiVFNSVCQSU4RiVFNyU5QSU4NCVFNyVCQyU5NiVFOCVBRiU5MSVFNSU5MiU4QyVFOSU5MyVCRSVFNiU4RSVBNQ=="></span>3.1.1 RISC-V程序的编译和链接</h3><p>下面，我们将简要介绍RISC-V程序的编译和链接相关知识。这里，我们仍然假设你已经按照<span class="exturl" data-url="aHR0cHM6Ly9naXRlZS5jb20vaHVzdG9zL3BrZS1kb2MvYmxvYi9tYXN0ZXIvY2hhcHRlcjJfaW5zdGFsbGF0aW9uLm1k">第二章</span>的要求完成了基于Ubuntu或者openEular的开发环境构建，如果是在头歌平台，可以通过他们提供的交互??进入终端使用（里面的交叉编译器已经安装且已加入系统路径）。在PKE实验的开发环境中，我们通过模拟器（spike）所构建的目标机是risc-v机器，而主机一般采用的是采用x86指令集的Intel处理器（openEular可能采用的是基于ARM指令集的华为鲲鹏处理器），在这种配置下我们的程序，包括PKE操作系统内核以及应用都通过交叉编译器所提供的工具进行编译和链接。虽然risc-v交叉编译器和主机环境下的GCC是同一套体系，但它的使用和输出还是有些细微的不同，所以有必要对它进行一定的了解。</p>
-<p>实际上，采用RV64G指令集的RISC-V体系结构（参见<span class="exturl" data-url="aHR0cHM6Ly9naXRlZS5jb20vaHVzdG9zL3BrZS1kb2MvYmxvYi9tYXN0ZXIvY2hhcHRlcjFfcmlzY3YubWQ=">第一章</span>的内容）跟传统的x86或者ARM体系结构非常类似（从采用精简指令集这个角度，跟ARM更加类似一些），从软件层面上来看也没有什么不同。所以，为RISC-V体系结构编写、编译和链接程序，以及ELF文件的结构这些基础知识，读者可以从<span class="exturl" data-url="aHR0cHM6Ly9naXRlZS5jb20vbGluaz90YXJnZXQ9aHR0cHM6Ly9ib29rLmRvdWJhbi5jb20vc3ViamVjdC8zMDI5NTk0MC8=">《计算机系统基础》课程</span>的第四章（采用x86指令集）里找到，以下的讲解我们将更侧重用我们的PKE实验里可能碰到的问题。</p>
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+      
+        <p>许可证:</p>
+<p>版权归<a target="_blank" rel="noopener" href="https://gitee.com/hustos">华中科技大学操作系统团队</a>所有,下面是许可证书,本文档是对<a target="_blank" rel="noopener" href="https://gitee.com/hustos/pke-doc%E7%9A%84%E9%83%A8%E5%88%86%E4%BF%AE%E6%94%B9%E5%92%8C%E8%A7%A3%E9%87%8A">https://gitee.com/hustos/pke-doc的部分修改和解释</a>.</p>
+<h2 id="3-1-实验1的基础知识"><a href="#3-1-实验1的基础知识" class="headerlink" title="3.1 实验1的基础知识"></a>3.1 实验1的基础知识</h2><p>本章我们将首先<a target="_blank" rel="noopener" href="https://gitee.com/hustos/pke-doc#subsec_preparecode">获得代码</a>，接下来介绍<a target="_blank" rel="noopener" href="https://gitee.com/hustos/pke-doc#subsec_elfload">程序的编译链接和ELF文件</a>的基础知识，接着讲述riscv-pke操作系统内核的<a target="_blank" rel="noopener" href="https://gitee.com/hustos/pke-doc#subsec_booting">启动原理</a>，最后开始实验1的3个实验。</p>
+<h3 id="3-1-1-RISC-V程序的编译和链接"><a href="#3-1-1-RISC-V程序的编译和链接" class="headerlink" title="3.1.1 RISC-V程序的编译和链接"></a><a target="_blank" rel="noopener" href="https://gitee.com/hustos/pke-doc#311-risc-v%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%BC%96%E8%AF%91%E5%92%8C%E9%93%BE%E6%8E%A5"></a>3.1.1 RISC-V程序的编译和链接</h3><p>下面，我们将简要介绍RISC-V程序的编译和链接相关知识。这里，我们仍然假设你已经按照<a target="_blank" rel="noopener" href="https://gitee.com/hustos/pke-doc/blob/master/chapter2_installation.md">第二章</a>的要求完成了基于Ubuntu或者openEular的开发环境构建，如果是在头歌平台，可以通过他们提供的交互??进入终端使用（里面的交叉编译器已经安装且已加入系统路径）。在PKE实验的开发环境中，我们通过模拟器（spike）所构建的目标机是risc-v机器，而主机一般采用的是采用x86指令集的Intel处理器（openEular可能采用的是基于ARM指令集的华为鲲鹏处理器），在这种配置下我们的程序，包括PKE操作系统内核以及应用都通过交叉编译器所提供的工具进行编译和链接。虽然risc-v交叉编译器和主机环境下的GCC是同一套体系，但它的使用和输出还是有些细微的不同，所以有必要对它进行一定的了解。</p>
+<p>实际上，采用RV64G指令集的RISC-V体系结构（参见<a target="_blank" rel="noopener" href="https://gitee.com/hustos/pke-doc/blob/master/chapter1_riscv.md">第一章</a>的内容）跟传统的x86或者ARM体系结构非常类似（从采用精简指令集这个角度，跟ARM更加类似一些），从软件层面上来看也没有什么不同。所以，为RISC-V体系结构编写、编译和链接程序，以及ELF文件的结构这些基础知识，读者可以从<a href="https://gitee.com/link?target=https://book.douban.com/subject/30295940/">《计算机系统基础》课程</a>的第四章（采用x86指令集）里找到，以下的讲解我们将更侧重用我们的PKE实验里可能碰到的问题。</p>
 <p>我们知道，采用C语言编写一个应用的过程大概可以归纳为：首先，<strong>编辑（edit）</strong>.c的源文件；接下来，编译（compile）<strong>为对象文件.o；最后，将对象文件</strong>链接（link）为可执行程序文件。当然，在从源代码编译为对象文件的过程中，可能会出现语法错误；再链接过程中，也可能出现符号找不到或函数未定义的错误，这些错误都需要我们回到源代码或者修改链接命令行来进行修正，并最终得到符合预期的应用程序。(.c-&gt;(编译).o-&gt;(与静态库静态链接)可执行)</p>
 <ul>
 <li>编辑</li>
@@ -228,7 +453,7 @@ Suwa shrine = 灵山之上神风起 = 一个普通的华中科技大学在读硕
 <p>编者注:这里编译器的静态链接库里面只有put函数,编译器在编译的时候将printf变异成put也是为了与编译器的静态链接库进行配合(静态链接就是在编译的时候将一些符号进行替换.)</p>
 <p>通过以上讲解，可以看到RISC-V程序的编译链接其实跟我们在x86平台上编写、编译和链接一个C语言程序的过程一摸一样，唯一的不同是将以上的命令加上了<code>riscv64-unknown-elf-</code>前缀而已，基本的过程是完全一样的。除此之外，我们生成的可执行代码（如以上的helloworld）采用是RISC-V指令集（更准确的说，是RV64G指令集），是不能在我们的x86开发电脑上直接执行的！也就是说，我们不能通过<code>./helloworld</code>命令直接执行之前编写的C语言程序。</p>
 <p>为了执行helloworld文件，首先我们需要：<strong>1）一个支持RISC-V指令集的机器；2）一个能够在该RISC-V机器上运行的操作系统。</strong>在PKE实验中，我们采用spike模拟RISC-V机器以满足第一个要求；通过实验设计操作系统内核，以满足第二个要求。实际上，PKE的实验设计正是从应用出发，考虑为给定应用设计“刚刚好”的内核，使得给定应用能够在spike模拟的RISC-V机器上正确地执行。</p>
-<h3 id="3-1-2-指定符号的逻辑地址"><a href="#3-1-2-指定符号的逻辑地址" class="headerlink" title="3.1.2 指定符号的逻辑地址"></a><span class="exturl" data-url="aHR0cHM6Ly9naXRlZS5jb20vaHVzdG9zL3BrZS1kb2MjMzEyLSVFNiU4QyU4NyVFNSVBRSU5QSVFNyVBQyVBNiVFNSU4RiVCNyVFNyU5QSU4NCVFOSU4MCVCQiVFOCVCRSU5MSVFNSU5QyVCMCVFNSU5RCU4MA=="></span>3.1.2 指定符号的逻辑地址</h3><p>编译器在链接过程中，一个重要的任务就是为源程序中的符号（symbol）赋予逻辑地址。例如，在以上<code>sections</code>的例子中，我们通过<code>objdump</code>命令，得知helloworld.c源文件的main函数所对应的逻辑地址为0x000000000001014e，而且对于<strong>任意ELF中的段（segment）或节（section）而言，它的逻辑地址必然是从某个地址开始的一段连续地址空间。</strong></p>
+<h3 id="3-1-2-指定符号的逻辑地址"><a href="#3-1-2-指定符号的逻辑地址" class="headerlink" title="3.1.2 指定符号的逻辑地址"></a><a target="_blank" rel="noopener" href="https://gitee.com/hustos/pke-doc#312-%E6%8C%87%E5%AE%9A%E7%AC%A6%E5%8F%B7%E7%9A%84%E9%80%BB%E8%BE%91%E5%9C%B0%E5%9D%80"></a>3.1.2 指定符号的逻辑地址</h3><p>编译器在链接过程中，一个重要的任务就是为源程序中的符号（symbol）赋予逻辑地址。例如，在以上<code>sections</code>的例子中，我们通过<code>objdump</code>命令，得知helloworld.c源文件的main函数所对应的逻辑地址为0x000000000001014e，而且对于<strong>任意ELF中的段（segment）或节（section）而言，它的逻辑地址必然是从某个地址开始的一段连续地址空间。</strong></p>
 <p>那么，是否有办法指定某符号对应的逻辑地址呢？答案是可以，但只能指定符号所在的段的起始逻辑地址，方法是通过<strong>lds链接脚本</strong>。我们还是用以上的helloworld.c作为例子，另外创建和编辑一个lds链接脚本，即helloworld_lds.lds文件：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"> 1 OUTPUT_ARCH( &quot;riscv&quot; )</span><br><span class="line"> 2</span><br><span class="line"> 3 ENTRY(main)</span><br><span class="line"> 4</span><br><span class="line"> 5 SECTIONS</span><br><span class="line"> 6 &#123;</span><br><span class="line"> 7   . = 0x81000000;</span><br><span class="line"> 8   . = ALIGN(0x1000);</span><br><span class="line"> 9   .text : &#123; **\***(.text) &#125;</span><br><span class="line">10   . = ALIGN(16);</span><br><span class="line">11   .data : &#123; **\***(.data) &#125;</span><br><span class="line">12   . = ALIGN(16);</span><br><span class="line">13   .bss : &#123; **\***(.bss) &#125;</span><br><span class="line">14 &#125;</span><br></pre></td></tr></table></figure>
 <p>在该脚本中，我们规定了程序的目标指令集为RISC-V（第1行）；入口地址为main（第3行）。接下来，我们对程序的几个段地址进行了“规划”，其中代码段的首地址为0x81000000（如果目标平台是64位，编译器会对该逻辑地址的高地址位填0），**.data段和.bss段跟在.text段之后**；ALIGN(0x1000)表示按4KB对齐，ALIGN(16)表示按照16字节对齐。</p>
@@ -242,7 +467,7 @@ Suwa shrine = 灵山之上神风起 = 一个普通的华中科技大学在读硕
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">$ riscv64-unknown-elf-objdump -D ./helloworld_with_lds  less</span><br><span class="line"></span><br><span class="line">./helloworld_with_lds:     file format elf64-littleriscv</span><br><span class="line"></span><br><span class="line">Disassembly of section .text:</span><br><span class="line"></span><br><span class="line">0000000081000000 &lt;main&gt;:</span><br><span class="line">    81000000:   1101                    addi    sp,sp,-32</span><br><span class="line">    81000002:   ec22                    sd      s0,24(sp)</span><br><span class="line">    81000004:   1000                    addi    s0,sp,32</span><br><span class="line">    81000006:   fe042623                sw      zero,-20(s0)</span><br><span class="line">    8100000a:   4785                    li      a5,1</span><br><span class="line">    8100000c:   fef42623                sw      a5,-20(s0)</span><br><span class="line">    81000010:   4781                    li      a5,0</span><br><span class="line">    81000012:   853e                    mv      a0,a5</span><br><span class="line">    81000014:   6462                    ld      s0,24(sp)</span><br><span class="line">    81000016:   6105                    addi    sp,sp,32</span><br><span class="line">    81000018:   8082                    ret</span><br><span class="line">        ...</span><br></pre></td></tr></table></figure>
 <p>可以看到，main函数成为了helloworld_with_lds文件的真正入口（而不是3.1.2中的helloworld文件中main函数并不是该可执行程序的真正入口的情形）。</p>
 <p>通过lds文件的办法控制程序中符号地址到逻辑地址的转换，对于PKE的第一组实验（lab1）而言，是一个很重要的知识点。<strong>因为在第一组实验中，我们将采用直接映射（Bare-mode mapping）的办法完成应用程序中虚地址到实际物理地址的转换</strong>（我们在第二组实验中才会打开RISC-V的SV39页式地址映射），所以需要提前对PKE的内核以及应用的逻辑地址进行“规划”。</p>
-<h3 id="3-1-3-代理内核的构造过程"><a href="#3-1-3-代理内核的构造过程" class="headerlink" title="3.1.3 代理内核的构造过程"></a><span class="exturl" data-url="aHR0cHM6Ly9naXRlZS5jb20vaHVzdG9zL3BrZS1kb2MjMzEzLSVFNCVCQiVBMyVFNyU5MCU4NiVFNSU4NiU4NSVFNiVBMCVCOCVFNyU5QSU4NCVFNiU5RSU4NCVFOSU4MCVBMCVFOCVCRiU4NyVFNyVBOCU4Qg=="></span>3.1.3 代理内核的构造过程</h3><p>这里我们讨论lab1_1中代理内核，以及其上运行的应用的构造（build）过程。PKE实验采用了Linux中广泛采用的make软件包完成内核、支撑库，以及应用的构造。关于Makefile的编写，我们建议读者阅读<span class="exturl" data-url="aHR0cHM6Ly9naXRlZS5jb20vbGluaz90YXJnZXQ9aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ZvcnlvdXJmYWNlL2FydGljbGUvZGV0YWlscy8zNDA1ODU3Nw==">这里</span>了解make文件的基础知识，这里仅讨论lab1_1的Makefile以及对应的构造过程。PKE的后续实验实际上采用的Makefile跟lab1_1的非常类似，所以我们在后续章节中不再对它们的构建过程进行讨论。</p>
+<h3 id="3-1-3-代理内核的构造过程"><a href="#3-1-3-代理内核的构造过程" class="headerlink" title="3.1.3 代理内核的构造过程"></a><a target="_blank" rel="noopener" href="https://gitee.com/hustos/pke-doc#313-%E4%BB%A3%E7%90%86%E5%86%85%E6%A0%B8%E7%9A%84%E6%9E%84%E9%80%A0%E8%BF%87%E7%A8%8B"></a>3.1.3 代理内核的构造过程</h3><p>这里我们讨论lab1_1中代理内核，以及其上运行的应用的构造（build）过程。PKE实验采用了Linux中广泛采用的make软件包完成内核、支撑库，以及应用的构造。关于Makefile的编写，我们建议读者阅读<a href="https://gitee.com/link?target=https://blog.csdn.net/foryourface/article/details/34058577">这里</a>了解make文件的基础知识，这里仅讨论lab1_1的Makefile以及对应的构造过程。PKE的后续实验实际上采用的Makefile跟lab1_1的非常类似，所以我们在后续章节中不再对它们的构建过程进行讨论。</p>
 <p>编者注:在 Linux环境下使用 GNU 的 make工具能够比较容易的构建一个属于你自己的工程，整个工程的编译只需要一个命令就可以完成编译、连接以至于最后的执行。一个工程中的源文件不计数，其按<strong>类型、功能、模块</strong>分别放在若干个目录中，makefile定义了一系列的规则来指定，哪些文件需要先编译，哪些文件需要后编译，哪些文件需要重新编译，甚至于进行更复杂的功能操作，因为makefile就像一个Shell脚本一样，其中也可以执行操作系统的命令。makefile带来的好处就是——“<strong>自动化编译</strong>”，一旦写好，只需要一个make命令，整个工程完全自动编译，极大的提高了软件开发的效率。</p>
 <p>我们首先观察lab1_1中位于根目录的Makefile文件（摘取其中我们认为重要的内容）：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br></pre></td><td class="code"><pre><span class="line">  8 CROSS_PREFIX    :**\= riscv64-unknown-elf-**</span><br><span class="line">  9 CC              :**\= $(CROSS_PREFIX)gcc**</span><br><span class="line"> 10 AR              :**\= $(CROSS_PREFIX)ar**</span><br><span class="line"> 11 RANLIB          :**\= $(CROSS_PREFIX)ranlib**</span><br><span class="line"> 12</span><br><span class="line"> 13 SRC_DIR         :**\= .**</span><br><span class="line"> 14 OBJ_DIR         :**\= obj**</span><br><span class="line"> 15 SPROJS_INCLUDE  :**\= -I.**</span><br><span class="line"> 16</span><br><span class="line"> ...</span><br><span class="line"> 26 #---------------------  utils -----------------------</span><br><span class="line"> 27 UTIL_CPPS   :**\= util/\*.c**</span><br><span class="line"> 28</span><br><span class="line"> 29 UTIL_CPPS  :**\= $(wildcard $(UTIL_CPPS))**</span><br><span class="line"> 30 UTIL_OBJS  :**\=  $(addprefix $(OBJ_DIR)/**, **$(patsubst %.c**,**%.o**,**$(UTIL_CPPS)))**</span><br><span class="line"> 31</span><br><span class="line"> 32</span><br><span class="line"> 33 UTIL_LIB   :**\= $(OBJ_DIR)/util.a**</span><br><span class="line"> 34</span><br><span class="line"> 35 #---------------------  kernel -----------------------</span><br><span class="line"> 36 KERNEL_LDS      :**\= kernel/kernel.lds**</span><br><span class="line"> 37 KERNEL_CPPS     :**\=** \\</span><br><span class="line"> **38     kernel/\*.c** \\</span><br><span class="line"> **39     kernel/machine/\*.c** \\</span><br><span class="line"> **40     kernel/util/\*.c**</span><br><span class="line"> 41</span><br><span class="line"> 42 KERNEL_ASMS     :**\=** \\</span><br><span class="line"> **43     kernel/\*.S** \\</span><br><span class="line"> **44     kernel/machine/\*.S** \\</span><br><span class="line"> **45     kernel/util/\*.S**</span><br><span class="line"> 46</span><br><span class="line"> 47 KERNEL_CPPS     :**\= $(wildcard $(KERNEL_CPPS))**</span><br><span class="line"> 48 KERNEL_ASMS     :**\= $(wildcard $(KERNEL_ASMS))**</span><br><span class="line"> 49 KERNEL_OBJS     :**\=  $(addprefix $(OBJ_DIR)/**, **$(patsubst %.c**,**%.o**,**$(KERNEL_CPPS)))**</span><br><span class="line"> 50 KERNEL_OBJS     +=  **$(**addprefix $(OBJ_DIR)/, **$(**patsubst %.S,%.o,$(KERNEL_ASMS)**))**</span><br><span class="line"> 51</span><br><span class="line"> 52 KERNEL_TARGET = $(OBJ_DIR)/riscv-pke</span><br><span class="line"> 53</span><br><span class="line"> 54</span><br><span class="line"> 55 #---------------------  spike interface library -----------------------</span><br><span class="line"> 56 SPIKE_INF_CPPS  :**\= spike_interface/\*.c**</span><br><span class="line"> 57</span><br><span class="line"> 58 SPIKE_INF_CPPS  :**\= $(wildcard $(SPIKE_INF_CPPS))**</span><br><span class="line"> 59 SPIKE_INF_OBJS  :**\=  $(addprefix $(OBJ_DIR)/**, **$(patsubst %.c**,**%.o**,**$(SPIKE_INF_CPPS)))**</span><br><span class="line"> 60</span><br><span class="line"> 61</span><br><span class="line"> 62 SPIKE_INF_LIB   :**\= $(OBJ_DIR)/spike_interface.a**</span><br><span class="line"> 63</span><br><span class="line"> 64</span><br><span class="line"> 65 #---------------------  user   -----------------------</span><br><span class="line"> 66 USER_LDS  :**\= user/user.lds**</span><br><span class="line"> 67 USER_CPPS       :**\= user/\*.c**</span><br><span class="line"> 68</span><br><span class="line"> 70 USER_OBJS       :**\= $(addprefix $(OBJ_DIR)/**, **$(patsubst %.c**,**%.o**,**$(USER_CPPS)))**</span><br><span class="line"> 71</span><br><span class="line"> 72 USER_TARGET     :**\= $(OBJ_DIR)/app_helloworld**</span><br><span class="line"> 73</span><br><span class="line"> 74 #------------------------targets------------------------</span><br><span class="line"> 75 $(OBJ_DIR):</span><br><span class="line"> 76     @-mkdir -p $(OBJ_DIR)</span><br><span class="line"> 77     @-mkdir -p $(dir $(UTIL_OBJS))</span><br><span class="line"> 78     @-mkdir -p $(dir $(SPIKE_INF_OBJS))</span><br><span class="line"> 79     @-mkdir -p $(dir $(KERNEL_OBJS))</span><br><span class="line"> 80     @-mkdir -p $(dir $(USER_OBJS))</span><br><span class="line"> 81</span><br><span class="line"> 82 $(OBJ_DIR)/%.o : **%.c**</span><br><span class="line"> 83     @echo &quot;compiling&quot; $&lt;</span><br><span class="line"> 84     @$(COMPILE) -c $&lt; -o $@</span><br><span class="line"> 85</span><br><span class="line"> 86 $(OBJ_DIR)/%.o : **%.S**</span><br><span class="line"> 87     @echo &quot;compiling&quot; $&lt;</span><br><span class="line"> 88     @$(COMPILE) -c $&lt; -o $@</span><br><span class="line"> 89</span><br><span class="line"> 90 $(UTIL_LIB): **$(OBJ_DIR) $(UTIL_OBJS)**</span><br><span class="line"> 91     @echo &quot;linking &quot; $@ ...</span><br><span class="line"> 92     @$(AR) -rcs $@ $(UTIL_OBJS)</span><br><span class="line"> 93     @echo &quot;Util lib has been build into&quot; \\&quot;$@\\&quot;</span><br><span class="line"> 94</span><br><span class="line"> 95 $(SPIKE_INF_LIB): $(OBJ_DIR) $(UTIL_OBJS) $(SPIKE_INF_OBJS)</span><br><span class="line"> 96     @echo &quot;linking &quot; $@ ...</span><br><span class="line"> 97     @$(AR) -rcs $@ $(SPIKE_INF_OBJS) $(UTIL_OBJS)</span><br><span class="line"> 98     @echo &quot;Spike lib has been build into&quot; \\&quot;$@\\&quot;</span><br><span class="line"> 99</span><br><span class="line">100 $(KERNEL_TARGET): $(OBJ_DIR) $(UTIL_LIB) $(SPIKE_INF_LIB) $(KERNEL_OBJS) $(KERNEL_LDS)</span><br><span class="line">101     @echo &quot;linking&quot; $@ ...</span><br><span class="line">102     @$(COMPILE) $(KERNEL_OBJS) $(UTIL_LIB) $(SPIKE_INF_LIB) -o $@ -T $(KERNEL_LDS)</span><br><span class="line">103     @echo &quot;PKE core has been built into&quot; \\&quot;$@\\&quot;</span><br><span class="line">104</span><br><span class="line">105 $(USER_TARGET): $(OBJ_DIR) $(UTIL_LIB) $(USER_OBJS) $(USER_LDS)</span><br><span class="line">106     @echo &quot;linking&quot; $@  ...</span><br><span class="line">107     @$(COMPILE) $(USER_OBJS) $(UTIL_LIB) -o $@ -T $(USER_LDS)</span><br><span class="line">108     @echo &quot;User app has been built into&quot; \\&quot;$@\\&quot;</span><br><span class="line">109</span><br><span class="line">...</span><br><span class="line">113 .DEFAULT_GOAL :**\= $(all)**</span><br><span class="line">114</span><br><span class="line">115 all: **$(KERNEL_TARGET) $(USER_TARGET)**</span><br><span class="line">116 .PHONY:**all**</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
@@ -268,9 +493,9 @@ Suwa shrine = 灵山之上神风起 = 一个普通的华中科技大学在读硕
 <li>4）最后构造代理内核<code>$(OBJ_DIR)/riscv-pke</code>。</li>
 </ul>
 <p>编者注:这一段很长,其实就是一个套娃的过程,就是指定变量,这个变量可以理解成一个函数,或者是一种操作,在执行这种操作之前我们都会之前这个操作“依赖”的操作(有点像函数里面调用函数).这样我们就可以构造一个代理内核来运行我们的程序了</p>
-<h3 id="3-1-4-代理内核的启动过程"><a href="#3-1-4-代理内核的启动过程" class="headerlink" title="3.1.4 代理内核的启动过程"></a><span class="exturl" data-url="aHR0cHM6Ly9naXRlZS5jb20vaHVzdG9zL3BrZS1kb2MjMzE0LSVFNCVCQiVBMyVFNyU5MCU4NiVFNSU4NiU4NSVFNiVBMCVCOCVFNyU5QSU4NCVFNSU5MCVBRiVFNSU4QSVBOCVFOCVCRiU4NyVFNyVBOCU4Qg=="></span>3.1.4 代理内核的启动过程</h3><p>在3.1.1中，我们获取riscv-pke的代码并完成构造步骤后，我们将通过以下命令开始lab1_1所给定的应用的执行：</p>
+<h3 id="3-1-4-代理内核的启动过程"><a href="#3-1-4-代理内核的启动过程" class="headerlink" title="3.1.4 代理内核的启动过程"></a><a target="_blank" rel="noopener" href="https://gitee.com/hustos/pke-doc#314-%E4%BB%A3%E7%90%86%E5%86%85%E6%A0%B8%E7%9A%84%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B"></a>3.1.4 代理内核的启动过程</h3><p>在3.1.1中，我们获取riscv-pke的代码并完成构造步骤后，我们将通过以下命令开始lab1_1所给定的应用的执行：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ spike ./obj/riscv-pke ./obj/app_helloworld</span><br><span class="line">In m_start, hartid:0</span><br><span class="line">HTIF is available!</span><br><span class="line">(Emulated) memory size: 2048 MB</span><br><span class="line">Enter supervisor mode...</span><br><span class="line">Application: ./obj/app_helloworld</span><br><span class="line">Application program entry point (virtual address): 0x0000000081000000</span><br><span class="line">Switching to user mode...</span><br><span class="line">call do_syscall to accomplish the syscall and lab1_1 here.</span><br><span class="line"></span><br><span class="line">System is shutting down with exit code -1.</span><br></pre></td></tr></table></figure>
-<p>可以看到，该命令有3个部分组成：spike、.&#x2F;obj&#x2F;riscv-pke以及.&#x2F;obj&#x2F;app_helloworld。其中spike是我们在<span class="exturl" data-url="aHR0cHM6Ly9naXRlZS5jb20vaHVzdG9zL3BrZS1kb2MvYmxvYi9tYXN0ZXIvY2hhcHRlcjJfaW5zdGFsbGF0aW9uLm1k">第二章</span>安装的RISC-V模拟器，执行它的效果是模拟出一个支持RV64G指令集的RISC-V机器；.&#x2F;obj&#x2F;riscv-pke是我们的PKE代理内核；而.&#x2F;obj&#x2F;app_helloworld是我们在lab1_1中给定的应用。</p>
+<p>可以看到，该命令有3个部分组成：spike、.&#x2F;obj&#x2F;riscv-pke以及.&#x2F;obj&#x2F;app_helloworld。其中spike是我们在<a target="_blank" rel="noopener" href="https://gitee.com/hustos/pke-doc/blob/master/chapter2_installation.md">第二章</a>安装的RISC-V模拟器，执行它的效果是模拟出一个支持RV64G指令集的RISC-V机器；.&#x2F;obj&#x2F;riscv-pke是我们的PKE代理内核；而.&#x2F;obj&#x2F;app_helloworld是我们在lab1_1中给定的应用。</p>
 <p>那么代理内核是如何在spike模拟的RISC-V机器上启动的呢？实际上，这个启动过程比我们实际的物理机的启动过程简单得多，_<strong>代理内核实际上是spike模拟器将其当作是一个标准ELF文件载入的</strong>_。那么既然是“可执行”的ELF文件，我们就可以用交叉编译器里提供的工具观察它的结构：(编者注:也就是说代理内核也是一个可执行文件.我们的程序就在代理内核上面跑[PKE是一个操作系统内核…])</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">$ riscv64-unknown-elf-readelf -h ./obj/riscv-pke</span><br><span class="line">ELF Header:</span><br><span class="line">  Magic:   7f 45 4c 46 02 01 01 00 00 00 00 00 00 00 00 00</span><br><span class="line">  Class:                             ELF64</span><br><span class="line">  Data:                              2&#x27;s complement, little endian</span><br><span class="line">  Version:                           1 (current)</span><br><span class="line">  OS/ABI:                            UNIX - System V</span><br><span class="line">  ABI Version:                       0</span><br><span class="line">  Type:                              EXEC (Executable file)</span><br><span class="line">  Machine:                           RISC-V</span><br><span class="line">  Version:                           0x1</span><br><span class="line">  Entry point address:               0x80000548</span><br><span class="line">  Start of program headers:          64 (bytes into file)</span><br><span class="line">  Start of section headers:          130760 (bytes into file)</span><br><span class="line">  Flags:                             0x5, RVC, double-float ABI</span><br><span class="line">  Size of this header:               64 (bytes)</span><br><span class="line">  Size of program headers:           56 (bytes)</span><br><span class="line">  Number of program headers:         2</span><br><span class="line">  Size of section headers:           64 (bytes)</span><br><span class="line">  Number of section headers:         18</span><br><span class="line">  Section header string table index: 17</span><br><span class="line"></span><br><span class="line">$ riscv64-unknown-elf-readelf -l ./obj/riscv-pke</span><br><span class="line"></span><br><span class="line">Elf file type is EXEC (Executable file)</span><br><span class="line">Entry point 0x80000548</span><br><span class="line">There are 2 program headers, starting at offset 64</span><br><span class="line"></span><br><span class="line">Program Headers:</span><br><span class="line">  Type           Offset             VirtAddr           PhysAddr</span><br><span class="line">                 FileSiz            MemSiz              Flags  Align</span><br><span class="line">  LOAD           0x0000000000001000 0x0000000080000000 0x0000000080000000</span><br><span class="line">                 0x0000000000003564 0x0000000000003564  R E    0x1000</span><br><span class="line">  LOAD           0x0000000000005000 0x0000000080004000 0x0000000080004000</span><br><span class="line">                 0x0000000000001411 0x00000000000098b8  RW     0x1000</span><br><span class="line"></span><br><span class="line"> Section to Segment mapping:</span><br><span class="line">  Segment Sections...</span><br><span class="line">   00     .text .rodata</span><br><span class="line">   01     .htif .data .bss</span><br></pre></td></tr></table></figure>
 <p>通过以上命令和输出，我们可以得知.&#x2F;obj&#x2F;riscv-pke这个ELF文件的入口地址是0x80000548，且它有两个程序段（segment），分别是00号代码段和01号数据段。其中00号代码段的段首地址是0x80000000，长度是0x3564；01号数据段的段首地址是0x80004000，长度是0x98b8。</p>
@@ -300,7 +525,7 @@ Suwa shrine = 灵山之上神风起 = 一个普通的华中科技大学在读硕
 <p>编者注:current代表当前正在执行的进程,这里switch_to函数做了两件事,一个是切换进程,一个是转换成了用户态.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">45 .globl return_to_user</span><br><span class="line">46 return_to_user:</span><br><span class="line">47     # save a0 in sscratch, so sscratch points to a trapframe now.</span><br><span class="line">48     csrw sscratch, a0</span><br><span class="line">49</span><br><span class="line">50     # let [t6]=[a0]</span><br><span class="line">51     addi t6, a0, 0</span><br><span class="line">52</span><br><span class="line">53     # restore all registers from trapframe, so as to resort the execution of a process</span><br><span class="line">54     restore_all_registers</span><br><span class="line">55</span><br><span class="line">56     # return to user mode and user pc.</span><br><span class="line">57     sret</span><br></pre></td></tr></table></figure>
 <p>其作用是恢复进程的上下文（54行）到RISC-V机器的所有寄存器，并调用sret指令，从S模式“返回”应用模式（即U模式）。这样，所载入的应用程序（即obj&#x2F;app_helloworld所对应的“进程”）就投入运行了。</p>
-<h3 id="3-1-5-ELF文件（app）的加载过程"><a href="#3-1-5-ELF文件（app）的加载过程" class="headerlink" title="3.1.5 ELF文件（app）的加载过程"></a><span class="exturl" data-url="aHR0cHM6Ly9naXRlZS5jb20vaHVzdG9zL3BrZS1kb2MjMzE1LWVsZiVFNiU5NiU4NyVFNCVCQiVCNmFwcCVFNyU5QSU4NCVFNSU4QSVBMCVFOCVCRCVCRCVFOCVCRiU4NyVFNyVBOCU4Qg=="></span>3.1.5 ELF文件（app）的加载过程</h3><p>这里我们对load_user_program()函数进行讨论，它在kernel&#x2F;kernel.c中定义：</p>
+<h3 id="3-1-5-ELF文件（app）的加载过程"><a href="#3-1-5-ELF文件（app）的加载过程" class="headerlink" title="3.1.5 ELF文件（app）的加载过程"></a><a target="_blank" rel="noopener" href="https://gitee.com/hustos/pke-doc#315-elf%E6%96%87%E4%BB%B6app%E7%9A%84%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B"></a>3.1.5 ELF文件（app）的加载过程</h3><p>这里我们对load_user_program()函数进行讨论，它在kernel&#x2F;kernel.c中定义：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">18 **void** **load_user_program**(process \*proc) &#123;</span><br><span class="line">19   proc-&gt;trapframe = (trapframe \*)USER_TRAP_FRAME;</span><br><span class="line">20   memset(proc-&gt;trapframe, 0, **sizeof**(trapframe));</span><br><span class="line">21   proc-&gt;kstack = USER_KSTACK;</span><br><span class="line">22   proc-&gt;trapframe-&gt;regs.sp = USER_STACK;</span><br><span class="line">23</span><br><span class="line">24   load_bincode_from_host_elf(proc);</span><br><span class="line">25 &#125;</span><br></pre></td></tr></table></figure>
 <p>我们看到，它的作用是首先对进程壳做了一定的初始化，最后调用load_bincode_from_host_elf()函数将应用程序对应的二进制代码实际地载入。load_bincode_from_host_elf()函数在kernel&#x2F;elf.c文件中实际定义：</p>
 <p>编者注:这个函数的主要作用就是更改对应进程的prod数据结构中的trapframe.</p>
@@ -322,23 +547,23 @@ Suwa shrine = 灵山之上神风起 = 一个普通的华中科技大学在读硕
 </ul>
 <p> 19 <strong>static</strong> <strong>void</strong> *<strong>elf_alloc_mb</strong>(elf_ctx *ctx, uint64 elf_pa, uint64 elf_va, uint64 size) {<br> 20   &#x2F;&#x2F; directly returns the virtual address as we are in the Bare mode in lab1<br> 21   <strong>return</strong> (<strong>void</strong> *)elf_va;<br> 22 }</p>
 <p>但是，到了实验二（lab2系列），我们将开启RISC-V的分页模式（sv39），届时elf_alloc_mb函数将发生变化。</p>
-<h3 id="3-1-6-spike的HTIF接口"><a href="#3-1-6-spike的HTIF接口" class="headerlink" title="3.1.6 spike的HTIF接口"></a><span class="exturl" data-url="aHR0cHM6Ly9naXRlZS5jb20vaHVzdG9zL3BrZS1kb2MjMzE2LXNwaWtlJUU3JTlBJTg0aHRpZiVFNiU4RSVBNSVFNSU4RiVBMw=="></span>3.1.6 spike的HTIF接口</h3><p>spike提供的HTIF（Host-Target InterFace）接口的原理可以用下图说明：</p>
-<p><img data-src="https://gitee.com/hustos/pke-doc/raw/master/pictures/htif.png" alt="fig2_install_1"></p>
+<h3 id="3-1-6-spike的HTIF接口"><a href="#3-1-6-spike的HTIF接口" class="headerlink" title="3.1.6 spike的HTIF接口"></a><a target="_blank" rel="noopener" href="https://gitee.com/hustos/pke-doc#316-spike%E7%9A%84htif%E6%8E%A5%E5%8F%A3"></a>3.1.6 spike的HTIF接口</h3><p>spike提供的HTIF（Host-Target InterFace）接口的原理可以用下图说明：</p>
+<p><img src="https://gitee.com/hustos/pke-doc/raw/master/pictures/htif.png" alt="fig2_install_1"></p>
 <p>图2.1 HTIF的原理</p>
 <p>我们知道spike是运行在主机（host）上的，在创建目标（target）机器的时候，spike模拟器将自身的一段内存（图中的HTIF内存段）提供给目标机。PKE操作系统内核在构造时引入了这段内存（参考kernel&#x2F;kernel.lds文件），在启动时通过目标机器传给PKE操作系统内核的设备参数（DTS，Device Tree String）中发现这段内存；接下来通过spike_interface目录中的代码对这段内存进行初始化和封装动作，将其包装成一组可以由操作系统调用的函数调用，典型的如sprint、spike_file_open、spike_file_close这些；最后PKE操作系统内核就能够直接使用这些封装后的函数调用完成对模拟硬件的操纵，如打印字符串到屏幕、访问主机上的文件或设备这些动作。</p>
 <p>spike基于HTIF内存的传递，定义了一组HTIF调用（类似于操作系统的系统调用的概念），每个HTIF调用实现一个既定的功能。在使用时，PKE内核可以通过设定往HTIF内存中写入特定的HTIF调用号，spike在从HTIF内存中获得调用号后就会执行调用号对应的动作，并传递返回值到HTIF内存中。最后，PKE操作系统内核通过读取HTIF中的信息获得返回值的内容。</p>
 <p>对于PKE实验而言，利用HTIF接口可以屏蔽一些操作系统底层功能（如设备操纵）的实现，这些功能往往是跟具体的硬件实现有关（不同平台还不一样），往往用汇编语言书写，阅读起来非常枯燥也很难读懂。更重要的，这些实现细节跟操作系统可能并无关系！采用HTIF这种形式，用高级语言（C语言）来书写这段代码（spike_interface目录下的文件）会简单易懂，满足操作系统原理课程的教学要求。</p>
 <p>另外需要注意的是，<strong>HTIF机制并不是纯粹为满足教学要求而写的“玩具”</strong>。我们在ZedBoard这种开发板的PL（Programmable Logic）部分部署我们开发的RISC-V处理器时，为了检验所开发的处理器对操作系统的支持能力，往往会在RISC-V处理器上启动代理内核（可以直接用我们在实验中开发的PKE代理内核），而后者就是通过HTIF的机制完成与主机（即在PS上运行的ARM Linux）的交互的。</p>
 <p>编者注:HTIF更像是网络中的应用层,屏蔽很多的底层实现,将复杂的底层实现打包成一个应用接口,来供用户使用.(可以使用C)</p>
-<h2 id="3-2-lab1-1-系统调用"><a href="#3-2-lab1-1-系统调用" class="headerlink" title="3.2 lab1_1 系统调用"></a><span class="exturl" data-url="aHR0cHM6Ly9naXRlZS5jb20vaHVzdG9zL3BrZS1kb2MjMzItbGFiMV8xLSVFNyVCMyVCQiVFNyVCQiU5RiVFOCVCMCU4MyVFNyU5NCVBOA=="></span>3.2 lab1_1 系统调用</h2><h4 id="给定应用"><a href="#给定应用" class="headerlink" title="给定应用"></a><span class="exturl" data-url="aHR0cHM6Ly9naXRlZS5jb20vaHVzdG9zL3BrZS1kb2MjJUU3JUJCJTk5JUU1JUFFJTlBJUU1JUJBJTk0JUU3JTk0JUE4"></span><strong>给定应用</strong></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">*   user/app_helloworld.c</span><br><span class="line"></span><br><span class="line">  1 /\*</span><br><span class="line">  2  \* Below is the given application for lab1_1.</span><br><span class="line">  3  \*</span><br><span class="line">  4  \* You can build this app (as well as our PKE OS kernel) by command:</span><br><span class="line">  5  \* $ make</span><br><span class="line">  6  \*</span><br><span class="line">  7  \* Or run this app (with the support from PKE OS kernel) by command:</span><br><span class="line">  8  \* $ make run</span><br><span class="line">  9  \*/</span><br><span class="line"> 10</span><br><span class="line"> 11 #include &quot;user_lib.h&quot;</span><br><span class="line"> 12</span><br><span class="line"> 13 **int** **main**(**void**) &#123;</span><br><span class="line"> 14   printu(&quot;Hello world!\\n&quot;);</span><br><span class="line"> 15</span><br><span class="line"> 16   exit(0);</span><br><span class="line"> 17 &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="3-2-lab1-1-系统调用"><a href="#3-2-lab1-1-系统调用" class="headerlink" title="3.2 lab1_1 系统调用"></a><a target="_blank" rel="noopener" href="https://gitee.com/hustos/pke-doc#32-lab1_1-%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8"></a>3.2 lab1_1 系统调用</h2><h4 id="给定应用"><a href="#给定应用" class="headerlink" title="给定应用"></a><a target="_blank" rel="noopener" href="https://gitee.com/hustos/pke-doc#%E7%BB%99%E5%AE%9A%E5%BA%94%E7%94%A8"></a><strong>给定应用</strong></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">*   user/app_helloworld.c</span><br><span class="line"></span><br><span class="line">  1 /\*</span><br><span class="line">  2  \* Below is the given application for lab1_1.</span><br><span class="line">  3  \*</span><br><span class="line">  4  \* You can build this app (as well as our PKE OS kernel) by command:</span><br><span class="line">  5  \* $ make</span><br><span class="line">  6  \*</span><br><span class="line">  7  \* Or run this app (with the support from PKE OS kernel) by command:</span><br><span class="line">  8  \* $ make run</span><br><span class="line">  9  \*/</span><br><span class="line"> 10</span><br><span class="line"> 11 #include &quot;user_lib.h&quot;</span><br><span class="line"> 12</span><br><span class="line"> 13 **int** **main**(**void**) &#123;</span><br><span class="line"> 14   printu(&quot;Hello world!\\n&quot;);</span><br><span class="line"> 15</span><br><span class="line"> 16   exit(0);</span><br><span class="line"> 17 &#125;</span><br></pre></td></tr></table></figure>
 <p>应用实现的功能非常简单，即在屏幕上打印”Hello world!\n”。</p>
 <ul>
 <li>make后的直接运行结果：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$ spike ./obj/riscv-pke ./obj/app_helloworld</span><br><span class="line">In m_start, hartid:0</span><br><span class="line">HTIF is available!</span><br><span class="line">(Emulated) memory size: 2048 MB</span><br><span class="line">Enter supervisor mode...</span><br><span class="line">Application: ./obj/app_helloworld</span><br><span class="line">elf_load: ctx-&gt;ehdr.phoff = 64, ctx-&gt;ehdr.phnum =1, sizeof(ph_addr)=56.</span><br><span class="line">elf_load: ph_addr.memsz = 744, ph_addr.off =4096.</span><br><span class="line">Application program entry point (virtual address): 0x0000000081000000</span><br><span class="line">Switching to user mode...</span><br><span class="line">call do_syscall to accomplish the syscall and lab1_1 here.</span><br><span class="line"></span><br><span class="line">System is shutting down with exit code -1.</span><br></pre></td></tr></table></figure>
 从结果上来看，并未达到我们的预期结果，即在屏幕上输出”Hello world!\n”。</li>
 </ul>
-<h4 id="实验内容"><a href="#实验内容" class="headerlink" title="实验内容"></a><span class="exturl" data-url="aHR0cHM6Ly9naXRlZS5jb20vaHVzdG9zL3BrZS1kb2MjJUU1JUFFJTlFJUU5JUFBJThDJUU1JTg2JTg1JUU1JUFFJUI5"></span><strong>实验内容</strong></h4><p>如输出提示所表示的那样，需要找到并完成对do_syscall的调用，并获得以下预期结果：</p>
+<h4 id="实验内容"><a href="#实验内容" class="headerlink" title="实验内容"></a><a target="_blank" rel="noopener" href="https://gitee.com/hustos/pke-doc#%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9"></a><strong>实验内容</strong></h4><p>如输出提示所表示的那样，需要找到并完成对do_syscall的调用，并获得以下预期结果：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ spike ./obj/riscv-pke ./obj/app_helloworld</span><br><span class="line">In m_start, hartid:0</span><br><span class="line">HTIF is available!</span><br><span class="line">(Emulated) memory size: 2048 MB</span><br><span class="line">Enter supervisor mode...</span><br><span class="line">Application: ./obj/app_helloworld</span><br><span class="line">Application program entry point (virtual address): 0x0000000081000000</span><br><span class="line">Switching to user mode...</span><br><span class="line">Hello world!</span><br><span class="line">User exit with code:0.</span><br><span class="line">System is shutting down with exit code 0.</span><br></pre></td></tr></table></figure>
-<h4 id="实验指导"><a href="#实验指导" class="headerlink" title="实验指导"></a><span class="exturl" data-url="aHR0cHM6Ly9naXRlZS5jb20vaHVzdG9zL3BrZS1kb2MjJUU1JUFFJTlFJUU5JUFBJThDJUU2JThDJTg3JUU1JUFGJUJD"></span><strong>实验指导</strong></h4><p>lab1_1实验需要读者了解和掌握操作系统中系统调用机制的实现原理。从应用出发，我们发现user&#x2F;app_helloworld.c文件中有两个函数调用：printu和exit。对代码进行跟踪，我们发现这两个函数都在user&#x2F;user_lib.c中进行了实现，同时，这两个函数最后都转换成了对do_user_call的调用。查看do_user_call函数的实现：</p>
+<h4 id="实验指导"><a href="#实验指导" class="headerlink" title="实验指导"></a><a target="_blank" rel="noopener" href="https://gitee.com/hustos/pke-doc#%E5%AE%9E%E9%AA%8C%E6%8C%87%E5%AF%BC"></a><strong>实验指导</strong></h4><p>lab1_1实验需要读者了解和掌握操作系统中系统调用机制的实现原理。从应用出发，我们发现user&#x2F;app_helloworld.c文件中有两个函数调用：printu和exit。对代码进行跟踪，我们发现这两个函数都在user&#x2F;user_lib.c中进行了实现，同时，这两个函数最后都转换成了对do_user_call的调用。查看do_user_call函数的实现：</p>
 <p>编者注:ret本质上是a0???</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">13 **int** **do_user_call**(uint64 sysnum, uint64 a1, uint64 a2, uint64 a3, uint64 a4, uint64 a5, uint64 a6,</span><br><span class="line">14                  uint64 a7) &#123;</span><br><span class="line">15   **int** ret;</span><br><span class="line">16</span><br><span class="line">17   // before invoking the syscall, arguments of do_user_call are already loaded into the argument</span><br><span class="line">18   // registers (a0-a7) of our (emulated) risc-v machine.</span><br><span class="line">19   asm **volatile**(</span><br><span class="line">20       &quot;ecall\\n&quot;</span><br><span class="line">21       &quot;sw a0, %0&quot;  // returns a 32-bit value</span><br><span class="line">22       : &quot;=m&quot;(ret)</span><br><span class="line">23       :</span><br><span class="line">24       : &quot;memory&quot;);</span><br><span class="line">25</span><br><span class="line">26   **return** ret;</span><br><span class="line">27 &#125;</span><br></pre></td></tr></table></figure>
 <p>我们发现，do_user_call函数是通过ecall指令完成系统调用的，且在执行ecall指令前，所有的参数（即do_user_call函数的8个参数）实际上都已经载入到RISC-V机器的a0到a7这8个寄存器中（这一步是我们的编译器生成的代码帮我们完成的）。ecall指令的执行将根据a0寄存器中的值获得系统调用号，并使RISC-V转到S模式（因为我们的操作系统内核启动时将所有的中断、异常、系统调用都代理给了S模式）的trap处理入口执行（在kernel&#x2F;strap_vector.S文件中定义）：</p>
@@ -370,17 +595,17 @@ Suwa shrine = 灵山之上神风起 = 一个普通的华中科技大学在读硕
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ spike ./obj/riscv-pke ./obj/app_helloworld</span><br><span class="line">In m_start, hartid:0</span><br><span class="line">HTIF is available!</span><br><span class="line">(Emulated) memory size: 2048 MB</span><br><span class="line">Enter supervisor mode...</span><br><span class="line">Application: ./obj/app_helloworld</span><br><span class="line">Application program entry point (virtual address): 0x0000000081000000</span><br><span class="line">Switching to user mode...</span><br><span class="line">Hello world!</span><br><span class="line">User exit with code:0.</span><br><span class="line">System is shutting down with exit code 0.</span><br></pre></td></tr></table></figure>
 <p><strong>实验完毕后，记得提交修改（命令行中-m后的字符串可自行确定），以便在后续实验中继承lab1_1中所做的工作</strong>：</p>
 <p>$ git commit -a -m “my work on lab1_1 is done.”</p>
-<h2 id="3-3-lab1-2-异常处理"><a href="#3-3-lab1-2-异常处理" class="headerlink" title="3.3 lab1_2 异常处理"></a><span class="exturl" data-url="aHR0cHM6Ly9naXRlZS5jb20vaHVzdG9zL3BrZS1kb2MjMzMtbGFiMV8yLSVFNSVCQyU4MiVFNSVCOCVCOCVFNSVBNCU4NCVFNyU5MCU4Ng=="></span>3.3 lab1_2 异常处理</h2><h4 id="给定应用-1"><a href="#给定应用-1" class="headerlink" title="给定应用"></a><span class="exturl" data-url="aHR0cHM6Ly9naXRlZS5jb20vaHVzdG9zL3BrZS1kb2MjJUU3JUJCJTk5JUU1JUFFJTlBJUU1JUJBJTk0JUU3JTk0JUE4LTE="></span><strong>给定应用</strong></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">*   user/app_illegal_instruction.c</span><br><span class="line"></span><br><span class="line">  1 /\*</span><br><span class="line">  2  \* Below is the given application for lab1_2.</span><br><span class="line">  3  \* This app attempts to issue M-mode instruction in U-mode, and consequently raises an exception.</span><br><span class="line">  4  \*/</span><br><span class="line">  5</span><br><span class="line">  6 #include &quot;user_lib.h&quot;</span><br><span class="line">  7 #include &quot;util/types.h&quot;</span><br><span class="line">  8</span><br><span class="line">  9 **int** **main**(**void**) &#123;</span><br><span class="line"> 10   printu(&quot;Going to hack the system by running privilege instructions.\\n&quot;);</span><br><span class="line"> 11   // we are now in U(user)-mode, but the &quot;csrw&quot; instruction requires M-mode privilege.</span><br><span class="line"> 12   // Attempting to execute such instruction will raise illegal instruction exception.</span><br><span class="line"> 13   asm **volatile**(&quot;csrw sscratch, 0&quot;);</span><br><span class="line"> 14   exit(0);</span><br><span class="line"> 15 &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="3-3-lab1-2-异常处理"><a href="#3-3-lab1-2-异常处理" class="headerlink" title="3.3 lab1_2 异常处理"></a><a target="_blank" rel="noopener" href="https://gitee.com/hustos/pke-doc#33-lab1_2-%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86"></a>3.3 lab1_2 异常处理</h2><h4 id="给定应用-1"><a href="#给定应用-1" class="headerlink" title="给定应用"></a><a target="_blank" rel="noopener" href="https://gitee.com/hustos/pke-doc#%E7%BB%99%E5%AE%9A%E5%BA%94%E7%94%A8-1"></a><strong>给定应用</strong></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">*   user/app_illegal_instruction.c</span><br><span class="line"></span><br><span class="line">  1 /\*</span><br><span class="line">  2  \* Below is the given application for lab1_2.</span><br><span class="line">  3  \* This app attempts to issue M-mode instruction in U-mode, and consequently raises an exception.</span><br><span class="line">  4  \*/</span><br><span class="line">  5</span><br><span class="line">  6 #include &quot;user_lib.h&quot;</span><br><span class="line">  7 #include &quot;util/types.h&quot;</span><br><span class="line">  8</span><br><span class="line">  9 **int** **main**(**void**) &#123;</span><br><span class="line"> 10   printu(&quot;Going to hack the system by running privilege instructions.\\n&quot;);</span><br><span class="line"> 11   // we are now in U(user)-mode, but the &quot;csrw&quot; instruction requires M-mode privilege.</span><br><span class="line"> 12   // Attempting to execute such instruction will raise illegal instruction exception.</span><br><span class="line"> 13   asm **volatile**(&quot;csrw sscratch, 0&quot;);</span><br><span class="line"> 14   exit(0);</span><br><span class="line"> 15 &#125;</span><br></pre></td></tr></table></figure>
 <p>（在用户U模式下执行的）应用企图执行RISC-V的特权指令csrw sscratch, 0。该指令会修改S模式的栈指针，如果允许该指令的执行，执行的结果可能会导致系统崩溃。</p>
 <ul>
 <li>（先提交lab1_1的答案，然后）切换到lab1_2、继承lab1_1中所做修改，并make后的直接运行结果：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">//切换到lab1_2</span><br><span class="line">$ git checkout lab1_2_exception</span><br><span class="line"></span><br><span class="line">//继承lab1_1的答案</span><br><span class="line">$ git merge lab1_1_syscall -m &quot;continue to work on lab1_2&quot;</span><br><span class="line"></span><br><span class="line">//重新构造</span><br><span class="line">$ make clean; make</span><br><span class="line"></span><br><span class="line">//运行构造结果</span><br><span class="line">$ spike ./obj/riscv-pke ./obj/app_illegal_instruction</span><br><span class="line">In m_start, hartid:0</span><br><span class="line">HTIF is available!</span><br><span class="line">(Emulated) memory size: 2048 MB</span><br><span class="line">Enter supervisor mode...</span><br><span class="line">Application: ./obj/app_illegal_instruction</span><br><span class="line">elf_load: ctx-&gt;ehdr.phoff = 64, ctx-&gt;ehdr.phnum =1, sizeof(ph_addr)=56.</span><br><span class="line">elf_load: ph_addr.memsz = 800, ph_addr.off =4096.</span><br><span class="line">Application program entry point (virtual address): 0x0000000081000000</span><br><span class="line">Switching to user mode...</span><br><span class="line">Going to hack the system by running privilege instructions.</span><br><span class="line">call handle_illegal_instruction to accomplish illegal instruction interception of lab1_2.</span><br><span class="line"></span><br><span class="line">System is shutting down with exit code -1.</span><br></pre></td></tr></table></figure>
 以上输出中，由于篇幅的关系，我们隐藏了前三个命令的输出结果。</li>
 </ul>
-<h4 id="实验内容-1"><a href="#实验内容-1" class="headerlink" title="实验内容"></a><span class="exturl" data-url="aHR0cHM6Ly9naXRlZS5jb20vaHVzdG9zL3BrZS1kb2MjJUU1JUFFJTlFJUU5JUFBJThDJUU1JTg2JTg1JUU1JUFFJUI5LTE="></span><strong>实验内容</strong></h4><p>如输出所提示的那样，通过调用handle_illegal_instruction函数完成异常指令处理，阻止app_illegal_instruction的执行。</p>
+<h4 id="实验内容-1"><a href="#实验内容-1" class="headerlink" title="实验内容"></a><a target="_blank" rel="noopener" href="https://gitee.com/hustos/pke-doc#%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9-1"></a><strong>实验内容</strong></h4><p>如输出所提示的那样，通过调用handle_illegal_instruction函数完成异常指令处理，阻止app_illegal_instruction的执行。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ spike ./obj/riscv-pke ./obj/app_illegal_instruction</span><br><span class="line">In m_start, hartid:0</span><br><span class="line">HTIF is available!</span><br><span class="line">(Emulated) memory size: 2048 MB</span><br><span class="line">Enter supervisor mode...</span><br><span class="line">Application: ./obj/app_illegal_instruction</span><br><span class="line">Application program entry point (virtual address): 0x0000000081000000</span><br><span class="line">Switching to user mode...</span><br><span class="line">Going to hack the system by running privilege instructions.</span><br><span class="line">Illegal instruction!</span><br><span class="line">System is shutting down with exit code -1.</span><br></pre></td></tr></table></figure>
-<h4 id="实验指导-1"><a href="#实验指导-1" class="headerlink" title="实验指导"></a><span class="exturl" data-url="aHR0cHM6Ly9naXRlZS5jb20vaHVzdG9zL3BrZS1kb2MjJUU1JUFFJTlFJUU5JUFBJThDJUU2JThDJTg3JUU1JUFGJUJDLTE="></span><strong>实验指导</strong></h4><p>lab1_2实验需要读者了解和掌握操作系统中异常（exception）的产生原理以及处理的原则。从应用出发，我们发现user&#x2F;app_illegal_instruction.c文件中，我们的应用程序“企图”执行不能在用户模式（U模式）运行的特权级指令：<code>csrw sscratch, 0</code></p>
+<h4 id="实验指导-1"><a href="#实验指导-1" class="headerlink" title="实验指导"></a><a target="_blank" rel="noopener" href="https://gitee.com/hustos/pke-doc#%E5%AE%9E%E9%AA%8C%E6%8C%87%E5%AF%BC-1"></a><strong>实验指导</strong></h4><p>lab1_2实验需要读者了解和掌握操作系统中异常（exception）的产生原理以及处理的原则。从应用出发，我们发现user&#x2F;app_illegal_instruction.c文件中，我们的应用程序“企图”执行不能在用户模式（U模式）运行的特权级指令：<code>csrw sscratch, 0</code></p>
 <p>显然，这种企图破坏了RISC-V机器以及操作系统的设计原则，对于机器而言该事件并不是它期望（它期望在用户模式下执行的都是用户模式的指令）发生的“异常事件”，需要介入和破坏该应用程序的执行。查找RISC-V体系结构的相关文档，我们知道，这类异常属于非法指令异常，即CAUSE_ILLEGAL_INSTRUCTION，它对应的异常码是02（见kernel&#x2F;riscv.h中的定义）。那么，当RISC-V机器截获了这类异常后，该将它交付给谁来处理呢？</p>
-<p>通过<span class="exturl" data-url="aHR0cHM6Ly9naXRlZS5jb20vaHVzdG9zL3BrZS1kb2Mjc3Vic2VjX2Jvb3Rpbmc=">3.1.5</span>节的阅读，我们知道PKE操作系统内核在启动时会将部分异常和中断“代理”给S模式处理，但是它是否将CAUSE_ILLEGAL_INSTRUCTION这类异常也进行了代理呢？这就要研究m_start()函数在执行delegate_traps()函数时设置的代理规则了，我们先查看delegate_traps()函数的代码，在kernel&#x2F;machine&#x2F;minit.c文件中找到它对应的代码：</p>
+<p>通过<a target="_blank" rel="noopener" href="https://gitee.com/hustos/pke-doc#subsec_booting">3.1.5</a>节的阅读，我们知道PKE操作系统内核在启动时会将部分异常和中断“代理”给S模式处理，但是它是否将CAUSE_ILLEGAL_INSTRUCTION这类异常也进行了代理呢？这就要研究m_start()函数在执行delegate_traps()函数时设置的代理规则了，我们先查看delegate_traps()函数的代码，在kernel&#x2F;machine&#x2F;minit.c文件中找到它对应的代码：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">51 **static** **void** **delegate_traps**() &#123;</span><br><span class="line">52   **if** (!supports_extension(&#x27;S&#x27;)) &#123;</span><br><span class="line">53     // confirm that our processor supports supervisor mode. abort if not.</span><br><span class="line">54     sprint(&quot;s mode is not supported.\\n&quot;);</span><br><span class="line">55     **return**;</span><br><span class="line">56   &#125;</span><br><span class="line">57</span><br><span class="line">58   **uintptr_t** interrupts = MIP_SSIP  MIP_STIP  MIP_SEIP;</span><br><span class="line">59   **uintptr_t** exceptions = (1U &lt;&lt; CAUSE_MISALIGNED_FETCH)  (1U &lt;&lt; CAUSE_FETCH_PAGE_FAULT) </span><br><span class="line">60                          (1U &lt;&lt; CAUSE_BREAKPOINT)  (1U &lt;&lt; CAUSE_LOAD_PAGE_FAULT) </span><br><span class="line">61                          (1U &lt;&lt; CAUSE_STORE_PAGE_FAULT)  (1U &lt;&lt; CAUSE_USER_ECALL);</span><br><span class="line">62</span><br><span class="line">63   write_csr(mideleg, interrupts);</span><br><span class="line">64   write_csr(medeleg, exceptions);</span><br><span class="line">65   assert(read_csr(mideleg) == interrupts);</span><br><span class="line">66   assert(read_csr(medeleg) == exceptions);</span><br><span class="line">67 &#125;</span><br></pre></td></tr></table></figure>
 <p>在第58–61行的代码中，delegate_traps()函数确实将部分异常代理给了S模式处理，但是里面并没有我们关心的CAUSE_ILLEGAL_INSTRUCTION异常，这说明该异常的处理还是交给M模式来处理（实际上，对于spike模拟的RISC-V平台而言，CAUSE_ILLEGAL_INSTRUCTION异常_必须_在M态处理）！所以，我们需要了解M模式的trap处理入口，以便继续跟踪其后的处理过程。M模式的trap处理入口在kernel&#x2F;machine&#x2F;mtrap_vector.S文件中（PKE操作系统内核在启动时（kernel&#x2F;machine&#x2F;minit.c文件的第125行<code>write_csr(mtvec, (uint64)mtrapvec);</code>）已经将M模式的中断处理入口指向了该函数）：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"> 8 mtrapvec:</span><br><span class="line"> 9     # swap a0 and mscratch</span><br><span class="line">10     # so that a0 points to interrupt frame</span><br><span class="line">11     csrrw a0, mscratch, a0</span><br><span class="line">12</span><br><span class="line">13     # save the registers in interrupt frame</span><br><span class="line">14     addi t6, a0, 0</span><br><span class="line">15     store_all_registers</span><br><span class="line">16     # save the user a0 in itrframe-&gt;a0</span><br><span class="line">17     csrr t0, mscratch</span><br><span class="line">18     sd t0, 72(a0)</span><br><span class="line">19</span><br><span class="line">20     # use stack0 for sp</span><br><span class="line">21     la sp, stack0</span><br><span class="line">22     li a3, 4096</span><br><span class="line">23     csrr a4, mhartid</span><br><span class="line">24     addi a4, a4, 1</span><br><span class="line">25     mul a3, a3, a4</span><br><span class="line">26     add sp, sp, a3</span><br><span class="line">27</span><br><span class="line">28     // save the address of interrupt frame in the csr &quot;mscratch&quot;</span><br><span class="line">29     csrw mscratch, a0</span><br><span class="line">30</span><br><span class="line">31     call handle_mtrap</span><br><span class="line">32</span><br><span class="line">33     // restore all registers</span><br><span class="line">34     csrr t6, mscratch</span><br><span class="line">35     restore_all_registers</span><br><span class="line">36</span><br><span class="line">37     mret</span><br></pre></td></tr></table></figure>
@@ -395,18 +620,18 @@ Suwa shrine = 灵山之上神风起 = 一个普通的华中科技大学在读硕
 
 <p><strong>实验完毕后，记得提交修改（命令行中-m后的字符串可自行确定），以便在后续实验中继承lab1_2中所做的工作</strong>：</p>
 <p>$ git commit -a -m “my work on lab1_2 is done.”</p>
-<h2 id="3-4-lab1-3-（外部）中断"><a href="#3-4-lab1-3-（外部）中断" class="headerlink" title="3.4 lab1_3 （外部）中断"></a><span class="exturl" data-url="aHR0cHM6Ly9naXRlZS5jb20vaHVzdG9zL3BrZS1kb2MjMzQtbGFiMV8zLSVFNSVBNCU5NiVFOSU4MyVBOCVFNCVCOCVBRCVFNiU5NiVBRA=="></span>3.4 lab1_3 （外部）中断</h2><h4 id="给定应用-2"><a href="#给定应用-2" class="headerlink" title="给定应用"></a><span class="exturl" data-url="aHR0cHM6Ly9naXRlZS5jb20vaHVzdG9zL3BrZS1kb2MjJUU3JUJCJTk5JUU1JUFFJTlBJUU1JUJBJTk0JUU3JTk0JUE4LTI="></span><strong>给定应用</strong></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">*   user/app_long_loop.c</span><br><span class="line"></span><br><span class="line">  1 /\*</span><br><span class="line">  2  \* Below is the given application for lab1_3.</span><br><span class="line">  3  \* This app performs a long loop, during which, timers are</span><br><span class="line">  4  \* generated and pop messages to our screen.</span><br><span class="line">  5  \*/</span><br><span class="line">  6</span><br><span class="line">  7 #include &quot;user_lib.h&quot;</span><br><span class="line">  8 #include &quot;util/types.h&quot;</span><br><span class="line">  9</span><br><span class="line"> 10 **int** **main**(**void**) &#123;</span><br><span class="line"> 11   printu(&quot;Hello world!\\n&quot;);</span><br><span class="line"> 12   **int** i;</span><br><span class="line"> 13   **for** (i = 0; i &lt; 100000000; ++i) &#123;</span><br><span class="line"> 14     **if** (i % 5000000 == 0) printu(&quot;wait %d\\n&quot;, i);</span><br><span class="line"> 15   &#125;</span><br><span class="line"> 16</span><br><span class="line"> 17   exit(0);</span><br><span class="line"> 18</span><br><span class="line"> 19   **return** 0;</span><br><span class="line"> 20 &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="3-4-lab1-3-（外部）中断"><a href="#3-4-lab1-3-（外部）中断" class="headerlink" title="3.4 lab1_3 （外部）中断"></a><a target="_blank" rel="noopener" href="https://gitee.com/hustos/pke-doc#34-lab1_3-%E5%A4%96%E9%83%A8%E4%B8%AD%E6%96%AD"></a>3.4 lab1_3 （外部）中断</h2><h4 id="给定应用-2"><a href="#给定应用-2" class="headerlink" title="给定应用"></a><a target="_blank" rel="noopener" href="https://gitee.com/hustos/pke-doc#%E7%BB%99%E5%AE%9A%E5%BA%94%E7%94%A8-2"></a><strong>给定应用</strong></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">*   user/app_long_loop.c</span><br><span class="line"></span><br><span class="line">  1 /\*</span><br><span class="line">  2  \* Below is the given application for lab1_3.</span><br><span class="line">  3  \* This app performs a long loop, during which, timers are</span><br><span class="line">  4  \* generated and pop messages to our screen.</span><br><span class="line">  5  \*/</span><br><span class="line">  6</span><br><span class="line">  7 #include &quot;user_lib.h&quot;</span><br><span class="line">  8 #include &quot;util/types.h&quot;</span><br><span class="line">  9</span><br><span class="line"> 10 **int** **main**(**void**) &#123;</span><br><span class="line"> 11   printu(&quot;Hello world!\\n&quot;);</span><br><span class="line"> 12   **int** i;</span><br><span class="line"> 13   **for** (i = 0; i &lt; 100000000; ++i) &#123;</span><br><span class="line"> 14     **if** (i % 5000000 == 0) printu(&quot;wait %d\\n&quot;, i);</span><br><span class="line"> 15   &#125;</span><br><span class="line"> 16</span><br><span class="line"> 17   exit(0);</span><br><span class="line"> 18</span><br><span class="line"> 19   **return** 0;</span><br><span class="line"> 20 &#125;</span><br></pre></td></tr></table></figure>
 <p>应用的程序逻辑包含一个长度为100000000次的循环，循环每次将整型变量i加一，当i的值是5000000的整数倍时，输出”wait i的值\n”。这个循环程序在我们的（模拟）RISC-V平台上运行，显然将消耗一定时间（实际上，你也可以把这个程序改成死循环，但并不会死机！<strong>请读者做完lab1_3的实验后思考为什么死循环并不会导致死机</strong>。）。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">*   （先提交lab1_2的答案，然后）切换到lab1_3、继承lab1_2中所做修改，并make后的直接运行结果：</span><br><span class="line"></span><br><span class="line">//切换到lab1_3</span><br><span class="line">$ git checkout lab1_3_irq</span><br><span class="line"></span><br><span class="line">//继承lab1_2以及之前的答案</span><br><span class="line">$ git merge lab1_2_exception -m &quot;continue to work on lab1_3&quot;</span><br><span class="line"></span><br><span class="line">//重新构造</span><br><span class="line">$ make clean; make</span><br><span class="line"></span><br><span class="line">//运行构造结果</span><br><span class="line">$ spike ./obj/riscv-pke ./obj/app_long_loop</span><br><span class="line">In m_start, hartid:0</span><br><span class="line">HTIF is available!</span><br><span class="line">(Emulated) memory size: 2048 MB</span><br><span class="line">Enter supervisor mode...</span><br><span class="line">Application: ./obj/app_long_loop</span><br><span class="line">Application program entry point (virtual address): 0x000000008100007e</span><br><span class="line">Switching to user mode...</span><br><span class="line">Hello world!</span><br><span class="line">wait 0</span><br><span class="line">wait 5000000</span><br><span class="line">wait 10000000</span><br><span class="line">Ticks 0</span><br><span class="line">lab1_3: increase g_ticks by one, and clear SIP field **in** sip register.</span><br><span class="line"></span><br><span class="line">System is shutting down with exit code -1.</span><br></pre></td></tr></table></figure>
 <p>以上输出中，由于篇幅的关系，我们隐藏了前三个命令的输出结果。</p>
 <p>从以上程序的运行结果来看，给定的程序并不是“不受干扰”地从开始运行到最终结束的，而是在运行过程中受到了系统的外部时钟中断（timer irq）的“干扰”！而我们在这个实验中给出的PKE操作系统内核，在时钟中断部分并未完全做好，导致（模拟）RISC-V机器碰到第一个时钟中断后就会出现崩溃。</p>
-<h4 id="实验内容-2"><a href="#实验内容-2" class="headerlink" title="实验内容"></a><span class="exturl" data-url="aHR0cHM6Ly9naXRlZS5jb20vaHVzdG9zL3BrZS1kb2MjJUU1JUFFJTlFJUU5JUFBJThDJUU1JTg2JTg1JUU1JUFFJUI5LTI="></span>实验内容</h4><p>完成PKE操作系统内核未完成的时钟中断处理过程，使得它能够完整地处理时钟中断。</p>
+<h4 id="实验内容-2"><a href="#实验内容-2" class="headerlink" title="实验内容"></a><a target="_blank" rel="noopener" href="https://gitee.com/hustos/pke-doc#%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9-2"></a>实验内容</h4><p>完成PKE操作系统内核未完成的时钟中断处理过程，使得它能够完整地处理时钟中断。</p>
 <p>实验完成后的运行结果：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">$ spike ./obj/riscv-pke ./obj/app_long_loop</span><br><span class="line">In m_start, hartid:0</span><br><span class="line">HTIF is available!</span><br><span class="line">(Emulated) memory size: 2048 MB</span><br><span class="line">Enter supervisor mode...</span><br><span class="line">Application: obj/app_long_loop</span><br><span class="line">Application program entry point (virtual address): 0x000000008100007e</span><br><span class="line">Switching to user mode...</span><br><span class="line">Hello world!</span><br><span class="line">wait 0</span><br><span class="line">wait 5000000</span><br><span class="line">wait 10000000</span><br><span class="line">Ticks 0</span><br><span class="line">wait 15000000</span><br><span class="line">wait 20000000</span><br><span class="line">Ticks 1</span><br><span class="line">wait 25000000</span><br><span class="line">wait 30000000</span><br><span class="line">wait 35000000</span><br><span class="line">Ticks 2</span><br><span class="line">wait 40000000</span><br><span class="line">wait 45000000</span><br><span class="line">Ticks 3</span><br><span class="line">wait 50000000</span><br><span class="line">wait 55000000</span><br><span class="line">wait 60000000</span><br><span class="line">Ticks 4</span><br><span class="line">wait 65000000</span><br><span class="line">wait 70000000</span><br><span class="line">Ticks 5</span><br><span class="line">wait 75000000</span><br><span class="line">wait 80000000</span><br><span class="line">wait 85000000</span><br><span class="line">Ticks 6</span><br><span class="line">wait 90000000</span><br><span class="line">wait 95000000</span><br><span class="line">Ticks 7</span><br><span class="line">User exit with code:0.</span><br><span class="line">System is shutting down with exit code 0.</span><br></pre></td></tr></table></figure>
-<h4 id="实验指导-2"><a href="#实验指导-2" class="headerlink" title="实验指导"></a><span class="exturl" data-url="aHR0cHM6Ly9naXRlZS5jb20vaHVzdG9zL3BrZS1kb2MjJUU1JUFFJTlFJUU5JUFBJThDJUU2JThDJTg3JUU1JUFGJUJDLTI="></span>实验指导</h4><p>在<span class="exturl" data-url="aHR0cHM6Ly9naXRlZS5jb20vaHVzdG9zL3BrZS1kb2MjZXhjZXB0aW9u">上一个实验</span>中，我们已经接触了机器模式（M-mode）下的中断处理。在本实验中，我们接触的时钟中断也是在机器模式下触发的。为了处理时钟中断，我们的PKE代码在lab1_2的基础上，新增了以下内容：</p>
+<h4 id="实验指导-2"><a href="#实验指导-2" class="headerlink" title="实验指导"></a><a target="_blank" rel="noopener" href="https://gitee.com/hustos/pke-doc#%E5%AE%9E%E9%AA%8C%E6%8C%87%E5%AF%BC-2"></a>实验指导</h4><p>在<a target="_blank" rel="noopener" href="https://gitee.com/hustos/pke-doc#exception">上一个实验</a>中，我们已经接触了机器模式（M-mode）下的中断处理。在本实验中，我们接触的时钟中断也是在机器模式下触发的。为了处理时钟中断，我们的PKE代码在lab1_2的基础上，新增了以下内容：</p>
 <ul>
 <li>在m_start函数（也就是机器模式的初始化函数）中新增了timerinit()函数，后者的函数定义在kernel&#x2F;machine&#x2F;minit.c文件：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">72 **void** **timerinit**(**uintptr_t** hartid) &#123;</span><br><span class="line">73   // fire timer irq after TIMER_INTERVAL from now.</span><br><span class="line">74   \*(uint64\*)CLINT_MTIMECMP(hartid) = \*(uint64\*)CLINT_MTIME + TIMER_INTERVAL;</span><br><span class="line">75</span><br><span class="line">76   // enable machine-mode timer irq in MIE (Machine Interrupt Enable) csr.</span><br><span class="line">77   write_csr(mie, read_csr(mie)  MIE_MTIE);</span><br><span class="line">78 &#125;</span><br></pre></td></tr></table></figure>
-该函数首先在74行设置了下一次timer触发的时间，即当前时间的TIMER_INTERVAL（即1000000周期后，见kernel&#x2F;config.h中的定义）之后。另外，在77行设置了MIE（Machine Interrupt Enable，见本书的第一章的<span class="exturl" data-url="aHR0cHM6Ly9naXRlZS5jb20vaHVzdG9zL3BrZS1kb2MvYmxvYi9tYXN0ZXIvY2hhcHRlcjFfcmlzY3YubWQjbWFjaGluZXN0YXRlcw==">1.3节</span>和<span class="exturl" data-url="aHR0cHM6Ly9naXRlZS5jb20vaHVzdG9zL3BrZS1kb2MvYmxvYi9tYXN0ZXIvY2hhcHRlcjFfcmlzY3YubWQjdHJhcHM=">1.4节</span>）寄存器中的MIE_MTIE位，即允许我们的（模拟）RISC-V机器在M模式处理timer中断。</li>
+该函数首先在74行设置了下一次timer触发的时间，即当前时间的TIMER_INTERVAL（即1000000周期后，见kernel&#x2F;config.h中的定义）之后。另外，在77行设置了MIE（Machine Interrupt Enable，见本书的第一章的<a target="_blank" rel="noopener" href="https://gitee.com/hustos/pke-doc/blob/master/chapter1_riscv.md#machinestates">1.3节</a>和<a target="_blank" rel="noopener" href="https://gitee.com/hustos/pke-doc/blob/master/chapter1_riscv.md#traps">1.4节</a>）寄存器中的MIE_MTIE位，即允许我们的（模拟）RISC-V机器在M模式处理timer中断。</li>
 </ul>
 <p>时钟中断触发后，kernel&#x2F;machine&#x2F;mtrap_vector.S文件中的mtrapvec函数将被调用：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"> 8 mtrapvec:</span><br><span class="line"> 9     # swap a0 and mscratch</span><br><span class="line">10     # so that a0 points to interrupt frame</span><br><span class="line">11     csrrw a0, mscratch, a0</span><br><span class="line">12</span><br><span class="line">13     # save the registers in interrupt frame</span><br><span class="line">14     addi t6, a0, 0</span><br><span class="line">15     store_all_registers</span><br><span class="line">16     # save the user a0 in itrframe-&gt;a0</span><br><span class="line">17     csrr t0, mscratch</span><br><span class="line">18     sd t0, 72(a0)</span><br><span class="line">19</span><br><span class="line">20     # use stack0 for sp</span><br><span class="line">21     la sp, stack0</span><br><span class="line">22     li a3, 4096</span><br><span class="line">23     csrr a4, mhartid</span><br><span class="line">24     addi a4, a4, 1</span><br><span class="line">25     mul a3, a3, a4</span><br><span class="line">26     add sp, sp, a3</span><br><span class="line">27</span><br><span class="line">28     // save the address of interrupt frame in the csr &quot;mscratch&quot;</span><br><span class="line">29     csrw mscratch, a0</span><br><span class="line">30</span><br><span class="line">31     call handle_mtrap</span><br><span class="line">32</span><br><span class="line">33     // restore all registers</span><br><span class="line">34     csrr t6, mscratch</span><br><span class="line">35     restore_all_registers</span><br><span class="line">36</span><br><span class="line">37     mret</span><br></pre></td></tr></table></figure>
@@ -425,298 +650,537 @@ Suwa shrine = 灵山之上神风起 = 一个普通的华中科技大学在读硕
 <p><strong>实验完毕后，记得提交修改（命令行中-m后的字符串可自行确定），以便在后续实验中继承lab1_3中所做的工作</strong>：</p>
 <p>$ git commit -a -m “my work on lab1_3 is done.”</p>
 
+      
+    </div>
+    <footer class="article-footer">
+      
+        <blockquote class="article-copyright">
+    <p><strong>本文作者：</strong>Sukuna @ Suwa shrine</p>
+    <p><strong>本文链接：</strong><a href="https://sukunashinmyoumaru-hust.github.io/2021/12/18/oslab1/">https://sukunashinmyoumaru-hust.github.io/2021/12/18/oslab1/</a></p>
+    
+    
+    
+    <p><strong>本文版权：</strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener external nofollow noreferrer" target="_blank"><span class="icon-creative-commons"></span>BY-NC-SA</a> 许可协议。转载请注明出处！</p>
+    <span class="icon-creative-commons article-copyright-bg"></span>
+  </blockquote>
+      
+      
+      
+        <a data-aos="zoom-in" href="/2021/12/18/oslab1/#comments" class="article-comment-link">
+          <span class="post-comments-count valine-comment-count" data-xid="/2021/12/18/oslab1/" itemprop="commentCount"></span>
+          留言
+        </a>
+      
+      
+      
+      
+      
+      
+
+    </footer>
   </div>
-
-   <footer>
-
-    <div class="meta">
-  <span class="item">
-    <span class="icon">
-      <i class="ic i-calendar-check"></i>
-    </span>
-    <span class="text">更新于</span>
-    <time title="修改时间：2024-02-29 15:24:00" itemprop="dateModified" datetime="2024-02-29T15:24:00+08:00">2024-02-29</time>
-  </span>
-</div>
-
-      
-<div class="reward">
-  <button><i class="ic i-heartbeat"></i> 赞赏</button>
-  <p>请我喝[茶]~(￣▽￣)~*</p>
-  <div id="qr">
-      
-      <div>
-        <img data-src="/images/wechatpay.jpg" alt="Sukuna 微信支付">
-        <p>微信支付</p>
+  
+  <nav id="article-nav" data-aos="fade-up">
+    
+      <div class="article-nav-link-wrap article-nav-link-left">
+        
+          
+          
+            <img data-src="https://s3.bmp.ovh/imgs/2024/06/17/4663c8f5b7019dfd.jpg" data-sizes="auto" alt="华中科技大学OS实验解析(Lab2)" class="lazyload">
+          
+        
+        <a href="/2021/12/18/oslab2/"></a>
+        <div class="article-nav-caption">前一篇</div>
+        <h3 class="article-nav-title">
+          
+            华中科技大学OS实验解析(Lab2)
+          
+        </h3>
       </div>
+    
+    
+    <div class="article-nav-link-wrap article-nav-link-right">
       
-      <div>
-        <img data-src="/images/alipay.jpg" alt="Sukuna 支付宝">
-        <p>支付宝</p>
-      </div>
-  </div>
-</div>
-
+        
+        
+          <img data-src="https://s3.bmp.ovh/imgs/2024/06/17/c10853f5c9aee06c.jpg" data-sizes="auto" alt="华中科技大学Verilog实验解析" class="lazyload">
+        
       
+      <a href="/2021/04/25/verilog/"></a>
+      <div class="article-nav-caption">后一篇</div>
+      <h3 class="article-nav-title">
+        
+          华中科技大学Verilog实验解析
+        
+      </h3>
+    </div>
+    
+  </nav>
 
-<div id="copyright">
-<ul>
-  <li class="author">
-    <strong>本文作者： </strong>Sukuna <i class="ic i-at"><em>@</em></i>灵山之上神风起
-  </li>
-  <li class="link">
-    <strong>本文链接：</strong>
-    <a href="https://sukunashinmyoumaru-hust.github.io/2021/12/18/oslab1/" title="华中科技大学OS实验解析(Lab1)">https://sukunashinmyoumaru-hust.github.io/2021/12/18/oslab1/</a>
-  </li>
-  <li class="license">
-    <strong>版权声明： </strong>本站所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</span> 许可协议。转载请注明出处！
-  </li>
-</ul>
-</div>
-
-  </footer>
 
 </article>
 
+  <section id="comments" class="vcomment" data-aos="fade-up"></section>
+
+
+
+
+
+
+</section>
+          
+        </div>
+        <footer id="footer">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div class="aplayer no-destroy" data-id="60198" data-server="netease" data-type="playlist" data-fixed="true" data-mini="true" data-autoplay="false"></div>
+  <div id="footer-info">
+    
+    <div>
+      <span class="icon-copyright"></span>
+      2020-2024
+      <span class="footer-info-sep rotate"></span>
+      Sukuna
+    </div>
+    
+      <div>
+        基于&nbsp;<a href="https://hexo.io/" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a>&nbsp;
+        Theme.<a href="https://github.com/D-Sketon/hexo-theme-reimu" rel="noopener external nofollow noreferrer" target="_blank">Reimu</a>
+      </div>
+    
+    
+      <div>
+        <span class="icon-brush"></span>
+        178.4k
+        &nbsp;|&nbsp;
+        <span class="icon-coffee"></span>
+        12:34
+      </div>
+    
+    
+    
+    
+      <div>
+        <span class="icon-eye"></span>
+        <span id="busuanzi_container_site_pv">总访问量&nbsp;<span id="busuanzi_value_site_pv"></span></span>
+        &nbsp;|&nbsp;
+        <span class="icon-user"></span>
+        <span id="busuanzi_container_site_uv">总访客量&nbsp;<span id="busuanzi_value_site_uv"></span></span>
+      </div>
+    
   </div>
   
+</footer>
 
-<div class="post-nav">
-    <div class="item left">
+        
+          <div class="sidebar-top">
+            <div class="sidebar-top-taichi rotate"></div>
+            <div class="arrow-up"></div>
+          </div>
+        
+        <div id="mask" class="hide"></div>
+      </div>
+      <nav id="mobile-nav">
+  <div class="sidebar-wrap">
+    
+      <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">文章目录</h3>
+  <div class="sidebar-toc-wrapper toc-div-class" >
       
-
-  <a href="/2021/04/25/verilog/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;s3.bmp.ovh&#x2F;imgs&#x2F;2024&#x2F;06&#x2F;17&#x2F;7c97ca6398f62495.jpg" title="华中科技大学Verilog实验解析">
-  <span class="type">上一篇</span>
-  <span class="category"><i class="ic i-flag"></i> 实验记录</span>
-  <h3>华中科技大学Verilog实验解析</h3>
-  </a>
-
-    </div>
-    <div class="item right">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-%E5%AE%9E%E9%AA%8C1%E7%9A%84%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><span class="toc-number">1.</span> <span class="toc-text">3.1 实验1的基础知识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-1-RISC-V%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%BC%96%E8%AF%91%E5%92%8C%E9%93%BE%E6%8E%A5"><span class="toc-number">1.1.</span> <span class="toc-text">3.1.1 RISC-V程序的编译和链接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-2-%E6%8C%87%E5%AE%9A%E7%AC%A6%E5%8F%B7%E7%9A%84%E9%80%BB%E8%BE%91%E5%9C%B0%E5%9D%80"><span class="toc-number">1.2.</span> <span class="toc-text">3.1.2 指定符号的逻辑地址</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-3-%E4%BB%A3%E7%90%86%E5%86%85%E6%A0%B8%E7%9A%84%E6%9E%84%E9%80%A0%E8%BF%87%E7%A8%8B"><span class="toc-number">1.3.</span> <span class="toc-text">3.1.3 代理内核的构造过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-4-%E4%BB%A3%E7%90%86%E5%86%85%E6%A0%B8%E7%9A%84%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B"><span class="toc-number">1.4.</span> <span class="toc-text">3.1.4 代理内核的启动过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-5-ELF%E6%96%87%E4%BB%B6%EF%BC%88app%EF%BC%89%E7%9A%84%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B"><span class="toc-number">1.5.</span> <span class="toc-text">3.1.5 ELF文件（app）的加载过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-6-spike%E7%9A%84HTIF%E6%8E%A5%E5%8F%A3"><span class="toc-number">1.6.</span> <span class="toc-text">3.1.6 spike的HTIF接口</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-lab1-1-%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8"><span class="toc-number">2.</span> <span class="toc-text">3.2 lab1_1 系统调用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%99%E5%AE%9A%E5%BA%94%E7%94%A8"><span class="toc-number">2.0.1.</span> <span class="toc-text">给定应用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9"><span class="toc-number">2.0.2.</span> <span class="toc-text">实验内容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E6%8C%87%E5%AF%BC"><span class="toc-number">2.0.3.</span> <span class="toc-text">实验指导</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-lab1-2-%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86"><span class="toc-number">3.</span> <span class="toc-text">3.3 lab1_2 异常处理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%99%E5%AE%9A%E5%BA%94%E7%94%A8-1"><span class="toc-number">3.0.1.</span> <span class="toc-text">给定应用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9-1"><span class="toc-number">3.0.2.</span> <span class="toc-text">实验内容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E6%8C%87%E5%AF%BC-1"><span class="toc-number">3.0.3.</span> <span class="toc-text">实验指导</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-4-lab1-3-%EF%BC%88%E5%A4%96%E9%83%A8%EF%BC%89%E4%B8%AD%E6%96%AD"><span class="toc-number">4.</span> <span class="toc-text">3.4 lab1_3 （外部）中断</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%99%E5%AE%9A%E5%BA%94%E7%94%A8-2"><span class="toc-number">4.0.1.</span> <span class="toc-text">给定应用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9-2"><span class="toc-number">4.0.2.</span> <span class="toc-text">实验内容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E6%8C%87%E5%AF%BC-2"><span class="toc-number">4.0.3.</span> <span class="toc-text">实验指导</span></a></li></ol></li></ol></li></ol>
       
-
-  <a href="/2021/12/18/oslab2/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;s3.bmp.ovh&#x2F;imgs&#x2F;2024&#x2F;06&#x2F;17&#x2F;97c3cfc23ec60f4c.jpg" title="华中科技大学OS实验解析(Lab2)">
-  <span class="type">下一篇</span>
-  <span class="category"><i class="ic i-flag"></i> 实验记录</span>
-  <h3>华中科技大学OS实验解析(Lab2)</h3>
-  </a>
-
-    </div>
+  </div>
 </div>
-
+</div>
+      <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/IMG_1335.PNG" data-sizes="auto" alt="Sukuna" class="lazyload">
+  <div class="sidebar-author-name">Sukuna</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">25</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">3</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">0</div>
+  </div>
+</div>
+<div class="sidebar-social">
   
-  <div class="wrap" id="comments"></div>
-
-
-        </div>
-        <div id="sidebar">
-          
-
-<div class="inner">
-
-  <div class="panels">
-    <div class="inner">
-      <div class="contents panel pjax" data-title="文章目录">
-          <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-%E5%AE%9E%E9%AA%8C1%E7%9A%84%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><span class="toc-number">1.</span> <span class="toc-text">3.1 实验1的基础知识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-1-RISC-V%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%BC%96%E8%AF%91%E5%92%8C%E9%93%BE%E6%8E%A5"><span class="toc-number">1.1.</span> <span class="toc-text">3.1.1 RISC-V程序的编译和链接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-2-%E6%8C%87%E5%AE%9A%E7%AC%A6%E5%8F%B7%E7%9A%84%E9%80%BB%E8%BE%91%E5%9C%B0%E5%9D%80"><span class="toc-number">1.2.</span> <span class="toc-text">3.1.2 指定符号的逻辑地址</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-3-%E4%BB%A3%E7%90%86%E5%86%85%E6%A0%B8%E7%9A%84%E6%9E%84%E9%80%A0%E8%BF%87%E7%A8%8B"><span class="toc-number">1.3.</span> <span class="toc-text">3.1.3 代理内核的构造过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-4-%E4%BB%A3%E7%90%86%E5%86%85%E6%A0%B8%E7%9A%84%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B"><span class="toc-number">1.4.</span> <span class="toc-text">3.1.4 代理内核的启动过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-5-ELF%E6%96%87%E4%BB%B6%EF%BC%88app%EF%BC%89%E7%9A%84%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B"><span class="toc-number">1.5.</span> <span class="toc-text">3.1.5 ELF文件（app）的加载过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-6-spike%E7%9A%84HTIF%E6%8E%A5%E5%8F%A3"><span class="toc-number">1.6.</span> <span class="toc-text">3.1.6 spike的HTIF接口</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-lab1-1-%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8"><span class="toc-number">2.</span> <span class="toc-text">3.2 lab1_1 系统调用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%99%E5%AE%9A%E5%BA%94%E7%94%A8"><span class="toc-number">2.0.1.</span> <span class="toc-text">给定应用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9"><span class="toc-number">2.0.2.</span> <span class="toc-text">实验内容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E6%8C%87%E5%AF%BC"><span class="toc-number">2.0.3.</span> <span class="toc-text">实验指导</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-lab1-2-%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86"><span class="toc-number">3.</span> <span class="toc-text">3.3 lab1_2 异常处理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%99%E5%AE%9A%E5%BA%94%E7%94%A8-1"><span class="toc-number">3.0.1.</span> <span class="toc-text">给定应用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9-1"><span class="toc-number">3.0.2.</span> <span class="toc-text">实验内容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E6%8C%87%E5%AF%BC-1"><span class="toc-number">3.0.3.</span> <span class="toc-text">实验指导</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-4-lab1-3-%EF%BC%88%E5%A4%96%E9%83%A8%EF%BC%89%E4%B8%AD%E6%96%AD"><span class="toc-number">4.</span> <span class="toc-text">3.4 lab1_3 （外部）中断</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%99%E5%AE%9A%E5%BA%94%E7%94%A8-2"><span class="toc-number">4.0.1.</span> <span class="toc-text">给定应用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9-2"><span class="toc-number">4.0.2.</span> <span class="toc-text">实验内容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E6%8C%87%E5%AF%BC-2"><span class="toc-number">4.0.3.</span> <span class="toc-text">实验指导</span></a></li></ol></li></ol></li></ol>
-      </div>
-      <div class="related panel pjax" data-title="系列文章">
-        <ul>
-          <li><a href="/2021/04/25/verilog/" rel="bookmark" title="华中科技大学Verilog实验解析">华中科技大学Verilog实验解析</a></li><li class="active"><a href="/2021/12/18/oslab1/" rel="bookmark" title="华中科技大学OS实验解析(Lab1)">华中科技大学OS实验解析(Lab1)</a></li><li><a href="/2021/12/18/oslab2/" rel="bookmark" title="华中科技大学OS实验解析(Lab2)">华中科技大学OS实验解析(Lab2)</a></li><li><a href="/2022/02/26/oschallengelab/" rel="bookmark" title="华中科技大学操作系统挑战实验(PKE)基础解析">华中科技大学操作系统挑战实验(PKE)基础解析</a></li><li><a href="/2023/02/06/rustilings/" rel="bookmark" title="Rustilings 练习笔记">Rustilings 练习笔记</a></li><li><a href="/2023/02/06/stanford-cs144-lab/" rel="bookmark" title="Stanford CS144 Lab">Stanford CS144 Lab</a></li><li><a href="/2023/02/07/cmu14-445-lab/" rel="bookmark" title="CMU14-445 Lab">CMU14-445 Lab</a></li><li><a href="/2023/02/08/mit-6-s081-lab/" rel="bookmark" title="MIT_6.s081_Lab">MIT_6.s081_Lab</a></li><li><a href="/2023/02/09/mit-6-s081-xv6-information-%E9%9B%86%E5%90%88/" rel="bookmark" title="MIT_6.S081_xv6.Information 集合">MIT_6.S081_xv6.Information 集合</a></li><li><a href="/2023/09/13/nju-pa/" rel="bookmark" title="南大pa">南大pa</a></li><li><a href="/2024/04/17/stanford-cs143-PA/" rel="bookmark" title="Stanford CS143 PA">Stanford CS143 PA</a></li><li><a href="/2024/04/19/mit-6-824-mr/" rel="bookmark" title="MIT_6.824:PA1-MapReduce">MIT_6.824:PA1-MapReduce</a></li><li><a href="/2024/04/28/mit-6-824-raft/" rel="bookmark" title="In Search of an Understandable Consensus Algorithm (Extended Version)">In Search of an Understandable Consensus Algorithm (Extended Version)</a></li>
-        </ul>
-      </div>
-      <div class="overview panel" data-title="站点概览">
-        <div class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <img class="image" itemprop="image" alt="Sukuna"
-      data-src="/images/IMG_1335.PNG">
-  <p class="name" itemprop="name">Sukuna</p>
-  <div class="description" itemprop="description"></div>
+    <div class="icon-github sidebar-social-icon">
+      <a href=https://github.com/Sukunashinmyoumaru-hust || github || &#34;#191717&#34; itemprop="url" target="_blank" aria-label="github" rel="noopener external nofollow noreferrer"></a>
+    </div>
+  
+    <div class="icon-twitter sidebar-social-icon">
+      <a href=https://twitter.com/sukuna_wireless || twitter || &#34;#00aff0&#34; itemprop="url" target="_blank" aria-label="twitter" rel="noopener external nofollow noreferrer"></a>
+    </div>
+  
+    <div class="icon-email sidebar-social-icon">
+      <a href=sukuna@hust.edu.cn || envelope || &#34;#55acd5&#34; itemprop="url" target="_blank" aria-label="email" rel="noopener external nofollow noreferrer"></a>
+    </div>
+  
+    <div class="icon-bilibili sidebar-social-icon">
+      <a href=https://space.bilibili.com/5595530 itemprop="url" target="_blank" aria-label="bilibili" rel="noopener external nofollow noreferrer"></a>
+    </div>
+  
 </div>
-
-<nav class="state">
-    <div class="item posts">
-      <a href="/archives/">
-        <span class="count">25</span>
-        <span class="name">文章</span>
-      </a>
+<div class="sidebar-menu">
+  
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="关于"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/friend" aria-label="友链"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">友链</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" target="_blank" rel="noopener" href="https://github.com/SukunaShinmyoumaru-hust/Hust-opensource-Xuejie" aria-label="HUST-学解"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">HUST-学解</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/picture" aria-label="赠画感谢"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">赠画感谢</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/source" aria-label="资料下载"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">资料下载</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/travel" aria-label="旅行日志"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">旅行日志</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/gbook" aria-label="Sukuna冬令营"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">Sukuna冬令营</div>
+      </div>
+    
+  
+</div>
+</div>
+    
+  </div>
+  
+    <div class="sidebar-btn-wrapper">
+      <div class="sidebar-toc-btn current"></div>
+      <div class="sidebar-common-btn"></div>
     </div>
-    <div class="item categories">
-      <a href="/categories/">
-        <span class="count">3</span>
-        <span class="name">分类</span>
-      </a>
-    </div>
+  
 </nav>
 
-<div class="social">
-      <span class="exturl item github" data-url="aHR0cHM6Ly9naXRodWIuY29tL1N1a3VuYXNoaW5teW91bWFydS1odXN0" title="https:&#x2F;&#x2F;github.com&#x2F;Sukunashinmyoumaru-hust"><i class="ic i-github"></i></span>
-      <span class="exturl item twitter" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9zdWt1bmFfd2lyZWxlc3M=" title="https:&#x2F;&#x2F;twitter.com&#x2F;sukuna_wireless"><i class="ic i-twitter"></i></span>
-      <span class="exturl item music" data-url="aHR0cHM6Ly9tdXNpYy4xNjMuY29tLyMvdXNlci9ob21lP2lkPTI5NDE3ODM1MQ==" title="https:&#x2F;&#x2F;music.163.com&#x2F;#&#x2F;user&#x2F;home?id&#x3D;294178351"><i class="ic i-cloud-music"></i></span>
-      <span class="exturl item about" data-url="aHR0cHM6Ly9zdWt1bmFodXN0Lm1vZS9hYm91dA==" title="https:&#x2F;&#x2F;sukunahust.moe&#x2F;about"><i class="ic i-address-card"></i></span>
-      <a href="/sukuna@hust.edu.cn" title="sukuna@hust.edu.cn" class="item email"><i class="ic i-envelope"></i></a>
-</div>
-
-<ul class="menu">
-  
-    
-  <li class="item">
-    <a href="/" rel="section"><i class="ic i-home"></i>首页</a>
-  </li>
-
-    
-  <li class="item">
-    <a href="/about/" rel="section"><i class="ic i-user"></i>关于</a>
-  </li>
-
-        
-  <li class="item dropdown">
-      <a href="javascript:void(0);"><i class="ic i-feather"></i>文章</a>
-    <ul class="submenu">
-
-        
-  <li class="item">
-    <a href="/archives/" rel="section"><i class="ic i-list-alt"></i>归档</a>
-  </li>
-
-        
-  <li class="item">
-    <a href="/categories/" rel="section"><i class="ic i-th"></i>分类</a>
-  </li>
-
-        
-  <li class="item">
-    <a href="/tags/" rel="section"><i class="ic i-tags"></i>标签</a>
-  </li>
-
-  </ul>
-    
-  <li class="item">
-    <a href="/friend/" rel="section"><i class="ic i-heart"></i>友链</a>
-  </li>
-
-    
-  <li class="item">
-    <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1N1a3VuYVNoaW5teW91bWFydS1odXN0L0h1c3Qtb3BlbnNvdXJjZS1YdWVqaWU="><i class="ic i-github"></i>HUST-学解</span>
-  </li>
-
-    
-  <li class="item">
-    <a href="/picture/" rel="section"><i class="ic i-magic"></i>赠画感谢</a>
-  </li>
-
-    
-  <li class="item">
-    <a href="/source/" rel="section"><i class="ic i-address-card"></i>资料下载</a>
-  </li>
-
-    
-  <li class="item">
-    <a href="/travel/" rel="section"><i class="ic i-heart"></i>旅行日志</a>
-  </li>
-
-    
-  <li class="item">
-    <a href="/gbook/" rel="section"><i class="ic i-magic"></i>Sukuna冬令营</a>
-  </li>
-
-    
-  <li class="item">
-    <span class="exturl" data-url="aHR0cHM6Ly9nMmNlemVwZC55aWNoYWZlbi5jb20="><i class="ic i-magic"></i>相关查询</span>
-  </li>
-
-
-</ul>
-
-      </div>
     </div>
-  </div>
-
-  <ul id="quick">
-    <li class="prev pjax">
-        <a href="/2021/04/25/verilog/" rel="prev" title="上一篇"><i class="ic i-chevron-left"></i></a>
-    </li>
-    <li class="up"><i class="ic i-arrow-up"></i></li>
-    <li class="down"><i class="ic i-arrow-down"></i></li>
-    <li class="next pjax">
-        <a href="/2021/12/18/oslab2/" rel="next" title="下一篇"><i class="ic i-chevron-right"></i></a>
-    </li>
-    <li class="percent"></li>
-  </ul>
-</div>
-
-
-        </div>
-        <div class="dimmer"></div>
-      </div>
-    </main>
-    <footer id="footer">
-      <div class="inner">
-        <div class="widgets">
-          
-
-        </div>
-        <div class="status">
-  <div class="copyright">
     
-    &copy; 2020 – 
-    <span itemprop="copyrightYear">2024</span>
-    <span class="with-love">
-      <i class="ic i-sakura rotate"></i>
-    </span>
-    <span class="author" itemprop="copyrightHolder">Sukuna @ Suwa shrine</span>
-  </div>
-  <div class="count">
-    <span class="post-meta-item-icon">
-      <i class="ic i-chart-area"></i>
-    </span>
-    <span title="站点总字数">463k 字</span>
+    
+<script src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js" integrity="sha384-3gT&#x2F;vsepWkfz&#x2F;ff7PpWNUeMzeWoH3cDhm&#x2F;A8jM7ouoAK0&#x2F;fP&#x2F;9bcHHR5kHq2nf+e" crossorigin="anonymous"></script>
 
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item-icon">
-      <i class="ic i-coffee"></i>
-    </span>
-    <span title="站点阅读时长">7:01</span>
-  </div>
-  <div class="powered-by">
-    基于 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & Theme.<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FtZWhpbWUvaGV4by10aGVtZS1zaG9rYQ==">Shoka</span>
+
+<script src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js" integrity="sha384-J08i8An&#x2F;QeARD9ExYpvphB8BsyOj3Gh2TSh1aLINKO3L0cMSH2dN3E22zFoXEi0Q" crossorigin="anonymous"></script>
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+  
+<script src="/js/aos.js"></script>
+
+  <script>
+    var aosInit = () => {
+      AOS.init({
+        duration: 1000,
+        easing: "ease",
+        once: true,
+        offset: 50,
+      });
+    };
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', aosInit);
+    } else {
+      aosInit();
+    }
+  </script>
+
+
+
+<script src="/js/pjax_script.js" data-pjax></script>
+
+
+
+
+
+
+
+  
+<script src="https://npm.webcache.cn/mouse-firework@0.0.6/dist/index.umd.js" integrity="sha384-vkGvf25gm1C1PbcoD5dNfc137HzNL&#x2F;hr1RKA5HniJOaawtvUmH5lTVFgFAruE9Ge" crossorigin="anonymous"></script>
+
+  <script>
+    window.firework && window.firework(JSON.parse('{"excludeElements":["a","button"],"particles":[{"shape":"circle","move":["emit"],"easing":"easeOutExpo","colors":["#ff5252","#ff7c7c","#ffafaf","#ffd0d0"],"number":20,"duration":[1200,1800],"shapeOptions":{"radius":[16,32],"alpha":[0.3,0.5]}},{"shape":"circle","move":["diffuse"],"easing":"easeOutExpo","colors":["#ff0000"],"number":1,"duration":[1200,1800],"shapeOptions":{"radius":20,"alpha":[0.2,0.5],"lineWidth":6}}]}'))
+  </script>
+
+
+
+  
+<script src="https://npm.webcache.cn/theme-shokax-pjax@0.0.3/dist/index.umd.js" integrity="sha384-xneY1WY8hOfUzswrE4CrYq35N4BdVcxqxwHPr9zawE&#x2F;jMSCxD+jAPU55x&#x2F;jj3wlf" crossorigin="anonymous"></script>
+
+  <script>
+    function loadScripts(scripts, index) {
+      if (index < scripts.length) {
+        const script = scripts[index];
+        const src = script.getAttribute('src');
+
+        const loadScript = (scriptContent) => {
+          const scriptElement = document.createElement('script');
+          if (script.type) {
+            scriptElement.type = script.type;
+          }
+          scriptElement.text = scriptContent;
+          document.head.appendChild(scriptElement);
+          loadScripts(scripts, index + 1);
+        }
+
+        if (src) {
+          fetch(src)
+            .then(response => {
+              if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+              }
+              return response.text();
+            })
+            .then(scriptContent => {
+              loadScript(scriptContent);
+            })
+            .catch(error => {
+              console.error('Failed to load script:', src, error);
+            });
+        } else {
+          loadScript(script.text);
+        }
+      }
+    }
+    window.Pjax && new window.Pjax({
+      selectors: [
+        "#header img",
+        "#header picture",
+        "head title",
+        "#header-title",
+        "#subtitle-wrap",
+        "#content",
+        '#mobile-nav',
+        '#lazy-script'
+      ],
+      switches: {
+        "#header-title": Pjax.switches.outerHTML,
+        "#subtitle-wrap": Pjax.switches.outerHTML,
+        "#content": function(oldEl, newEl) {
+          const scripts = [...newEl.querySelectorAll('script')];
+          loadScripts(scripts, 0);
+          oldEl.outerHTML = newEl.outerHTML
+          this.onSwitch()
+        },
+        "#mobile-nav": Pjax.switches.outerHTML,
+        '#lazy-script': function(oldEl, newEl) {
+          const scripts = [...newEl.querySelectorAll('script')];
+          loadScripts(scripts, 0);
+          oldEl.innerHTML = newEl.innerHTML
+          this.onSwitch()
+        },
+      },
+      cacheBust: false
+    })
+  </script>
+  
+<script src="/js/pjax.js"></script>
+
+
+
+
+  <script>
+    function initLive2d() {
+      live2d.init("https://fastly.jsdelivr.net/gh/D-Sketon/plugin-live2d/", {themeTipsPath: ""});
+    }
+  </script>
+  
+<script src="https://fastly.jsdelivr.net/gh/D-Sketon/plugin-live2d/js/live2d-autoload.js" onload="initLive2d &amp;&amp; initLive2d()" async></script>
+
+
+
+
+
+<div id="lazy-script">
+  <div>
+    
+    
+      
+        
+<script src="/js/insert_highlight.js" data-pjax></script>
+
+      
+    
+    
+      <script type="module" data-pjax>
+        const PhotoSwipeLightbox = (await safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe-lightbox.esm.min.js", "sha384-DiL6M/gG+wmTxmCRZyD1zee6lIhawn5TGvED0FOh7fXcN9B0aZ9dexSF/N6lrZi/")).default;
+        
+        const pswp = () => {
+          if (_$$('.article-entry a.article-gallery-item').length > 0) {
+            new PhotoSwipeLightbox({
+              gallery: '.article-entry',
+              children: 'a.article-gallery-item',
+              pswpModule: () => safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8+oTJ7m3DfYEWX1fu1scuS4+s")
+            }).init();
+          }
+          if(_$$('.article-gallery a.article-gallery-item').length > 0) {
+            new PhotoSwipeLightbox({
+              gallery: '.article-gallery',
+              children: 'a.article-gallery-item',
+              pswpModule: () => safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8+oTJ7m3DfYEWX1fu1scuS4+s")
+            }).init();
+          }
+          window.lightboxStatus = 'done';
+          window.removeEventListener('lightbox:ready', pswp);
+        }
+        if(window.lightboxStatus === 'ready') {
+          pswp()
+        } else {
+          window.addEventListener('lightbox:ready', pswp);
+        }
+      </script>
+      
+  
+<script src="https://npm.webcache.cn/valine@1.5.1/dist/Valine.min.js" integrity="sha384-3ma91AExDeMAZ1rjTjaP8V2A2obQE+s5ltKRwYlwdpArz9xVbp0tF3b0VV2ACNPn" crossorigin="anonymous" data-pjax></script>
+
+  <script data-pjax>
+    var GUEST_INFO = ['nick', 'mail', 'link'];
+    var guest_info = 'SukunaFans'.split(',').filter((item) => {
+      return GUEST_INFO.indexOf(item) > -1
+    });
+    var recordIP = JSON.parse('true');
+    var highlight = JSON.parse('true');
+    var visitor = JSON.parse('false');
+
+    new Valine({
+      el: '.vcomment',
+      appId: "xR5C19oD9KiPnawzBUJNSD64-gzGzoHsz",
+      appKey: "BuHN9ATTBOcwMxGPy9IxuI8b",
+      placeholder: "留下你的留言吧",
+      pageSize: '10',
+      avatar: 'mp',
+      lang: 'zh-cn',
+      recordIP: recordIP,
+      highlight: highlight,
+      visitor: visitor,
+      requiredFields: guest_info,
+      path: window.location.pathname
+    });
+  </script>
+
+
+
+
+
+
+
+
+
+    
   </div>
 </div>
 
-      </div>
-    </footer>
-  </div>
-<script data-config type="text/javascript">
-  var LOCAL = {
-    path: '2021/12/18/oslab1/',
-    favicon: {
-      show: "（●´3｀●）あややややや～",
-      hide: "(´Д｀)大変だ！"
-    },
-    search : {
-      placeholder: "文章搜索",
-      empty: "关于 「 ${query} 」，什么也没搜到",
-      stats: "${time} ms 内找到 ${hits} 条结果"
-    },
-    valine: true,fancybox: true,
-    copyright: '复制成功，转载请遵守 <i class="ic i-creative-commons"></i>BY-NC-SA 协议。',
-    ignores : [
-      function(uri) {
-        return uri.includes('#');
-      },
-      function(uri) {
-        return new RegExp(LOCAL.path+"$").test(uri);
+
+  <script>
+    console.log(String.raw`%c 
+ ______     ______     __     __    __     __  __    
+/\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+\ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+ \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+  \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                  
+`,'color: #ff5252;')
+    console.log('%c Theme.Reimu v' + '1.0.0' + ' %c https://github.com/D-Sketon/hexo-theme-reimu ', 'color: white; background: #ff5252; padding:5px 0;', 'padding:4px;border:1px solid #ff5252;')
+  </script>
+  
+
+
+
+  
+<script src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js" integrity="sha384-0M75wtSkhjIInv4coYlaJU83+OypaRCIq2SukQVQX04eGTCBXJDuWAbJet56id+S" crossorigin="anonymous" async></script>
+
+
+
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then((registrations) => {
+      for (let registration of registrations) {
+        registration.unregister();
       }
-    ]
-  };
+    });
+  }
 </script>
 
-<script src="https://cdn.polyfill.io/v2/polyfill.js"></script>
-
-<script src="//cdn.jsdelivr.net/combine/npm/pace-js@1.0.2/pace.min.js,npm/pjax@0.2.8/pjax.min.js,npm/whatwg-fetch@3.4.0/dist/fetch.umd.min.js,npm/animejs@3.2.0/lib/anime.min.js,npm/algoliasearch@4/dist/algoliasearch-lite.umd.js,npm/instantsearch.js@4/dist/instantsearch.production.min.js,npm/lozad@1/dist/lozad.min.js,npm/quicklink@2/dist/quicklink.umd.js"></script>
-
-<script src="/js/app.js?v=0.2.5"></script>
 
 
+  
+    
+<script src="https://npm.webcache.cn/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha384-Wuix6BuhrWbjDBs24bXrjf4ZQ5aFeFWBuKkFekO2t8xFU0iNaLQfp2K6&#x2F;1Nxveei" crossorigin="anonymous" defer data-pjax></script>
+
+    <script data-pjax>
+      window.MathJax = {"tex":{"tags":"ams","useLabelIds":true,"inlineMath":[["$","$"],["\\\\(","\\\\)"]],"displayMath":[["$$","$$"],["\\\\[","\\\\]"]],"processEscapes":true,"processEnvironments":true,"autoload":{"color":[],"colorv2":["color"]},"packages":{"[+]":["noerrors"]}},"options":{"skipHtmlTags":["script","noscript","style","textarea","pre","code"],"ignoreHtmlClass":"tex2jax_ignore","processHtmlClass":"tex2jax_process"},"loader":{"load":["input/asciimath","[tex]/noerrors"]}};
+    </script>
+  
 
 
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":200,"height":400},"mobile":{"show":false},"log":false});</script></body>
-</html>
+  <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+  </html>
+

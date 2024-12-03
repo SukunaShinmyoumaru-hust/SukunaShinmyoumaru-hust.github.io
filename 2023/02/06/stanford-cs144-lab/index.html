@@ -1,175 +1,400 @@
 
-
-
-
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#FFF">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/1.jpg">
-
-<link rel="icon" type="image/ico" sizes="32x32" href="/images/favicon.ico">
-  <link rel="mask-icon" href="/images/1.jpg" color="">
-  <link rel="manifest" href="/images/manifest.json">
-  <meta name="msapplication-config" content="/images/browserconfig.xml">
-  <meta http-equiv="Cache-Control" content="no-transform">
-  <meta http-equiv="Cache-Control" content="no-siteapp">
-
-
-<link rel="alternate" type="application/rss+xml" title="灵山之上神风起" href="https://sukunashinmyoumaru-hust.github.io/rss.xml" />
-<link rel="alternate" type="application/atom+xml" title="灵山之上神风起" href="https://sukunashinmyoumaru-hust.github.io/atom.xml" />
-<link rel="alternate" type="application/json" title="灵山之上神风起" href="https://sukunashinmyoumaru-hust.github.io/feed.json" />
-
-<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Mulish:300,300italic,400,400italic,700,700italic%7CFredericka%20the%20Great:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20JP:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20SC:300,300italic,400,400italic,700,700italic%7CInconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
-
-<link rel="stylesheet" href="/css/app.css?v=0.2.5">
+  <!DOCTYPE html>
+  <html lang="zh-CN"  >
+  <head>
+  <meta charset="utf-8">
+  
 
   
 
-<link rel="canonical" href="https://sukunashinmyoumaru-hust.github.io/2023/02/06/stanford-cs144-lab/">
+  
 
-
-
+  
+  <script>window.REIMU_CONFIG = {};window.REIMU_CONFIG.icon_font = '4552607_tq6stt6tcg';window.REIMU_CONFIG.clipboard_tips = {"success":"复制成功(*^▽^*)","fail":"复制失败 (ﾟ⊿ﾟ)ﾂ","copyright":{"enable":false,"count":50,"content":"本文版权：本博客所有文章除特别声明外，均采用 BY-NC-SA 许可协议。转载请注明出处！"}};</script>
+  
+  
   <title>
-Stanford CS144 Lab - 实验记录 |
-Suwa shrine = 灵山之上神风起 = 一个普通的华中科技大学在读硕士研究生</title>
-</head>
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div id="loading">
-    <div class="cat">
-      <div class="body"></div>
-      <div class="head">
-        <div class="face"></div>
-      </div>
-      <div class="foot">
-        <div class="tummy-end"></div>
-        <div class="bottom"></div>
-        <div class="legs left"></div>
-        <div class="legs right"></div>
-      </div>
-      <div class="paw">
-        <div class="hands left"></div>
-        <div class="hands right"></div>
-      </div>
-    </div>
-  </div>
-  <div id="container">
-    <header id="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="inner">
-        <div id="brand">
-          <div class="pjax">
-          
-  <h1 itemprop="name headline">Stanford CS144 Lab
-  </h1>
+    Stanford CS144 Lab |
+    
+    Suwa shrine
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin><link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=&display=swap" media="print" onload="this.media&#x3D;&#39;all&#39;">
   
-<div class="meta">
-  <span class="item" title="创建时间：2023-02-06 10:50:55">
-    <span class="icon">
-      <i class="ic i-calendar"></i>
-    </span>
-    <span class="text">发表于</span>
-    <time itemprop="dateCreated datePublished" datetime="2023-02-06T10:50:55+08:00">2023-02-06</time>
-  </span>
-  <span class="item" title="本文字数">
-    <span class="icon">
-      <i class="ic i-pen"></i>
-    </span>
-    <span class="text">本文字数</span>
-    <span>27k</span>
-    <span class="text">字</span>
-  </span>
-  <span class="item" title="阅读时长">
-    <span class="icon">
-      <i class="ic i-clock"></i>
-    </span>
-    <span class="text">阅读时长</span>
-    <span>25 分钟</span>
-  </span>
-</div>
+    <link rel="preload" href="//at.alicdn.com/t/c/font_4552607_tq6stt6tcg.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  
+  
+    
+<link rel="stylesheet" href="/css/loader.css">
 
+  
+  
+    <meta name="description" content="Lab0.Warm Up1 Networking by hand这一个部分主要是体验一些基本的应用层协议,主要是HTTP协议和SMTP协议.  Both of these tasks rely on a networking abstraction called a reliable bidirectional in-order byte stream: you’ll type a sequenc">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Stanford CS144 Lab">
+<meta property="og:url" content="https://sukunashinmyoumaru-hust.github.io/2023/02/06/stanford-cs144-lab/index.html">
+<meta property="og:site_name" content="Suwa shrine">
+<meta property="og:description" content="Lab0.Warm Up1 Networking by hand这一个部分主要是体验一些基本的应用层协议,主要是HTTP协议和SMTP协议.  Both of these tasks rely on a networking abstraction called a reliable bidirectional in-order byte stream: you’ll type a sequenc">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://sukunahust.com/wp-content/uploads/2022/03/image-22-1024x617.png">
+<meta property="article:published_time" content="2023-02-06T02:50:55.000Z">
+<meta property="article:modified_time" content="2024-12-03T06:26:25.677Z">
+<meta property="article:author" content="Sukuna">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://sukunahust.com/wp-content/uploads/2022/03/image-22-1024x617.png">
+  
+  
+    <link rel="alternate" href="/atom.xml" title="Suwa shrine" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/images/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
 
-          </div>
-        </div>
-        <nav id="nav">
-  <div class="inner">
-    <div class="toggle">
-      <div class="lines" aria-label="切换导航栏">
-        <span class="line"></span>
-        <span class="line"></span>
-        <span class="line"></span>
+  <link rel="preload" href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  
+    
+  
+  
+  
+  
+    
+<script src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js" integrity="sha384-k6YtvFUEIuEFBdrLKJ3YAUbBki333tj1CSUisai5Cswsg9wcLNaPzsTHDswp4Az8" crossorigin="anonymous"></script>
+
+  
+  
+    
+<link rel="stylesheet" href="https://npm.webcache.cn/@reimujs/aos@0.1.0/dist/aos.css">
+
+  
+  
+</head>
+
+  <body>
+    
+  <div id='loader'>
+    <div class="loading-left-bg loading-bg"></div>
+    <div class="loading-right-bg loading-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi">
+        
+          <svg width="150" height="150" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="https://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+            <path d="M303.5 432A80 80 0 0 1 291.5 592A80 80 0 0 1 303.5 432z" fill="var(--red-1, #ff5252)" />
+            <path d="M512 65A447 447 0 0 1 512 959L512 929A417 417 0 0 0 512 95A417 417 0 0 0 512 929L512 959A447 447 0 0 1 512 65z 
+           M512 95A417 417 0 0 1 929 512A208.5 208.5 0 0 1 720.5 720.5L720.5 592A80 80 0 0 0 720.5 432A80 80 0 0 0 720.5 592L720.5 720.5A208.5 208.5 0 0 1 512 512A208.5 208.5 0 0 0 303.5 303.5A208.5 208.5 0 0 0 95 512A417 417 0 0 1 512 95z" fill="var(--red-1, #ff5252)" />
+          </svg>
+        
       </div>
+      <div class="loading-word">少女祈祷中...</div>
     </div>
-    <ul class="menu">
-      <li class="item title"><a href="/" rel="start">Suwa shrine</a></li>
-    </ul>
-    <ul class="right">
-      <li class="item theme">
-        <i class="ic i-sun"></i>
-      </li>
-      <li class="item search">
-        <i class="ic i-search"></i>
-      </li>
-    </ul>
   </div>
-</nav>
+  </div>
+  <script>
+    var time = null;
+    var startLoading = () => {
+      time = Date.now();
+      document.getElementById('loader').classList.remove("loading");
+    }
+    var endLoading = () => {
+      if (!time) {
+        document.body.style.overflow = 'auto';
+        document.getElementById('loader').classList.add("loading");
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          document.body.style.overflow = 'auto';
+          document.getElementById('loader').classList.add("loading");
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('DOMContentLoaded', endLoading);
+    document.getElementById('loader').addEventListener('click', endLoading);
+  </script>
 
-      </div>
-      <div id="imgs" class="pjax">
-        <ul>
-          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/f841728a51c3ae78.jpg"></li>
-          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/bac1b1e69e7ebfb7.jpg"></li>
-          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/5d3d43e0f7dc0697.jpg"></li>
-          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/7c97ca6398f62495.jpg"></li>
-          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/97c3cfc23ec60f4c.jpg"></li>
-          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/7d2279310f1bb2f7.jpg"></li>
-        </ul>
-      </div>
-    </header>
-    <div id="waves">
-      <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
-        <defs>
-          <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
-        </defs>
-        <g class="parallax">
-          <use xlink:href="#gentle-wave" x="48" y="0" />
-          <use xlink:href="#gentle-wave" x="48" y="3" />
-          <use xlink:href="#gentle-wave" x="48" y="5" />
-          <use xlink:href="#gentle-wave" x="48" y="7" />
-        </g>
-      </svg>
-    </div>
-    <main>
-      <div class="inner">
-        <div id="main" class="pjax">
-          
-  <div class="article wrap">
-    
-<div class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
-<i class="ic i-home"></i>
-<span><a href="/">首页</a></span><i class="ic i-angle-right"></i>
-<span  class="current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" itemprop="item" rel="index" title="分类于 实验记录"><span itemprop="name">实验记录</span></a>
-<meta itemprop="position" content="1" /></span>
+<div id="copy-tooltip" style="pointer-events: none; opacity: 0; transition: all 0.2s ease; position: fixed;top: 50%;left: 50%;z-index: 999;transform: translate(-50%, -50%);color: white;background: rgba(0, 0, 0, 0.5);padding: 10px 15px;border-radius: 10px;">
 </div>
 
-    <article itemscope itemtype="http://schema.org/Article" class="post block" lang="zh-CN">
-  <link itemprop="mainEntityOfPage" href="https://sukunashinmyoumaru-hust.github.io/2023/02/06/stanford-cs144-lab/">
 
-  <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="image" content="/images/IMG_1335.PNG">
-    <meta itemprop="name" content="Sukuna">
-    <meta itemprop="description" content="一个普通的华中科技大学在读硕士研究生, ">
-  </span>
+    <div id="container">
+      <div id="wrap">
+        <div id="header-nav">
+  <nav id="main-nav">
+    
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/">首页</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/archives">归档</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/about">关于</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/friend">友链</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" target="_blank" rel="noopener" href="https://github.com/SukunaShinmyoumaru-hust/Hust-opensource-Xuejie">HUST-学解</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/picture">赠画感谢</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/source">资料下载</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/travel">旅行日志</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/gbook">Sukuna冬令营</a>
+        </span>
+      
+    
+    <a id="main-nav-toggle" class="nav-icon"></a>
+  </nav>
+  <nav id="sub-nav">
+    
+      <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅" target="_blank"></a>
+    
+    
+    
+  </nav>
+</div>
+<header id="header">
+  
+    
+      <img fetchpriority="high" src="/images/IMG_0700.JPG" alt="Stanford CS144 Lab">
+    
+  
+  <div id="header-outer">
+    <div id="header-title">
+      
+        
+        
+          <a href="/" id="logo">
+            <h1 data-aos="slide-up">Stanford CS144 Lab</h1>
+          </a>
+        
+      
+      
+        
+        <h2 id="subtitle-wrap" data-aos="slide-down">
+          
+        </h2>
+      
+    </div>
+  </div>
+</header>
 
-  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="灵山之上神风起">
-  </span>
+        <div id="content">
+          
+            <aside id="sidebar">
+  <div class="sidebar-wrapper wrap-sticky">
+    <div class="sidebar-wrap" data-aos="fade-up">
+      
+        <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">文章目录</h3>
+  <div class="sidebar-toc-wrapper toc-div-class" >
+      
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Lab0-Warm-Up"><span class="toc-number">1.</span> <span class="toc-text">Lab0.Warm Up</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Networking-by-hand"><span class="toc-number">1.1.</span> <span class="toc-text">1 Networking by hand</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E8%87%AA%E5%88%B6Socket"><span class="toc-number">1.2.</span> <span class="toc-text">2 自制Socket</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E7%BC%93%E5%86%B2%E5%8C%BA%E9%98%9F%E5%88%97"><span class="toc-number">1.3.</span> <span class="toc-text">3 缓冲区队列</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Lab1-stitching-substrings-into-a-byte-stream"><span class="toc-number">2.</span> <span class="toc-text">Lab1.stitching substrings into a byte stream</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Lab2-TCP-Reciever"><span class="toc-number">3.</span> <span class="toc-text">Lab2.TCP Reciever</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%9D%E5%AF%B9%E5%BA%8F%E5%8F%B7%E5%92%8C%E7%9B%B8%E5%AF%B9%E5%BA%8F%E5%8F%B7%E7%9A%84%E8%BD%AC%E6%8D%A2"><span class="toc-number">3.1.</span> <span class="toc-text">绝对序号和相对序号的转换:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Implementing-the-TCP-receiver"><span class="toc-number">3.2.</span> <span class="toc-text">Implementing the TCP receiver</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Lab3-TCP-Sender"><span class="toc-number">4.</span> <span class="toc-text">Lab3 TCP Sender</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Lab4-TCP-Connnection"><span class="toc-number">5.</span> <span class="toc-text">Lab4 TCP Connnection</span></a></li></ol>
+      
+  </div>
+</div>
+</div>
+        <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/IMG_1335.PNG" data-sizes="auto" alt="Sukuna" class="lazyload">
+  <div class="sidebar-author-name">Sukuna</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">25</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">3</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">0</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+    <div class="icon-github sidebar-social-icon">
+      <a href=https://github.com/Sukunashinmyoumaru-hust || github || &#34;#191717&#34; itemprop="url" target="_blank" aria-label="github" rel="noopener external nofollow noreferrer"></a>
+    </div>
+  
+    <div class="icon-twitter sidebar-social-icon">
+      <a href=https://twitter.com/sukuna_wireless || twitter || &#34;#00aff0&#34; itemprop="url" target="_blank" aria-label="twitter" rel="noopener external nofollow noreferrer"></a>
+    </div>
+  
+    <div class="icon-email sidebar-social-icon">
+      <a href=sukuna@hust.edu.cn || envelope || &#34;#55acd5&#34; itemprop="url" target="_blank" aria-label="email" rel="noopener external nofollow noreferrer"></a>
+    </div>
+  
+    <div class="icon-bilibili sidebar-social-icon">
+      <a href=https://space.bilibili.com/5595530 itemprop="url" target="_blank" aria-label="bilibili" rel="noopener external nofollow noreferrer"></a>
+    </div>
+  
+</div>
+<div class="sidebar-menu">
+  
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="关于"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/friend" aria-label="友链"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">友链</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" target="_blank" rel="noopener" href="https://github.com/SukunaShinmyoumaru-hust/Hust-opensource-Xuejie" aria-label="HUST-学解"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">HUST-学解</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/picture" aria-label="赠画感谢"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">赠画感谢</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/source" aria-label="资料下载"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">资料下载</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/travel" aria-label="旅行日志"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">旅行日志</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/gbook" aria-label="Sukuna冬令营"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">Sukuna冬令营</div>
+      </div>
+    
+  
+</div>
+</div>
+      
+      
+        <div class="sidebar-btn-wrapper" style="position:static">
+          <div class="sidebar-toc-btn current"></div>
+          <div class="sidebar-common-btn"></div>
+        </div>
+      
+    </div>
+  </div>
 
-  <div class="body md" itemprop="articleBody">
+  
+  
+</aside>
+
+          
+          <section id="main"><article id="post-stanford-cs144-lab" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner" data-aos="fade-up">
+    <div class="article-meta">
+      <div class="article-date">
+  <a href="/2023/02/06/stanford-cs144-lab/" class="article-date-link" data-aos="zoom-in">
+    <time datetime="2023-02-06T02:50:55.000Z" itemprop="datePublished">2023-02-06</time>
+    <time style="display: none;" id="post-update-time">2024-12-03</time>
+  </a>
+</div>
+
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" data-aos="zoom-in">实验记录</a>
+  </div>
+
+
+    </div>
+    <div class="hr-line"></div>
     
 
-    <h1 id="Lab0-Warm-Up"><a href="#Lab0-Warm-Up" class="headerlink" title="Lab0.Warm Up"></a>Lab0.Warm Up</h1><h2 id="1-Networking-by-hand"><a href="#1-Networking-by-hand" class="headerlink" title="1 Networking by hand"></a>1 Networking by hand</h2><p>这一个部分主要是体验一些基本的应用层协议,主要是HTTP协议和SMTP协议.</p>
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+      
+        <h1 id="Lab0-Warm-Up"><a href="#Lab0-Warm-Up" class="headerlink" title="Lab0.Warm Up"></a>Lab0.Warm Up</h1><h2 id="1-Networking-by-hand"><a href="#1-Networking-by-hand" class="headerlink" title="1 Networking by hand"></a>1 Networking by hand</h2><p>这一个部分主要是体验一些基本的应用层协议,主要是HTTP协议和SMTP协议.</p>
 <blockquote>
 <p>Both of these tasks rely on a networking abstraction called a reliable bidirectional in-order byte stream: you’ll type a sequence of bytes into the terminal, and the same sequence of bytes will eventually be delivered, in the same order, to a program running on another computer (a server). The server responds with its own sequence of bytes, delivered back to your terminal.</p>
 </blockquote>
@@ -180,7 +405,7 @@ Suwa shrine = 灵山之上神风起 = 一个普通的华中科技大学在读硕
 <p>Socket在Linux操作系统中本质上就是一个文件,一旦两个Socket相互连接,应用程序会往一个Socket递交数据,另外一个Socket就会原封不动地把数据传递过来.连接的方式在运输层有讲,客户端的一个网络端口创建一个Socket,往服务器的一个网络端口发送请求,这是第一次握手,接着服务器的网络端口传输ACK给客户端,这是第二次握手,接着客户端会传输一个最后的请求,这个叫三次握手.三次握手后,连接就完成了,这个时候两个Socket(可以理解成网络端口?)相互链接了.</p>
 <p>需要注意的是,在应用层我们一般是注重逻辑通信,Socket是一个逻辑概念,应用程序把数据投给一个叫做Socket的东西,你可以理解成逻辑通信的一端,但是具体Socket往下是怎么做的不是应用程序需要关注的.</p>
 <p>这个实验就需要我们模拟一个Socket应用,与一个服务器的端口建立连接.然后获取网页.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">void get_URL(const string &amp;host, const string &amp;path) &#123;</span><br><span class="line">    // Your code here.</span><br><span class="line"></span><br><span class="line">    // You will need to connect to the &quot;http&quot; service on</span><br><span class="line">    // the computer whose name is in the &quot;host&quot; string,</span><br><span class="line">    // then request the URL path given in the &quot;path&quot; string.</span><br><span class="line"></span><br><span class="line">    // Then you&#x27;ll need to print out everything the server sends back,</span><br><span class="line">    // (not just one call to rearequestd() -- everything) until you reach</span><br><span class="line">    // the &quot;eof&quot; (end of file).</span><br><span class="line">    // create a TCPSocket</span><br><span class="line">    TCPSocket client_socket;</span><br><span class="line">    // connect with host. host is a parameter.</span><br><span class="line">    client_socket.connect(Address(host, &quot;http&quot;));</span><br><span class="line">    // send a request Message. the request is made of 2 sentences.</span><br><span class="line">    string request = &quot;GET &quot;+path+&quot; HTTP/1.1\r\n&quot;+&quot;Host: &quot;+host+&quot;\r\nConnection: close\r\n\r\n&quot;;</span><br><span class="line">    client_socket.write(request);</span><br><span class="line"></span><br><span class="line">    // get the Message</span><br><span class="line">    while(!client_socket.eof())&#123;</span><br><span class="line">        string reply = client_socket.read();</span><br><span class="line">        cout&lt;&lt;reply;</span><br><span class="line">    &#125;</span><br><span class="line">    cerr &lt;&lt; &quot;Function called: get_URL(&quot; &lt;&lt; host &lt;&lt; &quot;, &quot; &lt;&lt; path &lt;&lt; &quot;).\n&quot;;</span><br><span class="line">    cerr &lt;&lt; &quot;Warning: get_URL() has not been implemented yet.\n&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">get_URL</span><span class="params">(<span class="type">const</span> <span class="built_in">string</span> &amp;host, <span class="type">const</span> <span class="built_in">string</span> &amp;path)</span> &#123;</span><br><span class="line">    <span class="comment">// Your code here.</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// You will need to connect to the &quot;http&quot; service on</span></span><br><span class="line">    <span class="comment">// the computer whose name is in the &quot;host&quot; string,</span></span><br><span class="line">    <span class="comment">// then request the URL path given in the &quot;path&quot; string.</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// Then you&#x27;ll need to print out everything the server sends back,</span></span><br><span class="line">    <span class="comment">// (not just one call to rearequestd() -- everything) until you reach</span></span><br><span class="line">    <span class="comment">// the &quot;eof&quot; (end of file).</span></span><br><span class="line">    <span class="comment">// create a TCPSocket</span></span><br><span class="line">    TCPSocket client_socket;</span><br><span class="line">    <span class="comment">// connect with host. host is a parameter.</span></span><br><span class="line">    client_socket.connect(Address(host, <span class="string">&quot;http&quot;</span>));</span><br><span class="line">    <span class="comment">// send a request Message. the request is made of 2 sentences.</span></span><br><span class="line">    <span class="built_in">string</span> request = <span class="string">&quot;GET &quot;</span>+path+<span class="string">&quot; HTTP/1.1\r\n&quot;</span>+<span class="string">&quot;Host: &quot;</span>+host+<span class="string">&quot;\r\nConnection: close\r\n\r\n&quot;</span>;</span><br><span class="line">    client_socket.write(request);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// get the Message</span></span><br><span class="line">    <span class="keyword">while</span>(!client_socket.eof())&#123;</span><br><span class="line">        <span class="built_in">string</span> reply = client_socket.read();</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;reply;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cerr</span> &lt;&lt; <span class="string">&quot;Function called: get_URL(&quot;</span> &lt;&lt; host &lt;&lt; <span class="string">&quot;, &quot;</span> &lt;&lt; path &lt;&lt; <span class="string">&quot;).\n&quot;</span>;</span><br><span class="line">    <span class="built_in">cerr</span> &lt;&lt; <span class="string">&quot;Warning: get_URL() has not been implemented yet.\n&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>这个时候先创建一个TCPSocket,首先先进行连接,然后像之前一样创建request,接着这个Socket就可以把request写进去.然后服务器会返回数据,这个数据是读取到Socket的,读数据一直读到EOF即可.</p>
 <p>由于这个实验是面向初学者的,具体Socket怎么读怎么写我们没有考虑,我们只用调用教授已经写好的写,读操作.</p>
@@ -193,14 +418,14 @@ Suwa shrine = 灵山之上神风起 = 一个普通的华中科技大学在读硕
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">class baba (const int abab) _abab(abab)&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>这个本质上就是数据结构题,完成缓冲区队列罢了.</p>
-<p><img data-src="https://sukunahust.com/wp-content/uploads/2022/03/image-22-1024x617.png"></p>
+<p><img src="https://sukunahust.com/wp-content/uploads/2022/03/image-22-1024x617.png"></p>
 <h1 id="Lab1-stitching-substrings-into-a-byte-stream"><a href="#Lab1-stitching-substrings-into-a-byte-stream" class="headerlink" title="Lab1.stitching substrings into a byte stream"></a>Lab1.stitching substrings into a byte stream</h1><p>该lab要求我们实现一个流重组类，可以将Sender发来的带索引号的字节碎片重组成有序的字节写入到byte_stream。接收端从发送端读取数据，调用流重组器，流重组器对数据进行排序，排序好后写入byte_stream。</p>
 <p>流重组器也是有capasity的,也就是说流重组器也有一定的容量,一次性处理太多的信息会导致流重组器不能够正常地工作.同样的我们把流处理器当成一个双端队列即可.</p>
 <p>private类中还有一个ByteStream类型的变量,所有的内容都输出给ByteStream,还有一个容量变量.其中ByteStream中的bytes_read返回ByteStream处理了多少元素.</p>
 <p>因为重组类的函数中,支持的index是first unread&#x3D;_output.bytes_read()(已经读取的元素)到first unacceptable的这一块区域,我们要保证输入的字节编号是在这个区域里面的.</p>
 <p>在重组器类的函数中，push_substring函数完成重组工作。其参数有data(string),index(size_t),eof(bool),data是待排序的数据，index是数据首元素的序号，eof用于判断是否结束。结束后将不再有数据输入。</p>
 <p>在重组的过程中，我们会遇到重复、丢包、重叠、乱序的现象。为了使乱序的数据找到有序的位置，我使用’\0’维护重组器中数据的相对序号，例如，第一次data为make,index为0,第二次data为great,index为13,而处于两组数据中间的数据未知，我们就用’\0’代替，即make\0\0\0\0\0\0\0\0\0great。这样就维护了已经进入重组器的数据的有序。当然，写入的data中也有可能含有\0,这是，我们就需要一个bool双端队列，来记录相应位置的数据是否有序，在上述例子中，队列的bool值为111100000000011111。</p>
-<p>所以说我们在数据结构中添加几项,一个是_unassembled_byte,是一个<span class="exturl" data-url="c3RkOjpkZXF1ZQ==">std::deque</span><char>,暂时存储还乱序的字符串,_check_byte是<span class="exturl" data-url="c3RkOjpkZXF1ZQ==">std::deque</span><bool>,这个元素与_unassembled_byte一一对应,当un[i]存储着还没有发送的字符的时候,ch[I]&#x3D;true,否则为false,还有一个_lens_un,这个记录乱序的字符的长度.</p>
+<p>所以说我们在数据结构中添加几项,一个是_unassembled_byte,是一个<a href="std::deque">std::deque</a><char>,暂时存储还乱序的字符串,_check_byte是<a href="std::deque">std::deque</a><bool>,这个元素与_unassembled_byte一一对应,当un[i]存储着还没有发送的字符的时候,ch[I]&#x3D;true,否则为false,还有一个_lens_un,这个记录乱序的字符的长度.</p>
 <p>程序的总体结构:</p>
 <p>发送端的数据-&gt;流重组器(重组成有序的数据)-&gt;Bytestream(在Lab0就做好的队列)-&gt;TCP接收端.<br>流重组器需要做的是,把所有有序的数据写入到接收端.<br>其中字符的编号是从1一直往后延伸的,因为队列的首和尾都可以记录.TCP的发送端发送的数据也是(字符号、字符串)字符的编号一直往后延伸.</p>
 <p>这个时候我们回忆一下对应数据的表示:</p>
@@ -274,298 +499,537 @@ Suwa shrine = 灵山之上神风起 = 一个普通的华中科技大学在读硕
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">//! \\param[in] ms_since_last_tick number of milliseconds since the last call to this method</span><br><span class="line">void TCPConnection::tick(const size_t ms_since_last_tick) &#123; </span><br><span class="line">    DUMMY_CODE(ms_since_last_tick); </span><br><span class="line">    if(!_active) return;</span><br><span class="line">    //count</span><br><span class="line">    _time_since_last_segment_received += ms_since_last_tick;</span><br><span class="line">    // tell the sender to tick</span><br><span class="line">    _sender.tick(ms_since_last_tick);</span><br><span class="line">    if(_sender.consecutive_retransmissions()&gt;TCPConfig::MAX_RETX_ATTEMPTS)&#123;</span><br><span class="line">        unclean_shutdown();</span><br><span class="line">    &#125;</span><br><span class="line">    send_sender_segments();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>4、真正的发送信息:读取sender中的消息缓存,然后加上ack和窗口信息信息,发送出去.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">void TCPConnection::send_sender_segments ()&#123;</span><br><span class="line">    //travel the queue to set the ack and windows size.</span><br><span class="line">    while(!_sender.segments_out().empty())&#123;</span><br><span class="line">        TCPSegment seg = _sender.segments_out().front();</span><br><span class="line">        _sender.segments_out().pop();</span><br><span class="line">        // the ack number is bot null</span><br><span class="line">        if(_receiver.ackno().has_value())&#123;</span><br><span class="line">            seg.header().ack=true;</span><br><span class="line">            seg.header().ackno=_receiver.ackno().value();</span><br><span class="line">            seg.header().win=_receiver.window_size();</span><br><span class="line">        &#125;</span><br><span class="line">        _segments_out.push(seg);</span><br><span class="line">    &#125;</span><br><span class="line">    //every time send segment,we need to shutdown.</span><br><span class="line">    clean_shutdown();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      
+        <blockquote class="article-copyright">
+    <p><strong>本文作者：</strong>Sukuna @ Suwa shrine</p>
+    <p><strong>本文链接：</strong><a href="https://sukunashinmyoumaru-hust.github.io/2023/02/06/stanford-cs144-lab/">https://sukunashinmyoumaru-hust.github.io/2023/02/06/stanford-cs144-lab/</a></p>
+    
+    
+    
+    <p><strong>本文版权：</strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener external nofollow noreferrer" target="_blank"><span class="icon-creative-commons"></span>BY-NC-SA</a> 许可协议。转载请注明出处！</p>
+    <span class="icon-creative-commons article-copyright-bg"></span>
+  </blockquote>
+      
+      
+      
+        <a data-aos="zoom-in" href="/2023/02/06/stanford-cs144-lab/#comments" class="article-comment-link">
+          <span class="post-comments-count valine-comment-count" data-xid="/2023/02/06/stanford-cs144-lab/" itemprop="commentCount"></span>
+          留言
+        </a>
+      
+      
+      
+      
+      
+      
+
+    </footer>
   </div>
-
-   <footer>
-
-    <div class="meta">
-  <span class="item">
-    <span class="icon">
-      <i class="ic i-calendar-check"></i>
-    </span>
-    <span class="text">更新于</span>
-    <time title="修改时间：2024-04-12 16:29:56" itemprop="dateModified" datetime="2024-04-12T16:29:56+08:00">2024-04-12</time>
-  </span>
-</div>
-
-      
-<div class="reward">
-  <button><i class="ic i-heartbeat"></i> 赞赏</button>
-  <p>请我喝[茶]~(￣▽￣)~*</p>
-  <div id="qr">
-      
-      <div>
-        <img data-src="/images/wechatpay.jpg" alt="Sukuna 微信支付">
-        <p>微信支付</p>
+  
+  <nav id="article-nav" data-aos="fade-up">
+    
+      <div class="article-nav-link-wrap article-nav-link-left">
+        
+          
+          
+            <img data-src="https://s3.bmp.ovh/imgs/2024/06/17/97c3cfc23ec60f4c.jpg" data-sizes="auto" alt="CMU14-445 Lab" class="lazyload">
+          
+        
+        <a href="/2023/02/07/cmu14-445-lab/"></a>
+        <div class="article-nav-caption">前一篇</div>
+        <h3 class="article-nav-title">
+          
+            CMU14-445 Lab
+          
+        </h3>
       </div>
+    
+    
+    <div class="article-nav-link-wrap article-nav-link-right">
       
-      <div>
-        <img data-src="/images/alipay.jpg" alt="Sukuna 支付宝">
-        <p>支付宝</p>
-      </div>
-  </div>
-</div>
-
+        
+        
+          <img data-src="https://s3.bmp.ovh/imgs/2024/06/17/4663c8f5b7019dfd.jpg" data-sizes="auto" alt="Rustilings 练习笔记" class="lazyload">
+        
       
+      <a href="/2023/02/06/rustilings/"></a>
+      <div class="article-nav-caption">后一篇</div>
+      <h3 class="article-nav-title">
+        
+          Rustilings 练习笔记
+        
+      </h3>
+    </div>
+    
+  </nav>
 
-<div id="copyright">
-<ul>
-  <li class="author">
-    <strong>本文作者： </strong>Sukuna <i class="ic i-at"><em>@</em></i>灵山之上神风起
-  </li>
-  <li class="link">
-    <strong>本文链接：</strong>
-    <a href="https://sukunashinmyoumaru-hust.github.io/2023/02/06/stanford-cs144-lab/" title="Stanford CS144 Lab">https://sukunashinmyoumaru-hust.github.io/2023/02/06/stanford-cs144-lab/</a>
-  </li>
-  <li class="license">
-    <strong>版权声明： </strong>本站所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</span> 许可协议。转载请注明出处！
-  </li>
-</ul>
-</div>
-
-  </footer>
 
 </article>
 
+  <section id="comments" class="vcomment" data-aos="fade-up"></section>
+
+
+
+
+
+
+</section>
+          
+        </div>
+        <footer id="footer">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div class="aplayer no-destroy" data-id="60198" data-server="netease" data-type="playlist" data-fixed="true" data-mini="true" data-autoplay="false"></div>
+  <div id="footer-info">
+    
+    <div>
+      <span class="icon-copyright"></span>
+      2020-2024
+      <span class="footer-info-sep rotate"></span>
+      Sukuna
+    </div>
+    
+      <div>
+        基于&nbsp;<a href="https://hexo.io/" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a>&nbsp;
+        Theme.<a href="https://github.com/D-Sketon/hexo-theme-reimu" rel="noopener external nofollow noreferrer" target="_blank">Reimu</a>
+      </div>
+    
+    
+      <div>
+        <span class="icon-brush"></span>
+        178.4k
+        &nbsp;|&nbsp;
+        <span class="icon-coffee"></span>
+        12:34
+      </div>
+    
+    
+    
+    
+      <div>
+        <span class="icon-eye"></span>
+        <span id="busuanzi_container_site_pv">总访问量&nbsp;<span id="busuanzi_value_site_pv"></span></span>
+        &nbsp;|&nbsp;
+        <span class="icon-user"></span>
+        <span id="busuanzi_container_site_uv">总访客量&nbsp;<span id="busuanzi_value_site_uv"></span></span>
+      </div>
+    
   </div>
   
+</footer>
 
-<div class="post-nav">
-    <div class="item left">
+        
+          <div class="sidebar-top">
+            <div class="sidebar-top-taichi rotate"></div>
+            <div class="arrow-up"></div>
+          </div>
+        
+        <div id="mask" class="hide"></div>
+      </div>
+      <nav id="mobile-nav">
+  <div class="sidebar-wrap">
+    
+      <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">文章目录</h3>
+  <div class="sidebar-toc-wrapper toc-div-class" >
       
-
-  <a href="/2023/02/06/rustilings/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;s3.bmp.ovh&#x2F;imgs&#x2F;2024&#x2F;06&#x2F;17&#x2F;c10853f5c9aee06c.jpg" title="Rustilings 练习笔记">
-  <span class="type">上一篇</span>
-  <span class="category"><i class="ic i-flag"></i> 实验记录</span>
-  <h3>Rustilings 练习笔记</h3>
-  </a>
-
-    </div>
-    <div class="item right">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Lab0-Warm-Up"><span class="toc-number">1.</span> <span class="toc-text">Lab0.Warm Up</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Networking-by-hand"><span class="toc-number">1.1.</span> <span class="toc-text">1 Networking by hand</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E8%87%AA%E5%88%B6Socket"><span class="toc-number">1.2.</span> <span class="toc-text">2 自制Socket</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E7%BC%93%E5%86%B2%E5%8C%BA%E9%98%9F%E5%88%97"><span class="toc-number">1.3.</span> <span class="toc-text">3 缓冲区队列</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Lab1-stitching-substrings-into-a-byte-stream"><span class="toc-number">2.</span> <span class="toc-text">Lab1.stitching substrings into a byte stream</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Lab2-TCP-Reciever"><span class="toc-number">3.</span> <span class="toc-text">Lab2.TCP Reciever</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%9D%E5%AF%B9%E5%BA%8F%E5%8F%B7%E5%92%8C%E7%9B%B8%E5%AF%B9%E5%BA%8F%E5%8F%B7%E7%9A%84%E8%BD%AC%E6%8D%A2"><span class="toc-number">3.1.</span> <span class="toc-text">绝对序号和相对序号的转换:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Implementing-the-TCP-receiver"><span class="toc-number">3.2.</span> <span class="toc-text">Implementing the TCP receiver</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Lab3-TCP-Sender"><span class="toc-number">4.</span> <span class="toc-text">Lab3 TCP Sender</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Lab4-TCP-Connnection"><span class="toc-number">5.</span> <span class="toc-text">Lab4 TCP Connnection</span></a></li></ol>
       
-
-  <a href="/2023/02/07/cmu14-445-lab/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;s3.bmp.ovh&#x2F;imgs&#x2F;2024&#x2F;06&#x2F;17&#x2F;7c97ca6398f62495.jpg" title="CMU14-445 Lab">
-  <span class="type">下一篇</span>
-  <span class="category"><i class="ic i-flag"></i> 实验记录</span>
-  <h3>CMU14-445 Lab</h3>
-  </a>
-
-    </div>
+  </div>
 </div>
-
+</div>
+      <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/IMG_1335.PNG" data-sizes="auto" alt="Sukuna" class="lazyload">
+  <div class="sidebar-author-name">Sukuna</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">25</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">3</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">0</div>
+  </div>
+</div>
+<div class="sidebar-social">
   
-  <div class="wrap" id="comments"></div>
-
-
-        </div>
-        <div id="sidebar">
-          
-
-<div class="inner">
-
-  <div class="panels">
-    <div class="inner">
-      <div class="contents panel pjax" data-title="文章目录">
-          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Lab0-Warm-Up"><span class="toc-number">1.</span> <span class="toc-text">Lab0.Warm Up</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Networking-by-hand"><span class="toc-number">1.1.</span> <span class="toc-text">1 Networking by hand</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E8%87%AA%E5%88%B6Socket"><span class="toc-number">1.2.</span> <span class="toc-text">2 自制Socket</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E7%BC%93%E5%86%B2%E5%8C%BA%E9%98%9F%E5%88%97"><span class="toc-number">1.3.</span> <span class="toc-text">3 缓冲区队列</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Lab1-stitching-substrings-into-a-byte-stream"><span class="toc-number">2.</span> <span class="toc-text">Lab1.stitching substrings into a byte stream</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Lab2-TCP-Reciever"><span class="toc-number">3.</span> <span class="toc-text">Lab2.TCP Reciever</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%9D%E5%AF%B9%E5%BA%8F%E5%8F%B7%E5%92%8C%E7%9B%B8%E5%AF%B9%E5%BA%8F%E5%8F%B7%E7%9A%84%E8%BD%AC%E6%8D%A2"><span class="toc-number">3.1.</span> <span class="toc-text">绝对序号和相对序号的转换:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Implementing-the-TCP-receiver"><span class="toc-number">3.2.</span> <span class="toc-text">Implementing the TCP receiver</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Lab3-TCP-Sender"><span class="toc-number">4.</span> <span class="toc-text">Lab3 TCP Sender</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Lab4-TCP-Connnection"><span class="toc-number">5.</span> <span class="toc-text">Lab4 TCP Connnection</span></a></li></ol>
-      </div>
-      <div class="related panel pjax" data-title="系列文章">
-        <ul>
-          <li><a href="/2021/04/25/verilog/" rel="bookmark" title="华中科技大学Verilog实验解析">华中科技大学Verilog实验解析</a></li><li><a href="/2021/12/18/oslab1/" rel="bookmark" title="华中科技大学OS实验解析(Lab1)">华中科技大学OS实验解析(Lab1)</a></li><li><a href="/2021/12/18/oslab2/" rel="bookmark" title="华中科技大学OS实验解析(Lab2)">华中科技大学OS实验解析(Lab2)</a></li><li><a href="/2022/02/26/oschallengelab/" rel="bookmark" title="华中科技大学操作系统挑战实验(PKE)基础解析">华中科技大学操作系统挑战实验(PKE)基础解析</a></li><li><a href="/2023/02/06/rustilings/" rel="bookmark" title="Rustilings 练习笔记">Rustilings 练习笔记</a></li><li class="active"><a href="/2023/02/06/stanford-cs144-lab/" rel="bookmark" title="Stanford CS144 Lab">Stanford CS144 Lab</a></li><li><a href="/2023/02/07/cmu14-445-lab/" rel="bookmark" title="CMU14-445 Lab">CMU14-445 Lab</a></li><li><a href="/2023/02/08/mit-6-s081-lab/" rel="bookmark" title="MIT_6.s081_Lab">MIT_6.s081_Lab</a></li><li><a href="/2023/02/09/mit-6-s081-xv6-information-%E9%9B%86%E5%90%88/" rel="bookmark" title="MIT_6.S081_xv6.Information 集合">MIT_6.S081_xv6.Information 集合</a></li><li><a href="/2023/09/13/nju-pa/" rel="bookmark" title="南大pa">南大pa</a></li><li><a href="/2024/04/17/stanford-cs143-PA/" rel="bookmark" title="Stanford CS143 PA">Stanford CS143 PA</a></li><li><a href="/2024/04/19/mit-6-824-mr/" rel="bookmark" title="MIT_6.824:PA1-MapReduce">MIT_6.824:PA1-MapReduce</a></li><li><a href="/2024/04/28/mit-6-824-raft/" rel="bookmark" title="In Search of an Understandable Consensus Algorithm (Extended Version)">In Search of an Understandable Consensus Algorithm (Extended Version)</a></li>
-        </ul>
-      </div>
-      <div class="overview panel" data-title="站点概览">
-        <div class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <img class="image" itemprop="image" alt="Sukuna"
-      data-src="/images/IMG_1335.PNG">
-  <p class="name" itemprop="name">Sukuna</p>
-  <div class="description" itemprop="description"></div>
+    <div class="icon-github sidebar-social-icon">
+      <a href=https://github.com/Sukunashinmyoumaru-hust || github || &#34;#191717&#34; itemprop="url" target="_blank" aria-label="github" rel="noopener external nofollow noreferrer"></a>
+    </div>
+  
+    <div class="icon-twitter sidebar-social-icon">
+      <a href=https://twitter.com/sukuna_wireless || twitter || &#34;#00aff0&#34; itemprop="url" target="_blank" aria-label="twitter" rel="noopener external nofollow noreferrer"></a>
+    </div>
+  
+    <div class="icon-email sidebar-social-icon">
+      <a href=sukuna@hust.edu.cn || envelope || &#34;#55acd5&#34; itemprop="url" target="_blank" aria-label="email" rel="noopener external nofollow noreferrer"></a>
+    </div>
+  
+    <div class="icon-bilibili sidebar-social-icon">
+      <a href=https://space.bilibili.com/5595530 itemprop="url" target="_blank" aria-label="bilibili" rel="noopener external nofollow noreferrer"></a>
+    </div>
+  
 </div>
-
-<nav class="state">
-    <div class="item posts">
-      <a href="/archives/">
-        <span class="count">25</span>
-        <span class="name">文章</span>
-      </a>
+<div class="sidebar-menu">
+  
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="关于"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/friend" aria-label="友链"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">友链</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" target="_blank" rel="noopener" href="https://github.com/SukunaShinmyoumaru-hust/Hust-opensource-Xuejie" aria-label="HUST-学解"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">HUST-学解</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/picture" aria-label="赠画感谢"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">赠画感谢</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/source" aria-label="资料下载"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">资料下载</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/travel" aria-label="旅行日志"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">旅行日志</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/gbook" aria-label="Sukuna冬令营"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">Sukuna冬令营</div>
+      </div>
+    
+  
+</div>
+</div>
+    
+  </div>
+  
+    <div class="sidebar-btn-wrapper">
+      <div class="sidebar-toc-btn current"></div>
+      <div class="sidebar-common-btn"></div>
     </div>
-    <div class="item categories">
-      <a href="/categories/">
-        <span class="count">3</span>
-        <span class="name">分类</span>
-      </a>
-    </div>
+  
 </nav>
 
-<div class="social">
-      <span class="exturl item github" data-url="aHR0cHM6Ly9naXRodWIuY29tL1N1a3VuYXNoaW5teW91bWFydS1odXN0" title="https:&#x2F;&#x2F;github.com&#x2F;Sukunashinmyoumaru-hust"><i class="ic i-github"></i></span>
-      <span class="exturl item twitter" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9zdWt1bmFfd2lyZWxlc3M=" title="https:&#x2F;&#x2F;twitter.com&#x2F;sukuna_wireless"><i class="ic i-twitter"></i></span>
-      <span class="exturl item music" data-url="aHR0cHM6Ly9tdXNpYy4xNjMuY29tLyMvdXNlci9ob21lP2lkPTI5NDE3ODM1MQ==" title="https:&#x2F;&#x2F;music.163.com&#x2F;#&#x2F;user&#x2F;home?id&#x3D;294178351"><i class="ic i-cloud-music"></i></span>
-      <span class="exturl item about" data-url="aHR0cHM6Ly9zdWt1bmFodXN0Lm1vZS9hYm91dA==" title="https:&#x2F;&#x2F;sukunahust.moe&#x2F;about"><i class="ic i-address-card"></i></span>
-      <a href="/sukuna@hust.edu.cn" title="sukuna@hust.edu.cn" class="item email"><i class="ic i-envelope"></i></a>
-</div>
-
-<ul class="menu">
-  
-    
-  <li class="item">
-    <a href="/" rel="section"><i class="ic i-home"></i>首页</a>
-  </li>
-
-    
-  <li class="item">
-    <a href="/about/" rel="section"><i class="ic i-user"></i>关于</a>
-  </li>
-
-        
-  <li class="item dropdown">
-      <a href="javascript:void(0);"><i class="ic i-feather"></i>文章</a>
-    <ul class="submenu">
-
-        
-  <li class="item">
-    <a href="/archives/" rel="section"><i class="ic i-list-alt"></i>归档</a>
-  </li>
-
-        
-  <li class="item">
-    <a href="/categories/" rel="section"><i class="ic i-th"></i>分类</a>
-  </li>
-
-        
-  <li class="item">
-    <a href="/tags/" rel="section"><i class="ic i-tags"></i>标签</a>
-  </li>
-
-  </ul>
-    
-  <li class="item">
-    <a href="/friend/" rel="section"><i class="ic i-heart"></i>友链</a>
-  </li>
-
-    
-  <li class="item">
-    <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1N1a3VuYVNoaW5teW91bWFydS1odXN0L0h1c3Qtb3BlbnNvdXJjZS1YdWVqaWU="><i class="ic i-github"></i>HUST-学解</span>
-  </li>
-
-    
-  <li class="item">
-    <a href="/picture/" rel="section"><i class="ic i-magic"></i>赠画感谢</a>
-  </li>
-
-    
-  <li class="item">
-    <a href="/source/" rel="section"><i class="ic i-address-card"></i>资料下载</a>
-  </li>
-
-    
-  <li class="item">
-    <a href="/travel/" rel="section"><i class="ic i-heart"></i>旅行日志</a>
-  </li>
-
-    
-  <li class="item">
-    <a href="/gbook/" rel="section"><i class="ic i-magic"></i>Sukuna冬令营</a>
-  </li>
-
-    
-  <li class="item">
-    <span class="exturl" data-url="aHR0cHM6Ly9nMmNlemVwZC55aWNoYWZlbi5jb20="><i class="ic i-magic"></i>相关查询</span>
-  </li>
-
-
-</ul>
-
-      </div>
     </div>
-  </div>
-
-  <ul id="quick">
-    <li class="prev pjax">
-        <a href="/2023/02/06/rustilings/" rel="prev" title="上一篇"><i class="ic i-chevron-left"></i></a>
-    </li>
-    <li class="up"><i class="ic i-arrow-up"></i></li>
-    <li class="down"><i class="ic i-arrow-down"></i></li>
-    <li class="next pjax">
-        <a href="/2023/02/07/cmu14-445-lab/" rel="next" title="下一篇"><i class="ic i-chevron-right"></i></a>
-    </li>
-    <li class="percent"></li>
-  </ul>
-</div>
-
-
-        </div>
-        <div class="dimmer"></div>
-      </div>
-    </main>
-    <footer id="footer">
-      <div class="inner">
-        <div class="widgets">
-          
-
-        </div>
-        <div class="status">
-  <div class="copyright">
     
-    &copy; 2020 – 
-    <span itemprop="copyrightYear">2024</span>
-    <span class="with-love">
-      <i class="ic i-sakura rotate"></i>
-    </span>
-    <span class="author" itemprop="copyrightHolder">Sukuna @ Suwa shrine</span>
-  </div>
-  <div class="count">
-    <span class="post-meta-item-icon">
-      <i class="ic i-chart-area"></i>
-    </span>
-    <span title="站点总字数">463k 字</span>
+    
+<script src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js" integrity="sha384-3gT&#x2F;vsepWkfz&#x2F;ff7PpWNUeMzeWoH3cDhm&#x2F;A8jM7ouoAK0&#x2F;fP&#x2F;9bcHHR5kHq2nf+e" crossorigin="anonymous"></script>
 
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item-icon">
-      <i class="ic i-coffee"></i>
-    </span>
-    <span title="站点阅读时长">7:01</span>
-  </div>
-  <div class="powered-by">
-    基于 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & Theme.<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FtZWhpbWUvaGV4by10aGVtZS1zaG9rYQ==">Shoka</span>
+
+<script src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js" integrity="sha384-J08i8An&#x2F;QeARD9ExYpvphB8BsyOj3Gh2TSh1aLINKO3L0cMSH2dN3E22zFoXEi0Q" crossorigin="anonymous"></script>
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+  
+<script src="/js/aos.js"></script>
+
+  <script>
+    var aosInit = () => {
+      AOS.init({
+        duration: 1000,
+        easing: "ease",
+        once: true,
+        offset: 50,
+      });
+    };
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', aosInit);
+    } else {
+      aosInit();
+    }
+  </script>
+
+
+
+<script src="/js/pjax_script.js" data-pjax></script>
+
+
+
+
+
+
+
+  
+<script src="https://npm.webcache.cn/mouse-firework@0.0.6/dist/index.umd.js" integrity="sha384-vkGvf25gm1C1PbcoD5dNfc137HzNL&#x2F;hr1RKA5HniJOaawtvUmH5lTVFgFAruE9Ge" crossorigin="anonymous"></script>
+
+  <script>
+    window.firework && window.firework(JSON.parse('{"excludeElements":["a","button"],"particles":[{"shape":"circle","move":["emit"],"easing":"easeOutExpo","colors":["#ff5252","#ff7c7c","#ffafaf","#ffd0d0"],"number":20,"duration":[1200,1800],"shapeOptions":{"radius":[16,32],"alpha":[0.3,0.5]}},{"shape":"circle","move":["diffuse"],"easing":"easeOutExpo","colors":["#ff0000"],"number":1,"duration":[1200,1800],"shapeOptions":{"radius":20,"alpha":[0.2,0.5],"lineWidth":6}}]}'))
+  </script>
+
+
+
+  
+<script src="https://npm.webcache.cn/theme-shokax-pjax@0.0.3/dist/index.umd.js" integrity="sha384-xneY1WY8hOfUzswrE4CrYq35N4BdVcxqxwHPr9zawE&#x2F;jMSCxD+jAPU55x&#x2F;jj3wlf" crossorigin="anonymous"></script>
+
+  <script>
+    function loadScripts(scripts, index) {
+      if (index < scripts.length) {
+        const script = scripts[index];
+        const src = script.getAttribute('src');
+
+        const loadScript = (scriptContent) => {
+          const scriptElement = document.createElement('script');
+          if (script.type) {
+            scriptElement.type = script.type;
+          }
+          scriptElement.text = scriptContent;
+          document.head.appendChild(scriptElement);
+          loadScripts(scripts, index + 1);
+        }
+
+        if (src) {
+          fetch(src)
+            .then(response => {
+              if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+              }
+              return response.text();
+            })
+            .then(scriptContent => {
+              loadScript(scriptContent);
+            })
+            .catch(error => {
+              console.error('Failed to load script:', src, error);
+            });
+        } else {
+          loadScript(script.text);
+        }
+      }
+    }
+    window.Pjax && new window.Pjax({
+      selectors: [
+        "#header img",
+        "#header picture",
+        "head title",
+        "#header-title",
+        "#subtitle-wrap",
+        "#content",
+        '#mobile-nav',
+        '#lazy-script'
+      ],
+      switches: {
+        "#header-title": Pjax.switches.outerHTML,
+        "#subtitle-wrap": Pjax.switches.outerHTML,
+        "#content": function(oldEl, newEl) {
+          const scripts = [...newEl.querySelectorAll('script')];
+          loadScripts(scripts, 0);
+          oldEl.outerHTML = newEl.outerHTML
+          this.onSwitch()
+        },
+        "#mobile-nav": Pjax.switches.outerHTML,
+        '#lazy-script': function(oldEl, newEl) {
+          const scripts = [...newEl.querySelectorAll('script')];
+          loadScripts(scripts, 0);
+          oldEl.innerHTML = newEl.innerHTML
+          this.onSwitch()
+        },
+      },
+      cacheBust: false
+    })
+  </script>
+  
+<script src="/js/pjax.js"></script>
+
+
+
+
+  <script>
+    function initLive2d() {
+      live2d.init("https://fastly.jsdelivr.net/gh/D-Sketon/plugin-live2d/", {themeTipsPath: ""});
+    }
+  </script>
+  
+<script src="https://fastly.jsdelivr.net/gh/D-Sketon/plugin-live2d/js/live2d-autoload.js" onload="initLive2d &amp;&amp; initLive2d()" async></script>
+
+
+
+
+
+<div id="lazy-script">
+  <div>
+    
+    
+      
+        
+<script src="/js/insert_highlight.js" data-pjax></script>
+
+      
+    
+    
+      <script type="module" data-pjax>
+        const PhotoSwipeLightbox = (await safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe-lightbox.esm.min.js", "sha384-DiL6M/gG+wmTxmCRZyD1zee6lIhawn5TGvED0FOh7fXcN9B0aZ9dexSF/N6lrZi/")).default;
+        
+        const pswp = () => {
+          if (_$$('.article-entry a.article-gallery-item').length > 0) {
+            new PhotoSwipeLightbox({
+              gallery: '.article-entry',
+              children: 'a.article-gallery-item',
+              pswpModule: () => safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8+oTJ7m3DfYEWX1fu1scuS4+s")
+            }).init();
+          }
+          if(_$$('.article-gallery a.article-gallery-item').length > 0) {
+            new PhotoSwipeLightbox({
+              gallery: '.article-gallery',
+              children: 'a.article-gallery-item',
+              pswpModule: () => safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8+oTJ7m3DfYEWX1fu1scuS4+s")
+            }).init();
+          }
+          window.lightboxStatus = 'done';
+          window.removeEventListener('lightbox:ready', pswp);
+        }
+        if(window.lightboxStatus === 'ready') {
+          pswp()
+        } else {
+          window.addEventListener('lightbox:ready', pswp);
+        }
+      </script>
+      
+  
+<script src="https://npm.webcache.cn/valine@1.5.1/dist/Valine.min.js" integrity="sha384-3ma91AExDeMAZ1rjTjaP8V2A2obQE+s5ltKRwYlwdpArz9xVbp0tF3b0VV2ACNPn" crossorigin="anonymous" data-pjax></script>
+
+  <script data-pjax>
+    var GUEST_INFO = ['nick', 'mail', 'link'];
+    var guest_info = 'SukunaFans'.split(',').filter((item) => {
+      return GUEST_INFO.indexOf(item) > -1
+    });
+    var recordIP = JSON.parse('true');
+    var highlight = JSON.parse('true');
+    var visitor = JSON.parse('false');
+
+    new Valine({
+      el: '.vcomment',
+      appId: "xR5C19oD9KiPnawzBUJNSD64-gzGzoHsz",
+      appKey: "BuHN9ATTBOcwMxGPy9IxuI8b",
+      placeholder: "留下你的留言吧",
+      pageSize: '10',
+      avatar: 'mp',
+      lang: 'zh-cn',
+      recordIP: recordIP,
+      highlight: highlight,
+      visitor: visitor,
+      requiredFields: guest_info,
+      path: window.location.pathname
+    });
+  </script>
+
+
+
+
+
+
+
+
+
+    
   </div>
 </div>
 
-      </div>
-    </footer>
-  </div>
-<script data-config type="text/javascript">
-  var LOCAL = {
-    path: '2023/02/06/stanford-cs144-lab/',
-    favicon: {
-      show: "（●´3｀●）あややややや～",
-      hide: "(´Д｀)大変だ！"
-    },
-    search : {
-      placeholder: "文章搜索",
-      empty: "关于 「 ${query} 」，什么也没搜到",
-      stats: "${time} ms 内找到 ${hits} 条结果"
-    },
-    valine: true,fancybox: true,
-    copyright: '复制成功，转载请遵守 <i class="ic i-creative-commons"></i>BY-NC-SA 协议。',
-    ignores : [
-      function(uri) {
-        return uri.includes('#');
-      },
-      function(uri) {
-        return new RegExp(LOCAL.path+"$").test(uri);
+
+  <script>
+    console.log(String.raw`%c 
+ ______     ______     __     __    __     __  __    
+/\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+\ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+ \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+  \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                  
+`,'color: #ff5252;')
+    console.log('%c Theme.Reimu v' + '1.0.0' + ' %c https://github.com/D-Sketon/hexo-theme-reimu ', 'color: white; background: #ff5252; padding:5px 0;', 'padding:4px;border:1px solid #ff5252;')
+  </script>
+  
+
+
+
+  
+<script src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js" integrity="sha384-0M75wtSkhjIInv4coYlaJU83+OypaRCIq2SukQVQX04eGTCBXJDuWAbJet56id+S" crossorigin="anonymous" async></script>
+
+
+
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then((registrations) => {
+      for (let registration of registrations) {
+        registration.unregister();
       }
-    ]
-  };
+    });
+  }
 </script>
 
-<script src="https://cdn.polyfill.io/v2/polyfill.js"></script>
-
-<script src="//cdn.jsdelivr.net/combine/npm/pace-js@1.0.2/pace.min.js,npm/pjax@0.2.8/pjax.min.js,npm/whatwg-fetch@3.4.0/dist/fetch.umd.min.js,npm/animejs@3.2.0/lib/anime.min.js,npm/algoliasearch@4/dist/algoliasearch-lite.umd.js,npm/instantsearch.js@4/dist/instantsearch.production.min.js,npm/lozad@1/dist/lozad.min.js,npm/quicklink@2/dist/quicklink.umd.js"></script>
-
-<script src="/js/app.js?v=0.2.5"></script>
 
 
+  
+    
+<script src="https://npm.webcache.cn/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha384-Wuix6BuhrWbjDBs24bXrjf4ZQ5aFeFWBuKkFekO2t8xFU0iNaLQfp2K6&#x2F;1Nxveei" crossorigin="anonymous" defer data-pjax></script>
+
+    <script data-pjax>
+      window.MathJax = {"tex":{"tags":"ams","useLabelIds":true,"inlineMath":[["$","$"],["\\\\(","\\\\)"]],"displayMath":[["$$","$$"],["\\\\[","\\\\]"]],"processEscapes":true,"processEnvironments":true,"autoload":{"color":[],"colorv2":["color"]},"packages":{"[+]":["noerrors"]}},"options":{"skipHtmlTags":["script","noscript","style","textarea","pre","code"],"ignoreHtmlClass":"tex2jax_ignore","processHtmlClass":"tex2jax_process"},"loader":{"load":["input/asciimath","[tex]/noerrors"]}};
+    </script>
+  
 
 
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":200,"height":400},"mobile":{"show":false},"log":false});</script></body>
-</html>
+  <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+  </html>
+

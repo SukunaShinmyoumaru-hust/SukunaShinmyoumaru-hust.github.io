@@ -1,175 +1,401 @@
 
-
-
-
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#FFF">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/1.jpg">
-
-<link rel="icon" type="image/ico" sizes="32x32" href="/images/favicon.ico">
-  <link rel="mask-icon" href="/images/1.jpg" color="">
-  <link rel="manifest" href="/images/manifest.json">
-  <meta name="msapplication-config" content="/images/browserconfig.xml">
-  <meta http-equiv="Cache-Control" content="no-transform">
-  <meta http-equiv="Cache-Control" content="no-siteapp">
-
-
-<link rel="alternate" type="application/rss+xml" title="灵山之上神风起" href="https://sukunashinmyoumaru-hust.github.io/rss.xml" />
-<link rel="alternate" type="application/atom+xml" title="灵山之上神风起" href="https://sukunashinmyoumaru-hust.github.io/atom.xml" />
-<link rel="alternate" type="application/json" title="灵山之上神风起" href="https://sukunashinmyoumaru-hust.github.io/feed.json" />
-
-<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Mulish:300,300italic,400,400italic,700,700italic%7CFredericka%20the%20Great:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20JP:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20SC:300,300italic,400,400italic,700,700italic%7CInconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
-
-<link rel="stylesheet" href="/css/app.css?v=0.2.5">
+  <!DOCTYPE html>
+  <html lang="zh-CN"  >
+  <head>
+  <meta charset="utf-8">
+  
 
   
 
-<link rel="canonical" href="https://sukunashinmyoumaru-hust.github.io/2022/03/30/splay/">
+  
 
-
-
+  
+  <script>window.REIMU_CONFIG = {};window.REIMU_CONFIG.icon_font = '4552607_tq6stt6tcg';window.REIMU_CONFIG.clipboard_tips = {"success":"复制成功(*^▽^*)","fail":"复制失败 (ﾟ⊿ﾟ)ﾂ","copyright":{"enable":false,"count":50,"content":"本文版权：本博客所有文章除特别声明外，均采用 BY-NC-SA 许可协议。转载请注明出处！"}};</script>
+  
+  
   <title>
-Splay模版:P3369[模版/普通平衡树] - 算法题 |
-Suwa shrine = 灵山之上神风起 = 一个普通的华中科技大学在读硕士研究生</title>
-</head>
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div id="loading">
-    <div class="cat">
-      <div class="body"></div>
-      <div class="head">
-        <div class="face"></div>
-      </div>
-      <div class="foot">
-        <div class="tummy-end"></div>
-        <div class="bottom"></div>
-        <div class="legs left"></div>
-        <div class="legs right"></div>
-      </div>
-      <div class="paw">
-        <div class="hands left"></div>
-        <div class="hands right"></div>
-      </div>
-    </div>
-  </div>
-  <div id="container">
-    <header id="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="inner">
-        <div id="brand">
-          <div class="pjax">
-          
-  <h1 itemprop="name headline">Splay模版:P3369[模版/普通平衡树]
-  </h1>
+    Splay模版:P3369[模版/普通平衡树] |
+    
+    Suwa shrine
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin><link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=&display=swap" media="print" onload="this.media&#x3D;&#39;all&#39;">
   
-<div class="meta">
-  <span class="item" title="创建时间：2022-03-30 21:20:56">
-    <span class="icon">
-      <i class="ic i-calendar"></i>
-    </span>
-    <span class="text">发表于</span>
-    <time itemprop="dateCreated datePublished" datetime="2022-03-30T21:20:56+08:00">2022-03-30</time>
-  </span>
-  <span class="item" title="本文字数">
-    <span class="icon">
-      <i class="ic i-pen"></i>
-    </span>
-    <span class="text">本文字数</span>
-    <span>7.8k</span>
-    <span class="text">字</span>
-  </span>
-  <span class="item" title="阅读时长">
-    <span class="icon">
-      <i class="ic i-clock"></i>
-    </span>
-    <span class="text">阅读时长</span>
-    <span>7 分钟</span>
-  </span>
-</div>
+    <link rel="preload" href="//at.alicdn.com/t/c/font_4552607_tq6stt6tcg.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  
+  
+    
+<link rel="stylesheet" href="/css/loader.css">
 
+  
+  
+    <meta name="description" content="[latexpage] 题目描述您需要写一种数据结构（可参考题目标题），来维护一些数，其中需要提供以下操作：  插入$x$ 数 删除 $x$ 数(若有多个相同的数，因只删除一个) 查询 $x$ 数的排名(排名定义为比当前数小的数的个数 +1 ) 查询排名为 $x$ 的数 求 $x$ 的前驱(前驱定义为小于 $x$，且最大的数) 求 $x$ 的后继(后继定义为大于 $x$，且最小的数)  输入格式第">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Splay模版:P3369[模版&#x2F;普通平衡树]">
+<meta property="og:url" content="https://sukunashinmyoumaru-hust.github.io/2022/03/30/splay/index.html">
+<meta property="og:site_name" content="Suwa shrine">
+<meta property="og:description" content="[latexpage] 题目描述您需要写一种数据结构（可参考题目标题），来维护一些数，其中需要提供以下操作：  插入$x$ 数 删除 $x$ 数(若有多个相同的数，因只删除一个) 查询 $x$ 数的排名(排名定义为比当前数小的数的个数 +1 ) 查询排名为 $x$ 的数 求 $x$ 的前驱(前驱定义为小于 $x$，且最大的数) 求 $x$ 的后继(后继定义为大于 $x$，且最小的数)  输入格式第">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://sukunahust.com/wp-content/uploads/2022/03/1A952F557921D8DA96AB618F3912CFFE-1024x473.jpg">
+<meta property="og:image" content="https://sukunahust.com/wp-content/uploads/2022/03/3C5D880B2DA25B8A1D0A78A6B9E34390-1024x473.jpg">
+<meta property="article:published_time" content="2022-03-30T13:20:56.000Z">
+<meta property="article:modified_time" content="2024-02-29T07:26:09.260Z">
+<meta property="article:author" content="Sukuna">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://sukunahust.com/wp-content/uploads/2022/03/1A952F557921D8DA96AB618F3912CFFE-1024x473.jpg">
+  
+  
+    <link rel="alternate" href="/atom.xml" title="Suwa shrine" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/images/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
 
-          </div>
-        </div>
-        <nav id="nav">
-  <div class="inner">
-    <div class="toggle">
-      <div class="lines" aria-label="切换导航栏">
-        <span class="line"></span>
-        <span class="line"></span>
-        <span class="line"></span>
+  <link rel="preload" href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  
+    
+  
+  
+  
+  
+    
+<script src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js" integrity="sha384-k6YtvFUEIuEFBdrLKJ3YAUbBki333tj1CSUisai5Cswsg9wcLNaPzsTHDswp4Az8" crossorigin="anonymous"></script>
+
+  
+  
+    
+<link rel="stylesheet" href="https://npm.webcache.cn/@reimujs/aos@0.1.0/dist/aos.css">
+
+  
+  
+</head>
+
+  <body>
+    
+  <div id='loader'>
+    <div class="loading-left-bg loading-bg"></div>
+    <div class="loading-right-bg loading-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi">
+        
+          <svg width="150" height="150" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="https://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+            <path d="M303.5 432A80 80 0 0 1 291.5 592A80 80 0 0 1 303.5 432z" fill="var(--red-1, #ff5252)" />
+            <path d="M512 65A447 447 0 0 1 512 959L512 929A417 417 0 0 0 512 95A417 417 0 0 0 512 929L512 959A447 447 0 0 1 512 65z 
+           M512 95A417 417 0 0 1 929 512A208.5 208.5 0 0 1 720.5 720.5L720.5 592A80 80 0 0 0 720.5 432A80 80 0 0 0 720.5 592L720.5 720.5A208.5 208.5 0 0 1 512 512A208.5 208.5 0 0 0 303.5 303.5A208.5 208.5 0 0 0 95 512A417 417 0 0 1 512 95z" fill="var(--red-1, #ff5252)" />
+          </svg>
+        
       </div>
+      <div class="loading-word">少女祈祷中...</div>
     </div>
-    <ul class="menu">
-      <li class="item title"><a href="/" rel="start">Suwa shrine</a></li>
-    </ul>
-    <ul class="right">
-      <li class="item theme">
-        <i class="ic i-sun"></i>
-      </li>
-      <li class="item search">
-        <i class="ic i-search"></i>
-      </li>
-    </ul>
   </div>
-</nav>
+  </div>
+  <script>
+    var time = null;
+    var startLoading = () => {
+      time = Date.now();
+      document.getElementById('loader').classList.remove("loading");
+    }
+    var endLoading = () => {
+      if (!time) {
+        document.body.style.overflow = 'auto';
+        document.getElementById('loader').classList.add("loading");
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          document.body.style.overflow = 'auto';
+          document.getElementById('loader').classList.add("loading");
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('DOMContentLoaded', endLoading);
+    document.getElementById('loader').addEventListener('click', endLoading);
+  </script>
 
-      </div>
-      <div id="imgs" class="pjax">
-        <ul>
-          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/8d1e248fe0f62130.jpg"></li>
-          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/5d3d43e0f7dc0697.jpg"></li>
-          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/7c97ca6398f62495.jpg"></li>
-          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/bac1b1e69e7ebfb7.jpg"></li>
-          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/f841728a51c3ae78.jpg"></li>
-          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/c10853f5c9aee06c.jpg"></li>
-        </ul>
-      </div>
-    </header>
-    <div id="waves">
-      <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
-        <defs>
-          <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
-        </defs>
-        <g class="parallax">
-          <use xlink:href="#gentle-wave" x="48" y="0" />
-          <use xlink:href="#gentle-wave" x="48" y="3" />
-          <use xlink:href="#gentle-wave" x="48" y="5" />
-          <use xlink:href="#gentle-wave" x="48" y="7" />
-        </g>
-      </svg>
-    </div>
-    <main>
-      <div class="inner">
-        <div id="main" class="pjax">
-          
-  <div class="article wrap">
-    
-<div class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
-<i class="ic i-home"></i>
-<span><a href="/">首页</a></span><i class="ic i-angle-right"></i>
-<span  class="current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="/categories/%E7%AE%97%E6%B3%95%E9%A2%98/" itemprop="item" rel="index" title="分类于 算法题"><span itemprop="name">算法题</span></a>
-<meta itemprop="position" content="1" /></span>
+<div id="copy-tooltip" style="pointer-events: none; opacity: 0; transition: all 0.2s ease; position: fixed;top: 50%;left: 50%;z-index: 999;transform: translate(-50%, -50%);color: white;background: rgba(0, 0, 0, 0.5);padding: 10px 15px;border-radius: 10px;">
 </div>
 
-    <article itemscope itemtype="http://schema.org/Article" class="post block" lang="zh-CN">
-  <link itemprop="mainEntityOfPage" href="https://sukunashinmyoumaru-hust.github.io/2022/03/30/splay/">
 
-  <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="image" content="/images/IMG_1335.PNG">
-    <meta itemprop="name" content="Sukuna">
-    <meta itemprop="description" content="一个普通的华中科技大学在读硕士研究生, ">
-  </span>
+    <div id="container">
+      <div id="wrap">
+        <div id="header-nav">
+  <nav id="main-nav">
+    
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/">首页</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/archives">归档</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/about">关于</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/friend">友链</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" target="_blank" rel="noopener" href="https://github.com/SukunaShinmyoumaru-hust/Hust-opensource-Xuejie">HUST-学解</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/picture">赠画感谢</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/source">资料下载</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/travel">旅行日志</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/gbook">Sukuna冬令营</a>
+        </span>
+      
+    
+    <a id="main-nav-toggle" class="nav-icon"></a>
+  </nav>
+  <nav id="sub-nav">
+    
+      <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅" target="_blank"></a>
+    
+    
+    
+  </nav>
+</div>
+<header id="header">
+  
+    
+      <img fetchpriority="high" src="/images/IMG_0700.JPG" alt="Splay模版:P3369[模版/普通平衡树]">
+    
+  
+  <div id="header-outer">
+    <div id="header-title">
+      
+        
+        
+          <a href="/" id="logo">
+            <h1 data-aos="slide-up">Splay模版:P3369[模版/普通平衡树]</h1>
+          </a>
+        
+      
+      
+        
+        <h2 id="subtitle-wrap" data-aos="slide-down">
+          
+        </h2>
+      
+    </div>
+  </div>
+</header>
 
-  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="灵山之上神风起">
-  </span>
+        <div id="content">
+          
+            <aside id="sidebar">
+  <div class="sidebar-wrapper wrap-sticky">
+    <div class="sidebar-wrap" data-aos="fade-up">
+      
+        <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">文章目录</h3>
+  <div class="sidebar-toc-wrapper toc-div-class" >
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">题目描述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E6%A0%BC%E5%BC%8F"><span class="toc-number">2.</span> <span class="toc-text">输入格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E6%A0%BC%E5%BC%8F"><span class="toc-number">3.</span> <span class="toc-text">输出格式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#splay%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-number">3.1.</span> <span class="toc-text">splay的定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9A%E4%B9%89"><span class="toc-number">3.2.</span> <span class="toc-text">数据结构定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PushOff%E6%93%8D%E4%BD%9C"><span class="toc-number">3.3.</span> <span class="toc-text">PushOff操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%95%E6%97%8B%E8%BD%AC%E6%93%8D%E4%BD%9C"><span class="toc-number">3.4.</span> <span class="toc-text">单旋转操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#splay%E6%93%8D%E4%BD%9C"><span class="toc-number">3.5.</span> <span class="toc-text">splay操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#insert%E6%93%8D%E4%BD%9C"><span class="toc-number">3.6.</span> <span class="toc-text">insert操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#find%E6%93%8D%E4%BD%9C"><span class="toc-number">3.7.</span> <span class="toc-text">find操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E5%BA%8F%E5%92%8C%E5%90%8E%E5%BA%8F%E6%93%8D%E4%BD%9C"><span class="toc-number">3.8.</span> <span class="toc-text">前序和后序操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Delete%E6%93%8D%E4%BD%9C"><span class="toc-number">3.9.</span> <span class="toc-text">Delete操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%ACk%E4%B8%AA%E6%93%8D%E4%BD%9C"><span class="toc-number">3.10.</span> <span class="toc-text">第k个操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%92%E5%85%A5INF%E5%92%8C-INF"><span class="toc-number">3.11.</span> <span class="toc-text">插入INF和-INF</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%9A%84%E4%BB%A3%E7%A0%81"><span class="toc-number">3.12.</span> <span class="toc-text">总的代码</span></a></li></ol></li></ol>
+      
+  </div>
+</div>
+</div>
+        <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/IMG_1335.PNG" data-sizes="auto" alt="Sukuna" class="lazyload">
+  <div class="sidebar-author-name">Sukuna</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">25</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">3</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">0</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+    <div class="icon-github sidebar-social-icon">
+      <a href=https://github.com/Sukunashinmyoumaru-hust || github || &#34;#191717&#34; itemprop="url" target="_blank" aria-label="github" rel="noopener external nofollow noreferrer"></a>
+    </div>
+  
+    <div class="icon-twitter sidebar-social-icon">
+      <a href=https://twitter.com/sukuna_wireless || twitter || &#34;#00aff0&#34; itemprop="url" target="_blank" aria-label="twitter" rel="noopener external nofollow noreferrer"></a>
+    </div>
+  
+    <div class="icon-email sidebar-social-icon">
+      <a href=sukuna@hust.edu.cn || envelope || &#34;#55acd5&#34; itemprop="url" target="_blank" aria-label="email" rel="noopener external nofollow noreferrer"></a>
+    </div>
+  
+    <div class="icon-bilibili sidebar-social-icon">
+      <a href=https://space.bilibili.com/5595530 itemprop="url" target="_blank" aria-label="bilibili" rel="noopener external nofollow noreferrer"></a>
+    </div>
+  
+</div>
+<div class="sidebar-menu">
+  
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="关于"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/friend" aria-label="友链"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">友链</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" target="_blank" rel="noopener" href="https://github.com/SukunaShinmyoumaru-hust/Hust-opensource-Xuejie" aria-label="HUST-学解"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">HUST-学解</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/picture" aria-label="赠画感谢"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">赠画感谢</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/source" aria-label="资料下载"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">资料下载</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/travel" aria-label="旅行日志"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">旅行日志</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/gbook" aria-label="Sukuna冬令营"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">Sukuna冬令营</div>
+      </div>
+    
+  
+</div>
+</div>
+      
+      
+        <div class="sidebar-btn-wrapper" style="position:static">
+          <div class="sidebar-toc-btn current"></div>
+          <div class="sidebar-common-btn"></div>
+        </div>
+      
+    </div>
+  </div>
 
-  <div class="body md" itemprop="articleBody">
+  
+  
+</aside>
+
+          
+          <section id="main"><article id="post-splay" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner" data-aos="fade-up">
+    <div class="article-meta">
+      <div class="article-date">
+  <a href="/2022/03/30/splay/" class="article-date-link" data-aos="zoom-in">
+    <time datetime="2022-03-30T13:20:56.000Z" itemprop="datePublished">2022-03-30</time>
+    <time style="display: none;" id="post-update-time">2024-02-29</time>
+  </a>
+</div>
+
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95%E9%A2%98/" data-aos="zoom-in">算法题</a>
+  </div>
+
+
+    </div>
+    <div class="hr-line"></div>
     
 
-    <p>[latexpage]</p>
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+      
+        <p>[latexpage]</p>
 <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>您需要写一种数据结构（可参考题目标题），来维护一些数，其中需要提供以下操作：</p>
 <ol>
 <li>插入$x$ 数</li>
@@ -197,12 +423,12 @@ Suwa shrine = 灵山之上神风起 = 一个普通的华中科技大学在读硕
 <p>下面为了叙述方便,我们定义一个奇怪的定义,就是外孙,比如说x是fa的左儿子,那么x的右儿子就是fa的外孙;x是fa的右儿子,那么x的左儿子就是x的外孙.</p>
 <p>这个时候有三个点,分别是父亲、祖父和儿子,分别代表Gfa、fa和x.<br>首先第一步就是祖父的儿子从fa替换成x.<br>第二步就是父亲的儿子从x替换成x的外孙.<br>第三步就是原本x的外孙的位子由fa占领.</p>
 <p>这个是最难的一部分,还是希望还是可以记住执行的顺序,一个是替换祖父的儿子,然后替换父亲的儿子,然后替换儿子的儿子,这是替换顺序,替换成什么可以记下来,分别是儿子,父亲的外孙和父亲.</p>
-<p><img data-src="https://sukunahust.com/wp-content/uploads/2022/03/1A952F557921D8DA96AB618F3912CFFE-1024x473.jpg"></p>
+<p><img src="https://sukunahust.com/wp-content/uploads/2022/03/1A952F557921D8DA96AB618F3912CFFE-1024x473.jpg"></p>
 <p>实在太难怎么办?把旋转的画法画下来带进考场,反正CSP是开卷orz.</p>
 <h3 id="splay操作"><a href="#splay操作" class="headerlink" title="splay操作"></a>splay操作</h3><p>我们需要做到的就是增改查的节点送到根结点,那么我们可以设计一个函数,这个函数叫做splayed(x,y).目的就是把编号为x的节点送到y的儿子处.所以说用形式语言我们可以这么写$x.parent&#x3D;&#x3D;y$.就是x的父亲为y.</p>
 <p>说句题外话,因为节点是从1开始编号的,所以说有且只有一个结点就是根结点的父亲为0.所以说想把数送到根结点需要执行splayed(x,0).</p>
 <p>我们在之前还是知道rotate操作可以把一个数在树中的层数-1.这就好办,我们每次都做rorate操作,直到这个数的父亲是y为止.但是学过AVL的旋转我们知道,旋转可以分为单旋和双旋的,其实这个也是一样的.</p>
-<p><img data-src="https://sukunahust.com/wp-content/uploads/2022/03/3C5D880B2DA25B8A1D0A78A6B9E34390-1024x473.jpg"></p>
+<p><img src="https://sukunahust.com/wp-content/uploads/2022/03/3C5D880B2DA25B8A1D0A78A6B9E34390-1024x473.jpg"></p>
 <p>判断究竟是一字旋转还是之字旋转其实就判断<code>(splay[Gfa].ch[0] == fa) ^ (splay[fa].ch[0] == x)</code>.这个异或可以判断儿子情况是不是一样的.</p>
 <p>但是有一个问题就是,我们不知道旋转能不能做,因为在rotate函数中,我们充分相信fa和Gfa都是有意义的.所以说在splay操作调用rotate时我们要保证x是有意义的.</p>
 <p>由于旋转是两个两个来做的,首先第一步,我们判断我们能不能做两次旋转操作,然后判断我们能不能做一次操作.判断的方法在代码中有说.</p>
@@ -228,298 +454,537 @@ Suwa shrine = 灵山之上神风起 = 一个普通的华中科技大学在读硕
 
 <h3 id="插入INF和-INF"><a href="#插入INF和-INF" class="headerlink" title="插入INF和-INF"></a>插入INF和-INF</h3><p>INF和-INF可以作为哨兵,如果有哨兵存在，那么这些点永远都不会是死在最前面或者死的时候垫在最下面，就帮助我们少考虑很多边界，我昨天没有加哨兵，不停地补刀做手术，还是千疮百孔，病很多都是并发症，医不过来，加了个哨兵，自己就好了</p>
 <h3 id="总的代码"><a href="#总的代码" class="headerlink" title="总的代码"></a>总的代码</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">#define N 1000005</span><br><span class="line">#define INF 0x7f7f7f7f</span><br><span class="line">struct splay&#123;</span><br><span class="line">    int ch[2];</span><br><span class="line">    int val;//数值</span><br><span class="line">    int size;//子树大小</span><br><span class="line">    int cnt;//每个节点所含副本数</span><br><span class="line">    int parent;</span><br><span class="line">&#125;splay[N];</span><br><span class="line">int total;</span><br><span class="line">int root;</span><br><span class="line">int na;</span><br><span class="line">void pushup(int node_id)&#123;</span><br><span class="line">    int l=splay[node_id].ch[0];</span><br><span class="line">    int r=splay[node_id].ch[1];</span><br><span class="line">    splay[node_id].size=splay[l].size+splay[r].size+splay[node_id].cnt;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void rotate (int x) &#123;</span><br><span class="line">    int fa = splay[x].parent;</span><br><span class="line">    int Gfa = splay[fa].parent;</span><br><span class="line">    int k = (splay[fa].ch[1]== x);</span><br><span class="line">    splay[Gfa].ch[splay[Gfa].ch[1]==fa] = x;</span><br><span class="line">    splay[x].parent = Gfa;</span><br><span class="line">    splay[fa].ch[k] = splay[x].ch[k^1];</span><br><span class="line">    splay[splay[x].ch[k^1]].parent= fa;</span><br><span class="line">    splay[x].ch[k ^ 1] = fa;</span><br><span class="line">    splay[fa].parent = x;</span><br><span class="line">    pushup(fa);</span><br><span class="line">    pushup(x);</span><br><span class="line">&#125;</span><br><span class="line">//将x旋转到goal的儿子</span><br><span class="line">void splayed ( int x, int goal ) &#123;</span><br><span class="line">    while (splay[x].parent != goal) &#123;</span><br><span class="line">        int fa = splay[x].parent, Gfa = splay[fa].parent;</span><br><span class="line">        if (Gfa!= goal )</span><br><span class="line">            ( (splay[Gfa].ch[0] == fa) ^ (splay[fa].ch[0] == x)) ? rotate(x) : rotate (fa);</span><br><span class="line">        rotate (x);</span><br><span class="line">    &#125;</span><br><span class="line">    if (!goal)</span><br><span class="line">        root=x;</span><br><span class="line">&#125;</span><br><span class="line">void insert(int x) &#123;</span><br><span class="line">    int u=root, fa=0;</span><br><span class="line">    while (u &amp;&amp; splay[u].val!=x) &#123;</span><br><span class="line">        fa = u;</span><br><span class="line">        u=splay[u].ch[x&gt;splay[u].val];</span><br><span class="line">    &#125;</span><br><span class="line">    if (u)</span><br><span class="line">        splay[u].cnt ++;</span><br><span class="line">    else &#123;</span><br><span class="line">        u=++total;</span><br><span class="line">        if (fa)</span><br><span class="line">            splay[fa].ch[x &gt; splay[fa].val] = u;</span><br><span class="line">        splay[u].ch[0] = splay[u].ch[1] = 0;</span><br><span class="line">        splay[u].val = x;</span><br><span class="line">        splay[u].parent = fa;</span><br><span class="line">        splay[u].cnt = splay[u].size = 1;</span><br><span class="line">    &#125;</span><br><span class="line">    splayed(u,0);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void find(int x)&#123;</span><br><span class="line">    if (!root)</span><br><span class="line">            return;</span><br><span class="line">        int u=root;</span><br><span class="line">        while (splay[u].ch[x &gt; splay[u].val] &amp;&amp; x!=splay[u].val)</span><br><span class="line">            u=splay[u].ch[x &gt; splay[u].val];</span><br><span class="line">        splayed (u,0);</span><br><span class="line">&#125;</span><br><span class="line">int PreSuf (int x, int f) &#123;</span><br><span class="line">    find (x);</span><br><span class="line">    if (splay[root].val&gt;x&amp;&amp;f)</span><br><span class="line">        return root;</span><br><span class="line">    if (splay[root].val &lt; x &amp;&amp; !f)</span><br><span class="line">        return root;</span><br><span class="line">    int u = splay[root].ch[f];</span><br><span class="line">    if (!u)</span><br><span class="line">        return 0;</span><br><span class="line">    while (splay[u].ch[f ^ 1])</span><br><span class="line">        u =splay[u].ch[f ^ 1];</span><br><span class="line">    return u;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void Delete (int x) &#123;</span><br><span class="line">    int pre = PreSuf(x,0);</span><br><span class="line">    int suf = PreSuf(x,1);</span><br><span class="line">    splayed(pre,0);</span><br><span class="line">    splayed(suf,pre);</span><br><span class="line">    int u = splay[suf].ch[0];</span><br><span class="line">    if (splay[u].cnt&gt;1) &#123;</span><br><span class="line">        splay[u].cnt--;</span><br><span class="line">        splayed ( u, 0 );</span><br><span class="line">    &#125;</span><br><span class="line">    else&#123;</span><br><span class="line">        splay[suf].ch[0] = 0;</span><br><span class="line">    &#125;</span><br><span class="line">        </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int findkth (int x) &#123;</span><br><span class="line">    if (splay[root].size&lt;x)</span><br><span class="line">        return -1;</span><br><span class="line">    int u=root;</span><br><span class="line">    while (1) &#123;</span><br><span class="line">        if ( x &lt;= splay[splay[u].ch[0]].size )</span><br><span class="line">            u = splay[u].ch[0];</span><br><span class="line">        else if ( x &lt;= splay[u].cnt + splay[splay[u].ch[0]].size )</span><br><span class="line">                return u;</span><br><span class="line">            else &#123;</span><br><span class="line">                x -= ( splay[splay[u].ch[0]].size + splay[u].cnt );</span><br><span class="line">                u = splay[u].ch[1];</span><br><span class="line">            &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">void build()&#123;</span><br><span class="line">    insert(INF);</span><br><span class="line">    insert(-INF);</span><br><span class="line">&#125;</span><br><span class="line">int main()&#123;</span><br><span class="line">    int n;</span><br><span class="line">    build();</span><br><span class="line">    scanf(&quot;%d&quot;,&amp;n);</span><br><span class="line">    int opt,x;</span><br><span class="line">    int u;</span><br><span class="line">    while(n--)&#123;</span><br><span class="line">        scanf(&quot;%d %d&quot;,&amp;opt,&amp;x);</span><br><span class="line">        switch (opt) &#123;</span><br><span class="line">            case 1:</span><br><span class="line">                insert(x);</span><br><span class="line">                break;</span><br><span class="line">            case 2:</span><br><span class="line">                Delete(x);</span><br><span class="line">                break;</span><br><span class="line">            case 3:</span><br><span class="line">                find(x);</span><br><span class="line">                printf(&quot;%d\n&quot;,splay[splay[root].ch[0]].size);</span><br><span class="line">                break;</span><br><span class="line">            case 4:</span><br><span class="line">                u=findkth(x+1);</span><br><span class="line">                printf(&quot;%d\n&quot;,splay[u].val);</span><br><span class="line">                break;</span><br><span class="line">            case 5:</span><br><span class="line">                u=PreSuf(x, 0);</span><br><span class="line">                printf(&quot;%d\n&quot;,splay[u].val);</span><br><span class="line">                break;</span><br><span class="line">            case 6:</span><br><span class="line">                u=PreSuf(x, 1);</span><br><span class="line">                printf(&quot;%d\n&quot;,splay[u].val);</span><br><span class="line">                break;</span><br><span class="line">            default:</span><br><span class="line">                break;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      
+        <blockquote class="article-copyright">
+    <p><strong>本文作者：</strong>Sukuna @ Suwa shrine</p>
+    <p><strong>本文链接：</strong><a href="https://sukunashinmyoumaru-hust.github.io/2022/03/30/splay/">https://sukunashinmyoumaru-hust.github.io/2022/03/30/splay/</a></p>
+    
+    
+    
+    <p><strong>本文版权：</strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener external nofollow noreferrer" target="_blank"><span class="icon-creative-commons"></span>BY-NC-SA</a> 许可协议。转载请注明出处！</p>
+    <span class="icon-creative-commons article-copyright-bg"></span>
+  </blockquote>
+      
+      
+      
+        <a data-aos="zoom-in" href="/2022/03/30/splay/#comments" class="article-comment-link">
+          <span class="post-comments-count valine-comment-count" data-xid="/2022/03/30/splay/" itemprop="commentCount"></span>
+          留言
+        </a>
+      
+      
+      
+      
+      
+      
+
+    </footer>
   </div>
-
-   <footer>
-
-    <div class="meta">
-  <span class="item">
-    <span class="icon">
-      <i class="ic i-calendar-check"></i>
-    </span>
-    <span class="text">更新于</span>
-    <time title="修改时间：2024-02-29 15:26:09" itemprop="dateModified" datetime="2024-02-29T15:26:09+08:00">2024-02-29</time>
-  </span>
-</div>
-
-      
-<div class="reward">
-  <button><i class="ic i-heartbeat"></i> 赞赏</button>
-  <p>请我喝[茶]~(￣▽￣)~*</p>
-  <div id="qr">
-      
-      <div>
-        <img data-src="/images/wechatpay.jpg" alt="Sukuna 微信支付">
-        <p>微信支付</p>
+  
+  <nav id="article-nav" data-aos="fade-up">
+    
+      <div class="article-nav-link-wrap article-nav-link-left">
+        
+          
+          
+            <img data-src="https://s3.bmp.ovh/imgs/2024/06/17/4663c8f5b7019dfd.jpg" data-sizes="auto" alt="做算法题综合" class="lazyload">
+          
+        
+        <a href="/2022/04/17/luogu-al/"></a>
+        <div class="article-nav-caption">前一篇</div>
+        <h3 class="article-nav-title">
+          
+            做算法题综合
+          
+        </h3>
       </div>
+    
+    
+    <div class="article-nav-link-wrap article-nav-link-right">
       
-      <div>
-        <img data-src="/images/alipay.jpg" alt="Sukuna 支付宝">
-        <p>支付宝</p>
-      </div>
-  </div>
-</div>
-
+        
+        
+          <img data-src="https://s3.bmp.ovh/imgs/2024/06/17/7c97ca6398f62495.jpg" data-sizes="auto" alt="华中科技大学操作系统挑战实验(PKE)基础解析" class="lazyload">
+        
       
+      <a href="/2022/02/26/oschallengelab/"></a>
+      <div class="article-nav-caption">后一篇</div>
+      <h3 class="article-nav-title">
+        
+          华中科技大学操作系统挑战实验(PKE)基础解析
+        
+      </h3>
+    </div>
+    
+  </nav>
 
-<div id="copyright">
-<ul>
-  <li class="author">
-    <strong>本文作者： </strong>Sukuna <i class="ic i-at"><em>@</em></i>灵山之上神风起
-  </li>
-  <li class="link">
-    <strong>本文链接：</strong>
-    <a href="https://sukunashinmyoumaru-hust.github.io/2022/03/30/splay/" title="Splay模版:P3369[模版&#x2F;普通平衡树]">https://sukunashinmyoumaru-hust.github.io/2022/03/30/splay/</a>
-  </li>
-  <li class="license">
-    <strong>版权声明： </strong>本站所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</span> 许可协议。转载请注明出处！
-  </li>
-</ul>
-</div>
-
-  </footer>
 
 </article>
 
+  <section id="comments" class="vcomment" data-aos="fade-up"></section>
+
+
+
+
+
+
+</section>
+          
+        </div>
+        <footer id="footer">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div class="aplayer no-destroy" data-id="60198" data-server="netease" data-type="playlist" data-fixed="true" data-mini="true" data-autoplay="false"></div>
+  <div id="footer-info">
+    
+    <div>
+      <span class="icon-copyright"></span>
+      2020-2024
+      <span class="footer-info-sep rotate"></span>
+      Sukuna
+    </div>
+    
+      <div>
+        基于&nbsp;<a href="https://hexo.io/" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a>&nbsp;
+        Theme.<a href="https://github.com/D-Sketon/hexo-theme-reimu" rel="noopener external nofollow noreferrer" target="_blank">Reimu</a>
+      </div>
+    
+    
+      <div>
+        <span class="icon-brush"></span>
+        178.4k
+        &nbsp;|&nbsp;
+        <span class="icon-coffee"></span>
+        12:34
+      </div>
+    
+    
+    
+    
+      <div>
+        <span class="icon-eye"></span>
+        <span id="busuanzi_container_site_pv">总访问量&nbsp;<span id="busuanzi_value_site_pv"></span></span>
+        &nbsp;|&nbsp;
+        <span class="icon-user"></span>
+        <span id="busuanzi_container_site_uv">总访客量&nbsp;<span id="busuanzi_value_site_uv"></span></span>
+      </div>
+    
   </div>
   
+</footer>
 
-<div class="post-nav">
-    <div class="item left">
+        
+          <div class="sidebar-top">
+            <div class="sidebar-top-taichi rotate"></div>
+            <div class="arrow-up"></div>
+          </div>
+        
+        <div id="mask" class="hide"></div>
+      </div>
+      <nav id="mobile-nav">
+  <div class="sidebar-wrap">
+    
+      <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">文章目录</h3>
+  <div class="sidebar-toc-wrapper toc-div-class" >
       
-
-  <a href="/2022/02/26/oschallengelab/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;s3.bmp.ovh&#x2F;imgs&#x2F;2024&#x2F;06&#x2F;17&#x2F;5d3d43e0f7dc0697.jpg" title="华中科技大学操作系统挑战实验(PKE)基础解析">
-  <span class="type">上一篇</span>
-  <span class="category"><i class="ic i-flag"></i> 实验记录</span>
-  <h3>华中科技大学操作系统挑战实验(PKE)基础解析</h3>
-  </a>
-
-    </div>
-    <div class="item right">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">题目描述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E6%A0%BC%E5%BC%8F"><span class="toc-number">2.</span> <span class="toc-text">输入格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E6%A0%BC%E5%BC%8F"><span class="toc-number">3.</span> <span class="toc-text">输出格式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#splay%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-number">3.1.</span> <span class="toc-text">splay的定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9A%E4%B9%89"><span class="toc-number">3.2.</span> <span class="toc-text">数据结构定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PushOff%E6%93%8D%E4%BD%9C"><span class="toc-number">3.3.</span> <span class="toc-text">PushOff操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%95%E6%97%8B%E8%BD%AC%E6%93%8D%E4%BD%9C"><span class="toc-number">3.4.</span> <span class="toc-text">单旋转操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#splay%E6%93%8D%E4%BD%9C"><span class="toc-number">3.5.</span> <span class="toc-text">splay操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#insert%E6%93%8D%E4%BD%9C"><span class="toc-number">3.6.</span> <span class="toc-text">insert操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#find%E6%93%8D%E4%BD%9C"><span class="toc-number">3.7.</span> <span class="toc-text">find操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E5%BA%8F%E5%92%8C%E5%90%8E%E5%BA%8F%E6%93%8D%E4%BD%9C"><span class="toc-number">3.8.</span> <span class="toc-text">前序和后序操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Delete%E6%93%8D%E4%BD%9C"><span class="toc-number">3.9.</span> <span class="toc-text">Delete操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%ACk%E4%B8%AA%E6%93%8D%E4%BD%9C"><span class="toc-number">3.10.</span> <span class="toc-text">第k个操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%92%E5%85%A5INF%E5%92%8C-INF"><span class="toc-number">3.11.</span> <span class="toc-text">插入INF和-INF</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%9A%84%E4%BB%A3%E7%A0%81"><span class="toc-number">3.12.</span> <span class="toc-text">总的代码</span></a></li></ol></li></ol>
       
-
-  <a href="/2022/04/17/luogu-al/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;s3.bmp.ovh&#x2F;imgs&#x2F;2024&#x2F;06&#x2F;17&#x2F;4663c8f5b7019dfd.jpg" title="做算法题综合">
-  <span class="type">下一篇</span>
-  <span class="category"><i class="ic i-flag"></i> 杂记</span>
-  <h3>做算法题综合</h3>
-  </a>
-
-    </div>
+  </div>
 </div>
-
+</div>
+      <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/IMG_1335.PNG" data-sizes="auto" alt="Sukuna" class="lazyload">
+  <div class="sidebar-author-name">Sukuna</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">25</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">3</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">0</div>
+  </div>
+</div>
+<div class="sidebar-social">
   
-  <div class="wrap" id="comments"></div>
-
-
-        </div>
-        <div id="sidebar">
-          
-
-<div class="inner">
-
-  <div class="panels">
-    <div class="inner">
-      <div class="contents panel pjax" data-title="文章目录">
-          <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">题目描述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E6%A0%BC%E5%BC%8F"><span class="toc-number">2.</span> <span class="toc-text">输入格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E6%A0%BC%E5%BC%8F"><span class="toc-number">3.</span> <span class="toc-text">输出格式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#splay%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-number">3.1.</span> <span class="toc-text">splay的定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9A%E4%B9%89"><span class="toc-number">3.2.</span> <span class="toc-text">数据结构定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PushOff%E6%93%8D%E4%BD%9C"><span class="toc-number">3.3.</span> <span class="toc-text">PushOff操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%95%E6%97%8B%E8%BD%AC%E6%93%8D%E4%BD%9C"><span class="toc-number">3.4.</span> <span class="toc-text">单旋转操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#splay%E6%93%8D%E4%BD%9C"><span class="toc-number">3.5.</span> <span class="toc-text">splay操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#insert%E6%93%8D%E4%BD%9C"><span class="toc-number">3.6.</span> <span class="toc-text">insert操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#find%E6%93%8D%E4%BD%9C"><span class="toc-number">3.7.</span> <span class="toc-text">find操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E5%BA%8F%E5%92%8C%E5%90%8E%E5%BA%8F%E6%93%8D%E4%BD%9C"><span class="toc-number">3.8.</span> <span class="toc-text">前序和后序操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Delete%E6%93%8D%E4%BD%9C"><span class="toc-number">3.9.</span> <span class="toc-text">Delete操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%ACk%E4%B8%AA%E6%93%8D%E4%BD%9C"><span class="toc-number">3.10.</span> <span class="toc-text">第k个操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%92%E5%85%A5INF%E5%92%8C-INF"><span class="toc-number">3.11.</span> <span class="toc-text">插入INF和-INF</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%9A%84%E4%BB%A3%E7%A0%81"><span class="toc-number">3.12.</span> <span class="toc-text">总的代码</span></a></li></ol></li></ol>
-      </div>
-      <div class="related panel pjax" data-title="系列文章">
-        <ul>
-          <li><a href="/2020/05/24/ufpe-starters-final-try-outs-2019-problem-l/" rel="bookmark" title="UFPE Starters Final Try-Outs 2019 Problem L">UFPE Starters Final Try-Outs 2019 Problem L</a></li><li><a href="/2020/05/25/ufpe-starters-final-try-outs-2019-recife-brazil-dec-1-2018-problem-j/" rel="bookmark" title="UFPE Starters Final Try-Outs 2019 Recife, Brazil, Dec 1, 2018 Problem J（线段树+二分）">UFPE Starters Final Try-Outs 2019 Recife, Brazil, Dec 1, 2018 Problem J（线段树+二分）</a></li><li class="active"><a href="/2022/03/30/splay/" rel="bookmark" title="Splay模版:P3369[模版/普通平衡树]">Splay模版:P3369[模版/普通平衡树]</a></li><li><a href="/2024/11/20/150/" rel="bookmark" title="力扣面试经典150题">力扣面试经典150题</a></li>
-        </ul>
-      </div>
-      <div class="overview panel" data-title="站点概览">
-        <div class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <img class="image" itemprop="image" alt="Sukuna"
-      data-src="/images/IMG_1335.PNG">
-  <p class="name" itemprop="name">Sukuna</p>
-  <div class="description" itemprop="description"></div>
+    <div class="icon-github sidebar-social-icon">
+      <a href=https://github.com/Sukunashinmyoumaru-hust || github || &#34;#191717&#34; itemprop="url" target="_blank" aria-label="github" rel="noopener external nofollow noreferrer"></a>
+    </div>
+  
+    <div class="icon-twitter sidebar-social-icon">
+      <a href=https://twitter.com/sukuna_wireless || twitter || &#34;#00aff0&#34; itemprop="url" target="_blank" aria-label="twitter" rel="noopener external nofollow noreferrer"></a>
+    </div>
+  
+    <div class="icon-email sidebar-social-icon">
+      <a href=sukuna@hust.edu.cn || envelope || &#34;#55acd5&#34; itemprop="url" target="_blank" aria-label="email" rel="noopener external nofollow noreferrer"></a>
+    </div>
+  
+    <div class="icon-bilibili sidebar-social-icon">
+      <a href=https://space.bilibili.com/5595530 itemprop="url" target="_blank" aria-label="bilibili" rel="noopener external nofollow noreferrer"></a>
+    </div>
+  
 </div>
-
-<nav class="state">
-    <div class="item posts">
-      <a href="/archives/">
-        <span class="count">25</span>
-        <span class="name">文章</span>
-      </a>
+<div class="sidebar-menu">
+  
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="关于"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/friend" aria-label="友链"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">友链</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" target="_blank" rel="noopener" href="https://github.com/SukunaShinmyoumaru-hust/Hust-opensource-Xuejie" aria-label="HUST-学解"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">HUST-学解</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/picture" aria-label="赠画感谢"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">赠画感谢</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/source" aria-label="资料下载"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">资料下载</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/travel" aria-label="旅行日志"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">旅行日志</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/gbook" aria-label="Sukuna冬令营"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">Sukuna冬令营</div>
+      </div>
+    
+  
+</div>
+</div>
+    
+  </div>
+  
+    <div class="sidebar-btn-wrapper">
+      <div class="sidebar-toc-btn current"></div>
+      <div class="sidebar-common-btn"></div>
     </div>
-    <div class="item categories">
-      <a href="/categories/">
-        <span class="count">3</span>
-        <span class="name">分类</span>
-      </a>
-    </div>
+  
 </nav>
 
-<div class="social">
-      <span class="exturl item github" data-url="aHR0cHM6Ly9naXRodWIuY29tL1N1a3VuYXNoaW5teW91bWFydS1odXN0" title="https:&#x2F;&#x2F;github.com&#x2F;Sukunashinmyoumaru-hust"><i class="ic i-github"></i></span>
-      <span class="exturl item twitter" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9zdWt1bmFfd2lyZWxlc3M=" title="https:&#x2F;&#x2F;twitter.com&#x2F;sukuna_wireless"><i class="ic i-twitter"></i></span>
-      <span class="exturl item music" data-url="aHR0cHM6Ly9tdXNpYy4xNjMuY29tLyMvdXNlci9ob21lP2lkPTI5NDE3ODM1MQ==" title="https:&#x2F;&#x2F;music.163.com&#x2F;#&#x2F;user&#x2F;home?id&#x3D;294178351"><i class="ic i-cloud-music"></i></span>
-      <span class="exturl item about" data-url="aHR0cHM6Ly9zdWt1bmFodXN0Lm1vZS9hYm91dA==" title="https:&#x2F;&#x2F;sukunahust.moe&#x2F;about"><i class="ic i-address-card"></i></span>
-      <a href="/sukuna@hust.edu.cn" title="sukuna@hust.edu.cn" class="item email"><i class="ic i-envelope"></i></a>
-</div>
-
-<ul class="menu">
-  
-    
-  <li class="item">
-    <a href="/" rel="section"><i class="ic i-home"></i>首页</a>
-  </li>
-
-    
-  <li class="item">
-    <a href="/about/" rel="section"><i class="ic i-user"></i>关于</a>
-  </li>
-
-        
-  <li class="item dropdown">
-      <a href="javascript:void(0);"><i class="ic i-feather"></i>文章</a>
-    <ul class="submenu">
-
-        
-  <li class="item">
-    <a href="/archives/" rel="section"><i class="ic i-list-alt"></i>归档</a>
-  </li>
-
-        
-  <li class="item">
-    <a href="/categories/" rel="section"><i class="ic i-th"></i>分类</a>
-  </li>
-
-        
-  <li class="item">
-    <a href="/tags/" rel="section"><i class="ic i-tags"></i>标签</a>
-  </li>
-
-  </ul>
-    
-  <li class="item">
-    <a href="/friend/" rel="section"><i class="ic i-heart"></i>友链</a>
-  </li>
-
-    
-  <li class="item">
-    <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1N1a3VuYVNoaW5teW91bWFydS1odXN0L0h1c3Qtb3BlbnNvdXJjZS1YdWVqaWU="><i class="ic i-github"></i>HUST-学解</span>
-  </li>
-
-    
-  <li class="item">
-    <a href="/picture/" rel="section"><i class="ic i-magic"></i>赠画感谢</a>
-  </li>
-
-    
-  <li class="item">
-    <a href="/source/" rel="section"><i class="ic i-address-card"></i>资料下载</a>
-  </li>
-
-    
-  <li class="item">
-    <a href="/travel/" rel="section"><i class="ic i-heart"></i>旅行日志</a>
-  </li>
-
-    
-  <li class="item">
-    <a href="/gbook/" rel="section"><i class="ic i-magic"></i>Sukuna冬令营</a>
-  </li>
-
-    
-  <li class="item">
-    <span class="exturl" data-url="aHR0cHM6Ly9nMmNlemVwZC55aWNoYWZlbi5jb20="><i class="ic i-magic"></i>相关查询</span>
-  </li>
-
-
-</ul>
-
-      </div>
     </div>
-  </div>
-
-  <ul id="quick">
-    <li class="prev pjax">
-        <a href="/2022/02/26/oschallengelab/" rel="prev" title="上一篇"><i class="ic i-chevron-left"></i></a>
-    </li>
-    <li class="up"><i class="ic i-arrow-up"></i></li>
-    <li class="down"><i class="ic i-arrow-down"></i></li>
-    <li class="next pjax">
-        <a href="/2022/04/17/luogu-al/" rel="next" title="下一篇"><i class="ic i-chevron-right"></i></a>
-    </li>
-    <li class="percent"></li>
-  </ul>
-</div>
-
-
-        </div>
-        <div class="dimmer"></div>
-      </div>
-    </main>
-    <footer id="footer">
-      <div class="inner">
-        <div class="widgets">
-          
-
-        </div>
-        <div class="status">
-  <div class="copyright">
     
-    &copy; 2020 – 
-    <span itemprop="copyrightYear">2024</span>
-    <span class="with-love">
-      <i class="ic i-sakura rotate"></i>
-    </span>
-    <span class="author" itemprop="copyrightHolder">Sukuna @ Suwa shrine</span>
-  </div>
-  <div class="count">
-    <span class="post-meta-item-icon">
-      <i class="ic i-chart-area"></i>
-    </span>
-    <span title="站点总字数">463k 字</span>
+    
+<script src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js" integrity="sha384-3gT&#x2F;vsepWkfz&#x2F;ff7PpWNUeMzeWoH3cDhm&#x2F;A8jM7ouoAK0&#x2F;fP&#x2F;9bcHHR5kHq2nf+e" crossorigin="anonymous"></script>
 
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item-icon">
-      <i class="ic i-coffee"></i>
-    </span>
-    <span title="站点阅读时长">7:01</span>
-  </div>
-  <div class="powered-by">
-    基于 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & Theme.<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FtZWhpbWUvaGV4by10aGVtZS1zaG9rYQ==">Shoka</span>
+
+<script src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js" integrity="sha384-J08i8An&#x2F;QeARD9ExYpvphB8BsyOj3Gh2TSh1aLINKO3L0cMSH2dN3E22zFoXEi0Q" crossorigin="anonymous"></script>
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+  
+<script src="/js/aos.js"></script>
+
+  <script>
+    var aosInit = () => {
+      AOS.init({
+        duration: 1000,
+        easing: "ease",
+        once: true,
+        offset: 50,
+      });
+    };
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', aosInit);
+    } else {
+      aosInit();
+    }
+  </script>
+
+
+
+<script src="/js/pjax_script.js" data-pjax></script>
+
+
+
+
+
+
+
+  
+<script src="https://npm.webcache.cn/mouse-firework@0.0.6/dist/index.umd.js" integrity="sha384-vkGvf25gm1C1PbcoD5dNfc137HzNL&#x2F;hr1RKA5HniJOaawtvUmH5lTVFgFAruE9Ge" crossorigin="anonymous"></script>
+
+  <script>
+    window.firework && window.firework(JSON.parse('{"excludeElements":["a","button"],"particles":[{"shape":"circle","move":["emit"],"easing":"easeOutExpo","colors":["#ff5252","#ff7c7c","#ffafaf","#ffd0d0"],"number":20,"duration":[1200,1800],"shapeOptions":{"radius":[16,32],"alpha":[0.3,0.5]}},{"shape":"circle","move":["diffuse"],"easing":"easeOutExpo","colors":["#ff0000"],"number":1,"duration":[1200,1800],"shapeOptions":{"radius":20,"alpha":[0.2,0.5],"lineWidth":6}}]}'))
+  </script>
+
+
+
+  
+<script src="https://npm.webcache.cn/theme-shokax-pjax@0.0.3/dist/index.umd.js" integrity="sha384-xneY1WY8hOfUzswrE4CrYq35N4BdVcxqxwHPr9zawE&#x2F;jMSCxD+jAPU55x&#x2F;jj3wlf" crossorigin="anonymous"></script>
+
+  <script>
+    function loadScripts(scripts, index) {
+      if (index < scripts.length) {
+        const script = scripts[index];
+        const src = script.getAttribute('src');
+
+        const loadScript = (scriptContent) => {
+          const scriptElement = document.createElement('script');
+          if (script.type) {
+            scriptElement.type = script.type;
+          }
+          scriptElement.text = scriptContent;
+          document.head.appendChild(scriptElement);
+          loadScripts(scripts, index + 1);
+        }
+
+        if (src) {
+          fetch(src)
+            .then(response => {
+              if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+              }
+              return response.text();
+            })
+            .then(scriptContent => {
+              loadScript(scriptContent);
+            })
+            .catch(error => {
+              console.error('Failed to load script:', src, error);
+            });
+        } else {
+          loadScript(script.text);
+        }
+      }
+    }
+    window.Pjax && new window.Pjax({
+      selectors: [
+        "#header img",
+        "#header picture",
+        "head title",
+        "#header-title",
+        "#subtitle-wrap",
+        "#content",
+        '#mobile-nav',
+        '#lazy-script'
+      ],
+      switches: {
+        "#header-title": Pjax.switches.outerHTML,
+        "#subtitle-wrap": Pjax.switches.outerHTML,
+        "#content": function(oldEl, newEl) {
+          const scripts = [...newEl.querySelectorAll('script')];
+          loadScripts(scripts, 0);
+          oldEl.outerHTML = newEl.outerHTML
+          this.onSwitch()
+        },
+        "#mobile-nav": Pjax.switches.outerHTML,
+        '#lazy-script': function(oldEl, newEl) {
+          const scripts = [...newEl.querySelectorAll('script')];
+          loadScripts(scripts, 0);
+          oldEl.innerHTML = newEl.innerHTML
+          this.onSwitch()
+        },
+      },
+      cacheBust: false
+    })
+  </script>
+  
+<script src="/js/pjax.js"></script>
+
+
+
+
+  <script>
+    function initLive2d() {
+      live2d.init("https://fastly.jsdelivr.net/gh/D-Sketon/plugin-live2d/", {themeTipsPath: ""});
+    }
+  </script>
+  
+<script src="https://fastly.jsdelivr.net/gh/D-Sketon/plugin-live2d/js/live2d-autoload.js" onload="initLive2d &amp;&amp; initLive2d()" async></script>
+
+
+
+
+
+<div id="lazy-script">
+  <div>
+    
+    
+      
+        
+<script src="/js/insert_highlight.js" data-pjax></script>
+
+      
+    
+    
+      <script type="module" data-pjax>
+        const PhotoSwipeLightbox = (await safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe-lightbox.esm.min.js", "sha384-DiL6M/gG+wmTxmCRZyD1zee6lIhawn5TGvED0FOh7fXcN9B0aZ9dexSF/N6lrZi/")).default;
+        
+        const pswp = () => {
+          if (_$$('.article-entry a.article-gallery-item').length > 0) {
+            new PhotoSwipeLightbox({
+              gallery: '.article-entry',
+              children: 'a.article-gallery-item',
+              pswpModule: () => safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8+oTJ7m3DfYEWX1fu1scuS4+s")
+            }).init();
+          }
+          if(_$$('.article-gallery a.article-gallery-item').length > 0) {
+            new PhotoSwipeLightbox({
+              gallery: '.article-gallery',
+              children: 'a.article-gallery-item',
+              pswpModule: () => safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8+oTJ7m3DfYEWX1fu1scuS4+s")
+            }).init();
+          }
+          window.lightboxStatus = 'done';
+          window.removeEventListener('lightbox:ready', pswp);
+        }
+        if(window.lightboxStatus === 'ready') {
+          pswp()
+        } else {
+          window.addEventListener('lightbox:ready', pswp);
+        }
+      </script>
+      
+  
+<script src="https://npm.webcache.cn/valine@1.5.1/dist/Valine.min.js" integrity="sha384-3ma91AExDeMAZ1rjTjaP8V2A2obQE+s5ltKRwYlwdpArz9xVbp0tF3b0VV2ACNPn" crossorigin="anonymous" data-pjax></script>
+
+  <script data-pjax>
+    var GUEST_INFO = ['nick', 'mail', 'link'];
+    var guest_info = 'SukunaFans'.split(',').filter((item) => {
+      return GUEST_INFO.indexOf(item) > -1
+    });
+    var recordIP = JSON.parse('true');
+    var highlight = JSON.parse('true');
+    var visitor = JSON.parse('false');
+
+    new Valine({
+      el: '.vcomment',
+      appId: "xR5C19oD9KiPnawzBUJNSD64-gzGzoHsz",
+      appKey: "BuHN9ATTBOcwMxGPy9IxuI8b",
+      placeholder: "留下你的留言吧",
+      pageSize: '10',
+      avatar: 'mp',
+      lang: 'zh-cn',
+      recordIP: recordIP,
+      highlight: highlight,
+      visitor: visitor,
+      requiredFields: guest_info,
+      path: window.location.pathname
+    });
+  </script>
+
+
+
+
+
+
+
+
+
+    
   </div>
 </div>
 
-      </div>
-    </footer>
-  </div>
-<script data-config type="text/javascript">
-  var LOCAL = {
-    path: '2022/03/30/splay/',
-    favicon: {
-      show: "（●´3｀●）あややややや～",
-      hide: "(´Д｀)大変だ！"
-    },
-    search : {
-      placeholder: "文章搜索",
-      empty: "关于 「 ${query} 」，什么也没搜到",
-      stats: "${time} ms 内找到 ${hits} 条结果"
-    },
-    valine: true,fancybox: true,
-    copyright: '复制成功，转载请遵守 <i class="ic i-creative-commons"></i>BY-NC-SA 协议。',
-    ignores : [
-      function(uri) {
-        return uri.includes('#');
-      },
-      function(uri) {
-        return new RegExp(LOCAL.path+"$").test(uri);
+
+  <script>
+    console.log(String.raw`%c 
+ ______     ______     __     __    __     __  __    
+/\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+\ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+ \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+  \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                  
+`,'color: #ff5252;')
+    console.log('%c Theme.Reimu v' + '1.0.0' + ' %c https://github.com/D-Sketon/hexo-theme-reimu ', 'color: white; background: #ff5252; padding:5px 0;', 'padding:4px;border:1px solid #ff5252;')
+  </script>
+  
+
+
+
+  
+<script src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js" integrity="sha384-0M75wtSkhjIInv4coYlaJU83+OypaRCIq2SukQVQX04eGTCBXJDuWAbJet56id+S" crossorigin="anonymous" async></script>
+
+
+
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then((registrations) => {
+      for (let registration of registrations) {
+        registration.unregister();
       }
-    ]
-  };
+    });
+  }
 </script>
 
-<script src="https://cdn.polyfill.io/v2/polyfill.js"></script>
-
-<script src="//cdn.jsdelivr.net/combine/npm/pace-js@1.0.2/pace.min.js,npm/pjax@0.2.8/pjax.min.js,npm/whatwg-fetch@3.4.0/dist/fetch.umd.min.js,npm/animejs@3.2.0/lib/anime.min.js,npm/algoliasearch@4/dist/algoliasearch-lite.umd.js,npm/instantsearch.js@4/dist/instantsearch.production.min.js,npm/lozad@1/dist/lozad.min.js,npm/quicklink@2/dist/quicklink.umd.js"></script>
-
-<script src="/js/app.js?v=0.2.5"></script>
 
 
+  
+    
+<script src="https://npm.webcache.cn/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha384-Wuix6BuhrWbjDBs24bXrjf4ZQ5aFeFWBuKkFekO2t8xFU0iNaLQfp2K6&#x2F;1Nxveei" crossorigin="anonymous" defer data-pjax></script>
+
+    <script data-pjax>
+      window.MathJax = {"tex":{"tags":"ams","useLabelIds":true,"inlineMath":[["$","$"],["\\\\(","\\\\)"]],"displayMath":[["$$","$$"],["\\\\[","\\\\]"]],"processEscapes":true,"processEnvironments":true,"autoload":{"color":[],"colorv2":["color"]},"packages":{"[+]":["noerrors"]}},"options":{"skipHtmlTags":["script","noscript","style","textarea","pre","code"],"ignoreHtmlClass":"tex2jax_ignore","processHtmlClass":"tex2jax_process"},"loader":{"load":["input/asciimath","[tex]/noerrors"]}};
+    </script>
+  
 
 
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":200,"height":400},"mobile":{"show":false},"log":false});</script></body>
-</html>
+  <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+  </html>
+

@@ -1,180 +1,406 @@
 
-
-
-
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#FFF">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/1.jpg">
-
-<link rel="icon" type="image/ico" sizes="32x32" href="/images/favicon.ico">
-  <link rel="mask-icon" href="/images/1.jpg" color="">
-  <link rel="manifest" href="/images/manifest.json">
-  <meta name="msapplication-config" content="/images/browserconfig.xml">
-  <meta http-equiv="Cache-Control" content="no-transform">
-  <meta http-equiv="Cache-Control" content="no-siteapp">
-
-
-<link rel="alternate" type="application/rss+xml" title="灵山之上神风起" href="https://sukunashinmyoumaru-hust.github.io/rss.xml" />
-<link rel="alternate" type="application/atom+xml" title="灵山之上神风起" href="https://sukunashinmyoumaru-hust.github.io/atom.xml" />
-<link rel="alternate" type="application/json" title="灵山之上神风起" href="https://sukunashinmyoumaru-hust.github.io/feed.json" />
-
-<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Mulish:300,300italic,400,400italic,700,700italic%7CFredericka%20the%20Great:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20JP:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20SC:300,300italic,400,400italic,700,700italic%7CInconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
-
-<link rel="stylesheet" href="/css/app.css?v=0.2.5">
+  <!DOCTYPE html>
+  <html lang="zh-CN"  >
+  <head>
+  <meta charset="utf-8">
+  
 
   
 
-<link rel="canonical" href="https://sukunashinmyoumaru-hust.github.io/2022/02/26/oschallengelab/">
+  
 
-
-
+  
+  <script>window.REIMU_CONFIG = {};window.REIMU_CONFIG.icon_font = '4552607_tq6stt6tcg';window.REIMU_CONFIG.clipboard_tips = {"success":"复制成功(*^▽^*)","fail":"复制失败 (ﾟ⊿ﾟ)ﾂ","copyright":{"enable":false,"count":50,"content":"本文版权：本博客所有文章除特别声明外，均采用 BY-NC-SA 许可协议。转载请注明出处！"}};</script>
+  
+  
   <title>
-华中科技大学操作系统挑战实验(PKE)基础解析 - 实验记录 |
-Suwa shrine = 灵山之上神风起 = 一个普通的华中科技大学在读硕士研究生</title>
-</head>
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div id="loading">
-    <div class="cat">
-      <div class="body"></div>
-      <div class="head">
-        <div class="face"></div>
-      </div>
-      <div class="foot">
-        <div class="tummy-end"></div>
-        <div class="bottom"></div>
-        <div class="legs left"></div>
-        <div class="legs right"></div>
-      </div>
-      <div class="paw">
-        <div class="hands left"></div>
-        <div class="hands right"></div>
-      </div>
-    </div>
-  </div>
-  <div id="container">
-    <header id="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="inner">
-        <div id="brand">
-          <div class="pjax">
-          
-  <h1 itemprop="name headline">华中科技大学操作系统挑战实验(PKE)基础解析
-  </h1>
+    华中科技大学操作系统挑战实验(PKE)基础解析 |
+    
+    Suwa shrine
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin><link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=&display=swap" media="print" onload="this.media&#x3D;&#39;all&#39;">
   
-<div class="meta">
-  <span class="item" title="创建时间：2022-02-26 17:34:26">
-    <span class="icon">
-      <i class="ic i-calendar"></i>
-    </span>
-    <span class="text">发表于</span>
-    <time itemprop="dateCreated datePublished" datetime="2022-02-26T17:34:26+08:00">2022-02-26</time>
-  </span>
-  <span class="item" title="本文字数">
-    <span class="icon">
-      <i class="ic i-pen"></i>
-    </span>
-    <span class="text">本文字数</span>
-    <span>30k</span>
-    <span class="text">字</span>
-  </span>
-  <span class="item" title="阅读时长">
-    <span class="icon">
-      <i class="ic i-clock"></i>
-    </span>
-    <span class="text">阅读时长</span>
-    <span>27 分钟</span>
-  </span>
-</div>
+    <link rel="preload" href="//at.alicdn.com/t/c/font_4552607_tq6stt6tcg.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  
+  
+    
+<link rel="stylesheet" href="/css/loader.css">
 
+  
+  
+    <meta name="description" content="lab1_challenge1 打印用户程序调用栈（难度：★★☆☆☆）给定应用12345678910111213141516171819202122232425*   user&#x2F;app_print_backtrace.c  1 &#x2F;\*  2  \* Below is the given application for lab1_challenge1_backtrace.  3  \* This a">
+<meta property="og:type" content="article">
+<meta property="og:title" content="华中科技大学操作系统挑战实验(PKE)基础解析">
+<meta property="og:url" content="https://sukunashinmyoumaru-hust.github.io/2022/02/26/oschallengelab/index.html">
+<meta property="og:site_name" content="Suwa shrine">
+<meta property="og:description" content="lab1_challenge1 打印用户程序调用栈（难度：★★☆☆☆）给定应用12345678910111213141516171819202122232425*   user&#x2F;app_print_backtrace.c  1 &#x2F;\*  2  \* Below is the given application for lab1_challenge1_backtrace.  3  \* This a">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/hustos/pke-doc/raw/master/pictures/fig1_2.png">
+<meta property="og:image" content="https://img-blog.csdn.net/20160521110434854">
+<meta property="article:published_time" content="2022-02-26T09:34:26.000Z">
+<meta property="article:modified_time" content="2024-02-29T07:20:21.142Z">
+<meta property="article:author" content="Sukuna">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/hustos/pke-doc/raw/master/pictures/fig1_2.png">
+  
+  
+    <link rel="alternate" href="/atom.xml" title="Suwa shrine" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/images/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
 
-          </div>
-        </div>
-        <nav id="nav">
-  <div class="inner">
-    <div class="toggle">
-      <div class="lines" aria-label="切换导航栏">
-        <span class="line"></span>
-        <span class="line"></span>
-        <span class="line"></span>
+  <link rel="preload" href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  
+    
+  
+  
+  
+  
+    
+<script src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js" integrity="sha384-k6YtvFUEIuEFBdrLKJ3YAUbBki333tj1CSUisai5Cswsg9wcLNaPzsTHDswp4Az8" crossorigin="anonymous"></script>
+
+  
+  
+    
+<link rel="stylesheet" href="https://npm.webcache.cn/@reimujs/aos@0.1.0/dist/aos.css">
+
+  
+  
+</head>
+
+  <body>
+    
+  <div id='loader'>
+    <div class="loading-left-bg loading-bg"></div>
+    <div class="loading-right-bg loading-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi">
+        
+          <svg width="150" height="150" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="https://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+            <path d="M303.5 432A80 80 0 0 1 291.5 592A80 80 0 0 1 303.5 432z" fill="var(--red-1, #ff5252)" />
+            <path d="M512 65A447 447 0 0 1 512 959L512 929A417 417 0 0 0 512 95A417 417 0 0 0 512 929L512 959A447 447 0 0 1 512 65z 
+           M512 95A417 417 0 0 1 929 512A208.5 208.5 0 0 1 720.5 720.5L720.5 592A80 80 0 0 0 720.5 432A80 80 0 0 0 720.5 592L720.5 720.5A208.5 208.5 0 0 1 512 512A208.5 208.5 0 0 0 303.5 303.5A208.5 208.5 0 0 0 95 512A417 417 0 0 1 512 95z" fill="var(--red-1, #ff5252)" />
+          </svg>
+        
       </div>
+      <div class="loading-word">少女祈祷中...</div>
     </div>
-    <ul class="menu">
-      <li class="item title"><a href="/" rel="start">Suwa shrine</a></li>
-    </ul>
-    <ul class="right">
-      <li class="item theme">
-        <i class="ic i-sun"></i>
-      </li>
-      <li class="item search">
-        <i class="ic i-search"></i>
-      </li>
-    </ul>
   </div>
-</nav>
+  </div>
+  <script>
+    var time = null;
+    var startLoading = () => {
+      time = Date.now();
+      document.getElementById('loader').classList.remove("loading");
+    }
+    var endLoading = () => {
+      if (!time) {
+        document.body.style.overflow = 'auto';
+        document.getElementById('loader').classList.add("loading");
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          document.body.style.overflow = 'auto';
+          document.getElementById('loader').classList.add("loading");
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('DOMContentLoaded', endLoading);
+    document.getElementById('loader').addEventListener('click', endLoading);
+  </script>
 
-      </div>
-      <div id="imgs" class="pjax">
-        <ul>
-          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/97c3cfc23ec60f4c.jpg"></li>
-          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/8d1e248fe0f62130.jpg"></li>
-          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/7d2279310f1bb2f7.jpg"></li>
-          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/c10853f5c9aee06c.jpg"></li>
-          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/f841728a51c3ae78.jpg"></li>
-          <li class="item" data-background-image="https://s3.bmp.ovh/imgs/2024/06/17/bac1b1e69e7ebfb7.jpg"></li>
-        </ul>
-      </div>
-    </header>
-    <div id="waves">
-      <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
-        <defs>
-          <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
-        </defs>
-        <g class="parallax">
-          <use xlink:href="#gentle-wave" x="48" y="0" />
-          <use xlink:href="#gentle-wave" x="48" y="3" />
-          <use xlink:href="#gentle-wave" x="48" y="5" />
-          <use xlink:href="#gentle-wave" x="48" y="7" />
-        </g>
-      </svg>
-    </div>
-    <main>
-      <div class="inner">
-        <div id="main" class="pjax">
-          
-  <div class="article wrap">
-    
-<div class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
-<i class="ic i-home"></i>
-<span><a href="/">首页</a></span><i class="ic i-angle-right"></i>
-<span  class="current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" itemprop="item" rel="index" title="分类于 实验记录"><span itemprop="name">实验记录</span></a>
-<meta itemprop="position" content="1" /></span>
+<div id="copy-tooltip" style="pointer-events: none; opacity: 0; transition: all 0.2s ease; position: fixed;top: 50%;left: 50%;z-index: 999;transform: translate(-50%, -50%);color: white;background: rgba(0, 0, 0, 0.5);padding: 10px 15px;border-radius: 10px;">
 </div>
 
-    <article itemscope itemtype="http://schema.org/Article" class="post block" lang="zh-CN">
-  <link itemprop="mainEntityOfPage" href="https://sukunashinmyoumaru-hust.github.io/2022/02/26/oschallengelab/">
 
-  <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="image" content="/images/IMG_1335.PNG">
-    <meta itemprop="name" content="Sukuna">
-    <meta itemprop="description" content="一个普通的华中科技大学在读硕士研究生, ">
-  </span>
+    <div id="container">
+      <div id="wrap">
+        <div id="header-nav">
+  <nav id="main-nav">
+    
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/">首页</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/archives">归档</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/about">关于</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/friend">友链</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" target="_blank" rel="noopener" href="https://github.com/SukunaShinmyoumaru-hust/Hust-opensource-Xuejie">HUST-学解</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/picture">赠画感谢</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/source">资料下载</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/travel">旅行日志</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/gbook">Sukuna冬令营</a>
+        </span>
+      
+    
+    <a id="main-nav-toggle" class="nav-icon"></a>
+  </nav>
+  <nav id="sub-nav">
+    
+      <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅" target="_blank"></a>
+    
+    
+    
+  </nav>
+</div>
+<header id="header">
+  
+    
+      <img fetchpriority="high" src="/images/IMG_0700.JPG" alt="华中科技大学操作系统挑战实验(PKE)基础解析">
+    
+  
+  <div id="header-outer">
+    <div id="header-title">
+      
+        
+        
+          <a href="/" id="logo">
+            <h1 data-aos="slide-up">华中科技大学操作系统挑战实验(PKE)基础解析</h1>
+          </a>
+        
+      
+      
+        
+        <h2 id="subtitle-wrap" data-aos="slide-down">
+          
+        </h2>
+      
+    </div>
+  </div>
+</header>
 
-  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="灵山之上神风起">
-  </span>
+        <div id="content">
+          
+            <aside id="sidebar">
+  <div class="sidebar-wrapper wrap-sticky">
+    <div class="sidebar-wrap" data-aos="fade-up">
+      
+        <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">文章目录</h3>
+  <div class="sidebar-toc-wrapper toc-div-class" >
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#lab1-challenge1-%E6%89%93%E5%8D%B0%E7%94%A8%E6%88%B7%E7%A8%8B%E5%BA%8F%E8%B0%83%E7%94%A8%E6%A0%88%EF%BC%88%E9%9A%BE%E5%BA%A6%EF%BC%9A%E2%98%85%E2%98%85%E2%98%86%E2%98%86%E2%98%86%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">lab1_challenge1 打印用户程序调用栈（难度：★★☆☆☆）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%99%E5%AE%9A%E5%BA%94%E7%94%A8"><span class="toc-number">1.0.1.</span> <span class="toc-text">给定应用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9"><span class="toc-number">1.0.2.</span> <span class="toc-text">实验内容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E6%8C%87%E5%AF%BC"><span class="toc-number">1.0.3.</span> <span class="toc-text">实验指导</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90"><span class="toc-number">1.0.4.</span> <span class="toc-text">实验解析</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#lab1-challenge2-%E6%89%93%E5%8D%B0%E5%BC%82%E5%B8%B8%E4%BB%A3%E7%A0%81%E8%A1%8C%EF%BC%88%E9%9A%BE%E5%BA%A6%EF%BC%9A%E2%98%85%E2%98%85%E2%98%85%E2%98%85%E2%98%86%EF%BC%89"><span class="toc-number">2.</span> <span class="toc-text">lab1_challenge2 打印异常代码行（难度：★★★★☆）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%99%E5%AE%9A%E5%BA%94%E7%94%A8-1"><span class="toc-number">2.0.1.</span> <span class="toc-text">给定应用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9-1"><span class="toc-number">2.0.2.</span> <span class="toc-text">实验内容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E6%8C%87%E5%AF%BC-1"><span class="toc-number">2.0.3.</span> <span class="toc-text">实验指导</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90-1"><span class="toc-number">2.0.4.</span> <span class="toc-text">实验解析</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#lab2-challenge1-%E5%A4%8D%E6%9D%82%E7%BC%BA%E9%A1%B5%E5%BC%82%E5%B8%B8%EF%BC%88%E9%9A%BE%E5%BA%A6%EF%BC%9A%E2%98%85%E2%98%86%E2%98%86%E2%98%86%E2%98%86%EF%BC%89"><span class="toc-number">3.</span> <span class="toc-text">lab2_challenge1 复杂缺页异常（难度：★☆☆☆☆）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%99%E5%AE%9A%E5%BA%94%E7%94%A8-2"><span class="toc-number">3.0.1.</span> <span class="toc-text">给定应用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9-2"><span class="toc-number">3.0.2.</span> <span class="toc-text">实验内容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E6%8C%87%E5%AF%BC-2"><span class="toc-number">3.0.3.</span> <span class="toc-text">实验指导</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90-2"><span class="toc-number">3.0.4.</span> <span class="toc-text">实验解析</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#lab2-challenge2-%E5%A0%86%E7%A9%BA%E9%97%B4%E7%AE%A1%E7%90%86-%EF%BC%88%E9%9A%BE%E5%BA%A6%EF%BC%9A%E2%98%85%E2%98%85%E2%98%85%E2%98%85%E2%98%86%EF%BC%89"><span class="toc-number">4.</span> <span class="toc-text">lab2_challenge2 堆空间管理 （难度：★★★★☆）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%99%E5%AE%9A%E5%BA%94%E7%94%A8-3"><span class="toc-number">4.0.1.</span> <span class="toc-text">给定应用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9-3"><span class="toc-number">4.0.2.</span> <span class="toc-text">实验内容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E6%8C%87%E5%AF%BC-3"><span class="toc-number">4.0.3.</span> <span class="toc-text">实验指导</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90-3"><span class="toc-number">4.0.4.</span> <span class="toc-text">实验解析</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#lab3-challenge1-%E8%BF%9B%E7%A8%8B%E7%AD%89%E5%BE%85%E5%92%8C%E6%95%B0%E6%8D%AE%E6%AE%B5%E5%A4%8D%E5%88%B6%EF%BC%88%E9%9A%BE%E5%BA%A6%EF%BC%9A%E2%98%85%E2%98%85%E2%98%86%E2%98%86%E2%98%86%EF%BC%89"><span class="toc-number">5.</span> <span class="toc-text">lab3_challenge1 进程等待和数据段复制（难度：★★☆☆☆）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%99%E5%AE%9A%E5%BA%94%E7%94%A8-4"><span class="toc-number">5.0.1.</span> <span class="toc-text">给定应用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9-4"><span class="toc-number">5.0.2.</span> <span class="toc-text">实验内容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E6%8C%87%E5%AF%BC-4"><span class="toc-number">5.0.3.</span> <span class="toc-text">实验指导</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90-4"><span class="toc-number">5.0.4.</span> <span class="toc-text">实验解析</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#lab3-challenge2-%E5%AE%9E%E7%8E%B0%E4%BF%A1%E5%8F%B7%E9%87%8F%EF%BC%88%E9%9A%BE%E5%BA%A6%EF%BC%9A%E2%98%85%E2%98%85%E2%98%85%E2%98%86%E2%98%86%EF%BC%89"><span class="toc-number">6.</span> <span class="toc-text">lab3_challenge2 实现信号量（难度：★★★☆☆）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%99%E5%AE%9A%E5%BA%94%E7%94%A8-5"><span class="toc-number">6.0.1.</span> <span class="toc-text">给定应用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9-5"><span class="toc-number">6.0.2.</span> <span class="toc-text">实验内容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E6%8C%87%E5%AF%BC-5"><span class="toc-number">6.0.3.</span> <span class="toc-text">实验指导</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90-5"><span class="toc-number">6.0.4.</span> <span class="toc-text">实验解析</span></a></li></ol></li></ol></li></ol>
+      
+  </div>
+</div>
+</div>
+        <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/IMG_1335.PNG" data-sizes="auto" alt="Sukuna" class="lazyload">
+  <div class="sidebar-author-name">Sukuna</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">25</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">3</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">0</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+    <div class="icon-github sidebar-social-icon">
+      <a href=https://github.com/Sukunashinmyoumaru-hust || github || &#34;#191717&#34; itemprop="url" target="_blank" aria-label="github" rel="noopener external nofollow noreferrer"></a>
+    </div>
+  
+    <div class="icon-twitter sidebar-social-icon">
+      <a href=https://twitter.com/sukuna_wireless || twitter || &#34;#00aff0&#34; itemprop="url" target="_blank" aria-label="twitter" rel="noopener external nofollow noreferrer"></a>
+    </div>
+  
+    <div class="icon-email sidebar-social-icon">
+      <a href=sukuna@hust.edu.cn || envelope || &#34;#55acd5&#34; itemprop="url" target="_blank" aria-label="email" rel="noopener external nofollow noreferrer"></a>
+    </div>
+  
+    <div class="icon-bilibili sidebar-social-icon">
+      <a href=https://space.bilibili.com/5595530 itemprop="url" target="_blank" aria-label="bilibili" rel="noopener external nofollow noreferrer"></a>
+    </div>
+  
+</div>
+<div class="sidebar-menu">
+  
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="关于"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/friend" aria-label="友链"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">友链</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" target="_blank" rel="noopener" href="https://github.com/SukunaShinmyoumaru-hust/Hust-opensource-Xuejie" aria-label="HUST-学解"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">HUST-学解</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/picture" aria-label="赠画感谢"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">赠画感谢</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/source" aria-label="资料下载"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">资料下载</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/travel" aria-label="旅行日志"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">旅行日志</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/gbook" aria-label="Sukuna冬令营"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">Sukuna冬令营</div>
+      </div>
+    
+  
+</div>
+</div>
+      
+      
+        <div class="sidebar-btn-wrapper" style="position:static">
+          <div class="sidebar-toc-btn current"></div>
+          <div class="sidebar-common-btn"></div>
+        </div>
+      
+    </div>
+  </div>
 
-  <div class="body md" itemprop="articleBody">
+  
+  
+</aside>
+
+          
+          <section id="main"><article id="post-oschallengelab" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner" data-aos="fade-up">
+    <div class="article-meta">
+      <div class="article-date">
+  <a href="/2022/02/26/oschallengelab/" class="article-date-link" data-aos="zoom-in">
+    <time datetime="2022-02-26T09:34:26.000Z" itemprop="datePublished">2022-02-26</time>
+    <time style="display: none;" id="post-update-time">2024-02-29</time>
+  </a>
+</div>
+
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95/" data-aos="zoom-in">实验记录</a>
+  </div>
+
+
+    </div>
+    <div class="hr-line"></div>
     
 
-    <h2 id="lab1-challenge1-打印用户程序调用栈（难度：★★☆☆☆）"><a href="#lab1-challenge1-打印用户程序调用栈（难度：★★☆☆☆）" class="headerlink" title="lab1_challenge1 打印用户程序调用栈（难度：★★☆☆☆）"></a>lab1_challenge1 打印用户程序调用栈（难度：★★☆☆☆）</h2><h4 id="给定应用"><a href="#给定应用" class="headerlink" title="给定应用"></a><span class="exturl" data-url="aHR0cHM6Ly9naXRlZS5jb20vaHVzdG9zL3BrZS1kb2MvYmxvYi9tYXN0ZXIvY2hhcHRlcjNfdHJhcHMubWQjJUU3JUJCJTk5JUU1JUFFJTlBJUU1JUJBJTk0JUU3JTk0JUE4LTM="></span><strong>给定应用</strong></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">*   user/app_print_backtrace.c</span><br><span class="line"></span><br><span class="line">  1 /\*</span><br><span class="line">  2  \* Below is the given application for lab1_challenge1_backtrace.</span><br><span class="line">  3  \* This app prints all functions before calling print_backtrace().</span><br><span class="line">  4  \*/</span><br><span class="line">  5</span><br><span class="line">  6 #include &quot;user_lib.h&quot;</span><br><span class="line">  7 #include &quot;util/types.h&quot;</span><br><span class="line">  8</span><br><span class="line">  9 **void** **f8**() &#123; print_backtrace(7); &#125;</span><br><span class="line"> 10 **void** **f7**() &#123; f8(); &#125;</span><br><span class="line"> 11 **void** **f6**() &#123; f7(); &#125;</span><br><span class="line"> 12 **void** **f5**() &#123; f6(); &#125;</span><br><span class="line"> 13 **void** **f4**() &#123; f5(); &#125;</span><br><span class="line"> 14 **void** **f3**() &#123; f4(); &#125;</span><br><span class="line"> 15 **void** **f2**() &#123; f3(); &#125;</span><br><span class="line"> 16 **void** **f1**() &#123; f2(); &#125;</span><br><span class="line"> 17</span><br><span class="line"> 18 **int** **main**(**void**) &#123;</span><br><span class="line"> 19   printu(&quot;back trace the user app in the following:\\n&quot;);</span><br><span class="line"> 20   f1();</span><br><span class="line"> 21   exit(0);</span><br><span class="line"> 22   **return** 0;</span><br><span class="line"> 23 &#125;</span><br></pre></td></tr></table></figure>
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+      
+        <h2 id="lab1-challenge1-打印用户程序调用栈（难度：★★☆☆☆）"><a href="#lab1-challenge1-打印用户程序调用栈（难度：★★☆☆☆）" class="headerlink" title="lab1_challenge1 打印用户程序调用栈（难度：★★☆☆☆）"></a>lab1_challenge1 打印用户程序调用栈（难度：★★☆☆☆）</h2><h4 id="给定应用"><a href="#给定应用" class="headerlink" title="给定应用"></a><a target="_blank" rel="noopener" href="https://gitee.com/hustos/pke-doc/blob/master/chapter3_traps.md#%E7%BB%99%E5%AE%9A%E5%BA%94%E7%94%A8-3"></a><strong>给定应用</strong></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">*   user/app_print_backtrace.c</span><br><span class="line"></span><br><span class="line">  1 /\*</span><br><span class="line">  2  \* Below is the given application for lab1_challenge1_backtrace.</span><br><span class="line">  3  \* This app prints all functions before calling print_backtrace().</span><br><span class="line">  4  \*/</span><br><span class="line">  5</span><br><span class="line">  6 #include &quot;user_lib.h&quot;</span><br><span class="line">  7 #include &quot;util/types.h&quot;</span><br><span class="line">  8</span><br><span class="line">  9 **void** **f8**() &#123; print_backtrace(7); &#125;</span><br><span class="line"> 10 **void** **f7**() &#123; f8(); &#125;</span><br><span class="line"> 11 **void** **f6**() &#123; f7(); &#125;</span><br><span class="line"> 12 **void** **f5**() &#123; f6(); &#125;</span><br><span class="line"> 13 **void** **f4**() &#123; f5(); &#125;</span><br><span class="line"> 14 **void** **f3**() &#123; f4(); &#125;</span><br><span class="line"> 15 **void** **f2**() &#123; f3(); &#125;</span><br><span class="line"> 16 **void** **f1**() &#123; f2(); &#125;</span><br><span class="line"> 17</span><br><span class="line"> 18 **int** **main**(**void**) &#123;</span><br><span class="line"> 19   printu(&quot;back trace the user app in the following:\\n&quot;);</span><br><span class="line"> 20   f1();</span><br><span class="line"> 21   exit(0);</span><br><span class="line"> 22   **return** 0;</span><br><span class="line"> 23 &#125;</span><br></pre></td></tr></table></figure>
 <p>以上程序在真正调用系统调用print_backtrace(7)之前的函数调用关系比复杂，图示起来有以下关系：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">main -&gt; f1 -&gt; f2 -&gt; f3 -&gt; f4 -&gt; f5 -&gt; f6 -&gt; f7 -&gt; f8</span><br></pre></td></tr></table></figure>
 <p>print_backtrace(7)的作用是将以上用户程序的函数调用关系，从最后的f8向上打印7层，预期的输出为：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">In m_start, hartid:0</span><br><span class="line">HTIF is available!</span><br><span class="line">(Emulated) memory size: 2048 MB</span><br><span class="line">Enter supervisor mode...</span><br><span class="line">Application: obj/app_print_backtrace</span><br><span class="line">Application program entry point (virtual address): 0x0000000081000072</span><br><span class="line">Switching to user mode...</span><br><span class="line">back trace the user app **in** the following:</span><br><span class="line">f8</span><br><span class="line">f7</span><br><span class="line">f6</span><br><span class="line">f5</span><br><span class="line">f4</span><br><span class="line">f3</span><br><span class="line">f2</span><br><span class="line">User exit with code:0.</span><br><span class="line">System is shutting down with exit code 0.</span><br></pre></td></tr></table></figure>
-<h4 id="实验内容"><a href="#实验内容" class="headerlink" title="实验内容"></a><span class="exturl" data-url="aHR0cHM6Ly9naXRlZS5jb20vaHVzdG9zL3BrZS1kb2MvYmxvYi9tYXN0ZXIvY2hhcHRlcjNfdHJhcHMubWQjJUU1JUFFJTlFJUU5JUFBJThDJUU1JTg2JTg1JUU1JUFFJUI5LTM="></span>实验内容</h4><p>本实验为挑战实验，基础代码将继承和使用lab1_3完成后的代码：</p>
+<h4 id="实验内容"><a href="#实验内容" class="headerlink" title="实验内容"></a><a target="_blank" rel="noopener" href="https://gitee.com/hustos/pke-doc/blob/master/chapter3_traps.md#%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9-3"></a>实验内容</h4><p>本实验为挑战实验，基础代码将继承和使用lab1_3完成后的代码：</p>
 <ul>
 <li>（先提交lab1_3的答案，然后）切换到lab1_challenge1_backtrace、继承lab1_3中所做修改：</li>
 </ul>
@@ -187,17 +413,17 @@ Suwa shrine = 灵山之上神风起 = 一个普通的华中科技大学在读硕
 <p>通过修改PKE内核，来实现从给定应用（user&#x2F;app_print_backtrace.c）到预期输出的转换。</p>
 <p>对于print_backtrace()函数的实现要求：</p>
 <p>应用程序调用print_backtrace()时，应能够通过控制输入的参数（如例子user&#x2F;app_print_backtrace.c中的7）控制回溯的层数。例如，如果调用print_backtrace(5)则只输出5层回溯；如果调用print_backtrace(100)，则应只回溯到main函数就停止回溯（因为调用的深度小于100）。</p>
-<h4 id="实验指导"><a href="#实验指导" class="headerlink" title="实验指导"></a><span class="exturl" data-url="aHR0cHM6Ly9naXRlZS5jb20vaHVzdG9zL3BrZS1kb2MvYmxvYi9tYXN0ZXIvY2hhcHRlcjNfdHJhcHMubWQjJUU1JUFFJTlFJUU5JUFBJThDJUU2JThDJTg3JUU1JUFGJUJDLTM="></span>实验指导</h4><p>为完成该挑战，PKE内核的完善应包含以下内容：</p>
+<h4 id="实验指导"><a href="#实验指导" class="headerlink" title="实验指导"></a><a target="_blank" rel="noopener" href="https://gitee.com/hustos/pke-doc/blob/master/chapter3_traps.md#%E5%AE%9E%E9%AA%8C%E6%8C%87%E5%AF%BC-3"></a>实验指导</h4><p>为完成该挑战，PKE内核的完善应包含以下内容：</p>
 <ul>
-<li>系统调用路径上的完善，可参见<span class="exturl" data-url="aHR0cHM6Ly9naXRlZS5jb20vaHVzdG9zL3BrZS1kb2MvYmxvYi9tYXN0ZXIvY2hhcHRlcjNfdHJhcHMubWQjc3lzY2FsbA==">3.2</span>中的知识；</li>
+<li>系统调用路径上的完善，可参见<a target="_blank" rel="noopener" href="https://gitee.com/hustos/pke-doc/blob/master/chapter3_traps.md#syscall">3.2</a>中的知识；</li>
 <li>在操作系统内核中获取用户程序的栈。这里需要注意的是，PKE系统中当用户程序通过系统调用陷入到内核时，会切换到S模式的“用户内核”栈，而不是在用户栈上继续操作。我们的print_backtrace()函数的设计目标是回溯并打印用户进程的函数调用情况，所以，进入操作系统内核后，需要找到用户进程的用户态栈来开始回溯；</li>
-<li>找到用户态栈后，我们需要了解用户态栈的结构。实际上，这一点在我们的第一章就有<span class="exturl" data-url="aHR0cHM6Ly9naXRlZS5jb20vaHVzdG9zL3BrZS1kb2MvYmxvYi9tYXN0ZXIvY2hhcHRlcjFfcmlzY3YubWQjY2FsbF9zdGFja19zdHJ1Y3R1cmU=">举例</span>来说明，读者可以回顾一下第一章的例子；</li>
-<li>通过用户栈找到函数的返回地址后，需要将虚拟地址转换为源程序中的符号。这一点，读者需要了解ELF文件中的符号节（.symtab section），以及字符串节（.strtab section）的相关知识，了解这两个节（section）里存储的内容以及存储的格式等内容。对ELF的这两个节，网上有大量的介绍，例如<span class="exturl" data-url="aHR0cHM6Ly9naXRlZS5jb20vbGluaz90YXJnZXQ9aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2Vkb25saWkvYXJ0aWNsZS9kZXRhaWxzLzg3NzkwNzU=">这里</span>，或阅读<span class="exturl" data-url="aHR0cHM6Ly9naXRlZS5jb20vbGluaz90YXJnZXQ9aHR0cHM6Ly9tYW43Lm9yZy9saW51eC9tYW4tcGFnZXMvbWFuNS9lbGYuNS5odG1s">Linux Man Page</span>。</li>
+<li>找到用户态栈后，我们需要了解用户态栈的结构。实际上，这一点在我们的第一章就有<a target="_blank" rel="noopener" href="https://gitee.com/hustos/pke-doc/blob/master/chapter1_riscv.md#call_stack_structure">举例</a>来说明，读者可以回顾一下第一章的例子；</li>
+<li>通过用户栈找到函数的返回地址后，需要将虚拟地址转换为源程序中的符号。这一点，读者需要了解ELF文件中的符号节（.symtab section），以及字符串节（.strtab section）的相关知识，了解这两个节（section）里存储的内容以及存储的格式等内容。对ELF的这两个节，网上有大量的介绍，例如<a href="https://gitee.com/link?target=https://blog.csdn.net/edonlii/article/details/8779075">这里</a>，或阅读<a href="https://gitee.com/link?target=https://man7.org/linux/man-pages/man5/elf.5.html">Linux Man Page</a>。</li>
 </ul>
 <p>提示：</p>
 <p>理论上，我们希望你了解函数调用时栈帧的结构，通过fp寄存器(s0)寻找各个栈帧；然而，编译器一般会优化掉fp，使得它的值始终为0，在发生函数调用时也不保存这个寄存器，实验的Makefile已经使用<code>-fno-omit-frame-pointer</code>禁止了此项优化。</p>
-<p>第一章中的 <span class="exturl" data-url="aHR0cHM6Ly9naXRlZS5jb20vaHVzdG9zL3BrZS1kb2MvYmxvYi9tYXN0ZXIvY2hhcHRlcjFfcmlzY3YubWQjY2FsbF9zdGFja19zdHJ1Y3R1cmU=">举例</span> 程序中，函数调用的栈帧（此时 bar 函数作为叶子调用函数）类似下图：</p>
-<p><img data-src="https://gitee.com/hustos/pke-doc/raw/master/pictures/fig1_2.png" alt="fig1_2"></p>
+<p>第一章中的 <a target="_blank" rel="noopener" href="https://gitee.com/hustos/pke-doc/blob/master/chapter1_riscv.md#call_stack_structure">举例</a> 程序中，函数调用的栈帧（此时 bar 函数作为叶子调用函数）类似下图：</p>
+<p><img src="https://gitee.com/hustos/pke-doc/raw/master/pictures/fig1_2.png" alt="fig1_2"></p>
 <p>注意，函数调用的叶子结点一般不会将ra保存到栈中；</p>
 <p>如果你发现使用fp追踪栈底难度太大，可以假设用户程序的函数调用产生的栈帧总是定长的；为了获得这个长度，你可以：</p>
 <p>$ riscv64-unknown-elf-objdump -d obj&#x2F;app_print_backtrace</p>
@@ -205,7 +431,7 @@ Suwa shrine = 灵山之上神风起 = 一个普通的华中科技大学在读硕
 <p>使用这种方法虽然在局部变量太多，或者函数参数较多时无法正确实现 backtrace 功能，也不是我们预期的做法，但我们进行测试时确实会使用简单的测试用例（没有参数，局部变量），因此可以通过 :)</p>
 <h4 id="实验解析"><a href="#实验解析" class="headerlink" title="实验解析"></a>实验解析</h4><p>首先最基本的,我们要了解ELF文件的基本组成.</p>
 <p>ELF文件主要是由两个视角组成,一个是链接时的视角,还有一个执行时的视角,两个视角组成不同的两种组成</p>
-<p><img data-src="https://img-blog.csdn.net/20160521110434854" alt="这里写图片描述"></p>
+<p><img src="https://img-blog.csdn.net/20160521110434854" alt="这里写图片描述"></p>
 <p>在这个时候我们发现有三个非常关键的结构,一个是总结全部的ELF头部,还有一个程序头部表,用来指导如何创建一个新的进程来进行执行.节区头部表用来记录程序静态的链接信息.</p>
 <p>首先是总的ELF头部信息.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">typedef struct elf_header_t &#123;</span><br><span class="line">  uint32 magic;</span><br><span class="line">  uint8 elf[12];</span><br><span class="line">  uint16 type;      /\* Object file type \*/</span><br><span class="line">  uint16 machine;   /\* Architecture \*/</span><br><span class="line">  uint32 version;   /\* Object file version \*/</span><br><span class="line">  uint64 entry;     /\* Entry point virtual address \*/</span><br><span class="line">  uint64 phoff;     /\* Program header table file offset \*/</span><br><span class="line">  uint64 shoff;     /\* Section header table file offset \*/</span><br><span class="line">  uint32 flags;     /\* Processor-specific flags \*/</span><br><span class="line">  uint16 ehsize;    /\* ELF header size in bytes \*/</span><br><span class="line">  uint16 phentsize; /\* Program header table entry size \*/</span><br><span class="line">  uint16 phnum;     /\* Program header table entry count \*/</span><br><span class="line">  uint16 shentsize; /\* Section header table entry size \*/</span><br><span class="line">  uint16 shnum;     /\* Section header table entry count \*/</span><br><span class="line">  uint16 shstrndx;  /\* Section header string table index \*/</span><br><span class="line">&#125; elf_header;</span><br></pre></td></tr></table></figure>
@@ -261,11 +487,11 @@ Suwa shrine = 灵山之上神风起 = 一个普通的华中科技大学在读硕
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">这里有代码,但是被ban了</span><br></pre></td></tr></table></figure>
 
 <p>基本的处理方式就是这样子的,在user_lib.c中实现函数,实现的方式就是进行系统调用,然后在sys_call里面完善do_syscall,就是加一个case而已,然后再syscall函数里面进行处理,这个时候交付给vmm.c,process.c都可以.</p>
-<h2 id="lab1-challenge2-打印异常代码行（难度：★★★★☆）"><a href="#lab1-challenge2-打印异常代码行（难度：★★★★☆）" class="headerlink" title="lab1_challenge2 打印异常代码行（难度：★★★★☆）"></a>lab1_challenge2 打印异常代码行（难度：★★★★☆）</h2><h4 id="给定应用-1"><a href="#给定应用-1" class="headerlink" title="给定应用"></a><span class="exturl" data-url="aHR0cHM6Ly9naXRlZS5jb20vaHVzdG9zL3BrZS1kb2MvYmxvYi9tYXN0ZXIvY2hhcHRlcjNfdHJhcHMubWQjJUU3JUJCJTk5JUU1JUFFJTlBJUU1JUJBJTk0JUU3JTk0JUE4LTQ="></span><strong>给定应用</strong></h4><ul>
+<h2 id="lab1-challenge2-打印异常代码行（难度：★★★★☆）"><a href="#lab1-challenge2-打印异常代码行（难度：★★★★☆）" class="headerlink" title="lab1_challenge2 打印异常代码行（难度：★★★★☆）"></a>lab1_challenge2 打印异常代码行（难度：★★★★☆）</h2><h4 id="给定应用-1"><a href="#给定应用-1" class="headerlink" title="给定应用"></a><a target="_blank" rel="noopener" href="https://gitee.com/hustos/pke-doc/blob/master/chapter3_traps.md#%E7%BB%99%E5%AE%9A%E5%BA%94%E7%94%A8-4"></a><strong>给定应用</strong></h4><ul>
 <li>user&#x2F;app_errorline.c（和lab1_2的应用一致）<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"> 1 /\*                                                                             </span><br><span class="line"> 2  \* Below is the given application for lab1_challenge2 (same as lab1_2).</span><br><span class="line"> 3  \* This app attempts to issue M-mode instruction in U-mode, and consequently raises an exception.</span><br><span class="line"> 4  \*/</span><br><span class="line"> 5 </span><br><span class="line"> 6 #include &quot;user_lib.h&quot;</span><br><span class="line"> 7 #include &quot;util/types.h&quot;</span><br><span class="line"> 8 </span><br><span class="line"> 9 **int** **main**(**void**) &#123;</span><br><span class="line">10   printu(&quot;Going to hack the system by running privilege instructions.\\n&quot;);</span><br><span class="line">11   // we are now in U(user)-mode, but the &quot;csrw&quot; instruction requires M-mode privilege.</span><br><span class="line">12   // Attempting to execute such instruction will raise illegal instruction exception.</span><br><span class="line">13   asm **volatile**(&quot;csrw sscratch, 0&quot;);</span><br><span class="line">14   exit(0);</span><br><span class="line">15 &#125;</span><br><span class="line">16 </span><br></pre></td></tr></table></figure>
 以上程序试图在用户态读取在内核态才能读取的寄存器sscratch，因此此处会触发illegal instruction异常，你的任务是<strong>修改内核（包括machine文件夹下）的代码，使得用户程序在发生异常时，内核能够输出触发异常的用户程序的源文件名和对应代码行</strong>，如上面的应用预期输出如下：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">In m_start, hartid:0</span><br><span class="line">HTIF is available!</span><br><span class="line">(Emulated) memory size: 2048 MB</span><br><span class="line">Enter supervisor mode...</span><br><span class="line">Application: obj/app_errorline</span><br><span class="line">Application program entry point (virtual address): 0x0000000081000000</span><br><span class="line">Switch to user mode...</span><br><span class="line">Going to hack the system by running privilege instructions.</span><br><span class="line">Runtime error at user/app_errorline.c:13</span><br><span class="line">  asm volatile(&quot;csrw sscratch, 0&quot;);</span><br><span class="line">Illegal instruction!</span><br><span class="line">System is shutting down with exit code -1.</span><br></pre></td></tr></table></figure></li>
 </ul>
-<h4 id="实验内容-1"><a href="#实验内容-1" class="headerlink" title="实验内容"></a><span class="exturl" data-url="aHR0cHM6Ly9naXRlZS5jb20vaHVzdG9zL3BrZS1kb2MvYmxvYi9tYXN0ZXIvY2hhcHRlcjNfdHJhcHMubWQjJUU1JUFFJTlFJUU5JUFBJThDJUU1JTg2JTg1JUU1JUFFJUI5LTQ="></span>实验内容</h4><p>本实验为挑战实验，基础代码将继承和使用lab1_3完成后的代码：</p>
+<h4 id="实验内容-1"><a href="#实验内容-1" class="headerlink" title="实验内容"></a><a target="_blank" rel="noopener" href="https://gitee.com/hustos/pke-doc/blob/master/chapter3_traps.md#%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9-4"></a>实验内容</h4><p>本实验为挑战实验，基础代码将继承和使用lab1_3完成后的代码：</p>
 <ul>
 <li>（先提交lab1_3的答案，然后）切换到lab1_challenge2_errorline、继承<strong>lab1_3</strong>（注意，不是继承lab1_challenge1_backtrace！<strong>PKE的挑战实验之间无继承关联</strong>）中所做修改：</li>
 </ul>
@@ -280,8 +506,8 @@ Suwa shrine = 灵山之上神风起 = 一个普通的华中科技大学在读硕
 <li>函数调用结束后，process结构体的dir、file、line三个指针会各指向一个数组，dir数组存储所有代码文件的文件夹路径字符串指针，如&#x2F;home&#x2F;abc&#x2F;bcd的文件夹路径为&#x2F;home&#x2F;abc，本项目user文件夹下的app_errorline.c文件夹路径为user；file数组存储所有代码文件的文件名字符串指针以及其文件夹路径在dir数组中的索引；line数组存储所有指令地址，代码行号，文件名在file数组中的索引三者的映射关系。如某文件第3行为a &#x3D; 0，被编译成地址为0x1234处的汇编代码li ax, 0和0x1238处的汇编代码sd 0(s0), ax。那么file数组中就包含两项，addr属性分别为0x1234和0x1238，line属性为3，file属性为“某文件”的文件名在file数组中的索引。</li>
 <li>注意：dir、file、line三个数组会依次存储在debug_line数据缓冲区之后，dir数组和file数组的大小为64。所以如果你用静态数组来存储debug_line段数据，那么这个数组必须足够大；或者你也可以把debug_line直接放在程序所有需映射的段数据之后，这样可以保证有足够大的动态空间。</li>
 </ul>
-<h4 id="实验指导-1"><a href="#实验指导-1" class="headerlink" title="实验指导"></a><span class="exturl" data-url="aHR0cHM6Ly9naXRlZS5jb20vaHVzdG9zL3BrZS1kb2MvYmxvYi9tYXN0ZXIvY2hhcHRlcjNfdHJhcHMubWQjJUU1JUFFJTlFJUU5JUFBJThDJUU2JThDJTg3JUU1JUFGJUJDLTQ="></span>实验指导</h4><ul>
-<li>为完成该挑战，需要利用用户程序编译时产生的<strong>调试信息</strong>，目前最广泛使用的调试信息格式是DWARF，可以参考<span class="exturl" data-url="aHR0cHM6Ly9naXRlZS5jb20vbGluaz90YXJnZXQ9aHR0cHM6Ly93aWtpLm9zZGV2Lm9yZy9EV0FSRg==">这里</span>了解其格式，该网站的参考文献中也给出了DWARF的完整文档地址，必要时可参考。</li>
+<h4 id="实验指导-1"><a href="#实验指导-1" class="headerlink" title="实验指导"></a><a target="_blank" rel="noopener" href="https://gitee.com/hustos/pke-doc/blob/master/chapter3_traps.md#%E5%AE%9E%E9%AA%8C%E6%8C%87%E5%AF%BC-4"></a>实验指导</h4><ul>
+<li>为完成该挑战，需要利用用户程序编译时产生的<strong>调试信息</strong>，目前最广泛使用的调试信息格式是DWARF，可以参考<a href="https://gitee.com/link?target=https://wiki.osdev.org/DWARF">这里</a>了解其格式，该网站的参考文献中也给出了DWARF的完整文档地址，必要时可参考。</li>
 <li>你对内核代码的修改可能包含以下内容：<ul>
 <li>修改读取elf文件的代码，找到包含调试信息的段，将其内容保存起来（可以保存在用户程序的地址空间中）</li>
 <li>在适当的位置调用debug_line段解析函数，对调试信息进行解析，构造指令地址-源代码行号-源代码文件名的对应表，注意，连续行号对应的不一定是连续的地址，因为一条源代码可以对应多条指令。</li>
@@ -330,11 +556,11 @@ Suwa shrine = 灵山之上神风起 = 一个普通的华中科技大学在读硕
 
 <p>到了这一步,前面的line-1行已经全部被处理了,那么我就只要第line行的字符就可以啦,处理方法如下:(处理到这一步code的内容已经整体前进了line-1行,现在code的第一个字符是异常代码的第一个ASCII,简单点说就是前面line-1行的元素已经全部处理完了),处理的方式就是利用offset</p>
 <p>这里有代码,但是被ban了</p>
-<h2 id="lab2-challenge1-复杂缺页异常（难度：★☆☆☆☆）"><a href="#lab2-challenge1-复杂缺页异常（难度：★☆☆☆☆）" class="headerlink" title="lab2_challenge1 复杂缺页异常（难度：★☆☆☆☆）"></a>lab2_challenge1 复杂缺页异常（难度：★☆☆☆☆）</h2><h4 id="给定应用-2"><a href="#给定应用-2" class="headerlink" title="给定应用"></a><span class="exturl" data-url="aHR0cHM6Ly9naXRlZS5jb20vaHVzdG9zL3BrZS1kb2MvIyVFNyVCQiU5OSVFNSVBRSU5QSVFNSVCQSU5NCVFNyU5NCVBOC0z"></span>给定应用</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">*   user/app_sum_sequence.c</span><br><span class="line"></span><br><span class="line">1/\*</span><br><span class="line">2 \* The application of lab2_4.</span><br><span class="line">3 \* Based on application of lab2_3.</span><br><span class="line">4 \*/</span><br><span class="line">5</span><br><span class="line">6#include &quot;user_lib.h&quot;</span><br><span class="line">7#include &quot;util/types.h&quot;</span><br><span class="line">8</span><br><span class="line">9//</span><br><span class="line">10// compute the summation of an arithmetic sequence. for a given &quot;n&quot;, compute</span><br><span class="line">11// result = n + (n-1) + (n-2) + ... + 0</span><br><span class="line">12// sum_sequence() calls itself recursively till 0. The recursive call, however,</span><br><span class="line">13// may consume more memory (from stack) than a physical 4KB page, leading to a page fault.</span><br><span class="line">14// PKE kernel needs to improved to handle such page fault by expanding the stack.</span><br><span class="line">15//</span><br><span class="line">16uint64 **sum_sequence**(uint64 n, **int** \*p) &#123;</span><br><span class="line">17  **if** (n == 0)</span><br><span class="line">18    **return** 0;</span><br><span class="line">19  **else**</span><br><span class="line">20    **return** \*p=sum_sequence( n-1, p+1 ) + n;</span><br><span class="line">21&#125;</span><br><span class="line">22</span><br><span class="line">23**int** **main**(**void**) &#123;</span><br><span class="line">24  // FIRST, we need a large enough &quot;n&quot; to trigger pagefaults in the user stack</span><br><span class="line">25  uint64 n = 1024;</span><br><span class="line">26</span><br><span class="line">27  // alloc a page size array(int) to store the result of every step</span><br><span class="line">28  // the max limit of the number is 4kB/4 = 1024</span><br><span class="line">29</span><br><span class="line">30  // SECOND, we use array out of bound to trigger pagefaults in an invalid address</span><br><span class="line">31  **int** \*ans = (**int** \*)naive_malloc();</span><br><span class="line">32</span><br><span class="line">33  printu(&quot;Summation of an arithmetic sequence from 0 to %ld is: %ld \\n&quot;, n, sum_sequence(n+1, ans) );</span><br><span class="line">34</span><br><span class="line">35  exit(0);</span><br><span class="line">36&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="lab2-challenge1-复杂缺页异常（难度：★☆☆☆☆）"><a href="#lab2-challenge1-复杂缺页异常（难度：★☆☆☆☆）" class="headerlink" title="lab2_challenge1 复杂缺页异常（难度：★☆☆☆☆）"></a>lab2_challenge1 复杂缺页异常（难度：★☆☆☆☆）</h2><h4 id="给定应用-2"><a href="#给定应用-2" class="headerlink" title="给定应用"></a><a target="_blank" rel="noopener" href="https://gitee.com/hustos/pke-doc/#%E7%BB%99%E5%AE%9A%E5%BA%94%E7%94%A8-3"></a>给定应用</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">*   user/app_sum_sequence.c</span><br><span class="line"></span><br><span class="line">1/\*</span><br><span class="line">2 \* The application of lab2_4.</span><br><span class="line">3 \* Based on application of lab2_3.</span><br><span class="line">4 \*/</span><br><span class="line">5</span><br><span class="line">6#include &quot;user_lib.h&quot;</span><br><span class="line">7#include &quot;util/types.h&quot;</span><br><span class="line">8</span><br><span class="line">9//</span><br><span class="line">10// compute the summation of an arithmetic sequence. for a given &quot;n&quot;, compute</span><br><span class="line">11// result = n + (n-1) + (n-2) + ... + 0</span><br><span class="line">12// sum_sequence() calls itself recursively till 0. The recursive call, however,</span><br><span class="line">13// may consume more memory (from stack) than a physical 4KB page, leading to a page fault.</span><br><span class="line">14// PKE kernel needs to improved to handle such page fault by expanding the stack.</span><br><span class="line">15//</span><br><span class="line">16uint64 **sum_sequence**(uint64 n, **int** \*p) &#123;</span><br><span class="line">17  **if** (n == 0)</span><br><span class="line">18    **return** 0;</span><br><span class="line">19  **else**</span><br><span class="line">20    **return** \*p=sum_sequence( n-1, p+1 ) + n;</span><br><span class="line">21&#125;</span><br><span class="line">22</span><br><span class="line">23**int** **main**(**void**) &#123;</span><br><span class="line">24  // FIRST, we need a large enough &quot;n&quot; to trigger pagefaults in the user stack</span><br><span class="line">25  uint64 n = 1024;</span><br><span class="line">26</span><br><span class="line">27  // alloc a page size array(int) to store the result of every step</span><br><span class="line">28  // the max limit of the number is 4kB/4 = 1024</span><br><span class="line">29</span><br><span class="line">30  // SECOND, we use array out of bound to trigger pagefaults in an invalid address</span><br><span class="line">31  **int** \*ans = (**int** \*)naive_malloc();</span><br><span class="line">32</span><br><span class="line">33  printu(&quot;Summation of an arithmetic sequence from 0 to %ld is: %ld \\n&quot;, n, sum_sequence(n+1, ans) );</span><br><span class="line">34</span><br><span class="line">35  exit(0);</span><br><span class="line">36&#125;</span><br></pre></td></tr></table></figure>
 <p>程序思路基本同lab2_3一致，对给定n计算0到n的和，但要求将每一步递归的结果保存在数组ans中。创建数组时，我们使用了当前的malloc函数申请了一个页面（4KB）的大小，对应可以存储的个数上限为1024。在函数调用时，我们试图计算1025求和，首先由于n足够大，所以在函数递归执行时会触发用户栈的缺页，你需要对其进行正确处理，确保程序正确运行；其次，1025在最后一次计算时会访问数组越界地址，由于该处虚拟地址尚未有对应的物理地址映射，因此属于非法地址的访问，这是不被允许的，对于这种缺页异常，应该提示用户并退出程序执行。如上的应用预期输出如下：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">In m_start, hartid:0</span><br><span class="line">HTIF is available!</span><br><span class="line">(Emulated) memory size: 2048 MB</span><br><span class="line">Enter supervisor mode...</span><br><span class="line">PKE kernel start 0x0000000080000000, PKE kernel end: 0x000000008000e000, PKE kernel size: 0x000000000000e000 .</span><br><span class="line">free physical memory address: [0x000000008000e000, 0x0000000087ffffff] </span><br><span class="line">kernel memory manager is initializing ...</span><br><span class="line">KERN_BASE 0x0000000080000000</span><br><span class="line">physical address of _etext is: 0x0000000080004000</span><br><span class="line">kernel page table is on </span><br><span class="line">User application is loading.</span><br><span class="line">user frame 0x0000000087fbc000, user stack 0x000000007ffff000, user kstack 0x0000000087fbb000 </span><br><span class="line">Application: ./obj/app_sum_sequence</span><br><span class="line">Application program entry point (virtual address): 0x00000000000100da</span><br><span class="line">Switching to user mode...</span><br><span class="line">handle_page_fault: 000000007fffdff8</span><br><span class="line">handle_page_fault: 000000007fffcff8</span><br><span class="line">handle_page_fault: 000000007fffbff8</span><br><span class="line">handle_page_fault: 000000007fffaff8</span><br><span class="line">handle_page_fault: 000000007fff9ff8</span><br><span class="line">handle_page_fault: 000000007fff8ff8</span><br><span class="line">handle_page_fault: 000000007fff7ff8</span><br><span class="line">handle_page_fault: 000000007fff6ff8</span><br><span class="line">handle_page_fault: 0000000000401000</span><br><span class="line">this address is not available!</span><br><span class="line">System is shutting down with exit code -1.</span><br></pre></td></tr></table></figure>
 <p>根据结果可以看出：前八个缺页是由于函数递归调用引起的，而最后一个缺页是对动态申请的数组进行越界访问造成的，访问非法地址，程序报错并退出。</p>
-<h4 id="实验内容-2"><a href="#实验内容-2" class="headerlink" title="实验内容"></a><span class="exturl" data-url="aHR0cHM6Ly9naXRlZS5jb20vaHVzdG9zL3BrZS1kb2MvIyVFNSVBRSU5RSVFOSVBQSU4QyVFNSU4NiU4NSVFNSVBRSVCOS0z"></span>实验内容</h4><p>本实验为挑战实验，基础代码将继承和使用lab2_3完成后的代码：</p>
+<h4 id="实验内容-2"><a href="#实验内容-2" class="headerlink" title="实验内容"></a><a target="_blank" rel="noopener" href="https://gitee.com/hustos/pke-doc/#%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9-3"></a>实验内容</h4><p>本实验为挑战实验，基础代码将继承和使用lab2_3完成后的代码：</p>
 <ul>
 <li>（先提交lab2_3的答案，然后）切换到lab2_challenge1_pagefaults、继承lab2_3中所做修改：</li>
 </ul>
@@ -345,7 +571,7 @@ Suwa shrine = 灵山之上神风起 = 一个普通的华中科技大学在读硕
 <li>本实验的具体要求为：通过修改PKE内核（包括machine文件夹下的代码），使得对于不同情况的缺页异常进行不同的处理。</li>
 <li>文件名规范：需要包含路径，如果是用户源程序发生的错误，路径为相对路径，如果是调用的标准库内发生的错误，路径为绝对路径。</li>
 </ul>
-<h4 id="实验指导-2"><a href="#实验指导-2" class="headerlink" title="实验指导"></a><span class="exturl" data-url="aHR0cHM6Ly9naXRlZS5jb20vaHVzdG9zL3BrZS1kb2MvIyVFNSVBRSU5RSVFOSVBQSU4QyVFNiU4QyU4NyVFNSVBRiVCQy0z"></span>实验指导</h4><ul>
+<h4 id="实验指导-2"><a href="#实验指导-2" class="headerlink" title="实验指导"></a><a target="_blank" rel="noopener" href="https://gitee.com/hustos/pke-doc/#%E5%AE%9E%E9%AA%8C%E6%8C%87%E5%AF%BC-3"></a>实验指导</h4><ul>
 <li>你对内核代码的修改可能包含以下内容：<ul>
 <li>修改进程的数据结构以对虚拟地址空间进行监控。</li>
 <li>修改kernel&#x2F;strap.c中的异常处理函数。对于合理的缺页异常，扩大内核栈大小并为其映射物理块；对于非法地址缺页，报错并退出程序。</li>
@@ -356,18 +582,18 @@ Suwa shrine = 灵山之上神风起 = 一个普通的华中科技大学在读硕
 <p>如果是正常的缺页中断,那么我们可以根据lab2_3的指示进行处理.</p>
 <p>如果是数组越界,那么编译器得到的访问地址必定相差很大,那么我们可以这样做,判断当前出现缺页中断的虚地址的地址是不是在可控的范围内,如果可控就进行中断,如果不可控就不做,那么我们只需要在处理缺页中断的地方添加上一段就可以:</p>
 <p>就这么简单.</p>
-<h2 id="lab2-challenge2-堆空间管理-（难度：★★★★☆）"><a href="#lab2-challenge2-堆空间管理-（难度：★★★★☆）" class="headerlink" title="lab2_challenge2 堆空间管理 （难度：★★★★☆）"></a>lab2_challenge2 堆空间管理 （难度：★★★★☆）</h2><h4 id="给定应用-3"><a href="#给定应用-3" class="headerlink" title="给定应用"></a><span class="exturl" data-url="aHR0cHM6Ly9naXRlZS5jb20vaHVzdG9zL3BrZS1kb2MvdHJlZS9tYXN0ZXIjJUU3JUJCJTk5JUU1JUFFJTlBJUU1JUJBJTk0JUU3JTk0JUE4LTQ="></span>给定应用</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">*   user/app_singlepageheap.c</span><br><span class="line"></span><br><span class="line"> 1/\*</span><br><span class="line">2 \* Below is the given application for lab2_challenge2_singlepageheap.</span><br><span class="line">3 \* This app performs malloc memory.</span><br><span class="line">4 \*/</span><br><span class="line">5</span><br><span class="line">6#include &quot;user_lib.h&quot;</span><br><span class="line">7#include &quot;util/types.h&quot;</span><br><span class="line">8#include &quot;util/string.h&quot;</span><br><span class="line">9**int** **main**(**void**) &#123;</span><br><span class="line">10  </span><br><span class="line">11  **char** str[20] = &quot;hello world.&quot;;</span><br><span class="line">12  **char** \*m = (**char** \*)better_malloc(100);</span><br><span class="line">13  **char** \*p = (**char** \*)better_malloc(50);</span><br><span class="line">14  **if**((uint64)p - (uint64)m &gt; 512 )&#123;</span><br><span class="line">15    printu(&quot;you need to manage the vm space precisely!&quot;);</span><br><span class="line">16    exit(-1);</span><br><span class="line">17  &#125;</span><br><span class="line">18  better_free((**void** \*)m);</span><br><span class="line">19</span><br><span class="line">20  strcpy(p,str);</span><br><span class="line">21  printu(&quot;%s\\n&quot;,p);</span><br><span class="line">22  exit(0);</span><br><span class="line">23  **return** 0;</span><br><span class="line">24&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="lab2-challenge2-堆空间管理-（难度：★★★★☆）"><a href="#lab2-challenge2-堆空间管理-（难度：★★★★☆）" class="headerlink" title="lab2_challenge2 堆空间管理 （难度：★★★★☆）"></a>lab2_challenge2 堆空间管理 （难度：★★★★☆）</h2><h4 id="给定应用-3"><a href="#给定应用-3" class="headerlink" title="给定应用"></a><a target="_blank" rel="noopener" href="https://gitee.com/hustos/pke-doc/tree/master#%E7%BB%99%E5%AE%9A%E5%BA%94%E7%94%A8-4"></a>给定应用</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">*   user/app_singlepageheap.c</span><br><span class="line"></span><br><span class="line"> 1/\*</span><br><span class="line">2 \* Below is the given application for lab2_challenge2_singlepageheap.</span><br><span class="line">3 \* This app performs malloc memory.</span><br><span class="line">4 \*/</span><br><span class="line">5</span><br><span class="line">6#include &quot;user_lib.h&quot;</span><br><span class="line">7#include &quot;util/types.h&quot;</span><br><span class="line">8#include &quot;util/string.h&quot;</span><br><span class="line">9**int** **main**(**void**) &#123;</span><br><span class="line">10  </span><br><span class="line">11  **char** str[20] = &quot;hello world.&quot;;</span><br><span class="line">12  **char** \*m = (**char** \*)better_malloc(100);</span><br><span class="line">13  **char** \*p = (**char** \*)better_malloc(50);</span><br><span class="line">14  **if**((uint64)p - (uint64)m &gt; 512 )&#123;</span><br><span class="line">15    printu(&quot;you need to manage the vm space precisely!&quot;);</span><br><span class="line">16    exit(-1);</span><br><span class="line">17  &#125;</span><br><span class="line">18  better_free((**void** \*)m);</span><br><span class="line">19</span><br><span class="line">20  strcpy(p,str);</span><br><span class="line">21  printu(&quot;%s\\n&quot;,p);</span><br><span class="line">22  exit(0);</span><br><span class="line">23  **return** 0;</span><br><span class="line">24&#125;</span><br></pre></td></tr></table></figure>
 <p>以上程序先利用better_malloc分别申请100和50个字节的一个物理页的内存，然后使用better_free释放掉100个字节，向50个字节中复制一串字符串，进行输出。原本的pke中malloc的实现是非常简化的（一次直接分配一个页面），你的挑战任务是<strong>修改内核(包括machine文件夹下)的代码，使得应用程序的malloc能够在一个物理页中分配，并对各申请块进行合理的管理</strong>，如上面的应用预期输出如下：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">In m_start, hartid:0</span><br><span class="line">HTIF is available!</span><br><span class="line">(Emulated) memory size: 2048 MB</span><br><span class="line">Enter supervisor mode...</span><br><span class="line">PKE kernel start 0x0000000080000000, PKE kernel end: 0x0000000080008000, PKE kernel size: 0x0000000000008000 .</span><br><span class="line">free physical memory address: [0x0000000080008000, 0x0000000087ffffff]</span><br><span class="line">kernel memory manager is initializing ...</span><br><span class="line">KERN_BASE 0x0000000080000000</span><br><span class="line">physical address of _etext is: 0x0000000080005000</span><br><span class="line">kernel page table is on</span><br><span class="line">User application is loading.</span><br><span class="line">user frame 0x0000000087fbc000, user stack 0x000000007ffff000, user kstack 0x0000000087fbb000</span><br><span class="line">Application: obj/app_singlepageheap</span><br><span class="line">Application program entry point (virtual address): 0x00000000000100b0</span><br><span class="line">Switch to user mode...</span><br><span class="line">hello world.</span><br><span class="line">User exit with code:0.</span><br><span class="line">System is shutting down with exit code 0.</span><br></pre></td></tr></table></figure>
 <p>通过应用程序和对应的预期结果可以看出：两次申请的空间在同一页面，并且释放第一块时，不会释放整个页面，所以需要你设计合适的数据结构对各块进行管理，使得better_malloc申请的空间更加“紧凑”。</p>
-<h4 id="实验内容-3"><a href="#实验内容-3" class="headerlink" title="实验内容"></a><span class="exturl" data-url="aHR0cHM6Ly9naXRlZS5jb20vaHVzdG9zL3BrZS1kb2MvdHJlZS9tYXN0ZXIjJUU1JUFFJTlFJUU5JUFBJThDJUU1JTg2JTg1JUU1JUFFJUI5LTQ="></span>实验内容</h4><p>本实验为挑战实验，基础代码将继承和使用lab2_challenge1完成后的代码：</p>
+<h4 id="实验内容-3"><a href="#实验内容-3" class="headerlink" title="实验内容"></a><a target="_blank" rel="noopener" href="https://gitee.com/hustos/pke-doc/tree/master#%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9-4"></a>实验内容</h4><p>本实验为挑战实验，基础代码将继承和使用lab2_challenge1完成后的代码：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">*   （先提交lab2_3的答案，然后）切换到lab2_challenge2、继承lab2_3中所做修改：</span><br><span class="line"></span><br><span class="line">//切换到lab2_challenge2_singlepageheap</span><br><span class="line">$ git checkout lab2_challenge2_singlepageheap</span><br><span class="line"></span><br><span class="line">//继承lab2_challenge1以及之前的答案</span><br><span class="line">$ git merge lab2_3_pagefault -m &quot;continue to work on lab2_challenge2&quot;</span><br></pre></td></tr></table></figure>
 <p>注意：**不同于基础实验，挑战实验的基础代码具有更大的不完整性，可能无法直接通过构造过程。**同样，不同于基础实验，我们在代码中也并未专门地哪些地方的代码需要填写，哪些地方的代码无须填写。这样，我们留给读者更大的“想象空间”。</p>
 <ul>
 <li>本实验的具体要求为：通过修改PKE内核（包括machine文件下的代码），实现优化后的malloc函数，使得应用程序两次申请块在同一页面，并且能够正常输出存入第二块中的字符串”hello world”。</li>
 <li>文件名规范：需要包含路径，如果是用户源程序发生的错误，路径为相对路径，如果是调用的标准库内发生的错误，路径为绝对路径。</li>
 </ul>
-<h4 id="实验指导-3"><a href="#实验指导-3" class="headerlink" title="实验指导"></a><span class="exturl" data-url="aHR0cHM6Ly9naXRlZS5jb20vaHVzdG9zL3BrZS1kb2MvdHJlZS9tYXN0ZXIjJUU1JUFFJTlFJUU5JUFBJThDJUU2JThDJTg3JUU1JUFGJUJDLTQ="></span>实验指导</h4><ul>
+<h4 id="实验指导-3"><a href="#实验指导-3" class="headerlink" title="实验指导"></a><a target="_blank" rel="noopener" href="https://gitee.com/hustos/pke-doc/tree/master#%E5%AE%9E%E9%AA%8C%E6%8C%87%E5%AF%BC-4"></a>实验指导</h4><ul>
 <li>为完成该挑战，你需要对进程的虚拟地址空间进行管理，建议参考Linux的内存分配策略从而实现malloc。</li>
 <li>你对内核代码的修改可能包含以下内容：<ul>
 <li>增加内存控制块数据结构对分配的内存块进行管理。</li>
@@ -403,7 +629,7 @@ Suwa shrine = 灵山之上神风起 = 一个普通的华中科技大学在读硕
 
 <p>首先第一步,看看free之后是不是能够空出一整个页来,如果能空出一整页的话,这一整页就可以释放了,接着就是把这一个内存块从数组中抽出来,后面的元素一一往前移动.</p>
 <p>由于数据集太弱了,狗都能过,所以说不代表我这个方法一定正确.</p>
-<h2 id="lab3-challenge1-进程等待和数据段复制（难度：★★☆☆☆）"><a href="#lab3-challenge1-进程等待和数据段复制（难度：★★☆☆☆）" class="headerlink" title="lab3_challenge1 进程等待和数据段复制（难度：★★☆☆☆）"></a>lab3_challenge1 进程等待和数据段复制（难度：★★☆☆☆）</h2><h4 id="给定应用-4"><a href="#给定应用-4" class="headerlink" title="给定应用"></a><span class="exturl" data-url="aHR0cHM6Ly9naXRlZS5jb20vaHVzdG9zL3BrZS1kb2MjJUU3JUJCJTk5JUU1JUFFJTlBJUU1JUJBJTk0JUU3JTk0JUE4LTM="></span><strong>给定应用</strong></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">*   user/app_wait.c</span><br><span class="line"></span><br><span class="line">  1 /\*                                                                             </span><br><span class="line">  2  \* This app fork a child process, and the child process fork a grandchild process.</span><br><span class="line">  3  \* every process waits for its own child exit then prints.                     </span><br><span class="line">  4  \* Three processes also write their own global variables &quot;flag&quot;</span><br><span class="line">  5  \* to different values.</span><br><span class="line">  6  \*/</span><br><span class="line">  7 </span><br><span class="line">  8 #include &quot;user/user_lib.h&quot;</span><br><span class="line">  9 #include &quot;util/types.h&quot;</span><br><span class="line"> 10 </span><br><span class="line"> 11 **int** flag;</span><br><span class="line"> 12 **int** **main**(**void**) &#123;</span><br><span class="line"> 13     flag = 0;</span><br><span class="line"> 14     **int** pid = fork();</span><br><span class="line"> 15     **if** (pid == 0) &#123;</span><br><span class="line"> 16         flag = 1;</span><br><span class="line"> 17         pid = fork();</span><br><span class="line"> 18         **if** (pid == 0) &#123;</span><br><span class="line"> 19             flag = 2;</span><br><span class="line"> 20             printu(&quot;Grandchild process end, flag = %d.\\n&quot;, flag);</span><br><span class="line"> 21         &#125; **else** &#123;</span><br><span class="line"> 22             wait(pid);</span><br><span class="line"> 23             printu(&quot;Child process end, flag = %d.\\n&quot;, flag);</span><br><span class="line"> 24         &#125;</span><br><span class="line"> 25     &#125; **else** &#123;</span><br><span class="line"> 26         wait(-1);</span><br><span class="line"> 27         printu(&quot;Parent process end, flag = %d.\\n&quot;, flag);</span><br><span class="line"> 28     &#125;</span><br><span class="line"> 29     exit(0);</span><br><span class="line"> 30     **return** 0;</span><br><span class="line"> 31 &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="lab3-challenge1-进程等待和数据段复制（难度：★★☆☆☆）"><a href="#lab3-challenge1-进程等待和数据段复制（难度：★★☆☆☆）" class="headerlink" title="lab3_challenge1 进程等待和数据段复制（难度：★★☆☆☆）"></a>lab3_challenge1 进程等待和数据段复制（难度：★★☆☆☆）</h2><h4 id="给定应用-4"><a href="#给定应用-4" class="headerlink" title="给定应用"></a><a target="_blank" rel="noopener" href="https://gitee.com/hustos/pke-doc#%E7%BB%99%E5%AE%9A%E5%BA%94%E7%94%A8-3"></a><strong>给定应用</strong></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">*   user/app_wait.c</span><br><span class="line"></span><br><span class="line">  1 /\*                                                                             </span><br><span class="line">  2  \* This app fork a child process, and the child process fork a grandchild process.</span><br><span class="line">  3  \* every process waits for its own child exit then prints.                     </span><br><span class="line">  4  \* Three processes also write their own global variables &quot;flag&quot;</span><br><span class="line">  5  \* to different values.</span><br><span class="line">  6  \*/</span><br><span class="line">  7 </span><br><span class="line">  8 #include &quot;user/user_lib.h&quot;</span><br><span class="line">  9 #include &quot;util/types.h&quot;</span><br><span class="line"> 10 </span><br><span class="line"> 11 **int** flag;</span><br><span class="line"> 12 **int** **main**(**void**) &#123;</span><br><span class="line"> 13     flag = 0;</span><br><span class="line"> 14     **int** pid = fork();</span><br><span class="line"> 15     **if** (pid == 0) &#123;</span><br><span class="line"> 16         flag = 1;</span><br><span class="line"> 17         pid = fork();</span><br><span class="line"> 18         **if** (pid == 0) &#123;</span><br><span class="line"> 19             flag = 2;</span><br><span class="line"> 20             printu(&quot;Grandchild process end, flag = %d.\\n&quot;, flag);</span><br><span class="line"> 21         &#125; **else** &#123;</span><br><span class="line"> 22             wait(pid);</span><br><span class="line"> 23             printu(&quot;Child process end, flag = %d.\\n&quot;, flag);</span><br><span class="line"> 24         &#125;</span><br><span class="line"> 25     &#125; **else** &#123;</span><br><span class="line"> 26         wait(-1);</span><br><span class="line"> 27         printu(&quot;Parent process end, flag = %d.\\n&quot;, flag);</span><br><span class="line"> 28     &#125;</span><br><span class="line"> 29     exit(0);</span><br><span class="line"> 30     **return** 0;</span><br><span class="line"> 31 &#125;</span><br></pre></td></tr></table></figure>
 <p>wait系统调用是进程管理中一个非常重要的系统调用，它主要有两大功能：</p>
 <ul>
 <li>当一个进程退出之后，它所占用的资源并不一定能够立即回收，比如该进程的内核栈目前就正用来进行系统调用处理。对于这种问题，一种典型的做法是当进程退出的时候内核立即回收一部分资源并将该进程标记为僵尸进程。由父进程调用wait函数的时候再回收该进程的其他资源。</li>
@@ -411,7 +637,7 @@ Suwa shrine = 灵山之上神风起 = 一个普通的华中科技大学在读硕
 </ul>
 <p>在以上程序中，父进程把flag变量赋值为0，然后fork生成一个子进程，接着通过wait函数等待子进程的退出。子进程把自己的变量flag赋值为1，然后fork生成孙子进程，接着通过wait函数等待孙子进程的退出。孙子进程给自己的变量flag赋值为2并在退出时输出信息，然后子进程退出时输出信息，最后父进程退出时输出信息。由于fork之后父子进程的数据段相互独立（同一虚拟地址对应不同的物理地址），子进程对全局变量的赋值不影响父进程全局变量的值，因此结果如下：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">In m_start, hartid:0</span><br><span class="line">HTIF is available!</span><br><span class="line">(Emulated) memory size: 2048 MB</span><br><span class="line">Enter supervisor mode...</span><br><span class="line">PKE kernel start 0x0000000080000000, PKE kernel end: 0x0000000080009000, PKE kernel size: 0x0000000000009000 .</span><br><span class="line">free physical memory address: [0x0000000080009000, 0x0000000087ffffff] </span><br><span class="line">kernel memory manager is initializing ...</span><br><span class="line">KERN_BASE 0x0000000080000000</span><br><span class="line">physical address of _etext is: 0x0000000080005000</span><br><span class="line">kernel page table is on </span><br><span class="line">Switch to user mode...</span><br><span class="line">**in** alloc_proc. user frame 0x0000000087fbc000, user stack 0x000000007ffff000, user kstack 0x0000000087fbb000 </span><br><span class="line">User application is loading.</span><br><span class="line">Application: obj/app_wait</span><br><span class="line">CODE_SEGMENT added at mapped info offset:3</span><br><span class="line">DATA_SEGMENT added at mapped info offset:4</span><br><span class="line">Application program entry point (virtual address): 0x00000000000100b0</span><br><span class="line">going to insert process 0 to ready queue.</span><br><span class="line">going to schedule process 0 to run.</span><br><span class="line">User call fork.</span><br><span class="line">will fork a child from parent 0.</span><br><span class="line">**in** alloc_proc. user frame 0x0000000087fae000, user stack 0x000000007ffff000, user kstack 0x0000000087fad000 </span><br><span class="line">do_fork map code segment at pa:0000000087fb2000 of parent to child at va:0000000000010000.</span><br><span class="line">going to insert process 1 to ready queue.</span><br><span class="line">going to schedule process 1 to run.</span><br><span class="line">User call fork.</span><br><span class="line">will fork a child from parent 1.</span><br><span class="line">**in** alloc_proc. user frame 0x0000000087fa1000, user stack 0x000000007ffff000, user kstack 0x0000000087fa0000 </span><br><span class="line">do_fork map code segment at pa:0000000087fb2000 of parent to child at va:0000000000010000.</span><br><span class="line">going to insert process 2 to ready queue.</span><br><span class="line">going to schedule process 2 to run.</span><br><span class="line">Grandchild process end, flag = 2.</span><br><span class="line">User exit with code:0.</span><br><span class="line">going to insert process 1 to ready queue.</span><br><span class="line">going to schedule process 1 to run.</span><br><span class="line">Child process end, flag = 1.</span><br><span class="line">User exit with code:0.</span><br><span class="line">going to insert process 0 to ready queue.</span><br><span class="line">going to schedule process 0 to run.</span><br><span class="line">Parent process end, flag = 0.</span><br><span class="line">User exit with code:0.</span><br><span class="line">no more ready processes, system shutdown now.</span><br><span class="line">System is shutting down with exit code 0.</span><br></pre></td></tr></table></figure>
-<h4 id="实验内容-4"><a href="#实验内容-4" class="headerlink" title="实验内容"></a><span class="exturl" data-url="aHR0cHM6Ly9naXRlZS5jb20vaHVzdG9zL3BrZS1kb2MjJUU1JUFFJTlFJUU5JUFBJThDJUU1JTg2JTg1JUU1JUFFJUI5LTM="></span>实验内容</h4><p>本实验为挑战实验，基础代码将继承和使用lab3_3完成后的代码：</p>
+<h4 id="实验内容-4"><a href="#实验内容-4" class="headerlink" title="实验内容"></a><a target="_blank" rel="noopener" href="https://gitee.com/hustos/pke-doc#%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9-3"></a>实验内容</h4><p>本实验为挑战实验，基础代码将继承和使用lab3_3完成后的代码：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">*   （先提交lab3_3的答案，然后）切换到lab3_challenge1_wait、继承lab3_3中所做修改：</span><br><span class="line"></span><br><span class="line">//切换到lab3_challenge1_wait</span><br><span class="line">$ git checkout lab3_challenge1_wait</span><br><span class="line"></span><br><span class="line">//继承lab3_3以及之前的答案</span><br><span class="line">$ git merge lab3_3_rrsched -m &quot;continue to work on lab3_challenge1&quot;</span><br></pre></td></tr></table></figure>
 <p>注意：<strong>不同于基础实验，挑战实验的基础代码具有更大的不完整性，可能无法直接通过构造过程。</strong> 同样，不同于基础实验，我们在代码中也并未专门地哪些地方的代码需要填写，哪些地方的代码无须填写。这样，我们留给读者更大的“想象空间”。</p>
 <ul>
@@ -427,7 +653,7 @@ Suwa shrine = 灵山之上神风起 = 一个普通的华中科技大学在读硕
 </li>
 <li>注意：最终测试程序可能和给出的用户程序不同，但都只涉及wait函数、fork函数和全局变量读写的相关操作。</li>
 </ul>
-<h4 id="实验指导-4"><a href="#实验指导-4" class="headerlink" title="实验指导"></a><span class="exturl" data-url="aHR0cHM6Ly9naXRlZS5jb20vaHVzdG9zL3BrZS1kb2MjJUU1JUFFJTlFJUU5JUFBJThDJUU2JThDJTg3JUU1JUFGJUJDLTM="></span>实验指导</h4><ul>
+<h4 id="实验指导-4"><a href="#实验指导-4" class="headerlink" title="实验指导"></a><a target="_blank" rel="noopener" href="https://gitee.com/hustos/pke-doc#%E5%AE%9E%E9%AA%8C%E6%8C%87%E5%AF%BC-3"></a>实验指导</h4><ul>
 <li>你对内核代码的修改可能包含添加系统调用、在内核中实现wait函数的功能以及对do_fork函数的完善。</li>
 </ul>
 <h4 id="实验解析-4"><a href="#实验解析-4" class="headerlink" title="实验解析"></a>实验解析</h4><p>首先第一步,我们要在do_fork函数中添加关于数据段的支持,那么在复制的时候只需要添加case DATA_SEGMENT的处理就可以.</p>
@@ -447,17 +673,17 @@ Suwa shrine = 灵山之上神风起 = 一个普通的华中科技大学在读硕
 <p>那么对于exit也要进行改变,当一个进程结束的时候有可能会通知给其他进程.?代表这个进程是某个进程的儿子,某个进程正在等待您结束呢?用位运算就可以完成.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">if (?) != 0 &amp;&amp; proc-&gt;parent-&gt;pid == procs[i].pid &amp;&amp; procs[i].status == BLOCKED) &#123;</span><br><span class="line">  procs[i].status = READY;</span><br><span class="line">  insert_to_ready_queue(&amp;procs[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="lab3-challenge2-实现信号量（难度：★★★☆☆）"><a href="#lab3-challenge2-实现信号量（难度：★★★☆☆）" class="headerlink" title="lab3_challenge2 实现信号量（难度：★★★☆☆）"></a>lab3_challenge2 实现信号量（难度：★★★☆☆）</h2><h4 id="给定应用-5"><a href="#给定应用-5" class="headerlink" title="给定应用"></a><span class="exturl" data-url="aHR0cHM6Ly9naXRlZS5jb20vaHVzdG9zL3BrZS1kb2MjJUU3JUJCJTk5JUU1JUFFJTlBJUU1JUJBJTk0JUU3JTk0JUE4LTQ="></span><strong>给定应用</strong></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">*   user/app_semaphore.c</span><br><span class="line"></span><br><span class="line">  1 /\*                                                                                                                                       </span><br><span class="line">  2 \* This app create two child process.</span><br><span class="line">  3 \* Use semaphores to control the order of</span><br><span class="line">  4 \* the main process and two child processes print info. </span><br><span class="line">  5 \*/</span><br><span class="line">  6 #include &quot;user/user_lib.h&quot;</span><br><span class="line">  7 #include &quot;util/types.h&quot;</span><br><span class="line">  8 </span><br><span class="line">  9 **int** **main**(**void**) &#123;</span><br><span class="line"> 10     **int** main_sem, child_sem[2];</span><br><span class="line"> 11     main_sem = sem_new(1);</span><br><span class="line"> 12     **for** (**int** i = 0; i &lt; 2; i++) child_sem[i] = sem_new(0);</span><br><span class="line"> 13     **int** pid = fork();</span><br><span class="line"> 14     **if** (pid == 0) &#123;</span><br><span class="line"> 15         pid = fork();</span><br><span class="line"> 16         **for** (**int** i = 0; i &lt; 10; i++) &#123;</span><br><span class="line"> 17             sem_P(child_sem[pid == 0]);</span><br><span class="line"> 18             printu(&quot;Child%d print %d\\n&quot;, pid == 0, i);</span><br><span class="line"> 19             **if** (pid != 0) sem_V(child_sem[1]); **else** sem_V(main_sem);</span><br><span class="line"> 20         &#125;</span><br><span class="line"> 21     &#125; **else** &#123;</span><br><span class="line"> 22         **for** (**int** i = 0; i &lt; 10; i++) &#123;</span><br><span class="line"> 23             sem_P(main_sem);</span><br><span class="line"> 24             printu(&quot;Parent print %d\\n&quot;, i);</span><br><span class="line"> 25             sem_V(child_sem[0]);</span><br><span class="line"> 26         &#125;</span><br><span class="line"> 27     &#125;</span><br><span class="line"> 28     exit(0);</span><br><span class="line"> 29     **return** 0;</span><br><span class="line"> 30 &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="lab3-challenge2-实现信号量（难度：★★★☆☆）"><a href="#lab3-challenge2-实现信号量（难度：★★★☆☆）" class="headerlink" title="lab3_challenge2 实现信号量（难度：★★★☆☆）"></a>lab3_challenge2 实现信号量（难度：★★★☆☆）</h2><h4 id="给定应用-5"><a href="#给定应用-5" class="headerlink" title="给定应用"></a><a target="_blank" rel="noopener" href="https://gitee.com/hustos/pke-doc#%E7%BB%99%E5%AE%9A%E5%BA%94%E7%94%A8-4"></a><strong>给定应用</strong></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">*   user/app_semaphore.c</span><br><span class="line"></span><br><span class="line">  1 /\*                                                                                                                                       </span><br><span class="line">  2 \* This app create two child process.</span><br><span class="line">  3 \* Use semaphores to control the order of</span><br><span class="line">  4 \* the main process and two child processes print info. </span><br><span class="line">  5 \*/</span><br><span class="line">  6 #include &quot;user/user_lib.h&quot;</span><br><span class="line">  7 #include &quot;util/types.h&quot;</span><br><span class="line">  8 </span><br><span class="line">  9 **int** **main**(**void**) &#123;</span><br><span class="line"> 10     **int** main_sem, child_sem[2];</span><br><span class="line"> 11     main_sem = sem_new(1);</span><br><span class="line"> 12     **for** (**int** i = 0; i &lt; 2; i++) child_sem[i] = sem_new(0);</span><br><span class="line"> 13     **int** pid = fork();</span><br><span class="line"> 14     **if** (pid == 0) &#123;</span><br><span class="line"> 15         pid = fork();</span><br><span class="line"> 16         **for** (**int** i = 0; i &lt; 10; i++) &#123;</span><br><span class="line"> 17             sem_P(child_sem[pid == 0]);</span><br><span class="line"> 18             printu(&quot;Child%d print %d\\n&quot;, pid == 0, i);</span><br><span class="line"> 19             **if** (pid != 0) sem_V(child_sem[1]); **else** sem_V(main_sem);</span><br><span class="line"> 20         &#125;</span><br><span class="line"> 21     &#125; **else** &#123;</span><br><span class="line"> 22         **for** (**int** i = 0; i &lt; 10; i++) &#123;</span><br><span class="line"> 23             sem_P(main_sem);</span><br><span class="line"> 24             printu(&quot;Parent print %d\\n&quot;, i);</span><br><span class="line"> 25             sem_V(child_sem[0]);</span><br><span class="line"> 26         &#125;</span><br><span class="line"> 27     &#125;</span><br><span class="line"> 28     exit(0);</span><br><span class="line"> 29     **return** 0;</span><br><span class="line"> 30 &#125;</span><br></pre></td></tr></table></figure>
 <p>以上程序通过信号量的增减，控制主进程和两个子进程的输出按主进程，第一个子进程，第二个子进程，主进程，第一个子进程，第二个子进程……这样的顺序轮流输出，如上面的应用预期输出如下：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br></pre></td><td class="code"><pre><span class="line">In m_start, hartid:0</span><br><span class="line">HTIF is available!</span><br><span class="line">(Emulated) memory size: 2048 MB</span><br><span class="line">Enter supervisor mode...</span><br><span class="line">PKE kernel start 0x0000000080000000, PKE kernel end: 0x0000000080009000, PKE kernel size: 0x0000000000009000 .</span><br><span class="line">free physical memory address: [0x0000000080009000, 0x0000000087ffffff] </span><br><span class="line">kernel memory manager is initializing ...</span><br><span class="line">KERN_BASE 0x0000000080000000</span><br><span class="line">physical address of _etext is: 0x0000000080005000</span><br><span class="line">kernel page table is on </span><br><span class="line">Switch to user mode...</span><br><span class="line">**in** alloc_proc. user frame 0x0000000087fbc000, user stack 0x000000007ffff000, user kstack 0x0000000087fbb000 </span><br><span class="line">User application is loading.</span><br><span class="line">Application: obj/app_semaphore</span><br><span class="line">CODE_SEGMENT added at mapped info offset:3</span><br><span class="line">DATA_SEGMENT added at mapped info offset:4</span><br><span class="line">Application program entry point (virtual address): 0x00000000000100b0</span><br><span class="line">going to insert process 0 to ready queue.</span><br><span class="line">going to schedule process 0 to run.</span><br><span class="line">User call fork.</span><br><span class="line">will fork a child from parent 0.</span><br><span class="line">**in** alloc_proc. user frame 0x0000000087fae000, user stack 0x000000007ffff000, user kstack 0x0000000087fad000 </span><br><span class="line">do_fork map code segment at pa:0000000087fb2000 of parent to child at va:0000000000010000.</span><br><span class="line">going to insert process 1 to ready queue.</span><br><span class="line">Parent print 0</span><br><span class="line">going to schedule process 1 to run.</span><br><span class="line">User call fork.</span><br><span class="line">will fork a child from parent 1.</span><br><span class="line">**in** alloc_proc. user frame 0x0000000087fa2000, user stack 0x000000007ffff000, user kstack 0x0000000087fa1000 </span><br><span class="line">do_fork map code segment at pa:0000000087fb2000 of parent to child at va:0000000000010000.</span><br><span class="line">going to insert process 2 to ready queue.</span><br><span class="line">Child0 print 0</span><br><span class="line">going to schedule process 2 to run.</span><br><span class="line">Child1 print 0</span><br><span class="line">going to insert process 0 to ready queue.</span><br><span class="line">going to schedule process 0 to run.</span><br><span class="line">Parent print 1</span><br><span class="line">going to insert process 1 to ready queue.</span><br><span class="line">going to schedule process 1 to run.</span><br><span class="line">Child0 print 1</span><br><span class="line">going to insert process 2 to ready queue.</span><br><span class="line">going to schedule process 2 to run.</span><br><span class="line">Child1 print 1</span><br><span class="line">going to insert process 0 to ready queue.</span><br><span class="line">going to schedule process 0 to run.</span><br><span class="line">Parent print 2</span><br><span class="line">going to insert process 1 to ready queue.</span><br><span class="line">going to schedule process 1 to run.</span><br><span class="line">Child0 print 2</span><br><span class="line">going to insert process 2 to ready queue.</span><br><span class="line">going to schedule process 2 to run.</span><br><span class="line">Child1 print 2</span><br><span class="line">going to insert process 0 to ready queue.</span><br><span class="line">going to schedule process 0 to run.</span><br><span class="line">Parent print 3</span><br><span class="line">going to insert process 1 to ready queue.</span><br><span class="line">going to schedule process 1 to run.</span><br><span class="line">Child0 print 3</span><br><span class="line">going to insert process 2 to ready queue.</span><br><span class="line">going to schedule process 2 to run.</span><br><span class="line">Child1 print 3</span><br><span class="line">going to insert process 0 to ready queue.</span><br><span class="line">going to schedule process 0 to run.</span><br><span class="line">Parent print 4</span><br><span class="line">going to insert process 1 to ready queue.</span><br><span class="line">going to schedule process 1 to run.</span><br><span class="line">Child0 print 4</span><br><span class="line">going to insert process 2 to ready queue.</span><br><span class="line">going to schedule process 2 to run.</span><br><span class="line">Child1 print 4</span><br><span class="line">going to insert process 0 to ready queue.</span><br><span class="line">going to schedule process 0 to run.</span><br><span class="line">Parent print 5</span><br><span class="line">going to insert process 1 to ready queue.</span><br><span class="line">going to schedule process 1 to run.</span><br><span class="line">Child0 print 5</span><br><span class="line">going to insert process 2 to ready queue.</span><br><span class="line">going to schedule process 2 to run.</span><br><span class="line">Child1 print 5</span><br><span class="line">going to insert process 0 to ready queue.</span><br><span class="line">going to schedule process 0 to run.</span><br><span class="line">Parent print 6</span><br><span class="line">going to insert process 1 to ready queue.</span><br><span class="line">going to schedule process 1 to run.</span><br><span class="line">Child0 print 6</span><br><span class="line">going to insert process 2 to ready queue.</span><br><span class="line">going to schedule process 2 to run.</span><br><span class="line">Child1 print 6</span><br><span class="line">going to insert process 0 to ready queue.</span><br><span class="line">going to schedule process 0 to run.</span><br><span class="line">Parent print 7</span><br><span class="line">going to insert process 1 to ready queue.</span><br><span class="line">going to schedule process 1 to run.</span><br><span class="line">Child0 print 7</span><br><span class="line">going to insert process 2 to ready queue.</span><br><span class="line">going to schedule process 2 to run.</span><br><span class="line">Child1 print 7</span><br><span class="line">going to insert process 0 to ready queue.</span><br><span class="line">going to schedule process 0 to run.</span><br><span class="line">Parent print 8</span><br><span class="line">going to insert process 1 to ready queue.</span><br><span class="line">going to schedule process 1 to run.</span><br><span class="line">Child0 print 8</span><br><span class="line">going to insert process 2 to ready queue.</span><br><span class="line">going to schedule process 2 to run.</span><br><span class="line">Child1 print 8</span><br><span class="line">going to insert process 0 to ready queue.</span><br><span class="line">going to schedule process 0 to run.</span><br><span class="line">Parent print 9</span><br><span class="line">going to insert process 1 to ready queue.</span><br><span class="line">User exit with code:0.</span><br><span class="line">going to schedule process 1 to run.</span><br><span class="line">Child0 print 9</span><br><span class="line">going to insert process 2 to ready queue.</span><br><span class="line">User exit with code:0.</span><br><span class="line">going to schedule process 2 to run.</span><br><span class="line">Child1 print 9</span><br><span class="line">User exit with code:0.</span><br><span class="line">no more ready processes, system shutdown now.</span><br><span class="line">System is shutting down with exit code 0.</span><br></pre></td></tr></table></figure>
-<h4 id="实验内容-5"><a href="#实验内容-5" class="headerlink" title="实验内容"></a><span class="exturl" data-url="aHR0cHM6Ly9naXRlZS5jb20vaHVzdG9zL3BrZS1kb2MjJUU1JUFFJTlFJUU5JUFBJThDJUU1JTg2JTg1JUU1JUFFJUI5LTQ="></span>实验内容</h4><p>本实验为挑战实验，基础代码将继承和使用lab3_3完成后的代码：</p>
+<h4 id="实验内容-5"><a href="#实验内容-5" class="headerlink" title="实验内容"></a><a target="_blank" rel="noopener" href="https://gitee.com/hustos/pke-doc#%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9-4"></a>实验内容</h4><p>本实验为挑战实验，基础代码将继承和使用lab3_3完成后的代码：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">*   （先提交lab3_3的答案，然后）切换到lab3_challenge2_semaphore、继承lab3_3中所做修改：</span><br><span class="line"></span><br><span class="line">//切换到lab3_challenge2_semaphore</span><br><span class="line">$ git checkout lab3_challenge2_semaphore</span><br><span class="line"></span><br><span class="line">//继承lab3_3以及之前的答案</span><br><span class="line">$ git merge lab3_3_rrsched -m &quot;continue to work on lab3_challenge1&quot;</span><br></pre></td></tr></table></figure>
 <p><strong>注意：不同于基础实验，挑战实验的基础代码具有更大的不完整性，可能无法直接通过构造过程。</strong> 同样，不同于基础实验，我们在代码中也并未专门地哪些地方的代码需要填写，哪些地方的代码无须填写。这样，我们留给读者更大的“想象空间”。</p>
 <ul>
 <li>本实验的具体要求为：通过修改PKE内核和系统调用，为用户程序提供信号量功能。</li>
 <li>注意：最终测试程序可能和给出的用户程序不同，但都只涉及信号量的相关操作。</li>
 </ul>
-<h4 id="实验指导-5"><a href="#实验指导-5" class="headerlink" title="实验指导"></a><span class="exturl" data-url="aHR0cHM6Ly9naXRlZS5jb20vaHVzdG9zL3BrZS1kb2MjJUU1JUFFJTlFJUU5JUFBJThDJUU2JThDJTg3JUU1JUFGJUJDLTQ="></span>实验指导</h4><ul>
+<h4 id="实验指导-5"><a href="#实验指导-5" class="headerlink" title="实验指导"></a><a target="_blank" rel="noopener" href="https://gitee.com/hustos/pke-doc#%E5%AE%9E%E9%AA%8C%E6%8C%87%E5%AF%BC-4"></a>实验指导</h4><ul>
 <li>你对内核代码的修改可能包含以下内容：<ul>
 <li>添加系统调用，使得用户对信号量的操作可以在内核态处理</li>
 <li>在内核中实现信号量的分配、释放和PV操作，当P操作处于等待状态时能够触发进程调度</li>
@@ -472,298 +698,537 @@ Suwa shrine = 灵山之上神风起 = 一个普通的华中科技大学在读硕
 <p>V操作:先+1,如果等待队列不为空的话就让等待队列队首投入就绪状态.(出队)</p>
 <p>由于process结构体有一个元素就是等待队列下一个元素,所以说我们可以进行模拟</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">这里有代码,但是被ban了</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      
+        <blockquote class="article-copyright">
+    <p><strong>本文作者：</strong>Sukuna @ Suwa shrine</p>
+    <p><strong>本文链接：</strong><a href="https://sukunashinmyoumaru-hust.github.io/2022/02/26/oschallengelab/">https://sukunashinmyoumaru-hust.github.io/2022/02/26/oschallengelab/</a></p>
+    
+    
+    
+    <p><strong>本文版权：</strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener external nofollow noreferrer" target="_blank"><span class="icon-creative-commons"></span>BY-NC-SA</a> 许可协议。转载请注明出处！</p>
+    <span class="icon-creative-commons article-copyright-bg"></span>
+  </blockquote>
+      
+      
+      
+        <a data-aos="zoom-in" href="/2022/02/26/oschallengelab/#comments" class="article-comment-link">
+          <span class="post-comments-count valine-comment-count" data-xid="/2022/02/26/oschallengelab/" itemprop="commentCount"></span>
+          留言
+        </a>
+      
+      
+      
+      
+      
+      
+
+    </footer>
   </div>
-
-   <footer>
-
-    <div class="meta">
-  <span class="item">
-    <span class="icon">
-      <i class="ic i-calendar-check"></i>
-    </span>
-    <span class="text">更新于</span>
-    <time title="修改时间：2024-02-29 15:20:21" itemprop="dateModified" datetime="2024-02-29T15:20:21+08:00">2024-02-29</time>
-  </span>
-</div>
-
-      
-<div class="reward">
-  <button><i class="ic i-heartbeat"></i> 赞赏</button>
-  <p>请我喝[茶]~(￣▽￣)~*</p>
-  <div id="qr">
-      
-      <div>
-        <img data-src="/images/wechatpay.jpg" alt="Sukuna 微信支付">
-        <p>微信支付</p>
+  
+  <nav id="article-nav" data-aos="fade-up">
+    
+      <div class="article-nav-link-wrap article-nav-link-left">
+        
+          
+          
+            <img data-src="https://s3.bmp.ovh/imgs/2024/06/17/8d1e248fe0f62130.jpg" data-sizes="auto" alt="Splay模版:P3369[模版/普通平衡树]" class="lazyload">
+          
+        
+        <a href="/2022/03/30/splay/"></a>
+        <div class="article-nav-caption">前一篇</div>
+        <h3 class="article-nav-title">
+          
+            Splay模版:P3369[模版/普通平衡树]
+          
+        </h3>
       </div>
+    
+    
+    <div class="article-nav-link-wrap article-nav-link-right">
       
-      <div>
-        <img data-src="/images/alipay.jpg" alt="Sukuna 支付宝">
-        <p>支付宝</p>
-      </div>
-  </div>
-</div>
-
+        
+        
+          <img data-src="https://s3.bmp.ovh/imgs/2024/06/17/5d3d43e0f7dc0697.jpg" data-sizes="auto" alt="华中科技大学OS实验解析(Lab2)" class="lazyload">
+        
       
+      <a href="/2021/12/18/oslab2/"></a>
+      <div class="article-nav-caption">后一篇</div>
+      <h3 class="article-nav-title">
+        
+          华中科技大学OS实验解析(Lab2)
+        
+      </h3>
+    </div>
+    
+  </nav>
 
-<div id="copyright">
-<ul>
-  <li class="author">
-    <strong>本文作者： </strong>Sukuna <i class="ic i-at"><em>@</em></i>灵山之上神风起
-  </li>
-  <li class="link">
-    <strong>本文链接：</strong>
-    <a href="https://sukunashinmyoumaru-hust.github.io/2022/02/26/oschallengelab/" title="华中科技大学操作系统挑战实验(PKE)基础解析">https://sukunashinmyoumaru-hust.github.io/2022/02/26/oschallengelab/</a>
-  </li>
-  <li class="license">
-    <strong>版权声明： </strong>本站所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</span> 许可协议。转载请注明出处！
-  </li>
-</ul>
-</div>
-
-  </footer>
 
 </article>
 
+  <section id="comments" class="vcomment" data-aos="fade-up"></section>
+
+
+
+
+
+
+</section>
+          
+        </div>
+        <footer id="footer">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div class="aplayer no-destroy" data-id="60198" data-server="netease" data-type="playlist" data-fixed="true" data-mini="true" data-autoplay="false"></div>
+  <div id="footer-info">
+    
+    <div>
+      <span class="icon-copyright"></span>
+      2020-2024
+      <span class="footer-info-sep rotate"></span>
+      Sukuna
+    </div>
+    
+      <div>
+        基于&nbsp;<a href="https://hexo.io/" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a>&nbsp;
+        Theme.<a href="https://github.com/D-Sketon/hexo-theme-reimu" rel="noopener external nofollow noreferrer" target="_blank">Reimu</a>
+      </div>
+    
+    
+      <div>
+        <span class="icon-brush"></span>
+        178.4k
+        &nbsp;|&nbsp;
+        <span class="icon-coffee"></span>
+        12:34
+      </div>
+    
+    
+    
+    
+      <div>
+        <span class="icon-eye"></span>
+        <span id="busuanzi_container_site_pv">总访问量&nbsp;<span id="busuanzi_value_site_pv"></span></span>
+        &nbsp;|&nbsp;
+        <span class="icon-user"></span>
+        <span id="busuanzi_container_site_uv">总访客量&nbsp;<span id="busuanzi_value_site_uv"></span></span>
+      </div>
+    
   </div>
   
+</footer>
 
-<div class="post-nav">
-    <div class="item left">
+        
+          <div class="sidebar-top">
+            <div class="sidebar-top-taichi rotate"></div>
+            <div class="arrow-up"></div>
+          </div>
+        
+        <div id="mask" class="hide"></div>
+      </div>
+      <nav id="mobile-nav">
+  <div class="sidebar-wrap">
+    
+      <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">文章目录</h3>
+  <div class="sidebar-toc-wrapper toc-div-class" >
       
-
-  <a href="/2021/12/18/oslab2/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;s3.bmp.ovh&#x2F;imgs&#x2F;2024&#x2F;06&#x2F;17&#x2F;8d1e248fe0f62130.jpg" title="华中科技大学OS实验解析(Lab2)">
-  <span class="type">上一篇</span>
-  <span class="category"><i class="ic i-flag"></i> 实验记录</span>
-  <h3>华中科技大学OS实验解析(Lab2)</h3>
-  </a>
-
-    </div>
-    <div class="item right">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#lab1-challenge1-%E6%89%93%E5%8D%B0%E7%94%A8%E6%88%B7%E7%A8%8B%E5%BA%8F%E8%B0%83%E7%94%A8%E6%A0%88%EF%BC%88%E9%9A%BE%E5%BA%A6%EF%BC%9A%E2%98%85%E2%98%85%E2%98%86%E2%98%86%E2%98%86%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">lab1_challenge1 打印用户程序调用栈（难度：★★☆☆☆）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%99%E5%AE%9A%E5%BA%94%E7%94%A8"><span class="toc-number">1.0.1.</span> <span class="toc-text">给定应用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9"><span class="toc-number">1.0.2.</span> <span class="toc-text">实验内容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E6%8C%87%E5%AF%BC"><span class="toc-number">1.0.3.</span> <span class="toc-text">实验指导</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90"><span class="toc-number">1.0.4.</span> <span class="toc-text">实验解析</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#lab1-challenge2-%E6%89%93%E5%8D%B0%E5%BC%82%E5%B8%B8%E4%BB%A3%E7%A0%81%E8%A1%8C%EF%BC%88%E9%9A%BE%E5%BA%A6%EF%BC%9A%E2%98%85%E2%98%85%E2%98%85%E2%98%85%E2%98%86%EF%BC%89"><span class="toc-number">2.</span> <span class="toc-text">lab1_challenge2 打印异常代码行（难度：★★★★☆）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%99%E5%AE%9A%E5%BA%94%E7%94%A8-1"><span class="toc-number">2.0.1.</span> <span class="toc-text">给定应用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9-1"><span class="toc-number">2.0.2.</span> <span class="toc-text">实验内容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E6%8C%87%E5%AF%BC-1"><span class="toc-number">2.0.3.</span> <span class="toc-text">实验指导</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90-1"><span class="toc-number">2.0.4.</span> <span class="toc-text">实验解析</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#lab2-challenge1-%E5%A4%8D%E6%9D%82%E7%BC%BA%E9%A1%B5%E5%BC%82%E5%B8%B8%EF%BC%88%E9%9A%BE%E5%BA%A6%EF%BC%9A%E2%98%85%E2%98%86%E2%98%86%E2%98%86%E2%98%86%EF%BC%89"><span class="toc-number">3.</span> <span class="toc-text">lab2_challenge1 复杂缺页异常（难度：★☆☆☆☆）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%99%E5%AE%9A%E5%BA%94%E7%94%A8-2"><span class="toc-number">3.0.1.</span> <span class="toc-text">给定应用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9-2"><span class="toc-number">3.0.2.</span> <span class="toc-text">实验内容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E6%8C%87%E5%AF%BC-2"><span class="toc-number">3.0.3.</span> <span class="toc-text">实验指导</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90-2"><span class="toc-number">3.0.4.</span> <span class="toc-text">实验解析</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#lab2-challenge2-%E5%A0%86%E7%A9%BA%E9%97%B4%E7%AE%A1%E7%90%86-%EF%BC%88%E9%9A%BE%E5%BA%A6%EF%BC%9A%E2%98%85%E2%98%85%E2%98%85%E2%98%85%E2%98%86%EF%BC%89"><span class="toc-number">4.</span> <span class="toc-text">lab2_challenge2 堆空间管理 （难度：★★★★☆）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%99%E5%AE%9A%E5%BA%94%E7%94%A8-3"><span class="toc-number">4.0.1.</span> <span class="toc-text">给定应用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9-3"><span class="toc-number">4.0.2.</span> <span class="toc-text">实验内容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E6%8C%87%E5%AF%BC-3"><span class="toc-number">4.0.3.</span> <span class="toc-text">实验指导</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90-3"><span class="toc-number">4.0.4.</span> <span class="toc-text">实验解析</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#lab3-challenge1-%E8%BF%9B%E7%A8%8B%E7%AD%89%E5%BE%85%E5%92%8C%E6%95%B0%E6%8D%AE%E6%AE%B5%E5%A4%8D%E5%88%B6%EF%BC%88%E9%9A%BE%E5%BA%A6%EF%BC%9A%E2%98%85%E2%98%85%E2%98%86%E2%98%86%E2%98%86%EF%BC%89"><span class="toc-number">5.</span> <span class="toc-text">lab3_challenge1 进程等待和数据段复制（难度：★★☆☆☆）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%99%E5%AE%9A%E5%BA%94%E7%94%A8-4"><span class="toc-number">5.0.1.</span> <span class="toc-text">给定应用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9-4"><span class="toc-number">5.0.2.</span> <span class="toc-text">实验内容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E6%8C%87%E5%AF%BC-4"><span class="toc-number">5.0.3.</span> <span class="toc-text">实验指导</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90-4"><span class="toc-number">5.0.4.</span> <span class="toc-text">实验解析</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#lab3-challenge2-%E5%AE%9E%E7%8E%B0%E4%BF%A1%E5%8F%B7%E9%87%8F%EF%BC%88%E9%9A%BE%E5%BA%A6%EF%BC%9A%E2%98%85%E2%98%85%E2%98%85%E2%98%86%E2%98%86%EF%BC%89"><span class="toc-number">6.</span> <span class="toc-text">lab3_challenge2 实现信号量（难度：★★★☆☆）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%99%E5%AE%9A%E5%BA%94%E7%94%A8-5"><span class="toc-number">6.0.1.</span> <span class="toc-text">给定应用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9-5"><span class="toc-number">6.0.2.</span> <span class="toc-text">实验内容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E6%8C%87%E5%AF%BC-5"><span class="toc-number">6.0.3.</span> <span class="toc-text">实验指导</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90-5"><span class="toc-number">6.0.4.</span> <span class="toc-text">实验解析</span></a></li></ol></li></ol></li></ol>
       
-
-  <a href="/2022/03/30/splay/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;s3.bmp.ovh&#x2F;imgs&#x2F;2024&#x2F;06&#x2F;17&#x2F;97c3cfc23ec60f4c.jpg" title="Splay模版:P3369[模版&#x2F;普通平衡树]">
-  <span class="type">下一篇</span>
-  <span class="category"><i class="ic i-flag"></i> 算法题</span>
-  <h3>Splay模版:P3369[模版/普通平衡树]</h3>
-  </a>
-
-    </div>
+  </div>
 </div>
-
+</div>
+      <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/IMG_1335.PNG" data-sizes="auto" alt="Sukuna" class="lazyload">
+  <div class="sidebar-author-name">Sukuna</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">25</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">3</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">0</div>
+  </div>
+</div>
+<div class="sidebar-social">
   
-  <div class="wrap" id="comments"></div>
-
-
-        </div>
-        <div id="sidebar">
-          
-
-<div class="inner">
-
-  <div class="panels">
-    <div class="inner">
-      <div class="contents panel pjax" data-title="文章目录">
-          <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#lab1-challenge1-%E6%89%93%E5%8D%B0%E7%94%A8%E6%88%B7%E7%A8%8B%E5%BA%8F%E8%B0%83%E7%94%A8%E6%A0%88%EF%BC%88%E9%9A%BE%E5%BA%A6%EF%BC%9A%E2%98%85%E2%98%85%E2%98%86%E2%98%86%E2%98%86%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">lab1_challenge1 打印用户程序调用栈（难度：★★☆☆☆）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%99%E5%AE%9A%E5%BA%94%E7%94%A8"><span class="toc-number">1.0.1.</span> <span class="toc-text">给定应用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9"><span class="toc-number">1.0.2.</span> <span class="toc-text">实验内容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E6%8C%87%E5%AF%BC"><span class="toc-number">1.0.3.</span> <span class="toc-text">实验指导</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90"><span class="toc-number">1.0.4.</span> <span class="toc-text">实验解析</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#lab1-challenge2-%E6%89%93%E5%8D%B0%E5%BC%82%E5%B8%B8%E4%BB%A3%E7%A0%81%E8%A1%8C%EF%BC%88%E9%9A%BE%E5%BA%A6%EF%BC%9A%E2%98%85%E2%98%85%E2%98%85%E2%98%85%E2%98%86%EF%BC%89"><span class="toc-number">2.</span> <span class="toc-text">lab1_challenge2 打印异常代码行（难度：★★★★☆）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%99%E5%AE%9A%E5%BA%94%E7%94%A8-1"><span class="toc-number">2.0.1.</span> <span class="toc-text">给定应用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9-1"><span class="toc-number">2.0.2.</span> <span class="toc-text">实验内容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E6%8C%87%E5%AF%BC-1"><span class="toc-number">2.0.3.</span> <span class="toc-text">实验指导</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90-1"><span class="toc-number">2.0.4.</span> <span class="toc-text">实验解析</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#lab2-challenge1-%E5%A4%8D%E6%9D%82%E7%BC%BA%E9%A1%B5%E5%BC%82%E5%B8%B8%EF%BC%88%E9%9A%BE%E5%BA%A6%EF%BC%9A%E2%98%85%E2%98%86%E2%98%86%E2%98%86%E2%98%86%EF%BC%89"><span class="toc-number">3.</span> <span class="toc-text">lab2_challenge1 复杂缺页异常（难度：★☆☆☆☆）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%99%E5%AE%9A%E5%BA%94%E7%94%A8-2"><span class="toc-number">3.0.1.</span> <span class="toc-text">给定应用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9-2"><span class="toc-number">3.0.2.</span> <span class="toc-text">实验内容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E6%8C%87%E5%AF%BC-2"><span class="toc-number">3.0.3.</span> <span class="toc-text">实验指导</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90-2"><span class="toc-number">3.0.4.</span> <span class="toc-text">实验解析</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#lab2-challenge2-%E5%A0%86%E7%A9%BA%E9%97%B4%E7%AE%A1%E7%90%86-%EF%BC%88%E9%9A%BE%E5%BA%A6%EF%BC%9A%E2%98%85%E2%98%85%E2%98%85%E2%98%85%E2%98%86%EF%BC%89"><span class="toc-number">4.</span> <span class="toc-text">lab2_challenge2 堆空间管理 （难度：★★★★☆）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%99%E5%AE%9A%E5%BA%94%E7%94%A8-3"><span class="toc-number">4.0.1.</span> <span class="toc-text">给定应用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9-3"><span class="toc-number">4.0.2.</span> <span class="toc-text">实验内容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E6%8C%87%E5%AF%BC-3"><span class="toc-number">4.0.3.</span> <span class="toc-text">实验指导</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90-3"><span class="toc-number">4.0.4.</span> <span class="toc-text">实验解析</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#lab3-challenge1-%E8%BF%9B%E7%A8%8B%E7%AD%89%E5%BE%85%E5%92%8C%E6%95%B0%E6%8D%AE%E6%AE%B5%E5%A4%8D%E5%88%B6%EF%BC%88%E9%9A%BE%E5%BA%A6%EF%BC%9A%E2%98%85%E2%98%85%E2%98%86%E2%98%86%E2%98%86%EF%BC%89"><span class="toc-number">5.</span> <span class="toc-text">lab3_challenge1 进程等待和数据段复制（难度：★★☆☆☆）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%99%E5%AE%9A%E5%BA%94%E7%94%A8-4"><span class="toc-number">5.0.1.</span> <span class="toc-text">给定应用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9-4"><span class="toc-number">5.0.2.</span> <span class="toc-text">实验内容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E6%8C%87%E5%AF%BC-4"><span class="toc-number">5.0.3.</span> <span class="toc-text">实验指导</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90-4"><span class="toc-number">5.0.4.</span> <span class="toc-text">实验解析</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#lab3-challenge2-%E5%AE%9E%E7%8E%B0%E4%BF%A1%E5%8F%B7%E9%87%8F%EF%BC%88%E9%9A%BE%E5%BA%A6%EF%BC%9A%E2%98%85%E2%98%85%E2%98%85%E2%98%86%E2%98%86%EF%BC%89"><span class="toc-number">6.</span> <span class="toc-text">lab3_challenge2 实现信号量（难度：★★★☆☆）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%99%E5%AE%9A%E5%BA%94%E7%94%A8-5"><span class="toc-number">6.0.1.</span> <span class="toc-text">给定应用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9-5"><span class="toc-number">6.0.2.</span> <span class="toc-text">实验内容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E6%8C%87%E5%AF%BC-5"><span class="toc-number">6.0.3.</span> <span class="toc-text">实验指导</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E8%A7%A3%E6%9E%90-5"><span class="toc-number">6.0.4.</span> <span class="toc-text">实验解析</span></a></li></ol></li></ol></li></ol>
-      </div>
-      <div class="related panel pjax" data-title="系列文章">
-        <ul>
-          <li><a href="/2021/04/25/verilog/" rel="bookmark" title="华中科技大学Verilog实验解析">华中科技大学Verilog实验解析</a></li><li><a href="/2021/12/18/oslab1/" rel="bookmark" title="华中科技大学OS实验解析(Lab1)">华中科技大学OS实验解析(Lab1)</a></li><li><a href="/2021/12/18/oslab2/" rel="bookmark" title="华中科技大学OS实验解析(Lab2)">华中科技大学OS实验解析(Lab2)</a></li><li class="active"><a href="/2022/02/26/oschallengelab/" rel="bookmark" title="华中科技大学操作系统挑战实验(PKE)基础解析">华中科技大学操作系统挑战实验(PKE)基础解析</a></li><li><a href="/2023/02/06/rustilings/" rel="bookmark" title="Rustilings 练习笔记">Rustilings 练习笔记</a></li><li><a href="/2023/02/06/stanford-cs144-lab/" rel="bookmark" title="Stanford CS144 Lab">Stanford CS144 Lab</a></li><li><a href="/2023/02/07/cmu14-445-lab/" rel="bookmark" title="CMU14-445 Lab">CMU14-445 Lab</a></li><li><a href="/2023/02/08/mit-6-s081-lab/" rel="bookmark" title="MIT_6.s081_Lab">MIT_6.s081_Lab</a></li><li><a href="/2023/02/09/mit-6-s081-xv6-information-%E9%9B%86%E5%90%88/" rel="bookmark" title="MIT_6.S081_xv6.Information 集合">MIT_6.S081_xv6.Information 集合</a></li><li><a href="/2023/09/13/nju-pa/" rel="bookmark" title="南大pa">南大pa</a></li><li><a href="/2024/04/17/stanford-cs143-PA/" rel="bookmark" title="Stanford CS143 PA">Stanford CS143 PA</a></li><li><a href="/2024/04/19/mit-6-824-mr/" rel="bookmark" title="MIT_6.824:PA1-MapReduce">MIT_6.824:PA1-MapReduce</a></li><li><a href="/2024/04/28/mit-6-824-raft/" rel="bookmark" title="In Search of an Understandable Consensus Algorithm (Extended Version)">In Search of an Understandable Consensus Algorithm (Extended Version)</a></li>
-        </ul>
-      </div>
-      <div class="overview panel" data-title="站点概览">
-        <div class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <img class="image" itemprop="image" alt="Sukuna"
-      data-src="/images/IMG_1335.PNG">
-  <p class="name" itemprop="name">Sukuna</p>
-  <div class="description" itemprop="description"></div>
+    <div class="icon-github sidebar-social-icon">
+      <a href=https://github.com/Sukunashinmyoumaru-hust || github || &#34;#191717&#34; itemprop="url" target="_blank" aria-label="github" rel="noopener external nofollow noreferrer"></a>
+    </div>
+  
+    <div class="icon-twitter sidebar-social-icon">
+      <a href=https://twitter.com/sukuna_wireless || twitter || &#34;#00aff0&#34; itemprop="url" target="_blank" aria-label="twitter" rel="noopener external nofollow noreferrer"></a>
+    </div>
+  
+    <div class="icon-email sidebar-social-icon">
+      <a href=sukuna@hust.edu.cn || envelope || &#34;#55acd5&#34; itemprop="url" target="_blank" aria-label="email" rel="noopener external nofollow noreferrer"></a>
+    </div>
+  
+    <div class="icon-bilibili sidebar-social-icon">
+      <a href=https://space.bilibili.com/5595530 itemprop="url" target="_blank" aria-label="bilibili" rel="noopener external nofollow noreferrer"></a>
+    </div>
+  
 </div>
-
-<nav class="state">
-    <div class="item posts">
-      <a href="/archives/">
-        <span class="count">25</span>
-        <span class="name">文章</span>
-      </a>
+<div class="sidebar-menu">
+  
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="关于"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/friend" aria-label="友链"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">友链</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" target="_blank" rel="noopener" href="https://github.com/SukunaShinmyoumaru-hust/Hust-opensource-Xuejie" aria-label="HUST-学解"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">HUST-学解</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/picture" aria-label="赠画感谢"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">赠画感谢</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/source" aria-label="资料下载"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">资料下载</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/travel" aria-label="旅行日志"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">旅行日志</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/gbook" aria-label="Sukuna冬令营"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">Sukuna冬令营</div>
+      </div>
+    
+  
+</div>
+</div>
+    
+  </div>
+  
+    <div class="sidebar-btn-wrapper">
+      <div class="sidebar-toc-btn current"></div>
+      <div class="sidebar-common-btn"></div>
     </div>
-    <div class="item categories">
-      <a href="/categories/">
-        <span class="count">3</span>
-        <span class="name">分类</span>
-      </a>
-    </div>
+  
 </nav>
 
-<div class="social">
-      <span class="exturl item github" data-url="aHR0cHM6Ly9naXRodWIuY29tL1N1a3VuYXNoaW5teW91bWFydS1odXN0" title="https:&#x2F;&#x2F;github.com&#x2F;Sukunashinmyoumaru-hust"><i class="ic i-github"></i></span>
-      <span class="exturl item twitter" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9zdWt1bmFfd2lyZWxlc3M=" title="https:&#x2F;&#x2F;twitter.com&#x2F;sukuna_wireless"><i class="ic i-twitter"></i></span>
-      <span class="exturl item music" data-url="aHR0cHM6Ly9tdXNpYy4xNjMuY29tLyMvdXNlci9ob21lP2lkPTI5NDE3ODM1MQ==" title="https:&#x2F;&#x2F;music.163.com&#x2F;#&#x2F;user&#x2F;home?id&#x3D;294178351"><i class="ic i-cloud-music"></i></span>
-      <span class="exturl item about" data-url="aHR0cHM6Ly9zdWt1bmFodXN0Lm1vZS9hYm91dA==" title="https:&#x2F;&#x2F;sukunahust.moe&#x2F;about"><i class="ic i-address-card"></i></span>
-      <a href="/sukuna@hust.edu.cn" title="sukuna@hust.edu.cn" class="item email"><i class="ic i-envelope"></i></a>
-</div>
-
-<ul class="menu">
-  
-    
-  <li class="item">
-    <a href="/" rel="section"><i class="ic i-home"></i>首页</a>
-  </li>
-
-    
-  <li class="item">
-    <a href="/about/" rel="section"><i class="ic i-user"></i>关于</a>
-  </li>
-
-        
-  <li class="item dropdown">
-      <a href="javascript:void(0);"><i class="ic i-feather"></i>文章</a>
-    <ul class="submenu">
-
-        
-  <li class="item">
-    <a href="/archives/" rel="section"><i class="ic i-list-alt"></i>归档</a>
-  </li>
-
-        
-  <li class="item">
-    <a href="/categories/" rel="section"><i class="ic i-th"></i>分类</a>
-  </li>
-
-        
-  <li class="item">
-    <a href="/tags/" rel="section"><i class="ic i-tags"></i>标签</a>
-  </li>
-
-  </ul>
-    
-  <li class="item">
-    <a href="/friend/" rel="section"><i class="ic i-heart"></i>友链</a>
-  </li>
-
-    
-  <li class="item">
-    <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1N1a3VuYVNoaW5teW91bWFydS1odXN0L0h1c3Qtb3BlbnNvdXJjZS1YdWVqaWU="><i class="ic i-github"></i>HUST-学解</span>
-  </li>
-
-    
-  <li class="item">
-    <a href="/picture/" rel="section"><i class="ic i-magic"></i>赠画感谢</a>
-  </li>
-
-    
-  <li class="item">
-    <a href="/source/" rel="section"><i class="ic i-address-card"></i>资料下载</a>
-  </li>
-
-    
-  <li class="item">
-    <a href="/travel/" rel="section"><i class="ic i-heart"></i>旅行日志</a>
-  </li>
-
-    
-  <li class="item">
-    <a href="/gbook/" rel="section"><i class="ic i-magic"></i>Sukuna冬令营</a>
-  </li>
-
-    
-  <li class="item">
-    <span class="exturl" data-url="aHR0cHM6Ly9nMmNlemVwZC55aWNoYWZlbi5jb20="><i class="ic i-magic"></i>相关查询</span>
-  </li>
-
-
-</ul>
-
-      </div>
     </div>
-  </div>
-
-  <ul id="quick">
-    <li class="prev pjax">
-        <a href="/2021/12/18/oslab2/" rel="prev" title="上一篇"><i class="ic i-chevron-left"></i></a>
-    </li>
-    <li class="up"><i class="ic i-arrow-up"></i></li>
-    <li class="down"><i class="ic i-arrow-down"></i></li>
-    <li class="next pjax">
-        <a href="/2022/03/30/splay/" rel="next" title="下一篇"><i class="ic i-chevron-right"></i></a>
-    </li>
-    <li class="percent"></li>
-  </ul>
-</div>
-
-
-        </div>
-        <div class="dimmer"></div>
-      </div>
-    </main>
-    <footer id="footer">
-      <div class="inner">
-        <div class="widgets">
-          
-
-        </div>
-        <div class="status">
-  <div class="copyright">
     
-    &copy; 2020 – 
-    <span itemprop="copyrightYear">2024</span>
-    <span class="with-love">
-      <i class="ic i-sakura rotate"></i>
-    </span>
-    <span class="author" itemprop="copyrightHolder">Sukuna @ Suwa shrine</span>
-  </div>
-  <div class="count">
-    <span class="post-meta-item-icon">
-      <i class="ic i-chart-area"></i>
-    </span>
-    <span title="站点总字数">463k 字</span>
+    
+<script src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js" integrity="sha384-3gT&#x2F;vsepWkfz&#x2F;ff7PpWNUeMzeWoH3cDhm&#x2F;A8jM7ouoAK0&#x2F;fP&#x2F;9bcHHR5kHq2nf+e" crossorigin="anonymous"></script>
 
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item-icon">
-      <i class="ic i-coffee"></i>
-    </span>
-    <span title="站点阅读时长">7:01</span>
-  </div>
-  <div class="powered-by">
-    基于 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & Theme.<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FtZWhpbWUvaGV4by10aGVtZS1zaG9rYQ==">Shoka</span>
+
+<script src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js" integrity="sha384-J08i8An&#x2F;QeARD9ExYpvphB8BsyOj3Gh2TSh1aLINKO3L0cMSH2dN3E22zFoXEi0Q" crossorigin="anonymous"></script>
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+  
+<script src="/js/aos.js"></script>
+
+  <script>
+    var aosInit = () => {
+      AOS.init({
+        duration: 1000,
+        easing: "ease",
+        once: true,
+        offset: 50,
+      });
+    };
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', aosInit);
+    } else {
+      aosInit();
+    }
+  </script>
+
+
+
+<script src="/js/pjax_script.js" data-pjax></script>
+
+
+
+
+
+
+
+  
+<script src="https://npm.webcache.cn/mouse-firework@0.0.6/dist/index.umd.js" integrity="sha384-vkGvf25gm1C1PbcoD5dNfc137HzNL&#x2F;hr1RKA5HniJOaawtvUmH5lTVFgFAruE9Ge" crossorigin="anonymous"></script>
+
+  <script>
+    window.firework && window.firework(JSON.parse('{"excludeElements":["a","button"],"particles":[{"shape":"circle","move":["emit"],"easing":"easeOutExpo","colors":["#ff5252","#ff7c7c","#ffafaf","#ffd0d0"],"number":20,"duration":[1200,1800],"shapeOptions":{"radius":[16,32],"alpha":[0.3,0.5]}},{"shape":"circle","move":["diffuse"],"easing":"easeOutExpo","colors":["#ff0000"],"number":1,"duration":[1200,1800],"shapeOptions":{"radius":20,"alpha":[0.2,0.5],"lineWidth":6}}]}'))
+  </script>
+
+
+
+  
+<script src="https://npm.webcache.cn/theme-shokax-pjax@0.0.3/dist/index.umd.js" integrity="sha384-xneY1WY8hOfUzswrE4CrYq35N4BdVcxqxwHPr9zawE&#x2F;jMSCxD+jAPU55x&#x2F;jj3wlf" crossorigin="anonymous"></script>
+
+  <script>
+    function loadScripts(scripts, index) {
+      if (index < scripts.length) {
+        const script = scripts[index];
+        const src = script.getAttribute('src');
+
+        const loadScript = (scriptContent) => {
+          const scriptElement = document.createElement('script');
+          if (script.type) {
+            scriptElement.type = script.type;
+          }
+          scriptElement.text = scriptContent;
+          document.head.appendChild(scriptElement);
+          loadScripts(scripts, index + 1);
+        }
+
+        if (src) {
+          fetch(src)
+            .then(response => {
+              if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+              }
+              return response.text();
+            })
+            .then(scriptContent => {
+              loadScript(scriptContent);
+            })
+            .catch(error => {
+              console.error('Failed to load script:', src, error);
+            });
+        } else {
+          loadScript(script.text);
+        }
+      }
+    }
+    window.Pjax && new window.Pjax({
+      selectors: [
+        "#header img",
+        "#header picture",
+        "head title",
+        "#header-title",
+        "#subtitle-wrap",
+        "#content",
+        '#mobile-nav',
+        '#lazy-script'
+      ],
+      switches: {
+        "#header-title": Pjax.switches.outerHTML,
+        "#subtitle-wrap": Pjax.switches.outerHTML,
+        "#content": function(oldEl, newEl) {
+          const scripts = [...newEl.querySelectorAll('script')];
+          loadScripts(scripts, 0);
+          oldEl.outerHTML = newEl.outerHTML
+          this.onSwitch()
+        },
+        "#mobile-nav": Pjax.switches.outerHTML,
+        '#lazy-script': function(oldEl, newEl) {
+          const scripts = [...newEl.querySelectorAll('script')];
+          loadScripts(scripts, 0);
+          oldEl.innerHTML = newEl.innerHTML
+          this.onSwitch()
+        },
+      },
+      cacheBust: false
+    })
+  </script>
+  
+<script src="/js/pjax.js"></script>
+
+
+
+
+  <script>
+    function initLive2d() {
+      live2d.init("https://fastly.jsdelivr.net/gh/D-Sketon/plugin-live2d/", {themeTipsPath: ""});
+    }
+  </script>
+  
+<script src="https://fastly.jsdelivr.net/gh/D-Sketon/plugin-live2d/js/live2d-autoload.js" onload="initLive2d &amp;&amp; initLive2d()" async></script>
+
+
+
+
+
+<div id="lazy-script">
+  <div>
+    
+    
+      
+        
+<script src="/js/insert_highlight.js" data-pjax></script>
+
+      
+    
+    
+      <script type="module" data-pjax>
+        const PhotoSwipeLightbox = (await safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe-lightbox.esm.min.js", "sha384-DiL6M/gG+wmTxmCRZyD1zee6lIhawn5TGvED0FOh7fXcN9B0aZ9dexSF/N6lrZi/")).default;
+        
+        const pswp = () => {
+          if (_$$('.article-entry a.article-gallery-item').length > 0) {
+            new PhotoSwipeLightbox({
+              gallery: '.article-entry',
+              children: 'a.article-gallery-item',
+              pswpModule: () => safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8+oTJ7m3DfYEWX1fu1scuS4+s")
+            }).init();
+          }
+          if(_$$('.article-gallery a.article-gallery-item').length > 0) {
+            new PhotoSwipeLightbox({
+              gallery: '.article-gallery',
+              children: 'a.article-gallery-item',
+              pswpModule: () => safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8+oTJ7m3DfYEWX1fu1scuS4+s")
+            }).init();
+          }
+          window.lightboxStatus = 'done';
+          window.removeEventListener('lightbox:ready', pswp);
+        }
+        if(window.lightboxStatus === 'ready') {
+          pswp()
+        } else {
+          window.addEventListener('lightbox:ready', pswp);
+        }
+      </script>
+      
+  
+<script src="https://npm.webcache.cn/valine@1.5.1/dist/Valine.min.js" integrity="sha384-3ma91AExDeMAZ1rjTjaP8V2A2obQE+s5ltKRwYlwdpArz9xVbp0tF3b0VV2ACNPn" crossorigin="anonymous" data-pjax></script>
+
+  <script data-pjax>
+    var GUEST_INFO = ['nick', 'mail', 'link'];
+    var guest_info = 'SukunaFans'.split(',').filter((item) => {
+      return GUEST_INFO.indexOf(item) > -1
+    });
+    var recordIP = JSON.parse('true');
+    var highlight = JSON.parse('true');
+    var visitor = JSON.parse('false');
+
+    new Valine({
+      el: '.vcomment',
+      appId: "xR5C19oD9KiPnawzBUJNSD64-gzGzoHsz",
+      appKey: "BuHN9ATTBOcwMxGPy9IxuI8b",
+      placeholder: "留下你的留言吧",
+      pageSize: '10',
+      avatar: 'mp',
+      lang: 'zh-cn',
+      recordIP: recordIP,
+      highlight: highlight,
+      visitor: visitor,
+      requiredFields: guest_info,
+      path: window.location.pathname
+    });
+  </script>
+
+
+
+
+
+
+
+
+
+    
   </div>
 </div>
 
-      </div>
-    </footer>
-  </div>
-<script data-config type="text/javascript">
-  var LOCAL = {
-    path: '2022/02/26/oschallengelab/',
-    favicon: {
-      show: "（●´3｀●）あややややや～",
-      hide: "(´Д｀)大変だ！"
-    },
-    search : {
-      placeholder: "文章搜索",
-      empty: "关于 「 ${query} 」，什么也没搜到",
-      stats: "${time} ms 内找到 ${hits} 条结果"
-    },
-    valine: true,fancybox: true,
-    copyright: '复制成功，转载请遵守 <i class="ic i-creative-commons"></i>BY-NC-SA 协议。',
-    ignores : [
-      function(uri) {
-        return uri.includes('#');
-      },
-      function(uri) {
-        return new RegExp(LOCAL.path+"$").test(uri);
+
+  <script>
+    console.log(String.raw`%c 
+ ______     ______     __     __    __     __  __    
+/\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+\ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+ \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+  \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                  
+`,'color: #ff5252;')
+    console.log('%c Theme.Reimu v' + '1.0.0' + ' %c https://github.com/D-Sketon/hexo-theme-reimu ', 'color: white; background: #ff5252; padding:5px 0;', 'padding:4px;border:1px solid #ff5252;')
+  </script>
+  
+
+
+
+  
+<script src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js" integrity="sha384-0M75wtSkhjIInv4coYlaJU83+OypaRCIq2SukQVQX04eGTCBXJDuWAbJet56id+S" crossorigin="anonymous" async></script>
+
+
+
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then((registrations) => {
+      for (let registration of registrations) {
+        registration.unregister();
       }
-    ]
-  };
+    });
+  }
 </script>
 
-<script src="https://cdn.polyfill.io/v2/polyfill.js"></script>
-
-<script src="//cdn.jsdelivr.net/combine/npm/pace-js@1.0.2/pace.min.js,npm/pjax@0.2.8/pjax.min.js,npm/whatwg-fetch@3.4.0/dist/fetch.umd.min.js,npm/animejs@3.2.0/lib/anime.min.js,npm/algoliasearch@4/dist/algoliasearch-lite.umd.js,npm/instantsearch.js@4/dist/instantsearch.production.min.js,npm/lozad@1/dist/lozad.min.js,npm/quicklink@2/dist/quicklink.umd.js"></script>
-
-<script src="/js/app.js?v=0.2.5"></script>
 
 
+  
+    
+<script src="https://npm.webcache.cn/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha384-Wuix6BuhrWbjDBs24bXrjf4ZQ5aFeFWBuKkFekO2t8xFU0iNaLQfp2K6&#x2F;1Nxveei" crossorigin="anonymous" defer data-pjax></script>
+
+    <script data-pjax>
+      window.MathJax = {"tex":{"tags":"ams","useLabelIds":true,"inlineMath":[["$","$"],["\\\\(","\\\\)"]],"displayMath":[["$$","$$"],["\\\\[","\\\\]"]],"processEscapes":true,"processEnvironments":true,"autoload":{"color":[],"colorv2":["color"]},"packages":{"[+]":["noerrors"]}},"options":{"skipHtmlTags":["script","noscript","style","textarea","pre","code"],"ignoreHtmlClass":"tex2jax_ignore","processHtmlClass":"tex2jax_process"},"loader":{"load":["input/asciimath","[tex]/noerrors"]}};
+    </script>
+  
 
 
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":200,"height":400},"mobile":{"show":false},"log":false});</script></body>
-</html>
+  <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+  </html>
+
