@@ -37,7 +37,7 @@
 <meta property="og:description" content="E 是Easy N 是 Normal，也就是Medium，H 是 Hard Array &#x2F; String Merge Sorted Array E  设置答案表ans，设置两个指针i和j，表示当前所指的位置，一开始指针指向表头。比较两个指针所指元素大小，谁小谁先进ans表。如果有一个指针指到了表尾就不比了，直接把剩下没处理完的内容直接放进ans表。  Remove Element E">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-11-20T15:56:31.000Z">
-<meta property="article:modified_time" content="2024-11-25T07:08:58.755Z">
+<meta property="article:modified_time" content="2024-12-12T03:51:20.547Z">
 <meta property="article:author" content="Sukuna">
 <meta name="twitter:card" content="summary">
   
@@ -233,7 +233,7 @@
   <h3 class="toc-title">文章目录</h3>
   <div class="sidebar-toc-wrapper toc-div-class" >
       
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Array-String"><span class="toc-number">1.</span> <span class="toc-text">Array &#x2F; String</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Two-Pointers"><span class="toc-number">2.</span> <span class="toc-text">Two Pointers</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Sliding-Window%EF%BC%88%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E3%80%90%E5%8D%95%E8%B0%83%E9%98%9F%E5%88%97%E3%80%91%EF%BC%89"><span class="toc-number">3.</span> <span class="toc-text">Sliding Window（滑动窗口【单调队列】）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9F%A9%E9%98%B5%EF%BC%88%E5%A4%A7%E9%83%A8%E5%88%86%E5%B0%B1%E6%98%AF%E5%81%9A%E6%A8%A1%E6%8B%9F%EF%BC%89"><span class="toc-number">4.</span> <span class="toc-text">矩阵（大部分就是做模拟）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HashMap%EF%BC%88%E5%93%88%E5%B8%8C%E8%A1%A8%EF%BC%89"><span class="toc-number">5.</span> <span class="toc-text">HashMap（哈希表）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Intervals"><span class="toc-number">6.</span> <span class="toc-text">Intervals</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Stack"><span class="toc-number">7.</span> <span class="toc-text">Stack</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LinkList"><span class="toc-number">8.</span> <span class="toc-text">LinkList</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Binariy-Tree"><span class="toc-number">9.</span> <span class="toc-text">Binariy Tree</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Binariy-Tree-BFS"><span class="toc-number">10.</span> <span class="toc-text">Binariy Tree BFS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BST"><span class="toc-number">11.</span> <span class="toc-text">BST</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Graph"><span class="toc-number">12.</span> <span class="toc-text">Graph</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Graph-BFS"><span class="toc-number">13.</span> <span class="toc-text">Graph BFS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Trie%EF%BC%88%E5%AD%97%E5%85%B8%E6%A0%91%EF%BC%89"><span class="toc-number">14.</span> <span class="toc-text">Trie（字典树）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Backtracking%EF%BC%88%E5%9B%9E%E6%BA%AF%EF%BC%8C%E5%85%B6%E5%AE%9E%E4%B9%9F%E6%98%AF%E4%B8%80%E7%A7%8D%E6%90%9C%E7%B4%A2%EF%BC%89"><span class="toc-number">15.</span> <span class="toc-text">Backtracking（回溯，其实也是一种搜索）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Divide-Conquer%EF%BC%88%E5%88%86%E6%B2%BB%EF%BC%89"><span class="toc-number">16.</span> <span class="toc-text">Divide &amp; Conquer（分治）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Kadane%E2%80%99s-Algorithm"><span class="toc-number">17.</span> <span class="toc-text">Kadane’s Algorithm</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Binary-Search%EF%BC%88%E4%BA%8C%E5%88%86%E6%90%9C%E7%B4%A2%EF%BC%89"><span class="toc-number">18.</span> <span class="toc-text">Binary Search（二分搜索）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Heap%EF%BC%88%E5%A0%86%EF%BC%89"><span class="toc-number">19.</span> <span class="toc-text">Heap（堆）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Bit-Manipulation%EF%BC%88%E4%BD%8D%E8%BF%90%E7%AE%97%EF%BC%89"><span class="toc-number">20.</span> <span class="toc-text">Bit Manipulation（位运算）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Math"><span class="toc-number">21.</span> <span class="toc-text">Math</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1D-DP%EF%BC%88%E4%B8%80%E7%BB%B4%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%89"><span class="toc-number">22.</span> <span class="toc-text">1D DP（一维动态规划）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">23.</span> <span class="toc-text"></span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Array-String"><span class="toc-number">1.</span> <span class="toc-text">Array &#x2F; String</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Two-Pointers"><span class="toc-number">2.</span> <span class="toc-text">Two Pointers</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Sliding-Window%EF%BC%88%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E3%80%90%E5%8D%95%E8%B0%83%E9%98%9F%E5%88%97%E3%80%91%EF%BC%89"><span class="toc-number">3.</span> <span class="toc-text">Sliding Window（滑动窗口【单调队列】）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9F%A9%E9%98%B5%EF%BC%88%E5%A4%A7%E9%83%A8%E5%88%86%E5%B0%B1%E6%98%AF%E5%81%9A%E6%A8%A1%E6%8B%9F%EF%BC%89"><span class="toc-number">4.</span> <span class="toc-text">矩阵（大部分就是做模拟）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HashMap%EF%BC%88%E5%93%88%E5%B8%8C%E8%A1%A8%EF%BC%89"><span class="toc-number">5.</span> <span class="toc-text">HashMap（哈希表）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Intervals"><span class="toc-number">6.</span> <span class="toc-text">Intervals</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Stack"><span class="toc-number">7.</span> <span class="toc-text">Stack</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LinkList"><span class="toc-number">8.</span> <span class="toc-text">LinkList</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Binariy-Tree"><span class="toc-number">9.</span> <span class="toc-text">Binariy Tree</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Binariy-Tree-BFS"><span class="toc-number">10.</span> <span class="toc-text">Binariy Tree BFS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BST"><span class="toc-number">11.</span> <span class="toc-text">BST</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Graph"><span class="toc-number">12.</span> <span class="toc-text">Graph</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Graph-BFS"><span class="toc-number">13.</span> <span class="toc-text">Graph BFS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Trie%EF%BC%88%E5%AD%97%E5%85%B8%E6%A0%91%EF%BC%89"><span class="toc-number">14.</span> <span class="toc-text">Trie（字典树）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Backtracking%EF%BC%88%E5%9B%9E%E6%BA%AF%EF%BC%8C%E5%85%B6%E5%AE%9E%E4%B9%9F%E6%98%AF%E4%B8%80%E7%A7%8D%E6%90%9C%E7%B4%A2%EF%BC%89"><span class="toc-number">15.</span> <span class="toc-text">Backtracking（回溯，其实也是一种搜索）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Divide-Conquer%EF%BC%88%E5%88%86%E6%B2%BB%EF%BC%89"><span class="toc-number">16.</span> <span class="toc-text">Divide &amp; Conquer（分治）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Kadane%E2%80%99s-Algorithm"><span class="toc-number">17.</span> <span class="toc-text">Kadane’s Algorithm</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Binary-Search%EF%BC%88%E4%BA%8C%E5%88%86%E6%90%9C%E7%B4%A2%EF%BC%89"><span class="toc-number">18.</span> <span class="toc-text">Binary Search（二分搜索）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Heap%EF%BC%88%E5%A0%86%EF%BC%89"><span class="toc-number">19.</span> <span class="toc-text">Heap（堆）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Bit-Manipulation%EF%BC%88%E4%BD%8D%E8%BF%90%E7%AE%97%EF%BC%89"><span class="toc-number">20.</span> <span class="toc-text">Bit Manipulation（位运算）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Math"><span class="toc-number">21.</span> <span class="toc-text">Math</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1D-DP%EF%BC%88%E4%B8%80%E7%BB%B4%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%89"><span class="toc-number">22.</span> <span class="toc-text">1D DP（一维动态规划）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E7%BB%B4DP"><span class="toc-number">23.</span> <span class="toc-text">多维DP</span></a></li></ol>
       
   </div>
 </div>
@@ -246,7 +246,7 @@
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">25</div>
+    <div class="sidebar-state-number">26</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
@@ -375,7 +375,7 @@
       <div class="article-date">
   <a href="/2024/11/20/150/" class="article-date-link" data-aos="zoom-in">
     <time datetime="2024-11-20T15:56:31.000Z" itemprop="datePublished">2024-11-20</time>
-    <time style="display: none;" id="post-update-time">2024-11-25</time>
+    <time style="display: none;" id="post-update-time">2024-12-12</time>
   </a>
 </div>
 
@@ -1035,7 +1035,7 @@
 </ol>
 <p>dp[0] &#x3D; 1. 对于所有a[n] &gt; a[k] dp[n] &#x3D; max(dp[n],dp[k] + 1)，然后找到最大的dp</p>
 <p>对于dp，其递推方程的数据来源可以是一个数据（之前一个，之前两个）；也可以一组数据中最大的或者是最小的。</p>
-<h2 id=""><a href="#" class="headerlink" title=""></a></h2><ol start="142">
+<h2 id="多维DP"><a href="#多维DP" class="headerlink" title="多维DP"></a>多维DP</h2><ol start="142">
 <li>Triangle N</li>
 </ol>
 <p>dp[0][0] &#x3D; a[0][0]<br>dp[i][0] &#x3D; dp[i-1][0] + a[i][0]<br>dp[i][i] &#x3D; dp[i-1][i-1] + a[i][i]<br>dp[i][k] &#x3D; min(dp[i-1][k-1],dp[i-1][k]) + a[i][k]</p>
@@ -1111,12 +1111,28 @@
   
   <nav id="article-nav" data-aos="fade-up">
     
+      <div class="article-nav-link-wrap article-nav-link-left">
+        
+          
+          
+            <img data-src="https://s3.bmp.ovh/imgs/2024/06/17/c10853f5c9aee06c.jpg" data-sizes="auto" alt="一个有趣的C语言ub" class="lazyload">
+          
+        
+        <a href="/2024/12/12/cub/"></a>
+        <div class="article-nav-caption">前一篇</div>
+        <h3 class="article-nav-title">
+          
+            一个有趣的C语言ub
+          
+        </h3>
+      </div>
+    
     
     <div class="article-nav-link-wrap article-nav-link-right">
       
         
         
-          <img data-src="https://s3.bmp.ovh/imgs/2024/06/17/8d1e248fe0f62130.jpg" data-sizes="auto" alt="Sukuna出的几道语文高考题" class="lazyload">
+          <img data-src="https://s3.bmp.ovh/imgs/2024/06/17/97c3cfc23ec60f4c.jpg" data-sizes="auto" alt="Sukuna出的几道语文高考题" class="lazyload">
         
       
       <a href="/2024/11/19/chinese/"></a>
@@ -1165,10 +1181,10 @@
     
       <div>
         <span class="icon-brush"></span>
-        178.4k
+        179.2k
         &nbsp;|&nbsp;
         <span class="icon-coffee"></span>
-        12:34
+        12:37
       </div>
     
     
@@ -1201,7 +1217,7 @@
   <h3 class="toc-title">文章目录</h3>
   <div class="sidebar-toc-wrapper toc-div-class" >
       
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Array-String"><span class="toc-number">1.</span> <span class="toc-text">Array &#x2F; String</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Two-Pointers"><span class="toc-number">2.</span> <span class="toc-text">Two Pointers</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Sliding-Window%EF%BC%88%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E3%80%90%E5%8D%95%E8%B0%83%E9%98%9F%E5%88%97%E3%80%91%EF%BC%89"><span class="toc-number">3.</span> <span class="toc-text">Sliding Window（滑动窗口【单调队列】）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9F%A9%E9%98%B5%EF%BC%88%E5%A4%A7%E9%83%A8%E5%88%86%E5%B0%B1%E6%98%AF%E5%81%9A%E6%A8%A1%E6%8B%9F%EF%BC%89"><span class="toc-number">4.</span> <span class="toc-text">矩阵（大部分就是做模拟）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HashMap%EF%BC%88%E5%93%88%E5%B8%8C%E8%A1%A8%EF%BC%89"><span class="toc-number">5.</span> <span class="toc-text">HashMap（哈希表）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Intervals"><span class="toc-number">6.</span> <span class="toc-text">Intervals</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Stack"><span class="toc-number">7.</span> <span class="toc-text">Stack</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LinkList"><span class="toc-number">8.</span> <span class="toc-text">LinkList</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Binariy-Tree"><span class="toc-number">9.</span> <span class="toc-text">Binariy Tree</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Binariy-Tree-BFS"><span class="toc-number">10.</span> <span class="toc-text">Binariy Tree BFS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BST"><span class="toc-number">11.</span> <span class="toc-text">BST</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Graph"><span class="toc-number">12.</span> <span class="toc-text">Graph</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Graph-BFS"><span class="toc-number">13.</span> <span class="toc-text">Graph BFS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Trie%EF%BC%88%E5%AD%97%E5%85%B8%E6%A0%91%EF%BC%89"><span class="toc-number">14.</span> <span class="toc-text">Trie（字典树）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Backtracking%EF%BC%88%E5%9B%9E%E6%BA%AF%EF%BC%8C%E5%85%B6%E5%AE%9E%E4%B9%9F%E6%98%AF%E4%B8%80%E7%A7%8D%E6%90%9C%E7%B4%A2%EF%BC%89"><span class="toc-number">15.</span> <span class="toc-text">Backtracking（回溯，其实也是一种搜索）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Divide-Conquer%EF%BC%88%E5%88%86%E6%B2%BB%EF%BC%89"><span class="toc-number">16.</span> <span class="toc-text">Divide &amp; Conquer（分治）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Kadane%E2%80%99s-Algorithm"><span class="toc-number">17.</span> <span class="toc-text">Kadane’s Algorithm</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Binary-Search%EF%BC%88%E4%BA%8C%E5%88%86%E6%90%9C%E7%B4%A2%EF%BC%89"><span class="toc-number">18.</span> <span class="toc-text">Binary Search（二分搜索）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Heap%EF%BC%88%E5%A0%86%EF%BC%89"><span class="toc-number">19.</span> <span class="toc-text">Heap（堆）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Bit-Manipulation%EF%BC%88%E4%BD%8D%E8%BF%90%E7%AE%97%EF%BC%89"><span class="toc-number">20.</span> <span class="toc-text">Bit Manipulation（位运算）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Math"><span class="toc-number">21.</span> <span class="toc-text">Math</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1D-DP%EF%BC%88%E4%B8%80%E7%BB%B4%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%89"><span class="toc-number">22.</span> <span class="toc-text">1D DP（一维动态规划）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">23.</span> <span class="toc-text"></span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Array-String"><span class="toc-number">1.</span> <span class="toc-text">Array &#x2F; String</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Two-Pointers"><span class="toc-number">2.</span> <span class="toc-text">Two Pointers</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Sliding-Window%EF%BC%88%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E3%80%90%E5%8D%95%E8%B0%83%E9%98%9F%E5%88%97%E3%80%91%EF%BC%89"><span class="toc-number">3.</span> <span class="toc-text">Sliding Window（滑动窗口【单调队列】）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9F%A9%E9%98%B5%EF%BC%88%E5%A4%A7%E9%83%A8%E5%88%86%E5%B0%B1%E6%98%AF%E5%81%9A%E6%A8%A1%E6%8B%9F%EF%BC%89"><span class="toc-number">4.</span> <span class="toc-text">矩阵（大部分就是做模拟）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HashMap%EF%BC%88%E5%93%88%E5%B8%8C%E8%A1%A8%EF%BC%89"><span class="toc-number">5.</span> <span class="toc-text">HashMap（哈希表）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Intervals"><span class="toc-number">6.</span> <span class="toc-text">Intervals</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Stack"><span class="toc-number">7.</span> <span class="toc-text">Stack</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LinkList"><span class="toc-number">8.</span> <span class="toc-text">LinkList</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Binariy-Tree"><span class="toc-number">9.</span> <span class="toc-text">Binariy Tree</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Binariy-Tree-BFS"><span class="toc-number">10.</span> <span class="toc-text">Binariy Tree BFS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BST"><span class="toc-number">11.</span> <span class="toc-text">BST</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Graph"><span class="toc-number">12.</span> <span class="toc-text">Graph</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Graph-BFS"><span class="toc-number">13.</span> <span class="toc-text">Graph BFS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Trie%EF%BC%88%E5%AD%97%E5%85%B8%E6%A0%91%EF%BC%89"><span class="toc-number">14.</span> <span class="toc-text">Trie（字典树）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Backtracking%EF%BC%88%E5%9B%9E%E6%BA%AF%EF%BC%8C%E5%85%B6%E5%AE%9E%E4%B9%9F%E6%98%AF%E4%B8%80%E7%A7%8D%E6%90%9C%E7%B4%A2%EF%BC%89"><span class="toc-number">15.</span> <span class="toc-text">Backtracking（回溯，其实也是一种搜索）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Divide-Conquer%EF%BC%88%E5%88%86%E6%B2%BB%EF%BC%89"><span class="toc-number">16.</span> <span class="toc-text">Divide &amp; Conquer（分治）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Kadane%E2%80%99s-Algorithm"><span class="toc-number">17.</span> <span class="toc-text">Kadane’s Algorithm</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Binary-Search%EF%BC%88%E4%BA%8C%E5%88%86%E6%90%9C%E7%B4%A2%EF%BC%89"><span class="toc-number">18.</span> <span class="toc-text">Binary Search（二分搜索）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Heap%EF%BC%88%E5%A0%86%EF%BC%89"><span class="toc-number">19.</span> <span class="toc-text">Heap（堆）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Bit-Manipulation%EF%BC%88%E4%BD%8D%E8%BF%90%E7%AE%97%EF%BC%89"><span class="toc-number">20.</span> <span class="toc-text">Bit Manipulation（位运算）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Math"><span class="toc-number">21.</span> <span class="toc-text">Math</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1D-DP%EF%BC%88%E4%B8%80%E7%BB%B4%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%89"><span class="toc-number">22.</span> <span class="toc-text">1D DP（一维动态规划）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E7%BB%B4DP"><span class="toc-number">23.</span> <span class="toc-text">多维DP</span></a></li></ol>
       
   </div>
 </div>
@@ -1214,7 +1230,7 @@
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">25</div>
+    <div class="sidebar-state-number">26</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
