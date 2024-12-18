@@ -1,0 +1,1022 @@
+
+  <!DOCTYPE html>
+  <html lang="zh-CN"  >
+  <head>
+  <meta charset="utf-8">
+  
+
+  
+
+  
+
+  
+  <script>window.REIMU_CONFIG = {};window.REIMU_CONFIG.icon_font = '4552607_tq6stt6tcg';window.REIMU_CONFIG.clipboard_tips = {"success":"复制成功(*^▽^*)","fail":"复制失败 (ﾟ⊿ﾟ)ﾂ","copyright":{"enable":false,"count":50,"content":"本文版权：本博客所有文章除特别声明外，均采用 BY-NC-SA 许可协议。转载请注明出处！"}};</script>
+  
+  
+  <title>
+    一些校招八股文的准备 |
+    
+    Suwa shrine
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin><link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=&display=swap" media="print" onload="this.media&#x3D;&#39;all&#39;">
+  
+    <link rel="preload" href="//at.alicdn.com/t/c/font_4552607_tq6stt6tcg.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  
+  
+    
+<link rel="stylesheet" href="/css/loader.css">
+
+  
+  
+    <meta name="description" content="操作系统 线程和进程的区别和相同之处。  相同之处：  都是操作系统来进行管理的。 都需要陷入到操作系统的内核态进行操作。 临时变量都会放入到操作系统的内核栈中。  不同之处：  进程是资源分配（文件，内存等）的基本单位，线程是程序执行（占用CPU）的基本单位。 切换的时候，进程需要保存和切换页表，栈，寄存器，文件句柄等信息，而线程只需要保存和切换一部分寄存器和栈，页表不会切换。 开销：进程创建和">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一些校招八股文的准备">
+<meta property="og:url" content="https://sukunashinmyoumaru-hust.github.io/2024/12/18/javainterview/index.html">
+<meta property="og:site_name" content="Suwa shrine">
+<meta property="og:description" content="操作系统 线程和进程的区别和相同之处。  相同之处：  都是操作系统来进行管理的。 都需要陷入到操作系统的内核态进行操作。 临时变量都会放入到操作系统的内核栈中。  不同之处：  进程是资源分配（文件，内存等）的基本单位，线程是程序执行（占用CPU）的基本单位。 切换的时候，进程需要保存和切换页表，栈，寄存器，文件句柄等信息，而线程只需要保存和切换一部分寄存器和栈，页表不会切换。 开销：进程创建和">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-12-18T06:56:02.000Z">
+<meta property="article:modified_time" content="2024-12-18T11:55:00.524Z">
+<meta property="article:author" content="Sukuna">
+<meta name="twitter:card" content="summary">
+  
+  
+    <link rel="alternate" href="/atom.xml" title="Suwa shrine" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/images/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <link rel="preload" href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  
+    
+  
+  
+  
+  
+    
+<script src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js" integrity="sha384-k6YtvFUEIuEFBdrLKJ3YAUbBki333tj1CSUisai5Cswsg9wcLNaPzsTHDswp4Az8" crossorigin="anonymous"></script>
+
+  
+  
+    
+<link rel="stylesheet" href="https://npm.webcache.cn/@reimujs/aos@0.1.0/dist/aos.css">
+
+  
+  
+</head>
+
+  <body>
+    
+  <div id='loader'>
+    <div class="loading-left-bg loading-bg"></div>
+    <div class="loading-right-bg loading-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi">
+        
+          <svg width="150" height="150" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="https://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+            <path d="M303.5 432A80 80 0 0 1 291.5 592A80 80 0 0 1 303.5 432z" fill="var(--red-1, #ff5252)" />
+            <path d="M512 65A447 447 0 0 1 512 959L512 929A417 417 0 0 0 512 95A417 417 0 0 0 512 929L512 959A447 447 0 0 1 512 65z 
+           M512 95A417 417 0 0 1 929 512A208.5 208.5 0 0 1 720.5 720.5L720.5 592A80 80 0 0 0 720.5 432A80 80 0 0 0 720.5 592L720.5 720.5A208.5 208.5 0 0 1 512 512A208.5 208.5 0 0 0 303.5 303.5A208.5 208.5 0 0 0 95 512A417 417 0 0 1 512 95z" fill="var(--red-1, #ff5252)" />
+          </svg>
+        
+      </div>
+      <div class="loading-word">少女祈祷中...</div>
+    </div>
+  </div>
+  </div>
+  <script>
+    var time = null;
+    var startLoading = () => {
+      time = Date.now();
+      document.getElementById('loader').classList.remove("loading");
+    }
+    var endLoading = () => {
+      if (!time) {
+        document.body.style.overflow = 'auto';
+        document.getElementById('loader').classList.add("loading");
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          document.body.style.overflow = 'auto';
+          document.getElementById('loader').classList.add("loading");
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('DOMContentLoaded', endLoading);
+    document.getElementById('loader').addEventListener('click', endLoading);
+  </script>
+
+<div id="copy-tooltip" style="pointer-events: none; opacity: 0; transition: all 0.2s ease; position: fixed;top: 50%;left: 50%;z-index: 999;transform: translate(-50%, -50%);color: white;background: rgba(0, 0, 0, 0.5);padding: 10px 15px;border-radius: 10px;">
+</div>
+
+
+    <div id="container">
+      <div id="wrap">
+        <div id="header-nav">
+  <nav id="main-nav">
+    
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/">首页</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/archives">归档</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/about">关于</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/friend">友链</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" target="_blank" rel="noopener" href="https://github.com/SukunaShinmyoumaru-hust/Hust-opensource-Xuejie">HUST-学解</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/picture">赠画感谢</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/source">资料下载</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/travel">旅行日志</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+            &#xe62b;
+          </div>
+          <a class="main-nav-link" href="/gbook">Sukuna冬令营</a>
+        </span>
+      
+    
+    <a id="main-nav-toggle" class="nav-icon"></a>
+  </nav>
+  <nav id="sub-nav">
+    
+      <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅" target="_blank"></a>
+    
+    
+    
+  </nav>
+</div>
+<header id="header">
+  
+    
+      <img fetchpriority="high" src="/images/sukuna.png" alt="一些校招八股文的准备">
+    
+  
+  <div id="header-outer">
+    <div id="header-title">
+      
+        
+        
+          <a href="/" id="logo">
+            <h1 data-aos="slide-up">一些校招八股文的准备</h1>
+          </a>
+        
+      
+      
+        
+        <h2 id="subtitle-wrap" data-aos="slide-down">
+          
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+        <div id="content">
+          
+            <aside id="sidebar">
+  <div class="sidebar-wrapper wrap-sticky">
+    <div class="sidebar-wrap" data-aos="fade-up">
+      
+        <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">文章目录</h3>
+  <div class="sidebar-toc-wrapper toc-div-class" >
+      
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.</span> <span class="toc-text">操作系统</span></a></li></ol>
+      
+  </div>
+</div>
+</div>
+        <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/IMG_1335.PNG" data-sizes="auto" alt="Sukuna" class="lazyload">
+  <div class="sidebar-author-name">Sukuna</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">29</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">3</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">0</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+    <div class="icon-github sidebar-social-icon">
+      <a href=https://github.com/Sukunashinmyoumaru-hust || github || &#34;#191717&#34; itemprop="url" target="_blank" aria-label="github" rel="noopener external nofollow noreferrer"></a>
+    </div>
+  
+    <div class="icon-twitter sidebar-social-icon">
+      <a href=https://twitter.com/sukuna_wireless || twitter || &#34;#00aff0&#34; itemprop="url" target="_blank" aria-label="twitter" rel="noopener external nofollow noreferrer"></a>
+    </div>
+  
+    <div class="icon-email sidebar-social-icon">
+      <a href=sukuna@hust.edu.cn || envelope || &#34;#55acd5&#34; itemprop="url" target="_blank" aria-label="email" rel="noopener external nofollow noreferrer"></a>
+    </div>
+  
+    <div class="icon-bilibili sidebar-social-icon">
+      <a href=https://space.bilibili.com/5595530 itemprop="url" target="_blank" aria-label="bilibili" rel="noopener external nofollow noreferrer"></a>
+    </div>
+  
+</div>
+<div class="sidebar-menu">
+  
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="关于"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/friend" aria-label="友链"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">友链</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" target="_blank" rel="noopener" href="https://github.com/SukunaShinmyoumaru-hust/Hust-opensource-Xuejie" aria-label="HUST-学解"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">HUST-学解</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/picture" aria-label="赠画感谢"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">赠画感谢</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/source" aria-label="资料下载"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">资料下载</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/travel" aria-label="旅行日志"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">旅行日志</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/gbook" aria-label="Sukuna冬令营"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">Sukuna冬令营</div>
+      </div>
+    
+  
+</div>
+</div>
+      
+      
+        <div class="sidebar-btn-wrapper" style="position:static">
+          <div class="sidebar-toc-btn current"></div>
+          <div class="sidebar-common-btn"></div>
+        </div>
+      
+    </div>
+  </div>
+
+  
+  
+</aside>
+
+          
+          <section id="main"><article id="post-javainterview" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner" data-aos="fade-up">
+    <div class="article-meta">
+      <div class="article-date">
+  <a href="/2024/12/18/javainterview/" class="article-date-link" data-aos="zoom-in">
+    <time datetime="2024-12-18T06:56:02.000Z" itemprop="datePublished">2024-12-18</time>
+    <time style="display: none;" id="post-update-time">2024-12-18</time>
+  </a>
+</div>
+
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%9D%82%E8%AE%B0/" data-aos="zoom-in">杂记</a>
+  </div>
+
+
+    </div>
+    <div class="hr-line"></div>
+    
+
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+      
+        <h3 id="操作系统"><a href="#操作系统" class="headerlink" title="操作系统"></a>操作系统</h3><ol>
+<li>线程和进程的区别和相同之处。</li>
+</ol>
+<p>相同之处：</p>
+<ul>
+<li>都是操作系统来进行管理的。</li>
+<li>都需要陷入到操作系统的内核态进行操作。</li>
+<li>临时变量都会放入到操作系统的内核栈中。</li>
+</ul>
+<p>不同之处：</p>
+<ul>
+<li>进程是资源分配（文件，内存等）的基本单位，线程是程序执行（占用CPU）的基本单位。</li>
+<li>切换的时候，进程需要保存和切换页表，栈，寄存器，文件句柄等信息，而线程只需要保存和切换一部分寄存器和栈，页表不会切换。</li>
+<li>开销：进程创建和销毁需要创建和销毁PCB（进程控制块）而线程创建销毁只用处理PC，状态码，部分寄存器值和栈即可。</li>
+<li>进程之间通信需要操作系统协同，而线程之间通信可以访问进程数据段（如全局变量）来进行通信。</li>
+<li>进程的并发性是通过不同进程间切换实现的，而线程的并发是一个进程多个内部线程并发执行。（意思是同一时刻只有一个进程占用CPU资源，但是一个进程附属的若干个线程会占用CPU的每个核）</li>
+</ul>
+<p>两者之间的关系：</p>
+<ul>
+<li>一个程序的运行会创建一个或若干个进程。进程是运行的程序。</li>
+<li>线程是轻量级的进程，一个进程会创建若干个线程（其中包括一个主线程）。你可以认为线程是进程的从属。</li>
+<li>主线程结束，进程结束，子线程也会结束。（pthread_exit()和_exit()的区别）</li>
+<li>当操作系统切换进程时，线程也会终止运行并被替换。</li>
+</ul>
+<ol start="2">
+<li>一个进程可以创建多少线程？</li>
+</ol>
+<p>如果是32位系统，那么虚拟空间只有3G，如果创建线程时分配空间为aMB，那么可以创建$\frac{3000}{a}$个线程</p>
+<p>如果是64为系统，那么虚拟空间有128T，线程的创建不受虚拟空间的限制，而会受系统的参数和性能限制。</p>
+<ol start="3">
+<li>外中断、异常和自陷之区别。</li>
+</ol>
+<p>外中断是由CPU执行以外的时间引起，例如IO中断，表示设备的输入或者输出完成；时钟中断等。</p>
+<p>异常是由于CPU执行导致的错误，比如说除以0等。</p>
+<p>自陷是自己引发中断，比如说syscall指令，早期汇编的inv指令等。</p>
+<ol start="4">
+<li>进程调度算法？</li>
+</ol>
+<ul>
+<li>先来先服务（FCFS）顾名思义，不利于短作业。</li>
+<li>短作业优先（SJF）顾名思义，但是长作业可能会饿死。</li>
+<li>最短剩余时间优先（SRTN）看谁剩的短谁先做，会抢占。</li>
+<li>时间片轮转，构建一个就绪队列，每次调度时，从就绪队列中取一个开始，过一个固定的时间后换一个。</li>
+<li>优先级调度，可以认为是把上面的就绪队列改成优先队列，优先级高的先调度。</li>
+<li>多级反馈队列，有n个就绪队列，从i号就绪队列取出来之后执行$S_i$时间，然后进入i+1号就绪队列。（如果i &#x3D; n，就进入i号就绪队列）</li>
+</ul>
+<ol start="5">
+<li>Linux进程通信方式？</li>
+</ol>
+<ul>
+<li>管道：分成无名和有名两种，管道的数据是单向流动的，无名管道通常只能在父子进程间使用而有名管道就没有这种限制。</li>
+<li>共享内存：几个进程都可以同时访问一段内存。</li>
+<li>消息队列：有消息的链表，存放在内核中并由消息队列标识符标记。</li>
+<li>套接字：Socket</li>
+<li>信号</li>
+<li>信号量（PV操作）</li>
+</ul>
+<ol start="6">
+<li>进程同步机制？</li>
+</ol>
+<p>临界资源就是多个进程都会用到的资源，换句话说就是</p>
+<ul>
+<li>信号量：P-V操作，可以用于进程同步。</li>
+<li>锁：可以有很多种锁，除了互斥锁以外还有睡眠锁，读写锁等等。只能用于线程同步。</li>
+</ul>
+<ol start="7">
+<li>快表是什么，有什么用？</li>
+</ol>
+<p>快表（TLB）是页表的cache。作用是在访问页表的时候起到一次cache的作用。</p>
+<p>如果TLB命中，那么访存只需要一次TLB + 一次读内存。如果TLB没有命中，那么访存就是一次TLB + 一次读页表 + 一次读内存，如果读页表也miss了，还要承担一次缺页异常的损耗。</p>
+<ol start="8">
+<li>动态分区算法</li>
+</ol>
+<ul>
+<li>首次适应，从低地址查找，找到第一个能满足的空闲区。</li>
+<li>最佳适应，空闲分区按照容量递增顺序连接，找到大小能满足要求的第一个空闲分区。会有太多小碎片了，算法开销大。</li>
+<li>最坏适应，空闲分区按照容量递减顺序连接，找到大小能满足要求的第一个空闲分区。大分区会很快用完，算法开销大。</li>
+<li>邻近适应，从上一次分配的地址开始找（递增地址），找到第一个能满足要求的空闲分区。</li>
+</ul>
+<ol start="9">
+<li>操作系统的虚拟技术。</li>
+</ol>
+<ul>
+<li>时分复用：进程时间片技术，多线程和多进程。</li>
+<li>空分复用：虚拟内存技术。两个进程的逻辑使用空间一致，物理使用空间不一致。</li>
+</ul>
+<ol start="10">
+<li>进程状态</li>
+</ol>
+<p>分为就绪态，等待态和运行态。在一个操作系统中只能存在一个运行态的进程。</p>
+<ul>
+<li>就绪-&gt;运行，运行-&gt;就绪：时间片到了，从就绪队列取一个进程进行运行，原本运行的进程，进入就绪队列。</li>
+<li>运行-&gt;等待，就绪-&gt;运行：进程运行到某一步被PV操作、IO或者wait卡住了，进入等待状态。</li>
+<li>等待-&gt;就绪：某一个被卡住的进程要等待的东西来了，就可以进入就绪状态。</li>
+</ul>
+<p>只存在这四种转移模式。</p>
+<ol start="11">
+<li>C&#x2F;C++编译过程。</li>
+</ol>
+<ul>
+<li>预编译：处理所有宏定义，条件预编译指令（#if等），include，注释，#pragma等（.i）</li>
+<li>编译：词法分析，语法分析，语义分析，前端优化（中间代码生成），目标代码生成（.s）</li>
+<li>汇编：将生成的汇编代码生成中间文件（.o）</li>
+<li>链接：分为静态链接（直接把静态库的代码复制到二进制文件里，运行快）和动态链接（程序运行的时候再连接成一个完成的程序，在链接的时候只标记位置，占用空间少）</li>
+</ul>
+<ol start="12">
+<li>va to pa？</li>
+</ol>
+<p>将va$(V|O)$拆成两部分，页内偏移$O$和页号$V$。然后查页表，一般来说操作系统会管理一个页表基寄存器PTR，然后查$PTR + Vk$（k为一个页表项的长度）这个地址对应的页表项，找到对应的物理块号$P$，则物理地址为$(P|O)$</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <blockquote class="article-copyright">
+    <p><strong>本文作者：</strong>Sukuna @ Suwa shrine</p>
+    <p><strong>本文链接：</strong><a href="https://sukunashinmyoumaru-hust.github.io/2024/12/18/javainterview/">https://sukunashinmyoumaru-hust.github.io/2024/12/18/javainterview/</a></p>
+    
+    
+    
+    <p><strong>本文版权：</strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener external nofollow noreferrer" target="_blank"><span class="icon-creative-commons"></span>BY-NC-SA</a> 许可协议。转载请注明出处！</p>
+    <span class="icon-creative-commons article-copyright-bg"></span>
+  </blockquote>
+      
+      
+      
+        <a data-aos="zoom-in" href="/2024/12/18/javainterview/#comments" class="article-comment-link">
+          <span class="post-comments-count valine-comment-count" data-xid="/2024/12/18/javainterview/" itemprop="commentCount"></span>
+          留言
+        </a>
+      
+      
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+  <nav id="article-nav" data-aos="fade-up">
+    
+    
+    <div class="article-nav-link-wrap article-nav-link-right">
+      
+        
+        
+          <img data-src="https://s3.bmp.ovh/imgs/2024/06/17/7d2279310f1bb2f7.jpg" data-sizes="auto" alt="每日两个积分题（一直更新到微积分考前）" class="lazyload">
+        
+      
+      <a href="/2024/12/17/integrate-everyday/"></a>
+      <div class="article-nav-caption">后一篇</div>
+      <h3 class="article-nav-title">
+        
+          每日两个积分题（一直更新到微积分考前）
+        
+      </h3>
+    </div>
+    
+  </nav>
+
+
+</article>
+
+  <section id="comments" class="vcomment" data-aos="fade-up"></section>
+
+
+
+
+
+
+</section>
+          
+        </div>
+        <footer id="footer">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div class="aplayer no-destroy" data-id="60198" data-server="netease" data-type="playlist" data-fixed="true" data-mini="true" data-autoplay="false"></div>
+  <div id="footer-info">
+    
+    <div>
+      <span class="icon-copyright"></span>
+      2020-2024
+      <span class="footer-info-sep rotate"></span>
+      Sukuna
+    </div>
+    
+      <div>
+        基于&nbsp;<a href="https://hexo.io/" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a>&nbsp;
+        Theme.<a href="https://github.com/D-Sketon/hexo-theme-reimu" rel="noopener external nofollow noreferrer" target="_blank">Reimu</a>
+      </div>
+    
+    
+      <div>
+        <span class="icon-brush"></span>
+        181k
+        &nbsp;|&nbsp;
+        <span class="icon-coffee"></span>
+        12:44
+      </div>
+    
+    
+    
+    
+      <div>
+        <span class="icon-eye"></span>
+        <span id="busuanzi_container_site_pv">总访问量&nbsp;<span id="busuanzi_value_site_pv"></span></span>
+        &nbsp;|&nbsp;
+        <span class="icon-user"></span>
+        <span id="busuanzi_container_site_uv">总访客量&nbsp;<span id="busuanzi_value_site_uv"></span></span>
+      </div>
+    
+  </div>
+  
+</footer>
+
+        
+          <div class="sidebar-top">
+            <div class="sidebar-top-taichi rotate"></div>
+            <div class="arrow-up"></div>
+          </div>
+        
+        <div id="mask" class="hide"></div>
+      </div>
+      <nav id="mobile-nav">
+  <div class="sidebar-wrap">
+    
+      <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">文章目录</h3>
+  <div class="sidebar-toc-wrapper toc-div-class" >
+      
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.</span> <span class="toc-text">操作系统</span></a></li></ol>
+      
+  </div>
+</div>
+</div>
+      <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/IMG_1335.PNG" data-sizes="auto" alt="Sukuna" class="lazyload">
+  <div class="sidebar-author-name">Sukuna</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">29</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">3</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">0</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+    <div class="icon-github sidebar-social-icon">
+      <a href=https://github.com/Sukunashinmyoumaru-hust || github || &#34;#191717&#34; itemprop="url" target="_blank" aria-label="github" rel="noopener external nofollow noreferrer"></a>
+    </div>
+  
+    <div class="icon-twitter sidebar-social-icon">
+      <a href=https://twitter.com/sukuna_wireless || twitter || &#34;#00aff0&#34; itemprop="url" target="_blank" aria-label="twitter" rel="noopener external nofollow noreferrer"></a>
+    </div>
+  
+    <div class="icon-email sidebar-social-icon">
+      <a href=sukuna@hust.edu.cn || envelope || &#34;#55acd5&#34; itemprop="url" target="_blank" aria-label="email" rel="noopener external nofollow noreferrer"></a>
+    </div>
+  
+    <div class="icon-bilibili sidebar-social-icon">
+      <a href=https://space.bilibili.com/5595530 itemprop="url" target="_blank" aria-label="bilibili" rel="noopener external nofollow noreferrer"></a>
+    </div>
+  
+</div>
+<div class="sidebar-menu">
+  
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="关于"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/friend" aria-label="友链"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">友链</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" target="_blank" rel="noopener" href="https://github.com/SukunaShinmyoumaru-hust/Hust-opensource-Xuejie" aria-label="HUST-学解"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">HUST-学解</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/picture" aria-label="赠画感谢"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">赠画感谢</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/source" aria-label="资料下载"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">资料下载</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/travel" aria-label="旅行日志"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">旅行日志</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/gbook" aria-label="Sukuna冬令营"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">Sukuna冬令营</div>
+      </div>
+    
+  
+</div>
+</div>
+    
+  </div>
+  
+    <div class="sidebar-btn-wrapper">
+      <div class="sidebar-toc-btn current"></div>
+      <div class="sidebar-common-btn"></div>
+    </div>
+  
+</nav>
+
+    </div>
+    
+    
+<script src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js" integrity="sha384-3gT&#x2F;vsepWkfz&#x2F;ff7PpWNUeMzeWoH3cDhm&#x2F;A8jM7ouoAK0&#x2F;fP&#x2F;9bcHHR5kHq2nf+e" crossorigin="anonymous"></script>
+
+
+<script src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js" integrity="sha384-J08i8An&#x2F;QeARD9ExYpvphB8BsyOj3Gh2TSh1aLINKO3L0cMSH2dN3E22zFoXEi0Q" crossorigin="anonymous"></script>
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+  
+<script src="/js/aos.js"></script>
+
+  <script>
+    var aosInit = () => {
+      AOS.init({
+        duration: 1000,
+        easing: "ease",
+        once: true,
+        offset: 50,
+      });
+    };
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', aosInit);
+    } else {
+      aosInit();
+    }
+  </script>
+
+
+
+<script src="/js/pjax_script.js" data-pjax></script>
+
+
+
+
+
+
+
+  
+<script src="https://npm.webcache.cn/mouse-firework@0.0.6/dist/index.umd.js" integrity="sha384-vkGvf25gm1C1PbcoD5dNfc137HzNL&#x2F;hr1RKA5HniJOaawtvUmH5lTVFgFAruE9Ge" crossorigin="anonymous"></script>
+
+  <script>
+    window.firework && window.firework(JSON.parse('{"excludeElements":["a","button"],"particles":[{"shape":"circle","move":["emit"],"easing":"easeOutExpo","colors":["#ff5252","#ff7c7c","#ffafaf","#ffd0d0"],"number":20,"duration":[1200,1800],"shapeOptions":{"radius":[16,32],"alpha":[0.3,0.5]}},{"shape":"circle","move":["diffuse"],"easing":"easeOutExpo","colors":["#ff0000"],"number":1,"duration":[1200,1800],"shapeOptions":{"radius":20,"alpha":[0.2,0.5],"lineWidth":6}}]}'))
+  </script>
+
+
+
+  
+<script src="https://npm.webcache.cn/theme-shokax-pjax@0.0.3/dist/index.umd.js" integrity="sha384-xneY1WY8hOfUzswrE4CrYq35N4BdVcxqxwHPr9zawE&#x2F;jMSCxD+jAPU55x&#x2F;jj3wlf" crossorigin="anonymous"></script>
+
+  <script>
+    function loadScripts(scripts, index) {
+      if (index < scripts.length) {
+        const script = scripts[index];
+        const src = script.getAttribute('src');
+
+        const loadScript = (scriptContent) => {
+          const scriptElement = document.createElement('script');
+          if (script.type) {
+            scriptElement.type = script.type;
+          }
+          scriptElement.text = scriptContent;
+          document.head.appendChild(scriptElement);
+          loadScripts(scripts, index + 1);
+        }
+
+        if (src) {
+          fetch(src)
+            .then(response => {
+              if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+              }
+              return response.text();
+            })
+            .then(scriptContent => {
+              loadScript(scriptContent);
+            })
+            .catch(error => {
+              console.error('Failed to load script:', src, error);
+            });
+        } else {
+          loadScript(script.text);
+        }
+      }
+    }
+    window.Pjax && new window.Pjax({
+      selectors: [
+        "#header img",
+        "#header picture",
+        "head title",
+        "#header-title",
+        "#subtitle-wrap",
+        "#content",
+        '#mobile-nav',
+        '#lazy-script'
+      ],
+      switches: {
+        "#header-title": Pjax.switches.outerHTML,
+        "#subtitle-wrap": Pjax.switches.outerHTML,
+        "#content": function(oldEl, newEl) {
+          const scripts = [...newEl.querySelectorAll('script')];
+          loadScripts(scripts, 0);
+          oldEl.outerHTML = newEl.outerHTML
+          this.onSwitch()
+        },
+        "#mobile-nav": Pjax.switches.outerHTML,
+        '#lazy-script': function(oldEl, newEl) {
+          const scripts = [...newEl.querySelectorAll('script')];
+          loadScripts(scripts, 0);
+          oldEl.innerHTML = newEl.innerHTML
+          this.onSwitch()
+        },
+      },
+      cacheBust: false
+    })
+  </script>
+  
+<script src="/js/pjax.js"></script>
+
+
+
+
+  <script>
+    function initLive2d() {
+      live2d.init("https://fastly.jsdelivr.net/gh/D-Sketon/plugin-live2d/", {themeTipsPath: ""});
+    }
+  </script>
+  
+<script src="https://fastly.jsdelivr.net/gh/D-Sketon/plugin-live2d/js/live2d-autoload.js" onload="initLive2d &amp;&amp; initLive2d()" async></script>
+
+
+
+
+
+<div id="lazy-script">
+  <div>
+    
+    
+      
+        
+<script src="/js/insert_highlight.js" data-pjax></script>
+
+      
+    
+    
+      <script type="module" data-pjax>
+        const PhotoSwipeLightbox = (await safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe-lightbox.esm.min.js", "sha384-DiL6M/gG+wmTxmCRZyD1zee6lIhawn5TGvED0FOh7fXcN9B0aZ9dexSF/N6lrZi/")).default;
+        
+        const pswp = () => {
+          if (_$$('.article-entry a.article-gallery-item').length > 0) {
+            new PhotoSwipeLightbox({
+              gallery: '.article-entry',
+              children: 'a.article-gallery-item',
+              pswpModule: () => safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8+oTJ7m3DfYEWX1fu1scuS4+s")
+            }).init();
+          }
+          if(_$$('.article-gallery a.article-gallery-item').length > 0) {
+            new PhotoSwipeLightbox({
+              gallery: '.article-gallery',
+              children: 'a.article-gallery-item',
+              pswpModule: () => safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8+oTJ7m3DfYEWX1fu1scuS4+s")
+            }).init();
+          }
+          window.lightboxStatus = 'done';
+          window.removeEventListener('lightbox:ready', pswp);
+        }
+        if(window.lightboxStatus === 'ready') {
+          pswp()
+        } else {
+          window.addEventListener('lightbox:ready', pswp);
+        }
+      </script>
+      
+  
+<script src="https://npm.webcache.cn/valine@1.5.1/dist/Valine.min.js" integrity="sha384-3ma91AExDeMAZ1rjTjaP8V2A2obQE+s5ltKRwYlwdpArz9xVbp0tF3b0VV2ACNPn" crossorigin="anonymous" data-pjax></script>
+
+  <script data-pjax>
+    var GUEST_INFO = ['nick', 'mail', 'link'];
+    var guest_info = 'SukunaFans'.split(',').filter((item) => {
+      return GUEST_INFO.indexOf(item) > -1
+    });
+    var recordIP = JSON.parse('true');
+    var highlight = JSON.parse('true');
+    var visitor = JSON.parse('false');
+
+    new Valine({
+      el: '.vcomment',
+      appId: "xR5C19oD9KiPnawzBUJNSD64-gzGzoHsz",
+      appKey: "BuHN9ATTBOcwMxGPy9IxuI8b",
+      placeholder: "留下你的留言吧",
+      pageSize: '10',
+      avatar: 'mp',
+      lang: 'zh-cn',
+      recordIP: recordIP,
+      highlight: highlight,
+      visitor: visitor,
+      requiredFields: guest_info,
+      path: window.location.pathname
+    });
+  </script>
+
+
+
+
+
+
+
+
+
+    
+  </div>
+</div>
+
+
+  <script>
+    console.log(String.raw`%c 
+ ______     ______     __     __    __     __  __    
+/\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+\ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+ \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+  \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                  
+`,'color: #ff5252;')
+    console.log('%c Theme.Reimu v' + '1.0.0' + ' %c https://github.com/D-Sketon/hexo-theme-reimu ', 'color: white; background: #ff5252; padding:5px 0;', 'padding:4px;border:1px solid #ff5252;')
+  </script>
+  
+
+
+
+  
+<script src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js" integrity="sha384-0M75wtSkhjIInv4coYlaJU83+OypaRCIq2SukQVQX04eGTCBXJDuWAbJet56id+S" crossorigin="anonymous" async></script>
+
+
+
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then((registrations) => {
+      for (let registration of registrations) {
+        registration.unregister();
+      }
+    });
+  }
+</script>
+
+
+
+  
+    
+<script src="https://npm.webcache.cn/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha384-Wuix6BuhrWbjDBs24bXrjf4ZQ5aFeFWBuKkFekO2t8xFU0iNaLQfp2K6&#x2F;1Nxveei" crossorigin="anonymous" defer data-pjax></script>
+
+    <script data-pjax>
+      window.MathJax = {"tex":{"tags":"ams","useLabelIds":true,"inlineMath":[["$","$"],["\\\\(","\\\\)"]],"displayMath":[["$$","$$"],["\\\\[","\\\\]"]],"processEscapes":true,"processEnvironments":true,"autoload":{"color":[],"colorv2":["color"]},"packages":{"[+]":["noerrors"]}},"options":{"skipHtmlTags":["script","noscript","style","textarea","pre","code"],"ignoreHtmlClass":"tex2jax_ignore","processHtmlClass":"tex2jax_process"},"loader":{"load":["input/asciimath","[tex]/noerrors"]}};
+    </script>
+  
+
+
+  <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+  </html>
+
