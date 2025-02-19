@@ -47,7 +47,7 @@
 <meta property="og:image" content="https://sukunashinmyoumaru-hust.github.io/image/image-20230107084730393.png">
 <meta property="og:image" content="f:\BaiduNetdiskDownload\day14-SpringBoot%E5%8E%9F%E7%90%86%E7%AF%87\day14-SpringBoot%E5%8E%9F%E7%90%86%E7%AF%87\%E8%AE%B2%E4%B9%89\assets\image-20230114234222946.png">
 <meta property="article:published_time" content="2025-01-07T09:32:02.000Z">
-<meta property="article:modified_time" content="2025-01-20T13:37:10.502Z">
+<meta property="article:modified_time" content="2025-02-19T08:24:03.312Z">
 <meta property="article:author" content="Sukuna">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://sukunashinmyoumaru-hust.github.io/2025/01/07/image/image-20230310092820616.png">
@@ -386,7 +386,7 @@
       <div class="article-date">
   <a href="/2025/01/07/javaweb/" class="article-date-link" data-aos="zoom-in">
     <time datetime="2025-01-07T09:32:02.000Z" itemprop="datePublished">2025-01-07</time>
-    <time style="display: none;" id="post-update-time">2025-01-20</time>
+    <time style="display: none;" id="post-update-time">2025-02-19</time>
   </a>
 </div>
 
@@ -4049,7 +4049,7 @@
 
 <h4 id="Bean"><a href="#Bean" class="headerlink" title="@Bean"></a>@Bean</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Lazy</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@ComponentScan(basePackages = &quot;com.spring.configuration.pojo&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AppConfigWithLazy</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> MyBean <span class="title function_">myBean</span><span class="params">()</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;myBean Initialized&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">MyBean</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<p>每个Bean注解注释下的Bean方法也可以有参数，类似于<code>myBean(classA a)</code>，这个classA也得通过<code>@EnableConfigurationProperties(value = xxx.class)</code>的方法声明为Bean。</p>
+<p>每个Bean注解注释下的Bean方法也可以有参数，类似于<code>myBean(classA a)</code>。详见自定义starter。</p>
 <h4 id="源码跟踪"><a href="#源码跟踪" class="headerlink" title="源码跟踪"></a>源码跟踪</h4><p>要搞清楚SpringBoot的自动配置原理，要从SpringBoot启动类上使用的核心注解@SpringBootApplication开始分析：</p>
 <p>在@SpringBootApplication注解中包含了：</p>
 <ul>
@@ -4114,9 +4114,9 @@
 <p>将来在项目当中进行相关功能开发时，只需要引入一个起步依赖就可以了，因为它会将autoconfigure自动配置的依赖给传递下来。</p>
 </blockquote>
 <p> AliOSSAutoConfiguration类：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span><span class="comment">//当前类为Spring配置类</span></span><br><span class="line"><span class="meta">@EnableConfigurationProperties(AliOSSProperties.class)</span><span class="comment">//导入AliOSSProperties类，并交给SpringIOC管理</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AliOSSAutoConfiguration</span> &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">//创建AliOSSUtils对象，并交给SpringIOC容器</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> AliOSSUtils <span class="title function_">aliOSSUtils</span><span class="params">(AliOSSProperties aliOSSProperties)</span>&#123;</span><br><span class="line">        <span class="type">AliOSSUtils</span> <span class="variable">aliOSSUtils</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">AliOSSUtils</span>();</span><br><span class="line">        aliOSSUtils.setAliOSSProperties(aliOSSProperties);</span><br><span class="line">        <span class="keyword">return</span> aliOSSUtils;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span><span class="comment">//当前类为Spring配置类</span></span><br><span class="line"><span class="meta">@EnableConfigurationProperties(AliOSSProperties.class)</span><span class="comment">//导入AliOSSProperties类，并交给SpringIOC管理</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AliOSSAutoConfiguration</span> &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">//创建AliOSSUtils对象，并交给SpringIOC容器</span></span><br><span class="line">    <span class="comment">//可以在声明Bean的函数里面有参数，前提是这个参数对应的类必须也得是Bean（这个类由于不能加@Data所以要自己加get和set）</span></span><br><span class="line">    <span class="comment">//声明Bean的方式有两种：</span></span><br><span class="line">    <span class="comment">//1. 将这个Bean定义成ConfigurationProperties，然后在前面加上一句@EnableConfigurationProperties(Bean的名字.class)，</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> AliOSSUtils <span class="title function_">aliOSSUtils</span><span class="params">(AliOSSProperties aliOSSProperties)</span>&#123;</span><br><span class="line">        <span class="type">AliOSSUtils</span> <span class="variable">aliOSSUtils</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">AliOSSUtils</span>();</span><br><span class="line">        aliOSSUtils.setAliOSSProperties(aliOSSProperties);</span><br><span class="line">        <span class="keyword">return</span> aliOSSUtils;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="meta">@ConfigurationProperties(prefix = &quot;aliyun.oss&quot;)</span></span><br><span class="line"><span class="keyword">public</span> AliOSSProperties <span class="title function_">aliOSSProperties</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">AliOSSProperties</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 直接在这个配置类里面定义一个新的Bean即可。</span></span><br><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="keyword">public</span> AliOSSUtils <span class="title function_">aliOSSUtils</span><span class="params">(AliOSSProperties aliOSSProperties)</span>&#123;</span><br><span class="line">    <span class="type">AliOSSUtils</span> <span class="variable">aliOSSUtils</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">AliOSSUtils</span>();</span><br><span class="line">    aliOSSUtils.setAliOSSProperties(aliOSSProperties);</span><br><span class="line">    <span class="keyword">return</span> aliOSSUtils;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>AliOSSProperties类：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*阿里云OSS相关配置*/</span></span><br><span class="line"><span class="meta">@ConfigurationProperties(prefix = &quot;aliyun.oss&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AliOSSProperties</span> &#123;</span><br><span class="line">    <span class="comment">//区域</span></span><br><span class="line">    <span class="keyword">private</span> String endpoint;</span><br><span class="line">    <span class="comment">//身份ID</span></span><br><span class="line">    <span class="keyword">private</span> String accessKeyId ;</span><br><span class="line">    <span class="comment">//身份密钥</span></span><br><span class="line">    <span class="keyword">private</span> String accessKeySecret ;</span><br><span class="line">    <span class="comment">//存储空间</span></span><br><span class="line">    <span class="keyword">private</span> String bucketName;</span><br><span class="line">    <span class="comment">// get&amp;set省略</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -4172,7 +4172,7 @@
       
         
         
-          <img data-src="https://s3.bmp.ovh/imgs/2024/06/17/8d1e248fe0f62130.jpg" data-sizes="auto" alt="一些数据库的八股文" class="lazyload">
+          <img data-src="https://s3.bmp.ovh/imgs/2024/06/17/f841728a51c3ae78.jpg" data-sizes="auto" alt="一些数据库的八股文" class="lazyload">
         
       
       <a href="/2024/12/26/interview-II/"></a>
@@ -4221,10 +4221,10 @@
     
       <div>
         <span class="icon-brush"></span>
-        252.8k
+        252.9k
         &nbsp;|&nbsp;
         <span class="icon-coffee"></span>
-        17:19
+        17:20
       </div>
     
     
