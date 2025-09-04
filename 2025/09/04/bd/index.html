@@ -14,7 +14,7 @@
   
   
   <title>
-    UFPE Starters Final Try-Outs 2019 Recife, Brazil, Dec 1, 2018 Problem J（线段树+二分） |
+    推荐系统——在字节跳动实习的收获 |
     
     Suwa shrine
   </title>
@@ -29,15 +29,15 @@
 
   
   
-    <meta name="description" content="链接 题目大意：现在有n个房子，从1到n从左向右排列。每个房子有一个高度，一个人要向通过这个房子，他的高度必须和房子的高度完全相等。你可以修改一个人的身高，给定你一个D，你能使一个人的身高最多增加D或最多减少D。 现在给定你次询问。询问类型1，将一个指定房子的高度修改成其他值。询问类型2，若一个人从一个房子出发，你的修改身高能力的上限为D（每通过一个房子可以修改一次），那么这个人在最远在哪个房子停">
+    <meta name="description" content="实习前的面试一面流水线一般为几段？为什么要设计那么多段？为什么MEM和WB不是一个段的？流水线出现数据相关如何解决？如何尽可能的保持并行性地去解决数据相关？出现控制相关怎么办？可以重定向吗？如何从软件和硬件去优化控制相关？（解释一下动态分支预测和延迟槽）如何对数组操作的for循环做优化？解释一下向量加速器？ 64位电脑的虚存空间？虚存溢出了该怎么办？如何对页表访存做优化？TLB表和cache的区别">
 <meta property="og:type" content="article">
-<meta property="og:title" content="UFPE Starters Final Try-Outs 2019 Recife, Brazil, Dec 1, 2018 Problem J（线段树+二分）">
-<meta property="og:url" content="https://sukunashinmyoumaru-hust.github.io/2020/05/25/ufpe-starters-final-try-outs-2019-recife-brazil-dec-1-2018-problem-j/index.html">
+<meta property="og:title" content="推荐系统——在字节跳动实习的收获">
+<meta property="og:url" content="https://sukunashinmyoumaru-hust.github.io/2025/09/04/bd/index.html">
 <meta property="og:site_name" content="Suwa shrine">
-<meta property="og:description" content="链接 题目大意：现在有n个房子，从1到n从左向右排列。每个房子有一个高度，一个人要向通过这个房子，他的高度必须和房子的高度完全相等。你可以修改一个人的身高，给定你一个D，你能使一个人的身高最多增加D或最多减少D。 现在给定你次询问。询问类型1，将一个指定房子的高度修改成其他值。询问类型2，若一个人从一个房子出发，你的修改身高能力的上限为D（每通过一个房子可以修改一次），那么这个人在最远在哪个房子停">
+<meta property="og:description" content="实习前的面试一面流水线一般为几段？为什么要设计那么多段？为什么MEM和WB不是一个段的？流水线出现数据相关如何解决？如何尽可能的保持并行性地去解决数据相关？出现控制相关怎么办？可以重定向吗？如何从软件和硬件去优化控制相关？（解释一下动态分支预测和延迟槽）如何对数组操作的for循环做优化？解释一下向量加速器？ 64位电脑的虚存空间？虚存溢出了该怎么办？如何对页表访存做优化？TLB表和cache的区别">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-05-25T01:26:34.000Z">
-<meta property="article:modified_time" content="2024-12-03T06:26:12.000Z">
+<meta property="article:published_time" content="2025-09-04T05:49:31.000Z">
+<meta property="article:modified_time" content="2025-09-04T07:02:31.431Z">
 <meta property="article:author" content="Sukuna">
 <meta name="twitter:card" content="summary">
   
@@ -200,7 +200,7 @@
 <header id="header">
   
     
-      <img fetchpriority="high" src="/images/sukuna.png" alt="UFPE Starters Final Try-Outs 2019 Recife, Brazil, Dec 1, 2018 Problem J（线段树+二分）">
+      <img fetchpriority="high" src="/images/sukuna.png" alt="推荐系统——在字节跳动实习的收获">
     
   
   <div id="header-outer">
@@ -209,7 +209,7 @@
         
         
           <a href="/" id="logo">
-            <h1 data-aos="slide-up">UFPE Starters Final Try-Outs 2019 Recife, Brazil, Dec 1, 2018 Problem J（线段树+二分）</h1>
+            <h1 data-aos="slide-up">推荐系统——在字节跳动实习的收获</h1>
           </a>
         
       
@@ -233,7 +233,7 @@
   <h3 class="toc-title">文章目录</h3>
   <div class="sidebar-toc-wrapper toc-div-class" >
       
-        
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%9E%E4%B9%A0%E5%89%8D%E7%9A%84%E9%9D%A2%E8%AF%95"><span class="toc-number">1.</span> <span class="toc-text">实习前的面试</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E9%9D%A2"><span class="toc-number">1.1.</span> <span class="toc-text">一面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E9%9D%A2"><span class="toc-number">1.2.</span> <span class="toc-text">二面</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%9E%E4%B9%A0%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%A2%97%E6%A6%82"><span class="toc-number">2.</span> <span class="toc-text">实习的工作梗概</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%B5%81%E7%A8%8B"><span class="toc-number">3.</span> <span class="toc-text">推荐系统的流程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E7%A9%B6%E7%AB%9F%E6%98%AF%E5%9C%A8%E5%81%9A%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">3.1.</span> <span class="toc-text">推荐系统究竟是在做什么？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%89%B9%E5%BE%81%E5%A4%84%E7%90%86"><span class="toc-number">3.2.</span> <span class="toc-text">特征处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%AC%E5%9B%9E"><span class="toc-number">3.3.</span> <span class="toc-text">召回</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B2%97%E6%8E%92%E7%B2%BE%E6%8E%92"><span class="toc-number">3.4.</span> <span class="toc-text">粗排精排</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B7%B7%E6%8E%92"><span class="toc-number">3.5.</span> <span class="toc-text">混排</span></a></li></ol></li></ol>
       
   </div>
 </div>
@@ -369,19 +369,19 @@
 </aside>
 
           
-          <section id="main"><article id="post-ufpe-starters-final-try-outs-2019-recife-brazil-dec-1-2018-problem-j" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+          <section id="main"><article id="post-bd" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-inner" data-aos="fade-up">
     <div class="article-meta">
       <div class="article-date">
-  <a href="/2020/05/25/ufpe-starters-final-try-outs-2019-recife-brazil-dec-1-2018-problem-j/" class="article-date-link" data-aos="zoom-in">
-    <time datetime="2020-05-25T01:26:34.000Z" itemprop="datePublished">2020-05-25</time>
-    <time style="display: none;" id="post-update-time">2024-12-03</time>
+  <a href="/2025/09/04/bd/" class="article-date-link" data-aos="zoom-in">
+    <time datetime="2025-09-04T05:49:31.000Z" itemprop="datePublished">2025-09-04</time>
+    <time style="display: none;" id="post-update-time">2025-09-04</time>
   </a>
 </div>
 
       
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95%E9%A2%98/" data-aos="zoom-in">算法题</a>
+    <a class="article-category-link" href="/categories/%E6%9D%82%E8%AE%B0/" data-aos="zoom-in">杂记</a>
   </div>
 
 
@@ -392,18 +392,39 @@
     <div class="e-content article-entry" itemprop="articleBody">
       
       
-        <p><a target="_blank" rel="noopener" href="http://codeforces.com/group/uVAsoW2Jkj/contest/281191/problem/J">链接</a></p>
-<p>题目大意：现在有n个房子，从1到n从左向右排列。每个房子有一个高度，一个人要向通过这个房子，他的高度必须和房子的高度完全相等。你可以修改一个人的身高，给定你一个D，你能使一个人的身高最多增加D或最多减少D。</p>
-<p>现在给定你次询问。询问类型1，将一个指定房子的高度修改成其他值。询问类型2，若一个人从一个房子出发，你的修改身高能力的上限为D（每通过一个房子可以修改一次），那么这个人在最远在哪个房子停下来？</p>
-<p>房子的高度没什么用，真正有用的是相邻房子的高度差值。因此我们可以搞个绝对值差分数组存储相邻房子的高度差。然后我们可以直接暴力。而这里暴力会超时。我们可以观察，如果此人在第i个房子开始，到第j个房子停下。那么i到j之间各个相邻房子的高度差的绝对值小于等于D，换句话说，就是差分数组里i+1到j的最大值小于等于D。这个特性和线段树相似，所以我们对差分数组建立线段树。然后结合二分法找到此人停下来的位置。此题可解。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cmath&gt;</span></span></span><br><span class="line">using namespace <span class="built_in">std</span>;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="type">int</span> n,q;</span><br><span class="line"><span class="type">int</span> a[<span class="number">200001</span>];</span><br><span class="line"><span class="type">int</span> de[<span class="number">200001</span>];</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="type">int</span> tree[<span class="number">200001</span>*<span class="number">4</span>];</span><br><span class="line"> </span><br><span class="line"><span class="type">void</span> <span class="title function_">build</span><span class="params">(<span class="type">int</span> now,<span class="type">int</span> l,<span class="type">int</span> r)</span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(l==r)&#123;</span><br><span class="line">    tree[now]=de[l];</span><br><span class="line">    <span class="keyword">return</span> ;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="type">int</span> mid=(l+r)/<span class="number">2</span>;</span><br><span class="line">  build(now*<span class="number">2</span>,l,mid);</span><br><span class="line">  build(now*<span class="number">2</span>+<span class="number">1</span>,mid+<span class="number">1</span>,r);</span><br><span class="line">  tree[now]=max(tree[now*<span class="number">2</span>],tree[now*<span class="number">2</span>+<span class="number">1</span>]);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="type">void</span> <span class="title function_">updata</span><span class="params">(<span class="type">int</span> now,<span class="type">int</span> l,<span class="type">int</span> r,<span class="type">int</span> num1,<span class="type">int</span> num2)</span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(num1&lt;lnum1&gt;r)&#123;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span>(l==r)&#123;</span><br><span class="line">    tree[now]=num2;</span><br><span class="line">    <span class="keyword">return</span> ;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="type">int</span> mid=(l+r)/<span class="number">2</span>;</span><br><span class="line">  updata(now*<span class="number">2</span>,l,mid,num1,num2);</span><br><span class="line">  updata(now*<span class="number">2</span>+<span class="number">1</span>,mid+<span class="number">1</span>,r,num1,num2);</span><br><span class="line">  tree[now]=max(tree[now*<span class="number">2</span>],tree[now*<span class="number">2</span>+<span class="number">1</span>]);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="type">int</span> <span class="title function_">query</span><span class="params">(<span class="type">int</span> now,<span class="type">int</span> l,<span class="type">int</span> r,<span class="type">int</span> L,<span class="type">int</span> R)</span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(r&lt;Ll&gt;R)&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span>(L&lt;=l&amp;&amp;r&lt;=R)&#123;</span><br><span class="line">    <span class="keyword">return</span> tree[now];</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="type">int</span> mid=(l+r)/<span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> max(query(now*<span class="number">2</span>,l,mid,L,R),query(now*<span class="number">2</span>+<span class="number">1</span>,mid+<span class="number">1</span>,r,L,R));</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">read</span><span class="params">()</span>&#123;</span><br><span class="line">  <span class="type">char</span> c=getchar();</span><br><span class="line">  <span class="type">int</span> num=<span class="number">0</span>;</span><br><span class="line">  <span class="keyword">while</span>(c&gt;<span class="string">&#x27;9&#x27;</span>c&lt;<span class="string">&#x27;0&#x27;</span>)&#123;</span><br><span class="line">    c=getchar();</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">while</span>(c&gt;=<span class="string">&#x27;0&#x27;</span>&amp;&amp;c&lt;=<span class="string">&#x27;9&#x27;</span>)&#123;</span><br><span class="line">    num=num*<span class="number">10</span>+c-<span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">    c=getchar();</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> num;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span>&#123;</span><br><span class="line">  <span class="type">int</span> t,sb1,sb2;</span><br><span class="line">  n=read();</span><br><span class="line">  <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">    a[i]=read();</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">    de[i]=<span class="built_in">abs</span>(a[i]-a[i<span class="number">-1</span>]);</span><br><span class="line">  &#125;</span><br><span class="line"> </span><br><span class="line">  <span class="keyword">if</span>(n==<span class="number">1</span>)&#123;</span><br><span class="line">    q=read();</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">1</span>;j&lt;=q;j++)&#123;</span><br><span class="line">      t=read();</span><br><span class="line">      sb1=read();</span><br><span class="line">      sb2=read();</span><br><span class="line">      <span class="keyword">if</span>(t==<span class="number">2</span>)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;1\n&quot;</span>);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  build(<span class="number">1</span>,<span class="number">2</span>,n);</span><br><span class="line">  q=read();</span><br><span class="line">  <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=q;i++)&#123;</span><br><span class="line">    t=read();</span><br><span class="line">    sb1=read();</span><br><span class="line">    sb2=read();</span><br><span class="line">    <span class="keyword">if</span>(t==<span class="number">1</span>)&#123;</span><br><span class="line">      a[sb1]=sb2;</span><br><span class="line">      <span class="keyword">if</span>(sb1!=<span class="number">1</span>)&#123;</span><br><span class="line">        updata(<span class="number">1</span>,<span class="number">2</span>,n,sb1,<span class="built_in">abs</span>(a[sb1]-a[sb1<span class="number">-1</span>]));</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span>(sb1!=n)&#123;</span><br><span class="line">        updata(<span class="number">1</span>,<span class="number">2</span>,n,sb1+<span class="number">1</span>,<span class="built_in">abs</span>(a[sb1+<span class="number">1</span>]-a[sb1]));</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">      <span class="type">int</span> l=sb1,r=n;</span><br><span class="line">      <span class="type">int</span> mid;</span><br><span class="line">      <span class="type">int</span> ans=sb1;</span><br><span class="line">      <span class="keyword">while</span>(l&lt;=r)&#123;</span><br><span class="line">        mid=(l+r)/<span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span>(query(<span class="number">1</span>,<span class="number">2</span>,n,sb1+<span class="number">1</span>,mid)&lt;=sb2)&#123;</span><br><span class="line">          l=mid+<span class="number">1</span>;</span><br><span class="line">          ans=mid;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">          r=mid<span class="number">-1</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,ans);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h1 id="实习前的面试"><a href="#实习前的面试" class="headerlink" title="实习前的面试"></a>实习前的面试</h1><h2 id="一面"><a href="#一面" class="headerlink" title="一面"></a>一面</h2><p>流水线一般为几段？为什么要设计那么多段？为什么MEM和WB不是一个段的？流水线出现数据相关如何解决？如何尽可能的保持并行性地去解决数据相关？出现控制相关怎么办？可以重定向吗？如何从软件和硬件去优化控制相关？（解释一下动态分支预测和延迟槽）如何对数组操作的for循环做优化？解释一下向量加速器？</p>
+<p>64位电脑的虚存空间？虚存溢出了该怎么办？如何对页表访存做优化？TLB表和cache的区别？cache如何做优化以提高命中率？</p>
+<p>数据库：逻辑计划和物理计划是什么？有什么联系。</p>
+<p>C++：程序有什么空间？操作系统是怎么管理程序的空间的，比如说段错误是怎么一回事？</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span>&#123;</span></span><br><span class="line">    int64 i;</span><br><span class="line">    <span class="type">char</span> j;</span><br><span class="line">    <span class="type">int</span> k;</span><br><span class="line">&#125;a;</span><br></pre></td></tr></table></figure>
+<p>sizeof？解释一下这个sizeof</p>
+<p>为什么不能在头文件里写<code>static int a = 1;</code></p>
+<p>算法题：1、memmove<br>2、有序链表求和</p>
+<h2 id="二面"><a href="#二面" class="headerlink" title="二面"></a>二面</h2><p>项目遇到的技术难点-谈谈解决方案<br>GDB调试-对多进程多线程程序的调试支持<br>进程队列实现</p>
+<p>算法<br>两个线程交叉输出一个数组（条件变量）<br>一个数组，元素值范围为数组长度范围，统计每个数出现次数，时间复杂度O(n)，空间复杂度O(1)，可以利用原数组空间<br>原数组递增，左移n位，查最小的元素，时间复杂度O(logn)</p>
+<h1 id="实习的工作梗概"><a href="#实习的工作梗概" class="headerlink" title="实习的工作梗概"></a>实习的工作梗概</h1><ul>
+<li>链路构建：搭建离线链路dump数据</li>
+<li>样本构造：从线上构造训练用的样本</li>
+<li>架构优化：优化线上服务的工程表现</li>
+</ul>
+<h1 id="推荐系统的流程"><a href="#推荐系统的流程" class="headerlink" title="推荐系统的流程"></a>推荐系统的流程</h1><p>该部分会进行脱敏处理，里面只会讲述通用的推荐流程，而非字节跳动内部的解决方案。从大体上来讲，推荐架构可以分为召回、粗排、精排、混排这四个部分。</p>
+<h2 id="推荐系统究竟是在做什么？"><a href="#推荐系统究竟是在做什么？" class="headerlink" title="推荐系统究竟是在做什么？"></a>推荐系统究竟是在做什么？</h2><p>其实本质上推荐系统就是给用户输出一个队列，这个队列我们称之为推荐的结果。推荐系统希望能优化这个队列，然后在算法层面上表现得更好。这个表现得更好是有很多方面的，比如说DAU等。</p>
+<h2 id="特征处理"><a href="#特征处理" class="headerlink" title="特征处理"></a>特征处理</h2><p>在做推荐系统的时候必须得有一个特征系统来对推荐做基础的数据支持。一般来说特征可以分成两个部分，一个是g（group）侧的一个是u（user）侧的。g侧的特征一般是直播间、视频、短文本的一些相关特征、例如：点赞数等等。u侧的特征就是用户方面的特征，比如说用户的年龄、性别和学历等等。</p>
+<h2 id="召回"><a href="#召回" class="headerlink" title="召回"></a>召回</h2><p>召回的本质是希望能够在浩如烟海的groups中找到一系列可能适合这个用户的group。一般来说的召回是基于倒排索引的。倒排索引可以理解为一般的索引的“反函数”。比如说一般的索引是(id:1-&gt;直播间)，而倒排索引可能组织了若干个可能的反函数，比如说(年龄18-&gt;id:1,id:3)等等，以此可以很方便的根据u侧特征，获得可以被推荐的group。</p>
+<p>这个倒排索引对于召回来说非常关键，在运行的过程中倒排索引也会动态改变，比如说这个视频可能现在适合18岁的看，但是之后就可能不适合，或者有一个新的视频，需要插入到倒排索引中（冷启）</p>
+<h2 id="粗排精排"><a href="#粗排精排" class="headerlink" title="粗排精排"></a>粗排精排</h2><p>粗排精排收到了召回传来的直播间，对这个直播间会进行一个排序。排序的依据是根据一个root分来进行计算。这个root分的定义是非常抽象和复杂的。一般来说$root &#x3D; \sum a_iK_i$，其中$a_i$是权重，$K_i$指的是小分。</p>
+<p>比如说$root &#x3D; 5K_{isliked} - 20 K_{isdislike}$，那么这个root分就依赖于用户喜欢的概率和用户不喜欢的概率。这个小分的计算一般是通过一个机器学习模型来进行计算：$K_{islike} &#x3D; f(f_g,f_u)$，并且机器学习模型的输入是u侧和g侧的特征。</p>
+<p>粗排和精排的区别就来源于root分的定义。一般来说粗排的root分比较简单，精排的root分比较复杂。</p>
+<h2 id="混排"><a href="#混排" class="headerlink" title="混排"></a>混排</h2><p>混排接受截断之后的精排数据。根据来源不同的精排队列进行混合，这个混合就是做一次搜索，这个搜索可以是简单的BFS、DFS（或者是BS搜索），但是我们一般使用启发式的搜索，这个启发式的搜索有一个启发函数，这个启发函数可以我们自己定义。最后这个搜索结果出来了。</p>
+<p>上述语言只是用一个简单的语言去介绍一个搜索系统是如何构成的，帮大家简单地理解一个推荐系统的构造。其中比较核心的策略构造（例如root分等）、AML（模型工程）和特征工程都需要细细的研究。</p>
+
       
     </div>
     <footer class="article-footer">
       
         <blockquote class="article-copyright">
     <p><strong>本文作者：</strong>Sukuna @ Suwa shrine</p>
-    <p><strong>本文链接：</strong><a href="https://sukunashinmyoumaru-hust.github.io/2020/05/25/ufpe-starters-final-try-outs-2019-recife-brazil-dec-1-2018-problem-j/">https://sukunashinmyoumaru-hust.github.io/2020/05/25/ufpe-starters-final-try-outs-2019-recife-brazil-dec-1-2018-problem-j/</a></p>
+    <p><strong>本文链接：</strong><a href="https://sukunashinmyoumaru-hust.github.io/2025/09/04/bd/">https://sukunashinmyoumaru-hust.github.io/2025/09/04/bd/</a></p>
     
     
     
@@ -413,8 +434,8 @@
       
       
       
-        <a data-aos="zoom-in" href="/2020/05/25/ufpe-starters-final-try-outs-2019-recife-brazil-dec-1-2018-problem-j/#comments" class="article-comment-link">
-          <span class="post-comments-count valine-comment-count" data-xid="/2020/05/25/ufpe-starters-final-try-outs-2019-recife-brazil-dec-1-2018-problem-j/" itemprop="commentCount"></span>
+        <a data-aos="zoom-in" href="/2025/09/04/bd/#comments" class="article-comment-link">
+          <span class="post-comments-count valine-comment-count" data-xid="/2025/09/04/bd/" itemprop="commentCount"></span>
           留言
         </a>
       
@@ -429,35 +450,19 @@
   
   <nav id="article-nav" data-aos="fade-up">
     
-      <div class="article-nav-link-wrap article-nav-link-left">
-        
-          
-          
-            <img data-src="https://s3.bmp.ovh/imgs/2024/06/17/7c97ca6398f62495.jpg" data-sizes="auto" alt="(烂活)用cmd窗口输出图画" class="lazyload">
-          
-        
-        <a href="/2020/10/11/cmd/"></a>
-        <div class="article-nav-caption">前一篇</div>
-        <h3 class="article-nav-title">
-          
-            (烂活)用cmd窗口输出图画
-          
-        </h3>
-      </div>
-    
     
     <div class="article-nav-link-wrap article-nav-link-right">
       
         
         
-          <img data-src="https://s3.bmp.ovh/imgs/2024/06/17/c10853f5c9aee06c.jpg" data-sizes="auto" alt="UFPE Starters Final Try-Outs 2019 Problem L" class="lazyload">
+          <img data-src="https://s3.bmp.ovh/imgs/2024/06/17/c10853f5c9aee06c.jpg" data-sizes="auto" alt="JavaWeb学习笔记" class="lazyload">
         
       
-      <a href="/2020/05/24/ufpe-starters-final-try-outs-2019-problem-l/"></a>
+      <a href="/2025/01/07/javaweb/"></a>
       <div class="article-nav-caption">后一篇</div>
       <h3 class="article-nav-title">
         
-          UFPE Starters Final Try-Outs 2019 Problem L
+          JavaWeb学习笔记
         
       </h3>
     </div>
@@ -535,7 +540,7 @@
   <h3 class="toc-title">文章目录</h3>
   <div class="sidebar-toc-wrapper toc-div-class" >
       
-        
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%9E%E4%B9%A0%E5%89%8D%E7%9A%84%E9%9D%A2%E8%AF%95"><span class="toc-number">1.</span> <span class="toc-text">实习前的面试</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E9%9D%A2"><span class="toc-number">1.1.</span> <span class="toc-text">一面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E9%9D%A2"><span class="toc-number">1.2.</span> <span class="toc-text">二面</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%9E%E4%B9%A0%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%A2%97%E6%A6%82"><span class="toc-number">2.</span> <span class="toc-text">实习的工作梗概</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%B5%81%E7%A8%8B"><span class="toc-number">3.</span> <span class="toc-text">推荐系统的流程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E7%A9%B6%E7%AB%9F%E6%98%AF%E5%9C%A8%E5%81%9A%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">3.1.</span> <span class="toc-text">推荐系统究竟是在做什么？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%89%B9%E5%BE%81%E5%A4%84%E7%90%86"><span class="toc-number">3.2.</span> <span class="toc-text">特征处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%AC%E5%9B%9E"><span class="toc-number">3.3.</span> <span class="toc-text">召回</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B2%97%E6%8E%92%E7%B2%BE%E6%8E%92"><span class="toc-number">3.4.</span> <span class="toc-text">粗排精排</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B7%B7%E6%8E%92"><span class="toc-number">3.5.</span> <span class="toc-text">混排</span></a></li></ol></li></ol>
       
   </div>
 </div>
