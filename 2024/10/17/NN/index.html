@@ -29,17 +29,17 @@
 
   
   
-    <meta name="description" content="目标检测概论目标检测，通俗点说就是给定一个图像，在图像中框出符合要求的区域。 用数学语言表达，就是： 训练集的输入是$(x_1,b_1),\dots,(x_n,b_n)$（其中$x_i&#x3D;(x_{i1},x_{i2},…,x_{ik})\in R^{mn}$ 是原始$mn$，k通道的图片，$b_i &#x3D; {b_{i1},b_{i2},…,b_{ij},c_{i1},c_{i2},…">
+    <meta name="description" content="目标检测概论目标检测，通俗点说就是给定一个图像，在图像中框出符合要求的区域。 用数学语言表达，就是： 训练集的输入是$(x_1,b_1),\dots,(x_n,b_n)$（其中$x_i$ 是原始$m*n$，k通道的图片，$b_i &#x3D; {b_{i1},b_{i2},…,b_{ij},c_{i1},c_{i2},…,c_{ij}}$是若干个符合要求的区域$b_{ik}\in R^4$和它们的">
 <meta property="og:type" content="article">
 <meta property="og:title" content="目标检测概论">
 <meta property="og:url" content="https://sukunashinmyoumaru-hust.github.io/2024/10/17/NN/index.html">
 <meta property="og:site_name" content="Suwa shrine">
-<meta property="og:description" content="目标检测概论目标检测，通俗点说就是给定一个图像，在图像中框出符合要求的区域。 用数学语言表达，就是： 训练集的输入是$(x_1,b_1),\dots,(x_n,b_n)$（其中$x_i&#x3D;(x_{i1},x_{i2},…,x_{ik})\in R^{mn}$ 是原始$mn$，k通道的图片，$b_i &#x3D; {b_{i1},b_{i2},…,b_{ij},c_{i1},c_{i2},…">
+<meta property="og:description" content="目标检测概论目标检测，通俗点说就是给定一个图像，在图像中框出符合要求的区域。 用数学语言表达，就是： 训练集的输入是$(x_1,b_1),\dots,(x_n,b_n)$（其中$x_i$ 是原始$m*n$，k通道的图片，$b_i &#x3D; {b_{i1},b_{i2},…,b_{ij},c_{i1},c_{i2},…,c_{ij}}$是若干个符合要求的区域$b_{ik}\in R^4$和它们的">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://i-blog.csdnimg.cn/blog_migrate/394c30ee399375d92dc9ec14ab4c0de9.png">
 <meta property="og:image" content="https://pic4.zhimg.com/v2-c006bfdf549bd811fcbcf8a6260f1c05_r.jpg">
 <meta property="article:published_time" content="2024-10-17T06:38:17.000Z">
-<meta property="article:modified_time" content="2024-10-31T06:53:04.000Z">
+<meta property="article:modified_time" content="2025-09-04T07:04:29.625Z">
 <meta property="article:author" content="Sukuna">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://i-blog.csdnimg.cn/blog_migrate/394c30ee399375d92dc9ec14ab4c0de9.png">
@@ -378,7 +378,7 @@
       <div class="article-date">
   <a href="/2024/10/17/NN/" class="article-date-link" data-aos="zoom-in">
     <time datetime="2024-10-17T06:38:17.000Z" itemprop="datePublished">2024-10-17</time>
-    <time style="display: none;" id="post-update-time">2024-10-31</time>
+    <time style="display: none;" id="post-update-time">2025-09-04</time>
   </a>
 </div>
 
@@ -397,7 +397,7 @@
       
         <h3 id="目标检测概论"><a href="#目标检测概论" class="headerlink" title="目标检测概论"></a>目标检测概论</h3><p>目标检测，通俗点说就是给定一个图像，在图像中框出符合要求的区域。</p>
 <p>用数学语言表达，就是：</p>
-<p>训练集的输入是$(x_1,b_1),\dots,(x_n,b_n)$（其中$x_i&#x3D;(x_{i1},x_{i2},…,x_{ik})\in R^{m<em>n}$ 是原始$m</em>n$，k通道的图片，$b_i &#x3D; {b_{i1},b_{i2},…,b_{ij},c_{i1},c_{i2},…,c_{ij}}$是若干个符合要求的区域$b_{ik}\in R^4$和它们的id$c_{ik}$），也就是说在神经网络的推理中，我们需要输入一个$x$得到一个$b$</p>
+<p>训练集的输入是$(x_1,b_1),\dots,(x_n,b_n)$（其中$x_i$ 是原始$m*n$，k通道的图片，$b_i &#x3D; {b_{i1},b_{i2},…,b_{ij},c_{i1},c_{i2},…,c_{ij}}$是若干个符合要求的区域$b_{ik}\in R^4$和它们的id$c_{ik}$），也就是说在神经网络的推理中，我们需要输入一个$x$得到一个$b$</p>
 <h3 id="R-CNN"><a href="#R-CNN" class="headerlink" title="R-CNN"></a>R-CNN</h3><p>传统目标检测方法包含预处理、窗口滑动、特征提取、特征选择、特征分类、后处理等步骤，而卷积神经网络本身具有特征提取、特征选择和特征分类的功能。那么，可以直接利用卷积神经网络对每个滑动窗口产生的候选区进行二分类，判断其是否为待检测目标。R-CNN因此而生。</p>
 <p>R-CNN就是在CNN的基础上加了一层滑动窗口的选择。它有几点创新点：</p>
 <ul>
@@ -481,7 +481,7 @@
         
           
           
-            <img data-src="https://s3.bmp.ovh/imgs/2024/06/17/c10853f5c9aee06c.jpg" data-sizes="auto" alt="边缘智能应用论文阅读" class="lazyload">
+            <img data-src="https://s3.bmp.ovh/imgs/2024/06/17/4663c8f5b7019dfd.jpg" data-sizes="auto" alt="边缘智能应用论文阅读" class="lazyload">
           
         
         <a href="/2024/10/31/edgecompute/"></a>
@@ -498,7 +498,7 @@
       
         
         
-          <img data-src="https://s3.bmp.ovh/imgs/2024/06/17/4663c8f5b7019dfd.jpg" data-sizes="auto" alt="Python异步编程说明" class="lazyload">
+          <img data-src="https://s3.bmp.ovh/imgs/2024/06/17/c10853f5c9aee06c.jpg" data-sizes="auto" alt="Python异步编程说明" class="lazyload">
         
       
       <a href="/2024/10/12/asycn/"></a>
@@ -550,7 +550,7 @@
         254.3k
         &nbsp;|&nbsp;
         <span class="icon-coffee"></span>
-        17:24
+        17:23
       </div>
     
     
