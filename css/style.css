@@ -356,9 +356,6 @@ body [data-aos='zoom-in'] {
 .icon-github:before {
   content: "\e619";
 }
-.icon-twitter:before {
-  content: "\e62a";
-}
 .icon-bilibili:before {
   content: "\e603";
 }
@@ -2406,9 +2403,6 @@ pre .javascript .function {
 }
 [data-theme="dark"] .icon-github {
   color: #bc88ff;
-}
-.icon-twitter {
-  color: #191717;
 }
 .icon-bilibili {
   color: #00a1d6;
