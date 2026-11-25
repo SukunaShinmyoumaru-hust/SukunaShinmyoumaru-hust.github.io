@@ -6,7 +6,7 @@
   <link href="https://sukunashinmyoumaru-hust.github.io/atom.xml" rel="self"/>
   
   <link href="https://sukunashinmyoumaru-hust.github.io/"/>
-  <updated>2026-11-21T13:44:11.694Z</updated>
+  <updated>2026-11-25T14:55:33.841Z</updated>
   <id>https://sukunashinmyoumaru-hust.github.io/</id>
   
   <author>
@@ -17,18 +17,18 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>我整理的16篇复习笔记</title>
+    <title>我整理的20篇复习笔记</title>
     <link href="https://sukunashinmyoumaru-hust.github.io/2026/11/21/review-notes/"/>
     <id>https://sukunashinmyoumaru-hust.github.io/2026/11/21/review-notes/</id>
     <published>2026-11-21T13:43:51.000Z</published>
-    <updated>2026-11-21T13:44:11.694Z</updated>
+    <updated>2026-11-25T14:55:33.841Z</updated>
     
-    <content type="html"><![CDATA[<p>这几年学下来，我给不少课都做了复习笔记。前阵子抽空把它们整理成册，一共16本，从大一的微积分、C语言，一直到大三的操作系统、编译原理，计算机专业的主干课差不多都收在里面了。</p><p>这些笔记当初纯粹是写给自己复习用的，考前照着过一遍，心里有个底。现在排好版放出来，希望能帮到同样在啃这些课的人。要是你正好在复习其中某一门，直接拿去用就行，也欢迎挑毛病。</p><p>下载链接都放在蓝奏云上了，点下面的科目名字跳转过去就能下。我按课程性质大致分了个类，方便你找。</p><h2 id="数学"><a href="#数学" class="headerlink" title="数学"></a>数学</h2><ul><li><a href="https://sukunahust.lanzouu.com/iQMHC4gwaptc">微积分B（上）</a></li><li><a href="https://sukunahust.lanzouu.com/iJ2D04gwaq3c">微积分B（下）</a></li><li><a href="https://sukunahust.lanzouu.com/iTpTP4gwapwf">线性代数</a></li><li><a href="https://sukunahust.lanzouu.com/idJyo4gwaq5e">概率论与数理统计</a></li><li><a href="https://sukunahust.lanzouu.com/ioD364gwaq8h">离散数学</a></li><li><a href="https://sukunahust.lanzouu.com/iCl1I4gwar8d">矩阵论</a></li></ul><h2 id="物理"><a href="#物理" class="headerlink" title="物理"></a>物理</h2><ul><li><a href="https://sukunahust.lanzouu.com/ipJh64gwaqba">大学物理（一）</a></li><li><a href="https://sukunahust.lanzouu.com/iRioV4gwaqgf">大学物理（二）</a></li></ul><h2 id="程序设计"><a href="#程序设计" class="headerlink" title="程序设计"></a>程序设计</h2><ul><li><a href="https://sukunahust.lanzouu.com/imbfm4gwapzi">C语言程序设计</a></li><li><a href="https://sukunahust.lanzouu.com/iYu704gwaqed">数据结构</a></li><li><a href="https://sukunahust.lanzouu.com/i6GXH4gwaqji">算法设计与分析</a></li></ul><h2 id="专业课"><a href="#专业课" class="headerlink" title="专业课"></a>专业课</h2><ul><li><a href="https://sukunahust.lanzouu.com/iS20E4gwaqnc">数字电路分析</a></li><li><a href="https://sukunahust.lanzouu.com/iVxou4gwaqod">信号与线性系统</a></li><li><a href="https://sukunahust.lanzouu.com/i7gUG4gwaqsh">数据库设计原理</a></li><li><a href="https://sukunahust.lanzouu.com/i5vZy4gwaqxc">操作系统</a></li><li><a href="https://sukunahust.lanzouu.com/iObX74gwar2h">编译原理</a></li></ul><p>链接失效了，或者你想要哪门课的别的格式，留言跟我说一声就行。</p>]]></content>
+    <content type="html"><![CDATA[<p>这几年学下来，我给不少课都做了复习笔记。前阵子抽空把它们整理成册，一共20本，从大一的微积分、C语言，一直到大三的操作系统、编译原理，计算机专业的主干课差不多都收在里面了。</p><p>这些笔记当初纯粹是写给自己复习用的，考前照着过一遍，心里有个底。现在排好版放出来，希望能帮到同样在啃这些课的人。要是你正好在复习其中某一门，直接拿去用就行，也欢迎挑毛病。</p><p>下载链接都放在蓝奏云上了，点下面的科目名字跳转过去就能下。我按课程性质大致分了个类，方便你找。</p><h2 id="数学"><a href="#数学" class="headerlink" title="数学"></a>数学</h2><ul><li><a href="https://sukunahust.lanzouu.com/iyMS14halj6d">微积分B（上）</a></li><li><a href="https://sukunahust.lanzouu.com/iLUMt4ham24f">微积分B（下）</a></li><li><a href="https://sukunahust.lanzouu.com/iogIt4haly6d">线性代数</a></li><li><a href="https://sukunahust.lanzouu.com/iN9iR4ham4xg">概率论与数理统计</a></li><li><a href="https://sukunahust.lanzouu.com/ijt414ham5cb">离散数学</a></li><li><a href="https://sukunahust.lanzouu.com/isQ544hanjba">矩阵论</a></li><li><a href="https://sukunahust.lanzouu.com/iF3VB4hao0qh">数值分析</a></li></ul><h2 id="物理"><a href="#物理" class="headerlink" title="物理"></a>物理</h2><ul><li><a href="https://sukunahust.lanzouu.com/iL6174ham6uf">大学物理（一）</a></li><li><a href="https://sukunahust.lanzouu.com/iIGce4hama1a">大学物理（二）</a></li></ul><h2 id="程序设计"><a href="#程序设计" class="headerlink" title="程序设计"></a>程序设计</h2><ul><li><a href="https://sukunahust.lanzouu.com/iajuX4ham11g">C语言程序设计</a></li><li><a href="https://sukunahust.lanzouu.com/iiMIp4hao1yb">C++程序设计</a></li><li><a href="https://sukunahust.lanzouu.com/iBqJ14hao2ra">Java程序设计</a></li><li><a href="https://sukunahust.lanzouu.com/iucmN4ham8tg">数据结构</a></li><li><a href="https://sukunahust.lanzouu.com/icKF34hamj5i">算法设计与分析</a></li></ul><h2 id="专业课"><a href="#专业课" class="headerlink" title="专业课"></a>专业课</h2><ul><li><a href="https://sukunahust.lanzouu.com/ihfiH4hanzsd">模拟电子技术</a></li><li><a href="https://sukunahust.lanzouu.com/igQwV4haml3i">数字电路设计</a></li><li><a href="https://sukunahust.lanzouu.com/ijj2S4hamlpa">信号与线性系统</a></li><li><a href="https://sukunahust.lanzouu.com/ihlQm4hanate">数据库设计原理</a></li><li><a href="https://sukunahust.lanzouu.com/i5Zrh4haneva">操作系统设计原理</a></li><li><a href="https://sukunahust.lanzouu.com/irVgc4hangbc">编译原理</a></li></ul><p>链接失效了，或者你想要哪门课的别的格式，留言跟我说一声就行。</p>]]></content>
     
     
       
       
-    <summary type="html">&lt;p&gt;这几年学下来，我给不少课都做了复习笔记。前阵子抽空把它们整理成册，一共16本，从大一的微积分、C语言，一直到大三的操作系统、编译原理，计算机专业的主干课差不多都收在里面了。&lt;/p&gt;
+    <summary type="html">&lt;p&gt;这几年学下来，我给不少课都做了复习笔记。前阵子抽空把它们整理成册，一共20本，从大一的微积分、C语言，一直到大三的操作系统、编译原理，计算机专业的主干课差不多都收在里面了。&lt;/p&gt;
 &lt;p&gt;这些笔记当初纯粹是写给自己复习用的，考前照着过一遍，心里有个底。现在排好版放出来，希望</summary>
       
     
